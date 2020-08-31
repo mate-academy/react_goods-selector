@@ -2,3 +2,17 @@
 .selected {
   color: yellow;
 }
+
+button {
+  border: none;
+  display: flex;
+  outline: none;
+  cursor: pointer;
+  margin: 20px;
+  background-color: #fff;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}

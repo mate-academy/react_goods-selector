@@ -41,10 +41,27 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <h1>
-          Selected good:
-          {selectedGoods}
-        </h1>
+        <p className="header">
+          <h1>
+            Selected good:
+            {selectedGoods}
+          </h1>
+          <button
+            type="button"
+            onClick={() => {
+              this.setState({
+                selectedGoods: '-',
+              });
+              const cleared = document.querySelector('.selected');
+
+              if (cleared) {
+                cleared.className = '';
+              }
+            }}
+          >
+            X
+          </button>
+        </p>
         {goodsFromServer.map(item => (
           <button
             type="button"
@@ -54,20 +71,6 @@ class App extends React.Component {
             {item}
           </button>
         ))}
-        <button
-          type="button"
-          onClick={() => {
-            this.setState({
-              selectedGoods: '-',
-            });
-            const cleared = document.querySelector('.selected');
-
-            cleared.className = '';
-          }
-          }
-        >
-          X
-        </button>
       </div>
     );
   }
