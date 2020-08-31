@@ -1,2 +1,0 @@
-- make sure your list is the same regardless of the order of actions (sort, reducing words length...);
-- use `localeCompare()` for alphabetical sorting;
