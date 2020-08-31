@@ -1,1 +1,28 @@
-// styles go here
+.good {
+  display:flex;
+  margin: 10px;
+  border: none;
+  outline:none;
+  background-color: #fff;
+  padding: 0;
+  cursor: pointer;
+}
+
+.selected {
+  color: green;
+}
+
+.selectedGood {
+  display: flex;
+  align-items: center;
+
+  &__btnX {
+    font-weight: bold;
+    color: red;
+    background-color: #fff;
+    margin-left: 20px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid silver;
+  };
+}
