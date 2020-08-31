@@ -19,9 +19,9 @@ function App() {
   const goods = [...document.querySelectorAll('.good')];
 
   function selectGood(target, el) {
-    setSelectedGood(el);
     cleanGoodClass();
     target.classList.add('selected');
+    setSelectedGood(el);
   }
 
   function removeSelectedGood() {
@@ -53,10 +53,10 @@ function App() {
       {
         goodsFromServer.map(el => (
           <button
-            onClick={event => selectGood(event.target, el)}
             className="good"
-            key={Math.random()}
+            onClick={event => selectGood(event.target, el)}
             type="button"
+            key={el}
           >
             {el}
           </button>
