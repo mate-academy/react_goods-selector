@@ -1,1 +1,34 @@
-// styles go here
+.App {
+  font-family: Arial, sans-serif;
+}
+
+.good {
+  display: block;
+  font-size: 1em;
+  background: transparent;
+  border: none;
+  margin: 10px 0 0 10px;
+  cursor: pointer;
+
+  &--selected {
+    color: red;
+  }
+}
+
+.cleaner {
+  margin-top: 15px;
+  height: 30px;
+  width: 100px;
+  border-radius: 20px;
+  background: red;
+  border: 2px solid red;
+  transition: 0.1s;
+  cursor: pointer;
+  color: white;
+  font-size: 1em;
+
+  &:hover {
+    background: white;
+    color: red;
+  }
+}
