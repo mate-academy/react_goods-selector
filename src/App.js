@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.scss';
+import cn from 'classnames';
 
 const goodsFromServer = [
   'Dumplings',
@@ -18,9 +19,7 @@ function App() {
   const [selectedGood, setSelectedGood] = useState('');
   const goods = [...document.querySelectorAll('.good')];
 
-  function selectGood(target, el) {
-    cleanGoodClass();
-    target.classList.add('selected');
+  function selectGood(el) {
     setSelectedGood(el);
   }
 
@@ -53,8 +52,11 @@ function App() {
       {
         goodsFromServer.map(el => (
           <button
-            className="good"
-            onClick={event => selectGood(event.target, el)}
+            className={cn({
+              good: true,
+              selected: selectedGood === el,
+            })}
+            onClick={event => selectGood(el)}
             type="button"
             key={el}
           >
