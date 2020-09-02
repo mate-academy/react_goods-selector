@@ -1,1 +1,18 @@
-// styles go here
+.button {
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    background-color: yellow;
+  }
+}
+
+.title {
+  display: inline;
+}
+
+.delete-btn {
+  margin: 20px;
+}
