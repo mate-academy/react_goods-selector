@@ -35,7 +35,10 @@ class App extends React.Component {
   }
 
   render() {
+    const { item } = this.state;
+
     return (
+
       <>
         <div className="App">
           <h3
@@ -43,8 +46,8 @@ class App extends React.Component {
           >
             Selected good:
             {' '}
-            {this.state.item}
-            {this.state.item
+            {item}
+            {item
               ? (
                 <button
                   type="button"
@@ -67,8 +70,8 @@ class App extends React.Component {
               <li
                 key={product}
                 className={
-                  `goods__item 
-                  ${this.state.item.includes(product)
+                  `goods__item
+                  ${item.includes(product)
                 ? 'goods__item--active'
                 : ''}
                   `}
