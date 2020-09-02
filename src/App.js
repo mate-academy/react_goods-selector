@@ -22,7 +22,6 @@ class App extends React.Component {
 
   selectGood = (event, good) => {
     const { prevGood } = this.state;
-    const resetButton = document.querySelector('.heading__button');
 
     this.setState({ selectedGood: good });
 
@@ -33,16 +32,17 @@ class App extends React.Component {
 
     event.target.classList.add('button--good-selected');
     this.setState({ prevGood: event.target });
-    resetButton.classList.remove('button--hidden');
   };
 
   resetSelection = () => {
-    const { prevGood } = this.state;
-    const resetButton = document.querySelector('.heading__button');
+    const { selectedGood, prevGood } = this.state;
+
+    if (selectedGood === '-') {
+      return;
+    }
 
     this.setState({ selectedGood: '-' });
     prevGood.classList.remove('button--good-selected');
-    resetButton.classList.toggle('button--hidden');
   };
 
   render() {
@@ -59,13 +59,18 @@ class App extends React.Component {
             {selectedGood}
           </span>
 
-          <button
-            type="button"
-            className="heading__button button button--reset button--hidden"
-            onClick={() => {
-              this.resetSelection();
-            }}
-          />
+          {selectedGood !== '-'
+            ? (
+              <button
+                type="button"
+                className="heading__button button button--reset"
+                onClick={() => {
+                  this.resetSelection();
+                }}
+              />
+            )
+            : null
+          }
         </div>
 
         <ul className="goods">
