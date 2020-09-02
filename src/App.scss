@@ -1,1 +1,32 @@
-// styles go here
+body {
+  max-width: 550px;
+  font: 16px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__btn {
+    height: 45px;
+    width: 70px;
+  }
+}
+
+.goods {
+  &__item {
+    font-size: 18px;
+    display: block;
+    width: 100px;
+    padding: 10px 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    outline: none;
+  }
+}
+
+.selected {
+  background-color: #ef7976;
+  border: 2px solid lightgrey;
+}
