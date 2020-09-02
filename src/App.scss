@@ -1,1 +1,23 @@
 // styles go here
+
+.heading {
+  display: flex;
+}
+
+.button {
+  padding: 5px 15px;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: yellow;
+  padding: 5px 15px;
+  cursor: pointer;
+}
+
+.close {
+  width: 40px;
+  height: 40px;
+  margin-left: 20px;
+  cursor: pointer;
+}
