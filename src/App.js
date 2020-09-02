@@ -19,14 +19,29 @@ class App extends React.Component {
     item: '',
   }
 
+  addSelection = (event, product) => {
+    this.setState({ item: product });
+    if (event.ctrlKey) {
+      const order = this.state.item;
+
+      const addToList = prop => (
+        !prop.includes(product)
+          ? `${prop} ${product}`
+          : prop
+      );
+
+      this.setState({ item: addToList(order) });
+    }
+  }
+
   render() {
     return (
       <>
         <div className="App">
-          <h1
+          <h3
             className="heading"
           >
-            Selected good: -
+            Selected good:
             {' '}
             {this.state.item}
             {this.state.item
@@ -43,22 +58,27 @@ class App extends React.Component {
               )
               : ''
             }
-          </h1>
+          </h3>
           {goodsFromServer.length}
         </div>
-        <ul className="goods goods__list">
+        <ul className="goods">
           {
             goodsFromServer.map(product => (
               <li
                 key={product}
-                className="goods__item"
+                className={
+                  `goods__item 
+                  ${this.state.item.includes(product)
+                ? 'goods__item--active'
+                : ''}
+                  `}
               >
                 {product}
                 <button
                   type="button"
                   className="goods__button"
                   onClick={(event) => {
-                    this.setState({ item: product });
+                    this.addSelection(event, product);
                   }}
                 >
                   Pick
