@@ -19,28 +19,32 @@ class App extends React.Component {
     selectedGood: '',
   }
 
-  addSelection = (event, good) => {
+  addSelection = (event, item) => {
     if (!event.ctrlKey) {
-      this.setState({ selectedGood: good });
+      this.setState({ selectedGood: item });
 
       return;
     }
 
     event.stopPropagation();
 
-    if (this.state.selectedGood.includes(good)) {
-      this.setState(state => (
-        { selectedGood: state.selectedGood
-          .replace(`, ${good}`, '')
-          .replace(`${good},`, '') }
-      ));
+    if (this.state.selectedGood.includes(item)) {
+      this.removeSelection(item);
 
       return;
     }
 
     this.setState(state => (
-      { selectedGood: `${state.selectedGood
-        || good}${state.selectedGood && `, ${good}`}` }
+      { selectedGood:
+          `${state.selectedGood || item}${state.selectedGood && `, ${item}`}` }
+    ));
+  }
+
+  removeSelection = (good) => {
+    this.setState(state => (
+      { selectedGood: state.selectedGood
+        .replace(`, ${good}`, '')
+        .replace(`${good},`, '') }
     ));
   }
 
@@ -76,18 +80,18 @@ class App extends React.Component {
         </p>
 
         <ul className="App__list">
-          {goodsFromServer.map((good, id) => (
-            <li id={id}>
+          {goodsFromServer.map((item, index) => (
+            <li id={index}>
               <button
                 className={
-                  selectedGood.includes(good)
+                  selectedGood.includes(item)
                     ? 'App__button App__button--selected'
                     : 'App__button'
                 }
                 type="button"
-                onClick={event => this.addSelection(event, good)}
+                onClick={event => this.addSelection(event, item)}
               >
-                {good}
+                {item}
               </button>
             </li>
           ))}
