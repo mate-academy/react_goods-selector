@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import cn from 'classnames';
 
 const goodsFromServer = [
   'Dumplings',
@@ -14,43 +15,32 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-// document.addEventListener('keydown', function (event) {
-//   if (event.target.tagName == "BUTTON") {
-//     console.log(56456)
-//     const arr =[];
-//     arr.push(event.target)
-//   }
-// })
 class App extends React.Component {
   state = {
-    selectedGoods: '-',
-    elem: '',
+    selectedGood: '-',
   }
-
-  selectedElement;
 
   onSelect = (event) => {
     this.setState({
-      selectedGoods: event.target.textContent,
-      elem: event.target.textContent,
+      selectedGood: event.target.textContent,
     });
   }
 
   render() {
-    const { selectedGoods } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <div className="App">
         <p className="header">
           <h1>
             Selected good:
-            {selectedGoods}
+            {selectedGood}
           </h1>
           <button
             type="button"
             onClick={() => {
               this.setState({
-                selectedGoods: '-',
+                selectedGood: '-',
               });
               const cleared = document.querySelector('.selected');
 
@@ -65,7 +55,7 @@ class App extends React.Component {
         {goodsFromServer.map(item => (
           <button
             type="button"
-            className={this.state.elem === item ? 'selected' : ''}
+            className={cn({ selected: selectedGood === item })}
             onClick={this.onSelect}
           >
             {item}
