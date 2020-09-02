@@ -1,1 +1,38 @@
-// styles go here
+.App {
+  display: grid;
+  justify-content: center;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
+
+  &__button {
+    color: red;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+  }
+}
+
+.goods {
+  list-style: none;
+  padding: 0;
+  font-size: 20px;
+}
+
+.good {
+  background-color: white;
+  color: black;
+  outline: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.selected {
+  color: red;
+}
