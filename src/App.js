@@ -38,7 +38,6 @@ class App extends React.Component {
     const { item } = this.state;
 
     return (
-
       <>
         <div className="App">
           <h3
