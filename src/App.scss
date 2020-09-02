@@ -1,1 +1,34 @@
-// styles go here
+button {
+  cursor: pointer;
+}
+
+.App {
+  display: grid;
+  grid-auto-rows: auto;
+  grid-row-gap: 20px;
+}
+
+.products {
+  display: grid;
+  grid-auto-rows: auto;
+  grid-row-gap: 10px;
+
+  &__product {
+    display: flex;
+
+    font-size: 16px;
+    font-weight: 500;
+
+    outline: none;
+    border: none;
+    background-color: transparent;
+
+    &--active {
+      color: aqua;
+    }
+  }
+}
+
+.product-clear {
+  width: max-content;
+}
