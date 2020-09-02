@@ -1,1 +1,87 @@
-// styles go here
+$gap: 15px;
+
+html {
+  font-family: Roboto, sans-serif;
+}
+
+li {
+  list-style: none;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+
+  &__title,
+  &__good {
+    margin-right: $gap;
+  }
+
+  &__good {
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
+
+.button {
+  padding: 3px 10px;
+  font-size: 16px;
+
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s,
+    color 0.2s;
+
+  &:focus {
+    outline: none;
+  }
+
+  &--reset {
+    $dimension: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $dimension;
+    height: $dimension;
+
+    &::before,
+    &::after {
+      display: block;
+      position: absolute;
+      width: $dimension;
+      height: 3px;
+      background-color: red;
+      border-radius: 3px;
+      content: "";
+    }
+
+    &::before {
+      transform: rotate(45deg);
+
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+
+  &--hidden {
+    visibility: hidden;
+  }
+
+  &--good-selected {
+    font-weight: bold;
+    color: #fff;
+    border-radius: 3px;
+    background-color: rgb(35, 122, 13);
+  }
+}
+
+.goods {
+
+  &__item {
+    margin-bottom: $gap / 2;
+  }
+}
