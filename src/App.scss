@@ -1,1 +1,27 @@
-// styles go here
+.good {
+  display: block;
+  border: none;
+  margin: 0;
+  padding: 7px 0;
+  width: 100%;
+  overflow: visible;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  -webkit-appearance: none;
+  transition-duration: 0.7s;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  &--selected {
+    background: #ffd000;
+    padding-left: 5px;
+  }
+}
