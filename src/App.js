@@ -40,24 +40,23 @@ class App extends React.Component {
         <h1 className="heading">
           {`Selected good: ${this.state.selected}`}
         </h1>
-        <button
-          type="button"
-          className={classNames('button',
-            {
-              'button--clear': selected !== '-',
-              'button--hidden': selected === '-',
-            })}
-          onClick={this.clearHandler}
-        >
-          X
-        </button>
+        {selected !== '-' && (
+          <button
+            type="button"
+            className={classNames('button', 'button--clear')}
+            onClick={this.clearHandler}
+          >
+            X
+          </button>
+        )}
+
         <div className="goods">
           {goodsFromServer.map(good => (
             <button
               type="button"
               key={good}
               className={classNames('button', {
-                'button--selected': good === this.state.selected,
+                'button--selected': good === selected,
               })}
               onClick={this.selectHandler}
             >
