@@ -10,7 +10,7 @@ export const Button = ({ handler, good, heading }) => (
     }}
     type="button"
     className={classNames('button', {
-      button_active: good === heading ? true : '',
+      button_active: good === heading,
     })}
   >
     {good}
