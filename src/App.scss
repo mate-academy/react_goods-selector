@@ -1,30 +1,38 @@
 .App {
   margin: 20px;
   background-color: #f6f4e6;
+  width: 450px;
+  position: relative;
 
   &__title {
     color: #52575d;
-    padding: 20px;
+    padding: 20px 0 10px 20px;
   }
 }
 
-.good {
-  border: none;
-  outline: none;
-  width: 100%;
-  background-color: #f6f4e6;
-  text-align: left;
-  cursor: pointer;
-  color: #41444b;
-  font-size: large;
-  line-height: 30px;
-  &__active {
-    background-image: linear-gradient(to right,  #fddb3a, #f6f4e6);
+.list {
+  padding-bottom: 20px;
+
+  &__item {
+    border: none;
+    outline: none;
+    width: 100%;
+    background-color: #f6f4e6;
+    text-align: left;
+    cursor: pointer;
+    color: #41444b;
+    font-size: large;
+    line-height: 30px;
+    &_active {
+      background-image: linear-gradient(to right,  #fddb3a, #f6f4e6);
+    }
   }
 }
 
 .button {
-  margin: 20px;
+  position: absolute;
+  top: 30px;
+  right: 20px;
   background-color: #fddb3a;
   cursor: pointer;
   border-radius: 5px;

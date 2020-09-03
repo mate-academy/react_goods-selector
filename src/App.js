@@ -32,14 +32,14 @@ class App extends React.Component {
         <h1 className="App__title">
           {`Selected good: ${selectedGood}`}
         </h1>
-        <ul>
+        <ul className="list">
           {goodsFromServer.map(good => (
             <li key={good}>
               <button
                 type="button"
                 className={classNames({
-                  good: true,
-                  good__active: good === selectedGood,
+                  list__item: true,
+                  list__item_active: good === selectedGood,
                 })}
                 onClick={this.clickHandler}
               >
