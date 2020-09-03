@@ -1,1 +1,12 @@
-// styles go here
+.good {
+  border: none;
+  outline: none;
+  background: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: yellow;
+  border-radius: 10px;
+}
