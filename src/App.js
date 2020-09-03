@@ -43,7 +43,7 @@ class App extends React.Component {
         <div>
           {goodsFromServer.map(item => (
             <button
-              key={goodsFromServer.indexOf(item)}
+              key={item}
               type="button"
               className={`button ${
                 item === this.state.word && 'button__active'
