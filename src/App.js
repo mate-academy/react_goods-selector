@@ -17,7 +17,6 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    goods: goodsFromServer,
     status: '',
   }
 
@@ -30,7 +29,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { goods, status } = this.state;
+    const { status } = this.state;
 
     return (
       <div className="App">
@@ -44,15 +43,14 @@ class App extends React.Component {
         >
           X
         </button>
-
         <ul className="good-list">
-          {goods.map(good => (
+          {goodsFromServer.map(good => (
             <li className="good-item" key={good}>
               <button
                 type="button"
                 className={classNames({
                   'good-button': true,
-                  selected: good === status ? true : '',
+                  selected: good === status,
                 })}
                 onClick={this.setStatus}
               >
