@@ -1,1 +1,34 @@
-// styles go here
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 16px;
+}
+
+.selected {
+  display: inline;
+}
+
+.remove {
+  margin-left: 50px;
+  height: 50px;
+  width: 100px;
+  cursor: pointer;
+}
+
+.goods {
+
+  &__item {
+    position: relative;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    left: 0;
+
+    &_selected {
+      background-color: yellow;
+    }
+
+    &:hover {
+      left: 10px;
+    }
+  }
+}
