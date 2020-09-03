@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
 
 const goodsFromServer = [
   'Dumplings',
@@ -16,39 +17,27 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    current: '___',
-    previous: null,
+    current: 'none',
   };
 
-  selectHandler = (event) => {
-    const li = event.target;
-    const { state } = this;
-
-    if (!li.classList.contains('good--selected')) {
-      li.classList.add('good--selected');
-      state.previous && state.previous.classList.remove('good--selected');
-      state.previous = li;
-      this.setState({ current: li.innerText });
-    } else {
-      li.classList.remove('good--selected');
-      state.previous = null;
-      this.setState({ current: '___' });
-    }
+  selectHandler = (good) => {
+    this.setState({
+      current: good,
+    });
   }
 
-  resetHandler = (event) => {
-    if (this.state.previous) {
-      this.state.previous.classList.remove('good--selected');
-      this.state.previous = null;
-      this.setState({ current: '___' });
-    }
+  resetHandler = () => {
+    this.setState({
+      current: 'none',
+    });
   }
 
   render() {
     return (
       <div className="App">
         <h1>
-          Selected good: -
+          Selected good:
+          {' '}
           {this.state.current}
         </h1>
 
@@ -59,15 +48,20 @@ class App extends React.Component {
             <button
               type="button"
               key={good}
-              className="good"
-              onClick={this.selectHandler}
+              className={classNames({
+                good: true,
+                'good--selected': good === this.state.current,
+              })}
+              onClick={() => {
+                this.selectHandler(good);
+              }}
             >
               {good}
             </button>
           ))}
         </div>
 
-        {goodsFromServer.length}
+        {`there are ${goodsFromServer.length} goods`}
       </div>
     );
   }
