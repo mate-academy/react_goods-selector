@@ -1,1 +1,31 @@
-// styles go here
+
+.header {
+	display: flex;
+	
+	&__remove {
+		color: red;
+		margin-left: 25px;
+		cursor: pointer;
+	}
+}
+
+.goods{
+	&__button {
+		background: none;
+		color: inherit;
+		border: none;
+		padding: 0;
+		font: inherit;
+		cursor: pointer;
+		outline: inherit;
+	}
+	
+	&__item {
+		margin: 5px;
+		font-size: 25px;
+	}
+}
+
+.highlight {
+	background-color: yellow;
+}
