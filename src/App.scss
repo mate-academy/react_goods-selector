@@ -1,10 +1,6 @@
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 16px;
-}
-
-.selected {
-  display: inline;
+  font-size: 18px;
 }
 
 .remove {
@@ -14,9 +10,16 @@ body {
   cursor: pointer;
 }
 
+.selected {
+  background-color: yellow;
+}
+
 .goods {
+  list-style: none;
 
   &__item {
+    font-weight: 600;
+    border: none;
     position: relative;
     margin-bottom: 15px;
     cursor: pointer;
