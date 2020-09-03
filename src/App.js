@@ -21,15 +21,15 @@ class App extends React.Component {
   }
 
   addSelection = (event, item) => {
+    const { selectedGood } = this.state;
+
     if (!event.ctrlKey) {
       this.setState({ selectedGood: item });
 
       return;
     }
 
-    event.stopPropagation();
-
-    if (this.state.selectedGood.includes(item)) {
+    if (selectedGood.includes(item)) {
       this.removeSelection(item);
 
       return;
@@ -79,7 +79,7 @@ class App extends React.Component {
 
         <ul className="App__list">
           {goodsFromServer.map(item => (
-            <li key={Math.random()}>
+            <li key={item}>
               <button
                 className={classNames('App__button', {
                   'App__button--selected': selectedGood.includes(item),
