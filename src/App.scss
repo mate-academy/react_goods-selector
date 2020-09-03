@@ -1,1 +1,33 @@
 // styles go here
+.app__resetBtn {
+  width: 100px;
+  background-color: rgb(236, 236, 3);
+}
+
+.goodsList {
+  padding-left: 0;
+
+  &__btn {
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+      border: none;
+    }
+  }
+
+  &__product {
+    list-style-type: none;
+    margin: 5px;
+    width: fit-content;
+
+    border-radius: 5px;
+
+    &--selected {
+      background-color: yellow;
+      border: 2px solid grey;
+    }
+  }
+}
