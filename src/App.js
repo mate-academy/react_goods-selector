@@ -35,11 +35,7 @@ class App extends React.Component {
   };
 
   resetSelection = () => {
-    const { selectedGood, prevGood } = this.state;
-
-    if (selectedGood === '-') {
-      return;
-    }
+    const { prevGood } = this.state;
 
     this.setState({ selectedGood: '-' });
     prevGood.classList.remove('button--good-selected');
@@ -64,9 +60,7 @@ class App extends React.Component {
               <button
                 type="button"
                 className="heading__button button button--reset"
-                onClick={() => {
-                  this.resetSelection();
-                }}
+                onClick={() => this.resetSelection()}
               />
             )
             : null
@@ -82,9 +76,7 @@ class App extends React.Component {
               <button
                 type="button"
                 className="goods__button button"
-                onClick={(event) => {
-                  this.selectGood(event, good);
-                }}
+                onClick={event => this.selectGood(event, good)}
               >
                 {good}
               </button>
