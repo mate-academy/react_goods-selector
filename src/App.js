@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer = [
@@ -62,11 +63,8 @@ class App extends React.Component {
           {' '}
           <button
             type="button"
-            className={
-              selectedGood
-                ? 'App__button App__button--close'
-                : 'App__button App__button--close hidden'
-            }
+            hidden={!selectedGood}
+            className="App__button App__button--close"
             onClick={() => this.setState({ selectedGood: '' })}
           >
             {' '}
@@ -80,14 +78,12 @@ class App extends React.Component {
         </p>
 
         <ul className="App__list">
-          {goodsFromServer.map((item, index) => (
-            <li id={index}>
+          {goodsFromServer.map(item => (
+            <li key={Math.random()}>
               <button
-                className={
-                  selectedGood.includes(item)
-                    ? 'App__button App__button--selected'
-                    : 'App__button'
-                }
+                className={classNames('App__button', {
+                  'App__button--selected': selectedGood.includes(item),
+                })}
                 type="button"
                 onClick={event => this.addSelection(event, item)}
               >
