@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.scss';
 
+import cn from 'classnames';
+
 const goodsFromServer = [
   'Dumplings',
   'Carrot',
@@ -17,28 +19,6 @@ const goodsFromServer = [
 class App extends React.Component {
   state = {
     selectedGood: '-',
-    prevGood: null,
-  };
-
-  selectGood = (event, good) => {
-    const { prevGood } = this.state;
-
-    this.setState({ selectedGood: good });
-
-    if (prevGood) {
-      prevGood.classList.remove('button--good-selected');
-      this.setState({ prevGood: null });
-    }
-
-    event.target.classList.add('button--good-selected');
-    this.setState({ prevGood: event.target });
-  };
-
-  resetSelection = () => {
-    const { prevGood } = this.state;
-
-    this.setState({ selectedGood: '-' });
-    prevGood.classList.remove('button--good-selected');
   };
 
   render() {
@@ -60,7 +40,7 @@ class App extends React.Component {
               <button
                 type="button"
                 className="heading__button button button--reset"
-                onClick={() => this.resetSelection()}
+                onClick={() => this.setState({ selectedGood: '-' })}
               />
             )
             : null
@@ -75,8 +55,10 @@ class App extends React.Component {
             >
               <button
                 type="button"
-                className="goods__button button"
-                onClick={event => this.selectGood(event, good)}
+                className={cn('goods__button', 'button', {
+                  'button--good-selected': selectedGood === good,
+                })}
+                onClick={() => this.setState({ selectedGood: good })}
               >
                 {good}
               </button>
