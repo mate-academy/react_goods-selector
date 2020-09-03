@@ -1,1 +1,10 @@
-// styles go here
+.App {
+  &__header {
+    display: flex;
+    align-items: center;
+  }
+
+  &__button {
+    margin: 0 5px;
+  }
+}
