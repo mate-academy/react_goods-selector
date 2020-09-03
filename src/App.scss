@@ -1,1 +1,68 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+button {
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: none;
+}
+
+.App {
+  &__list {
+    height: 35px;
+    display: block;
+    width: fit-content;
+    list-style-type: none;
+    font-size: 24px;
+    margin: 2px;
+    padding: 2px;
+
+    &--active {
+      font-weight: 600;
+      border: 1px solid #000;
+      background-color: green;
+      color: white;
+    }
+
+    &:hover {
+      border: 1px solid blue;
+      cursor: pointer;
+    }
+  }
+
+  &__close {
+    position: relative;
+    top: 5px;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 10px;
+    background-color: yellow;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+
+    &::after {
+      content: " ";
+      position: absolute;
+      top: 15px;
+      left: 0;
+      height: 2px;
+      width: 30px;
+      background-color: red;
+      transform: rotate(45deg);
+    }
+
+    &::before {
+      content: " ";
+      position: absolute;
+      top: 15px;
+      left: 0;
+      height: 2px;
+      width: 30px;
+      background-color: red;
+      transform: rotate(-45deg);
+    }
+  }
+}
