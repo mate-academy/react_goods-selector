@@ -1,1 +1,37 @@
-// styles go here
+.heading {
+  display: inline;
+}
+
+.goods {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  align-items: flex-start;
+}
+
+.button {
+  background-color: white;
+  border: none;
+  font-family: "Times New Roman", serif;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  &--selected {
+    background-color: yellow;
+  }
+
+  &--clear {
+    font-size: 32px;
+    font-weight: bold;
+    margin-left: 20px;
+    color: red;
+  }
+
+  &--hidden {
+    visibility: hidden;
+  }
+}
