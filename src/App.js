@@ -1,4 +1,5 @@
 import React from 'react';
+import className from 'classnames';
 import './App.scss';
 
 const goodsFromServer = [
@@ -47,11 +48,11 @@ render() {
         {goodsFromServer.map(item => (
           <li
             key={item}
-            className={`
-              goodsList__product  ${(product === item)
-            ? 'goodsList__product--selected'
-            : ''}
-            `}
+            className={className(
+              'goodsList__product', {
+                'goodsList__product--selected': product === item,
+              },
+            )}
           >
             <button
               type="button"
