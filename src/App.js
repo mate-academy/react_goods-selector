@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
 
 const goodsFromServer = [
   'Dumplings',
@@ -68,12 +69,10 @@ class App extends React.Component {
             goodsFromServer.map(product => (
               <li
                 key={product}
-                className={
-                  `goods__item
-                  ${item.includes(product)
-                ? 'goods__item--active'
-                : ''}
-                  `}
+                className={classNames({
+                  goods__item: true,
+                  'goods__item--active': item.includes(product),
+                })}
               >
                 {product}
                 <button
