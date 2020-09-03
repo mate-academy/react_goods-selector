@@ -1,1 +1,34 @@
 // styles go here
+h1 {
+  display: inline-block;
+  margin-right: 30px;
+}
+
+.list {
+  list-style: none;
+  padding-left: 10px;
+}
+
+.item {
+  margin: 5px;
+}
+
+.button {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  margin-bottom: 5px;
+  background-color: #fff;
+}
+
+.close-button {
+  color: red;
+  background-color: #fff;
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.active {
+  color: red;
+}
