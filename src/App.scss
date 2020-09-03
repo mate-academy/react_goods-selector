@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: #20232a;
 }
@@ -20,23 +24,22 @@ body {
 .good-list {
   display: grid;
   grid-row-gap: 10px;
-
   width: 100%;
   margin: 0;
   padding: 20px;
-
   background-color: #434a57;
 }
 
 .good-item {
   list-style: none;
-  font-size: 20px;
-  color: #fff;
 }
 
 .good-button {
+  font-size: 20px;
+  color: #fff;
   background-color: #434a57;
   border: none;
+  cursor: pointer;
 
   &:focus {
     outline: none;
@@ -51,6 +54,7 @@ body {
   background-color: rgb(168, 55, 55);
   border: 1px solid rgb(168, 55, 55);
   border-radius: 2px;
+  cursor: pointer;
 
   &:focus {
     outline: none;
