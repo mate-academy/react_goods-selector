@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer = [
@@ -25,34 +26,22 @@ export class App extends React.Component {
   }
 
   toRemoveSelection = () => {
-    const selected = document.querySelector('.selected');
-
-    if (!selected) {
-      return;
-    }
-
-    selected.classList.remove('selected');
     this.setState({ selectedGood: 'no item selected' });
   }
 
   toSetSelection = (element) => {
-    this.toRemoveSelection();
-
-    if (!element.classList.contains('good')) {
-      return;
-    }
-
-    element.classList.add('selected');
     this.setState({ selectedGood: element.textContent });
   }
 
   render() {
+    const { selectedGood } = this.state;
+
     return (
       <div className="App">
         <section className="heading">
           <h1>
             {'Selected good: - '}
-            {this.state.selectedGood}
+            {selectedGood}
           </h1>
 
           <button
@@ -72,7 +61,10 @@ export class App extends React.Component {
               <button
                 key={item.id}
                 type="button"
-                className="good"
+                className={classNames({
+                  good: true,
+                  selected: selectedGood === item.good,
+                })}
                 onClick={event => this.toSetSelection(event.target)}
               >
                 {item.good}
