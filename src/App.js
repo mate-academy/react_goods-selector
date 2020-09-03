@@ -23,11 +23,13 @@ class App extends React.Component {
   };
 
   render() {
+    const { word, goodsFromServer } = this.state;
+
     return (
       <div className="App">
         <h1 className="title">
-          Selected good: -
-          {`${this.state.word}`}
+          Selected good:
+          {` ${word}`}
         </h1>
         <button
           type="button"
@@ -39,10 +41,13 @@ class App extends React.Component {
           X
         </button>
         <div>
-          {this.state.goodsFromServer.map(item => (
+          {goodsFromServer.map(item => (
             <button
+              key={goodsFromServer.indexOf(item)}
               type="button"
-              className="button"
+              className={`button ${
+                item === this.state.word && 'button__active'
+              }`}
               onClick={() => {
                 this.addGoods(item);
               }}

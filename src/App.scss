@@ -5,6 +5,9 @@
 
   &:focus {
     outline: none;
+  }
+
+  &__active {
     background-color: yellow;
   }
 }
