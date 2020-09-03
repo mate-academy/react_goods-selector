@@ -7,62 +7,48 @@ button {
   border: 0;
   outline: none;
   background: none;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 5px;
+  display: block;
+  width: fit-content;
 }
 
-.App {
-  &__list {
-    height: 35px;
-    display: block;
-    width: fit-content;
-    list-style-type: none;
-    font-size: 24px;
-    margin: 2px;
-    padding: 2px;
+.selected {
+  border-radius: 15px;
+  background-color: green;
+  color: white;
+}
 
-    &--active {
-      font-weight: 600;
-      border: 1px solid #000;
-      background-color: green;
-      color: white;
-    }
+.close {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 10px;
+  background-color: yellow;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
 
-    &:hover {
-      border: 1px solid blue;
-      cursor: pointer;
-    }
+  &::after {
+    content: " ";
+    position: absolute;
+    top: 15px;
+    left: 0;
+    height: 2px;
+    width: 30px;
+    background-color: red;
+    transform: rotate(45deg);
   }
 
-  &__close {
-    position: relative;
-    top: 5px;
-    display: inline-block;
-    cursor: pointer;
-    margin-left: 10px;
-    background-color: yellow;
-    height: 30px;
+  &::before {
+    content: " ";
+    position: absolute;
+    top: 15px;
+    left: 0;
+    height: 2px;
     width: 30px;
-    border-radius: 50%;
-
-    &::after {
-      content: " ";
-      position: absolute;
-      top: 15px;
-      left: 0;
-      height: 2px;
-      width: 30px;
-      background-color: red;
-      transform: rotate(45deg);
-    }
-
-    &::before {
-      content: " ";
-      position: absolute;
-      top: 15px;
-      left: 0;
-      height: 2px;
-      width: 30px;
-      background-color: red;
-      transform: rotate(-45deg);
-    }
+    background-color: red;
+    transform: rotate(-45deg);
   }
 }

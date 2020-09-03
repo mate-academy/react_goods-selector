@@ -17,31 +17,18 @@ const goodsFromServer = [
 class App extends React.Component {
   state = {
     selector: false,
-    close: false,
   };
 
   closeButton = (text) => {
     this.setState({ selector: false });
-    this.setState({ close: false });
-    document.querySelector('.App__list--active').className = 'App__list';
   }
 
-  writeSrelector = (event, value) => {
+  writeSelector = (event, value) => {
     this.setState({ selector: value });
-    this.setState({ close: true });
-    const key = event.target;
-
-    const active = document.querySelector('.App__list--active');
-
-    if (active !== null) {
-      active.className = 'App__list';
-    }
-
-    key.className = 'App__list App__list--active';
   }
 
   render() {
-    const { selector, close } = this.state;
+    const { selector } = this.state;
 
     return (
       <div className="App">
@@ -49,26 +36,25 @@ class App extends React.Component {
           Selected good: -
           {' '}
           { selector }
-          <span>
-            <button
-              type="button"
-              className={close && 'App__close'}
-              onClick={this.closeButton}
-            >
-              {close}
-            </button>
-          </span>
+          <button
+            type="button"
+            style={{
+              display: 'inline-block',
+            }}
+            className={selector && 'close'}
+            onClick={this.closeButton}
+          />
         </h1>
-        {goodsFromServer.map(a => (
+        {goodsFromServer.map(good => (
           <p>
             <button
               type="button"
-              className="App__list"
+              className={selector === good ? 'selected' : ''}
               onClick={(event) => {
-                this.writeSrelector(event, a);
+                this.writeSelector(event, good);
               }}
             >
-              {a}
+              {good}
             </button>
           </p>
         ))}
