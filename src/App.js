@@ -29,7 +29,7 @@ class App extends React.Component {
     const { selectedGood } = this.state;
 
     return (
-      <div className="App">
+      <div className="app">
         <h1>
           Selected good:
           {' '}
