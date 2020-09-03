@@ -1,1 +1,66 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #20232a;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 40%;
+  margin: 100px auto 0;
+  border: 3px solid #434a57;
+  border-radius: 10px;
+
+  &__title {
+    color: orange;
+  }
+}
+
+.good-list {
+  display: grid;
+  grid-row-gap: 10px;
+  width: 100%;
+  margin: 0;
+  padding: 20px;
+  background-color: #434a57;
+}
+
+.good-item {
+  list-style: none;
+}
+
+.good-button {
+  font-size: 20px;
+  color: #fff;
+  background-color: #434a57;
+  border: none;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.remove-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #fff;
+  background-color: rgb(168, 55, 55);
+  border: 1px solid rgb(168, 55, 55);
+  border-radius: 2px;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.selected {
+  color: yellowgreen;
+}
