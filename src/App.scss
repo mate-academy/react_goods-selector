@@ -1,1 +1,23 @@
-// styles go here
+.goods {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 25px;
+}
+
+.goods-item {
+  border: none;
+  line-height: 25px;
+  cursor: pointer;
+  margin-top: 5px;
+
+  &:focus {
+    background-color: yellow;
+  }
+}
+
+.clear-button {
+  cursor: pointer;
+  width: 55px;
+  height: 55px;
+}

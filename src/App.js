@@ -14,11 +14,45 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-const App = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+class App extends React.Component {
+  state = {
+    status: '',
+  }
+
+  saveHandler = (event) => {
+    this.setState({ status: event.target.innerText });
+  }
+
+  render() {
+    const { status } = this.state;
+
+    return (
+      <div className="App">
+        <h1>{`Selected good: ${status}`}</h1>
+        <div className="goods">
+          {goodsFromServer.map(good => (
+            <button
+              key={good}
+              type="button"
+              className="goods-item"
+              onClick={this.saveHandler}
+            >
+              {good}
+            </button>
+          ))}
+        </div>
+        <button
+          type="button"
+          className="clear-button"
+          onClick={() => {
+            this.setState({ status: '' });
+          }}
+        >
+          X
+        </button>
+      </div>
+    );
+  }
+}
 
 export default App;
