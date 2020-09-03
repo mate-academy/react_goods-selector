@@ -19,8 +19,8 @@ class App extends React.Component {
     status: '',
   }
 
-  saveHandler = (event) => {
-    this.setState({ status: event.target.innerText });
+  saveHandler = (product) => {
+    this.setState({ status: product });
   }
 
   render() {
@@ -34,8 +34,11 @@ class App extends React.Component {
             <button
               key={good}
               type="button"
-              className="goods-item"
-              onClick={this.saveHandler}
+              className={good === status
+                ? 'goods__item selected__goods'
+                : 'goods__item'
+              }
+              onClick={() => this.saveHandler(good)}
             >
               {good}
             </button>
