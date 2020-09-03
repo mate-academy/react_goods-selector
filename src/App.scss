@@ -1,1 +1,67 @@
-// styles go here
+html {
+  background-color: #eee;
+}
+
+.App {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.heading {
+  color: #0f3460;
+}
+
+.clear-button {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  margin: 0 0 0 40px;
+  background-color: #91d18b;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 15px;
+  transition: background 250ms ease-in-out,
+    transform 150ms ease;
+
+  &:hover {
+    border: 1px solid black;
+    background-color: #ea5455;
+  }
+
+  &:focus {
+    background-color: #ea5455;
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+  }
+
+  &:active {
+    transform: scale(0.99);
+  }
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 40px;
+
+  &__button {
+    width: fit-content;
+    cursor: pointer;
+    padding: 5px;
+    margin: 10px 0;
+    transition: color 0.5s;
+    font-size: 20px;
+    background-color: #056676;
+    border: none;
+    border-radius: 5px;
+    color: #a3d2ca;
+
+    &-active {
+      background-color: yellow;
+    }
+
+    &:hover {
+      color: #ea5455;
+    }
+  }
+}
