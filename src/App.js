@@ -16,35 +16,38 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    status: 'Your bag is empty',
     selected: '',
   }
 
-  savedGoods = (event) => {
+  savedGoods = (good) => {
     this.setState({
-      status: `${event.target.textContent} is in basket`,
-      selected: event.target.textContent,
+      selected: good,
     });
   };
 
   render() {
-    const { status, selected } = this.state;
+    const { selected } = this.state;
 
     return (
       <div className="App">
-        <h1 className=" status">{status}</h1>
+        <h1 className="status">
+          { selected
+            ? `${selected} is in basket`
+            : 'Basket is empty'
+          }
+        </h1>
         <ul className="goods">
-          {goodsFromServer.map(goods => (
-            <li key={goods}>
+          {goodsFromServer.map(item => (
+            <li key={item}>
               <button
                 type="button"
-                onClick={this.savedGoods}
-                className={goods === selected
+                onClick={() => this.savedGoods(item)}
+                className={item === selected
                   ? 'selected goods__item'
                   : 'goods__item'
                 }
               >
-                {goods}
+                {item}
               </button>
             </li>
           ))}
@@ -54,7 +57,6 @@ class App extends React.Component {
           className="remove"
           onClick={() => {
             this.setState({
-              status: 'Your bag is empty',
               selected: '',
             });
           }}
