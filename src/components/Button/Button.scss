@@ -1,0 +1,9 @@
+.button {
+  background-color: #fff;
+  border: 0;
+  outline: 0;
+
+  &_active {
+    background-color: red;
+  }
+}
