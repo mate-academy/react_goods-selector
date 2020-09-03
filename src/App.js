@@ -36,6 +36,11 @@ render() {
         {product}
       </h1>
       <button
+        style={
+          product === ' -'
+            ? { display: 'none' }
+            : null
+        }
         type="button"
         className="app__resetBtn"
         onClick={() => {

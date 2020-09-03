@@ -22,12 +22,12 @@
     list-style-type: none;
     margin: 5px;
     width: fit-content;
-    border: 2px solid grey;
+
     border-radius: 5px;
 
     &--selected {
       background-color: yellow;
-      border: 1ps solid red;
+      border: 2px solid grey;
     }
   }
 }
