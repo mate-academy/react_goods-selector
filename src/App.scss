@@ -1,1 +1,39 @@
-// styles go here
+.app {
+
+  &__button {
+    position: relative;
+    bottom: 5px;
+    margin-right: 5px;
+    display: inline-block;
+  }
+
+  &__title {
+    display: inline;
+  }
+}
+
+.goods {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  font-size: 58px;
+  margin-top: 10px;
+
+}
+
+.good {
+  text-decoration: none;
+  border: none;
+  background-color: transparent;
+  text-align: start;
+  list-style-type: circle;
+  outline: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &-active {
+    color: blue;
+  }
+}

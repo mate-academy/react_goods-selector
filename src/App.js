@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer = [
@@ -14,11 +15,50 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-const App = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+class App extends React.Component {
+  state = {
+    goods: goodsFromServer,
+    item: '',
+  }
+
+  goodOnClick = (good) => {
+    this.setState({ item: good });
+  }
+
+  render() {
+    const { goods } = this.state;
+    const { item } = this.state;
+
+    return (
+      <div className="app">
+        <button
+          type="submit"
+          className="app__button"
+          onClick={() => this.goodOnClick('-')}
+        >
+          X
+        </button>
+        <h1 className="app__title">
+          {`Selected good: ${item || '-'}`}
+        </h1>
+
+        <div className="goods">
+          {goods.map(good => (
+            <button
+              key={good}
+              type="button"
+              onClick={() => {
+                this.goodOnClick(good);
+              }}
+              className={classNames('good', { 'good-active': item === good })}
+            >
+              { good }
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+  }
+}
 
 export default App;
