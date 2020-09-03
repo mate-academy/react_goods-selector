@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer = [
@@ -32,6 +33,8 @@ class App extends React.Component {
   };
 
   render() {
+    const { selected } = this.state;
+
     return (
       <div className="App">
         <h1 className="heading">
@@ -39,11 +42,11 @@ class App extends React.Component {
         </h1>
         <button
           type="button"
-          className={
-            this.state.selected !== '-'
-              ? 'button button--clear'
-              : 'button button--hidden'
-          }
+          className={classNames('button',
+            {
+              'button--clear': selected !== '-',
+              'button--hidden': selected === '-',
+            })}
           onClick={this.clearHandler}
         >
           X
@@ -53,10 +56,9 @@ class App extends React.Component {
             <button
               type="button"
               key={good}
-              className={good === this.state.selected
-                ? 'button button--selected'
-                : 'button'
-              }
+              className={classNames('button', {
+                'button--selected': good === this.state.selected,
+              })}
               onClick={this.selectHandler}
             >
               {good}
