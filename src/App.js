@@ -37,7 +37,7 @@ class App extends React.Component {
 
     return (
       <div className="container">
-        <div className="App">
+        <div className="app">
           <h1>
             Selected good:
             {this.state.selectedGood}
@@ -47,8 +47,8 @@ class App extends React.Component {
               <li>
                 <button
                   type="button"
-                  className={classNames('App__button', {
-                    'App__button--active': good === selectedGood,
+                  className={classNames('app__button', {
+                    'app__button--active': good === selectedGood,
                   })}
                   key={good}
                   onClick={() => this.selectGood(good)}
@@ -63,7 +63,7 @@ class App extends React.Component {
           <button
             type="button"
             onClick={this.clearSelected}
-            className="App__button App__button--clear"
+            className="app__button app__button--clear"
           >
             Сlear
           </button>
