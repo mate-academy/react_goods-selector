@@ -1,4 +1,6 @@
 import React from 'react';
+import classnames from 'classnames';
+
 import './App.scss';
 
 const goodsFromServer = [
@@ -16,35 +18,19 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    activeElement: null,
-    selectedGood: '-',
+    selectedGood: '',
   };
 
-  removeActiveClass = () => {
-    const { activeElement } = this.state;
-
-    if (activeElement) {
-      activeElement.classList.remove('active');
-    }
-  };
-
-  selectedGoodHandler = (e, good) => {
-    this.removeActiveClass();
-
-    e.target.classList.add('active');
-
+  selectedGoodHandler = (good) => {
     this.setState({
-      activeElement: e.target,
       selectedGood: good,
     });
   };
 
   clearGoodsListHandler = () => {
     this.setState({
-      selectedGood: '-',
+      selectedGood: '',
     });
-
-    this.removeActiveClass();
   }
 
   render() {
@@ -52,21 +38,28 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <button
-          onClick={this.clearGoodsListHandler}
-          className="clear"
-          type="button"
-        >
-          Clear
-        </button>
+        {
+          selectedGood && (
+            <button
+              onClick={this.clearGoodsListHandler}
+              className="clear"
+              type="button"
+            >
+              Clear
+            </button>
+          )
+        }
         <h1>{`Selected good: ${selectedGood}`}</h1>
 
         {goodsFromServer.map(good => (
           <button
             key={good}
-            onClick={e => this.selectedGoodHandler(e, good)}
+            onClick={e => this.selectedGoodHandler(good)}
+            className={classnames({
+              button: true,
+              active: this.state.selectedGood === good,
+            })}
             type="button"
-            className="button"
           >
             {good}
           </button>
