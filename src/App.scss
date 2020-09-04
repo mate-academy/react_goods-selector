@@ -1,1 +1,35 @@
-// styles go here
+.list {
+  display: flex;
+  max-width: 500px;
+  margin: auto;
+  justify-content: space-between;
+  align-items: center;
+
+  &__btn {
+    height: 50px;
+    width: 100px;
+  }
+}
+
+.selected {
+  background-color: rgb(162, 233, 31);
+  border: 2px solid black;
+}
+
+.goods {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 400px;
+  margin: auto;
+
+  &__good {
+    font-size: 18px;
+    width: 100px;
+    padding: 10px 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    
+  }
+}
