@@ -1,1 +1,25 @@
-// styles go here
+button {
+  cursor: pointer;
+}
+
+.products {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  
+  &__product {
+    margin: 10px;
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid blue;
+    background-color: aqua;
+
+    &_active {
+      background-color:yellow;
+    }
+  }
+}
+
+.product-clear {
+  background-color: red;
+}
