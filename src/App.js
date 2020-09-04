@@ -17,7 +17,7 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGood: '',
+    selectedGood: ' - ',
   };
 
   selected = (item) => {
@@ -34,22 +34,19 @@ class App extends React.Component {
         <div className="app__heading">
           <h1>
             Selected good:
-            {selectedGood}
+            {` ${selectedGood} `}
           </h1>
-          <button
-            style={
-              selectedGood === ''
-                ? { display: 'none' }
-                : { display: 'block' }
-            }
-            type="button"
-            className="button__clear"
-            onClick={() => {
-              this.selected('');
-            }}
-          >
-            X
-          </button>
+          {selectedGood !== ' - ' && (
+            <button
+              type="button"
+              className="button__clear"
+              onClick={() => {
+                this.selected(' - ');
+              }}
+            >
+              X
+            </button>
+          )}
         </div>
         <div className="goods">
           {goodsFromServer.map(item => (
