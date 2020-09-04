@@ -1,1 +1,37 @@
-// styles go here
+.title {
+  position: relative;
+}
+
+.cleaner {
+  border: none;
+  margin-left: 5px;
+  position: absolute;
+  padding: 5px;
+  bottom: 2px;
+  cursor: pointer;
+  color: red;
+  border-radius: 4px;
+
+  &--selected {
+    border: 1px solid black;
+  }
+}
+
+.select {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  align-items: flex-start;
+  font-size: 20px;
+  background-color: white;
+  border: none;
+
+  &--selected {
+    color: red;
+  }
+}
+
+// // .cleaner:hover {
+// //   border: 1px solid black;
+// // }
