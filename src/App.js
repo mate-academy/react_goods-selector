@@ -20,7 +20,7 @@ class App extends React.Component {
     selectedGood: ' - ',
   };
 
-  selected = (item) => {
+  handleGoodChange = (item) => {
     this.setState({
       selectedGood: item,
     });
