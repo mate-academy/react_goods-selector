@@ -1,1 +1,46 @@
-// styles go here
+.header {
+  display: flex;
+  align-items: center;
+  width: 550px;
+  justify-content: space-between;
+
+  &__goods {
+    color: lightcoral;
+  }
+
+  &__close {
+    visibility: hidden;
+    font-size: 25px;
+    font-weight: bold;
+    color: red;
+    cursor: pointer;
+    border: none;
+    background-color: #fff;
+    outline: none;
+
+    &--active {
+      visibility: visible;
+    }
+  }
+}
+
+.listOfGoods {
+  list-style: none;
+  columns: 2;
+  width: 600px;
+
+  &__goods {
+    margin-bottom: 15px;
+    font-size: 25px;
+    text-decoration: underline;
+    color: lightgreen;
+    cursor: pointer;
+    border: none;
+    background-color: #fff;
+    outline: none;
+
+    &--active {
+      color: red;
+    }
+  }
+}
