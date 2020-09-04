@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
 
 const goodsFromServer = [
   'Dumplings',
@@ -21,7 +22,7 @@ class App extends React.Component {
 
   selectingClickHandler = (good) => {
     this.setState({
-      selectedGood: `${good}`,
+      selectedGood: good,
     });
   }
 
@@ -57,9 +58,9 @@ class App extends React.Component {
               <button
                 type="button"
                 className={
-                  `goods__button ${selectedGood === `${good}`
-                    ? 'goods__button--active'
-                    : ''}`
+                  classNames('goods__button', {
+                    goods__button__active: selectedGood === good,
+                  })
                 }
                 onClick={() => (
                   this.selectingClickHandler(good)
