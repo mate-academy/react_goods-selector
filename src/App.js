@@ -59,7 +59,7 @@ class App extends React.Component {
                 type="button"
                 className={
                   classNames('goods__button', {
-                    goods__button__active: selectedGood === good,
+                    'goods__button--active': selectedGood === good,
                   })
                 }
                 onClick={() => (
