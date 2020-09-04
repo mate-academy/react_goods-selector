@@ -39,14 +39,15 @@ class App extends React.Component {
             {' '}
             {choosenItem || '-'}
           </h1>
-          <button
-            type="button"
-            className="header__button"
-            onClick={this.clearSelection}
-            hidden={!choosenItem}
-          >
-            X
-          </button>
+          {choosenItem && (
+            <button
+              type="button"
+              className="header__button"
+              onClick={this.clearSelection}
+            >
+              X
+            </button>
+          )}
         </div>
 
         <div className="App__items items">
