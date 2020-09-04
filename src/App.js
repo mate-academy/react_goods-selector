@@ -17,38 +17,40 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    goods: goodsFromServer,
     item: '',
   }
 
-  goodOnClick = (unit) => {
+  selectGood = (unit) => {
     this.setState({ item: unit });
   }
 
   render() {
-    const { goods } = this.state;
     const { item } = this.state;
 
     return (
       <div className="app">
-        <button
-          type="button"
-          className="app__button"
-          onClick={() => this.goodOnClick('-')}
-        >
-          X
-        </button>
+
         <h1 className="app__title">
           {`Selected good: ${item || '-'}`}
         </h1>
+        {item && (
+          <button
+            type="button"
+            className="app__button"
+            onClick={() => this.selectGood('')}
+          >
+            {' '}
+            X
+          </button>
+        )}
 
         <div className="goods">
-          {goods.map(unit => (
+          {goodsFromServer.map(unit => (
             <button
               key={unit}
               type="button"
               onClick={() => {
-                this.goodOnClick(unit);
+                this.selectGood(unit);
               }}
               className={classNames('unit', { 'unit-active': item === unit })}
             >
