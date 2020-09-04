@@ -1,1 +1,6 @@
-// styles go here
+@import './components/GoodsList/GoodsList.scss';
+@import './components/Item/Item.scss';
+
+ul {
+  list-style: none;
+}

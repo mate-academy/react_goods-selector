@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import { GoodsList } from './components/GoodsList/GoodsList';
 
 const goodsFromServer = [
   'Dumplings',
@@ -14,11 +15,36 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-const App = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+export class App extends React.Component {
+  state = {
+    selected: '-',
+  }
 
-export default App;
+  setSelected = (item) => {
+    this.setState({ selected: item });
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <h1>
+          {`Selected good: ${this.state.selected}`}
+        </h1>
+        <button
+          type="button"
+          className="button"
+          onClick={() => {
+            this.setState({ selected: '-' });
+          }}
+        >
+          X
+        </button>
+        <GoodsList
+          goods={goodsFromServer}
+          selectHandler={this.setSelected}
+          selectedItem={this.state.selected}
+        />
+      </div>
+    );
+  }
+}

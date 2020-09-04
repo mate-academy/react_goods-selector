@@ -1,0 +1,12 @@
+.item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  &--highlighted {
+    background-color: yellow;
+  }
+
+  &__button {
+    cursor: pointer;
+  }
+}
