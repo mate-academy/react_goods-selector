@@ -31,15 +31,15 @@ class App extends React.Component {
     return (
       <div>
         <h1>{`Selected good - ${selected}`}</h1>
-        <ul>
+        <ul className="goods">
           {goodsFromServer.map(good => (
             <li>
               <button
                 type="button"
                 onClick={() => this.selectGood(good)}
                 className={good === selected
-                  ? 'selected good'
-                  : 'good'
+                  ? 'selected goods__item'
+                  : 'goods__item'
                 }
               >
                 {good}

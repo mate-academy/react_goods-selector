@@ -3,6 +3,19 @@ li {
   list-style: none;
 }
 
+button {
+  cursor: pointer;
+}
+
+.goods {
+
+  &__item {
+    font-size: 18px;
+    border: none;
+    background-color: transparent;
+  }
+}
+
 .selected {
   background-color: yellow;
 }
