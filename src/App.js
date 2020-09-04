@@ -38,15 +38,12 @@ class App extends React.Component {
           { selector }
           <button
             type="button"
-            style={{
-              display: 'inline-block',
-            }}
-            className={selector && 'close'}
+            className={selector ? 'visible' : 'hidden'}
             onClick={this.closeButton}
           />
         </h1>
         {goodsFromServer.map(good => (
-          <p>
+          <p key={Math.random()}>
             <button
               type="button"
               className={selector === good ? 'selected' : ''}

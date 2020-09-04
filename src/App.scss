@@ -20,7 +20,11 @@ button {
   color: white;
 }
 
-.close {
+.hidden {
+  display: inline-block;
+}
+
+.visible {
   position: relative;
   display: inline-block;
   cursor: pointer;
