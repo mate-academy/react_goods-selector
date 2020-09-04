@@ -38,7 +38,10 @@ class App extends React.Component {
           </h1>
           <button
             onClick={() => this.setState({ selectedGoods: '' })}
-            className="header__close"
+            className={classNames({
+              header__close: true,
+              'header__close--active': selectedGoods,
+            })}
             type="button"
           >
             X
@@ -47,9 +50,8 @@ class App extends React.Component {
         {goodsFromServer.length}
         <ul className="listOfGoods">
           {goodsFromServer.map(item => (
-            <li>
+            <li key={item}>
               <button
-                key={item}
                 className={classNames({
                   listOfGoods__goods: true,
                   'listOfGoods__goods--active': selectedGoods === item,

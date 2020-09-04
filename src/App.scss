@@ -9,6 +9,7 @@
   }
 
   &__close {
+    visibility: hidden;
     font-size: 25px;
     font-weight: bold;
     color: red;
@@ -16,6 +17,10 @@
     border: none;
     background-color: #fff;
     outline: none;
+
+    &--active {
+      visibility: visible;
+    }
   }
 }
 
