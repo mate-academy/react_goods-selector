@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import cn from 'classnames';
 
 const goodsFromServer = [
   'Dumplings',
@@ -65,8 +66,10 @@ class App extends React.Component {
             >
               <button
                 type="button"
-                className="goods__button button"
-                onClick={event => this.selectedGood(event)}
+                className={cn('goods__button', 'button', {
+                  'button--good-selected': selectedGood === good,
+                })}
+                onClick={() => this.setState({ selectedGood: good })}
               >
                 {good}
               </button>
