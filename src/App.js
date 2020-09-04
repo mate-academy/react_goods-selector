@@ -32,12 +32,12 @@ export class App extends React.Component {
         </h1>
         <button
           type="button"
-          className="button"
+          className="App__button"
           onClick={() => {
             this.setState({ selected: '-' });
           }}
         >
-          X
+          Cancel
         </button>
         <GoodsList
           goods={goodsFromServer}

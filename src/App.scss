@@ -4,3 +4,15 @@
 ul {
   list-style: none;
 }
+
+.App {
+  display: grid;
+  justify-items: stretch;
+  width: 400px;
+  padding: 10px 50px;
+
+  &__button {
+    padding: 10px 25px;
+    cursor: pointer;
+  }
+}
