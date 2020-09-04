@@ -21,8 +21,8 @@ class App extends React.Component {
     item: '',
   }
 
-  goodOnClick = (good) => {
-    this.setState({ item: good });
+  goodOnClick = (unit) => {
+    this.setState({ item: unit });
   }
 
   render() {
@@ -32,7 +32,7 @@ class App extends React.Component {
     return (
       <div className="app">
         <button
-          type="submit"
+          type="button"
           className="app__button"
           onClick={() => this.goodOnClick('-')}
         >
@@ -43,16 +43,16 @@ class App extends React.Component {
         </h1>
 
         <div className="goods">
-          {goods.map(good => (
+          {goods.map(unit => (
             <button
-              key={good}
+              key={unit}
               type="button"
               onClick={() => {
-                this.goodOnClick(good);
+                this.goodOnClick(unit);
               }}
-              className={classNames('good', { 'good-active': item === good })}
+              className={classNames('unit', { 'unit-active': item === unit })}
             >
-              { good }
+              { unit }
             </button>
           ))}
         </div>
