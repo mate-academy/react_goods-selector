@@ -1,0 +1,13 @@
+.item {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  &__name {
+    padding: 10px 0;
+    cursor: pointer;
+
+    &--highlighted {
+      background-color: yellow;
+    }
+  }
+}
