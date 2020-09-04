@@ -14,50 +14,38 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-let select = '';
-
 class App extends React.Component {
   state = {
     selectText: '-',
   }
 
   clickHandler = (event) => {
-    if (select !== '') {
-      select.className = 'button';
-    }
-
     this.setState({ selectText: event.target.textContent });
-
-    select = event.target;
-    select.className = 'selected';
   };
 
   handlerClose = () => {
-    if (this.state.selectText === '-') {
-      return;
-    }
-
-    select.className = 'button';
-
     this.setState({ selectText: '-' });
-    select = '';
   }
 
   render() {
+    const { selectText } = this.state;
+
     return (
       <div className="App">
         <h1 className="heading">
           {'Selected good: '}
           {this.state.selectText}
-          {this.state.selectText === '-' ? '' : (
-            <button
-              type="button"
-              onClick={this.handlerClose}
-              className="close"
-            >
-              X
-            </button>
-          )}
+          {this.state.selectText === '-'
+            ? null
+            : (
+              <button
+                type="button"
+                onClick={this.handlerClose}
+                className="close"
+              >
+                X
+              </button>
+            )}
 
         </h1>
         {goodsFromServer.length}
@@ -70,7 +58,10 @@ class App extends React.Component {
               <button
                 onClick={this.clickHandler}
                 type="button"
-                className="button"
+                className={good === selectText
+                  ? 'button selected'
+                  : 'button'
+                }
               >
                 {good}
               </button>
