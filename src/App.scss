@@ -1,1 +1,40 @@
-// styles go here
+body {
+  background-color: #e6e6e6;
+}
+
+.header {
+  display: flex;
+
+  &__button {
+    margin-left: 20px;
+    align-self: center;
+    color: white;
+    font-weight: 900;
+    font-size: 15px;
+    width: 35px;
+    height: 35px;
+    background-color: rgba(0,0,0,0.65);
+    cursor: pointer;
+  }
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    padding: 7px;
+    margin-bottom: 5px;
+    text-align: left;
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+
+    &_selected {
+      background: linear-gradient(45deg,
+      rgba(0,0,0,0.65) 0%,
+      rgba(0,0,0,0) 100%);
+      color: white;
+    }
+  }
+}
