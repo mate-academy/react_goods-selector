@@ -17,18 +17,23 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    goods: [...goodsFromServer],
     selectedGood: '',
   }
 
-  clickHandler = (good) => {
+  selectGoods = (good) => {
     this.setState({
-      selectedGood: good || '',
+      selectedGood: good,
+    });
+  }
+
+  removeSelection = () => {
+    this.setState({
+      selectedGood: '',
     });
   }
 
   render() {
-    const { goods, selectedGood } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <div className="App">
@@ -37,7 +42,7 @@ class App extends React.Component {
             {`Selected good: - ${selectedGood}`}
           </h1>
           <button
-            onClick={() => this.clickHandler()}
+            onClick={() => this.removeSelection()}
             type="submit"
             className={classNames('goods__clear', {
               invisible: !selectedGood,
@@ -45,10 +50,10 @@ class App extends React.Component {
           >
             X
           </button>
-          {goods.map(good => (
+          {goodsFromServer.map(good => (
             <button
               key={good}
-              onClick={() => this.clickHandler(good)}
+              onClick={() => this.selectGoods(good)}
               type="submit"
               className={classNames('goods__button', {
                 goods__button_selected: selectedGood === good,
