@@ -43,7 +43,7 @@ class App extends React.Component {
 
         <ul className="list">
           {goodsFromServer.map(good => (
-            <li key={good} className="list__goods">
+            <li key={good} className="list__good">
               <button
                 type="button"
                 className={classnames({
