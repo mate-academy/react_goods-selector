@@ -19,9 +19,9 @@ class App extends React.Component {
     selectedGood: '-',
   }
 
-  selectGood = (event) => {
+  selectGood = (good) => {
     this.setState({
-      selectedGood: event.target.textContent,
+      selectedGood: good,
     });
   }
 
@@ -32,33 +32,43 @@ class App extends React.Component {
   }
 
   render() {
+    const { selectedGood } = this.state;
+
     return (
       <div className="App">
         <h1>
           Selected good:
-          {this.state.selectedGood}
+          {selectedGood}
           <button
             type="button"
             onClick={this.deleteGood}
+            className={
+              selectedGood === '-'
+                ? 'hidden'
+                : ''
+            }
           >
             x
           </button>
         </h1>
-        {goodsFromServer.map(good => (
-          <button
-            key={good}
-            type="button"
-            onClick={this.selectGood}
-            className={
-              this.state.selectedGood === good
-                ? 'selected'
-                : ''
-            }
-          >
-            {good}
-          </button>
-        ))}
+        <ul>
+          {goodsFromServer.map(good => (
+            <li key={good}>
+              <button
 
+                type="button"
+                onClick={() => this.selectGood(good)}
+                className={
+                  selectedGood === good
+                    ? 'selected'
+                    : ''
+                }
+              >
+                {good}
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }
