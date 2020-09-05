@@ -17,26 +17,14 @@ const goodsFromServer = [
 class App extends React.Component {
   state = {
     selected: '-',
-    prevGood: null,
   }
 
   selectHandler = (event, product) => {
-    const { prevGood } = this.state;
-
     this.setState({ selected: product });
-
-    if (prevGood !== event.target && prevGood !== null) {
-      prevGood.classList.remove('selected');
-    }
-
-    event.target.classList.add('selected');
-
-    this.setState({ prevGood: event.target });
   }
 
   clear = () => {
     this.setState({ selected: '-' });
-    this.state.prevGood.classList.remove('selected');
   }
 
   render() {
@@ -59,7 +47,10 @@ class App extends React.Component {
             <button
               key={good}
               type="button"
-              className="goods__good"
+              className={good === selected
+                ? 'selected goods__good'
+                : 'goods__good'
+              }
               onClick={event => this.selectHandler(event, good)}
             >
               {good}
