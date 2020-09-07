@@ -31,33 +31,30 @@ class App extends React.Component {
         <h1>
           Selected good: -
           {selectedGood}
-          {selectedGood
-            ? (
-              <button
-                type="button"
-                onClick={this.saveHandler}
-                className="smallButton"
-              />
-            )
-            : ''
-          }
-        </h1>
-        {goodsFromServer.map(product => (
-          <ul>
+          {selectedGood && (
             <button
               type="button"
               onClick={this.saveHandler}
-              className={selectedGood === product
-                ? 'clicked'
-                : null
-              }
-            >
-              <li key={product}>
+              className="smallButton"
+            />
+          )}
+        </h1>
+        <ul>
+          {goodsFromServer.map(product => (
+            <li key={product}>
+              <button
+                type="button"
+                onClick={this.saveHandler}
+                className={selectedGood === product
+                  ? 'clicked'
+                  : null
+                }
+              >
                 {product}
-              </li>
-            </button>
-          </ul>
-        ))}
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }
