@@ -1,0 +1,26 @@
+.goods {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__item {
+    width: 200px;
+    outline: none;
+    border: none;
+    margin-top: 5px;
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: rgb(144,196,216);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .selected {
+    background-color: #76EEC6;
+
+    &:focus {
+      transform: scale(1.1) ;
+    }
+  }
+}
