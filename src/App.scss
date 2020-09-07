@@ -1,1 +1,28 @@
 // styles go here
+body {
+  margin: 0;
+  background-color: #8DEEEE;
+}
+
+.App {
+  padding: 10px;
+  background-color: #E0FFFF;
+
+  .header {
+    text-align: center;
+
+    &__button {
+      margin-bottom: 20px;
+      padding: 4px;
+      outline: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
