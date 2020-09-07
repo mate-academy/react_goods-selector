@@ -1,37 +1,38 @@
 import React from 'react';
 import './App.scss';
 
+const goodsFromServer = [
+  'Dumplings',
+  'Carrot',
+  'Eggs',
+  'Ice cream',
+  'Apple',
+  'Bread',
+  'Fish',
+  'Honey',
+  'Jam',
+  'Garlic',
+];
+
 class App extends React.Component {
   state = {
-    goodsFromServer: [
-      'Dumplings',
-      'Carrot',
-      'Eggs',
-      'Ice cream',
-      'Apple',
-      'Bread',
-      'Fish',
-      'Honey',
-      'Jam',
-      'Garlic',
-    ],
-    clicked: '',
+    selected: '',
   };
 
   clickWorker = (item) => {
-    this.setState({ clicked: item });
+    this.setState({ selected: item });
   }
 
   render() {
-    const { goodsFromServer, clicked } = this.state;
+    const { selected } = this.state;
 
     return (
 
       <div className="App">
         <h1>
-          {`Selected good: - ${clicked}`}
+          {`Selected good: - ${selected}`}
 
-          {clicked ? (
+          {selected ? (
             <button
               type="button"
               onClick={() => {
@@ -50,7 +51,7 @@ class App extends React.Component {
             <li>
               <button
                 type="button"
-                className={clicked === item ? 'selected' : null}
+                className={selected === item ? 'selected' : null}
                 key={item}
                 onClick={() => {
                   this.clickWorker(item);
