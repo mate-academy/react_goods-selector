@@ -32,7 +32,7 @@ class App extends React.Component {
         <h1>
           {`Selected good: - ${selected}`}
 
-          {selected ? (
+          {selected && (
             <button
               type="button"
               onClick={() => {
@@ -41,9 +41,7 @@ class App extends React.Component {
             >
               X
             </button>
-          )
-            : null
-          }
+          )}
 
         </h1>
         <ul>
@@ -51,7 +49,7 @@ class App extends React.Component {
             <li>
               <button
                 type="button"
-                className={selected === item ? 'selected' : null}
+                className={(selected === item && 'selected')}
                 key={item}
                 onClick={() => {
                   this.clickWorker(item);
