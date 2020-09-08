@@ -20,11 +20,11 @@ class App extends React.Component {
     name: '-',
   };
 
-  selectHandler = (event) => {
-    this.setState({ name: event.target.innerText });
+  selectHandler = (product) => {
+    this.setState({ name: product });
   };
 
-  cleanHandler = (event) => {
+  cleanHandler = () => {
     this.setState({ name: '-' });
   };
 
@@ -47,16 +47,18 @@ class App extends React.Component {
         </h1>
 
         <div className="goods">
-          {goodsFromServer.map(elem => (
+          {goodsFromServer.map(product => (
             <button
               type="button"
-              key={elem}
+              key={product}
               className={classNames('select', {
-                'select--selected': elem === name,
+                'select--selected': product === name,
               })}
-              onClick={this.selectHandler}
+              onClick={(event) => {
+                this.selectHandler(product);
+              }}
             >
-              {elem}
+              {product}
             </button>
           ))}
         </div>
