@@ -17,12 +17,12 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGood: '-',
+    selectedGood: '',
   };
 
-  handleClick = (event) => {
+  handleClick = (x) => {
     this.setState({
-      selectedGood: event.target.textContent,
+      selectedGood: x,
     });
   }
 
@@ -31,7 +31,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <h1>{`Selected good: ${this.state.selectedGood}`}</h1>
+        <h1>{`Selected good: ${selectedGood}`}</h1>
         <div className="products">
           {goodsFromServer.map(elem => (
             <button
@@ -41,7 +41,9 @@ class App extends React.Component {
                 products__product: true,
                 products__product_active: elem === selectedGood,
               })}
-              onClick={this.handleClick}
+              onClick={() => {
+                this.handleClick(elem);
+              }}
             >
               {elem}
             </button>
@@ -51,7 +53,7 @@ class App extends React.Component {
           type="button"
           className="product-clear"
           onClick={() => this.setState({
-            selectedGood: '-',
+            selectedGood: '',
           })}
         >
           x
