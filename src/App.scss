@@ -1,1 +1,33 @@
-// styles go here
+h1 {
+  display: flex;
+}
+
+.goods-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.btn {
+  font-size: 22px;
+  background: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn-close {
+  margin-left: 10px;
+  visibility: hidden;
+
+  &.active {
+    visibility: visible;
+  }
+}
+
+.list-item {
+  border: 0;
+
+  &.selected {
+    background-color: yellow;
+  }
+}
