@@ -16,52 +16,39 @@ const goodsFromServer = [
 
 export class App extends React.Component {
   state = {
-    nameOfProduct: 'Selected good : ',
+    nameOfProduct: '',
     arrayOfProducts: [],
   }
 
-  constructor() {
-    super();
-    this.clearTheSelection = this.clearTheSelection.bind(this);
-    this.clickHandlerWithCtrl = this.clickHandlerWithCtrl.bind(this);
-  }
-
-  clickHandlerWithoutCtrl = (product) => {
+  handleSelection = (product) => {
     this.setState(() => ({
-      nameOfProduct: `Selected good : ${product}`,
+      nameOfProduct: product,
     }));
   }
 
-  clickHandlerWithCtrl(product) {
-    this.setState((prevState) => {
-      let manyNamesOfProducts;
+  handleMultipleSelection = (product) => {
+    this.setState((state) => {
+      let newArrayOfProducts = state.arrayOfProducts
+        .filter(good => good !== product);
 
-      if (!prevState.arrayOfProducts.includes(product)) {
-        prevState.arrayOfProducts.push(product);
+      newArrayOfProducts = [...newArrayOfProducts, product];
+      state.arrayOfProducts.push(product);
+      let manyNamesOfProducts = `${newArrayOfProducts[0]}`;
 
-        if (prevState.arrayOfProducts.length === 1) {
-          manyNamesOfProducts
-           = `Selected good : ${prevState.arrayOfProducts[0]}`;
-        } else {
-          manyNamesOfProducts
-         = `Selected goods : ${prevState.arrayOfProducts[0]}`;
-          for (let i = 1; i < prevState.arrayOfProducts.length; i += 1) {
-            manyNamesOfProducts += `, ${prevState.arrayOfProducts[i]}`;
-          }
-        }
-      } else {
-        return '';
+      for (let i = 1; i < newArrayOfProducts.length; i += 1) {
+        manyNamesOfProducts += `, ${newArrayOfProducts[i]}`;
       }
 
       return {
         nameOfProduct: manyNamesOfProducts,
+        arrayOfProducts: newArrayOfProducts,
       };
     });
   }
 
-  clearTheSelection() {
-    this.setState(state => ({
-      nameOfProduct: 'Selected good : ',
+  clearTheSelection = () => {
+    this.setState(() => ({
+      nameOfProduct: '',
       arrayOfProducts: [],
     }));
   }
@@ -72,6 +59,8 @@ export class App extends React.Component {
     return (
       <div className="App">
         <h1>
+          Selected goods :
+          {' '}
           {nameOfProduct}
         </h1>
         <p>
@@ -90,9 +79,9 @@ export class App extends React.Component {
                 value={product}
                 onClick={(event) => {
                   if (event.ctrlKey) {
-                    this.clickHandlerWithCtrl(product);
+                    this.handleMultipleSelection(product);
                   } else {
-                    this.clickHandlerWithoutCtrl(product);
+                    this.handleSelection(product);
                   }
                 }}
               >
