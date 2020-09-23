@@ -23,16 +23,17 @@ export class App extends React.Component {
   handleSelection = (product) => {
     this.setState(() => ({
       nameOfProduct: product,
+      arrayOfProducts: [],
     }));
   }
 
   handleMultipleSelection = (product) => {
-    this.setState((state) => {
-      let newArrayOfProducts = state.arrayOfProducts
+    this.setState((prevState) => {
+      let newArrayOfProducts = prevState.arrayOfProducts
         .filter(good => good !== product);
 
       newArrayOfProducts = [...newArrayOfProducts, product];
-      state.arrayOfProducts.push(product);
+
       let manyNamesOfProducts = `${newArrayOfProducts[0]}`;
 
       for (let i = 1; i < newArrayOfProducts.length; i += 1) {
