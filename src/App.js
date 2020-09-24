@@ -17,72 +17,63 @@ const goodsFromServer = [
 ];
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      goodSelected: '',
-      listSelected: [],
-      prevSelected: undefined,
-    };
-
-    this.handleSelected = this.handleSelected.bind(this);
-    this.handleDeleteSelected = this.handleDeleteSelected.bind(this);
+  state = {
+    products: [],
   }
 
-  handleDeleteSelected() {
-    const { listSelected } = this.state;
+  handleMultipleSelection = (selectedProduct) => {
+    const { products } = this.state;
+    const updatedProducts = products.includes(selectedProduct)
+      ? products.filter(product => (
+        product === selectedProduct
+          ? product.classList.toggle('selected', false)
+          : product))
+      : [...products, selectedProduct];
 
-    if (listSelected.length > 0) {
-      listSelected.map(good => good.classList.toggle('selected', false));
+    this.setState({
+      products: [...updatedProducts],
+    });
+  }
+
+  handleDeleteSelected = () => {
+    const { products } = this.state;
+
+    if (products.length > 0) {
+      products.some(good => good.classList.toggle('selected', false));
       this.setState({
-        goodSelected: '',
-        listSelected: [],
-        prevSelected: null,
+        products: [],
       });
     }
   }
 
-  handleSelected(event) {
-    const { goodSelected, listSelected, prevSelected } = this.state;
+  handleSelected = (event) => {
+    const { products } = this.state;
 
-    const target = event.target.closest('.content');
-    const goodName = target.textContent.slice(0, target.textContent.length - 1);
-    const goods = goodSelected.length > 0
-      ? goodSelected.split(', ') : [];
-    const arrayList = listSelected.length > 0
-      ? listSelected : [];
+    const { target } = event;
 
-    if (!goods.includes(goodName)) {
-      if (event.metaKey) {
-        goods.push(goodName);
-        target.classList.add('selected');
-        arrayList.push(target);
+    if (event.metaKey) {
+      target.classList.add('selected');
+      this.handleMultipleSelection(target);
+    } else {
+      if (products.length > 0) {
+        products.some(product => product.classList.toggle('selected', false));
+      }
+
+      if (products.includes(target)) {
+        this.setState({
+          products: [],
+        });
       } else {
-        goods.push(goodName);
-
-        goodSelected.length === 0
-          ? this.setState({
-            prevSelected: target,
-          })
-          : prevSelected.classList.toggle('selected', false);
-
         target.classList.add('selected');
         this.setState({
-          prevSelected: target,
+          products: [target],
         });
-        arrayList.push(target);
       }
     }
-
-    this.setState({
-      goodSelected: goods.join(', '),
-      listSelected: arrayList,
-    });
   }
 
   render() {
-    const { goodSelected } = this.state;
+    const { products } = this.state;
 
     return (
       <div className="App">
@@ -92,7 +83,8 @@ class App extends React.Component {
         <div className="container">
           <div className="header">
             <p>
-              {goodSelected}
+              {products.map(product => `${product.textContent}\n`)}
+              <br />
             </p>
           </div>
           <button
