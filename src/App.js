@@ -25,9 +25,7 @@ class App extends React.Component {
     const { products } = this.state;
     const updatedProducts = products.includes(selectedProduct)
       ? products.filter(product => (
-        product === selectedProduct
-          ? product.classList.toggle('selected', false)
-          : product))
+        product !== selectedProduct))
       : [...products, selectedProduct];
 
     this.setState({
@@ -39,7 +37,6 @@ class App extends React.Component {
     const { products } = this.state;
 
     if (products.length > 0) {
-      products.some(good => good.classList.toggle('selected', false));
       this.setState({
         products: [],
       });
@@ -52,23 +49,15 @@ class App extends React.Component {
     const { target } = event;
 
     if (event.metaKey) {
-      target.classList.add('selected');
-      this.handleMultipleSelection(target);
+      this.handleMultipleSelection(target.textContent);
+    } else if (products.includes(target.textContent)) {
+      this.setState({
+        products: [],
+      });
     } else {
-      if (products.length > 0) {
-        products.some(product => product.classList.toggle('selected', false));
-      }
-
-      if (products.includes(target)) {
-        this.setState({
-          products: [],
-        });
-      } else {
-        target.classList.add('selected');
-        this.setState({
-          products: [target],
-        });
-      }
+      this.setState({
+        products: [target.textContent],
+      });
     }
   }
 
@@ -83,7 +72,7 @@ class App extends React.Component {
         <div className="container">
           <div className="header">
             <p>
-              {products.map(product => `${product.textContent}\n`)}
+              {products.map(product => `${product}\n`)}
               <br />
             </p>
           </div>
@@ -99,7 +88,10 @@ class App extends React.Component {
               {goodsFromServer.map(good => (
                 <li
                   key={good}
-                  className="content"
+                  className={
+                    products.includes(good)
+                      ? 'content selected' : 'content'
+                  }
                   onClick={this.handleSelected}
                 >
                   {good}
