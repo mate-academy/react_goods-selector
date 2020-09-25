@@ -16,31 +16,47 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    goodName: ' - ',
+    goodName: [' - '],
+    array: [],
   };
 
   clearButton = () => {
-    this.setState({ goodName: ' - ' });
+    this.setState({ goodName: [' - '] });
+    this.setState({ array: [] });
   };
 
-  selectButton = (event, good, goodName) => {
-    this.setState({ goodName: good });
+  selectButton = (event, good, goodName, array) => {
+    let arr;
 
     if (event.ctrlKey) {
-      if (goodName === ' - ') {
-        this.setState({ goodName: good });
+      arr = array;
+
+      if (arr.includes(good)) {
+        const index = arr.indexOf(good);
+
+        arr.splice(index, 1);
+        this.setState({ goodName: arr.join(', ') });
 
         return null;
       }
 
-      this.setState({ goodName: `${goodName}, ${good}` });
+      arr.push(good);
+      this.setState({ goodName: arr.join(', ') });
+
+      return null;
     }
+
+    arr = [good];
+    this.setState({
+      array: arr,
+      goodName: arr,
+    });
 
     return null;
   };
 
   render() {
-    const { goodName } = this.state;
+    const { goodName, array } = this.state;
 
     return (
       <div className="App">
@@ -62,7 +78,7 @@ class App extends React.Component {
                 type="button"
                 className={goodName.includes(good) ? 'selected-item' : null}
                 onClick={(event) => {
-                  this.selectButton(event, good, goodName);
+                  this.selectButton(event, good, goodName, array);
                 }}
               >
                 {good}
