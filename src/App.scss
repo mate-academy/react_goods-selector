@@ -1,1 +1,50 @@
-// styles go here
+
+.app {
+  margin: 0 auto;
+  text-align: center;
+}
+
+ul {
+  list-style: none;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.itemInList {
+  display: inline;
+  text-align: center;
+  font-weight: 700;
+  font-size: 25px;
+  padding: 15px;
+  border: none;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+
+.electGood {
+  background-color: yellow;
+}
+
+.title {
+  text-align: center;
+}
+
+.titleH1 {
+  display: inline;
+}
+
+.btn {
+  width: 110px;
+  height: 45px;
+  margin-left: 60px;
+  cursor: pointer;
+}
+
+.active {
+  background-color: red;
+}
+
+.btn:focus {
+  background-color: #fff;
+}
