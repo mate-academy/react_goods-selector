@@ -13,16 +13,17 @@ ul {
 .itemInList {
   display: inline;
   text-align: center;
+  background-color: #fff;
   font-weight: 700;
   font-size: 25px;
-  padding: 15px;
+  padding: 5px;
   border: none;
   margin-left: 10px;
   cursor: pointer;
 }
 
 
-.electGood {
+.selected {
   background-color: yellow;
 }
 

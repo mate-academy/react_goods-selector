@@ -19,35 +19,21 @@ const goodsFromServer = [
 
 export default class App extends React.Component {
   state = {
-    countGoods: 0,
-    nameGood: '',
-    arrSelectedItem: [],
+    selectedGoods: [],
   }
 
   electNextGoods = (e) => {
-    const button = document.querySelector('.btn');
+    const { selectedGoods } = this.state;
 
     if (e.ctrlKey) {
-      e.target.classList.toggle('electGood');
-      this.state.arrSelectedItem.push(e.target);
-      button.classList.add('active');
+      this.setState({ selectedGoods: [...selectedGoods, e.target.innerHTML] });
     } else {
-      this.state.arrSelectedItem
-        .forEach(item => item.classList.remove('electGood'));
-      this.state.arrSelectedItem = [];
-      e.target.classList.add('electGood');
-      this.state.arrSelectedItem.push(e.target);
-      this.setState(state => (state.arrSelectedItem));
+      this.setState({ selectedGoods: [e.target.innerHTML] });
     }
   }
 
-  cleanSelectedItems = (button) => {
-    this.state.arrSelectedItem
-      .forEach(item => item.classList.remove('electGood'));
-    button.classList.remove('active');
-    this.state.nameGood = '';
-    this.state.arrSelectedItem = [];
-    this.setState(state => (state.nameGood));
+  cleanSelectedItems = () => {
+    this.setState({ selectedGoods: [] });
   }
 
   render() {
@@ -58,31 +44,32 @@ export default class App extends React.Component {
             <h1 className="titleH1">
               Selected good: -
               {' '}
-              {this.state.nameGood}
+              {this.state.selectedGoods.join(', ')}
             </h1>
             <button
               type="button"
-              className="btn"
+              className={this.state.selectedGoods.length > 1
+                ? 'btn active' : 'btn'}
               onClick={(event) => {
                 this.cleanSelectedItems(event.target);
               }}
             >
               Clear selected
             </button>
-
           </div>
           <ul>
             {goodsFromServer.map(good => (
-              <li
-                key={good}
-                className="itemInList"
-                tabIndex={this.state.countGoods++}
-                onClick={(event) => {
-                  this.state.nameGood = event.target.textContent;
-                  this.electNextGoods(event);
-                }}
-              >
-                {good}
+              <li>
+                <button
+                  type="button"
+                  className={this.state.selectedGoods.includes(good)
+                    ? 'itemInList selected' : 'itemInList'}
+                  onClick={(event) => {
+                    this.electNextGoods(event);
+                  }}
+                >
+                  {good}
+                </button>
               </li>
             ))}
           </ul>
