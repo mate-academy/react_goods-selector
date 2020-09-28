@@ -48,7 +48,7 @@ class App extends React.Component {
 
     const { target } = event;
 
-    if (event.metaKey) {
+    if (event.metaKey || event.ctrlKey) {
       this.handleMultipleSelection(target.textContent);
     } else if (products.includes(target.textContent)) {
       this.setState({
