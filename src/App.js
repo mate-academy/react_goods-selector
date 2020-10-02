@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames/bind';
 import './App.scss';
 
 const goodsFromServer = [
@@ -16,69 +17,77 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    goodName: [' - '],
-    array: [],
+    selectedGoods: [],
+    goodsCheck: {},
   };
 
-  clearButton = () => {
-    this.setState({ goodName: [' - '] });
-    this.setState({ array: [] });
+  removeGood = () => {
+    this.setState({
+      selectedGoods: [],
+      goodsCheck: {},
+    });
   };
 
-  selectButton = (event, good, goodName, array) => {
-    let arr;
-
+  selectGood = (event, good, selectedGoods, goodsCheck) => {
     if (event.ctrlKey) {
-      arr = array;
+      if (selectedGoods.includes(good)) {
+        const includedGood = selectedGoods.indexOf(good);
 
-      if (arr.includes(good)) {
-        const index = arr.indexOf(good);
+        selectedGoods.splice(includedGood, 1);
 
-        arr.splice(index, 1);
-        this.setState({ goodName: arr.join(', ') });
-
-        return null;
+        return this.setState({
+          selectedGoods,
+          goodsCheck: {
+            ...goodsCheck,
+            [good]: false,
+          },
+        });
       }
 
-      arr.push(good);
-      this.setState({ goodName: arr.join(', ') });
-
-      return null;
+      return this.setState({
+        selectedGoods: [...selectedGoods, good],
+        goodsCheck: {
+          ...goodsCheck,
+          [good]: true,
+        },
+      });
     }
 
-    arr = [good];
-    this.setState({
-      array: arr,
-      goodName: arr,
+    return this.setState({
+      selectedGoods: [good],
+      goodsCheck: {
+        [good]: true,
+      },
     });
-
-    return null;
   };
 
   render() {
-    const { goodName, array } = this.state;
+    const { selectedGoods, goodsCheck } = this.state;
 
     return (
       <div className="App">
         <h1>
-          Selected good:
-          {' '}
-          {goodName}
+          {`Selected good: ${selectedGoods.length > 0
+            ? selectedGoods.join(', ')
+            : '-'}`
+          }
         </h1>
         <button
           type="button"
-          onClick={this.clearButton}
+          onClick={this.removeGood}
         >
-          X
+          &#88;
         </button>
         <ul>
           {goodsFromServer.map(good => (
             <li key={good}>
               <button
                 type="button"
-                className={goodName.includes(good) ? 'selected-item' : null}
+                className={classNames({
+                  selected: goodsCheck[good],
+                })}
                 onClick={(event) => {
-                  this.selectButton(event, good, goodName, array);
+                  this.selectGood(event, good, selectedGoods, goodsCheck);
                 }}
               >
                 {good}
