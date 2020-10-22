@@ -1,1 +1,65 @@
-// styles go here
+.app {
+  position: relative;
+  background-color: rgb(248, 247, 255);
+  height: 150vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 100px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+
+  &__header {
+    font-size: 30px;
+
+    &-items {
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  &__button {
+    position: absolute;
+    background-color: #365afa93;
+    border: 1px solid #365afa93;
+    border-radius: 100px;
+    width: 100px;
+    height: 40px;
+    margin: 10px;
+    top: 200px;
+
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+
+    outline: none;
+    transition: color 0.5s, background-color 0.5s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #fff;
+      color: #365afa93;
+    }
+  }
+}
+
+.goods {
+  position: absolute;
+  top: 200px;
+  list-style: none;
+  padding: 0;
+  margin: 100px 0;
+}
+
+.good__item {
+  padding: 5px;
+  background-color: transparent;
+  border: none;
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+  outline: none;
+}
+
+.selected {
+  text-decoration: line-through;
+}
