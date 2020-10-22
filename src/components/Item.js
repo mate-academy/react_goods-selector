@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ItemFromServerShape } from '../shapes/ItemFromServerShape';
 
-export const Item = ({ stateValue, callback, item }) => (
+export const Item = ({ selectedGoods, onClick, item }) => (
   <button
-    onClick={event => callback(event)}
-    className={stateValue.includes(item.name)
+    onClick={event => onClick(event)}
+    className={selectedGoods.includes(item.name)
       ? 'btn btn-dark'
       : 'list-group-item-action btn'}
     type="button"
@@ -15,7 +15,7 @@ export const Item = ({ stateValue, callback, item }) => (
 );
 
 Item.propTypes = {
-  stateValue: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  callback: PropTypes.func.isRequired,
+  selectedGoods: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  onClick: PropTypes.func.isRequired,
   item: ItemFromServerShape.isRequired,
 };

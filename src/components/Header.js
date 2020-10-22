@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const Header = ({ item, callback }) => (
+export const Header = ({ selectedGoods, onClick }) => (
   <div className="wrapper">
     <h1>
       {`Selected good: - `}
       <span>
-        {item.join(' ')}
+        {selectedGoods.join(' ')}
       </span>
     </h1>
 
     <button
       type="button"
-      onClick={callback}
+      onClick={onClick}
       className="btn btn-danger"
     >
       X
@@ -21,6 +21,6 @@ export const Header = ({ item, callback }) => (
 );
 
 Header.propTypes = {
-  item: PropTypes.arrayOf(PropTypes.string).isRequired,
-  callback: PropTypes.func.isRequired,
+  selectedGoods: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onClick: PropTypes.func.isRequired,
 };

@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { Item } from './Item';
 import { ItemFromServerShape } from '../shapes/ItemFromServerShape';
 
-export const List = ({ data, stateValue, callback }) => (
+export const List = ({ data, selectedGoods, onClick }) => (
   <ul className="list-group list-group-horizontal list">
     {
       data.map(item => (
         <li key={item.id} className="list-group-item item">
           <Item
-            stateValue={stateValue}
-            callback={callback}
+            selectedGoods={selectedGoods}
+            onClick={onClick}
             item={item}
           />
         </li>
@@ -21,6 +21,6 @@ export const List = ({ data, stateValue, callback }) => (
 
 List.propTypes = {
   data: PropTypes.arrayOf(ItemFromServerShape).isRequired,
-  stateValue: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  callback: PropTypes.func.isRequired,
+  selectedGoods: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  onClick: PropTypes.func.isRequired,
 };

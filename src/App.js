@@ -25,43 +25,44 @@ const preparedGoods = goodsFromServer.map((good, index) => (
 
 class App extends React.Component {
   state = {
-    item: [],
+    selectedGoods: [],
   };
 
   clickHandler = (event) => {
-    if (event.ctrlKey) {
+    if (event.ctrlKey || event.metaKey) {
       const target = event.target.textContent;
 
       this.setState((prevState) => {
-        if (prevState.item.includes(target)) {
-          prevState.item.splice(prevState.item.indexOf(target), 1);
+        if (prevState.selectedGoods.includes(target)) {
+          const leftGoods = prevState.selectedGoods
+            .filter(good => good !== target);
 
-          return { item: prevState.item };
+          return { selectedGoods: leftGoods };
         }
 
-        const newArr = [...prevState.item, target];
+        const newArr = [...prevState.selectedGoods, target];
 
-        return { item: newArr };
+        return { selectedGoods: newArr };
       });
     } else {
-      this.setState({ item: [event.target.textContent] });
+      this.setState({ selectedGoods: [event.target.textContent] });
     }
   }
 
   removeAll = () => {
-    this.setState({ item: [] });
+    this.setState({ selectedGoods: [] });
   }
 
   render() {
-    const { item } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App">
-        <Header item={item} callback={this.removeAll} />
+        <Header selectedGoods={selectedGoods} onClick={this.removeAll} />
         <List
           data={preparedGoods}
-          stateValue={item}
-          callback={this.clickHandler}
+          selectedGoods={selectedGoods}
+          onClick={this.clickHandler}
         />
       </div>
     );
