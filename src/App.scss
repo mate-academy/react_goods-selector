@@ -1,1 +1,31 @@
-// styles go here
+body {
+  padding: 30px;
+  background-color: rgb(218, 196, 216);
+  color: #343a40;
+}
+
+.wrapper {
+  height: 150px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.list-group {
+  justify-content: center;
+}
+
+.item {
+  padding: 0;
+  border: none;
+}
+
+.btn-dark {
+  position: relative;
+  z-index: 1;
+  border-radius: 0;
+
+  &:enabled {
+    outline: none;
+  }
+}
