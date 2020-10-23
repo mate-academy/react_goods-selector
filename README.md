@@ -5,8 +5,14 @@
 ## Task
 - Render a header (`h1`) initially saying `Selected good: -`
 - Render a list of goods. 
-- Implement ability to select a good by clicking on it. Use buttons styled as a plain text with `cursor: pointer`.
+- Add a `Select` button next to each good in the list.
 - Add a special class to the selected good  in the list (e.g. highlight it with a yellow color).
-- The header should show the name of the selected good
+- The header should show the name of the selected good.
 - Add clear button (`X`) next to the header to clear the selection
-- (*) Implement multiple selection. A button click with `ctrl` pressed should toggle selection of a clicked item.
+
+## (* Optional) Advanced task
+> Watch [this video](https://youtu.be/zMe2Qq-ThpM) to update the state correctly.
+
+- Implement the ability to select multiple goods (use selectedGoods Array
+- Replace `Select` buttons with `Add/Remove`
+- All the selected goods should be listed in the header separated with commas.
