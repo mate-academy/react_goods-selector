@@ -1,14 +1,15 @@
 import React from 'react';
+import ClassNames from 'classnames';
 import { GoodShape } from '../../shapes/GoodShape';
 
-export const Good = ({ good, selectTodo, deleteTodo, selected }) => (
+export const Good = ({ good, selectTodo, selected }) => (
   <div className="good">
     <button
       type="button"
-      className={selected.includes(good.title)
-        ? 'good__item selected' : 'good__item'}
-      onClick={() => selectTodo(good.id)}
-      onContextMenu={deleteTodo}
+      className={
+        ClassNames('good__item', { selected: selected.includes(good.title) })
+      }
+      onClick={event => selectTodo(good.id, event)}
     >
       {good.title}
     </button>

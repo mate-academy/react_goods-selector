@@ -2,8 +2,9 @@ import React from 'react';
 import { Good } from '../Good';
 import { GoodListShape } from '../../shapes/GoodListShape';
 
-// eslint-disable-next-line max-len
-export const GoodsList = ({ preparedGoods, selectTodo, deleteTodo, selected }) => (
+export const GoodsList = (
+  { preparedGoods, selectTodo, selected },
+) => (
   <ul className="goods">
     {preparedGoods.map(good => (
       <li
@@ -13,7 +14,6 @@ export const GoodsList = ({ preparedGoods, selectTodo, deleteTodo, selected }) =
         <Good
           good={good}
           selectTodo={selectTodo}
-          deleteTodo={deleteTodo}
           selected={selected}
         />
       </li>

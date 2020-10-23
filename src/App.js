@@ -22,36 +22,50 @@ const preparedGoods = goodsFromServer.map((good, index) => ({
 
 class App extends React.Component {
   state = {
-    selected: '',
+    selected: [''],
   }
 
-  selectTodo = (id) => {
-    if (this.state.selected.includes(preparedGoods[id].title)) {
+  selectTodo = (id, event) => {
+    const selectedTodo = preparedGoods[id].title;
+
+    if ((event.metaKey || event.ctrlKey)
+      && !this.state.selected.includes(selectedTodo)
+    ) {
+      this.setState(state => ({
+        selected: [...state.selected, selectedTodo],
+      }));
+
       return;
     }
 
-    this.setState(state => ({
-      selected: `${state.selected} ${preparedGoods[id].title}`,
-    }));
+    if ((event.metaKey || event.ctrlKey)
+      && this.state.selected.includes(selectedTodo)
+    ) {
+      this.setState(state => ({
+        selected: state.selected.filter(good => good !== selectedTodo),
+      }));
+
+      return;
+    }
+
+    if (this.state.selected.includes(selectedTodo)) {
+      return;
+    }
+
+    this.setState({
+      selected: [selectedTodo],
+    });
   }
 
   clearSelected = () => {
     if (document.querySelector('.selected')) {
-      document.querySelector('.selected').classList.remove('selected');
+      [...document.querySelectorAll('.selected')]
+        .forEach(selectedItem => selectedItem.classList.remove('selected'));
     }
 
     this.setState({
-      selected: '',
+      selected: [],
     });
-  }
-
-  deleteSelectedTodo = (event) => {
-    event.preventDefault();
-    const itemToDelete = event.target.textContent;
-
-    this.setState(state => ({
-      selected: state.selected.split(itemToDelete).join(' '),
-    }));
   }
 
   render() {
@@ -60,19 +74,17 @@ class App extends React.Component {
     return (
       <div className="app">
         <h1 className="app__header">Selected goods:</h1>
-        <h3 className="app__header-items">{this.state.selected}</h3>
+        <h3 className="app__header-items">{selected.join(', ')}</h3>
         <button
           type="button"
           className="app__button"
           onClick={this.clearSelected}
-          onContextMenu={this.deleteSelectedTodo}
         >
           X
         </button>
         <GoodsList
           preparedGoods={preparedGoods}
           selectTodo={this.selectTodo}
-          deleteTodo={this.deleteSelectedTodo}
           selected={selected}
         />
       </div>
