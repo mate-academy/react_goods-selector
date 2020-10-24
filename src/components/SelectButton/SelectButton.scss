@@ -7,12 +7,13 @@
   font-size: 18px;
   color: #D4DCD2;
   background-color: #2F332E;
-  transition: color 0.5s, background-color 0.5s ;
+  transition: color 0.5s, background-color 0.5s;
 
   cursor: pointer;
 
   &--active {
     color: #2F332E;
     background-color: #D4DCD2;
+    transform: scale(1.2);
   }
 }
