@@ -1,0 +1,18 @@
+.SelectButton {
+  border: none;
+  outline: none;
+  padding: 10px;
+
+  line-height: 20px;
+  font-size: 18px;
+  color: #D4DCD2;
+  background-color: #2F332E;
+  transition: color 0.5s, background-color 0.5s ;
+
+  cursor: pointer;
+
+  &--active {
+    color: #2F332E;
+    background-color: #D4DCD2;
+  }
+}
