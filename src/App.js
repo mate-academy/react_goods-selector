@@ -43,13 +43,15 @@ class App extends React.Component {
           }
         </h1>
 
-        <button
-          type="button"
-          className="btn btn-danger"
-          onClick={this.clearSelect}
-        >
-          X
-        </button>
+        <div>
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={this.clearSelect}
+          >
+            X
+          </button>
+        </div>
 
         <div className="btn-group mt-2" role="group" aria-label="First group">
           {
