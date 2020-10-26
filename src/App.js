@@ -34,21 +34,15 @@ class App extends React.Component {
       this.setState(state => ({
         selected: [...state.selected, selectedTodo],
       }));
-
-      return;
-    }
-
-    if ((event.metaKey || event.ctrlKey)
+    } else if (
+      (event.metaKey || event.ctrlKey)
       && this.state.selected.includes(selectedTodo)
     ) {
       this.setState(state => ({
         selected: state.selected.filter(good => good !== selectedTodo),
       }));
-
-      return;
-    }
-
-    if (this.state.selected.includes(selectedTodo)) {
+    } else if (
+      this.state.selected.includes(selectedTodo)) {
       return;
     }
 
