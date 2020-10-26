@@ -17,29 +17,41 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGood: '',
+    selectedGoods: [],
   }
 
   selectGood = (good) => {
-    this.setState({
-      selectedGood: good,
+    this.setState((state) => {
+      if (!state.selectedGoods.includes(good)) {
+        return {
+          selectedGoods: [...state.selectedGoods, good],
+        };
+      }
+
+      const goodIndex = state.selectedGoods.indexOf(good);
+
+      state.selectedGoods.splice(goodIndex, 1);
+
+      return {
+        selectedGoods: state.selectedGoods,
+      };
     });
   }
 
   clearSelect = () => {
     this.setState({
-      selectedGood: '',
+      selectedGoods: [],
     });
   }
 
   render() {
-    const { selectedGood } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App w-50 m-auto">
         <h1>
           {
-            `Selected good: - ${selectedGood}`
+            `Selected good: - ${selectedGoods.join(', ')}`
           }
         </h1>
 
@@ -60,7 +72,7 @@ class App extends React.Component {
                 key={good}
                 good={good}
                 selectGoodClicker={this.selectGood}
-                selectedGood={selectedGood}
+                selectedGoods={selectedGoods}
               />
             ))
           }
