@@ -1,1 +1,24 @@
-// styles go here
+body,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.App {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 5vw 5vw 2vw;
+  }
+
+  &__main {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5vw 5vw;
+  }
+}
