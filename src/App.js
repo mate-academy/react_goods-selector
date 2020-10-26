@@ -15,12 +15,10 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-const preparedGoods = goodsFromServer.map((item, index) => (
-  {
-    id: index,
-    name: item,
-  }
-));
+const preparedGoods = goodsFromServer.map((item, index) => ({
+  id: index,
+  name: item,
+}));
 
 class App extends React.Component {
   state = {
@@ -28,11 +26,15 @@ class App extends React.Component {
   }
 
   clickHandler = (event) => {
-    this.setState({ selected: event.target.textContent });
+    this.setState({
+      selected: event.target.textContent,
+    });
   }
 
   remover = () => {
-    this.setState({ selected: '' });
+    this.setState({
+      selected: '',
+    });
   }
 
   render() {
