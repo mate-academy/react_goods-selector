@@ -1,1 +1,12 @@
-// styles go here
+* {
+  font-family: Montserrat, sans-serif;
+  background-color: #f2f2f2;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
