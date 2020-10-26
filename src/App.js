@@ -42,24 +42,20 @@ class App extends React.Component {
   }
 
   buttonClick = (good, target) => {
-    this.setState(({ selectedGoods }) => {
-      if (target.textContent === 'Remove') {
-        target.parentElement.classList.remove('border-primary');
+    if (target.textContent === 'Remove') {
+      target.parentElement.classList.remove('border-primary');
 
-        const currentSelectedGoods = selectedGoods
-          .filter(selectedGood => selectedGood !== good);
-
-        return ({
-          selectedGoods: currentSelectedGoods,
-        });
-      }
-
+      this.setState(({ selectedGoods }) => ({
+        selectedGoods: selectedGoods
+          .filter(selectedGood => selectedGood !== good),
+      }));
+    } else {
       target.parentElement.classList.add('border-primary');
 
-      return ({
+      this.setState(({ selectedGoods }) => ({
         selectedGoods: [...selectedGoods, good],
-      });
-    });
+      }));
+    }
   }
 
   render() {
