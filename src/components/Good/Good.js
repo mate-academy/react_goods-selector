@@ -7,7 +7,8 @@ export const Good = ({ good, selectTodo, selected }) => (
     <button
       type="button"
       className={
-        ClassNames('good__item', { selected: selected.includes(good.title) })
+        ClassNames('good__item',
+          { selected: selected.includes(good.title) })
       }
       onClick={event => selectTodo(good.id, event)}
     >

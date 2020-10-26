@@ -58,11 +58,6 @@ class App extends React.Component {
   }
 
   clearSelected = () => {
-    if (document.querySelector('.selected')) {
-      [...document.querySelectorAll('.selected')]
-        .forEach(selectedItem => selectedItem.classList.remove('selected'));
-    }
-
     this.setState({
       selected: [],
     });
