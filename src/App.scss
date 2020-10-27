@@ -1,1 +1,86 @@
-// styles go here
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,500&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+.app {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 10px;
+
+  &__info {
+    background-color: #c4c4c4;
+    border-radius: 10px;
+    padding: 20px 40px;
+    margin-bottom: 5px;
+  }
+
+  &__header {
+    margin: 0;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  &__goodsSelected {
+    margin-bottom: 20px;
+  }
+
+  &__button {
+    width: 80px;
+    height: 30px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #e5e5e5;
+    }
+
+    &--dark {
+      background-color: #c4c4c4;
+    }
+  }
+
+  &__goodList {
+    display: grid;
+    gap: 10px;
+    background-color: #e5e5e5;
+    border-radius: 10px;
+    padding: 20px 40px;
+  }
+
+  &__good {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
+    border-radius: 5px;
+    border: 2px solid #fff;
+    background-color: #fff;
+
+    &--selected {
+      border-color: #c4c4c4;
+    }
+  }
+}
