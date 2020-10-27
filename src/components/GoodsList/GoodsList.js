@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const GoodsList = ({ allGoods, addItem, selectedItems }) => (
+const GoodsList = ({ allItems, addItem, selectedItems }) => (
   <ul className="products__list">
     {
-      allGoods.map(item => (
+      allItems.map(item => (
         <li
           key={item}
         >
           <button
             type="button"
-            onClick={event => addItem(event)}
+            onClick={() => addItem(item)}
             className={selectedItems.includes(item)
               ? 'products__item products__item_selected'
               : 'products__item'}
@@ -24,13 +24,14 @@ const GoodsList = ({ allGoods, addItem, selectedItems }) => (
 );
 
 GoodsList.propTypes = {
-  allGoods: PropTypes.arrayOf(PropTypes.string).isRequired,
+  allItems: PropTypes.arrayOf(PropTypes.string),
   addItem: PropTypes.func.isRequired,
   selectedItems: PropTypes.arrayOf(PropTypes.string),
 };
 
 GoodsList.defaultProps = {
   selectedItems: [],
+  allItems: [],
 };
 
 export default GoodsList;

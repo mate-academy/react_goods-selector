@@ -18,31 +18,28 @@ const goodsFromServer = [
 
 class App extends Component {
   state = {
+    allItems: goodsFromServer,
     selectedItems: [],
   }
 
-  addItem = (event) => {
-    const target = event.target.textContent;
-    const { selectedItems } = this.state;
+  addItem = (selectedItem) => {
+    this.setState((state) => {
+      if (state.selectedItems.includes(selectedItem)) {
+        const newSelectedItems = state.selectedItems.filter(item => (
+          item !== selectedItem
+        ));
 
-    if (event.ctrlKey) {
-      if (selectedItems.includes(target)) {
-        this.setState(prevState => (
-          {
-            selectedItems: prevState.selectedItems
-              .filter(item => item !== target),
-          }
-        ));
-      } else {
-        this.setState(prevState => (
-          {
-            selectedItems: [...prevState.selectedItems, target],
-          }
-        ));
+        return {
+          selectedItems: newSelectedItems,
+        };
       }
-    } else {
-      this.setState({ selectedItems: [target] });
-    }
+
+      const newSelectedItems = [...state.selectedItems, selectedItem];
+
+      return {
+        selectedItems: newSelectedItems,
+      };
+    });
   }
 
   removeAllItems = () => {
@@ -52,7 +49,8 @@ class App extends Component {
   }
 
   render() {
-    const { selectedItems } = this.state;
+    const { selectedItems, allItems } = this.state;
+    const { addItem, removeAllItems } = this;
 
     return (
       <div className="App">
@@ -62,19 +60,13 @@ class App extends Component {
             <span
               className="products__tip"
             >
-              Click on item to add to Shopping Cart
-            </span>
-            <br />
-            <span
-              className="products__tip"
-            >
-              Keep Ctrl key pressed to add multiple
+              Click on item to add or remove it from Shopping Cart
             </span>
             <div>
               <GoodsList
-                allGoods={goodsFromServer}
+                allItems={allItems}
                 selectedItems={selectedItems}
-                addItem={this.addItem}
+                addItem={addItem}
               />
             </div>
           </div>
@@ -103,7 +95,7 @@ class App extends Component {
         </div>
 
         <RemoveButton
-          removeAllItems={this.removeAllItems}
+          removeAllItems={removeAllItems}
         />
       </div>
     );
