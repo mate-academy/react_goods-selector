@@ -7,7 +7,7 @@ import { GoodPropTypes } from '../PropTypes/GoodPropTypes';
 export const Good = ({ good, selectedGoods, onClick }) => (
   <button
     type="button"
-    onClick={onClick}
+    onClick={() => onClick(good.name)}
     className={classNames({
       app__item: true,
       'app__item--selected': selectedGoods.includes(good.name),

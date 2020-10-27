@@ -26,20 +26,19 @@ class App extends React.Component {
     selectedGoods: [],
   }
 
-  addGood = (event) => {
-    const targetName = event.target.textContent;
-
+  addGood = (name) => {
     this.setState((state) => {
-      if (state.selectedGoods.includes(targetName)) {
-        const newSelectedGoods = state.selectedGoods
-          .filter(good => good !== targetName);
+      if (state.selectedGoods.includes(name)) {
+        const newSelectedGoods = state.selectedGoods.filter(good => (
+          good !== name
+        ));
 
         return {
           selectedGoods: newSelectedGoods,
         };
       }
 
-      const newSelectedGoods = [...state.selectedGoods, targetName];
+      const newSelectedGoods = [...state.selectedGoods, name];
 
       return {
         selectedGoods: newSelectedGoods,
