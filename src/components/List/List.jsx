@@ -4,23 +4,25 @@ import { Product } from '../Product';
 
 export class List extends React.Component {
   render() {
-    const {goods} = this.props;
+    const {goods, isActive, counter, addProducts, removeProducts} = this.props;
 
     return (
       <ul className="App__list list">
         {goods.map(product =>
-          <Product product={product} addProducts={this.props.addProducts}/>
+          <Product
+            product={product}
+            addProducts={addProducts}
+            isActive={isActive}
+          />
         )}
 
         <li
           className="list__item item--reset"
-          onClick={() => {
-            this.props.removeProducts('reset')
-          }}
+          onClick={() => removeProducts()}
         >
           reset
         </li>
-        <li className="list__item item--count">{this.props.counter}</li>
+        <li className="list__item item--count">{counter}</li>
       </ul>
     )
   }

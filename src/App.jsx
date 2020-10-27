@@ -16,46 +16,53 @@ const goodsFromServer = [
 ];
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
+  state = {
+    selectedProducts: [],
+    temp: '',
+    isActive: false,
+  }
+
+  addProducts = (product) => {
+    const {selectedProducts} = this.state;
+    const index = selectedProducts.indexOf(product);
+
+    if (selectedProducts.includes(product)) {
+      selectedProducts.splice(index, 1);
+
+      return this.setState({
+        temp: selectedProducts.join(', '),
+      });
+    }
+
+    if (!selectedProducts.includes(product)) {
+      selectedProducts.push(product);
+
+      return this.setState({
+        temp: selectedProducts.join(', '),
+      });
+    }
+  }
+
+  removeProducts = () => {
+    this.setState({
       selectedProducts: [],
       temp: '',
-    }
-
-    this.addProducts = this.addProducts.bind(this);
-    this.removeProducts = this.removeProducts.bind(this);
-  }
-
-  addProducts(product) {
-    if (this.state.selectedProducts.includes(product)) {
-      const index = this.state.selectedProducts.indexOf(product);
-
-      this.state.selectedProducts.splice(index, 1);
-      return this.setState({temp: this.state.selectedProducts.join(', ')});
-    }
-
-    if (!this.state.selectedProducts.includes(product)) {
-      this.state.selectedProducts.push(product);
-      return this.setState({temp: this.state.selectedProducts.join(', ')});
-    }
-  }
-
-  removeProducts(callback) {
-    if (callback === 'reset') {
-      return this.setState({selectedProducts: [], temp: ''});
-    }
+      isActive: false,
+    });
   }
 
   render() {
+    const {selectedProducts, isActive} = this.state;
+
     return (
       <div className="App">
         <h1 className="App__title">Selected good: {this.state.temp}</h1>
         <List
           goods={goodsFromServer}
+          isActive={isActive}
           addProducts={this.addProducts}
           removeProducts={this.removeProducts}
-          counter={this.state.selectedProducts.length}
+          counter={selectedProducts.length}
         />
       </div>
     )
