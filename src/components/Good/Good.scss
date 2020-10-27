@@ -1,0 +1,26 @@
+.good {
+  &__button {
+    margin-bottom: 5px;
+    width: 200px;
+    height: 40px;
+    color: rgb(225, 124, 65);
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    background-color: rgba(236, 236, 112, 0.945);
+    border: 3px solid rgb(225, 124, 65);
+    border-radius: 10px;
+    outline: none;
+    transition: color 0.4s, background-color 0.4s;
+
+    &:hover {
+      color:rgba(223, 223, 21, 0.8);
+      background-color: rgb(218, 157, 122);
+      border: 3px solid rgba(223, 223, 21, 0.8);
+    }
+
+    &--selected {
+      background-color: rgb(151, 212, 135);
+    }
+  }
+}
