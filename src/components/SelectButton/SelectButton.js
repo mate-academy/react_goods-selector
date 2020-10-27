@@ -13,7 +13,7 @@ export const SelectButton = ({ handleClick, goodName, isSelected }) => (
       )
     }
     type="button"
-    onClick={handleClick}
+    onClick={() => handleClick(goodName)}
   >
     {goodName}
   </button>

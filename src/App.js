@@ -30,23 +30,17 @@ class App extends React.Component {
     selectedGoods: [],
   }
 
-  selectGoods = (event, goodName) => {
-    event.persist();
-
+  selectGoods = (goodName) => {
     this.setState((prevState) => {
-      const prevSelectedGoods = prevState.selectedGoods;
+      const prevSelectedGoods = [...prevState.selectedGoods];
 
-      if (event.ctrlKey) {
-        if (prevSelectedGoods.includes(goodName)) {
-          prevSelectedGoods.splice(prevSelectedGoods.indexOf(goodName), 1);
+      if (prevSelectedGoods.includes(goodName)) {
+        prevSelectedGoods.splice(prevSelectedGoods.indexOf(goodName), 1);
 
-          return { selectedGoods: [...prevSelectedGoods] };
-        }
-
-        return { selectedGoods: [...prevSelectedGoods, goodName] };
+        return { selectedGoods: [...prevSelectedGoods] };
       }
 
-      return { selectedGoods: [goodName] };
+      return { selectedGoods: [...prevSelectedGoods, goodName] };
     });
   }
 

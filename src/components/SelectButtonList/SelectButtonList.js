@@ -13,7 +13,7 @@ export const SelectButtonList = ({ handleClick, goods, selectedGoods }) => (
       return (
         <SelectButton
           key={good.id}
-          handleClick={event => handleClick(event, good.name)}
+          handleClick={handleClick}
           goodName={good.name}
           isSelected={isSelected}
         />
