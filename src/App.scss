@@ -1,1 +1,74 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(245, 142, 8);
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  width: 850px;
+  margin: 80px auto;
+  padding: 50px;
+
+  background-color: #fff;
+  border-radius: 80px;
+  box-shadow: 0 0 15px rgba(75, 74, 74, 0.3);
+
+  &__title {
+    height: 100px;
+    color: rgb(245, 142, 8);
+
+    &-goods {
+      color: rgb(184, 182, 182);
+    }
+  }
+}
+
+.goods {
+  align-self: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  &__item {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    width: 600px;
+    margin-bottom: 20px;
+    padding: 20px;
+
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 30px;
+    color: #fff;
+
+    background-color: rgb(245, 142, 8);
+    border: 3px solid rgb(245, 142, 8);
+    border-radius: 20px;
+    transition: 0.3s;
+
+    &--selected {
+      background-color: #fff;
+      color: rgb(245, 142, 8);
+    }
+  }
+
+  &__button {
+    padding: 10px;
+    font-weight: bold;
+    color: #fff;
+    background-color: rgb(184, 182, 182);
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgb(168, 166, 166);
+    }
+  }
+}
