@@ -1,10 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './List.scss';
 import { Product } from '../Product';
 
 export class List extends React.Component {
   render() {
-    const {goods, isActive, counter, addProducts, removeProducts} = this.props;
+    const {
+      goods,
+      counter,
+      addProducts,
+      removeProducts,
+      displayProducts
+    } = this.props;
 
     return (
       <ul className="App__list list">
@@ -12,7 +19,8 @@ export class List extends React.Component {
           <Product
             product={product}
             addProducts={addProducts}
-            isActive={isActive}
+            displayProducts={displayProducts}
+            key={goods.indexOf(product)}
           />
         )}
 
@@ -26,4 +34,8 @@ export class List extends React.Component {
       </ul>
     )
   }
+}
+
+List.propTypes = {
+  addProducts: PropTypes.func.isRequired,
 }

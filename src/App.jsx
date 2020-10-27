@@ -52,16 +52,16 @@ class App extends React.Component {
   }
 
   render() {
-    const {selectedProducts, isActive} = this.state;
+    const {selectedProducts, displayProducts} = this.state;
 
     return (
       <div className="App">
-        <h1 className="App__title">Selected good: {this.state.displayProducts}</h1>
+        <h1 className="App__title">Selected good: {displayProducts}</h1>
         <List
           goods={goodsFromServer}
-          isActive={isActive}
           addProducts={this.addProducts}
           removeProducts={this.removeProducts}
+          displayProducts={displayProducts}
           counter={selectedProducts.length}
         />
       </div>

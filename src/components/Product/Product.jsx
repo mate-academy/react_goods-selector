@@ -1,20 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Product.scss';
 
 export class Product extends React.Component {
   render() {
-    let { product, addProducts, isActive } = this.props;
+    const { product, addProducts, displayProducts } = this.props;
 
     return (
       <>
         <li
-          className={isActive
+          className={displayProducts.includes(product)
             ? "list__item item--active"
             : "list__item item--unactive"
           }
           onClick={() => {
             addProducts(product);
-            isActive = !isActive;
           }}
         >
           {product}
@@ -22,4 +22,10 @@ export class Product extends React.Component {
       </>
     )
   }
+}
+
+Product.propTypes = {
+  product: PropTypes.string.isRequired,
+  addProducts: PropTypes.func.isRequired,
+  displayProducts: PropTypes.string.isRequired,
 }
