@@ -19,7 +19,7 @@ export const Good = ({ good, selectedGoods, toggleGood }) => {
       <button
         type="button"
         className="good__button button"
-        onClick={toggleGood}
+        onClick={() => toggleGood(name)}
       >
         {goodClasses.includes('good--selected') ? 'Remove' : 'Select'}
       </button>

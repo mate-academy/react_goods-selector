@@ -26,18 +26,14 @@ class App extends React.Component {
     selectedGoods: [],
   }
 
-  toggleGood = (event) => {
-    const goodName = event.target.previousElementSibling.textContent;
-    const buttonName = event.target.textContent;
+  toggleGood = (name) => {
     const { selectedGoods } = this.state;
     const updatedSelectedGoods = [...selectedGoods];
 
-    if (buttonName === 'Select') {
-      if (!updatedSelectedGoods.includes(goodName)) {
-        updatedSelectedGoods.push(goodName);
-      }
+    if (!selectedGoods.includes(name)) {
+      updatedSelectedGoods.push(name);
     } else {
-      updatedSelectedGoods.splice(updatedSelectedGoods.indexOf(goodName), 1);
+      updatedSelectedGoods.splice(updatedSelectedGoods.indexOf(name), 1);
     }
 
     this.setState({
