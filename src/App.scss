@@ -1,1 +1,41 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+
+  background-color: rgb(255, 212, 240);
+  font-family: 'Lucida Sans', Geneva, Verdana, sans-serif;
+  font-size: 18px;
+}
+
+.button {
+  width: 100px;
+  height: 40px;
+
+  border-radius: 10px;
+  border: 1px solid rgb(82, 82, 82);
+
+  font-family: 'Lucida Sans', Geneva, Verdana, sans-serif;
+  font-size: 16px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(133, 87, 121);
+    color: white;
+  }
+}
+
+.app {
+  padding: 50px;
+
+  &__header {
+    margin: 20px 0;
+  }
+
+  &__button {
+    width: 70px;
+    height: 30px;
+  }
+}

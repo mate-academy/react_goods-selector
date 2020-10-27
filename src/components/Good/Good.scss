@@ -1,0 +1,13 @@
+.good {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  margin: 5px 0;
+
+  border-radius: 10px;
+
+  &--selected {
+    background-color: rgb(230, 161, 212);
+  }
+}
