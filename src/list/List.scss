@@ -1,0 +1,27 @@
+.list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.item {
+  margin-bottom: 5px;
+
+  &__button {
+    font-weight: bold;
+    font-size: 24px;
+    font-family: Georgia, serif;
+    border: none;
+    outline: inherit;
+    background-color: white;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      color: blue;
+    }
+  }
+
+  &__selected {
+    text-decoration: underline;
+  }
+}

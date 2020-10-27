@@ -1,1 +1,27 @@
-// styles go here
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Georgia, serif;
+}
+
+.App {
+  text-align: center;
+
+  &__button {
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 5px;
+    outline: inherit;
+    background-color: white;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: red;
+    }
+  }
+}
