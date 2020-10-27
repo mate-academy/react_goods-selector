@@ -18,7 +18,7 @@ const goodsFromServer = [
 class App extends React.Component {
   state = {
     selectedProducts: [],
-    temp: '',
+    displayProducts: '',
     isActive: false,
   }
 
@@ -30,7 +30,7 @@ class App extends React.Component {
       selectedProducts.splice(index, 1);
 
       return this.setState({
-        temp: selectedProducts.join(', '),
+        displayProducts: selectedProducts.join(', '),
       });
     }
 
@@ -38,7 +38,7 @@ class App extends React.Component {
       selectedProducts.push(product);
 
       return this.setState({
-        temp: selectedProducts.join(', '),
+        displayProducts: selectedProducts.join(', '),
       });
     }
   }
@@ -46,7 +46,7 @@ class App extends React.Component {
   removeProducts = () => {
     this.setState({
       selectedProducts: [],
-      temp: '',
+      displayProducts: '',
       isActive: false,
     });
   }
@@ -56,7 +56,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <h1 className="App__title">Selected good: {this.state.temp}</h1>
+        <h1 className="App__title">Selected good: {this.state.displayProducts}</h1>
         <List
           goods={goodsFromServer}
           isActive={isActive}
