@@ -23,18 +23,29 @@ const goods = goodsFromServer.map(
 
 class App extends Component {
   state = {
-    selected: '',
+    selectedGoods: [],
   }
 
   targetGood = (good) => {
-    this.setState({
-      selected: good.name,
-    });
+    const { name } = good;
+    const selected = this.state.selectedGoods;
+
+    this.setState({});
+
+    if (selected.includes(name)) {
+      const filterGoods = selected.filter(goodName => goodName !== name);
+
+      this.setState({
+        selectedGoods: filterGoods,
+      });
+    } else {
+      selected.push(name);
+    }
   }
 
   clear = () => {
     this.setState({
-      selected: '',
+      selectedGoods: [],
     });
   }
 
@@ -45,7 +56,7 @@ class App extends Component {
           Selected good:
           {' '}
           <span className="App__selected-good">
-            {this.state.selected}
+            {this.state.selectedGoods.join(', ')}
           </span>
         </h1>
 
@@ -60,10 +71,15 @@ class App extends Component {
         <div className="App__products">
           {goods.map((good) => {
             let isActive;
+            let submit = 'Add';
 
-            good.name === this.state.selected
-              ? isActive = 'App--active'
-              : isActive = '';
+            if (this.state.selectedGoods.includes(good.name)) {
+              isActive = 'App--active';
+              submit = 'Remove';
+            } else {
+              isActive = '';
+              submit = 'Add';
+            }
 
             return (
               <div
@@ -81,7 +97,7 @@ class App extends Component {
                     this.targetGood(good);
                   }}
                 >
-                  Submit
+                  {submit}
                 </button>
               </div>
             );
