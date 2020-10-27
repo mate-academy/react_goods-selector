@@ -70,7 +70,7 @@ class App extends React.Component {
 
         <GoodsList
           goods={preparedList}
-          selectedProducts={this.state.selectedProducts}
+          selectedProducts={selectedProducts}
           onClick={this.selectItem}
         />
       </div>
