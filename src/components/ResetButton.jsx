@@ -1,5 +1,5 @@
 import React from 'react';
-import { ResetButtonPropTypes } from '../propTypeShapes/resetButton';
+import PropTypes from 'prop-types';
 
 export function ResetButton({ resetList }) {
   return (
@@ -13,4 +13,6 @@ export function ResetButton({ resetList }) {
   );
 }
 
-ResetButton.propTypes = ResetButtonPropTypes;
+ResetButton.propTypes = {
+  resetList: PropTypes.func.isRequired,
+};
