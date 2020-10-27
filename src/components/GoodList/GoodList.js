@@ -2,14 +2,14 @@ import React from 'react';
 import { GoodListProps } from '../../props/GoodListProps';
 import { Good } from '../Good';
 
-export const GoodList = ({ goods, buttonClick, selected }) => (
+export const GoodList = ({ goods, buttonClick, selectedGoods }) => (
   <section className="row row-cols-2 row-cols-md-4">
-    {goods.map(({ good, id }) => (
+    {goods.map(good => (
       <Good
-        good={good}
+        name={good.name}
         buttonClick={buttonClick}
-        selected={selected}
-        key={id}
+        selectedGoods={selectedGoods}
+        key={good.id}
       />
     ))}
   </section>

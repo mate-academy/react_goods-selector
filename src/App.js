@@ -18,7 +18,7 @@ const goodsFromServer = [
 ];
 
 const preparedGoods = goodsFromServer.map((good, index) => ({
-  good,
+  name: good,
   id: index,
 }));
 
@@ -27,33 +27,21 @@ class App extends React.Component {
     selectedGoods: [],
   }
 
-  resetState = ({ target }) => {
-    const goods = [...target.nextElementSibling.children];
-
-    goods.forEach((good) => {
-      if (good.classList.contains('border-primary')) {
-        good.classList.remove('border-primary');
-      }
-    });
-
+  resetState = () => {
     this.setState({
       selectedGoods: [],
     });
   }
 
-  buttonClick = (good, target) => {
-    if (target.textContent === 'Remove') {
-      target.parentElement.classList.remove('border-primary');
-
+  buttonClick = (name) => {
+    if (this.state.selectedGoods.includes(name)) {
       this.setState(({ selectedGoods }) => ({
         selectedGoods: selectedGoods
-          .filter(selectedGood => selectedGood !== good),
+          .filter(selectedGood => selectedGood !== name),
       }));
     } else {
-      target.parentElement.classList.add('border-primary');
-
       this.setState(({ selectedGoods }) => ({
-        selectedGoods: [...selectedGoods, good],
+        selectedGoods: [...selectedGoods, name],
       }));
     }
   }
@@ -84,7 +72,7 @@ class App extends React.Component {
         <GoodList
           goods={preparedGoods}
           buttonClick={buttonClick}
-          selected={selectedGoods}
+          selectedGoods={selectedGoods}
         />
       </div>
     );
