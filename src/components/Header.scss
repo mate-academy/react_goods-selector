@@ -1,0 +1,19 @@
+.header {
+  height: 100px;
+  padding: 14px;
+  border: 1px solid black;
+}
+
+.clearButton {
+  width: 40px;
+  margin-left: 290px;
+
+  font-size: 20px;
+  background-color: rgb(250, 143, 143);
+
+  transition: background-color 500ms;
+
+  &:hover {
+    background-color: red;
+  }
+}
