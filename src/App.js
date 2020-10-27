@@ -74,8 +74,8 @@ class App extends Component {
           <div className="shoppingCart">
             <h2 className="shoppingCart__title">Shopping Cart</h2>
 
-            {selectedItems.length
-              ? selectedItems.map(item => (
+            {selectedItems.length ? (
+              selectedItems.map(item => (
                 <p
                   key={item}
                   className="shoppingCart__text"
@@ -83,14 +83,11 @@ class App extends Component {
                   {item}
                 </p>
               ))
-              : (
-                <p
-                  className="shoppingCart__info"
-                >
-                  Your Shopping Cart is empty
-                </p>
-              )
-            }
+            ) : (
+              <p className="shoppingCart__info">
+                Your Shopping Cart is empty
+              </p>
+            )}
           </div>
         </div>
 

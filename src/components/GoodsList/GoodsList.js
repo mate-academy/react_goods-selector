@@ -5,9 +5,7 @@ const GoodsList = ({ allItems, addItem, selectedItems }) => (
   <ul className="products__list">
     {
       allItems.map(item => (
-        <li
-          key={item}
-        >
+        <li key={item}>
           <button
             type="button"
             onClick={() => addItem(item)}
