@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { shapeList } from './shapeList';
 import './Item.scss';
 
-export const Item = ({ onClick, item }) => (
+export const Item = ({ selectedGoods, onClick, item }) => (
   <button
-    className="button"
+    className={selectedGoods.includes(item.name)
+      ? 'button button--isActive'
+      : 'button'}
     onClick={event => onClick(event)}
     type="button"
   >
@@ -14,6 +16,7 @@ export const Item = ({ onClick, item }) => (
 );
 
 Item.propTypes = {
+  selectedGoods: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   onClick: PropTypes.func.isRequired,
   item: shapeList.isRequired,
 };

@@ -3,10 +3,15 @@
 
   border: 0;
   font-size: large;
+  outline: none;
+  cursor: pointer;
 
   transition: transform 0.4s, box-shadow 0.6s;
-  // background-color: rgb(147, 236, 147);
 
+  &--isActive {
+    background-color: rgb(147, 236, 147);
+  }
+  
   &:hover {
     box-shadow: 1px 7px 6px silver;
     transform: scale(1.1);
