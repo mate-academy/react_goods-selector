@@ -26,7 +26,7 @@ class App extends Component {
     selectedGoods: [],
   }
 
-  targetGood = (good) => {
+  selectGoods = (good) => {
     const { name } = good;
     const { selectedGoods } = this.state;
 
@@ -53,6 +53,8 @@ class App extends Component {
   }
 
   render() {
+    const { selectedGoods } = this.state;
+
     return (
       <div className="App">
         <h1 className="App__title">
@@ -76,7 +78,7 @@ class App extends Component {
             let isActive;
             let submit = 'Add';
 
-            if (this.state.selectedGoods.includes(good.name)) {
+            if (selectedGoods.includes(good.name)) {
               isActive = 'App--active';
               submit = 'Remove';
             } else {
@@ -97,7 +99,7 @@ class App extends Component {
                   className="App__btn"
                   type="submit"
                   onClick={() => {
-                    this.targetGood(good);
+                    this.selectGoods(good);
                   }}
                 >
                   {submit}
