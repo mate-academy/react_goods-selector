@@ -37,5 +37,11 @@ export class List extends React.Component {
 }
 
 List.propTypes = {
+  goods: PropTypes.arrayOf(
+    PropTypes.string.isRequired,
+  ).isRequired,
   addProducts: PropTypes.func.isRequired,
+  removeProducts: PropTypes.func.isRequired,
+  counter: PropTypes.number.isRequired,
+  displayProducts: PropTypes.string.isRequired,
 }
