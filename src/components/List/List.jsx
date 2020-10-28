@@ -20,7 +20,7 @@ export class List extends React.Component {
             product={product}
             addProducts={addProducts}
             displayProducts={displayProducts}
-            key={goods.indexOf(product)}
+            key={product}
           />
         )}
 
