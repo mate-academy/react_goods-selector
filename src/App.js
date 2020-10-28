@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.scss';
 import { Header } from './components/Header';
 import { List } from './components/List';
+import 'semantic-ui-css/semantic.min.css';
 
 const goodsFromServer = [
   'Dumplings',
@@ -26,24 +27,22 @@ class App extends Component {
     selectedGood: [],
   };
 
-  clickHandler = (event) => {
+  clickHandler = (item, event) => {
     if (event.ctrlKey) {
-      const target = event.target.textContent;
-
-      this.setState((state) => {
-        if (state.selectedGood.includes(target)) {
-          const goodsWord = state.selectedGood
-            .filter(good => good !== target);
+      this.setState((changeState) => {
+        if (changeState.selectedGood.includes(item)) {
+          const goodsWord = changeState.selectedGood
+            .filter(good => good !== item);
 
           return { selectedGood: goodsWord };
         }
 
-        const joinedWord = [...state.selectedGood, target];
+        const joinedWord = [...changeState.selectedGood, item];
 
         return { selectedGood: joinedWord };
       });
     } else {
-      this.setState({ selectedGood: [event.target.textContent] });
+      this.setState({ selectedGood: [item] });
     }
   }
 
