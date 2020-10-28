@@ -33,7 +33,7 @@ class App extends React.Component {
       }
 
       return {
-        selectedGoods: [...state.selectedGoods]
+        selectedGoods: state.selectedGoods
           .filter(selectedGood => selectedGood !== good),
       };
     });
