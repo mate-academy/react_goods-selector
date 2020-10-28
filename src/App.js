@@ -22,18 +22,18 @@ class App extends React.Component {
 
   toogleGoods = (good) => {
     this.setState((prevState) => {
-      const temp = [...prevState.selectedGoods];
+      const prevSelected = [...prevState.selectedGoods];
 
-      if (temp.includes(good)) {
+      if (prevSelected.includes(good)) {
         return ({
-          selectedGoods: temp.filter(item => item !== good),
+          selectedGoods: prevSelected.filter(item => item !== good),
         });
       }
 
-      temp.push(good);
+      prevSelected.push(good);
 
       return {
-        selectedGoods: temp,
+        selectedGoods: prevSelected,
       };
     });
   }

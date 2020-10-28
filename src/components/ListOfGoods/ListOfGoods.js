@@ -1,12 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 import { Good } from '../Good/Good';
 
 export const ListOfGoods = ({ goods, selected, clickHandler }) => (
   <ul className="App__list">
     {goods.map((good) => {
-      const nameClass = !selected.includes(good) ? 'good__button'
-        : 'good__button--active';
+      const nameClass = cn(
+        'good__button',
+        {
+          'good__button--active': selected.includes(good),
+        },
+      );
 
       return (
         <Good
