@@ -5,7 +5,7 @@ import './Product.scss';
 export const Product = ({ selectedGoods, onClick, good }) => (
   <button
     className={selectedGoods.includes(good.name)
-      ? 'button button__active'
+      ? 'button button__active selected'
       : 'button'}
     onClick={event => onClick(event)}
     type="button"
