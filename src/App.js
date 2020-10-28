@@ -30,8 +30,6 @@ class App extends Component {
     const { name } = good;
     const selected = this.state.selectedGoods;
 
-    this.setState({});
-
     if (selected.includes(name)) {
       const filterGoods = selected.filter(goodName => goodName !== name);
 
@@ -39,7 +37,12 @@ class App extends Component {
         selectedGoods: filterGoods,
       });
     } else {
-      selected.push(name);
+      this.setState(state => ({
+        selectedGoods: [
+          ...state.selectedGoods,
+          name,
+        ],
+      }));
     }
   }
 
