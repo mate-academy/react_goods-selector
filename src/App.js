@@ -22,18 +22,29 @@ const preparedGoods = goodsFromServer.map((item, index) => ({
 
 class App extends React.Component {
   state = {
-    selected: '',
+    selected: [],
   }
 
-  clickHandler = (event) => {
+  clickHandler = (name) => {
+    const { selected } = this.state;
+    const listOfProducts = [...selected];
+
+    if (!selected.includes(name)) {
+      listOfProducts.push(name);
+    } else {
+      const productIndex = selected.indexOf(name);
+
+      listOfProducts.splice(productIndex, 1);
+    }
+
     this.setState({
-      selected: event.target.textContent,
+      selected: [...listOfProducts],
     });
   }
 
   remover = () => {
     this.setState({
-      selected: '',
+      selected: [],
     });
   }
 
@@ -43,9 +54,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>
-          Selected good: -
-          {' '}
-          {selected}
+          {`Selected goods: ${selected.join(', ')}`}
         </h1>
 
         <button
@@ -58,7 +67,7 @@ class App extends React.Component {
 
         <List
           items={preparedGoods}
-          selected={this.state.selected}
+          selected={selected}
           clicker={this.clickHandler}
         />
       </div>
