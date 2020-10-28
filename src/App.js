@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-import { Good } from './components/Good/Good';
+import { ListOfGoods } from './components/ListOfGoods/ListOfGoods';
 
 const goodsFromServer = [
   'Dumplings',
@@ -52,39 +52,24 @@ class App extends React.Component {
           {' '}
           {selectedGoods.join(', ')}
         </h1>
-        <ul className="App__list">
-          {goodsFromServer.map((good) => {
-            let nameClass = 'good__button';
-
-            if (this.state.selectedGoods.includes(good)) {
-              nameClass = 'good__button--active';
+        <ListOfGoods
+          goods={goodsFromServer}
+          selected={this.state.selectedGoods}
+          clickHandler={
+            this.toogleGoods
+          }
+        />
+        <button
+          type="button"
+          className="App__clear"
+          onClick={
+            () => {
+              this.clearSelected();
             }
-
-            return (
-              <Good
-                key={good}
-                nameOfClass={nameClass}
-                nameOfGood={good}
-                click={
-                  () => {
-                    this.toogleGoods(good);
-                  }
-                }
-              />
-            );
-          })}
-          <button
-            type="button"
-            className="App__clear"
-            onClick={
-              () => {
-                this.clearSelected();
-              }
-            }
-          >
-            Clear
-          </button>
-        </ul>
+          }
+        >
+          Clear
+        </button>
       </div>
     );
   }
