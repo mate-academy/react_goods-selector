@@ -27,18 +27,18 @@ class App extends React.Component {
 
   selectItem = (name) => {
     const { selectedProducts } = this.state;
-    const listOfProducts = [...selectedProducts];
+    const productList = [...selectedProducts];
 
     if (!selectedProducts.includes(name)) {
-      listOfProducts.push(name);
+      productList.push(name);
     } else {
       const productIndex = selectedProducts.indexOf(name);
 
-      listOfProducts.splice(productIndex, 1);
+      productList.splice(productIndex, 1);
     }
 
     this.setState({
-      selectedProducts: [...listOfProducts],
+      selectedProducts: [...productList],
     });
   }
 
