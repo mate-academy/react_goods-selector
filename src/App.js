@@ -31,13 +31,13 @@ class App extends PureComponent {
 
   SelectGoodsHandler = ({ name, id }) => {
     this.setState((state) => {
-      if (!state.selectedGoods.includes(` ${name}`)) {
+      if (!state.selectedGoods.includes(name)) {
         return {
-          selectedGoods: [...state.selectedGoods, ` ${name}`],
+          selectedGoods: [...state.selectedGoods, name],
         };
       }
 
-      const goodIndex = state.selectedGoods.indexOf(` ${name}`);
+      const goodIndex = state.selectedGoods.indexOf(name);
 
       state.selectedGoods.splice(goodIndex, 1);
 
@@ -60,7 +60,7 @@ class App extends PureComponent {
       <div className="app">
         <h1>
           Selected goods:
-          {this.state.selectedGoods}
+          {this.state.selectedGoods.join(',')}
         </h1>
         <GoodsList
           preparedGoods={preparedGoods}
