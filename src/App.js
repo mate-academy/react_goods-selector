@@ -21,7 +21,7 @@ class App extends React.Component {
     selectedGoods: [],
   }
 
-  buttonClickHandler = (good) => {
+  toggleSelection = (good) => {
     this.setState((state) => {
       if (state.selectedGoods.indexOf(good) === -1) {
         return {
@@ -69,7 +69,7 @@ class App extends React.Component {
               <button
                 type="button"
                 className="goods__button"
-                onClick={() => this.buttonClickHandler(good)}
+                onClick={() => this.toggleSelection(good)}
               >
                 {selectedGoods.indexOf(good) === -1 ? 'Add' : 'Remove'}
               </button>
