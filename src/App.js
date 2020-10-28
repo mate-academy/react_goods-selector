@@ -27,23 +27,19 @@ class App extends Component {
     selectedGood: [],
   };
 
-  clickHandler = (item, event) => {
-    if (event.ctrlKey) {
-      this.setState((changeState) => {
-        if (changeState.selectedGood.includes(item)) {
-          const goodsWord = changeState.selectedGood
-            .filter(good => good !== item);
+  clickHandler = (item) => {
+    this.setState((changeState) => {
+      if (changeState.selectedGood.includes(item)) {
+        const goodsWord = changeState.selectedGood
+          .filter(good => good !== item);
 
-          return { selectedGood: goodsWord };
-        }
+        return { selectedGood: goodsWord };
+      }
 
-        const joinedWord = [...changeState.selectedGood, item];
+      const joinedWord = [...changeState.selectedGood, item];
 
-        return { selectedGood: joinedWord };
-      });
-    } else {
-      this.setState({ selectedGood: [item] });
-    }
+      return { selectedGood: joinedWord };
+    });
   }
 
   removeAll = () => {
