@@ -1,1 +1,45 @@
-// styles go here
+li {
+  list-style: none;
+}
+
+h2 {
+  margin: 0;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+
+  &__button-x {
+    width: 30px;
+    height: 30px;
+    font-weight: 900;
+    border-radius: 10%;
+    background-color: red;
+
+    padding: 5px;
+    margin: 0 10px;
+  }
+  
+  &__item {
+    font-size: 16px;
+    width: 120px;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    cursor: pointer;
+
+    margin: 5px;
+    padding: 5px;
+
+    &--active {
+      background-color: yellow;
+      font-weight: 700;
+    }
+  }
+  
+  &__reset {
+    display: flex;
+    flex-direction: row;
+  }
+}
