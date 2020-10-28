@@ -60,7 +60,7 @@ class App extends PureComponent {
       <div className="app">
         <h1>
           Selected goods:
-          {this.state.selectedGoods.join(',')}
+          {this.state.selectedGoods.join(', ')}
         </h1>
         <GoodsList
           preparedGoods={preparedGoods}
@@ -79,18 +79,3 @@ class App extends PureComponent {
 }
 
 export default App;
-
-/* this.setState(prevState => {
-  if (!prevState.selectedGoods.includes(` ${name}`)) {
-    return ({
-      selectedGoods: [...prevState.selectedGoods, ` ${name}`],
-    });
-  }
-
-  const currIndex = this.state.selectedGoods.indexOf(` ${name}`);
-
-  return ({
-    selectedGoods: this.state.selectedGoods.splice(currIndex, 1),
-  });
-});
- */
