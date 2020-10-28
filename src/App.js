@@ -14,11 +14,52 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-const App = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+class App extends React.Component {
+  state = {
+
+  }
+
+  clearList = () => {
+    this.setState({ good: '' });
+  }
+
+  goodSelector = (good) => {
+    this.setState({ good });
+  }
+
+  render() {
+    return (
+      <main>
+        <h1>
+          {`Selected good is: ${this.state.good ? this.state.good : ''}`}
+          <button
+            type="button"
+            className={this.state.good ? 'button' : 'button--hidden'}
+            onClick={() => {
+              this.clearList();
+            }}
+          >
+            clear
+          </button>
+        </h1>
+        <ul className="goods">
+          {goodsFromServer.map(good => (
+            <li key={good}>
+              <button
+                type="button"
+                className={this.state.good === good ? 'selected' : ''}
+                onClick={() => {
+                  this.goodSelector(good);
+                }}
+              >
+                {good}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </main>
+    );
+  }
+}
 
 export default App;

@@ -1,1 +1,11 @@
-// styles go here
+.selected {
+  color: blue;
+}
+
+.button {
+  margin-left: 20px;
+
+  &--hidden {
+    visibility: hidden;
+  }
+}
