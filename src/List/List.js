@@ -47,7 +47,7 @@ class List extends React.Component {
           {this.list.map(item => (
             <div
               className={`list__row ${this.state.selectedGoods.indexOf(item)
-                !== -1 && 'list--selected'}`}
+                !== -1 && 'list__row--selected'}`}
               key={item}
             >
               <li className="list__item">{item}</li>
@@ -65,7 +65,7 @@ class List extends React.Component {
 
         <button
           type="button"
-          className="list__button list--clear"
+          className="list__button list__button--clear"
           onClick={() => this.handleClear()}
         >
           Clear all
