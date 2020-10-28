@@ -1,1 +1,34 @@
 // styles go here
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+  // background-color: gray;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+.s {
+  border: 2px solid blue;
+}
+
+.good {
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+  margin: 10px;
+  // background-color: red;
+
+  &__title {
+    padding: 8px;
+    // margin: 10px;
+    border-radius: 5px;
+    // border: 2px solid gray;
+  }
+}
