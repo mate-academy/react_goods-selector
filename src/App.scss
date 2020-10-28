@@ -1,1 +1,67 @@
-// styles go here
+body,
+ul,
+li,
+h1,
+button {
+  margin: 0;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: "Courier New", Courier, monospace;
+
+  background-color: #fffde7;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+
+  &__header-list {
+    font-size: 24px;
+  }
+
+  &__good {
+    padding: 5px;
+    list-style-type: none;
+  }
+
+  &__good--is-active {
+    color: red;
+  }
+
+  &__button-clear {
+    width: 180px;
+    padding: 5px;
+    margin: 10px 0;
+
+    font-family: "Courier New", Courier, monospace;
+
+    background-color: #ffcc80;
+    border: 1px solid #ff9800;
+
+    transition: 300ms;
+
+    &:hover {
+      background-color: #ff9800;
+    }
+  }
+
+  &__button-add {
+    padding: 5px 15px;
+
+    font-family: "Courier New", Courier, monospace;
+
+    background-color: #aed581;
+    border: 1px solid #689f38;
+
+    transition: 300ms;
+
+    &:hover {
+      background-color: #558b2f;
+    }
+  }
+}
