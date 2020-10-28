@@ -51,7 +51,7 @@ class App extends React.Component {
                 <button
                   type="button"
                   className={active('list__button', {
-                    'list-button-active': good === selectedGoods,
+                    'list__button--active': good === selectedGoods,
                   })}
                   onClick={() => {
                     this.addGoods(good);

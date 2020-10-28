@@ -21,6 +21,9 @@ body {
   transition: background-color 0.3s, color 0.3s, transform 0.3s;
   outline: none;
 
+  &--active {
+    text-shadow: 2px 3px 4px yellow;
+  }
 
   &:hover {
     cursor: pointer;
@@ -33,5 +36,4 @@ body {
 .clear-button {
   @extend .list__button;
   width: 1fr;
-
 }
