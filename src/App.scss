@@ -10,7 +10,7 @@ body {
   box-sizing: border-box;
   font-family: "Courier New", Courier, monospace;
 
-  background-color: #fffde7;
+  background-image: url("./images/8582bcf4709b7720feb61340bd298077.jpg");
 }
 
 .app {
@@ -18,7 +18,14 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 50px;
+  padding: 50px;
+  margin: 50px auto;
+  width: 600px;
+
+  border: 5px solid #ffc400 ;
+  border-radius: 10px;
+
+  background-color: #fffde7;
 
   &__header-list {
     font-size: 24px;
@@ -37,31 +44,16 @@ body {
     width: 180px;
     padding: 5px;
     margin: 10px 0;
-
+  
     font-family: "Courier New", Courier, monospace;
-
+  
     background-color: #ffcc80;
     border: 1px solid #ff9800;
-
+  
     transition: 300ms;
-
+  
     &:hover {
       background-color: #ff9800;
-    }
-  }
-
-  &__button-add {
-    padding: 5px 15px;
-
-    font-family: "Courier New", Courier, monospace;
-
-    background-color: #aed581;
-    border: 1px solid #689f38;
-
-    transition: 300ms;
-
-    &:hover {
-      background-color: #558b2f;
     }
   }
 }
