@@ -1,0 +1,30 @@
+.list {
+  text-align: center;
+
+  &__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 250px;
+    margin: 0 auto 10px;
+  }
+
+  &--selected {
+    background-color: #BFF099;
+  }
+
+  &__item {
+    list-style: none;
+  }
+
+  &__clear {
+    display: block;
+  }
+
+  &__button {
+    background-color: #ccc;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+  }
+}
