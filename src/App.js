@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.scss';
 import 'semantic-ui-css/semantic.min.css';
+import './App.scss';
 import { GoodsList } from './components/GoodsList';
 import { Header } from './components/Header';
 

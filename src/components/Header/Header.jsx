@@ -12,7 +12,7 @@ export const Header = ({ selectedGoods, onClick }) => (
 
     <button
       type="button"
-      className="ui header"
+      className="ui button"
       onClick={onClick}
     >
       Clear all
