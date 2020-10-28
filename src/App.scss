@@ -1,1 +1,34 @@
-// styles go here
+.App {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.buttonReset {
+  color: rgb(10, 51, 51);
+  background-color: aquamarine;
+  width: 100px;
+  border-radius: 10px;
+  position: absolute;
+  bottom: 70px;
+}
+
+.good {
+  color: rgb(11, 80, 80);
+  background-color: transparent;
+  font-size: 30px;
+  margin: 10px;
+  margin-top: 50px;
+  border-radius: 10px;
+
+  &:hover {
+    color: rgb(145, 116, 64);
+    cursor: pointer;
+  }
+
+  &--selected {
+    color: rgb(252, 98, 9);
+  }
+}
