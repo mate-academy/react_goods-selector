@@ -28,10 +28,10 @@ class App extends Component {
 
   targetGood = (good) => {
     const { name } = good;
-    const selected = this.state.selectedGoods;
+    const { selectedGoods } = this.state;
 
-    if (selected.includes(name)) {
-      const filterGoods = selected.filter(goodName => goodName !== name);
+    if (selectedGoods.includes(name)) {
+      const filterGoods = selectedGoods.filter(goodName => goodName !== name);
 
       this.setState({
         selectedGoods: filterGoods,
