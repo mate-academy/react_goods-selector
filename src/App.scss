@@ -1,1 +1,15 @@
-// styles go here
+.App {
+  padding: 40px;
+
+  &__heading {
+    margin-right: 25px;
+    margin-bottom: 0;
+  }
+
+  &__clear {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin-bottom: 20px;
+  }
+}
