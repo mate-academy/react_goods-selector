@@ -24,12 +24,20 @@ class App extends Component {
     this.setState((prevState) => {
       const { selectedGoods } = prevState;
 
-      selectedGoods.includes(item)
-        ? selectedGoods.splice(prevState.selectedGoods.indexOf(item), 1)
-        : selectedGoods.push(item);
+      if (selectedGoods.includes(item)) {
+        const newSelectedGoods = prevState.selectedGoods.filter(good => (
+          good !== item
+        ));
+
+        return {
+          selectedGoods: newSelectedGoods,
+        };
+      }
+
+      const newSelectedGoods = [...prevState.selectedGoods, item];
 
       return {
-        selectedGoods: [...selectedGoods],
+        selectedGoods: newSelectedGoods,
       };
     });
   };

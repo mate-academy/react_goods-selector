@@ -10,7 +10,8 @@ export const GoodsList = ({ items, selectedGoods, addItem }) => (
           onClick={() => addItem(item)}
           className={selectedGoods.includes(item)
             ? 'list-group-item btn list-group-item active mx-auto w-25 my-1'
-            : 'list-group-item btn mx-auto w-25 my-1'}
+            : 'list-group-item btn mx-auto w-25 my-1'
+          }
         >
           <li key={item}>
             {item}
