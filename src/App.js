@@ -37,14 +37,11 @@ class App extends PureComponent {
         };
       }
 
-      const goodIndex = state.selectedGoods.indexOf(name);
-
-      const splicedGoods = [...state.selectedGoods];
-
-      splicedGoods.splice(goodIndex, 1);
+      const filteredGoods = [...state.selectedGoods]
+        .filter(good => good !== name);
 
       return {
-        selectedGoods: splicedGoods,
+        selectedGoods: filteredGoods,
       };
     });
   }
