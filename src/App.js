@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import Button from './components/Button/Button';
 import './App.scss';
 
@@ -21,9 +22,9 @@ class App extends React.Component {
   }
 
   chooseGood(good) {
-    this.setState(
-      prevState => ({ selectedGoods: [...prevState.selectedGoods, good] }),
-    );
+    this.setState(prevState => ({
+      selectedGoods: [...prevState.selectedGoods, good],
+    }));
   }
 
   removeGood(good) {
@@ -61,12 +62,14 @@ class App extends React.Component {
           {goodsFromServer.map(
             (good) => {
               const isSelected = selectedGoods.some(item => item === good);
-              const className
-                = `app__good ${isSelected ? 'app__good--is-active' : ''}`;
+              const goodClassName = classNames({
+                app__good: true,
+                'app__good--is-active': isSelected,
+              });
 
               return (
                 <li
-                  className={className}
+                  className={goodClassName}
                   key={good}
                 >
                   {isSelected
