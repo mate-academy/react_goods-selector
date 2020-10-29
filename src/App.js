@@ -30,10 +30,10 @@ class App extends Component {
   clickHandler = (item) => {
     this.setState((changeState) => {
       if (changeState.selectedGoods.includes(item)) {
-        const goodsWord = changeState.selectedGoods
+        const selectedWords = changeState.selectedGoods
           .filter(good => good !== item);
 
-        return { selectedGoods: goodsWord };
+        return { selectedGoods: selectedWords };
       }
 
       const selectedWords = [...changeState.selectedGoods, item];
