@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.scss';
+import { GoodList } from './components/GoodList';
 
 const goodsFromServer = [
   'Dumplings',
@@ -39,6 +40,7 @@ export class App extends Component {
       <div className="App">
         <h1>
           Selected good:
+          {' '}
           {selectedGood}
           <button
             className="button"
@@ -49,27 +51,11 @@ export class App extends Component {
           </button>
         </h1>
 
-        <ul className="good-list">
-          {preparedGoods.map(good => (
-            <li
-              key={good.id}
-              className="good-list__item"
-            >
-              {good.name}
-
-              <button
-                className="button"
-                type="button"
-                onClick={() => {
-                  this.addGood(good.name);
-                }}
-              >
-                Add
-              </button>
-
-            </li>
-          ))}
-        </ul>
+        <GoodList
+          selectedGood={selectedGood}
+          goods={preparedGoods}
+          onClick={this.addGood}
+        />
       </div>
     );
   }
