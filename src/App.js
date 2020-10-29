@@ -24,11 +24,11 @@ class App extends React.Component {
   }
 
   saveSelectedGood = (good) => {
-    const goodIndex = goodsFromServer.indexOf(good);
+    const index = goodsFromServer.indexOf(good);
 
     this.setState({
       selected: ` - ${good}`,
-      index: goodIndex,
+      index,
     });
   }
 
