@@ -28,27 +28,31 @@ class App extends React.Component {
   }
 
   render() {
+    const { good } = this.state;
+
     return (
       <main>
         <h1>
-          {`Selected good is: ${this.state.good ? this.state.good : ''}`}
+          {`Selected good is: ${good || ''}`}
           <button
             type="button"
-            className={this.state.good ? 'button' : 'button--hidden'}
+            className={good ? 'button' : 'button--hidden'}
             onClick={this.clearList}
           >
             clear
           </button>
         </h1>
         <ul className="goods">
-          {goodsFromServer.map(good => (
-            <li key={good}>
+          {goodsFromServer.map(item => (
+            <li key={item}>
               <button
                 type="button"
-                className={this.state.good === good ? 'selected' : ''}
-                onClick={this.clearList}
+                className={good === item ? 'selected' : ''}
+                onClick={() => {
+                  this.goodSelector(item);
+                }}
               >
-                {good}
+                {item}
               </button>
             </li>
           ))}
