@@ -10,6 +10,7 @@ const GoodsList = ({ preparedGoods, clickHandler }) => (
         className="ui animated button"
         onClick={() => clickHandler(good)}
         key={good.id}
+        tabIndex="-1"
       >
         <Good item={good.name} />
       </button>

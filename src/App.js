@@ -48,11 +48,9 @@ class App extends PureComponent {
   }
 
   ClearGoodsHandler = () => {
-    this.setState(
-      {
-        selectedGoods: [],
-      },
-    );
+    this.setState({
+      selectedGoods: [],
+    });
   }
 
   render() {
@@ -70,6 +68,7 @@ class App extends PureComponent {
           className="fluid ui red button"
           onClick={this.ClearGoodsHandler}
           type="button"
+          tabIndex="-1"
         >
           Clear All
         </button>
