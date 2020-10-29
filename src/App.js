@@ -24,37 +24,37 @@ const goodsItems = goodsFromServer.map((item, index) => ({
 
 class App extends Component {
   state = {
-    selectedGood: [],
+    selectedGoods: [],
   };
 
   clickHandler = (item) => {
     this.setState((changeState) => {
-      if (changeState.selectedGood.includes(item)) {
-        const goodsWord = changeState.selectedGood
+      if (changeState.selectedGoods.includes(item)) {
+        const goodsWord = changeState.selectedGoods
           .filter(good => good !== item);
 
-        return { selectedGood: goodsWord };
+        return { selectedGoods: goodsWord };
       }
 
-      const joinedWord = [...changeState.selectedGood, item];
+      const selectedWords = [...changeState.selectedGoods, item];
 
-      return { selectedGood: joinedWord };
+      return { selectedGoods: selectedWords };
     });
   }
 
   removeAll = () => {
-    this.setState({ selectedGood: [] });
+    this.setState({ selectedGoods: [] });
   }
 
   render() {
-    const { selectedGood } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App">
-        <Header selectedGood={selectedGood} onClick={this.removeAll} />
+        <Header selectedGood={selectedGoods} onClick={this.removeAll} />
         <List
           goodsItems={goodsItems}
-          selectedGood={selectedGood}
+          selectedGoods={selectedGoods}
           onClick={this.clickHandler}
         />
       </div>

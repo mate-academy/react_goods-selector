@@ -4,13 +4,13 @@ import { Item } from './Item';
 import { shapeList } from './shapeList';
 import './List.scss';
 
-export const List = ({ goodsItems, selectedGood, onClick }) => (
+export const List = ({ goodsItems, selectedGoods, onClick }) => (
   <ul className="list">
     {
       goodsItems.map(item => (
         <li key={item.id} className="list__item">
           <Item
-            selectedGoods={selectedGood}
+            selectedGoods={selectedGoods}
             onClick={onClick}
             item={item}
           />
@@ -22,6 +22,6 @@ export const List = ({ goodsItems, selectedGood, onClick }) => (
 
 List.propTypes = {
   goodsItems: PropTypes.arrayOf(shapeList).isRequired,
-  selectedGood: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  selectedGoods: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   onClick: PropTypes.func.isRequired,
 };

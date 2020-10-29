@@ -7,7 +7,8 @@ export const Item = ({ selectedGoods, onClick, item }) => (
   <button
     className={selectedGoods.includes(item.name)
       ? 'button button--isActive'
-      : 'button'}
+      : 'button'
+    }
     onClick={event => onClick(item.name)}
     type="button"
   >
