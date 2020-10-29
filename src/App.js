@@ -16,7 +16,7 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-
+    good: '',
   }
 
   clearList = () => {
@@ -35,9 +35,7 @@ class App extends React.Component {
           <button
             type="button"
             className={this.state.good ? 'button' : 'button--hidden'}
-            onClick={() => {
-              this.clearList();
-            }}
+            onClick={this.clearList}
           >
             clear
           </button>
@@ -48,9 +46,7 @@ class App extends React.Component {
               <button
                 type="button"
                 className={this.state.good === good ? 'selected' : ''}
-                onClick={() => {
-                  this.goodSelector(good);
-                }}
+                onClick={this.clearList}
               >
                 {good}
               </button>
