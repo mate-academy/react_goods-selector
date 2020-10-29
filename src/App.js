@@ -37,8 +37,7 @@ class App extends PureComponent {
         };
       }
 
-      const filteredGoods = [...state.selectedGoods]
-        .filter(good => good !== name);
+      const filteredGoods = state.selectedGoods.filter(good => good !== name);
 
       return {
         selectedGoods: filteredGoods,
