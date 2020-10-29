@@ -39,10 +39,12 @@ class App extends PureComponent {
 
       const goodIndex = state.selectedGoods.indexOf(name);
 
-      state.selectedGoods.splice(goodIndex, 1);
+      const splicedGoods = [...state.selectedGoods];
+
+      splicedGoods.splice(goodIndex, 1);
 
       return {
-        selectedGoods: state.selectedGoods,
+        selectedGoods: splicedGoods,
       };
     });
   }
