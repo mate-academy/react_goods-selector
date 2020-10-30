@@ -22,7 +22,19 @@ class App extends React.Component {
   }
 
   addGoods = (good) => {
-    this.setState({ selectedGoods: good });
+    const goodIndex = this.state.selectedGoods.indexOf(good);
+
+    if (goodIndex !== -1) {
+      this.setState(prevState => ({
+        selectedGoods: prevState.selectedGoods
+          .filter(item => good !== item),
+      }));
+    } else {
+      this.setState(prevState => ({
+        selectedGoods: prevState.selectedGoods.concat(good)
+          .join(', ').split(','),
+      }));
+    }
   };
 
   clearGoods = () => {
