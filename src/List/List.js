@@ -13,9 +13,9 @@ class List extends React.Component {
     const goodIndex = this.state.selectedGoods.indexOf(goodName);
 
     if (goodIndex !== -1) {
-      this.state.selectedGoods.splice(goodIndex, 1);
       this.setState(prevState => ({
-        selectedGoods: prevState.selectedGoods,
+        selectedGoods: prevState.selectedGoods
+          .filter(item => goodName !== item),
       }));
     } else {
       this.setState(prevState => ({
@@ -57,7 +57,9 @@ class List extends React.Component {
                 onClick={() => this.handleAdd(item)}
               >
                 {this.state.selectedGoods.indexOf(item) !== -1
-                  ? 'Remove' : 'Add'}
+                  ? 'Remove'
+                  : 'Add'
+                }
               </button>
             </div>
           ))}
