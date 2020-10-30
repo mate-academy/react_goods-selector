@@ -31,8 +31,7 @@ class App extends React.Component {
       }));
     } else {
       this.setState(prevState => ({
-        selectedGoods: prevState.selectedGoods.concat(good)
-          .join(', ').split(','),
+        selectedGoods: prevState.selectedGoods.concat(good),
       }));
     }
   };
