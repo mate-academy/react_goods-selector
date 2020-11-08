@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable arrow-parens */
 import React from 'react';
@@ -17,38 +18,42 @@ const goodsFromServer = [
 ];
 
 class App extends React.Component {
-  state = { selected: 'Apple' };
+  state = { selected: [] };
 
   render() {
     const { selected } = this.state;
 
     return (
       <div className="App">
-        <h1>{`Selected good: ${selected}`}</h1>
+        <h1>{`Selected good: ${selected.join(', ')}`}</h1>
         <ul>
           {goodsFromServer.map((item) => (
-            <div
-              key={item}
-              style={{
-                display: 'flex',
-                margin: '10px 0',
-              }}
-            >
-              <li className={selected === item ? 'selected' : ''}>{item}</li>
+            <div key={item} className="item-container">
+              <li className={selected.includes(item) ? 'selected' : ''}>
+                {item}
+              </li>
               <button
                 type="button"
-                style={{ margin: '0 5px' }}
-                onClick={() => this.setState({ selected: item })}
+                className="select"
+                onClick={() =>
+                  this.setState((state) => ({
+                    selected: [...state.selected, item],
+                  }))
+                }
               >
-                Select
+                Add
               </button>
               <button
                 type="button"
                 onClick={() =>
-                  item === selected && this.setState({ selected: '' })
+                  this.setState((state) => ({
+                    selected: state.selected.filter(
+                      (product) => product !== item
+                    ),
+                  }))
                 }
               >
-                X
+                Remove
               </button>
             </div>
           ))}
