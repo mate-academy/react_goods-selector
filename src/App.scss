@@ -1,1 +1,70 @@
-// styles go here
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: rgb(194, 242, 248);
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__header {
+    margin-left: 200px;
+    align-self: flex-start;
+    color: rgb(28, 49, 47);
+  }
+
+  &__selected-goods {
+    font-size: 32px;
+    font-style: italic;
+    color: rgb(255, 0, 0);
+  }
+
+  &__clear-all {
+    align-self: flex-start;
+    padding: 5px;
+    margin: 10px;
+    margin-left: 200px;
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(255, 42, 0);
+    border-radius: 10px;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-self: flex-start;
+    width: 460px;
+    margin-left: 150px;
+    list-style: none;
+  }
+
+  &__item {
+    padding: 15px;
+    margin: 10px;
+    background-color: rgb(0, 153, 255);
+    font-size: 20px;
+    border: transparent solid 2px;
+    border-radius: 5px;
+    
+    color: rgb(255, 255, 255);
+  }
+
+  &__item--selected {
+    font-weight: 600;
+    color: #000;
+    background-color: rgb(136, 255, 0);
+    border: 2px solid #000;
+  }
+}
