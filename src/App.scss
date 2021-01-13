@@ -1,1 +1,26 @@
-// styles go here
+.App {
+  margin-top: 20px;
+  margin-left: 50vw;
+  transform: translate(-50%,);
+}
+
+.selected {
+  background-color: yellowgreen;
+  opacity: 0.5;
+}
+
+.button {
+  margin-left: 15px;
+}
+
+.is-active {
+  border: 3px green solid;
+}
+
+li {
+  display: block;
+  width: 300px;
+  margin: 10px 0;
+  height: 30px;
+  line-height: 30px;
+}
