@@ -25,7 +25,7 @@ class App extends React.Component {
 
     element.classList.add('is-success');
     this.setState(state => ({
-      selectedProduct: [product, ...state.selectedProduct],
+      selectedProduct: [...state.selectedProduct, product],
     }));
   }
 
@@ -33,16 +33,21 @@ class App extends React.Component {
     const element = event.target.closest('li');
 
     element.classList.remove('is-success');
-    this.setState((prevState) => {
-      const index = prevState
-        .selectedProduct.findIndex(item => item === product);
 
-      prevState.selectedProduct.splice(index, 1);
+    if (element.childNodes[0].textContent === product) {
+      this.setState((prevState) => {
+        const index = prevState
+          .selectedProduct.findIndex(item => item === product);
 
-      return {
-        selectedProduct: prevState.selectedProduct,
-      };
-    });
+        if (index !== -1) {
+          prevState.selectedProduct.splice(index, 1);
+        }
+
+        return {
+          selectedProduct: prevState.selectedProduct,
+        };
+      });
+    }
   }
 
   render() {
