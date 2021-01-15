@@ -3,6 +3,7 @@
 - Follow the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline)
 
 ## Task
+- DON'T create an additional component for the `GoodsList`, just iterate it in the `App`
 - Render a header (`h1`) initially saying `Selected good: -`
 - Render a list of goods. 
 - Add a `Select` button next to each good in the list.
