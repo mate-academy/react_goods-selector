@@ -1,1 +1,19 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.good {
+  padding-top: 20px;
+}
+
+.selected > span {
+  background-color: rgb(253, 253, 158);
+}
+
+.button {
+  margin-left: 5px;
+}
+
