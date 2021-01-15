@@ -12,8 +12,7 @@
 - Add clear button (`X`) next to the header to clear the selection
 
 ## (* Optional) Advanced task
-> Watch [this video](https://youtu.be/zMe2Qq-ThpM) to update the state correctly.
-
-- Implement the ability to select multiple goods (use selectedGoods Array
+- Implement the ability to select multiple goods (use selectedGoods Array)
+- Use functional setState described in [this video](https://youtu.be/zMe2Qq-ThpM)
 - Replace `Select` buttons with `Add/Remove`
 - All the selected goods should be listed in the header separated with commas.
