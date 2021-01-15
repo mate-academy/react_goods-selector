@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
 
 const goodsFromServer = [
   'Dumplings',
@@ -17,71 +18,47 @@ const goodsFromServer = [
 // eslint-disable-next-line react/prefer-stateless-function
 export class App extends React.Component {
   state = {
-    selectedGood: [],
-    domElem: [],
+    selectedGoods: [],
   }
 
   clearSelection = () => {
-    if (this.state.selectedGood.length !== 0) {
-      this.setState((state) => {
-        state.domElem.map(elem => elem.classList.remove('selected'));
-
-        return {
-          domElem: state.domElem,
-        };
-      });
+    if (this.state.selectedGoods.length !== 0) {
       this.setState({
-        selectedGood: [],
-        domElem: [],
+        selectedGoods: [],
       });
     }
   }
 
-  clickHandler({ target }, good) {
-    const targetElem = target.closest('li');
-
-    if (this.state.selectedGood.includes(good)) {
-      this.setState((state) => {
-        const index = state.selectedGood.indexOf(good);
-
-        state.selectedGood.splice(index, 1);
-        state.domElem[index].classList.remove('selected');
-        state.domElem.splice(index, 1);
-
-        return {
-          selectedGood: state.selectedGood,
-          domElem: state.domElem,
-        };
-      });
+  clickHandler(good) {
+    if (this.state.selectedGoods.includes(good)) {
+      this.setState(state => ({
+        selectedGoods: state.selectedGoods.filter(elem => elem !== good),
+      }));
     } else {
       this.setState((state) => {
-        state.selectedGood.push(good);
-        const length = state.domElem.push(targetElem);
-
-        state.domElem[length - 1].classList.add('selected');
+        state.selectedGoods.push(good);
 
         return {
-          selectedGood: state.selectedGood,
-          domElem: state.domElem,
+          selectedGoods: state.selectedGoods,
+
         };
       });
     }
   }
 
   render() {
-    const { selectedGood } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App">
         <h1>
           Selected good: -
-          { selectedGood.join(', ')}
-          {' '}
+          { `${selectedGoods.join(', ')} `}
           <button
             type="button"
             onClick={this.clearSelection}
           >
-            X
+            Clear
           </button>
         </h1>
         {goodsFromServer.length}
@@ -89,11 +66,13 @@ export class App extends React.Component {
           {goodsFromServer.map(good => (
             <li
               key={good}
+              className={
+                classNames({ selected: selectedGoods.includes(good) })}
             >
               {`${good}  - `}
               <button
                 type="button"
-                onClick={e => this.clickHandler(e, good)}
+                onClick={() => this.clickHandler(good)}
               >
                 Add/Remove
               </button>
