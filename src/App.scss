@@ -1,1 +1,23 @@
-// styles go here
+.goods {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.button {
+  margin: 5px;
+}
+
+.cancel-selection {
+  visibility: hidden;
+
+  &.active {
+    visibility: visible;
+  }
+}
+
+.item {
+  &.selected {
+    background-color: yellow;
+  }
+}
