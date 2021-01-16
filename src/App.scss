@@ -1,1 +1,35 @@
-// styles go here
+.selected {
+  color: yellowgreen;
+  font-weight: bold;
+}
+
+.list {
+  font-family: Helvetica, sans-serif;
+  list-style-type: none;
+}
+
+.buttons {
+  padding: 5px;
+  margin: 5px;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+
+  &:hover {
+    box-shadow: 1px 1px 1px black;
+  }
+}
+
+.button-clear {
+  width: 70px;
+  background-color: rgb(141, 141, 243);
+}
+
+.button-add {
+  background: yellowgreen;
+}
+
+.button-remove {
+  background: rgb(236, 108, 108);
+}
