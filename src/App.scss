@@ -1,1 +1,48 @@
-// styles go here
+.App {
+  width: 400px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.mainUl {
+  display: flex;
+  flex-direction: column;
+}
+
+.liOne {
+  display: grid;
+  grid-template-columns: 200px 150px;
+  padding-top: 10px;
+}
+
+.stateTranslation {
+  font-size: 16px;
+}
+
+.mainText {
+  padding: 20px;
+  border: 3px solid blue;
+  border-radius: 10px;
+}
+
+.buttonsGroup {
+  display: flex;
+}
+
+.nameProduct {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 24px;
+}
+
+.btn {
+  margin-right: 10px;
+}
+
+.highlighted {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #e4d1f9;
+}
