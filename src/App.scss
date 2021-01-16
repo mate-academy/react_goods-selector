@@ -1,1 +1,36 @@
-// styles go here
+h1 {
+  display: flex;
+
+  button {
+    visibility: hidden;
+    margin-left: 20px;
+    border-radius: 100%;
+    background-color: #f00;
+    color: #fff;
+    border: none;
+    height: 30px;
+    width: 30px;
+  }
+
+  .visible {
+    visibility: visible;
+  }
+}
+
+.goods-list {
+  display: flex;
+  flex-direction: column;
+
+  button {
+    cursor: pointer;
+    text-align: left;
+    border: none;
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+
+  .active {
+    background-color: #2196F3;
+    color: #fff;
+  }
+}
