@@ -1,1 +1,24 @@
 // styles go here
+
+.button {
+  &--clear {
+    margin-left: 20px;
+    font-size: 18px;
+    border-radius: 50%;
+  }
+}
+
+.list {
+  &__item {
+    font-size: 18px;
+    line-height: 1.5em;
+
+    &--selected span {
+      background-color: yellow;
+    }
+  }
+
+  &__button {
+    margin-left: 20px;
+  }
+}
