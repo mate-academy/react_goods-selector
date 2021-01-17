@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
 
@@ -40,8 +40,16 @@ class App extends React.Component {
     if (result.includes(item)) {
       result.splice(result.indexOf(item), 1);
       result = result.join(', ');
-      this.setState({ selectedGoods: result });
+      this.setState(() => ({
+        selectedGoods: result,
+      }));
     }
+  }
+
+  reset = () => {
+    this.setState(() => ({
+      selectedGoods: '',
+    }));
   }
 
   render() {
@@ -57,45 +65,37 @@ class App extends React.Component {
           {goodsFromServer.length}
         </h3>
         <Button
-          onClick={() => {
-            this.setState({ selectedGoods: '' });
-          }}
+          onClick={this.reset}
           className="btn"
           variant="danger"
         >
           Remove all from cart
         </Button>
-        <Container fluid>
-          <Row>
-            <Col md={6}>
-              <ul className="mainUl">
-                {goodsFromServer.map(product => (
-                  <li className="liOne" key={product}>
-                    <span className={this.state.selectedGoods.includes(product)
-                      ? 'highlighted' : ''}
-                    >
-                      {product}
-                    </span>
-                    <span className="buttonsGroup">
-                      <Button
-                        onClick={this.add}
-                        className="btn"
-                      >
-                        Add
-                      </Button>
-                      <Button
-                        onClick={this.remove}
-                        className="btn"
-                      >
-                        Remove
-                      </Button>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </Col>
-          </Row>
-        </Container>
+        <ul className="mainUl">
+          {goodsFromServer.map(product => (
+            <li className="liOne" key={product}>
+              <span className={this.state.selectedGoods.includes(product)
+                ? 'liText highlighted' : 'liText'}
+              >
+                {product}
+              </span>
+              <span className="buttonsGroup">
+                <Button
+                  onClick={this.add}
+                  className="btn"
+                >
+                  Add
+                </Button>
+                <Button
+                  onClick={this.remove}
+                  className="btn"
+                >
+                  Remove
+                </Button>
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }

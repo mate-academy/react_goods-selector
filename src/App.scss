@@ -1,19 +1,27 @@
 .App {
-  width: 400px;
+  width: 420px;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  padding: 10px;
+  background-color: #ffeaf5;
+  border: 1px solid lightslategray;
+  border-radius: 5px;
 }
 
 .mainUl {
   display: flex;
   flex-direction: column;
+  padding-left: 0;
+  padding-top: 20px;
 }
 
 .liOne {
   display: grid;
-  grid-template-columns: 200px 150px;
+  grid-template-columns: 250px 250px;
+  justify-content: space-between;
+  width: 400px;
   padding-top: 10px;
 }
 
@@ -22,9 +30,8 @@
 }
 
 .mainText {
-  padding: 20px;
-  border: 3px solid blue;
   border-radius: 10px;
+  height: 200px;
 }
 
 .buttonsGroup {
@@ -41,8 +48,15 @@
   margin-right: 10px;
 }
 
+.liText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 28px;
+}
+
 .highlighted {
-  padding: 10px;
+  border: 1px solid lightgray;
   border-radius: 5px;
-  background-color: #e4d1f9;
+  background-color: #f2efc1;
 }
