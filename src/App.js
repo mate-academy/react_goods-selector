@@ -16,52 +16,69 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGood: null,
-    header: null,
+    selectedGoods: [],
+    products: [],
   }
 
-  markSelectedGood = (event, product) => {
-    const { selectedGood } = this.state;
-    const item = event.target.closest('.list__item');
+  addOrRemoveSelectedGood = ({ target }, product) => {
+    this.setState(({ selectedGoods, products }) => {
+      const item = target.closest('.list__item');
 
-    if (selectedGood) {
-      selectedGood.classList.remove('list__item--selected');
-    }
+      item.classList.toggle('list__item--selected');
 
-    item.classList.add('list__item--selected');
+      const newSelectedGoods = [...selectedGoods];
+      const newProducts = [...products];
 
-    this.setState({
-      selectedGood: item,
-      header: product,
+      if (products.includes(product)) {
+        const index = selectedGoods.indexOf(item);
+
+        newSelectedGoods.splice(index, 1);
+        newProducts.splice(index, 1);
+      } else {
+        newSelectedGoods.push(item);
+        newProducts.push(product);
+      }
+
+      return {
+        selectedGoods: newSelectedGoods,
+        products: newProducts,
+      };
     });
   }
 
-  clearSelectedGood = (event) => {
-    const { selectedGood } = this.state;
+  clearSelectedGoods = (event) => {
+    const { selectedGoods } = this.state;
 
-    if (selectedGood) {
-      selectedGood.classList.remove('list__item--selected');
-    }
+    selectedGoods.forEach((item) => {
+      item.classList.remove('list__item--selected');
+    });
 
     this.setState({
-      selectedGood: null,
-      header: null,
+      selectedGoods: [],
+      products: [],
     });
+  }
+
+  printHeader() {
+    const { products } = this.state;
+
+    if (products.length === 0) {
+      return '';
+    }
+
+    return products.reduce((prev, product) => `${prev}, ${product}`);
   }
 
   render() {
-    const { header } = this.state;
-
     return (
       <div className="App">
         <h1>
-          Selected good: -
-          {` ${header || ''}`}
+          {`Selected goods: - ${this.printHeader()}`}
 
           <button
             className="button--clear"
             type="button"
-            onClick={this.clearSelectedGood}
+            onClick={this.clearSelectedGoods}
           >
             x
           </button>
@@ -80,10 +97,10 @@ class App extends React.Component {
                 type="button"
                 className="list__button"
                 onClick={(event) => {
-                  this.markSelectedGood(event, product);
+                  this.addOrRemoveSelectedGood(event, product);
                 }}
               >
-                Select
+                Add / Remove
               </button>
             </li>
           ))}
