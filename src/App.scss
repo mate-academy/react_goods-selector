@@ -1,1 +1,46 @@
-// styles go here
+body {
+  font-family: sans-serif;
+}
+
+.basket {
+  display: flex;
+  column-gap: 50px;
+
+  &__button {
+    border: none;
+    width: 60px;
+    cursor: pointer;
+    transition: background-color 0.3s linear;
+
+    &:hover {
+      background-color: #94a7a9;
+    }
+  }
+}
+
+.button {
+  width: 50%;
+  height: 60px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s linear;
+
+  &:hover {
+    background-color: #94a7a9;
+  }
+}
+
+.goods {
+  display: grid;
+  grid-template-columns: repeat( auto-fill, 200px);
+  gap: 20px;
+}
+
+.good {
+  padding: 15px;
+  border-radius: 4px;
+}
+
+.selected {
+  background-color: #c8cdcd;
+}
