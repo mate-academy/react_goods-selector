@@ -57,7 +57,6 @@ class App extends React.Component {
           {' '}
           {selectedGoods.length}
         </h1>
-
         {selectedGoods.map(good => (
           <span
             key={good}
@@ -67,8 +66,7 @@ class App extends React.Component {
           </span>
         ))}
         <br />
-
-        {selectedGoods.length < 10 && selectedGoods.length !== 0
+        {selectedGoods.length !== 0
           ? (
             <button
               type="button"
@@ -97,14 +95,12 @@ class App extends React.Component {
                   ? this.removeSelected(good)
                   : this.addSelected(good))}
               >
-
                 Select / Remove
               </button>
 
             </li>
           ))}
         </ul>
-
       </div>
     );
   }
