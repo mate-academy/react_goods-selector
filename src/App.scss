@@ -1,1 +1,17 @@
-// styles go here
+body {
+  font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
+.list {
+  list-style: none;
+}
+
+.selected {
+  color: rgb(150, 6, 6);
+  font-weight: 700;
+}
+
+button {
+  margin: 5px;
+  border-radius: 10px;
+}
