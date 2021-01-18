@@ -20,20 +20,16 @@ class App extends React.Component {
     selectedItem: [],
   };
 
-  addGood = (event, good) => {
-    event.target.closest('li').classList.add('highlight');
-
-    this.setState(prevState => (
-      { selectedItem: [...prevState.selectedItem, good] }
-    ));
+  addGood = (good) => {
+    if (!this.state.selectedItem.includes(good)) {
+      this.setState(prevState => (
+        { selectedItem: [...prevState.selectedItem, good] }
+      ));
+    }
   }
 
-  removeGood = (event, good) => {
+  removeGood = (good) => {
     const newList = [...this.state.selectedItem];
-
-    if (newList.filter(item => item === good).length <= 1) {
-      event.target.closest('li').classList.remove('highlight');
-    }
 
     if (newList.includes(good)) {
       newList.splice(newList.indexOf(good), 1);
@@ -42,13 +38,7 @@ class App extends React.Component {
     this.setState(() => ({ selectedItem: newList }));
   }
 
-  clearAll = (event) => {
-    const list = [...event.target.nextSibling.children];
-
-    list.forEach((li) => {
-      li.classList.remove('highlight');
-    });
-
+  clearAll = () => {
     this.setState({ selectedItem: [] });
   }
 
@@ -70,6 +60,7 @@ class App extends React.Component {
           goods={goodsFromServer}
           addGood={this.addGood}
           removeGood={this.removeGood}
+          selectedItem={this.state.selectedItem}
         />
       </div>
     );

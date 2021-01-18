@@ -8,18 +8,14 @@ export const Good = ({ good, addGood, removeGood }) => (
       <button
         type="button"
         className="list__button list__button_green"
-        onClick={(event) => {
-          addGood(event, good);
-        }}
+        onClick={() => addGood(good)}
       >
         add
       </button>
       <button
         type="button"
         className="list__button list__button_red"
-        onClick={(event) => {
-          removeGood(event, good);
-        }}
+        onClick={() => removeGood(good)}
       >
         remove
       </button>
