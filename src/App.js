@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
 
 const goodsFromServer = [
   'Dumplings',
@@ -49,10 +50,10 @@ class App extends React.Component {
           {
             goods.map(({ name, id }) => (
               <li
-                className={`
-                  list__item ${selectedGood === name ? 'selected' : ''}
-                `}
                 key={id}
+                className={classNames('list__item', {
+                  selected: name === selectedGood,
+                })}
               >
                 {name}
                 <button
