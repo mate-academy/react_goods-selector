@@ -18,38 +18,26 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGoods: '',
+    selectedGoods: [],
   };
 
-  add = ({ target }) => {
-    let item = target
-      .parentNode.previousElementSibling.innerText;
-
-    item += ', ';
-    this.setState(prevState => ({
-      selectedGoods: prevState.selectedGoods + item,
-    }));
+  add = (product) => {
+    this.setState(prevState => (
+      { selectedGoods: [...prevState.selectedGoods, product] }));
   }
 
-  remove = ({ target }) => {
-    const item = target
-      .parentNode.previousElementSibling.innerText;
-    let result = (this.state.selectedGoods).slice();
+  remove = (product) => {
+    if (this.state.selectedGoods.includes(product)) {
+      const copyArr = [...this.state.selectedGoods];
+      const elementIndex = copyArr.findIndex(element => element === product);
 
-    result = result.split((', '));
-    if (result.includes(item)) {
-      result.splice(result.indexOf(item), 1);
-      result = result.join(', ');
-      this.setState(() => ({
-        selectedGoods: result,
-      }));
+      copyArr.splice(elementIndex, 1);
+      this.setState(() => ({ selectedGoods: copyArr }));
     }
   }
 
   reset = () => {
-    this.setState(() => ({
-      selectedGoods: '',
-    }));
+    this.setState(() => ({ selectedGoods: [] }));
   }
 
   render() {
@@ -58,11 +46,15 @@ class App extends React.Component {
         <h2 className="mainText">
           Selected good:
           {' '}
-          <p className="stateTranslation">{this.state.selectedGoods}</p>
+          <p
+            className="stateTranslation"
+          >
+            {this.state.selectedGoods.join(', ')}
+          </p>
         </h2>
         <h3>
           quantity:
-          {goodsFromServer.length}
+          {this.state.selectedGoods.length}
         </h3>
         <Button
           onClick={this.reset}
@@ -81,13 +73,13 @@ class App extends React.Component {
               </span>
               <span className="buttonsGroup">
                 <Button
-                  onClick={this.add}
+                  onClick={() => this.add(product)}
                   className="btn"
                 >
                   Add
                 </Button>
                 <Button
-                  onClick={this.remove}
+                  onClick={() => this.remove(product)}
                   className="btn"
                 >
                   Remove
