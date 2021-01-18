@@ -1,9 +1,10 @@
 // styles go here
 .selected {
-  background-color: yellow;
+  background-color: #ff0;
 }
 
 .list__item {
+  list-style: none;
   margin: 10px 0;
 }
 

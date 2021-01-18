@@ -42,6 +42,9 @@ class App extends React.Component {
   }
 
   clearAll = () => {
+    const elementsToRemove = [...document.querySelectorAll('.selected')];
+
+    elementsToRemove.map(element => element.classList.remove('selected'));
     this.setState({ selectedGoods: [] });
   }
 
