@@ -17,13 +17,11 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-  // selected: '',
     selectedGoods: [],
   };
 
   selectItem = (item) => {
     const { selectedGoods } = this.state;
-    //  this.setState({ selected: item });
 
     if (selectedGoods.includes(item)) {
       const removeItem = selectedGoods.filter(x => x !== item);
@@ -46,7 +44,6 @@ class App extends React.Component {
         <h1>
           Selected good:
           {' '}
-          {/* {this.state.selected} */}
           {selectedGoods.join(', ')}
         </h1>
 
@@ -67,11 +64,6 @@ class App extends React.Component {
                 className={classNames('list__item',
                   selectedGoods.includes(item) ? 'selected' : '')}
               >
-                {/* <li
-                  key={item}
-                  className={`list__item ${this.state.selected === item
-                    ? 'selected' : ''}`}
-                > */}
                 {item}
               </li>
               <button
