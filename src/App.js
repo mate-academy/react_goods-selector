@@ -58,12 +58,6 @@ class App extends React.Component {
     });
   }
 
-  renderSelected() {
-    const selected = document.querySelectorAll('.App__list-item--active');
-
-    this.setState({ selectedGoods: selected });
-  }
-
   render() {
     const { allGoods, selectedGoods } = this.state;
 
