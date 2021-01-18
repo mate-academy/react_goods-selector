@@ -19,32 +19,30 @@ class App extends React.Component {
     basket: [],
   }
 
-  toSelect = ({ target }) => {
-    target.parentElement.classList.add('selected');
+  toToggle = ({ target }) => {
+    const { basket } = this.state;
+    const titleOfGood = target.parentElement.firstChild.textContent;
 
-    const targetName = goodsFromServer.find((good) => {
-      const titleOfGood = target.parentElement.firstChild.textContent;
+    target.parentElement.classList.toggle('selected');
 
-      return good === titleOfGood;
-    });
-    const prevStateOfBasket = this.state.basket;
+    basket.includes(titleOfGood)
+      ? this.toCancel(titleOfGood)
+      : this.toSelect(titleOfGood);
+  }
 
-    this.setState({ basket: [...prevStateOfBasket, targetName] });
+  toSelect = (title) => {
+    const { basket } = this.state;
+
+    this.setState({ basket: [...basket, title] });
   };
 
-  toCancel = ({ target }) => {
-    const titleOfGood = target.parentElement.firstChild.textContent;
-    const index = this.state.basket.indexOf(titleOfGood);
+  toCancel = (title) => {
+    const { basket } = this.state;
+    const index = basket.indexOf(title);
+    const itemsOfBasket = basket;
 
-    this.state.basket.splice(index, 1);
-    const itemsOfBasket = this.state.basket;
-
-    itemsOfBasket.splice(1, index);
+    itemsOfBasket.splice(index, 1);
     this.setState({ basket: [...itemsOfBasket] });
-
-    if (!this.state.basket.includes(titleOfGood)) {
-      target.parentElement.classList.remove('selected');
-    }
   }
 
   toReset = () => {
@@ -79,17 +77,9 @@ class App extends React.Component {
               <button
                 className="button"
                 type="button"
-                onClick={this.toSelect}
+                onClick={this.toToggle}
               >
-                Select
-              </button>
-
-              <button
-                className="button"
-                type="button"
-                onClick={this.toCancel}
-              >
-                Cancel
+                Add / Remove
               </button>
             </div>
           ))}
