@@ -21,20 +21,13 @@ class App extends React.Component {
   }
 
   addProduct = (event, product) => {
-    const element = event.target.closest('li');
-
-    element.classList.add('is-success');
     this.setState(state => ({
       selectedProduct: [...state.selectedProduct, product],
     }));
   }
 
   removeProduct = (event, product) => {
-    const element = event.target.closest('li');
-
-    element.classList.remove('is-success');
-
-    if (element.childNodes[0].textContent === product) {
+    if (this.state.selectedProduct.includes(product)) {
       this.setState((prevState) => {
         const index = prevState
           .selectedProduct.findIndex(item => item === product);
@@ -59,7 +52,12 @@ class App extends React.Component {
         <ul>
           {goodsFromServer.map((item, index) => (
             <>
-              <li className="subtitle is-5 button" key={item}>
+              <li
+                className={this.state.selectedProduct.includes(item)
+                  ? 'subtitle is-success is-5 button'
+                  : 'subtitle is-5 button'}
+                key={item}
+              >
                 {item}
                 <button
                   type="button"
