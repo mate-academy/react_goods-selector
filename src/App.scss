@@ -14,4 +14,9 @@ body {
 button {
   margin: 5px;
   border-radius: 10px;
+  outline: none;
+
+  &:checked {
+    background-color: chartreuse;
+  }
 }

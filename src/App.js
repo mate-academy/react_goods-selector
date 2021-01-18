@@ -47,6 +47,7 @@ class App extends React.Component {
       <div className="App">
         <h1>
           Selected good:
+          {' '}
           {selectedGood}
           {(selectedGood !== 'none') && (
             <button
