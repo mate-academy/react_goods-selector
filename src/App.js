@@ -72,7 +72,7 @@ class App extends React.Component {
 
         <div className="goods">
           {goodsFromServer.map(good => (
-            <div className="good">
+            <div key={good} className="good">
               <p>{good}</p>
               <button
                 className="button"
