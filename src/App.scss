@@ -6,6 +6,7 @@ body {
 .goods {
   list-style-type: none;
   display: flex;
+  justify-content: center;
   padding-left: 0;
 
   &__item {
