@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import ClassNames from 'classnames';
 
 const goodsFromServer = [
   'Dumplings',
@@ -20,41 +21,29 @@ class App extends React.Component {
     selectedGoods: [],
   }
 
-  toggleClass = (e) => {
-    const listItem = e.target.parentNode;
-
-    listItem.classList.toggle('App__list-item--active');
-  }
-
   clearAll = () => {
-    // eslint-disable-next-line
-    const selectedElements = [...document.querySelectorAll('.App__list-item--active')];
-
-    // eslint-disable-next-line
-    selectedElements.map(element => element.classList.toggle('App__list-item--active'));
-
     this.setState({
       selectedGoods: [],
     });
   }
 
-  addSelected = (e, good) => {
-    this.toggleClass(e);
-
+  addSelected = (good) => {
     this.setState(prevState => ({
       selectedGoods: [...prevState.selectedGoods, good],
     }));
   }
 
-  removeSelected = (e, good) => {
-    this.toggleClass(e);
-    // eslint-disable-next-line
-    const newState = [...this.state.selectedGoods];
+  removeSelected = (good) => {
+    this.setState((prevState) => {
+      const i = prevState.selectedGoods.indexOf(good);
 
-    newState.splice(newState.indexOf(good), 1);
+      prevState.selectedGoods.splice(i, 1);
 
-    this.setState({
-      selectedGoods: newState,
+      return (
+        {
+          selectedGoods: prevState.selectedGoods,
+        }
+      );
     });
   }
 
@@ -64,7 +53,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1 className="App__header">
-          Selected good:
+          Selected goods:
           {' '}
           {selectedGoods.length}
         </h1>
@@ -78,18 +67,25 @@ class App extends React.Component {
           </span>
         ))}
         <br />
-        <button
-          type="button"
-          className="App__clear-button"
-          onClick={this.clearAll}
-        >
-          Clear all
-        </button>
+
+        {selectedGoods.length < 10 && selectedGoods.length !== 0
+          ? (
+            <button
+              type="button"
+              className="App__clear-button"
+              onClick={this.clearAll}
+            >
+              Clear all
+            </button>
+          )
+          : ''
+        }
 
         <ul className="App__list">
           {allGoods.map(good => (
             <li
-              className="App__list-item"
+              className={ClassNames('App__list-item',
+                { 'App__list-item--active': selectedGoods.includes(good) })}
               key={good}
             >
               {good}
@@ -97,9 +93,9 @@ class App extends React.Component {
               <button
                 className="App__list-item-button"
                 type="button"
-                onClick={e => (selectedGoods.includes(good)
-                  ? this.removeSelected(e, good)
-                  : this.addSelected(e, good))}
+                onClick={() => (selectedGoods.includes(good)
+                  ? this.removeSelected(good)
+                  : this.addSelected(good))}
               >
 
                 Select / Remove
