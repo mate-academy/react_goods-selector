@@ -1,5 +1,8 @@
+/* eslint-disable */
 import React from 'react';
 import './App.scss';
+import 'react-bulma-components/dist/react-bulma-components.min.css';
+import Selector from './components/Selector/Selector';
 
 const goodsFromServer = [
   'Dumplings',
@@ -15,10 +18,7 @@ const goodsFromServer = [
 ];
 
 const App = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
+  <Selector goods={goodsFromServer} />
 );
 
 export default App;
