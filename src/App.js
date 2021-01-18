@@ -39,6 +39,8 @@ class App extends React.Component {
   };
 
   render() {
+    const { selectedGoods } = this.state;
+
     return (
       <div className="App app__card">
         <h1 className="goods__title">
@@ -47,8 +49,8 @@ class App extends React.Component {
         <p>
           Your cart: &nbsp;
           <span className="selected__goods">
-            {this.state.selectedGoods.length > 0
-              ? this.state.selectedGoods.join(', ')
+            {selectedGoods.length > 0
+              ? selectedGoods.join(', ')
               : 'empty'}
           </span>
         </p>
@@ -61,7 +63,13 @@ class App extends React.Component {
         </button>
         <ul className="goods__list">
           {goodsFromServer.map(item => (
-            <div className="list__item" key={item}>
+            <div
+              className={`list__item ${selectedGoods.includes(item)
+                ? 'selected'
+                : ''
+              }`}
+              key={item}
+            >
               <li>{item}</li>
               <div>
                 <button
