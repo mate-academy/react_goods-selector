@@ -5,9 +5,9 @@
 ## Task
 - DON'T create an additional component for the `GoodsList`, just iterate it in the `App`
 - Render a header (`h1`) initially saying `Selected good: -`
-- Render a list of goods. 
+- Render a list of goods.
 - Add a `Select` button next to each good in the list.
-- Add a special class to the selected good  in the list (e.g. highlight it with a yellow color).
+- Add a special class to the selected good in the list (e.g. highlight it with a yellow color).
 - The header should show the name of the selected good.
 - Add clear button (`X`) next to the header to clear the selection
 
