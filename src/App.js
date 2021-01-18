@@ -41,6 +41,8 @@ class App extends React.Component {
   }
 
   render() {
+    const { selectedGoods } = this.state;
+
     return (
       <div className="App">
         <h2 className="mainText">
@@ -49,12 +51,12 @@ class App extends React.Component {
           <p
             className="stateTranslation"
           >
-            {this.state.selectedGoods.join(', ')}
+            {selectedGoods.join(', ')}
           </p>
         </h2>
         <h3>
           quantity:
-          {this.state.selectedGoods.length}
+          {selectedGoods.length}
         </h3>
         <Button
           onClick={this.reset}
@@ -66,7 +68,7 @@ class App extends React.Component {
         <ul className="mainUl">
           {goodsFromServer.map(product => (
             <li className="liOne" key={product}>
-              <span className={this.state.selectedGoods.includes(product)
+              <span className={selectedGoods.includes(product)
                 ? 'liText highlighted' : 'liText'}
               >
                 {product}
