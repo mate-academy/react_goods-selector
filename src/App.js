@@ -1,7 +1,8 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
-import { Product } from './components/Product/Product';
+// import { Product } from './components/Product/Product';
 
 const goodsFromServer = [
   'Dumplings',
@@ -22,58 +23,48 @@ class App extends React.Component {
   }
 
   clear = () => {
-    const goodsList = document.querySelector('.goods__list');
-
-    [...goodsList.children].forEach((good) => {
-      good.classList.remove('active');
-    });
-
     this.setState({ selected: [] });
   }
 
-  add = ({ target }) => {
-    const listTarget = target.closest('li');
-    const newGood = listTarget.textContent.slice(0, -1);
+  toggle = (product) => {
+    const { selected } = this.state;
 
-    listTarget.classList.toggle('active');
-
-    if (listTarget.classList.contains('active')) {
-      this.setState(state => (
-        { selected: [...state.selected, newGood] }
-      ));
-
-      return;
-    }
-
-    this.setState(state => (
-      { selected: [...state.selected].filter(good => good !== newGood) }
-    ));
+    selected.includes(product)
+      ? this.setState({ selected: selected.filter(good => good !== product) })
+      : this.setState({ selected: [...selected, product] });
   }
 
   render() {
+    const { selected } = this.state;
+
     return (
       <div className="App">
         <h1>
-          Selected goods:
-          {' '}
-          <Product goods={this.state.selected} />
+          {'Selected goods: '}
+          {<span>{selected.join(', ')}</span>}
         </h1>
 
         <button
           onClick={this.clear}
-          className="button goods__button"
+          className="button products__button"
           type="button"
         >
           +
         </button>
 
-        <ul className="goods__list">
-          {goodsFromServer.map(good => (
-            <li key={good} className="goods__item">
-              {good}
+        <ul className="products__list">
+          {goodsFromServer.map(product => (
+            <li
+              key={product}
+              className={classNames(
+                'products__item',
+                { active: selected.includes(product) },
+              )}
+            >
+              <span>{product}</span>
               <button
-                onClick={this.add}
-                className="button goods__item-button"
+                onClick={() => this.toggle(product)}
+                className="button products__item-button"
                 type="button"
               >
                 +

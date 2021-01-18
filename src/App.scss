@@ -23,7 +23,7 @@ body {
   }
 }
 
-.goods {
+.products {
   &__button {
     transform: rotate(45deg);
 
@@ -47,6 +47,7 @@ body {
     padding: 5px 5px 5px 10px;
     width: 100%;
     border-radius: calc(1em + 10px);
+    transition: background-color 0.2s;
   }
 }
 
