@@ -43,7 +43,7 @@ class App extends React.Component {
 
   clearSelection = () => {
     this.setState({
-      selected: '',
+      selected: [],
     });
   }
 
@@ -68,7 +68,7 @@ class App extends React.Component {
           {goodsFromServer.map(good => (
             <li
               key={good}
-              className={selectedArr.includes(good) ? 'selected' : ''}
+              className={selectedArr.includes(good) && 'selected'}
             >
               {good}
               {' -> '}
