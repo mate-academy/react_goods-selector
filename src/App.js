@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer = [
@@ -17,59 +18,43 @@ const goodsFromServer = [
 class App extends React.Component {
   state = {
     selectedGoods: [],
-    products: [],
   }
 
-  addOrRemoveSelectedGood = ({ target }, product) => {
-    this.setState(({ selectedGoods, products }) => {
-      const item = target.closest('.list__item');
-
-      item.classList.toggle('list__item--selected');
-
-      const newSelectedGoods = [...selectedGoods];
-      const newProducts = [...products];
-
-      if (products.includes(product)) {
-        const index = selectedGoods.indexOf(item);
-
-        newSelectedGoods.splice(index, 1);
-        newProducts.splice(index, 1);
-      } else {
-        newSelectedGoods.push(item);
-        newProducts.push(product);
-      }
-
-      return {
-        selectedGoods: newSelectedGoods,
-        products: newProducts,
-      };
-    });
-  }
-
-  clearSelectedGoods = (event) => {
+  addOrRemoveSelectedGood = (event, product) => {
     const { selectedGoods } = this.state;
+    const newSelectedGoods = [...selectedGoods];
+    const index = newSelectedGoods.indexOf(product);
 
-    selectedGoods.forEach((item) => {
-      item.classList.remove('list__item--selected');
-    });
+    if (index === -1) {
+      newSelectedGoods.push(product);
+    } else {
+      newSelectedGoods.splice(index, 1);
+    }
 
     this.setState({
-      selectedGoods: [],
-      products: [],
+      selectedGoods: newSelectedGoods,
     });
   }
 
-  printHeader() {
-    const { products } = this.state;
+  clearSelectedGoods = () => {
+    this.setState({
+      selectedGoods: [],
+    });
+  }
 
-    if (products.length === 0) {
+  printHeader = () => {
+    const { selectedGoods } = this.state;
+
+    if (selectedGoods.length === 0) {
       return '';
     }
 
-    return products.reduce((prev, product) => `${prev}, ${product}`);
+    return selectedGoods.reduce((prev, product) => `${prev}, ${product}`);
   }
 
   render() {
+    const { selectedGoods } = this.state;
+
     return (
       <div className="App">
         <h1>
@@ -87,7 +72,9 @@ class App extends React.Component {
         <ul>
           {goodsFromServer.map(product => (
             <li
-              className="list__item"
+              className={classNames('list__item', {
+                'list__item--selected': selectedGoods.includes(product),
+              })}
               key={product}
             >
               <span>
