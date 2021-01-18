@@ -31,7 +31,8 @@ export class Good extends React.Component {
         <div>
           <button
             type="button"
-            className="button is-small is-success is-outlined mx-1"
+            className={`button is-small is-success is-outlined mx-1
+              ${selectedGood.includes(good) ? 'disabled' : ''}`}
             onClick={() => setSelectedGood(good)}
           >
             Add

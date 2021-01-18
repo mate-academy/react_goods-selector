@@ -21,9 +21,11 @@ class App extends React.Component {
   }
 
   setSelectedGood = (good) => {
-    this.setState(prevState => (
-      { selectedGood: [...prevState.selectedGood, good] }
-    ));
+    if (this.state.selectedGood.indexOf(good) === -1) {
+      this.setState(prevState => (
+        { selectedGood: [...prevState.selectedGood, good] }
+      ));
+    }
   }
 
   clearSelected = () => {
@@ -31,11 +33,9 @@ class App extends React.Component {
   }
 
   removeFromSelected = (good) => {
-    const goodIndex = this.state.selectedGood.indexOf(good);
-
     this.setState(prevState => ({
       selectedGood: prevState.selectedGood
-        .filter((item, index) => goodIndex !== index),
+        .filter(item => item !== good),
     }));
   }
 

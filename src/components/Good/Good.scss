@@ -9,3 +9,7 @@
   height: 50px;
   list-style-type: none;
 }
+
+.disabled {
+  pointer-events: none;
+}
