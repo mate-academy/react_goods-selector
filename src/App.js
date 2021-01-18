@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.scss';
 
+const classNames = require('classnames');
+
 const goodsFromServer = [
   'Dumplings',
   'Carrot',
@@ -19,41 +21,21 @@ class App extends React.Component {
     basket: [],
   }
 
-  toToggle = ({ target }) => {
-    const { basket } = this.state;
-    const titleOfGood = target.parentElement.firstChild.textContent;
-
-    target.parentElement.classList.toggle('selected');
-
-    basket.includes(titleOfGood)
-      ? this.toCancel(titleOfGood)
-      : this.toSelect(titleOfGood);
-  }
-
-  toSelect = (title) => {
+  toToggle = (item) => {
     const { basket } = this.state;
 
-    this.setState({ basket: [...basket, title] });
-  };
+    if (basket.includes(item)) {
+      const itemsOfBasket = basket.filter(good => good !== item);
 
-  toCancel = (title) => {
-    const { basket } = this.state;
-    const index = basket.indexOf(title);
-    const itemsOfBasket = basket;
+      this.setState({ basket: [...itemsOfBasket] });
 
-    itemsOfBasket.splice(index, 1);
-    this.setState({ basket: [...itemsOfBasket] });
+      return;
+    }
+
+    this.setState({ basket: [...basket, item] });
   }
 
   toReset = () => {
-    const goods = [...document.querySelectorAll('.good')];
-
-    goods.forEach((good) => {
-      const button = good.querySelector('button');
-
-      good.classList.remove('selected');
-      button.innerText = 'Add';
-    });
     this.setState({ basket: [] });
   }
 
@@ -65,7 +47,9 @@ class App extends React.Component {
         <div className="basket">
           <button
             type="button"
-            className="basket__button"
+            className={
+              classNames('basket__button', { hidden: basket.length === 0 })
+            }
             onClick={this.toReset}
           >
             X
@@ -79,12 +63,18 @@ class App extends React.Component {
 
         <div className="goods">
           {goodsFromServer.map(good => (
-            <div key={good} className="good">
+            <div
+              key={good}
+              className={
+                classNames('good', { selected: basket.includes(good) })
+              }
+            >
               <p>{good}</p>
               <button
                 className="button"
                 type="button"
-                onClick={this.toToggle}
+                onClick={() => this.toToggle(good)}
+
               >
                 {basket.includes(good) ? 'Remove' : 'Add'}
               </button>
