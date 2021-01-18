@@ -48,11 +48,18 @@ class App extends React.Component {
   toReset = () => {
     const goods = [...document.querySelectorAll('.good')];
 
-    goods.map(good => good.classList.remove('selected'));
+    goods.forEach((good) => {
+      const button = good.querySelector('button');
+
+      good.classList.remove('selected');
+      button.innerText = 'Add';
+    });
     this.setState({ basket: [] });
   }
 
   render() {
+    const { basket } = this.state;
+
     return (
       <div className="App">
         <div className="basket">
@@ -79,7 +86,7 @@ class App extends React.Component {
                 type="button"
                 onClick={this.toToggle}
               >
-                Add / Remove
+                {basket.includes(good) ? 'Remove' : 'Add'}
               </button>
             </div>
           ))}
