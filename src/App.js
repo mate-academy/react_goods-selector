@@ -14,11 +14,90 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-const App = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+class App extends React.Component {
+  state = {
+    title: ['none'],
+  }
+
+  clear = () => {
+    this.setState({ title: ['none'] });
+  }
+
+  select = (item) => {
+    if (this.state.title[0] === 'none') {
+      this.setState({ title: [] });
+    }
+
+    if (!this.state.title.includes(item)) {
+      this.setState(prevState => ({
+        title: [...prevState.title, item],
+      }));
+    }
+  }
+
+  delete = (item) => {
+    this.setState(prevState => ({
+      title: prevState.title.filter(product => product !== item),
+    }));
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <h1>
+          Selected good:
+          {this.state.title.length !== 0
+            ? this.state.title.join(', ')
+            : this.setState({ title: ['none'] })
+          }
+        </h1>
+        <div className="container">
+          <ul className="container__list">
+            {goodsFromServer.map(product => (
+              <>
+                <li className="container__item">
+                  {product}
+                  {':'}
+                  <div>
+                    <button
+                      type="button"
+                      className="container__button"
+                      onClick={() => {
+                        this.select(product);
+                      }}
+                    >
+                      Select
+                    </button>
+                    <button
+                      type="button"
+                      className="container__button container__button-delete"
+                      onClick={() => {
+                        this.delete(product);
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </li>
+              </>
+            ))}
+          </ul>
+        </div>
+        <button
+          type="button"
+          className="
+            container__button
+            container__button-delete
+            container__button-delete-all
+          "
+          onClick={this.clear}
+          hidden={this.state.title[0] === 'none' || false}
+        >
+          Clear
+        </button>
+      </div>
+    );
+  }
+}
 
 export default App;
