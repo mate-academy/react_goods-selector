@@ -24,7 +24,7 @@ class App extends React.Component {
     const { selectedGoods } = this.state;
 
     if (selectedGoods.includes(item)) {
-      const removeItem = selectedGoods.filter(x => x !== item);
+      const removeItem = selectedGoods.filter(product => product !== item);
 
       this.setState({ selectedGoods: removeItem });
     } else {
