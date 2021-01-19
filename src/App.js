@@ -28,10 +28,13 @@ class App extends React.Component {
 
   clear = (item) => {
     const { selectedGoods } = this.state;
-    const index = selectedGoods.indexOf(item);
 
-    selectedGoods.splice(index, 1);
-    this.setState({ selectedGoods });
+    if (selectedGoods.includes(item)) {
+      const index = selectedGoods.indexOf(item);
+
+      selectedGoods.splice(index, 1);
+      this.setState({ selectedGoods });
+    }
   }
 
   clearAll = () => {
