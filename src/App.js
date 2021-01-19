@@ -18,13 +18,64 @@ const goodsFromServer = [
 class App extends React.Component {
   state = {
     allGoods: goodsFromServer,
+    options: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    selectedOpt: 1,
+    isOptionSelected: false,
     selectedGoods: [],
+    startButton: false,
+    sortBy: '',
+    modified: false,
+    isReversed: false,
+  }
+
+  select = (event) => {
+    this.setState({
+      selectedOpt: event.target.value,
+      isOptionSelected: true,
+    });
+  }
+
+  sortByLength = () => {
+    this.setState(
+      {
+        sortBy: 'length',
+        modified: true,
+      },
+    );
+  }
+
+  sortByLetter = () => {
+    this.setState(prevState => (
+      {
+        sortBy: 'letter',
+        modified: true,
+      }
+    ));
+  }
+
+  reset = () => {
+    this.setState({
+      modified: false,
+      isOptionSelected: false,
+      selectedOpt: 1,
+    });
+  }
+
+  reverse = () => {
+    this.setState(prevState => (
+      {
+        modified: true,
+        isReversed: !prevState.isReversed,
+      }
+    ));
+  }
+
+  start = () => {
+    this.setState(prevState => ({ startButton: !prevState.startButton }));
   }
 
   clearAll = () => {
-    this.setState({
-      selectedGoods: [],
-    });
+    this.setState({ selectedGoods: [] });
   }
 
   addSelected = (good) => {
@@ -39,18 +90,49 @@ class App extends React.Component {
 
       prevState.selectedGoods.splice(i, 1);
 
-      return (
-        {
-          selectedGoods: prevState.selectedGoods,
-        }
-      );
+      return ({ selectedGoods: prevState.selectedGoods });
     });
   }
 
   render() {
-    const { allGoods, selectedGoods } = this.state;
+    const { isReversed,
+      options,
+      selectedOpt,
+      modified,
+      sortBy,
+      startButton,
+      allGoods,
+      selectedGoods,
+      isOptionSelected } = this.state;
 
-    return (
+    let goodsOnPage = [...allGoods];
+
+    if (selectedOpt > 1 && isOptionSelected) {
+      goodsOnPage = goodsOnPage.filter(good => good.length >= selectedOpt);
+    }
+
+    goodsOnPage.sort((one, two) => {
+      switch (sortBy) {
+        case ('length'):
+          return one.length - two.length;
+
+        case ('letter'):
+          return one.localeCompare(two);
+
+        default:
+          return 0;
+      }
+    });
+
+    if (isReversed) {
+      goodsOnPage.reverse();
+    }
+
+    if (!modified) {
+      goodsOnPage = [...allGoods];
+    }
+
+    const page = (
       <div className="App">
         <h1 className="App__header">
           Selected goods:
@@ -76,7 +158,7 @@ class App extends React.Component {
           </button>
         )}
         <ul className="App__list">
-          {allGoods.map(good => (
+          {goodsOnPage.map(good => (
             <li
               className={ClassNames('App__list-item',
                 { 'App__list-item--active': selectedGoods.includes(good) })}
@@ -97,8 +179,59 @@ class App extends React.Component {
             </li>
           ))}
         </ul>
+
+        <div className="App__buttons">
+          <button
+            type="button"
+            onClick={this.reverse}
+            className="App__reverse"
+          >
+            Reverse
+          </button>
+
+          <button
+            type="button"
+            onClick={this.sortByLetter}
+            className="App__sort-alph"
+          >
+            Sort alphabetically
+          </button>
+
+          <button
+            type="button"
+            onClick={this.reset}
+            className="App__reset"
+          >
+            Reset
+          </button>
+
+          <button
+            type="button"
+            onClick={this.sortByLength}
+            className="App__sort-length"
+          >
+            Sort by length
+          </button>
+          <select value={selectedOpt} onChange={this.select}>
+            {options.map(opt => <option value={opt} key={opt}>{opt}</option>)}
+          </select>
+        </div>
       </div>
     );
+
+    const button = (
+      <button
+        className="App__start"
+        type="button"
+        onClick={this.start}
+      >
+        Start
+      </button>
+    );
+
+    return startButton
+      ? button
+      : page;
   }
 }
 
