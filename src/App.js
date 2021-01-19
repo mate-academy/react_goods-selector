@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer = [
@@ -17,31 +18,31 @@ const goodsFromServer = [
 class App extends React.Component {
   state = {
     goods: [...goodsFromServer],
-    selectGoods: [],
+    selectedGoods: [],
   };
 
-  changeGoods = (good, sel) => {
-    if (!sel.includes(good)) {
-      this.setState({ selectGoods: [...sel, good] });
+  changeGoods = (good, selected) => {
+    if (!selected.includes(good)) {
+      this.setState({ selectedGoods: [...selected, good] });
     } else {
-      const temp = sel.filter(x => x !== good);
+      const temp = selected.filter(x => x !== good);
 
-      this.setState({ selectGoods: [...temp] });
+      this.setState({ selectedGoods: [...temp] });
     }
   };
 
   clearGoods = () => {
-    this.setState({ selectGoods: [] });
+    this.setState({ selectedGoods: [] });
   };
 
   render() {
-    const { goods, selectGoods } = this.state;
+    const { goods, selectedGoods } = this.state;
 
     return (
       <div className="App">
         <h1>
           Selected good:
-          <span className="App__title">{selectGoods.join(', ')}</span>
+          <span className="App__title">{selectedGoods.join(', ')}</span>
         </h1>
         <button
           type="button"
@@ -55,9 +56,9 @@ class App extends React.Component {
             <div className="App__wrapper">
               <li
                 key={good}
-                className={selectGoods.includes(good)
-                  ? 'App__item App__item--selected'
-                  : 'App__item'}
+                className={classNames('App__item', {
+                  'App__item--selected': selectedGoods.includes(good),
+                })}
               >
                 {good}
               </li>
@@ -65,8 +66,7 @@ class App extends React.Component {
                 type="button"
                 className="App__button"
                 onClick={(event) => {
-                  event.preventDefault();
-                  this.changeGoods(good, selectGoods);
+                  this.changeGoods(good, selectedGoods);
                 }}
               >
                 Add/Remove
