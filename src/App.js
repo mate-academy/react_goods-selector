@@ -14,11 +14,50 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-const App = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+class App extends React.Component {
+  state = {
+    select: '',
+  }
+
+handleClick = (product) => {
+  this.setState({ select: product });
+}
+
+render() {
+  return (
+    <div className="App">
+      <h1>
+        Selected good:
+        {' '}
+        {this.state.select}
+      </h1>
+      {this.state.select.lengt && (
+        <button type="button" onClick={() => this.setState({ select: 'none' })}>
+          clear
+        </button>
+      )}
+
+      <ul className="list-group">
+        {goodsFromServer.map(product => (
+          <ul>
+            <li
+              className={this.state.select === product && 'list-group-item'}
+              key={product}
+            >
+              {product}
+            </li>
+            <button
+              type="button"
+              onClick={() => this.handleClick(product)}
+            >
+              select
+            </button>
+          </ul>
+        ))}
+      </ul>
+    </div>
+  );
+}
+}
 
 export default App;
