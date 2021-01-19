@@ -17,31 +17,15 @@ const goodsFromServer = [
 export class App extends React.Component {
   state = {
     selected: 'nothing',
-    prevSelected: null,
     clearButtonVisability: false,
   }
 
-  selection = (event) => {
-    this.setState({
-      selected: event.target.previousSibling.innerText,
-      prevSelected: event.target.parentElement,
-      clearButtonVisability: true,
-    });
-
-    if (this.state.prevSelected) {
-      this.state.prevSelected.classList.remove('selected-item');
+  selectedClass = (name) => {
+    if (this.state.selected === name) {
+      return 'selected-item';
     }
 
-    event.target.parentElement.classList.add('selected-item');
-  }
-
-  clear = () => {
-    this.setState({
-      clearButtonVisability: false,
-      selected: 'nothing',
-    });
-
-    this.state.prevSelected.classList.remove('selected-item');
+    return '';
   }
 
   render() {
@@ -55,7 +39,12 @@ export class App extends React.Component {
         <button
           type="button"
           className="clear-button"
-          onClick={this.clear}
+          onClick={() => {
+            this.setState({
+              clearButtonVisability: false,
+              selected: 'nothing',
+            });
+          }}
           hidden={!this.state.clearButtonVisability}
         >
           clear selected
@@ -65,14 +54,24 @@ export class App extends React.Component {
             goodsFromServer
               .map(
                 good => (
-                  <li key={good} className="list-item">
+                  <li
+                    key={good}
+                    className={
+                      `list-item ${this.selectedClass(good)}`
+                    }
+                  >
                     <p>
                       {good}
                     </p>
                     <button
                       type="button"
                       className="select-button"
-                      onClick={this.selection}
+                      onClick={() => {
+                        this.setState({
+                          selected: good,
+                          clearButtonVisability: true,
+                        });
+                      }}
                     >
                       select it
                     </button>
