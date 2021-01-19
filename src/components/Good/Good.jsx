@@ -4,13 +4,12 @@ import PropTypes from 'prop-types';
 export function Good({ good, goodSelected }) {
   return (
     <>
-      <p>{good}</p>
+      <p id="good">{good}</p>
       <button
         type="button"
         className="goods__select"
         onClick={(event) => {
           goodSelected(event, good);
-          // передача кастомного параметра обратно в функцию, полученную пропсом
         }}
       >
         Select

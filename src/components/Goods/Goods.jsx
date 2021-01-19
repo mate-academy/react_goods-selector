@@ -1,41 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { Good } from '../Good';
+import './Goods.scss';
 
 export class Goods extends React.Component {
   state = {
     selected: ' - ',
+    clearMode: false,
   }
 
-  clearAll = ({ target }) => {
-    const allGoods = target.parentElement.parentElement.lastElementChild;
-
-    [...allGoods.children].forEach((element) => {
-      element.classList.remove('active');
+  clearAll = () => {
+    this.setState({
+      clearMode: true,
     });
   }
 
   selected = ({ target }, item) => {
-    // получение переданного кастомного параметра good = item
-    const allGoods = target.closest('.goods').children;
-
-    [...allGoods].forEach((element) => {
-      element.classList.remove('active');
-    });
-    target.closest('.goods__item').classList.add('active');
-
     this.setState({
       selected: ` ${item} `,
+      activeItem: target,
+      clearMode: false,
     });
   }
 
   render() {
     const { goods } = this.props;
-    const { selected } = this.state;
+    const { selected, activeItem, clearMode } = this.state;
 
     return (
-      <div className="App">
-        <div className="App__header-wrapper">
+      <div className="goods">
+        <div className="goods__header-wrapper">
           <h1>
             Selected good:
             {selected}
@@ -44,21 +39,23 @@ export class Goods extends React.Component {
             title="clear selection"
             type="button"
             className="goods__clear"
-            onClick={(event) => {
+            onClick={() => {
               this.setState({
                 selected: ' - ',
               });
-              this.clearAll(event);
+              this.clearAll();
             }}
           >
             Remove
           </button>
         </div>
-        <ul className="goods">
+        <ul className="goods__list">
           {goods.map(item => (
             <li
               key={item}
-              className="goods__item"
+              className={classNames('goods__item', { active: activeItem
+                && activeItem.previousSibling.innerText === item
+                && !clearMode })}
             >
               <Good
                 good={item}
