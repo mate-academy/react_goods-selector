@@ -25,7 +25,7 @@ class App extends React.Component {
     this.setState({ selectedId: null });
   }
 
-  selected = (id) => {
+  handleSelected = (id) => {
     this.setState({ selectedId: id });
   }
 
@@ -38,7 +38,7 @@ class App extends React.Component {
         <h1>
           Selected good: -
           {' '}
-          {showGood ? showGood.name : ''}
+          { showGood && showGood.name }
         </h1>
         {goodsFromServer.length}
         <br />
@@ -63,7 +63,7 @@ class App extends React.Component {
               <button
                 className="product-button"
                 type="button"
-                onClick={() => this.selected(good.id)}
+                onClick={() => this.handleSelected(good.id)}
               >
                 Select
               </button>
