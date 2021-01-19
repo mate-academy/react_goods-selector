@@ -20,36 +20,24 @@ class App extends React.Component {
     selectedGoods: [],
   };
 
-  selectElement = ({ target }) => {
-    const newGood = target.parentElement.firstChild.textContent;
+  selectElement = (good) => {
     const goods = this.state.selectedGoods;
 
-    target.parentElement.classList.toggle('selected');
-    this.setState({ selectedGoods: [...goods, newGood] });
+    this.setState({ selectedGoods: [...goods, good] });
   }
 
-  removeElement = ({ target }) => {
-    const newGood = target.parentElement.firstChild.textContent;
+  removeElement = (good) => {
     const goods = this.state.selectedGoods;
 
-    target.parentElement.classList.remove('selected');
-
-    if (goods.includes(newGood)) {
-      const newGoods = goods.filter(good => good !== newGood);
+    if (goods.includes(good)) {
+      const newGoods = goods.filter(somegood => somegood !== good);
 
       this.setState({ selectedGoods: [...newGoods] });
     }
   }
 
-  resetGoods = ({ target }) => {
+  resetGoods = () => {
     this.setState({ selectedGoods: [] });
-    [...target.nextSibling.children].forEach((good) => {
-      if (good.classList.contains('selected')) {
-        good.classList.remove('selected');
-      }
-
-      return good;
-    });
   }
 
   render() {
@@ -76,11 +64,19 @@ class App extends React.Component {
         <ul>
           {goodsFromServer.map(good => (
             <li key={good}>
-              {good}
+              <span className={
+                classNames({ selected: selected.includes(good) })
+              }
+              >
+                {good}
+              </span>
                 &emsp;
               <button
                 type="button"
-                onClick={selected.includes(good) ? remove : select}
+                onClick={() => (selected.includes(good)
+                  ? remove(good)
+                  : select(good))
+                }
               >
                 {selected.includes(good) ? 'Remove' : 'Add'}
               </button>
