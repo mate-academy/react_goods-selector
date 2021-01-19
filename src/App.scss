@@ -20,6 +20,11 @@
     justify-content: space-between;
   }
 
+  &__text {
+    color: rgb(173, 238, 43);
+    transition-duration: .5s;
+  }
+
   &__button {
     margin-left: 40px;
     height: 30px;

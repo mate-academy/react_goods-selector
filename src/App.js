@@ -56,8 +56,12 @@ class App extends React.Component {
             {goodsFromServer.map(product => (
               <>
                 <li className="container__item">
-                  {product}
-                  {':'}
+                  <span className={this.state.title.includes(product)
+                    ? 'container__text' : ''}
+                  >
+                    {product}
+                    {':'}
+                  </span>
                   <div>
                     <button
                       type="button"
