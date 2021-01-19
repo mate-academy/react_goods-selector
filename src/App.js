@@ -31,7 +31,7 @@ render() {
         {' '}
         {this.state.select}
       </h1>
-      {this.state.select.lengt && (
+      {this.state.select.length > 0 && (
         <button type="button" onClick={() => this.setState({ select: 'none' })}>
           clear
         </button>
