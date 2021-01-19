@@ -66,19 +66,15 @@ class App extends React.Component {
           </span>
         ))}
         <br />
-        {selectedGoods.length !== 0
-          ? (
-            <button
-              type="button"
-              className="App__clear-button"
-              onClick={this.clearAll}
-            >
-              Clear all
-            </button>
-          )
-          : ''
-        }
-
+        {selectedGoods.length !== 0 && (
+          <button
+            type="button"
+            className="App__clear-button"
+            onClick={this.clearAll}
+          >
+            Clear all
+          </button>
+        )}
         <ul className="App__list">
           {allGoods.map(good => (
             <li
