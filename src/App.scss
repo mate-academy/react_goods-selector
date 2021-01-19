@@ -20,8 +20,10 @@ body {
 }
 
 .goods {
-  border-collapse: collapse;
-  margin: 0 auto;
+  &__table {
+    border-collapse: collapse;
+    margin: 0 auto;
+  }
 
   td {
     border: 1px solid black;
@@ -53,5 +55,10 @@ body {
     &--remove {
       background-color: #FFA07A;
     }
+  }
+
+  &__remove {
+    text-align: center;
+    margin-bottom: 20px;
   }
 }

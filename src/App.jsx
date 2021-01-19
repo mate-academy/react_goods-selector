@@ -20,21 +20,25 @@ class App extends React.Component {
   };
 
   selectGood = (good) => {
-    const { selectedGoods } = this.state;
-
-    if (!selectedGoods.includes(good)) {
-      this.setState({ selectedGoods: [...selectedGoods, good] });
+    if (!this.state.selectedGoods.includes(good)) {
+      this.setState(state => ({
+        selectedGoods: [...state.selectedGoods, good],
+      }));
     }
   };
 
   removeGood = (good) => {
-    const { selectedGoods } = this.state;
-
-    if (selectedGoods.includes(good)) {
-      this.setState({
-        selectedGoods: selectedGoods.filter(item => item !== good),
-      });
+    if (this.state.selectedGoods.includes(good)) {
+      this.setState(state => ({
+        selectedGoods: state.selectedGoods.filter(item => item !== good),
+      }));
     }
+  };
+
+  removeAll = () => {
+    this.setState({
+      selectedGoods: [],
+    });
   };
 
   render() {
@@ -47,40 +51,51 @@ class App extends React.Component {
             {`Selected goods:
             ${selectedGoods.length === 0 ? '-' : selectedGoods.join(', ')}`}
           </h1>
-          <table className="goods">
-            <tbody>
-              {goodsFromServer.map(good => (
-                <tr
-                  key={good}
-                  className={selectedGoods.includes(good) ? 'goods__item goods__item--selected' : 'goods__item'}
-                >
-                  <td>{good}</td>
-                  <td>
-                    <button
-                      type="button"
-                      className="goods__button goods__button--select"
-                      onClick={(event) => {
-                        this.selectGood(good);
-                      }}
-                    >
-                      Add
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      type="button"
-                      className="goods__button goods__button--remove"
-                      onClick={(event) => {
-                        this.removeGood(good);
-                      }}
-                    >
-                      Remove
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="goods">
+            <div className="goods__remove">
+              <button
+                type="button"
+                className="goods__button goods__button--remove"
+                onClick={this.removeAll}
+              >
+                X
+              </button>
+            </div>
+            <table className="goods__table">
+              <tbody>
+                {goodsFromServer.map(good => (
+                  <tr
+                    key={good}
+                    className={selectedGoods.includes(good) ? 'goods__item goods__item--selected' : 'goods__item'}
+                  >
+                    <td>{good}</td>
+                    <td>
+                      <button
+                        type="button"
+                        className="goods__button goods__button--select"
+                        onClick={(event) => {
+                          this.selectGood(good);
+                        }}
+                      >
+                        Add
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        className="goods__button goods__button--remove"
+                        onClick={(event) => {
+                          this.removeGood(good);
+                        }}
+                      >
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     );
