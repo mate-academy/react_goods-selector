@@ -2,7 +2,7 @@
 import React from 'react';
 import './App.scss';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
-import Selector from './components/Selector/Selector';
+import { Selector } from './components/Selector/Selector';
 
 const goodsFromServer = [
   'Dumplings',
