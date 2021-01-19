@@ -19,32 +19,22 @@ class App extends React.Component {
     selectedGoods: [],
   }
 
-  select = (e) => {
+  select = (item) => {
     const { selectedGoods } = this.state;
-    const selectedElement = e.target.parentElement;
 
-    selectedElement.classList.add('selected');
-    selectedGoods.push(selectedElement.innerText.split(' ')[0]);
-
+    selectedGoods.push(item);
     this.setState({ selectedGoods });
   }
 
-  clear = (e) => {
+  clear = (item) => {
     const { selectedGoods } = this.state;
-    const elementToRemove = e.target.parentElement;
-    const index = selectedGoods
-      .indexOf(elementToRemove.innerText.split(' ')[0]);
+    const index = selectedGoods.indexOf(item);
 
-    elementToRemove.classList.remove('selected');
     selectedGoods.splice(index, 1);
-
     this.setState({ selectedGoods });
   }
 
   clearAll = () => {
-    const elementsToRemove = [...document.querySelectorAll('.selected')];
-
-    elementsToRemove.map(element => element.classList.remove('selected'));
     this.setState({ selectedGoods: [] });
   }
 
@@ -60,13 +50,18 @@ class App extends React.Component {
         <button type="button" onClick={this.clearAll}>Clear</button>
         <ul className="list">
           {goodsFromServer.map(good => (
-            <li className="list__item" key={good}>
+            <li
+              className={`list__item ${selectedGoods.includes(good)
+                ? 'selected'
+                : ''}`}
+              key={good}
+            >
               {good}
               {' '}
               <button
                 className="button"
                 type="button"
-                onClick={this.select}
+                onClick={() => this.select(good)}
               >
                 Add
               </button>
