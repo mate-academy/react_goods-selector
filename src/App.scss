@@ -1,1 +1,80 @@
-// styles go here
+@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+html {
+  font-family: 'Yusei Magic', sans-serif;
+}
+
+.header {
+  width: 600px;
+  min-height: 250px;
+  background-color: rgba(15, 19, 247, 0.91);
+  margin: 0 auto;
+  padding: 10px 30px;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgb(221, 224, 39);
+  }
+
+  &__goods {
+    font-size: 14px;
+  }
+}
+
+.main {
+  width: 600px;
+  margin: 0 auto;
+  background-color: rgba(248, 232, 10, 0.97);
+
+  &__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  &__good-item {
+    padding: 10px 15px;
+    text-align: center;
+
+    box-shadow: 1px 1px 7px rgba(7, 30, 129, 0.493);
+    background-color: rgba(244, 248, 1, 0.993);
+  }
+
+  &__btn {
+    margin-top: 10px;
+    width: 100px;
+    border-radius: 15px;
+    border: 1px solid green;
+    height: 40px;
+    background-color: rgb(39, 233, 21);
+    transition: 0.3s ease;
+    cursor: pointer;
+
+    &:active,
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      background-color: rgba(39, 233, 21, 0.733);
+    }
+  }
+}
+
+.selected {
+  background-color: rgb(107, 31, 206);
+  color: yellow;
+}
