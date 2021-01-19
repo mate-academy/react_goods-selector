@@ -165,7 +165,6 @@ class App extends React.Component {
               key={good}
             >
               {good}
-
               <button
                 className="App__list-item-button"
                 type="button"
@@ -179,7 +178,6 @@ class App extends React.Component {
             </li>
           ))}
         </ul>
-
         <div className="App__buttons">
           <button
             type="button"
@@ -188,7 +186,6 @@ class App extends React.Component {
           >
             Reverse
           </button>
-
           <button
             type="button"
             onClick={this.sortByLetter}
@@ -196,7 +193,6 @@ class App extends React.Component {
           >
             Sort alphabetically
           </button>
-
           <button
             type="button"
             onClick={this.reset}
@@ -204,7 +200,6 @@ class App extends React.Component {
           >
             Reset
           </button>
-
           <button
             type="button"
             onClick={this.sortByLength}
