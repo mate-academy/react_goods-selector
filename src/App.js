@@ -2,7 +2,7 @@ import React from 'react';
 import './App.scss';
 import { Product } from './components/Product';
 
-const goodsFromServer = [
+export const goodsFromServer = [
   'Dumplings',
   'Carrot',
   'Eggs',
@@ -21,32 +21,24 @@ class App extends React.Component {
   }
 
   clear = () => {
-    const goodsList = document.querySelector('.goods');
-
-    [...goodsList.children].forEach((good) => {
-      good.classList.remove('active');
-    });
-
     this.setState({ selected: [] });
   }
 
-  add = ({ target }) => {
-    const listTarget = target.closest('li');
-    const newGood = listTarget.firstChild.textContent;
-
-    listTarget.classList.toggle('active');
-
-    if (listTarget.classList.contains('active')) {
-      this.setState(state => (
-        { selected: [...state.selected, newGood] }
+  add = (good) => {
+    if (this.state.selected.includes(good)) {
+      const prevSelected = [...this.state.selected];
+      const goodIndex = prevSelected.findIndex(element => (
+        element === good
       ));
 
-      return;
-    }
+      prevSelected.splice(goodIndex, 1);
 
-    this.setState(state => (
-      { selected: [...state.selected].filter(good => good !== newGood) }
-    ));
+      this.setState(() => ({ selected: prevSelected }));
+    } else {
+      this.setState(prevState => ({
+        selected: [...prevState.selected, good],
+      }));
+    }
   }
 
   render() {
@@ -76,7 +68,7 @@ class App extends React.Component {
               {good}
 
               <button
-                onClick={this.add}
+                onClick={() => this.add(good)}
                 className="goods__button"
                 type="button"
               >
