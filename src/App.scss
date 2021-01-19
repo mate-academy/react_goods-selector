@@ -13,16 +13,16 @@
     margin-bottom: 35px;
   }
 
+  &__text {
+    color: rgb(173, 238, 43);
+    transition-duration: 0.5s;
+  }
+
   &__item {
     font-size: 22px;
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
-  }
-
-  &__text {
-    color: rgb(173, 238, 43);
-    transition-duration: .5s;
   }
 
   &__button {
