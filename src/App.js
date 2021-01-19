@@ -17,13 +17,11 @@ const goodsFromServer = [
 class App extends React.Component {
   state = {
     selectedGoods: [],
-    countOfGoods: 0,
   }
 
   addGood = (good) => {
     this.setState(state => ({
       selectedGoods: [...state.selectedGoods, good],
-      countOfGoods: state.countOfGoods + 1,
     }));
   }
 
@@ -38,7 +36,6 @@ class App extends React.Component {
 
         return {
           selectedGoods: newState,
-          countOfGoods: state.countOfGoods - 1,
         };
       }
 
@@ -49,12 +46,11 @@ class App extends React.Component {
   clearList = () => {
     this.setState({
       selectedGoods: [],
-      countOfGoods: 0,
     });
   }
 
   render() {
-    const { selectedGoods, countOfGoods } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App">
@@ -68,7 +64,7 @@ class App extends React.Component {
             <h2 className="header__count">
               Count of Goods:
               {' - '}
-              {countOfGoods}
+              {selectedGoods.length}
             </h2>
 
             <button
