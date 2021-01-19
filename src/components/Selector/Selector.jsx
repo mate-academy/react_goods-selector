@@ -16,7 +16,7 @@ export class Selector extends React.Component {
   };
 
   clear = () => {
-    this.setState({selectedGoods: []});
+    this.setState({ selectedGoods: [] });
   };
 
   deleteItem = (item) => {
@@ -81,10 +81,8 @@ export class Selector extends React.Component {
       </div>
     );
   }
+}
+
+Selector.propTypes = {
+  goods: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
-
-// Selector.propTypes = {
-//   goods: PropTypes.arrayOf(PropTypes.string).isRequired,
-// };
-
-// export default Selector;
