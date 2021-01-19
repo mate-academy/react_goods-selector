@@ -1,1 +1,22 @@
-// styles go here
+.select {
+  background-color: purple;
+  color: white;
+}
+
+.good {
+  display: flex;
+  justify-content: space-around;
+  max-width: 50%;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.button {
+  width: 100px;
+  height: 30px;
+}
