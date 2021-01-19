@@ -47,7 +47,6 @@ class App extends React.Component {
             X
           </button>
         </header>
-        {goodsFromServer.length}
 
         <ul>
           {goodsFromServer.map(good => (
