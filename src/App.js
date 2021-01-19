@@ -36,21 +36,17 @@ class App extends React.Component {
   }
 
   sortByLength = () => {
-    this.setState(
-      {
-        sortBy: 'length',
-        modified: true,
-      },
-    );
+    this.setState({
+      sortBy: 'length',
+      modified: true,
+    });
   }
 
   sortByLetter = () => {
-    this.setState(prevState => (
-      {
-        sortBy: 'letter',
-        modified: true,
-      }
-    ));
+    this.setState({
+      sortBy: 'letter',
+      modified: true,
+    });
   }
 
   reset = () => {
@@ -62,12 +58,10 @@ class App extends React.Component {
   }
 
   reverse = () => {
-    this.setState(prevState => (
-      {
-        modified: true,
-        isReversed: !prevState.isReversed,
-      }
-    ));
+    this.setState(prevState => ({
+      modified: true,
+      isReversed: !prevState.isReversed,
+    }));
   }
 
   start = () => {
@@ -85,14 +79,10 @@ class App extends React.Component {
   }
 
   removeSelected = (good) => {
-    this.setState((prevState) => {
-      const i = prevState.selectedGoods.indexOf(good);
-
-      prevState.selectedGoods.splice(i, 1);
-
-      return ({ selectedGoods: prevState.selectedGoods });
-    });
-  }
+    this.setState(prevState => ({
+      selectedGoods: prevState.selectedGoods.filter(item => item !== good),
+    }));
+  };
 
   render() {
     const { isReversed,
