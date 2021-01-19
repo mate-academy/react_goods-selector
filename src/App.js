@@ -68,7 +68,7 @@ class App extends React.Component {
               <button
                 className="button"
                 type="button"
-                onClick={this.clear}
+                onClick={() => this.clear(good)}
               >
                 Remove
               </button>
