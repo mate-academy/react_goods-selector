@@ -22,7 +22,7 @@ class App extends React.Component {
     selectedOpt: 1,
     isOptionSelected: false,
     selectedGoods: [],
-    startButton: false,
+    startButton: true,
     sortBy: '',
     modified: false,
     isReversed: false,
