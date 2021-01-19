@@ -18,10 +18,15 @@ export class Selector extends React.Component {
   };
 
   deleteItem = (item) => {
+    // this.setState(prevState => ({
+    // selectedGoods: prevState.selectedGoods.filter(e => e !== item),
+    // }));
     if (this.state.selectedGoods.includes(item)) {
-      const index = [...this.state.selectedGoods].findIndex(element => element === item);
-      index.splice(index, 1);
-      this.setState(() => ({ selectedGoods: index }));
+      const copy = [...this.state.selectedGoods];
+      const findIndex = copy.findIndex(element => element === item);
+      copy.splice(findIndex, 1);
+
+      this.setState(() => ({selectedGoods: copy}));
     }
   };
 
