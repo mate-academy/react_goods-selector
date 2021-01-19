@@ -2,7 +2,7 @@ body {
   font-family: "Trebuchet MS", Arial, sans-serif;
 }
 
-.list {
+li {
   list-style: none;
 }
 
@@ -15,8 +15,4 @@ button {
   margin: 5px;
   border-radius: 10px;
   outline: none;
-
-  &:checked {
-    background-color: chartreuse;
-  }
 }
