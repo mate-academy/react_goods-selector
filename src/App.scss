@@ -1,1 +1,38 @@
-// styles go here
+.heading {
+  width: 350px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+
+  &__button {
+    border: none;
+    background-color: lightblue;
+    width: 35px;
+    height: 35px;
+    border-radius: 3px;
+  }
+}
+
+.goods {
+  width: 350px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 24px;
+
+  &__item {
+    margin: 5px;
+
+    &.active {
+      color: lightsalmon;
+      font-weight: 700;
+    }
+  }
+
+  &__button button {
+    border: none;
+    background-color: lightblue;
+    width: 50px;
+    height: 30px;
+    border-radius: 3px;
+  }
+}
