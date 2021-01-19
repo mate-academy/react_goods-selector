@@ -17,39 +17,40 @@ const goodsFromServer = [
 class App extends React.Component {
   state = {
     goods: goodsFromServer,
-    selectedGood: 'none',
+    selectedGoods: [],
   }
 
-  addGood = (event) => {
-    const found = event.target.closest('.list');
+  toggleGoods = (good) => {
+    if (this.state.selectedGoods.includes(good)) {
+      const lastState = [...this.state.selectedGoods];
+      const index = lastState.findIndex(el => el === good);
 
-    const prev = document.querySelector('.selected');
+      lastState.splice(index, 1);
 
-    if (prev) {
-      prev.classList.remove('selected');
+      this.setState(state => ({
+        selectedGoods: lastState,
+      }));
+    } else {
+      this.setState(state => ({
+        selectedGoods: [...state.selectedGoods, good],
+      }));
     }
-
-    found.classList.add('selected');
-    this.setState({ selectedGood: found.innerText.slice(0, -6) });
   }
 
-  removeGood = (event) => {
-    const found = document.querySelector('.selected');
-
-    found.classList.remove('selected');
-    this.setState({ selectedGood: 'none' });
+  removeGood = () => {
+    this.setState({ selectedGoods: [] });
   }
 
   render() {
-    const { goods, selectedGood } = this.state;
+    const { goods, selectedGoods } = this.state;
 
     return (
       <div className="App">
         <h1>
-          Selected good:
+          Selected goods:
           {' '}
-          {selectedGood}
-          {(selectedGood !== 'none') && (
+          {selectedGoods.join(', ')}
+          {(selectedGoods.length !== 0) && (
             <button
               type="button"
               onClick={this.removeGood}
@@ -62,13 +63,18 @@ class App extends React.Component {
         <ul>
           {goods.map(good => (
             <>
-              <li key={good} className="list">
+              <li
+                key={good}
+                className={selectedGoods.includes(good) ? 'selected' : ''}
+              >
                 {good}
                 <button
                   type="button"
-                  onClick={this.addGood}
+                  onClick={() => {
+                    this.toggleGoods(good);
+                  }}
                 >
-                  Select
+                  Add/Remove
                 </button>
               </li>
             </>
