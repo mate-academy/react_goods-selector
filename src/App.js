@@ -35,15 +35,17 @@ class App extends React.Component {
   }
 
   render() {
+    const { goods } = this.state;
+
     return (
       <div className="App">
         <h1>
           Selected good:
           {` - `}
-          {`${this.state.goods.join(', ')}`}
+          {`${goods.join(', ')}`}
         </h1>
 
-        {this.state.goods.length !== 0 && (
+        {goods.length !== 0 && (
           <button
             className="App__button-clear"
             type="button"
@@ -72,7 +74,7 @@ class App extends React.Component {
 
                 <span
                   className={classNames(
-                    { App__selected: this.state.goods.includes(good) },
+                    { App__selected: goods.includes(good) },
                   )}
                 >
                   {good}
