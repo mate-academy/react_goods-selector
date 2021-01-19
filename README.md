@@ -1,11 +1,10 @@
 # React Goods selector
-- Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_goods-selector/)
-- Follow the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline)
+- [DEMO LINK](https://MaximZhuravlov.github.io/react_goods-selector/)
 
 ## Task
 - DON'T create an additional component for the `GoodsList`, just iterate it in the `App`
 - Render a header (`h1`) initially saying `Selected good: -`
-- Render a list of goods. 
+- Render a list of goods.
 - Add a `Select` button next to each good in the list.
 - Add a special class to the selected good  in the list (e.g. highlight it with a yellow color).
 - The header should show the name of the selected good.

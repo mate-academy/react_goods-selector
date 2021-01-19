@@ -1,1 +1,57 @@
-// styles go here
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.container {
+  max-width: 1170px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 20px;
+  text-align: center;
+}
+
+.goods {
+  border-collapse: collapse;
+  margin: 0 auto;
+
+  td {
+    border: 1px solid black;
+    padding: 20px;
+  }
+
+  &__item {
+    &--selected {
+      background-color: #90EE90;
+    }
+  }
+
+  &__button {
+    padding: 20px;
+    text-transform: uppercase;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s;
+
+    &:hover {
+      opacity: 0.75;
+    }
+
+    &--select {
+      background-color: green;
+    }
+
+    &--remove {
+      background-color: #FFA07A;
+    }
+  }
+}
