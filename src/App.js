@@ -21,10 +21,10 @@ class App extends React.Component {
   }
 
 toggleHandler = (good) => {
-  const copy = [...this.state.currentTarget];
-
-  if (!copy.includes(good)) {
-    this.setState({ currentTarget: [...copy, good] });
+  if (!this.state.currentTarget.includes(good)) {
+    this.setState(prevState => ({
+      currentTarget: [...prevState.currentTarget, good],
+    }));
   }
 }
 
@@ -57,25 +57,20 @@ render() {
       </h1>
       <button
         type="button"
-        onClick={() => this.clean()}
+        onClick={this.clean}
       >
         clean table
       </button>
       <ul>
         {goods.map(good => (
           <li
-            className={currentTarget.includes(good)
-              ? 'seclected'
-              : ''
-            }
-            key={Math.random()}
+            className={currentTarget.includes(good) && 'seclected'}
+            key={good}
           >
             {good}
             <button
               type="button"
-              onClick={() => {
-                this.toggleHandler(good);
-              }}
+              onClick={() => this.toggleHandler(good)}
             >
               Add
             </button>
@@ -83,9 +78,7 @@ render() {
             <button
               type="button"
               className={currentTarget.includes(good) && ''}
-              onClick={() => {
-                this.removeItem(good);
-              }}
+              onClick={() => this.removeItem(good)}
             >
               remove
             </button>
