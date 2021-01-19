@@ -1,1 +1,53 @@
 // styles go here
+.goods-list {
+  position: absolute;
+  top: 120px;
+}
+
+.list-item {
+  display: flex;
+  gap: 20px;
+
+  width: 200px;
+  height: 20px;
+  padding: 10px;
+  margin-bottom: 10px;
+
+  justify-content: space-between;
+  align-items: center;
+
+  font-family: Verdana, Geneva, Tahoma, Arial, Helvetica, sans-serif;
+}
+
+.select-button {
+  height: 25px;
+  justify-self: end;
+
+  border: 2px solid rgb(105, 168, 228);
+  border-radius: 10px;
+
+  background-color: white;
+
+  outline: none;
+  cursor: pointer;
+}
+
+.clear-button {
+  margin-left: 40px;
+
+  width: 220px;
+  height: 30px;
+
+  border: 0;
+  border-radius: 10px;
+
+  background-color: rgb(245, 180, 180);
+
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.selected-item {
+  background-color: rgb(105, 168, 228);
+  border-radius: 10px;
+}
