@@ -1,1 +1,15 @@
-// styles go here
+.active {
+  color: yellow;
+}
+
+.products {
+  width: 200px;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 5px;
+  }
+}
