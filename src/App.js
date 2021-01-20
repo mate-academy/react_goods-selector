@@ -44,7 +44,7 @@ class App extends React.Component {
           {<span>{selected.join(', ')}</span>}
         </h1>
 
-        {selected.length ? (
+        {selected.length !== 0 && (
           <button
             type="button"
             className="button"
@@ -52,8 +52,7 @@ class App extends React.Component {
           >
             Clear
           </button>
-        )
-          : null}
+        )}
 
         <ul className="products">
           {goodsFromServer.map(product => (
@@ -70,7 +69,7 @@ class App extends React.Component {
                 className="button products__button"
                 type="button"
               >
-                +
+                {selected.includes(product) ? '-' : '+'}
               </button>
             </li>
           ))}
