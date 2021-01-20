@@ -22,18 +22,18 @@ class App extends React.Component {
   select = (item) => {
     const { selectedGoods } = this.state;
 
-    selectedGoods.push(item);
-    this.setState({ selectedGoods });
+    this.setState({ selectedGoods: [...selectedGoods, item] });
   }
 
   clear = (item) => {
     const { selectedGoods } = this.state;
+    const selectedGoodsCopy = [...selectedGoods];
 
-    if (selectedGoods.includes(item)) {
-      const index = selectedGoods.indexOf(item);
+    if (selectedGoodsCopy.includes(item)) {
+      const index = selectedGoodsCopy.indexOf(item);
 
-      selectedGoods.splice(index, 1);
-      this.setState({ selectedGoods });
+      selectedGoodsCopy.splice(index, 1);
+      this.setState({ selectedGoods: selectedGoodsCopy });
     }
   }
 
