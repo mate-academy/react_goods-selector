@@ -15,39 +15,28 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-const goods = goodsFromServer.map((item, i) => (
-  {
-    name: item,
-    id: i,
-  }
-));
-
 class App extends React.Component {
   state = {
     selectedNames: [],
-    selectedId: [],
   }
 
   toggleSelection = (good) => {
-    const state = { ...this.state };
+    this.setState((state) => {
+      if (state.selectedNames.includes(good)) {
+        const index = state.selectedNames.indexOf(good);
 
-    if (this.state.selectedId.includes(good.id)) {
-      const index = state.selectedId.indexOf(good.id);
-
-      state.selectedId.splice(index, 1);
-      state.selectedNames.splice(index, 1);
-      this.setState(state);
-    } else {
-      state.selectedNames.push(good.name);
-      state.selectedId.push(good.id);
-      this.setState(state);
-    }
+        state.selectedNames.splice(index, 1);
+        this.setState(state);
+      } else {
+        state.selectedNames.push(good);
+        this.setState(state);
+      }
+    });
   }
 
   clearSelection = () => {
     this.setState({
       selectedNames: [],
-      selectedId: [],
     });
   }
 
@@ -59,7 +48,7 @@ class App extends React.Component {
           {' '}
           {this.state.selectedNames.join(', ')}
         </h1>
-        {this.state.selectedId.length > 0
+        {this.state.selectedNames.length > 0
         && (
           <button
             type="button"
@@ -70,14 +59,14 @@ class App extends React.Component {
         )
         }
         <ul className="list">
-          {goods.map(good => (
+          {goodsFromServer.map(good => (
             <li
-              key={good.id}
+              key={good}
               className={classNames('list__item', {
-                selected: this.state.selectedId.includes(good.id),
+                selected: this.state.selectedNames.includes(good),
               })}
             >
-              <span>{good.name}</span>
+              <span>{good}</span>
               <button
                 type="button"
                 onClick={() => {
