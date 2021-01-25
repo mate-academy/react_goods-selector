@@ -7,10 +7,23 @@
     padding: 0;
 
     &__item {
+      position: relative;
       width: 100%;
       display: flex;
       justify-content: space-between;
       padding: 10px;
+
+      &_selected::after {
+        content: "";
+        position: absolute;
+        left: -30px;
+        display: block;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: green;
+      }
+
       &:nth-child(even) {
         background-color: silver;
       }

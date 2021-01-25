@@ -63,7 +63,7 @@ class App extends React.Component {
             <li
               key={good}
               className={classNames('list__item', {
-                selected: this.state.selectedNames.includes(good),
+                list__item_selected: this.state.selectedNames.includes(good),
               })}
             >
               <span>{good}</span>
