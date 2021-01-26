@@ -21,16 +21,20 @@ class App extends React.Component {
   }
 
   toggleSelection = (good) => {
-    this.setState((state) => {
-      if (state.selectedNames.includes(good)) {
-        const index = state.selectedNames.indexOf(good);
+    this.setState((prevState) => {
+      const names = [...prevState.selectedNames];
 
-        state.selectedNames.splice(index, 1);
-        this.setState(state);
+      if (names.includes(good)) {
+        const index = names.indexOf(good);
+
+        names.splice(index, 1);
       } else {
-        state.selectedNames.push(good);
-        this.setState(state);
+        names.push(good);
       }
+
+      return ({
+        selectedNames: names,
+      });
     });
   }
 
@@ -43,11 +47,17 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+
         <h1>
-          Selected good: -
+          {
+            this.state.selectedNames.length < 2
+              ? 'Selected good - '
+              : 'Selected goods: '
+          }
           {' '}
           {this.state.selectedNames.join(', ')}
         </h1>
+
         {this.state.selectedNames.length > 0
         && (
           <button
@@ -56,8 +66,8 @@ class App extends React.Component {
           >
             Clear
           </button>
-        )
-        }
+        )}
+
         <ul className="list">
           {goodsFromServer.map(good => (
             <li
@@ -73,11 +83,17 @@ class App extends React.Component {
                   this.toggleSelection(good);
                 }}
               >
-                Add/Remove
+                {
+                  this.state.selectedNames.includes(good)
+                    ? 'Remove'
+                    : 'Add'
+                }
+
               </button>
             </li>
           ))}
         </ul>
+
       </div>
     );
   }
