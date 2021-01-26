@@ -3,20 +3,24 @@
 - Follow the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline)
 
 ## Task
-- DON'T create an additional component for the list of goods, just iterate them in the `App`
-- You may create any markup you like
-- Render a header (for example `h1`) initially saying `Selected good: - none`
-- Render a list of goods
-- Add a `Select` button next to each good in the list
-- When you press the button near the good it becomes selected
-- Add a special class to the selected good to highlight it (e.g with a yellow color)
-- There should be only one selected good at a time
-- The header should show the name of the selected good
-- Add clear button (`X`) next to the header to clear the selection
-- The clear button should not be visible if there is no selected good
+1. You are given an array of goods
+1. Display them as a list inside the `App` (DON'T create additional components)
+1. Add `h1` initially saying `No goods selected`
+1. Save a `selectedGood` in the `App`. Let it be `Jam` by default
+1. The `h1` should always show the name of the selected good `Jam is selected`
+1. The selected good should be hightlighted in the list (add CSS class with a background)
+1. Add a button `Select` next to each good in the list
+1. When you press the button the good becomes selected
+1. Don't show the button next to the selected good
+1. You can select another good by pressing its `Select` button 
+1. Add button `X` for to the `h1` to clear the selection. (Set `null`)
+1. The clear button should not be visible if there is no selected good
 
 ## (* Optional) Advanced task
-- Implement the ability to select multiple goods (use `selectedGoods` Array)
-- Use functional `setState` described in [this video](https://youtu.be/zMe2Qq-ThpM)
-- Replace `Select` buttons with `Add/Remove`
-- All the selected goods should be listed in the header separated with commas.
+1. Implement the ability to select multiple goods (use `selectedGoods` Array)
+1. Use functional `setState` described in [this video](https://youtu.be/zMe2Qq-ThpM)
+1. Show `Add` or `Remove` instead of `Select` button
+1. All the selected goods should be listed in the `h1`:
+    - `No goods selected`
+    - `Jam is selected`
+    - `Carrot, Jam and Eggs are selected`
