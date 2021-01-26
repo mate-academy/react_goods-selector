@@ -45,21 +45,25 @@ class App extends React.Component {
   }
 
   render() {
+    const { selectedNames } = this.state;
+
     return (
       <div className="App">
 
         <h1>
           {
-            this.state.selectedNames.length < 2
-              ? 'Selected good - '
+            selectedNames.length < 2
+              ? 'Selected good: '
               : 'Selected goods: '
           }
-          {' '}
-          {this.state.selectedNames.join(', ')}
+          {
+            selectedNames.length
+              ? selectedNames.join(', ')
+              : '-'
+          }
         </h1>
 
-        {this.state.selectedNames.length > 0
-        && (
+        {selectedNames.length > 0 && (
           <button
             type="button"
             onClick={this.clearSelection}
@@ -73,7 +77,7 @@ class App extends React.Component {
             <li
               key={good}
               className={classNames('list__item', {
-                list__item_selected: this.state.selectedNames.includes(good),
+                list__item_selected: selectedNames.includes(good),
               })}
             >
               <span>{good}</span>
@@ -84,11 +88,10 @@ class App extends React.Component {
                 }}
               >
                 {
-                  this.state.selectedNames.includes(good)
+                  selectedNames.includes(good)
                     ? 'Remove'
                     : 'Add'
                 }
-
               </button>
             </li>
           ))}
