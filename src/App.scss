@@ -1,1 +1,19 @@
 // styles go here
+.App {
+  &__title {
+    width: 450px;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+  }
+
+  &__good {
+    display: flex;
+    justify-content: space-between;
+    width: 150px;
+  }
+}
+
+.active {
+  background-color: yellow;
+}
