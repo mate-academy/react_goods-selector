@@ -1,1 +1,6 @@
-// styles go here
+.list__item {
+
+  &--selected {
+    background-color: yellow;
+  }
+}
