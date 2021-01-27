@@ -1,1 +1,96 @@
-// styles go here
+// Variables
+$color_green-salad: #009652;
+$color_yellow: #dde8a0;
+$color_red: #e02828;
+$color_white: #fff;
+$color_grey: #e6e6e6;
+
+$font_size_main: 18px;
+
+// General styles
+* {
+  font-family: "Gill Sans",
+    "Gill Sans MT",
+    Calibri,
+    "Trebuchet MS",
+    sans-serif;
+  color: $color_green-salad;
+}
+
+h1 {
+  margin: 10px 0;
+  font-size: 28px;
+}
+
+button {
+  padding: 3px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+// Theme styles
+.App {
+  margin: 15px auto;
+  padding: 15px 15px 15px 0;
+  max-width: 450px;
+}
+
+.heading {
+  padding: 15px;
+  min-height: 80px;
+  background-color: $color_grey;
+}
+
+.good {
+  &-list {
+    padding: 15px 0;
+    list-style-type: "\2013\0020";
+    list-style-position: inside;
+  }
+
+  &-item {
+    padding: 10px;
+    border-bottom: 1px dotted $color_green-salad;
+    font-size: $font_size_main;
+  }
+
+  &-btn {
+    background-color: transparent;
+    border: 1px solid;
+
+    font-size: $font_size_main - 2px;
+    line-height: 0.9;
+
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover {
+      color: $color_white;
+    }
+  }
+
+  &-select_btn {
+    float: right;
+    border-color: $color_green-salad;
+
+    &:hover {
+      background-color: $color_green-salad;
+    }
+  }
+
+  &-clear_btn {
+    border-color: $color_red;
+    color: $color_red;
+
+    &:hover {
+      background-color: $color_red;
+    }
+  }
+}
+
+.active {
+  background-color: $color_yellow;
+}
