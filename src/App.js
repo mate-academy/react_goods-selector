@@ -17,34 +17,48 @@ const goodsFromServer = [
 export default class App extends React.Component {
   state = {
     selectedGoods: [],
+    selectedIndexes: Array.from(goodsFromServer, () => false),
   }
 
-  toggleAddHandler = (elem) => {
+  toggleAddHandler = (elem, i) => {
     this.setState((prevState) => {
-      const isElem = prevState.selectedGoods.includes(elem);
       const { selectedGoods } = this.state;
+      const { selectedIndexes } = prevState;
+      const indexes = selectedIndexes;
 
-      return isElem ? {
-        selectedGoods: selectedGoods.filter(item => item !== elem),
-      }
-        : {
-          selectedGoods: [...selectedGoods, elem],
+      indexes[i] = (!selectedIndexes[i]);
+
+      if (selectedIndexes[i] === false) {
+        return {
+          selectedGoods: selectedGoods.filter(item => item !== elem),
+          selectedIndexes: indexes,
         };
+      }
+
+      return {
+        selectedGoods: [...selectedGoods, elem],
+        selectedIndexes: indexes,
+      };
     });
   };
 
   clearHandler = () => {
-    this.setState({ selectedGoods: [] });
+    const { selectedIndexes } = this.state;
+
+    this.setState({
+      selectedGoods: [],
+      selectedIndexes: selectedIndexes.fill(false),
+    });
   };
 
   render() {
-    const { selectedGoods } = this.state;
+    const { selectedGoods, selectedIndexes } = this.state;
 
     return (
       <div className="App">
         <div className="heading">
           <h1>
-            Selected good: &ndash;
+            Selected good: &ndash;&nbsp;
             {selectedGoods.length ? selectedGoods.join(', ') : 'none'}
           </h1>
           {selectedGoods.length !== 0 && (
@@ -60,9 +74,9 @@ export default class App extends React.Component {
         </div>
 
         <ul className="good-list">
-          {goodsFromServer.map(good => (
+          {goodsFromServer.map((good, index) => (
             <li
-              className={selectedGoods.includes(good)
+              className={selectedIndexes[index]
                 ? 'good-item active' : 'good-item'}
               key={good}
             >
@@ -71,7 +85,7 @@ export default class App extends React.Component {
                 type="button"
                 value="Add / Remove"
                 className="good-btn good-select_btn"
-                onClick={() => this.toggleAddHandler(good)}
+                onClick={() => this.toggleAddHandler(good, index)}
               >
                 Add / Remove
               </button>

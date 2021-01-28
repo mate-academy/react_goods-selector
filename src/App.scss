@@ -1,20 +1,23 @@
 // Variables
-$color_green-salad: #009652;
-$color_yellow: #dde8a0;
-$color_red: #e02828;
-$color_white: #fff;
-$color_grey: #e6e6e6;
+$c-green-salad: #009652;
+$c-yellow: #dde8a0;
+$c-red: #e02828;
+$c-white: #fff;
+$c-grey: #e6e6e6;
 
 $font_size_main: 18px;
 
 // General styles
-* {
+body,
+h1,
+button,
+li {
   font-family: "Gill Sans",
     "Gill Sans MT",
     Calibri,
     "Trebuchet MS",
     sans-serif;
-  color: $color_green-salad;
+  color: $c-green-salad;
 }
 
 h1 {
@@ -42,7 +45,7 @@ button {
 .heading {
   padding: 15px;
   min-height: 80px;
-  background-color: $color_grey;
+  background-color: $c-grey;
 }
 
 .good {
@@ -54,7 +57,7 @@ button {
 
   &-item {
     padding: 10px;
-    border-bottom: 1px dotted $color_green-salad;
+    border-bottom: 1px dotted $c-green-salad;
     font-size: $font_size_main;
   }
 
@@ -68,29 +71,29 @@ button {
     transition: background-color 0.3s, color 0.3s;
 
     &:hover {
-      color: $color_white;
+      color: $c-white;
     }
   }
 
   &-select_btn {
     float: right;
-    border-color: $color_green-salad;
+    border-color: $c-green-salad;
 
     &:hover {
-      background-color: $color_green-salad;
+      background-color: $c-green-salad;
     }
   }
 
   &-clear_btn {
-    border-color: $color_red;
-    color: $color_red;
+    border-color: $c-red;
+    color: $c-red;
 
     &:hover {
-      background-color: $color_red;
+      background-color: $c-red;
     }
   }
 }
 
 .active {
-  background-color: $color_yellow;
+  background-color: $c-yellow;
 }
