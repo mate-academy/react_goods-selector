@@ -1,1 +1,27 @@
-// styles go here
+.App {
+
+  &__button-clear {
+    position: absolute;
+  }
+
+  &__list {
+    margin-top: 80px;
+  }
+
+  &__item {
+    list-style: none;
+  }
+
+  &__button {
+    margin-right: 15px;
+  }
+
+  &__body {
+    margin-bottom: 10px;
+  }
+  
+  &__selected{
+    color: yellowgreen;
+  }
+}
+
