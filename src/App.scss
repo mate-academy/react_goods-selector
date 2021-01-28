@@ -1,1 +1,33 @@
-// styles go here
+body {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.goods {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  padding-left: 0;
+
+  &__item {
+    width: 170px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  &__text {
+    padding: 5px;
+  }
+}
+
+.button {
+  width: 70px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: yellow;
+}
