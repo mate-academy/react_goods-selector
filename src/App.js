@@ -14,98 +14,98 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-let selectedGoodsArr = [];
-
 export class App extends React.Component {
   state = {
-    selectedGoodName: '',
+    goods: [...goodsFromServer],
+    selectedGoods: [],
+    selectedGoodsNames: [],
   }
 
-  separator = ' ----- ';
-
   render() {
+    const { selectedGoods, selectedGoodsNames, goods } = this.state;
+
     return (
       <div className="App">
         <h1>
-          Selected good:
-          {this.state.selectedGoodName}
+          Selected goods:
+          {`\n`}
+          {
+            selectedGoodsNames.length
+              ? selectedGoodsNames.join(', ')
+              : "Anything wasn't select"
+          }
         </h1>
 
         <button
           type="button"
           onClick={(event) => {
-            selectedGoodsArr = [];
-            this.setState(state => ({
-              selectedGoodName: selectedGoodsArr
-                .map(good => good
-                  .innerText
-                  .split(this.separator)[0])
-                .join(', '),
-            }));
-            const items = [...document.body.querySelectorAll('.selected')];
-
-            items.forEach(item => item.classList.remove('selected'));
+            this.setState({
+              selectedGoods: [],
+              selectedGoodsNames: [],
+            });
           }}
         >
           Clear
         </button>
 
         <ul>
-          {goodsFromServer.map(good => (
+          {goods.map(good => (
             <li
               key={good}
-              className={this.state.itemClass}
+              className={
+                `${selectedGoodsNames.includes(good) ? 'selected' : ''}`}
             >
               {good}
-              {this.separator}
+
+              {' '}
+
               <button
                 type="button"
                 onClick={(event) => {
-                  const selectedItem = event.target.parentElement;
+                  const selectedGood = event.target.parentElement;
+                  const textOfSelectedGood = event.target
+                    .parentElement.childNodes[0]
+                    .wholeText.trim();
 
-                  if (selectedGoodsArr.includes(selectedItem)) {
+                  if (selectedGoods.includes(selectedGood)) {
                     return;
                   }
 
                   this.setState(state => ({
-                    selectedGoodName: selectedGoodsArr
-                      .map(item => item
-                        .innerText
-                        .split(this.separator)[0])
-                      .join(', '),
+                    selectedGoods: [
+                      ...state.selectedGoods,
+                      selectedGood,
+                    ],
+                    selectedGoodsNames: [
+                      ...state.selectedGoodsNames,
+                      textOfSelectedGood,
+                    ],
                   }));
-                  selectedGoodsArr.push(selectedItem);
-                  selectedItem.className = 'selected';
                 }}
               >
                 Select
               </button>
 
-              {this.separator}
+              {' '}
 
               <button
                 type="button"
                 onClick={(event) => {
-                  const selectedItem = event.target.parentElement;
+                  const selectedGood = event.target.parentElement;
+                  const textOfSelectedGood = event.target
+                    .parentElement.childNodes[0]
+                    .wholeText.trim();
 
-                  if (selectedGoodsArr.includes(selectedItem)) {
-                    selectedGoodsArr
-                      .splice(selectedGoodsArr
-                        .findIndex(item => event
-                          .target
-                          .parentElement === item)
-                      , 1);
-
-                    this.setState(state => ({
-                      selectedGoodName: selectedGoodsArr
-                        .map(item => item
-                          .innerText
-                          .split(this.separator)[0])
-                        .join(', '),
-                    }));
+                  if (!selectedGoods.includes(selectedGood)) {
+                    return;
                   }
 
-                  selectedItem.className = '';
+                  this.setState(state => ({
+                    selectedGoods: [...state.selectedGoods]
+                      .filter(g => g !== selectedGood),
+                    selectedGoodsNames: [...state.selectedGoodsNames]
+                      .filter(text => text !== textOfSelectedGood),
+                  }));
                 }}
               >
                 Remove
