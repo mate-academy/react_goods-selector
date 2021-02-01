@@ -1,1 +1,67 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  margin: 0;
+}
+
+.selectBox {
+  display: flex;
+  margin-bottom: 30px;
+
+  &__button {
+    margin-right: 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #3751ff;
+    color: aliceblue;
+  }
+
+  &__title {
+    color: #1e266d;
+  }
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.goods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+
+  &__good {
+    width: 200px;
+    padding: 10px;
+
+    color: #1e266d;
+    border: 1px solid #fff;
+  }
+
+  &__button {
+    height: 40px;
+    width: 100%;
+
+    color: aliceblue;
+    border-radius: 10px;
+    border: none;
+    background-color: #3751ff;
+
+    cursor: pointer;
+    outline: none;
+
+    transition: box-shadow 0.3s;
+
+    &:hover {
+      box-shadow: 0 0 10px 2px rgba(30,38,109,0.3);
+    }
+  }
+}
+
+.selected {
+  border: 1px solid #3751ff;
+  border-radius: 15px;
+}
