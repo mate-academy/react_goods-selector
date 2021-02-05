@@ -1,1 +1,12 @@
-// styles go here
+.selected {
+  background-color: #ff0;
+}
+
+.list__item {
+  list-style: none;
+  margin: 10px 0;
+}
+
+.button {
+  margin-right: 10px;
+}
