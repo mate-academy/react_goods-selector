@@ -14,11 +14,67 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-const App = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+class App extends React.Component {
+  state = {
+    goods: goodsFromServer,
+    selectedGood: '',
+  }
+
+  render() {
+    const { goods, selectedGood } = this.state;
+
+    return (
+      <div className="App">
+        <div className="header">
+          <h1>
+            Selected good: -
+            {' '}
+            {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
+          </h1>
+          {selectedGood
+            && (
+              <button
+                type="button"
+                onClick={() => {
+                  this.setState({ selectedGood: null });
+                }}
+              >
+                X
+              </button>
+            )
+          }
+        </div>
+        <ul>
+          {goods.map(product => (
+            <li
+              key={product}
+              className={
+                (product === selectedGood)
+                  ? 'selected'
+                  : 'notSelected'
+              }
+            >
+              {product}
+              <button
+                id={product}
+                type="submit"
+                className={
+                  (product === selectedGood)
+                    ? 'hover'
+                    : 'block'
+                }
+                onClick={() => {
+                  this.setState({ selectedGood: product });
+                }}
+              >
+                Select
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}
 
 export default App;

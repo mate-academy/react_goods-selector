@@ -1,1 +1,23 @@
-// styles go here
+.header {
+  display: flex;
+}
+
+.resetNone {
+  display: none;
+}
+
+.hover {
+  display: none;
+}
+
+.block {
+  display: block;
+}
+
+.selected {
+  font-weight: bold;
+}
+
+.notSelected {
+  font-weight: normal;
+}
