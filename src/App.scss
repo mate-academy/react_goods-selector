@@ -1,1 +1,64 @@
-// styles go here
+.App {
+  
+  &__title {
+    margin-left: 10px;
+    font-size: 15px;
+    border-bottom: 1px solid black;
+  }
+
+  &__list {
+    max-width: 300px;
+    padding: 10px;
+    border: 1px solid;
+    background-color: rgb(248, 247, 237);
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 15px;
+    border-bottom: 1px solid;
+  }
+
+  &__item {
+    display: flex;
+    list-style: none;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      margin-right: 10px;
+      margin-bottom: 5px;
+      width: 20px;
+      height: 20px;
+      background-color: rgb(255, 255, 255);
+      border: 1px solid;
+      border-radius: 50%;
+    }
+
+    &--selected {
+      color: green;
+
+      &::before {
+        content: "";
+        box-shadow: inset 0 0 5px 2px green;
+      }
+    }
+  }
+
+  &__button {
+    height: 20px;
+    outline: none;
+    border-style: none;
+    background-color: transparent;
+    box-shadow: 0 0 5px 1px rgb(134, 134, 134);
+    border-radius: 10px;
+    transition: transform 0.2s, background-color 0.2s;
+
+    &:hover {
+      transform: scale(1.1) ;
+      background-color: rgb(233, 232, 217);
+    }
+  }
+}
