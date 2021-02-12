@@ -1,1 +1,31 @@
-// styles go here
+
+.html {
+  background-color: green;
+}
+
+.goods__selector {
+  color: white;
+}
+
+.button__clear {
+  box-sizing: border-box;
+  color: white;
+  background-color: orange;
+}
+
+.selected_not_yet {
+  box-sizing: border-box;
+  color: black;
+  list-style-type: none;
+  margin-right: 50px;
+
+}
+
+.goods__select {
+  background-color: orchid;
+}
+
+.selected {
+  color: yellow;
+  list-style-type: none;
+}
