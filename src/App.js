@@ -17,29 +17,45 @@ const goodsFromServer = [
 class App extends React.Component {
   state = {
     goods: goodsFromServer,
-    selectedGood: '',
+    selectedGood: null,
+    selectedGoods: [],
+  }
+
+  getSelectedGoods = () => {
+    const { selectedGoods, selectedGood } = this.state;
+
+    if (selectedGoods.length === 1) {
+      return `${selectedGood} is selected`;
+    }
+
+    return `${selectedGood} are selected`;
   }
 
   render() {
-    const { goods, selectedGood } = this.state;
+    const { goods, selectedGood, selectedGoods } = this.state;
+    let arr = [];
 
     return (
       <div className="App">
         <div className="header">
           <h1>
-            Selected good: -
+            Selected good:
             {' '}
-            {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
+            {selectedGood ? this.getSelectedGoods() : 'no goods selected'}
           </h1>
           {selectedGood
             && (
               <button
                 type="button"
+                className="block reset"
                 onClick={() => {
-                  this.setState({ selectedGood: null });
+                  this.setState({
+                    selectedGood: null,
+                    selectedGoods: [],
+                  });
                 }}
               >
-                X
+                Clear cart
               </button>
             )
           }
@@ -49,25 +65,43 @@ class App extends React.Component {
             <li
               key={product}
               className={
-                (product === selectedGood)
+                (selectedGoods.includes(product))
                   ? 'selected'
                   : 'notSelected'
               }
             >
               {product}
               <button
-                id={product}
                 type="submit"
                 className={
-                  (product === selectedGood)
+                  (selectedGoods.includes(product))
                     ? 'hover'
                     : 'block'
                 }
                 onClick={() => {
-                  this.setState({ selectedGood: product });
+                  selectedGoods.push(product);
+                  this.setState({ selectedGood: selectedGoods.join(', ') });
                 }}
               >
-                Select
+                Add
+              </button>
+
+              <button
+                type="submit"
+                className={
+                  (selectedGoods.includes(product))
+                    ? 'block'
+                    : 'hover'
+                }
+                onClick={() => {
+                  arr = selectedGoods.filter(good => good !== product);
+                  this.setState({
+                    selectedGood: arr.join(', '),
+                    selectedGoods: selectedGoods.length ? arr : null,
+                  });
+                }}
+              >
+                Remove
               </button>
             </li>
           ))}
