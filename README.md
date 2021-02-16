@@ -22,5 +22,5 @@
 1. Show `Add` or `Remove` instead of `Select` button
 1. All the selected goods should be listed in the `h1`:
     - `No goods selected`
-    - `Jam is selected`
+    - `Jam is selected`op
     - `Carrot, Jam and Eggs are selected`

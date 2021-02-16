@@ -17,23 +17,24 @@ const goodsFromServer = [
 class App extends React.Component {
   state = {
     goods: goodsFromServer,
-    selectedGood: null,
     selectedGoods: [],
   }
 
   getSelectedGoods = () => {
-    const { selectedGoods, selectedGood } = this.state;
+    const { selectedGoods } = this.state;
+    const goodsString = selectedGoods.join(', ');
 
-    if (selectedGoods.length === 1) {
-      return `${selectedGood} is selected`;
+    if (selectedGoods.length === 0) {
+      return 'no goods selected';
+    } else if (selectedGoods.length === 1) {
+      return `${goodsString} is selected`;
     }
 
-    return `${selectedGood} are selected`;
+    return `${goodsString} are selected`;
   }
 
   render() {
-    const { goods, selectedGood, selectedGoods } = this.state;
-    let arr = [];
+    const { goods, selectedGoods } = this.state;
 
     return (
       <div className="App">
@@ -41,16 +42,15 @@ class App extends React.Component {
           <h1>
             Selected good:
             {' '}
-            {selectedGood ? this.getSelectedGoods() : 'no goods selected'}
+            {this.getSelectedGoods()}
           </h1>
-          {selectedGood
+          {selectedGoods.length > 0
             && (
               <button
                 type="button"
                 className="block reset"
                 onClick={() => {
                   this.setState({
-                    selectedGood: null,
                     selectedGoods: [],
                   });
                 }}
@@ -79,8 +79,12 @@ class App extends React.Component {
                     : 'block'
                 }
                 onClick={() => {
-                  selectedGoods.push(product);
-                  this.setState({ selectedGood: selectedGoods.join(', ') });
+                  this.setState(state => ({
+                    selectedGoods: [
+                      ...state.selectedGoods,
+                      product,
+                    ]
+                  }))
                 }}
               >
                 Add
@@ -94,10 +98,8 @@ class App extends React.Component {
                     : 'hover'
                 }
                 onClick={() => {
-                  arr = selectedGoods.filter(good => good !== product);
                   this.setState({
-                    selectedGood: arr.join(', '),
-                    selectedGoods: selectedGoods.length ? arr : null,
+                    selectedGoods: selectedGoods.filter(good => good !== product),
                   });
                 }}
               >
