@@ -1,1 +1,68 @@
-// styles go here
+* {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.App {
+  max-width: 500px;
+  background-color: #a5f1f1;
+  margin: auto ;
+}
+
+.header {
+  display: table;
+  width: auto;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  padding: 15px;
+  letter-spacing: 2px;
+  background: rgb(151, 139, 187);
+  border: 2px dashed white;
+  color: white;
+}
+
+.selected {
+  background-color: rgb(151, 139, 187);
+  opacity: 0.8;
+}
+
+.products {
+  font-size: 18px;
+  padding: 20px;
+  border-radius: 410px;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 5px;
+  }
+}
+
+.button {
+  text-decoration: none;
+  display: inline-block;
+  padding: 12px 40px;
+  margin: 10px 20px;
+  border-radius: 30px;
+  background-image: linear-gradient(
+    45deg, #6ab1d7 0%, #33d9de 50%, #5836b886 100%
+  );
+  background-position: 100% 0;
+  background-size: 200% 200%;
+  font-size: 14px;
+  font-weight: 100;
+  color: white;
+  box-shadow: 0 16px 32px 0 rgba(0, 40, 120, 0.35);
+  transition: 0.5s;
+}
+
+.button:hover {
+  box-shadow: 0 0 0 0 rgba(0, 40, 120, 0);
+  background-position: 0 0;
+  transform: translateY(-7px);
+}
+
+.hover {
+  display: none;
+}
