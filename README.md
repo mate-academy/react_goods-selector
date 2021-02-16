@@ -1,5 +1,5 @@
 # React Goods selector
-- Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_goods-selector/)
+- Replace `<your_account>` with your Github username in the [DEMO LINK](https://AnnAnnaU.github.io/react_goods-selector/)
 - Follow the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline)
 
 ## Task
@@ -22,5 +22,5 @@
 1. Show `Add` or `Remove` instead of `Select` button
 1. All the selected goods should be listed in the `h1`:
     - `No goods selected`
-    - `Jam is selected`
+    - `Jam is selected`op
     - `Carrot, Jam and Eggs are selected`
