@@ -1,1 +1,55 @@
 // styles go here
+.selected {
+  border: 1px solid darkorange;
+  background: darkorange;
+}
+.list {
+  list-style: none;
+
+}
+
+.listElement {
+  display: flex;
+  max-width: 500px;
+}
+
+li {
+  min-width: 200px;
+  padding: 20px;
+  background-color: #3d768a;
+}
+
+button {
+  box-shadow: 0 10px 14px -7px #276873;
+  background: #599bb3 linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+  display: inline-block;
+  cursor: pointer;
+  color: #fff;
+  font-family: Arial, serif;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 13px 32px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #3d768a;
+}
+
+button:hover {
+  background: #408c99 linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+}
+
+button:active {
+  position: relative;
+  top: 1px;
+}
+
+button:disabled {
+  background: gray;
+}
+
+.hide {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
