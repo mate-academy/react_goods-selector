@@ -39,8 +39,7 @@ class App extends React.Component {
 
         <button
           type="button"
-          className={classNames('button',
-            !selectedGood ? 'hover' : '')}
+          className={classNames('button', { hover: !selectedGood })}
           onClick={this.clear}
         >
           X
@@ -52,18 +51,14 @@ class App extends React.Component {
             <li
               key={product}
               className={classNames('products__item',
-                selectedGood === product
-                  ? 'selected'
-                  : '')}
+                { selected: selectedGood === product })}
             >
               {product}
 
               <button
                 type="button"
                 className={classNames('button',
-                  selectedGood !== product
-                    ? ''
-                    : 'hover')}
+                  { hover: selectedGood === product })}
                 onClick={() => {
                   this.setState({
                     selectedGood: product,
