@@ -1,1 +1,33 @@
-// styles go here
+.App {
+  margin-left: auto;
+  margin-right: auto;
+  width: 500px;
+}
+
+ul {
+  li {
+    display: flex;
+    width: 300px;
+    margin-bottom: 3px;
+    button {
+      margin-left: auto;
+      border: none;
+    }
+  }
+}
+
+.list-white {
+  background-color: white;
+}
+
+.list-yellow {
+  background-color: yellow;
+}
+
+.btn-red {
+  background-color: tomato;
+}
+
+.btn-green {
+  background-color: turquoise;
+}
