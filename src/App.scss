@@ -1,1 +1,33 @@
-// styles go here
+.App {
+  margin-left: auto;
+  margin-right: auto;
+  width: 500px;
+}
+
+.list {
+  .list-item {
+    display: flex;
+    width: 300px;
+    margin-bottom: 3px;
+    .btn {
+      margin-left: auto;
+      border: none;
+    }
+  }
+}
+
+.list-removed {
+  background-color: white;
+}
+
+.list-added {
+  background-color: yellow;
+}
+
+.btn-remove {
+  background-color: tomato;
+}
+
+.btn-add {
+  background-color: turquoise;
+}
