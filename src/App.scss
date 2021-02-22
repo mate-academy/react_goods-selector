@@ -4,12 +4,12 @@
   width: 500px;
 }
 
-ul {
-  li {
+.list {
+  .list-item {
     display: flex;
     width: 300px;
     margin-bottom: 3px;
-    button {
+    .btn {
       margin-left: auto;
       border: none;
     }

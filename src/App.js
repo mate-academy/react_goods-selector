@@ -66,15 +66,16 @@ class App extends React.Component {
         <h1>
           {`Selected good: - ${productName}`}
         </h1>
-        <ul>
+        <ul className="list">
           {goodsList.length > 0 && goodsList.map(({ id, name, isSelected }) => (
             <li
               key={id}
-              className={`${isSelected ? 'list-added' : 'list-removed'}`}
+              className={`list-item ${isSelected
+                ? 'list-added' : 'list-removed'}`}
             >
               {name}
               <button
-                className={`${isSelected ? 'btn-remove' : 'btn-add'}`}
+                className={`btn ${isSelected ? 'btn-remove' : 'btn-add'}`}
                 type="button"
                 onClick={() => this.toggleSelectedGoods(id, name, isSelected)}
               >
