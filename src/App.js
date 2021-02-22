@@ -18,7 +18,7 @@ const products = [];
 
 class App extends React.Component {
   state = {
-    productName: ' none',
+    productName: 'none',
     goodsList: [],
   }
 
@@ -44,7 +44,7 @@ class App extends React.Component {
     }
 
     this.setState(prevState => ({
-      productName: products.length === 0 ? ' none' : products.join(', '),
+      productName: products.length === 0 ? 'none' : products.join(', '),
       goodsList: prevState.goodsList.map((good) => {
         if (good.id === selectedId) {
           return {
@@ -64,18 +64,17 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>
-          Selected good: -
-          {productName}
+          {`Selected good: - ${productName}`}
         </h1>
         <ul>
-          {goodsList.length && goodsList.map(({ id, name, isSelected }) => (
+          {goodsList.length > 0 && goodsList.map(({ id, name, isSelected }) => (
             <li
               key={id}
-              className={`${isSelected ? 'list-yellow' : 'list-white'}`}
+              className={`${isSelected ? 'list-added' : 'list-removed'}`}
             >
               {name}
               <button
-                className={`btn ${isSelected ? 'btn-red' : 'btn-green'}`}
+                className={`${isSelected ? 'btn-remove' : 'btn-add'}`}
                 type="button"
                 onClick={() => this.toggleSelectedGoods(id, name, isSelected)}
               >
