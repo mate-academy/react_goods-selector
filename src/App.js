@@ -59,13 +59,14 @@ class App extends React.Component {
           </h1>
           <div className="goods">
             {goodsFromServer.map(good => (
-              <div className="list">
+              <div className={className({
+                list: true,
+                selected: selectedGood.includes(good),
+              })}
+              >
                 <div
                   key={good}
-                  className={className({
-                    list_element: true,
-                    selected: selectedGood.includes(good),
-                  })}
+                  className={className({ list_element: true })}
                 >
                   {good}
                 </div>
