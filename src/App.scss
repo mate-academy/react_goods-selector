@@ -1,1 +1,42 @@
-// styles go here
+.App {
+  text-align: center;
+  margin: 0 10rem;
+  padding: 1rem;
+  background-color: #20b2aa;
+  border-radius: 30px;
+}
+
+.goods {
+  width: 50%;
+  display: inline-grid;
+  background-color: #afeeee;
+  padding: 2rem;
+  border-radius: 20px;
+}
+
+.list {
+  display: flex;
+  justify-content: space-between;
+  background-color: #00fa9a;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.list_element {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: grey;
+}
+
+.selected {
+  background-color: #ffffe0;
+}
+
+button {
+  border-radius: 40px;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+}
