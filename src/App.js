@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.scss';
-import { v4 as uuidv4 } from 'uuid';
 import classNames from 'classnames';
 
 const goodsFromServer = [
@@ -18,26 +17,26 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGood: [' Jam'],
+    selectedGood: ['Jam'],
   }
 
   clear = () => {
     this.setState({ selectedGood: [] });
   }
 
-  toAdd = (good) => {
+  addItem = (good) => {
     this.setState(prevState => (
       {
-        selectedGood: [...prevState.selectedGood, ` ${good}`],
+        selectedGood: [...prevState.selectedGood, good],
       }
     ));
   }
 
-  toRemove = (good) => {
+  removeItem = (good) => {
     this.setState(prevState => (
       {
-        selectedGood: [...prevState.selectedGood]
-          .filter(el => el !== ` ${good}`),
+        selectedGood: prevState.selectedGood
+          .filter(el => el !== good),
       }
     ));
   }
@@ -53,19 +52,12 @@ class App extends React.Component {
           </h1>
           <h2 className="selectedList">
             Selected goods:
+            {' '}
             {
-            selectedGood.length === 1
-              && `${selectedGood} is selected`
-            }
-
-            {
-            selectedGood.length >= 2
-              && `${selectedGood} are selected`
-            }
-
-            {
-            selectedGood.length === 0
-              && ' No goods selected'
+            selectedGood.length > 0
+              ? `${selectedGood.join(', ')} 
+                ${selectedGood.length > 1 ? 'are' : 'is'} selected`
+              : ' No goods selected'
             }
           </h2>
 
@@ -88,42 +80,33 @@ class App extends React.Component {
           }
 
           <ul className="list">
-            {goodsFromServer.map(good => (
-              <li
-                key={uuidv4()}
-                className={classNames('good', {
-                  selected: selectedGood.includes(` ${good}`),
-                })}
-              >
-                {good}
+            {goodsFromServer.map((good) => {
+              const goodsInBasket = selectedGood.includes(good);
 
-                {
-                !selectedGood.includes(` ${good}`)
-                  ? (
-                    <button
-                      type="button"
-                      className="button"
-                      onClick={() => {
-                        this.toAdd(good);
-                      }}
-                    >
-                      Add
-                    </button>
-                  )
-                  : (
-                    <button
-                      type="button"
-                      className="button"
-                      onClick={() => {
-                        this.toRemove(good);
-                      }}
-                    >
-                      Remove
-                    </button>
-                  )
-                }
-              </li>
-            ))}
+              return (
+                <li
+                  key={good}
+                  className={classNames('good', {
+                    selected: goodsInBasket,
+                  })}
+                >
+                  {good}
+
+                  <button
+                    type="button"
+                    className="button"
+                    onClick={() => (
+                      goodsInBasket
+                        ? this.removeItem(good)
+                        : this.addItem(good)
+                    )
+                    }
+                  >
+                    {goodsInBasket ? 'Remove' : 'Add'}
+                  </button>
+                </li>
+              );
+            })}
           </ul>
 
         </div>
