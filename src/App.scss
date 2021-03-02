@@ -1,1 +1,30 @@
 // styles go here
+
+.clearBtn {
+  margin-left: 10px;
+}
+
+.goodsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  border: 1px solid #000;
+  margin: 10px;
+  border-radius: 5px;
+  min-width: 200px;
+
+  .checkbox {
+    //width: 10px;
+    //height: 10px;
+    background-color: darkred;
+    margin-left: 10px;
+    border-radius: 5px;
+    padding: 5px;
+
+    &.checked {
+      background-color: darkgreen;
+    }
+  }
+}
