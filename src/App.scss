@@ -1,1 +1,43 @@
-// styles go here
+.app {
+  border: 1px solid black;
+  margin: 0 20rem;
+}
+
+.button {
+  height: 40px;
+  width: 80px;
+  border-radius: 10px;
+  vertical-align: middle;
+  background: green;
+  text-transform: capitalize;
+}
+
+h1 {
+  margin: 1.25rem;
+
+  .button {
+    margin-left: 1.25rem;
+  }
+}
+
+ul {
+  width: 300px;
+
+  .item {
+    margin-bottom: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+li {
+  align-items: baseline;
+}
+
+li.active {
+  background: aqua;
+
+  .button {
+    background: red;
+  }
+}
