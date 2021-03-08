@@ -1,1 +1,31 @@
-// styles go here
+@import url("https://fonts.googleapis.com/css2?family=Redressed&display=swap");
+
+.App {
+  font-family: "Redressed", cursive;
+  text-align: center;
+  margin-top: 5%;
+}
+
+li {
+  font-size: x-large;
+  list-style-type: none;
+}
+
+button {
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+button:active {
+  background: red;
+}
+
+.notPressed {
+  position: relative;
+  border-radius: 8px;
+  outline: none;
+}
+
+.pressed {
+  background-color: greenyellow;
+}
