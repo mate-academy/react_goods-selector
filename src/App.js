@@ -27,12 +27,12 @@ class App extends Component {
 
   selectProduct = (e) => {
     const { target } = e;
-    const parent = target.closest('li');
-    const text = parent.childNodes[0].data;
+    const parentElement = target.closest('li');
+    const text = parentElement.childNodes[0].data;
 
     this.setState(state => ({ selectedGoods: [...state.selectedGoods, text] }));
     target.hidden = true;
-    parent.classList.add('app__item--active');
+    parentElement.classList.add('app__item--active');
   };
 
   undoSelectedProduct = (e) => {
@@ -41,11 +41,15 @@ class App extends Component {
     const elementWithAddClass = parentElement.querySelector('.app__add');
 
     const text = parentElement.childNodes[0].data;
+
+    if (!this.state.selectedGoods.includes(text)) {
+      return;
+    }
+
     const deletedElement = this.state.selectedGoods.indexOf(text);
 
     this.state.selectedGoods.splice(deletedElement, 1);
     this.setState(state => ({ selectedGoods: [...state.selectedGoods] }));
-
     parentElement.classList.remove('app__item--active');
     elementWithAddClass.hidden = null;
   }
