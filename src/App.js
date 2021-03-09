@@ -17,19 +17,26 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGoods: [],
+    selectedGoods: {},
   }
 
-  addOrRemoveGood(item) {
-    if (this.state.selectedGoods.includes(item)) {
-      this.setState(prevState => ({
-        selectedGoods: prevState.selectedGoods.filter(good => good !== item),
-      }));
+  toggleGood(item) {
+    const { selectedGoods } = this.state;
+
+    if (selectedGoods[item]) {
+      delete selectedGoods[item];
+      this.setState(selectedGoods);
     } else {
-      this.setState(prevState => ({
-        selectedGoods: [...prevState.selectedGoods, item],
-      }));
+      this.setState({
+        selectedGoods: {
+          ...selectedGoods, [item]: item,
+        },
+      });
     }
+  }
+
+  clearGoods() {
+    this.setState({ selectedGoods: [] });
   }
 
   render() {
@@ -40,35 +47,33 @@ class App extends React.Component {
         <h1>
           Selected good:
           {
-            `${selectedGoods.join(', ')}`
+            `${Object.keys(selectedGoods).join(', ')}`
           }
           {selectedGoods.length !== 0 && (
             <button
               type="button"
               className="button"
-              onClick={() => {
-                this.setState({ selectedGoods: [] });
-              }}
+              onClick={this.clearGoods}
             >
               Clear
             </button>
           )}
         </h1>
         <ul>
-          {goodsFromServer.map((good, index) => (
+          {goodsFromServer.map(good => (
             <li
               key={good}
               className={classNames('item', {
-                active: selectedGoods.includes(good),
+                active: selectedGoods[good],
               })}
             >
               {good}
               <button
                 type="button"
                 className="button"
-                onClick={() => this.addOrRemoveGood(good)}
+                onClick={() => this.toggleGood(good)}
               >
-                {selectedGoods.includes(good) ? 'remove' : 'add'}
+                {selectedGoods[good] ? 'remove' : 'add'}
               </button>
             </li>
           ))}
