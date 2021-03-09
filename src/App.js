@@ -20,7 +20,7 @@ const goodsWithId = goodsFromServer.map((good, index) => ({
   name: good,
 }));
 
-class App extends Component {
+export class App extends Component {
   state = {
     selectedGoods: ['Jam'],
   };
@@ -99,13 +99,17 @@ class App extends Component {
             : 'No goods selected'
             }
         </h1>
-        <button
-          type="button"
-          className="app__reset"
-          onClick={resetSelectedThings}
-        >
-          X
-        </button>
+        {!selectedGoods.length
+          || (
+          <button
+            type="button"
+            className="app__reset"
+            onClick={resetSelectedThings}
+          >
+            X
+          </button>
+          )
+        }
         {goodsFromServer.length
         && (
           <ul
@@ -148,5 +152,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;
