@@ -24,8 +24,9 @@ class App extends React.Component {
     const { selectedGoods } = this.state;
 
     if (selectedGoods[item]) {
-      delete selectedGoods[item];
-      this.setState(selectedGoods);
+      const { [item]: _, ...withoutItem } = selectedGoods;
+
+      this.setState({ selectedGoods: withoutItem });
     } else {
       this.setState({
         selectedGoods: {
@@ -36,7 +37,7 @@ class App extends React.Component {
   }
 
   clearGoods() {
-    this.setState({ selectedGoods: [] });
+    this.setState({ selectedGoods: {} });
   }
 
   render() {
