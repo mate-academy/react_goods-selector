@@ -23,27 +23,41 @@ export class App extends React.Component {
   addProduct = (product) => {
     const basket = this.state.basketOfProducts;
 
-    if (basket !== null && basket.length >= 1) {
+    if (basket !== null) {
       this.setState({ basketOfProducts: [...basket, product] });
     } else {
       this.setState({ basketOfProducts: [product] });
     }
   }
 
+  clearButtons = () => {
+    const basket = this.state.basketOfProducts;
+
+    if (basket !== null && basket.length === 1) {
+      return 'Clear';
+    }
+
+    return 'Clear All';
+  }
+
+  getGoodsTitle = () => {
+    const basket = this.state.basketOfProducts;
+
+    if (basket && basket.length === 1) {
+      return ` ${basket.join(', ')} is selected!`;
+    }
+
+    if (basket && basket.length > 1) {
+      return ` ${basket.join(', ')} are selected!`;
+    }
+
+    return ' No goods selected';
+  }
+
   render() {
     const { basketOfProducts, buttonVisible } = this.state;
-    let titleMessage = '';
-    let clearButton = '';
-
-    if (basketOfProducts !== null && basketOfProducts.length === 1) {
-      titleMessage = `${basketOfProducts.join(', ')} is selected!`;
-      clearButton = 'Clear';
-    } else if (basketOfProducts !== null && basketOfProducts.length > 1) {
-      titleMessage = `${basketOfProducts.join(', ')} are selected!`;
-      clearButton = 'Clear All';
-    } else {
-      titleMessage = 'No goods selected';
-    }
+    const clearButton = this.clearButtons();
+    const titleMessage = this.getGoodsTitle();
 
     return (
       <div className="App">
@@ -70,19 +84,19 @@ export class App extends React.Component {
               <button
                 type="button"
                 className={
-                  (basketOfProducts !== null && basketOfProducts.includes(good))
+                  (basketOfProducts && basketOfProducts.includes(good))
                     ? 'pressed'
                     : 'notPressed'
                 }
                 onClick={() => {
                   this.addProduct(good);
                 }}
-                disabled={basketOfProducts !== null
+                disabled={basketOfProducts
                   && basketOfProducts.includes(good)
                   ? buttonVisible
                   : false}
               >
-                {basketOfProducts !== null
+                {basketOfProducts
                   && basketOfProducts.includes(good)
                   ? 'Selected'
                   : 'Select'}
