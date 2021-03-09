@@ -1,1 +1,35 @@
-// styles go here
+.App {
+  height: 500px;
+
+  background-color: rgb(177, 173, 173);
+  &__title {
+    margin-bottom: 100px;
+
+    border-bottom: 3px white solid;
+  }
+  &__button-delete-all {
+    position: absolute;
+    left: 300px;
+
+    background-color: white;
+    border-radius: 0;
+    border-color: transparent;
+    &:hover {
+      background: rgb(158, 125, 125);
+    }
+  }
+
+  &__button-select {
+    background-color: #fff;
+    border-color: transparent;
+  }
+
+  &__list {
+    li {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+      width: 150px;
+    }
+  }
+}
