@@ -1,1 +1,31 @@
-// styles go here
+.goods {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    padding: 5px;
+    font-size: 16px;
+
+    &--selected {
+      background-color: aquamarine;
+    }
+  }
+
+  &__button {
+    padding: 5px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
