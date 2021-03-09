@@ -50,11 +50,11 @@ class App extends React.Component {
           {
             `${Object.keys(selectedGoods).join(', ')}`
           }
-          {selectedGoods.length !== 0 && (
+          {Object.keys(selectedGoods).length !== 0 && (
             <button
               type="button"
               className="button"
-              onClick={this.clearGoods}
+              onClick={() => this.clearGoods()}
             >
               Clear
             </button>
