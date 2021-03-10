@@ -15,6 +15,19 @@ const goodsFromServer = [
   'Garlic',
 ];
 
+function chooseHeader(goods) {
+  if (goods.length === 0) {
+    return 'No goods selected';
+  }
+
+  if (goods.length === 1) {
+    return `${goods}  is selected`;
+  }
+
+  return `${goods.slice(0, -1).join(', ')}
+      and ${goods.slice(-1)} are selected`;
+}
+
 class App extends React.Component {
   state = {
     selectedGoods: [],
@@ -22,12 +35,12 @@ class App extends React.Component {
 
   selectGood = (good) => {
     if (this.state.selectedGoods.includes(good)) {
-      this.setState(state => (
-        { selectedGoods: state.selectedGoods.filter(el => el !== good) }
+      this.setState(prevState => (
+        { selectedGoods: prevState.selectedGoods.filter(el => el !== good) }
       ));
     } else {
-      this.setState(state => (
-        { selectedGoods: [...state.selectedGoods, good] }
+      this.setState(prevState => (
+        { selectedGoods: [...prevState.selectedGoods, good] }
       ));
     }
   }
@@ -38,21 +51,11 @@ class App extends React.Component {
 
   render() {
     const { selectedGoods } = this.state;
-    let header;
-
-    if (selectedGoods.length === 0) {
-      header = 'No goods selected';
-    } else if (selectedGoods.length === 1) {
-      header = `${selectedGoods}  is selected`;
-    } else {
-      header = `${selectedGoods.slice(0, -1).join(', ')}
-       and ${selectedGoods.slice(-1)} are selected`;
-    }
 
     return (
       <div className="App">
         <h1 className="goods__header">
-          {header}
+          {chooseHeader(selectedGoods)}
           {selectedGoods.length > 0
             && (
             <button type="button" onClick={this.removeGoods}>
