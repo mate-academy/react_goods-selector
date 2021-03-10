@@ -18,25 +18,19 @@ class App extends React.Component {
   state ={
     choosenGoods: [],
     isButtonForDeleteAllVisible: false,
-    buttonAddDelete: true,
   }
 
-  addGood = ({ target }, good) => {
-    const clickedButton = target;
-
+  addGood = (good) => {
     if (this.state.choosenGoods.includes(good)) {
       this.setState(prevState => (
         { choosenGoods: prevState.choosenGoods.filter(el => el !== good) }
       ));
-
-      clickedButton.innerText = 'ADD';
     } else {
       this.setState(prevState => (
         {
           choosenGoods: [...prevState.choosenGoods, good],
         }));
 
-      clickedButton.innerText = 'DELETE';
       this.setState({ isButtonForDeleteAllVisible: true });
     }
   }
@@ -52,7 +46,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { choosenGoods, buttonAddDelete } = this.state;
+    const { choosenGoods } = this.state;
 
     return (
       <div className="App">
@@ -78,11 +72,11 @@ class App extends React.Component {
               <button
                 type="button"
                 className="App__button-select"
-                onClick={(event) => {
-                  this.addGood(event, good);
+                onClick={() => {
+                  this.addGood(good);
                 }}
               >
-                {buttonAddDelete && 'ADD'}
+                {choosenGoods.includes(good) ? 'DELETE' : 'ADD'}
               </button>
             </li>
           ))}
