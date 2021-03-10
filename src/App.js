@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
 import './App.scss';
 
@@ -21,30 +19,20 @@ class App extends React.Component {
     selectedGoods: [],
   }
 
-  showSelectedGood = (event) => {
-    const { target } = event;
-
-    this.setState({
-      selectedGoods: [target.textContent],
-    });
-  }
-
   handleSelectedGood = (event) => {
     const good = event.target.previousSibling;
 
     good.classList.toggle('selected');
 
-    const arrayOfGoods = this.state.selectedGoods;
+    const goodsData = this.state.selectedGoods;
 
-    if (arrayOfGoods.includes(good.textContent) && arrayOfGoods.length > 0) {
+    if (goodsData.includes(good.textContent) && goodsData.length > 0) {
       this.setState(prevState => ({
         selectedGoods: prevState.selectedGoods.filter(item => (
           item !== good.textContent
         )),
       }));
-    }
-
-    if (!arrayOfGoods.includes(good.textContent)) {
+    } else {
       this.setState(prevState => ({
         selectedGoods: prevState.selectedGoods.concat(good.textContent),
       }));
@@ -82,7 +70,6 @@ class App extends React.Component {
             <>
               <li
                 key={goodFromServer}
-                onClick={this.showSelectedGood}
               >
                 {goodFromServer}
               </li>
