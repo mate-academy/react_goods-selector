@@ -24,8 +24,6 @@ class App extends React.Component {
   showSelectedGood = (event) => {
     const { target } = event;
 
-    target.classList.toggle('selected');
-
     this.setState({
       selectedGoods: [target.textContent],
     });
@@ -33,6 +31,8 @@ class App extends React.Component {
 
   handleSelectedGood = (event) => {
     const good = event.target.previousSibling;
+
+    good.classList.toggle('selected');
 
     const arrayOfGoods = this.state.selectedGoods;
 
@@ -52,6 +52,10 @@ class App extends React.Component {
   }
 
   handleClearSelected = () => {
+    const goods = document.body.querySelectorAll('li');
+
+    goods.forEach(item => item.classList.remove('selected'));
+
     this.setState({
       selectedGoods: [],
     });
@@ -83,6 +87,7 @@ class App extends React.Component {
                 {goodFromServer}
               </li>
               <button
+                className="button"
                 type="submit"
                 key={goodFromServer}
                 onClick={this.handleSelectedGood}
