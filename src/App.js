@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 import React from 'react';
 import './App.scss';
 import classNames from 'classnames';
@@ -18,31 +17,29 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selected: ['Jam'],
-  }
-
-  componentDidUpdate(prefProp, prevState) {
-
+    selectedProduct: ['Jam'],
   }
 
   addProductToList = (product) => {
-    const { selected } = this.state;
+    const { selectedProduct } = this.state;
 
-    selected.includes(product)
-      ? this.setState({
-        selected: selected.filter(goods => goods !== product),
-      })
-      : this.setState({ selected: [...selected, product] });
+    if (selectedProduct.includes(product)) {
+      return this.setState({
+        selectedProduct: selectedProduct.filter(goods => goods !== product),
+      });
+    }
+
+    return this.setState({ selectedProduct: [...selectedProduct, product] });
   };
 
   clearProductList = () => {
     this.setState({
-      selected: [],
+      selectedProduct: [],
     });
   }
 
   render() {
-    const { selected: selectedGood } = this.state;
+    const { selectedProduct: selectedGood } = this.state;
 
     return (
       <div className="App">
