@@ -5,3 +5,9 @@
     color: red;
   }
 }
+
+.clear {
+  &__visible {
+    visibility: hidden;
+  }
+}

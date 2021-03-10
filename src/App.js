@@ -56,7 +56,17 @@ class App extends React.Component {
         <h1>
           {goodsText}
           {this.state.goods
-          && (<button type="button" onClick={this.clearGoods}>X</button>
+          && (
+          <button
+            type="button"
+            onClick={this.clearGoods}
+            className={classNames(
+              'clear',
+              { clear__visible: this.state.goods.length === 0 },
+            )}
+          >
+            X
+          </button>
           )}
         </h1>
         <ul>
