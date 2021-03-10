@@ -22,7 +22,8 @@ class App extends React.Component {
   addGood = (good) => {
     if (this.state.choosenGoods.includes(good)) {
       this.setState(prevState => (
-        { choosenGoods: prevState.choosenGoods.filter(el => el !== good) }
+        { choosenGoods: prevState.choosenGoods
+          .filter(currentGood => currentGood !== good) }
       ));
     } else {
       this.setState(prevState => (
@@ -32,7 +33,7 @@ class App extends React.Component {
     }
   }
 
-  deletingAllButton = () => {
+  deletingAllGoods = () => {
     this.setState({ choosenGoods: [] });
   }
 
@@ -50,7 +51,7 @@ class App extends React.Component {
         {(choosenGoods.length > 0) && (
           <button
             type="button"
-            onClick={this.deletingAllButton}
+            onClick={this.deletingAllGoods}
             className="App__button--delete-all"
           >
             X
