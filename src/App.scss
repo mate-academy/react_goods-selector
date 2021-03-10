@@ -1,1 +1,42 @@
 // styles go here
+li {
+  display: flex;
+  width: 250px;
+  margin-bottom: 15px;
+  justify-content: space-between;
+  align-items: center;
+
+  font-weight: bold;
+  font-size: 18px;
+
+  border-bottom: 1px solid #000;
+}
+
+button {
+  color: goldenrod;
+  background-color: black;
+  border: 0, solid, transparent;
+  padding: 10px 30px;
+  border-radius: 10px;
+  text-transform: uppercase;
+}
+
+.header {
+  display: flex;
+}
+
+.header > h1 {
+  margin-left: 50px;
+}
+
+.header > button {
+  font-size: 25px;
+  color: goldenrod;
+  background-color: black;
+  border: 0, solid, transparent;
+  border-radius: 50%;
+}
+
+.active {
+  background-color: gold;
+}
