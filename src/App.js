@@ -18,6 +18,7 @@ class App extends React.Component {
   state ={
     choosenGoods: [],
     isButtonForDeleteAllVisible: false,
+    buttonAddDelete: true,
   }
 
   addGood = ({ target }, good) => {
@@ -45,17 +46,13 @@ class App extends React.Component {
       {
         choosenGoods: [],
         isButtonForDeleteAllVisible: false,
+        // buttonAddDelete: true,
       },
     );
-    const buttons = document.querySelectorAll('.App__button-select');
-    // eslint-disable-next-line
-    for (let button of buttons) {
-      button.innerText = 'ADD';
-    }
   }
 
   render() {
-    const { choosenGoods } = this.state;
+    const { choosenGoods, buttonAddDelete } = this.state;
 
     return (
       <div className="App">
@@ -85,7 +82,7 @@ class App extends React.Component {
                   this.addGood(event, good);
                 }}
               >
-                ADD
+                {buttonAddDelete && 'ADD'}
               </button>
             </li>
           ))}
