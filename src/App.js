@@ -15,6 +15,20 @@ const goodsFromServer = [
   'Garlic',
 ];
 
+function addGoodsText(goods) {
+  if (goods.length === 0) {
+    return `No goods selected`;
+  }
+
+  if (goods.length === 1) {
+    return `Selected ${goods}`;
+  }
+
+  return `${goods.slice(0, -1).join(', ')}
+  and
+  ${goods.slice(-1)} selected`;
+}
+
 class App extends React.Component {
   state = {
     goods: [],
@@ -39,22 +53,10 @@ class App extends React.Component {
   }
 
   render() {
-    let goodsText;
-
-    if (this.state.goods.length === 0) {
-      goodsText = 'No goods selected';
-    } else if (this.state.goods.length === 1) {
-      goodsText = `Selected ${this.state.goods}`;
-    } else {
-      goodsText = `${this.state.goods.slice(0, -1).join(', ')}
-      and
-      ${this.state.goods.slice(-1)} selected`;
-    }
-
     return (
       <div className="App">
         <h1>
-          {goodsText}
+          {addGoodsText(this.state.goods)}
           {this.state.goods
           && (
           <button
@@ -79,7 +81,10 @@ class App extends React.Component {
               )}
             >
               {good}
-              <button type="button" onClick={() => this.toggleGoods(good)}>
+              <button
+                type="button"
+                onClick={() => this.toggleGoods(good)}
+              >
                 {this.state.goods.includes(good) ? 'Delete' : 'add'}
               </button>
             </li>
