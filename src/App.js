@@ -17,23 +17,61 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGood: null,
+    selectedGoods: [],
   };
 
+  addGoodToSelected = (good) => {
+    this.setState((prevState) => {
+      const updatedSelectedGoods = [...prevState.selectedGoods];
+
+      updatedSelectedGoods.push(good);
+
+      return { selectedGoods: updatedSelectedGoods };
+    });
+  }
+
+  removeGoodFromSelected(removingGood) {
+    this.setState((prevState) => {
+      const updatedSelectedGoods = [...prevState.selectedGoods];
+      const goodIndex = updatedSelectedGoods.findIndex(
+        item => item === removingGood,
+      );
+
+      updatedSelectedGoods.splice(goodIndex, 1);
+
+      return { selectedGoods: updatedSelectedGoods };
+    });
+  }
+
   render() {
-    const { selectedGood } = this.state;
+    const { selectedGoods } = this.state;
+    const goodsListLength = selectedGoods.length;
+
+    let headerText = '';
+
+    if (goodsListLength === 0) {
+      headerText = 'No goods selected';
+    } else if (goodsListLength === 1) {
+      headerText = `${selectedGoods[0]} is selected`;
+    } else {
+      headerText = `
+        ${selectedGoods.slice(0, goodsListLength - 1)
+    .toString().replace(/,/g, ', ')}
+          and ${selectedGoods[goodsListLength - 1]} are selected
+      `;
+    }
 
     return (
       <div className="App">
         <h1 className="header">
-          {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
+          {headerText}
         </h1>
 
         <button
           type="button"
-          className={classNames('button', { hidden: !selectedGood })}
+          className={classNames('button', { hidden: goodsListLength === 0 })}
           onClick={() => {
-            this.setState({ selectedGood: null });
+            this.setState({ selectedGoods: [] });
           }}
         >
           X
@@ -44,21 +82,38 @@ class App extends React.Component {
             <li key={good}>
               <span
                 className={
-                  classNames('good-name', { selected: selectedGood === good })
+                  classNames('good-name', {
+                    selected: selectedGoods.includes(good),
+                  })
                 }
               >
                 {good}
               </span>
+
               <button
                 type="button"
                 className={
-                  classNames('button', { hidden: selectedGood === good })
+                  classNames('button', { hidden: selectedGoods.includes(good) })
                 }
                 onClick={() => {
-                  this.setState({ selectedGood: good });
+                  this.addGoodToSelected(good);
                 }}
               >
                 Select
+              </button>
+
+              <button
+                type="button"
+                className={
+                  classNames(
+                    'button', { hidden: !selectedGoods.includes(good) },
+                  )
+                }
+                onClick={() => {
+                  this.removeGoodFromSelected(good);
+                }}
+              >
+                Cancel
               </button>
             </li>
           ))}
