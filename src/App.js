@@ -22,8 +22,6 @@ class App extends React.Component {
   handleSelectedGood = (event) => {
     const good = event.target.previousSibling;
 
-    good.classList.toggle('selected');
-
     const goodsData = this.state.selectedGoods;
 
     if (goodsData.includes(good.textContent) && goodsData.length > 0) {
@@ -40,10 +38,6 @@ class App extends React.Component {
   }
 
   handleClearSelected = () => {
-    const goods = document.body.querySelectorAll('li');
-
-    goods.forEach(item => item.classList.remove('selected'));
-
     this.setState({
       selectedGoods: [],
     });
@@ -70,6 +64,11 @@ class App extends React.Component {
             <>
               <li
                 key={goodFromServer}
+                className={
+                  selectedGoods.includes(goodFromServer)
+                    ? 'selected'
+                    : ''
+                }
               >
                 {goodFromServer}
               </li>
