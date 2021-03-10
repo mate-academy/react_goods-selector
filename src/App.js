@@ -17,7 +17,6 @@ const goodsFromServer = [
 class App extends React.Component {
   state ={
     choosenGoods: [],
-    isButtonForDeleteAllVisible: false,
   }
 
   addGood = (good) => {
@@ -30,19 +29,11 @@ class App extends React.Component {
         {
           choosenGoods: [...prevState.choosenGoods, good],
         }));
-
-      this.setState({ isButtonForDeleteAllVisible: true });
     }
   }
 
   deletingAllButton = () => {
-    this.setState(
-      {
-        choosenGoods: [],
-        isButtonForDeleteAllVisible: false,
-        // buttonAddDelete: true,
-      },
-    );
+    this.setState({ choosenGoods: [] });
   }
 
   render() {
@@ -56,18 +47,21 @@ class App extends React.Component {
             : `Selected: ${choosenGoods.join(', ')}`
           }
         </h1>
-        {this.state.isButtonForDeleteAllVisible && (
+        {(choosenGoods.length > 0) && (
           <button
             type="button"
             onClick={this.deletingAllButton}
-            className="App__button-delete-all"
+            className="App__button--delete-all"
           >
             X
           </button>
         )}
         <ul className="App__list">
           {goodsFromServer.map(good => (
-            <li key={`${good}`}>
+            <li
+              key={`${good}`}
+              className={choosenGoods.includes(good) && 'App__item-active'}
+            >
               {` ${good} `}
               <button
                 type="button"

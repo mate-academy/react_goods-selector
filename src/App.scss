@@ -7,7 +7,11 @@
 
     border-bottom: 3px white solid;
   }
-  &__button-delete-all {
+
+  &__item-active {
+    background-color: #fff;
+  }
+  &__button--delete-all {
     position: absolute;
     left: 300px;
 
