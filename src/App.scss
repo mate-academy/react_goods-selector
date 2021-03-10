@@ -1,1 +1,13 @@
 // styles go here
+.good {
+  color: blue;
+  &__active {
+    color: red;
+  }
+}
+
+.clear {
+  &__visible {
+    visibility: hidden;
+  }
+}
