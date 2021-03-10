@@ -20,82 +20,52 @@ const goodsWithId = goodsFromServer.map((good, index) => ({
   name: good,
 }));
 
+function outputText(goods) {
+  if (goods.length === 0) {
+    return 'No goods';
+  }
+
+  if (goods.length === 1) {
+    return `${goods[0]} is`;
+  }
+
+  return `${goods.slice(0, -1).join(', ')}
+      and ${goods.slice(-1)} are`;
+}
+
 export class App extends Component {
   state = {
     selectedGoods: ['Jam'],
   };
 
-  selectProduct = (e) => {
-    const { target } = e;
-    const parentElement = target.closest('li');
-    const text = parentElement.childNodes[0].data;
-
-    this.setState(state => ({ selectedGoods: [...state.selectedGoods, text] }));
-    target.hidden = true;
-    parentElement.classList.add('app__item--active');
+  selectProduct = (good) => {
+    this.setState(state => ({ selectedGoods: [...state.selectedGoods, good] }));
   };
 
-  undoSelectedProduct = (e) => {
-    const { target } = e;
-    const parentElement = target.closest('li');
-    const elementWithAddClass = parentElement.querySelector('.app__add');
-
-    const text = parentElement.childNodes[0].data;
-
-    if (!this.state.selectedGoods.includes(text)) {
-      return;
+  undoSelectedProduct = (good) => {
+    this.setState(prevState => ({
+      selectedGoods: [...prevState.selectedGoods.filter(item => good !== item)],
     }
-
-    const deletedElement = this.state.selectedGoods.indexOf(text);
-
-    this.state.selectedGoods.splice(deletedElement, 1);
-    this.setState(state => ({ selectedGoods: [...state.selectedGoods] }));
-    parentElement.classList.remove('app__item--active');
-    elementWithAddClass.hidden = null;
+    ));
   }
 
   resetSelectedThings = () => {
-    const selectedElement = document.querySelectorAll('.app__item--active');
-
-    [...selectedElement].forEach((elem) => {
-      const buttonAdd = elem.querySelector('.app__add');
-
-      this.setState({ selectedGoods: [] });
-      buttonAdd.hidden = null;
-      elem.classList.remove('app__item--active');
-    });
+    this.setState({ selectedGoods: [] });
   };
 
   render() {
     const { selectedGoods } = this.state;
-    const { selectProduct, resetSelectedThings, undoSelectedProduct } = this;
-    let printedValue;
-    const goodsLength = selectedGoods.length;
-
-    if (selectedGoods.length >= 3) {
-      const restValue = selectedGoods.slice(0, -1);
-
-      printedValue = `${restValue.join(', ')}`
-        + `and ${selectedGoods[goodsLength - 1]} are`;
-    }
-
-    if (selectedGoods.length === 0) {
-      printedValue = 'No goods';
-    }
-
-    if (selectedGoods.length === 1) {
-      printedValue = `${selectedGoods[0]} is`;
-    }
-
-    if (selectedGoods.length === 2) {
-      printedValue = `${selectedGoods.join(' and ')} are`;
-    }
+    const {
+      selectProduct,
+      resetSelectedThings,
+      undoSelectedProduct,
+    } = this;
 
     return (
       <div className="app">
         <h1 className="app__title">
           {goodsFromServer.length
-            ? `${printedValue} selected`
+            ? `${outputText(selectedGoods)} selected`
             : 'No goods selected'
             }
         </h1>
@@ -115,36 +85,30 @@ export class App extends Component {
           <ul
             className="app__list"
           >
-            {goodsWithId.map((good) => {
-              const product = good.name;
-
-              return (
-                <li
-                  className={classNames('app__item',
-                    { 'app__item--active': product === selectedGoods[0] })}
-                  key={good.id}
+            {goodsWithId.map(good => (
+              <li
+                className={classNames('app__item',
+                  { 'app__item--active': selectedGoods.includes(good.name) })}
+                key={good.id}
+              >
+                {good.name}
+                <button
+                  className="app__add"
+                  type="button"
+                  hidden={selectedGoods.includes(good.name)}
+                  onClick={() => selectProduct(good.name)}
                 >
-                  {good.name}
-                  <button
-                    className="app__add"
-                    type="button"
-                    hidden={
-                      product === selectedGoods[0] ? true : null
-                    }
-                    onClick={selectProduct}
-                  >
-                    Add
-                  </button>
-                  <button
-                    className="app__remove"
-                    type="button"
-                    onClick={undoSelectedProduct}
-                  >
-                    Remove
-                  </button>
-                </li>
-              );
-            })}
+                  Add
+                </button>
+                <button
+                  className="app__remove"
+                  type="button"
+                  onClick={() => undoSelectedProduct(good.name)}
+                >
+                  Remove
+                </button>
+              </li>
+            ))}
           </ul>
         )
       }
