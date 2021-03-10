@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer = [
@@ -60,7 +61,13 @@ class App extends React.Component {
         </h1>
         <ul>
           {goodsFromServer.map(good => (
-            <li key={good}>
+            <li
+              key={good}
+              className={classNames(
+                'good',
+                { good__active: this.state.goods.includes(good) },
+              )}
+            >
               {good}
               <button type="button" onClick={() => this.toggleGoods(good)}>
                 {this.state.goods.includes(good) ? 'Delete' : 'add'}
