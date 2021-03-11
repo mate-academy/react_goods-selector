@@ -1,0 +1,44 @@
+.Good {
+  width: 120px;
+  height: 130px;
+
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  letter-spacing: 1px;
+
+  background-color: #696a69;
+  color: #fff;
+  font-weight: 500;
+
+  border-radius: 5px;
+  border: none;
+
+  outline: none;
+  cursor: pointer;
+
+  &--selected {
+    background-color: #2bbdb9;
+  }
+
+  &__icon {
+    display: block;
+
+    margin: 0 auto;
+    width: 18px;
+    height: 18px;
+
+    border: 2px solid #fff;
+    border-radius: 4px;
+    color: transparent;
+
+    &--selected {
+      color: #fff;
+      border: none;
+    }
+  }
+}

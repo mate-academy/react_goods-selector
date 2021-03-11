@@ -1,1 +1,60 @@
-// styles go here
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Gill Sans", "Gill Sans MT", "Trebuchet MS", sans-serif;
+}
+
+body,
+h1,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f2f2f2;
+}
+
+.App {
+  padding: 30px 45px;
+
+  &__title {
+    margin-bottom: 30px;
+    padding: 20px 25px;
+    border-bottom: 1px solid #ccc;
+
+    text-transform: capitalize;
+  }
+
+  &__list {
+    max-width: 50%;
+    margin: 0 auto;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+
+    list-style: none;
+  }
+
+  &__clear {
+    position: absolute;
+    top: 60px;
+    right: 60px;
+
+    background-color: inherit;
+
+    border: none;
+    outline: none;
+
+    font-size: 22px;
+    color: red;
+
+    cursor: pointer;
+  }
+}
