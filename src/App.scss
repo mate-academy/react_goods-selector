@@ -1,1 +1,21 @@
-// styles go here
+.item {
+  list-style: none;
+  margin-bottom: 5px;
+}
+
+.button {
+  border: none;
+  font-size: 15px;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: yellow;
+}
+
+.clear {
+  margin-bottom: 20px;
+  margin-left: 30px;
+}
