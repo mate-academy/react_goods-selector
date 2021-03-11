@@ -1,1 +1,17 @@
 // styles go here
+
+.header {
+  display: inline-block;
+}
+
+.selected {
+  background-color: aqua;
+}
+
+.hidden {
+  display: none;
+}
+
+.button {
+  margin: 10px 20px;
+}
