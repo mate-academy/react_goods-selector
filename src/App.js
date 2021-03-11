@@ -30,14 +30,15 @@ class App extends React.Component {
     });
   }
 
-  removeGoodFromSelected(removingGood) {
-    this.setState((prevState) => {
-      const updatedSelectedGoods = [...prevState.selectedGoods];
-      const goodIndex = updatedSelectedGoods.findIndex(
-        item => item === removingGood,
-      );
+  clearSelectedGoodList = () => {
+    this.setState({ selectedGoods: [] });
+  };
 
-      updatedSelectedGoods.splice(goodIndex, 1);
+  removeGoodFromSelected = (removingGood) => {
+    this.setState((prevState) => {
+      const updatedSelectedGoods = [...prevState.selectedGoods].filter(
+        good => good !== removingGood,
+      );
 
       return { selectedGoods: updatedSelectedGoods };
     });
@@ -47,31 +48,17 @@ class App extends React.Component {
     const { selectedGoods } = this.state;
     const goodsListLength = selectedGoods.length;
 
-    let headerText = '';
-
-    if (goodsListLength === 0) {
-      headerText = 'No goods selected';
-    } else if (goodsListLength === 1) {
-      headerText = `${selectedGoods[0]} is selected`;
-    } else {
-      headerText = `
-        ${selectedGoods.slice(0, goodsListLength - 1)
-    .toString().replace(/,/g, ', ')}
-          and ${selectedGoods[goodsListLength - 1]} are selected
-      `;
-    }
-
     return (
       <div className="App">
         <h1 className="header">
-          {headerText}
+          {createHeader(selectedGoods, goodsListLength)}
         </h1>
 
         <button
           type="button"
           className={classNames('button', { hidden: goodsListLength === 0 })}
           onClick={() => {
-            this.setState({ selectedGoods: [] });
+            this.clearSelectedGoodList();
           }}
         >
           X
@@ -121,6 +108,24 @@ class App extends React.Component {
       </div>
     );
   }
+}
+
+function createHeader(selectedGoods, goodsListLength) {
+  let headerText = '';
+
+  if (goodsListLength === 0) {
+    headerText = 'No goods selected';
+  } else if (goodsListLength === 1) {
+    headerText = `${selectedGoods[0]} is selected`;
+  } else {
+    headerText = `
+      ${selectedGoods.slice(0, goodsListLength - 1)
+    .toString().replace(/,/g, ', ')}
+        and ${selectedGoods[goodsListLength - 1]} are selected
+    `;
+  }
+
+  return headerText;
 }
 
 export default App;
