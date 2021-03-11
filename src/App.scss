@@ -1,1 +1,14 @@
-// styles go here
+body {
+  @media (prefers-color-scheme: dark) {
+    color: lightgrey;
+    background-color: black;
+  }
+}
+
+.active {
+  color: red;
+}
+
+.hidden {
+  display: none;
+}

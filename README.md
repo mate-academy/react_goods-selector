@@ -1,9 +1,9 @@
 # React Goods selector
-- Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_goods-selector/)
+- Replace `<your_account>` with your Github username in the [DEMO LINK](https://andrii256.github.io/react_goods-selector/)
 - Follow the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline)
 
 ## Task
-1. You are given an array of goods
+1. You have given an array of goods
 1. Display them as a list inside the `App` (DON'T create additional components)
 1. Add `h1` initially saying `No goods selected`
 1. Save a `selectedGood` in the `App`. Let it be `Jam` by default
