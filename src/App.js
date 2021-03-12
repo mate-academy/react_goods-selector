@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
 
 const goodsFromServer = [
   'Dumplings',
@@ -14,11 +15,76 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-const App = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+class App extends React.Component {
+  state = {
+    goods: goodsFromServer,
+    selectedGoods: ['Jam'],
+  }
+
+  addGood = (good) => {
+    if (!this.state.selectedGoods.includes(good)) {
+      this.setState(prevState => ({
+        selectedGoods: [
+          ...prevState.selectedGoods,
+          good,
+        ],
+      }));
+    }
+  }
+
+  removeGood = (good) => {
+    if (this.state.selectedGoods.includes(good)) {
+      this.setState((prevState) => {
+        const copyGoods = [...prevState.selectedGoods];
+        const index = copyGoods.indexOf(good);
+
+        copyGoods.splice(index, 1);
+
+        return {
+          selectedGoods: copyGoods,
+        };
+      });
+    }
+  }
+
+  render() {
+    const { goods, selectedGoods } = this.state;
+
+    return (
+      <div className="App">
+        <h1>
+          {selectedGoods.length > 0
+            ? `Selected goods ${selectedGoods.map(good => ` ${good}`)}`
+            : `No goods selected`}
+        </h1>
+        <ul>
+          {goods.map(good => (
+            <li key={good}>
+              <p className={classNames(
+                '',
+                { active: selectedGoods.includes(good) },
+              )}
+              >
+                {good}
+              </p>
+              <button
+                type="button"
+                onClick={() => this.addGood(good)}
+              >
+                Add
+              </button>
+              <button
+                type="button"
+                onClick={() => this.removeGood(good)}
+              >
+                Remove
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}
 
 export default App;
