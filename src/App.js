@@ -47,6 +47,10 @@ class App extends React.Component {
     }
   }
 
+  resetSelections = () => {
+    this.setState({ selectedGoods: [] });
+  }
+
   render() {
     const { goods, selectedGoods } = this.state;
 
@@ -57,6 +61,12 @@ class App extends React.Component {
             ? `Selected goods ${selectedGoods.map(good => ` ${good}`)}`
             : `No goods selected`}
         </h1>
+        <button
+          type="button"
+          onClick={this.resetSelections}
+        >
+          X
+        </button>
         <ul>
           {goods.map(good => (
             <li key={good}>
