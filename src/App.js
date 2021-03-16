@@ -34,16 +34,11 @@ class App extends React.Component {
 
   removeGood = (good) => {
     if (this.state.selectedGoods.includes(good)) {
-      this.setState((prevState) => {
-        const copyGoods = [...prevState.selectedGoods];
-        const index = copyGoods.indexOf(good);
-
-        copyGoods.splice(index, 1);
-
-        return {
-          selectedGoods: copyGoods,
-        };
-      });
+      this.setState(prevState => ({
+        selectedGoods: prevState.selectedGoods.filter(
+          selectedGood => selectedGood !== good,
+        ),
+      }));
     }
   }
 
@@ -58,7 +53,7 @@ class App extends React.Component {
       <div className="App">
         <h1>
           {selectedGoods.length > 0
-            ? `Selected goods ${selectedGoods.map(good => ` ${good}`)}`
+            ? `Selected goods: ${selectedGoods.map(good => ` ${good}`)}`
             : `No goods selected`}
         </h1>
         <button
