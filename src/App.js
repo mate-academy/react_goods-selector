@@ -33,16 +33,21 @@ export class App extends React.Component {
             goodsFromServer.map(good => (
               <li
                 key={good}
-                onClick={() => {
-                  this.setState({
-                    selectedGood: good,
-                  });
-                }}
                 className={
-                (good === this.state.selectedGood) ? 'isActive' : ''
-              }
+                  (good === this.state.selectedGood) && 'isActive'
+                }
               >
                 {good}
+                <button
+                  type="button"
+                  onClick={() => {
+                    this.setState({
+                      selectedGood: good,
+                    });
+                  }}
+                >
+                  {good}
+                </button>
               </li>
             ))
           }
@@ -72,6 +77,8 @@ export class App extends React.Component {
               selectedGood: 'No goods selected',
             });
           }}
+          className={this.state.selectedGood === 'No goods selected'
+            && 'cancelled'}
         >
           X
         </button>
