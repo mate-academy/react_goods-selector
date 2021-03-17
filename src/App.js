@@ -46,7 +46,7 @@ export class App extends React.Component {
                     });
                   }}
                 >
-                  {good}
+                  Select
                 </button>
               </li>
             ))
@@ -67,7 +67,7 @@ export class App extends React.Component {
           }
           }
         >
-          Select
+          Select next
         </button>
 
         <button
