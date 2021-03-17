@@ -33,13 +33,11 @@ class App extends React.Component {
   }
 
   removeGood = (good) => {
-    if (this.state.selectedGoods.includes(good)) {
-      this.setState(prevState => ({
-        selectedGoods: prevState.selectedGoods.filter(
-          selectedGood => selectedGood !== good,
-        ),
-      }));
-    }
+    this.setState(prevState => ({
+      selectedGoods: prevState.selectedGoods.filter(
+        selectedGood => selectedGood !== good,
+      ),
+    }));
   }
 
   resetSelections = () => {
@@ -53,7 +51,7 @@ class App extends React.Component {
       <div className="App">
         <h1>
           {selectedGoods.length > 0
-            ? `Selected goods: ${selectedGoods.map(good => ` ${good}`)}`
+            ? `Selected goods: ${selectedGoods}`
             : `No goods selected`}
         </h1>
         <button
@@ -65,10 +63,9 @@ class App extends React.Component {
         <ul>
           {goods.map(good => (
             <li key={good}>
-              <p className={classNames(
-                '',
-                { active: selectedGoods.includes(good) },
-              )}
+              <p className={classNames({
+                active: selectedGoods.includes(good),
+              })}
               >
                 {good}
               </p>
