@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-import ClassNames from 'classnames';
+import classNames from 'classnames';
 
 const goodsFromServer = [
   'Dumplings',
@@ -21,18 +21,28 @@ const goodsWithId = goodsFromServer.map((name, index) => ({
 
 class App extends React.Component {
   state = {
-    selectedGood: 'Jam',
+    selectedGoods: [],
   }
 
   setSelection = (good) => {
+    const { selectedGoods } = this.state;
+
     this.setState({
-      selectedGood: good,
+      selectedGoods: [...selectedGoods, good],
+    });
+  }
+
+  removeSelection = (good) => {
+    const { selectedGoods } = this.state;
+
+    this.setState({
+      selectedGoods: selectedGoods.filter(element => element !== good),
     });
   }
 
   resetSelection = () => {
     this.setState({
-      selectedGood: null,
+      selectedGoods: [],
     });
   }
 
@@ -42,22 +52,24 @@ class App extends React.Component {
         <div className="ui middle aligned divided list">
           <div className="list-header">
             <h1>
-              {this.state.selectedGood ? (
+              {this.state.selectedGoods.length !== 0 ? (
                 <>
                   <span className="selected">
-                    {this.state.selectedGood}
+                    {this.state.selectedGoods.join(', ')}
                   </span>
                   {' '}
-                  is selected
+                  {this.state.selectedGoods.length > 1 ? (
+                    'are selected'
+                  ) : 'is selected'}
                 </>
-              ) : 'Nothing selected'}
+              ) : 'No goods selected'}
             </h1>
             <button
               type="button"
               onClick={this.resetSelection}
-              className={ClassNames(
+              className={classNames(
                 'ui icon button header-button',
-                { hidden: !this.state.selectedGood },
+                { hidden: this.state.selectedGoods.length === 0 },
               )}
             >
               <i className="close icon" />
@@ -68,19 +80,28 @@ class App extends React.Component {
               <div className="right floated content">
                 <button
                   type="button"
-                  className={ClassNames(
-                    'ui',
-                    'button',
-                    { disabled: good.name === this.state.selectedGood },
+                  className={classNames(
+                    'ui button',
+                    { hidden: this.state.selectedGoods.includes(good.name) },
                   )}
                   onClick={() => this.setSelection(good.name)}
                 >
-                  Select
+                  Add
+                </button>
+                <button
+                  type="button"
+                  className={classNames(
+                    'ui button',
+                    { hidden: !this.state.selectedGoods.includes(good.name) },
+                  )}
+                  onClick={() => this.removeSelection(good.name)}
+                >
+                  Remove
                 </button>
               </div>
-              <div className={ClassNames({
-                selected: good.name === this.state.selectedGood,
-              })}
+              <div className={classNames(
+                { selected: this.state.selectedGoods.includes(good.name) },
+              )}
               >
                 {good.name}
               </div>
