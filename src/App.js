@@ -1,6 +1,8 @@
 import React from 'react';
-import classNames from 'classnames';
 import './App.scss';
+import { ResetButton } from './components/ResetButton';
+import { Title } from './components/Title';
+import { ProductsList } from './components/ProductsList';
 
 const goodsFromServer = [
   'Dumplings',
@@ -29,20 +31,18 @@ export class App extends React.Component {
     const { selectedProducts } = this.state;
 
     if (!selectedProducts.includes(productName)) {
-      this.setState({
-        selectedProducts: [...selectedProducts, productName],
-      });
+      this.setState(state => ({
+        selectedProducts: [...state.selectedProducts, productName],
+      }));
     }
   };
 
   removeGoods = (productName) => {
-    const { selectedProducts } = this.state;
-
-    this.setState({
-      selectedProducts: [...selectedProducts.filter(
+    this.setState(state => ({
+      selectedProducts: state.selectedProducts.filter(
         product => product !== productName,
-      )],
-    });
+      ),
+    }));
   }
 
   resetGoods = () => {
@@ -56,58 +56,17 @@ export class App extends React.Component {
 
     return (
       <div className="App">
-        {selectedProducts.length > 0
-          && (
-          <button
-            type="button"
-            onClick={this.resetGoods}
-          >
-            X
-          </button>
-          )
-        }
-        <h1>
-          {selectedProducts.length > 0
-            ? `${selectedProducts.join(', ')} is selected`
-            : 'No goods selected'
-          }
-        </h1>
-        <ul>
-          {goodsWithID.map(item => (
-            <li key={item.id}>
-              <span
-                className={
-                  classNames({
-                    selected: selectedProducts.includes(item.product),
-                  })}
-              >
-                {item.product}
-              </span>
-              { !selectedProducts.includes(item.product)
-              && (
-              <button
-                type="button"
-                onClick={() => {
-                  this.addGoods(item.product);
-                }}
-              >
-                Add
-              </button>
-              )}
-              { !selectedProducts.includes(item.product)
-              || (
-              <button
-                type="button"
-                onClick={() => {
-                  this.removeGoods(item.product);
-                }}
-              >
-                Remove
-              </button>
-              )}
-            </li>
-          ))}
-        </ul>
+        <ResetButton
+          selectedProducts={selectedProducts}
+          resetGoods={this.resetGoods}
+        />
+        <Title selectedProducts={selectedProducts} />
+        <ProductsList
+          goodsWithID={goodsWithID}
+          addGoods={this.addGoods}
+          removeGoods={this.removeGoods}
+          selectedProducts={selectedProducts}
+        />
         {goodsFromServer.length}
       </div>
     );
