@@ -93,8 +93,7 @@ export class App extends React.Component {
               >
                 Add
               </button>
-              )
-              }
+              )}
               { !selectedProducts.includes(item.product)
               || (
               <button
@@ -105,8 +104,7 @@ export class App extends React.Component {
               >
                 Remove
               </button>
-              )
-              }
+              )}
             </li>
           ))}
         </ul>
