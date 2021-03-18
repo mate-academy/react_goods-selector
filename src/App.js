@@ -35,11 +35,37 @@ export class App extends React.Component {
     }
   };
 
+  removeGoods = (productName) => {
+    const { selectedProducts } = this.state;
+
+    this.setState({
+      selectedProducts: [...selectedProducts.filter(
+        product => product !== productName,
+      )],
+    });
+  }
+
+  resetGoods = () => {
+    this.setState({
+      selectedProducts: [],
+    });
+  }
+
   render() {
     const { selectedProducts } = this.state;
 
     return (
       <div className="App">
+        {selectedProducts.length > 0
+          && (
+          <button
+            type="button"
+            onClick={this.resetGoods}
+          >
+            X
+          </button>
+          )
+        }
         <h1>
           {selectedProducts.length > 0
             ? `${selectedProducts.join(', ')} is selected`
@@ -47,25 +73,37 @@ export class App extends React.Component {
           }
         </h1>
         <ul>
-          {goodsWithID.map(element => (
-            <li key={element.id}>
+          {goodsWithID.map(item => (
+            <li key={item.id}>
               <span
                 className={
                   classNames({
-                    selected: selectedProducts.includes(element.product),
+                    selected: selectedProducts.includes(item.product),
                   })}
               >
-                {element.product}
+                {item.product}
               </span>
-              { !selectedProducts.includes(element.product)
+              { !selectedProducts.includes(item.product)
               && (
               <button
                 type="button"
                 onClick={() => {
-                  this.addGoods(element.product);
+                  this.addGoods(item.product);
                 }}
               >
-                Select
+                Add
+              </button>
+              )
+              }
+              { !selectedProducts.includes(item.product)
+              || (
+              <button
+                type="button"
+                onClick={() => {
+                  this.removeGoods(item.product);
+                }}
+              >
+                Remove
               </button>
               )
               }
