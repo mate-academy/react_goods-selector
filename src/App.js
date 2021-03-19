@@ -1,8 +1,7 @@
 import React from 'react';
 import './App.scss';
-import { ProductName } from './components/ProductName';
-import { SelectedButton } from './components/SelectedButton';
-import { RemovedButton } from './components/RemovedButton';
+import { ProductList } from './components/ProductList';
+import { classNameButton } from './components/classNameButton';
 
 const goodsFromServer = [
   'Dumplings',
@@ -60,6 +59,9 @@ class App extends React.Component {
 
         <button
           type="button"
+          className={
+            classNameButton(selectedGood.length === 0)
+          }
           onClick={(event) => {
             this.resetProduct();
           }}
@@ -69,24 +71,16 @@ class App extends React.Component {
 
         <div>
           {products.map(product => (
-            <>
-              <ProductName
-                id={product.id}
+            <div key={product.id}>
+
+              <ProductList
                 name={product.name}
                 selectedGood={selectedGood}
-              />
-
-              <SelectedButton
-                name={product.name}
                 selectedProduct={this.selectedProduct}
-              />
-
-              <RemovedButton
-                name={product.name}
                 removedProduct={this.removedProduct}
               />
 
-            </>
+            </div>
           ))}
         </div>
       </div>

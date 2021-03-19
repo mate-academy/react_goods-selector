@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { classNameButton } from './classNameButton';
 
 export const RemovedButton = (props) => {
-  const { name, removedProduct } = props;
+  const { name, removedProduct, selectedGood } = props;
 
   return (
     <button
       type="button"
+      className={classNameButton(!selectedGood.includes(name))}
       onClick={(event) => {
         removedProduct(name);
       }}
@@ -19,4 +21,5 @@ export const RemovedButton = (props) => {
 RemovedButton.propTypes = PropTypes.shape({
   name: PropTypes.string.isRequired,
   removedProduct: PropTypes.func.isRequired,
+  selectedGood: PropTypes.arrayOf(PropTypes.string).isRequired,
 }).isRequired;
