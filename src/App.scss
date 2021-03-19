@@ -1,1 +1,30 @@
-// styles go here
+.App {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 50px;
+}
+
+.list {
+  width: 400px;
+}
+
+.list-header {
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-button {
+  height: 38px;
+}
+
+.selected {
+  color: #49699c;
+  font-weight: 900;
+}
+
+.hidden {
+  display: none !important;
+}
