@@ -28,15 +28,9 @@ class App extends React.Component {
       this.setState({ selectedGood: [] });
     }
 
-    this.setState((state) => {
-      const updatedGoods = [...state.selectedGood];
-
-      updatedGoods.push(good.name);
-
-      return {
-        selectedGood: updatedGoods,
-      };
-    });
+    this.setState(prevState => ({
+      selectedGood: [...prevState.selectedGood, good.name],
+    }));
   };
 
   removeGoods = (good) => {
@@ -57,16 +51,17 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>
-          <button
-            type="button"
-            onClick={this.removeAllGoods}
-            className={classNames({
-              hiddenButton:
-                this.state.selectedGood.includes('No goods selected'),
-            })}
-          >
-            X
-          </button>
+          {this.state.selectedGood.includes('No goods selected')
+            ? ''
+            : (
+              <button
+                type="button"
+                onClick={this.removeAllGoods}
+              >
+                X
+              </button>
+            )
+          }
           {` Selected good: ${this.state.selectedGood.map(
             good => (` ${good}`),
           )}`}
@@ -85,28 +80,32 @@ class App extends React.Component {
                 {good.name}
               </span>
               {' '}
-              <button
-                type="button"
-                className={classNames({
-                  hiddenButton: this.state.selectedGood.includes(good.name),
-                })}
-                onClick={() => {
-                  this.addGoods(good);
-                }}
-              >
-                Add
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  this.removeGoods(good);
-                }}
-                className={classNames({
-                  hiddenButton: !this.state.selectedGood.includes(good.name),
-                })}
-              >
-                Remove
-              </button>
+              {this.state.selectedGood.includes(good.name)
+                ? ''
+                : (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      this.addGoods(good);
+                    }}
+                  >
+                    Add
+                  </button>
+                )
+              }
+              {!this.state.selectedGood.includes(good.name)
+                ? ''
+                : (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      this.removeGoods(good);
+                    }}
+                  >
+                    Remove
+                  </button>
+                )
+              }
             </li>
           ))}
         </ul>
