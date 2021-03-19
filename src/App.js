@@ -25,19 +25,17 @@ class App extends React.Component {
   }
 
   setSelection = (good) => {
-    const { selectedGoods } = this.state;
-
-    this.setState({
-      selectedGoods: [...selectedGoods, good],
-    });
+    this.setState(prevState => ({
+      selectedGoods: [...prevState.selectedGoods, good],
+    }));
   }
 
   removeSelection = (good) => {
-    const { selectedGoods } = this.state;
-
-    this.setState({
-      selectedGoods: selectedGoods.filter(element => element !== good),
-    });
+    this.setState(prevState => ({
+      selectedGoods: prevState.selectedGoods.filter(
+        element => element !== good,
+      ),
+    }));
   }
 
   resetSelection = () => {
