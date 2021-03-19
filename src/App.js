@@ -16,7 +16,19 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGood: null,
+    selectedGood: 'Jam',
+  }
+
+  resetGoods = () => {
+    this.setState({
+      selectedGood: null,
+    });
+  }
+
+  addGoods = (good) => {
+    this.setState({
+      selectedGood: good,
+    });
   }
 
   render() {
@@ -33,11 +45,7 @@ class App extends React.Component {
           className={selectedGood
             ? '' : 'Button'}
           type="button"
-          onClick={() => {
-            this.setState({
-              selectedGood: null,
-            });
-          }}
+          onClick={this.resetGoods}
         >
           X
         </button>
@@ -55,9 +63,7 @@ class App extends React.Component {
                   ? 'Button' : ''}
                 type="button"
                 onClick={() => {
-                  this.setState({
-                    selectedGood: good,
-                  });
+                  this.addGoods(good);
                 }}
               >
                 Select
