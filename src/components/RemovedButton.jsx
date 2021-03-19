@@ -9,7 +9,7 @@ export const RemovedButton = (props) => {
     <button
       type="button"
       className={classNameButton(!selectedGood.includes(name))}
-      onClick={(event) => {
+      onClick={() => {
         removedProduct(name);
       }}
     >

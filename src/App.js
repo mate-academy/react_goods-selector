@@ -62,9 +62,7 @@ class App extends React.Component {
           className={
             classNameButton(selectedGood.length === 0)
           }
-          onClick={(event) => {
-            this.resetProduct();
-          }}
+          onClick={this.resetProduct}
         >
           reset
         </button>
