@@ -1,1 +1,25 @@
-// styles go here
+.wrap {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.button {
+  margin-left: 15px;
+  padding: 3px 10px;
+
+  background-color: rgb(184, 245, 242);
+  border-radius: 5px;
+  border: 1px solid rgb(140, 179, 167);
+
+  &--red {
+    color: white;
+    background-color: rgb(255, 85, 85);
+  }
+}
+
+.selected {
+  background-color: rgb(230, 227, 96);
+  border: 2px solid rgb(140, 179, 167);
+  border-radius: 3px;
+}
