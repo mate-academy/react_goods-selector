@@ -20,40 +20,33 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGood: ['Jam'],
+    selectedGoods: ['Jam'],
   }
 
   addGoods = (good) => {
-    if (this.state.selectedGood.includes('No goods selected')) {
-      this.setState({ selectedGood: [] });
-    }
-
     this.setState(prevState => ({
-      selectedGood: [...prevState.selectedGood, good.name],
+      selectedGoods: [...prevState.selectedGoods, good.name],
     }));
   };
 
   removeGoods = (good) => {
-    if (this.state.selectedGood.length === 1) {
-      this.setState({ selectedGood: ['No goods selected'] });
-    }
-
     this.setState(state => ({
-      selectedGood: state.selectedGood.filter(item => item !== good.name),
+      selectedGoods: state.selectedGoods.filter(item => item !== good.name),
     }));
   };
 
   removeAllGoods = () => {
-    this.setState({ selectedGood: ['No goods selected'] });
+    this.setState({ selectedGoods: [] });
   }
 
   render() {
+    const { selectedGoods } = this.state;
+
     return (
       <div className="App">
         <h1>
-          {this.state.selectedGood.includes('No goods selected')
-            ? ''
-            : (
+          {selectedGoods.length > 0
+            ? (
               <button
                 type="button"
                 onClick={this.removeAllGoods}
@@ -61,10 +54,13 @@ class App extends React.Component {
                 X
               </button>
             )
+            : ''
           }
-          {` Selected good: ${this.state.selectedGood.map(
-            good => (` ${good}`),
-          )}`}
+          {` Selected good: ${
+            selectedGoods.length > 0
+              ? selectedGoods.map(good => (` ${good}`))
+              : 'No goods selected'}`
+          }
         </h1>
         <ul>
           {goodsFromServer.map(good => (
@@ -74,38 +70,32 @@ class App extends React.Component {
             >
               <span
                 className={classNames({
-                  selectedGood: this.state.selectedGood.includes(good.name),
+                  selectedGoods: selectedGoods.includes(good.name),
                 })}
               >
                 {good.name}
               </span>
               {' '}
-              {this.state.selectedGood.includes(good.name)
-                ? ''
-                : (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      this.addGoods(good);
-                    }}
-                  >
-                    Add
-                  </button>
-                )
-              }
-              {!this.state.selectedGood.includes(good.name)
-                ? ''
-                : (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      this.removeGoods(good);
-                    }}
-                  >
-                    Remove
-                  </button>
-                )
-              }
+              {!selectedGoods.includes(good.name) && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    this.addGoods(good);
+                  }}
+                >
+                  Add
+                </button>
+              )}
+              {selectedGoods.includes(good.name) && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    this.removeGoods(good);
+                  }}
+                >
+                  Remove
+                </button>
+              )}
             </li>
           ))}
         </ul>
