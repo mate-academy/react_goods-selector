@@ -1,1 +1,78 @@
-// styles go here
+body {
+  background-color: whitesmoke;
+  font-family: Roboto, sans-serif;
+}
+
+.app__card {
+  background-color: #fff;
+  margin: auto;
+  width: 400px;
+  padding: 20px 30px;
+  border: 1px solid #efefef;
+  box-shadow:
+    rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
+    rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+}
+
+.goods__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.list__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 5px;
+  background-color: #efefef;
+  border-radius: 5px;
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  color: #333;
+}
+
+.selected {
+  background-color: #eff48e;
+}
+
+.goods__title {
+  margin: 0;
+  text-align: center;
+}
+
+.selected__goods {
+  font-size: 12px;
+  text-transform: lowercase;
+  color: #08635e;
+}
+
+.btn {
+  margin-left: 10px;
+  border: none;
+  font-family: Roboto, sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 5px 10px;
+  color: white;
+  border-radius: 5px;
+  background-color: #0e918c;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.clear {
+  border: none;
+  font-family: Roboto, sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #0e918c;
+  text-transform: uppercase;
+  color: white;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
