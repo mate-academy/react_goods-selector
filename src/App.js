@@ -28,21 +28,21 @@ export default class App extends React.Component {
 
   addGood = (good) => {
     this.setState((prevState) => {
-      const updated = [...prevState.selectedGoods];
+      const updatedGood = [...prevState.selectedGoods];
 
-      updated.push(good);
+      updatedGood.push(good);
 
-      return { selectedGoods: updated };
+      return { selectedGoods: updatedGood };
     });
   }
 
   removeGood = (removingGood) => {
     this.setState((prevState) => {
-      const updated = [...prevState.selectedGoods].filter(
+      const updatedGood = [...prevState.selectedGoods].filter(
         good => good !== removingGood,
       );
 
-      return { selectedGoods: updated };
+      return { selectedGoods: updatedGood };
     });
   }
 
