@@ -23,34 +23,16 @@ export class App extends React.Component {
     goods: ['Jam'],
   }
 
-  addItem = (goodsName, element) => {
-    const buttonTextLength = element.textContent.length;
-
-    if (element.textContent === 'delete') {
-      this.removeItem(goodsName, buttonTextLength, element);
-
-      return;
-    }
-
+  addItem = (goodsName) => {
     this.setState(state => ({
-      goods: [...state.goods, goodsName.slice(0, -buttonTextLength)],
+      goods: [...state.goods, goodsName],
     }));
-
-    // eslint-disable-next-line no-param-reassign
-    element.textContent = 'delete';
   }
 
-  removeItem = (goodsName, index, element) => {
-    const indexOfGood = this.state.goods.indexOf(goodsName.slice(0, -index));
-
-    this.state.goods.splice(indexOfGood, 1);
-
+  removeItem = (goodsName) => {
     this.setState(state => ({
-      goods: [...state.goods],
+      goods: state.goods.filter(item => item !== goodsName),
     }));
-
-    // eslint-disable-next-line no-param-reassign
-    element.textContent = 'select';
   }
 
   reset = () => {
@@ -98,11 +80,12 @@ export class App extends React.Component {
                     'list__button',
                     { hidden: goods.includes(goodsFromServer[index]) },
                   )}
-                  onClick={(event) => {
-                    const liElement = event.target.closest('li');
-
-                    this.addItem(liElement.textContent, event.target);
-                  }
+                  onClick={((event) => {
+                    // eslint-disable-next-line no-unused-expressions
+                    event.target.textContent === 'delete'
+                      ? this.removeItem(good)
+                      : this.addItem(good);
+                  })
                 }
                 >
                   {this.state.goods.includes(good) ? 'delete' : 'select'}
