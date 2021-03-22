@@ -42,16 +42,8 @@ class App extends React.Component {
 
   render() {
     const { selectedGood } = this.state;
-    const singleProduct = (selectedGood.length === 1);
-    let products;
 
-    if (selectedGood && !isResetted) {
-      products = singleProduct
-        ? `${selectedGood} is selected`
-        : `${selectedGood.join(', ')} are selected`;
-    } else {
-      products = [];
-    }
+    const products = createTitle(selectedGood, selectedGood.length, isResetted);
 
     return (
       <div>
@@ -68,9 +60,7 @@ class App extends React.Component {
               ? ''
               : 'disabled'
           }
-          onClick={(event) => {
-            this.resetSelection();
-          }}
+          onClick={this.resetSelection}
         >
           X
         </button>
@@ -88,7 +78,7 @@ class App extends React.Component {
               {' '}
               <button
                 type="button"
-                onClick={(event) => {
+                onClick={() => {
                   this.selectGood(good);
                 }}
                 className={
@@ -105,6 +95,21 @@ class App extends React.Component {
       </div>
     );
   }
+}
+
+function createTitle(product, amountOfProducts, flagOfResetting) {
+  const singleProduct = (amountOfProducts === 1);
+  let someProducts;
+
+  if (product && !flagOfResetting) {
+    someProducts = singleProduct
+      ? `${product} is selected`
+      : `${product.join(', ')} are selected`;
+  } else {
+    someProducts = [];
+  }
+
+  return someProducts;
 }
 
 export default App;
