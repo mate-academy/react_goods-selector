@@ -45,17 +45,15 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>
-          {selectedGoods.length > 0
-            ? (
-              <button
-                type="button"
-                onClick={this.removeAllGoods}
-              >
-                X
-              </button>
-            )
-            : ''
-          }
+          {selectedGoods.length > 0 && (
+            <button
+              type="button"
+              onClick={this.removeAllGoods}
+            >
+              X
+            </button>
+          )}
+
           {` Selected good: ${
             selectedGoods.length > 0
               ? selectedGoods.map(good => (` ${good}`))
