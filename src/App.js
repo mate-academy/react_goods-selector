@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import { Button } from './Button';
 
 const goodsFromServer = [
   'Dumplings',
@@ -35,19 +36,19 @@ class App extends React.Component {
         <div className="heading">
           <h1 className="heading__title">
             {
-            selectedGood ? `${selectedGood} is selected` : `No goods selected`
+            selectedGood
+              ? `${selectedGood} is selected`
+              : `No goods selected`
+            }
+            {
+            selectedGood && (
+            <Button
+              callback={this.removeSelection}
+              text="X"
+            />
+            )
             }
           </h1>
-          {
-          selectedGood && (
-          <button
-            type="button"
-            className="heading__button"
-            onClick={this.removeSelection}
-          >
-            X
-          </button>
-          )}
         </div>
 
         <ul className="list">
@@ -63,15 +64,10 @@ class App extends React.Component {
               {
               selectedGood !== product
               && (
-              <button
-                type="button"
-                className="button__select"
-                onClick={() => {
-                  this.addSelection(product);
-                }}
-              >
-                Select
-              </button>
+                <Button
+                  callback={() => this.addSelection(product)}
+                  text="Select"
+                />
               )
             }
             </li>
