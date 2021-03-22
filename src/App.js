@@ -54,6 +54,8 @@ export default class App extends React.Component {
         <h1>
           <button
             type="button"
+            className={classNames('button',
+              { hidden: selectedGoods.length === 0 })}
             onClick={() => {
               this.resetGoods();
             }}
@@ -90,7 +92,7 @@ export default class App extends React.Component {
                 type="button"
                 className={
                   classNames(
-                    'button', { hidden: !selectedGoods.includes(good) },
+                    { hidden: !selectedGoods.includes(good) },
                   )
                 }
                 onClick={() => {
