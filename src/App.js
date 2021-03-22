@@ -44,7 +44,7 @@ const App = () => {
   return (
     <div className="App">
       <h1>
-        {`Selected good: ${selectedGood}`}
+        {`Selected good: ${selectedGood || 'None'} `}
 
         {!selectedGood || (
           <button type="button" onClick={clearSelect}>
