@@ -70,13 +70,18 @@ export class App extends React.Component {
           {goods.join(',')}
         </h1>
 
-        <button
-          type="button"
-          onClick={this.reset}
-          className="App__button"
-        >
-          X
-        </button>
+        {goods.length > 0
+          ? (
+            <button
+              type="button"
+              onClick={this.reset}
+              className="App__button"
+            >
+              X
+            </button>
+          )
+          : null
+        }
 
         <ul className="list">
           {goodsFromServer.map((good, index) => (
