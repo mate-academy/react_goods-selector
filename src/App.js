@@ -33,18 +33,13 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className="heading">
-          {selectedGood ? (
-            <h1 className="heading__title">
-              {selectedGood}
-              {' '}
-              is selected
-            </h1>
-          ) : (
-            <h1 className="heading__title">No goods selected</h1>
-          )}
+          <h1 className="heading__title">
+            {
+            selectedGood ? `${selectedGood} is selected` : `No goods selected`
+            }
+          </h1>
           {
-          selectedGood !== null
-          && (
+          selectedGood && (
           <button
             type="button"
             className="heading__button"
@@ -59,7 +54,7 @@ class App extends React.Component {
           {goodsFromServer.map(product => (
             <li key={product}>
               <span className={
-                selectedGood === product ? 'active' : null
+                selectedGood === product ? 'active' : ''
                 }
               >
                 {product}
