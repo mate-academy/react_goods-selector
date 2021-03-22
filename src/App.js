@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import './App.scss';
 
 const goodsFromServer = [
@@ -19,7 +19,7 @@ let prevButton;
 const App = () => {
   const [selectedGood, selectGood] = useState('Jam');
 
-  const changeGood = (selectEvent) => {
+  const changeGood = useCallback((selectEvent) => {
     const selectedButton = selectEvent.target;
 
     selectGood(selectedButton.parentNode.firstChild.textContent);
@@ -31,34 +31,37 @@ const App = () => {
     }
 
     prevButton = selectEvent.target;
-  };
+  });
 
-  const clearSelect = () => {
-    selectGood(null);
+  const clearSelect = useCallback(() => {
+    selectGood('');
 
     if (prevButton) {
       prevButton.hidden = false;
     }
-  };
+  });
 
   return (
     <div className="App">
       <h1>
-        {`Selected good: `}
-        <span className="App__selected-good">
-          {selectedGood}
-        </span>
+        {`Selected good: ${selectedGood}`}
+
         {!selectedGood || (
           <button type="button" onClick={clearSelect}>
             x
           </button>
         )}
-
       </h1>
+
       <ul>
-        {goodsFromServer.map((good, index) => (
-          <li key={good} className="App__good">
-            {`${good} `}
+        {goodsFromServer.map(good => (
+          <li key={good}>
+            <span className={good === selectedGood ? 'App__selected' : ''}>
+              {good}
+            </span>
+
+            {' '}
+
             <button
               className="App__button"
               type="button"
