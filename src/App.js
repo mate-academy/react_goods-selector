@@ -22,12 +22,9 @@ const preparedListGoods = goodsFromServer.map((name, index) => (
 ));
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      selectedGoods: [],
-    };
-  }
+  state = {
+    selectedGoods: [],
+  };
 
   addGood = (goodName) => {
     this.setState(prevState => ({
@@ -51,6 +48,10 @@ class App extends React.Component {
     this.setState({ selectedGoods: [] });
   }
 
+  showTitleText = goodsLength => (goodsLength > 1
+    ? 'are selected'
+    : 'is selected')
+
   render() {
     const { selectedGoods } = this.state;
     const listLength = selectedGoods.length;
@@ -59,79 +60,55 @@ class App extends React.Component {
       <div className="App">
         <div className="wrap">
           {
-              listLength
-                ? (
-                  <>
-                    <h1>
-                      {
-                        listLength === 1
-                          ? (
-                            <>
-                              {selectedGoods[0]}
-                              {' '}
-                              is selected
-                            </>
-                          )
-                          : ''
-                      }
-                      {
-                        listLength > 1
-                          ? (
-                            <>
-                              {selectedGoods.join(', ')}
-                              {' '}
-                              are selected
-                            </>
-                          )
-                          : ''
-                      }
-                    </h1>
-                    <button
-                      type="button"
-                      onClick={this.resetGoods}
-                      className="button"
-                    >
-                      Reset
-                    </button>
-                  </>
-                )
-                : <h1>No goods selected</h1>
-            }
+            listLength
+              ? (
+                <>
+                  <h1>
+                    {selectedGoods.join(', ')}
+                    {' '}
+                    {this.showTitleText(listLength)}
+                  </h1>
+                  <button
+                    type="button"
+                    onClick={this.resetGoods}
+                    className="button"
+                  >
+                    Reset
+                  </button>
+                </>
+              )
+              : <h1>No goods selected</h1>
+          }
         </div>
 
         {
           preparedListGoods.map(good => (
             <div className="wrap" key={good.index}>
+              <span
+                className={selectedGoods.includes(good.name) ? 'selected' : ''}
+              >
+                {good.name}
+              </span>
               {
-                 selectedGoods.includes(good.name)
-                   ? (
-                     <>
-                       <span className="selected">
-                         {good.name}
-                       </span>
-                       <button
-                         type="button"
-                         onClick={this.deleteGood.bind(null, good.name)}
-                         className="button button--red"
-                       >
-                         Delete
-                       </button>
-                     </>
-                   )
-                   : (
-                     <>
-                       <span>
-                         {good.name}
-                       </span>
-                       <button
-                         type="button"
-                         onClick={this.addGood.bind(null, good.name)}
-                         className="button"
-                       >
-                         Select
-                       </button>
-                     </>
-                   )
+                selectedGoods.includes(good.name)
+                  ? (
+                    <button
+                      type="button"
+                      onClick={() => this.deleteGood(good.name)}
+                      className="button button--red"
+                    >
+                      Delete
+                    </button>
+                  )
+                  : (
+                    <button
+                      type="button"
+                      onClick={() => this.addGood(good.name)}
+                      className="button"
+                    >
+                      Select
+                    </button>
+                  )
               }
             </div>
           ))
