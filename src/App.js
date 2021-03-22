@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import classNames from 'classnames';
 import './App.scss';
@@ -17,25 +15,24 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-// eslint-disable-next-line react/prefer-stateless-function
 export class App extends React.Component {
   state = {
     goods: ['Jam'],
   }
 
-  addItem = (goodsName) => {
+  addItem = (good) => {
     this.setState(state => ({
-      goods: [...state.goods, goodsName],
+      goods: [...state.goods, good],
     }));
   }
 
-  removeItem = (goodsName) => {
+  removeGood = (good) => {
     this.setState(state => ({
-      goods: state.goods.filter(item => item !== goodsName),
+      goods: state.goods.filter(item => item !== good),
     }));
   }
 
-  reset = () => {
+  resetGood = () => {
     this.setState({
       goods: [],
     });
@@ -56,7 +53,7 @@ export class App extends React.Component {
           ? (
             <button
               type="button"
-              onClick={this.reset}
+              onClick={this.resetGood}
               className="App__button"
             >
               X
@@ -74,22 +71,38 @@ export class App extends React.Component {
               >
                 {good}
 
-                <button
-                  type="button"
-                  className={classNames(
-                    'list__button',
-                    { hidden: goods.includes(goodsFromServer[index]) },
-                  )}
-                  onClick={((event) => {
-                    // eslint-disable-next-line no-unused-expressions
-                    event.target.textContent === 'delete'
-                      ? this.removeItem(good)
-                      : this.addItem(good);
-                  })
+                {this.state.goods.includes(good)
+                  ? (
+                    <button
+                      type="button"
+                      className={classNames(
+                        'list__button',
+                        { hidden: goods.includes(goodsFromServer[index]) },
+                      )}
+                      onClick={(() => {
+                        this.removeGood(good);
+                      })
+                      }
+                    >
+                      delete
+                    </button>
+                  )
+                  : (
+                    <button
+                      type="button"
+                      className={classNames(
+                        'list__button',
+                        { hidden: goods.includes(goodsFromServer[index]) },
+                      )}
+                      onClick={(() => {
+                        this.addItem(good);
+                      })
+                      }
+                    >
+                      select
+                    </button>
+                  )
                 }
-                >
-                  {this.state.goods.includes(good) ? 'delete' : 'select'}
-                </button>
               </li>
             </>
           ))}
