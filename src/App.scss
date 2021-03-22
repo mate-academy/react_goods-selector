@@ -29,9 +29,13 @@ html {
   background-color: #caf3f1;
 }
 
+.button {
+  cursor: pointer;
+}
+
 .button__add {
   background-color: rgb(114, 187, 114);
-  margin-right: 5px;
+  margin-right: 10px;
 }
 
 .button__remove {
