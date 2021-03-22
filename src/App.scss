@@ -1,1 +1,22 @@
-// styles go here
+.active {
+  color: rgb(41, 129, 180);
+  margin: 5px;
+  font-size: 18px;
+}
+
+.button__select {
+  margin: 0 40px;
+}
+
+.heading {
+  display: flex;
+
+  &__title {
+    margin: 0 5px;
+  }
+
+  &__button {
+    width: 33px;
+    height: 33px;
+  }
+}
