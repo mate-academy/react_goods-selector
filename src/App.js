@@ -16,7 +16,7 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGood: goodsFromServer[8],
+    selectedGood: 'Jam',
   };
 
   selectGood = (product) => {
@@ -24,7 +24,7 @@ class App extends React.Component {
   }
 
   removeSelected =() => {
-    this.setState({ selectedGood: null });
+    this.setState({ selectedGood: [] });
   }
 
   render() {
@@ -53,8 +53,11 @@ class App extends React.Component {
           {
             goodsFromServer.map(product => (
               <li
-                // eslint-disable-next-line max-len
-                className={`goods__item  ${selectedGood === product ? 'active' : ''}`}
+                className={
+                  `goods__item  ${
+                    selectedGood === product ? 'active' : ''
+                  }`
+                }
                 key={product}
               >
                 {product}
