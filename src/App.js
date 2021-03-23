@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import formatTitle from './FormatTitle';
 
 const goodsFromServer = [
   'Dumplings',
@@ -43,7 +44,7 @@ class App extends React.Component {
   render() {
     const { selectedGood } = this.state;
 
-    const products = createTitle(selectedGood, selectedGood.length, isResetted);
+    const products = formatTitle(selectedGood, isResetted);
 
     return (
       <div>
@@ -97,8 +98,8 @@ class App extends React.Component {
   }
 }
 
-function createTitle(product, amountOfProducts, flagOfResetting) {
-  const singleProduct = (amountOfProducts === 1);
+/* function formatTitle(product, flagOfResetting) {
+  const singleProduct = (product.length === 1);
   let someProducts;
 
   if (product && !flagOfResetting) {
@@ -110,6 +111,6 @@ function createTitle(product, amountOfProducts, flagOfResetting) {
   }
 
   return someProducts;
-}
+} */
 
 export default App;
