@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import './App.scss';
+import './list.scss';
 
 const goodsFromServer = [
   'Dumplings',

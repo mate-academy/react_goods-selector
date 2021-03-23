@@ -1,0 +1,39 @@
+.list {
+  list-style: none;
+  padding: 0;
+  cursor: pointer;
+
+  &__item {
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+  }
+
+  &__button {
+    width: 70px;
+    height: 30px;
+    cursor: pointer;
+    border-radius: 15px;
+    box-shadow: none;
+    background: #fff;
+    outline: none;
+    border-color: #f4b313;
+    transition: background 0.3s ease;
+
+    &:hover {
+      border: none;
+      background: #f4b313;
+    }
+  }
+}
+
+.hidden {
+  background: red;
+  border-color: red;
+
+  &:hover {
+    border: 2px solid red;
+    background: #fff;
+  }
+}
