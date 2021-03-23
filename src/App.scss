@@ -1,1 +1,16 @@
-// styles go here
+body {
+  background-color: #ffddad;
+}
+
+.selected {
+  background-color: #fff000;
+  font-size: 20px;
+}
+
+.button {
+  margin: 10px 0;
+}
+
+.hidden {
+  display: none;
+}
