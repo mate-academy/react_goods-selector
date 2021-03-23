@@ -17,21 +17,20 @@ const goodsFromServer = [
 class App extends React.Component {
   state = {
     selectedGoods: ['Jam'],
-    isProductAdded: false,
   }
 
-  addProduct = (item) => {
-    if (!this.state.selectedGoods.includes(item)) {
+  addProduct = (product) => {
+    if (!this.state.selectedGoods.includes(product)) {
       this.setState(prevState => ({
-        selectedGoods: [...prevState.selectedGoods, item],
+        selectedGoods: [...prevState.selectedGoods, product],
       }));
     }
   }
 
-  removeProduct = (item) => {
+  removeProduct = (product) => {
     this.setState(prevState => ({
       selectedGoods: prevState.selectedGoods
-        .filter(selectedItem => selectedItem !== item),
+        .filter(selectedproduct => selectedproduct !== product),
     }));
   }
 
@@ -40,12 +39,6 @@ class App extends React.Component {
       selectedGoods: [],
     }));
   };
-
-  changeProductStatus = () => {
-    this.setState(prevState => ({
-      isProductAdded: !prevState.isProductAdded,
-    }));
-  }
 
   render() {
     const { selectedGoods } = this.state;
@@ -67,21 +60,21 @@ class App extends React.Component {
         </button>
 
         <ul className="goods__list">
-          {goodsFromServer.map(item => (
+          {goodsFromServer.map(product => (
             <div
-              className={`list__item ${selectedGoods.includes(item)
+              className={`list__product ${selectedGoods.includes(product)
                 ? 'selected'
                 : ''
               }`}
-              key={item}
+              key={product}
             >
-              <li>{item}</li>
+              <li>{product}</li>
 
               <div>
                 <button
                   type="button"
                   className="button button__add"
-                  onClick={() => (this.addProduct(item))}
+                  onClick={() => this.addProduct(product)}
                 >
                   Add
                 </button>
@@ -89,11 +82,10 @@ class App extends React.Component {
                 <button
                   type="button"
                   className="button button__remove"
-                  onClick={() => (this.removeProduct(item))}
+                  onClick={() => this.removeProduct(product)}
                 >
                   Remove
                 </button>
-
               </div>
             </div>
           ))}
