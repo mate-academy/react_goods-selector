@@ -36,10 +36,10 @@ export default class App extends React.Component {
     });
   }
 
-  removeGood = (removingGood) => {
+  removeGood = (good) => {
     this.setState((prevState) => {
       const updatedGood = [...prevState.selectedGoods].filter(
-        good => good !== removingGood,
+        selectedGood => selectedGood !== good,
       );
 
       return { selectedGoods: updatedGood };
@@ -62,7 +62,7 @@ export default class App extends React.Component {
           >
             X
           </button>
-          {createTitle(selectedGoods, selectedGoods.length)}
+          {formateTitle(selectedGoods)}
         </h1>
         <ul>
           {goodsFromServer.map(good => (
@@ -87,7 +87,6 @@ export default class App extends React.Component {
               >
                 Add
               </button>
-
               <button
                 type="button"
                 className={
@@ -109,21 +108,21 @@ export default class App extends React.Component {
   }
 }
 
-function createTitle(selectedGoods, goodsListLength) {
-  if (goodsListLength === 0) {
+function formateTitle(selectedGoods) {
+  if (selectedGoods.length === 0) {
     return ('No goods selected');
   }
 
-  if (goodsListLength === 1) {
+  if (selectedGoods.length === 1) {
     return (`${selectedGoods[0]} is selected`);
   }
 
   return (`
     ${selectedGoods
-      .slice(0, goodsListLength - 1)
+      .slice(0, selectedGoods.length - 1)
       .toString()
       .replace(/,/g, ', ')} and 
-      ${selectedGoods[goodsListLength - 1]}
+      ${selectedGoods[selectedGoods.length - 1]}
        are selected`
   );
 }
