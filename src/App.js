@@ -52,16 +52,17 @@ export default class App extends React.Component {
     return (
       <div className="App">
         <h1>
+          {selectedGoods.length === 0 || (
           <button
             type="button"
-            className={classNames('button',
-              { hidden: selectedGoods.length === 0 })}
+            className="button"
             onClick={() => {
               this.resetGoods();
             }}
           >
             X
           </button>
+          )}
           {formateTitle(selectedGoods)}
         </h1>
         <ul>
@@ -76,30 +77,28 @@ export default class App extends React.Component {
             >
               {good}
               {'   '}
-              <button
-                type="button"
-                className={
-                  classNames('button', { hidden: selectedGoods.includes(good) })
-                }
-                onClick={() => {
-                  this.addGood(good);
-                }}
-              >
-                Add
-              </button>
-              <button
-                type="button"
-                className={
-                  classNames(
-                    { hidden: !selectedGoods.includes(good) },
-                  )
-                }
-                onClick={() => {
-                  this.removeGood(good);
-                }}
-              >
-                Remove
-              </button>
+              {selectedGoods.includes(good) || (
+                <button
+                  type="button"
+                  className="button"
+                  onClick={() => {
+                    this.addGood(good);
+                  }}
+                >
+                  Add
+                </button>
+              )}
+              {!selectedGoods.includes(good) || (
+                <button
+                  type="button"
+                  className="button"
+                  onClick={() => {
+                    this.removeGood(good);
+                  }}
+                >
+                  Remove
+                </button>
+              )}
             </li>
           ))}
         </ul>
