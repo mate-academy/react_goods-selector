@@ -1,1 +1,25 @@
-// styles go here
+.body {
+  margin: 0;
+}
+
+.title {
+  font-family: "Roboto", sans-serif;
+  font-size: 26px;
+  color: green;
+}
+
+.list {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  line-height: 2;
+
+}
+
+.selected {
+  color: green;
+  font-weight: 700;
+}
+
+.disabled {
+  display: none;
+}
