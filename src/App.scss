@@ -1,1 +1,27 @@
-// styles go here
+.App {
+  margin-left: 20px;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  width: 50vw;
+
+  &__button {
+    height: max-content;
+    margin: auto;
+  }
+}
+
+.goods {
+  display: flex;
+  justify-content: space-between;
+  width: 30vw;
+  margin-bottom: 5px;
+
+  &__item {
+    color: firebrick;
+    font-weight: 700;
+    text-decoration: underline;
+  }
+}
