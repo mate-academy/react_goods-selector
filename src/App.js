@@ -25,7 +25,7 @@ class App extends React.Component {
   };
 
   removeProduct = () => {
-    this.setState({ selectedGood: null });
+    this.setState({ selectedGood: [] });
   };
 
   render() {
@@ -64,16 +64,9 @@ class App extends React.Component {
               {`${product} `}
               <button
                 type="button"
+                hidden={selectedGood === product}
                 onClick={(event) => {
                   this.addProduct(product);
-
-                  const pressedButton = event.target;
-
-                  pressedButton.hidden = true;
-
-                  if (previousButton) {
-                    previousButton.hidden = false;
-                  }
 
                   this.setState({ previousButton: event.target });
                 }}
