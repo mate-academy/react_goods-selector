@@ -1,1 +1,43 @@
-// styles go here
+html {
+  background-color: #f5f5ee;
+  font-family: Arial, Helvetica, sans-serif
+}
+
+.app {
+  background-color: #fff;
+  margin: auto;
+  width: 1400px;
+  padding: 10px 40px;
+  border: 1px solid #f0f0f0;
+  box-shadow: rgba(23, 23, 36, 0.15) 0px 3px 7px 0px,
+}
+
+.goods__list {
+  list-style: none;
+  padding: 0;
+}
+
+.list__product {
+  display: flex;
+  justify-content: space-between;
+  background-color: #efefef;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.selected {
+  background-color: #caf3f1;
+}
+
+.button {
+  cursor: pointer;
+}
+
+.button__add {
+  background-color: rgb(114, 187, 114);
+  margin-right: 10px;
+}
+
+.button__remove {
+  background-color: rgb(218, 96, 96);
+}
