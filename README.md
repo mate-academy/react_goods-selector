@@ -1,8 +1,10 @@
 # React Goods selector
-- Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_goods-selector/)
+
+- Replace `<your_account>` with your Github username in the [DEMO LINK](https://taniazt.github.io/react_goods-selector/)
 - Follow the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline)
 
 ## Task
+
 1. You are given an array of goods
 1. Display them as a list inside the `App` (DON'T create additional components)
 1. Add `h1` initially saying `No goods selected`
@@ -12,15 +14,16 @@
 1. Add a button `Select` next to each good in the list
 1. When you press the button the good becomes selected
 1. Don't show the button next to the selected good
-1. You can select another good by pressing its `Select` button 
+1. You can select another good by pressing its `Select` button
 1. Add button `X` for to the `h1` to clear the selection. (Set `null`)
 1. The clear button should not be visible if there is no selected good
 
-## (* Optional) Advanced task
+## (\* Optional) Advanced task
+
 1. Implement the ability to select multiple goods (use `selectedGoods` Array)
 1. Use functional `setState` described in [this video](https://youtu.be/zMe2Qq-ThpM)
 1. Show `Add` or `Remove` instead of `Select` button
 1. All the selected goods should be listed in the `h1`:
-    - `No goods selected`
-    - `Jam is selected`
-    - `Carrot, Jam and Eggs are selected`
+   - `No goods selected`
+   - `Jam is selected`
+   - `Carrot, Jam and Eggs are selected`
