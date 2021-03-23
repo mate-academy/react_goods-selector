@@ -17,7 +17,6 @@ const goodsFromServer = [
 class App extends React.Component {
   state = {
     selectedGood: 'Jam',
-    previousButton: null,
   }
 
   addProduct = (product) => {
@@ -25,11 +24,11 @@ class App extends React.Component {
   };
 
   removeProduct = () => {
-    this.setState({ selectedGood: [] });
+    this.setState({ selectedGood: null });
   };
 
   render() {
-    const { selectedGood, previousButton } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <div className="App">
@@ -42,10 +41,6 @@ class App extends React.Component {
                   type="button"
                   onClick={() => {
                     this.removeProduct();
-
-                    if (previousButton) {
-                      previousButton.hidden = false;
-                    }
                   }}
                 >
                   X
@@ -65,10 +60,8 @@ class App extends React.Component {
               <button
                 type="button"
                 hidden={selectedGood === product}
-                onClick={(event) => {
+                onClick={() => {
                   this.addProduct(product);
-
-                  this.setState({ previousButton: event.target });
                 }}
               >
                 Select
