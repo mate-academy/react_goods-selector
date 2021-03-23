@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.scss';
-import classNames from 'classnames';
 
 const goodsFromServer = [
   'Dumplings',
@@ -67,14 +66,7 @@ export default class App extends React.Component {
         </h1>
         <ul>
           {goodsFromServer.map(good => (
-            <li
-              key={good}
-              className={
-                classNames('good-name', {
-                  selected: selectedGoods.includes(good),
-                })
-              }
-            >
+            <li key={good}>
               {good}
               {'   '}
               {selectedGoods.includes(good) || (
