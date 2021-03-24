@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+
 import './App.scss';
 
 const goodsFromServer = [
@@ -14,39 +15,32 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-export class App extends React.Component {
+export class App extends Component {
   state = {
-    goodsInCart: [],
+    selectedGoods: [],
   };
 
-  handleClick = (clickEvent) => {
-    const button = clickEvent.target;
-
+  handleClick = (product) => {
     const addContent = () => {
-      const good = clickEvent.target.previousElementSibling.textContent;
-
       this.setState((prevState) => {
-        const updateGoodsInCart = [...prevState.goodsInCart];
+        const updateSelectedGoods = [...prevState.selectedGoods];
 
-        updateGoodsInCart.push(good);
+        updateSelectedGoods.push(product);
 
-        return { goodsInCart: updateGoodsInCart };
+        return { selectedGoods: updateSelectedGoods };
       });
     };
 
     const removeContent = () => {
-      const toDelete = clickEvent.target
-        .previousElementSibling.textContent;
-
       this.setState((prevState) => {
-        const updateGoodsInCart = [...prevState.goodsInCart]
-          .filter(good => good !== toDelete);
+        const updateSelectedGoods = [...prevState.selectedGoods]
+          .filter(good => good !== product);
 
-        return { goodsInCart: updateGoodsInCart };
+        return { selectedGoods: updateSelectedGoods };
       });
     };
 
-    if (button.textContent === 'Select') {
+    if (!this.state.selectedGoods.includes(product)) {
       addContent();
     } else {
       removeContent();
@@ -54,7 +48,7 @@ export class App extends React.Component {
   }
 
   clearGoodsCart = () => {
-    this.setState({ goodsInCart: [] });
+    this.setState({ selectedGoods: [] });
   };
 
   headerText = (goods) => {
@@ -84,9 +78,9 @@ export class App extends React.Component {
       <div className="App">
         <div>
           <h1 className="header">
-            {this.headerText(this.state.goodsInCart)}
+            {this.headerText(this.state.selectedGoods)}
           </h1>
-          {this.state.goodsInCart.length > 0
+          {this.state.selectedGoods.length > 0
             && (
             <button
               type="button"
@@ -96,12 +90,13 @@ export class App extends React.Component {
             </button>
             )}
         </div>
+
         <ul>
           {goodsFromServer.map(goods => (
             <div key={goods}>
               <li>
                 <span className={
-                  this.state.goodsInCart.includes(goods)
+                  this.state.selectedGoods.includes(goods)
                     ? 'mark'
                     : ''
                 }
@@ -111,9 +106,9 @@ export class App extends React.Component {
                 {` - `}
                 <button
                   type="button"
-                  onClick={this.handleClick}
+                  onClick={() => this.handleClick(goods)}
                 >
-                  {this.state.goodsInCart.includes(goods)
+                  {this.state.selectedGoods.includes(goods)
                     ? 'Cancel'
                     : 'Select'
                   }
@@ -122,6 +117,7 @@ export class App extends React.Component {
             </div>
           ))}
         </ul>
+
       </div>
     );
   }
