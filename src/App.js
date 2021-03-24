@@ -51,7 +51,7 @@ export class App extends Component {
     this.setState({ selectedGoods: [] });
   };
 
-  headerText = () => {
+  formatTitle = () => {
     if (this.state.selectedGoods.length === 0) {
       return 'No goods selected';
     }
@@ -78,7 +78,7 @@ export class App extends Component {
       <div className="App">
         <div>
           <h1 className="header">
-            {this.headerText()}
+            {this.formatTitle()}
           </h1>
           {this.state.selectedGoods.length > 0
             && (
