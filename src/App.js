@@ -51,16 +51,16 @@ export class App extends Component {
     this.setState({ selectedGoods: [] });
   };
 
-  headerText = (goods) => {
-    if (goods.length === 0) {
+  headerText = () => {
+    if (this.state.selectedGoods.length === 0) {
       return 'No goods selected';
     }
 
-    if (goods.length === 1) {
-      return `${goods[0]} is selected `;
+    if (this.state.selectedGoods.length === 1) {
+      return `${this.state.selectedGoods[0]} is selected `;
     }
 
-    return goods.reduce((text, good, index, arr) => {
+    return this.state.selectedGoods.reduce((text, good, index, arr) => {
       if (index === arr.length - 1) {
         return `${text} and ${good} are selected `;
       }
@@ -78,7 +78,7 @@ export class App extends Component {
       <div className="App">
         <div>
           <h1 className="header">
-            {this.headerText(this.state.selectedGoods)}
+            {this.headerText()}
           </h1>
           {this.state.selectedGoods.length > 0
             && (
