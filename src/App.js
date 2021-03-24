@@ -1,4 +1,3 @@
-// import { ReactComponent } from '*.svg';
 import React from 'react';
 import './App.scss';
 
@@ -16,80 +15,108 @@ const goodsFromServer = [
 ];
 
 export class App extends React.Component {
+  state = {
+    goodsInCart: [],
+  };
+
   handleClick = (clickEvent) => {
-    const header = document.querySelector('h1');
     const button = clickEvent.target;
-    let markedGoods = [];
-    const resetButton = `<button
-      onclick="
-        this.parentNode.textContent = 'No goods selected';
-        [...document.querySelectorAll('.mark')].forEach(li =>{
-          li.classList.remove('mark');
-          li.lastElementChild.textContent = 'Select';
-        })
-      ">X</button>`;
 
-    switch (button.textContent) {
-      case 'Select':
-        switchContent(
-          'Cancel',
-          className => button.parentElement.classList.add(className),
-        );
-        break;
+    const addContent = () => {
+      const good = clickEvent.target.previousElementSibling.textContent;
 
-      case 'Cancel':
-        switchContent(
-          'Select',
-          className => button.parentElement.classList.remove(className),
-        );
-        break;
+      this.setState((prevState) => {
+        const updateGoodsInCart = [...prevState.goodsInCart];
 
-      default:
+        updateGoodsInCart.push(good);
+
+        return { goodsInCart: updateGoodsInCart };
+      });
+    };
+
+    const removeContent = () => {
+      const toDelete = clickEvent.target
+        .previousElementSibling.textContent;
+
+      this.setState((prevState) => {
+        const updateGoodsInCart = [...prevState.goodsInCart]
+          .filter(good => good !== toDelete);
+
+        return { goodsInCart: updateGoodsInCart };
+      });
+    };
+
+    if (button.textContent === 'Select') {
+      addContent();
+    } else {
+      removeContent();
+    }
+  }
+
+  clearGoodsCart = () => {
+    this.setState({ goodsInCart: [] });
+  };
+
+  headerText = (goods) => {
+    if (goods.length === 0) {
+      return 'No goods selected';
     }
 
-    function switchContent(buttonText, listCallback) {
-      button.textContent = buttonText;
-      listCallback('mark');
-      markedGoods = [...document.querySelectorAll('.mark .goodsName')];
+    if (goods.length === 1) {
+      return `${goods[0]} is selected `;
+    }
 
-      if (markedGoods.length === 0) {
-        header.textContent = 'No goods selected';
-      } else if (markedGoods.length === 1) {
-        header.textContent = `${markedGoods[0].textContent} is selected `;
-        header.insertAdjacentHTML('beforeend', resetButton);
-      } else {
-        header.textContent = markedGoods
-          .reduce((text, goods, index, arr) => {
-            if (index === arr.length - 1) {
-              return `${text} and ${goods.textContent} are selected `;
-            }
-
-            if (index !== 0 && index !== arr.length - 1) {
-              return `${text}, ${goods.textContent} `;
-            }
-
-            return `${text} ${goods.textContent} `;
-          }, '');
-        header.insertAdjacentHTML('beforeend', resetButton);
+    return goods.reduce((text, good, index, arr) => {
+      if (index === arr.length - 1) {
+        return `${text} and ${good} are selected `;
       }
-    }
+
+      if (index !== 0 && index !== arr.length - 1) {
+        return `${text}, ${good} `;
+      }
+
+      return `${text} ${good} `;
+    }, '');
   }
 
   render() {
     return (
       <div className="App">
-        <h1>No goods selected</h1>
+        <div>
+          <h1 className="header">
+            {this.headerText(this.state.goodsInCart)}
+          </h1>
+          {this.state.goodsInCart.length > 0
+            && (
+            <button
+              type="button"
+              onClick={this.clearGoodsCart}
+            >
+              X
+            </button>
+            )}
+        </div>
         <ul>
-          {goodsFromServer.map((goods, index) => (
-            <div>
+          {goodsFromServer.map(goods => (
+            <div key={goods}>
               <li>
-                <span className="goodsName">{goods}</span>
+                <span className={
+                  this.state.goodsInCart.includes(goods)
+                    ? 'mark'
+                    : ''
+                }
+                >
+                  {goods}
+                </span>
                 {` - `}
                 <button
                   type="button"
                   onClick={this.handleClick}
                 >
-                  Select
+                  {this.state.goodsInCart.includes(goods)
+                    ? 'Cancel'
+                    : 'Select'
+                  }
                 </button>
               </li>
             </div>
