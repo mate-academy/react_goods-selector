@@ -12,36 +12,35 @@ const goodsFromServer = [
   'Honey',
   'Jam',
   'Garlic',
-].map((good, index) => ({
+];
+
+const preparedGoods = goodsFromServer.map((good, index) => ({
   product: good,
   id: index + 1,
 }));
 
-let isResetted = false;
-
 class App extends React.Component {
   state = {
     selectedGood: ['Jam'],
+    isResetted: false,
   }
 
   addGoods = (good) => {
     this.setState(prevState => ({
       selectedGood: [...prevState.selectedGood, good],
+      isResetted: false,
     }));
-
-    isResetted = false;
   }
 
   resetGoods = () => {
     this.setState(() => ({
       selectedGood: [],
+      isResetted: true,
     }));
-
-    isResetted = true;
   }
 
   render() {
-    const { selectedGood } = this.state;
+    const { selectedGood, isResetted } = this.state;
 
     return (
       <div className="App">
@@ -60,7 +59,7 @@ class App extends React.Component {
           </button>
         )}
         <ul>
-          {goodsFromServer.map(({ product, id }) => (
+          {preparedGoods.map(({ product, id }) => (
             <li
               key={id}
               className={`item ${selectedGood.includes(product)
