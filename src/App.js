@@ -14,32 +14,18 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-let prevButton;
-
 const App = () => {
   const [selectedGood, selectGood] = useState('Jam');
 
-  const changeGood = useCallback((selectEvent) => {
-    const selectedButton = selectEvent.target;
+  const changeGood = useCallback(
+    good => () => selectGood(good),
+    [],
+  );
 
-    selectGood(selectedButton.parentNode.firstChild.textContent);
-
-    selectedButton.hidden = true;
-
-    if (prevButton) {
-      prevButton.hidden = false;
-    }
-
-    prevButton = selectEvent.target;
-  });
-
-  const clearSelect = useCallback(() => {
-    selectGood('');
-
-    if (prevButton) {
-      prevButton.hidden = false;
-    }
-  });
+  const clearSelect = useCallback(
+    () => selectGood(''),
+    [],
+  );
 
   return (
     <div className="App">
@@ -65,7 +51,8 @@ const App = () => {
             <button
               className="App__button"
               type="button"
-              onClick={changeGood}
+              onClick={changeGood(good)}
+              hidden={good === selectedGood}
             >
               Select
             </button>
