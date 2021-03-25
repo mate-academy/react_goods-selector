@@ -18,7 +18,7 @@ const App = () => {
   const [selectedGood, selectGood] = useState('Jam');
 
   const changeGood = useCallback(
-    good => () => selectGood(good),
+    good => selectGood(good),
     [],
   );
 
@@ -51,7 +51,7 @@ const App = () => {
             <button
               className="App__button"
               type="button"
-              onClick={changeGood(good)}
+              onClick={() => changeGood(good)}
               hidden={good === selectedGood}
             >
               Select
