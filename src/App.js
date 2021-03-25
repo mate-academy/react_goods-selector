@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import './App.scss';
 
 const goodsFromServer = [
@@ -14,11 +14,53 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-const App = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+const App = () => {
+  const [selectedGood, selectGood] = useState('Jam');
+
+  const changeGood = useCallback(
+    good => selectGood(good),
+    [],
+  );
+
+  const clearSelect = useCallback(
+    () => selectGood(''),
+    [],
+  );
+
+  return (
+    <div className="App">
+      <h1>
+        {`Selected good: ${selectedGood || 'None'} `}
+
+        {!selectedGood || (
+          <button type="button" onClick={clearSelect}>
+            x
+          </button>
+        )}
+      </h1>
+
+      <ul>
+        {goodsFromServer.map(good => (
+          <li key={good}>
+            <span className={good === selectedGood ? 'App__selected' : ''}>
+              {good}
+            </span>
+
+            {' '}
+
+            <button
+              className="App__button"
+              type="button"
+              onClick={() => changeGood(good)}
+              hidden={good === selectedGood}
+            >
+              Select
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default App;
