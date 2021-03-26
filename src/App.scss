@@ -1,1 +1,37 @@
-// styles go here
+.app {
+  margin: 0 auto;
+  width: 700px;
+
+  font-family: "Courier New", Courier, monospace;
+  color: #252a20;
+}
+
+.clear-button {
+  width: 40px;
+  height: 40px;
+  outline: none;
+  border: 1px solid #252a20;
+  border-radius: 5px;
+  margin-top: 10px;
+  background-color: #5d9561;
+  font-size: 30px;
+  font-weight: bold;
+
+  &:hover {
+    background-color: #b1b67a;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+  font-size: 20px;
+}
+
+.list {
+  width: 240px;
+  margin: 0 auto;
+  &__item {
+    margin: 10px;
+  }
+}
