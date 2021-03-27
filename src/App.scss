@@ -1,1 +1,151 @@
-// styles go here
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Montserrat, sans-serif;
+  background-color: burlywood;
+  padding: 50px 20px;
+}
+
+.app {
+  min-height: 500px;
+  margin: 0 auto;
+  padding: 30px 0;
+  max-width: 1380px;
+  border-radius: 10px;
+  background-color: rgb(157, 243, 207);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+    0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding-bottom: 50px;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+    height: 40px;
+    line-height: 40px;
+  }
+
+  &__text {
+    font-size: 20px;
+    height: 40px;
+  }
+
+  &__active {
+    color: hsl(236, 78%, 51%);
+    height: 40px;
+    line-height: 40px;
+    border-radius: 8px;
+  }
+
+}
+
+.btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__select {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+
+  &__remove {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+}
+
+.products {
+  display: flex;
+  padding: 0 20px;
+  padding-bottom: 40px;
+  width: 250px;
+  justify-content: space-between;
+
+  &__count {
+    font-size: 24px;
+  }
+  &__delete {
+    width: 50px;
+    color: rgb(157, 243, 207);
+    border-radius: 8px;
+    background: rgb(207, 55, 55)
+      radial-gradient(circle at 50% 0,
+      rgba(196, 51, 51, 0.65),
+      rgba(197, 19, 19, 0.35));
+    box-shadow: inset rgba(43, 3, 3, 0.6) 0 -3px 8px,
+      inset rgba(24, 231, 231, 0.7) 0 3px 8px,
+      rgba(119, 7, 7, 0.8) 0 3px 8px -3px;
+  }
+}
+
+.text {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 20px;
+  align-items: center;
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    display: block;
+    font-size: 22px;
+    white-space: nowrap;
+    margin: 10px 0;
+  }
+
+  &__col {
+    font-size: 18px;
+  }
+}
+
+.add-remove {
+  width: 60px;
+  height: 30px;
+  line-height: 30px;
+  text-transform: uppercase;
+  font-size: 12px;
+  border: none;
+  color: cornsilk;
+
+  transition: all 0.3s;
+  background: rgb(100,100,100)
+    radial-gradient(circle at 50% 0,
+    rgba(255,255,255,0.65),
+    rgba(255,255,255,0.35));
+  box-shadow: inset rgba(0,0,0,0.6) 0 -3px 8px,
+    inset rgba(252,255,255,0.7) 0 3px 8px,
+    rgba(0,0,0,0.8) 0 3px 8px -3px;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+      0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}
