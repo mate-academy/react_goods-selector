@@ -80,10 +80,12 @@ body {
   &__count {
     font-size: 24px;
   }
+
   &__delete {
     width: 50px;
     color: rgb(157, 243, 207);
     border-radius: 8px;
+    cursor: pointer;
     background: rgb(207, 55, 55)
       radial-gradient(circle at 50% 0,
       rgba(196, 51, 51, 0.65),
@@ -125,6 +127,7 @@ body {
   font-size: 12px;
   border: none;
   color: cornsilk;
+  cursor: pointer;
 
   transition: all 0.3s;
   background: rgb(100,100,100)
