@@ -18,7 +18,15 @@ const nonSelected = 'None';
 
 class App extends React.Component {
   state = {
-    selectedItem: nonSelected,
+    selectedItem: 'Jam',
+  }
+
+  resetSelection = () => {
+    this.setState({ selectedItem: nonSelected });
+  }
+
+  selectGoods = (item) => {
+    this.setState({ selectedItem: item });
   }
 
   highlight(item) {
@@ -40,26 +48,24 @@ class App extends React.Component {
             <button
               type="button"
               className="heading__button"
-              onClick={() => {
-                this.setState({ selectedItem: nonSelected });
-              }}
+              onClick={this.resetSelection}
             >
               X
             </button>
           )}
         </div>
 
-        {goodsFromServer.map(item => (
-          <div key={item} className="goods">
-            <div className={this.highlight(item)}>
-              {item}
+        {goodsFromServer.map(good => (
+          <div key={good} className="goods">
+            <div className={this.highlight(good)}>
+              {good}
             </div>
 
             <div className="goods__button">
               <button
                 type="button"
                 onClick={() => {
-                  this.setState({ selectedItem: item });
+                  this.selectGoods(good);
                 }}
               >
                 V
