@@ -22,7 +22,7 @@ class App extends React.Component {
 
   chooseClass = (item) => {
     if (this.state.selectedGoods.includes(item)) {
-      return 'selected';
+      return 'products selected';
     }
 
     return 'products';
