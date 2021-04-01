@@ -56,8 +56,8 @@ class App extends React.Component {
       }));
     }
 
-    document.querySelector(`.${item.slice(0, 1)}`).style.color = 'black';
-    document.querySelector(`.${item.slice(0, 2)}`).style.display
+    document.querySelector(`#${item.slice(0, 1)}`).style.color = 'black';
+    document.querySelector(`#${item.slice(0, 2)}`).style.display
       = 'inline-block';
   }
 
@@ -75,14 +75,18 @@ class App extends React.Component {
       }));
     }
 
-    document.querySelector(`.${item.slice(0, 1)}`).style.color = 'aqua';
-    document.querySelector(`.${item.slice(0, 2)}`).style.display = 'none';
+    document.querySelector(`#${item.slice(0, 1)}`).style.color = 'green';
+    document.querySelector(`#${item.slice(0, 2)}`).style.display = 'none';
   }
 
   render() {
     return (
       <div className="App">
-        <h1>{this.state.selectedGood}</h1>
+        <h1 className="title">Shop</h1>
+        <p>
+          You choose:&nbsp;
+          {this.state.selectedGood}
+        </p>
         <p>
           {goodsFromServer.length - this.state.selectedGoods.length}
           &nbsp;goods yet!
@@ -91,13 +95,15 @@ class App extends React.Component {
           {goodsFromServer.map(item => (
             <li
               key={goodsFromServer.indexOf(item)}
-              className={item.slice(0, 1)}
+              id={item.slice(0, 1)}
               type="button"
+              className="product"
             >
               <>
                 {item}
                 <button
-                  className={item.slice(0, 2)}
+                  className="button is-success is-light"
+                  id={item.slice(0, 2)}
                   onClick={() => this.adder(item)}
                   type="button"
                 >
@@ -105,6 +111,7 @@ class App extends React.Component {
                 </button>
                 {(this.state.selectedGoods.includes(item)) && (
                   <button
+                    className="button is-warning"
                     onClick={() => this.remover(item)}
                     type="button"
                   >
@@ -117,6 +124,7 @@ class App extends React.Component {
         </div>
         {(this.state.selectedGood !== 'No goods selected') && (
           <button
+            className="button is-danger"
             onClick={() => this.clear()}
             type="button"
           >
