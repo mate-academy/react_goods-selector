@@ -20,19 +20,17 @@ class App extends React.Component {
     selectedGoods: [],
   }
 
-  clear = () => {
-    const allLi = [...document.querySelectorAll('li')];
-    const allButton = [...document.querySelectorAll('button')];
+  chooseClass = (item) => {
+    if (this.state.selectedGoods.includes(item)) {
+      return 'selected';
+    }
 
+    return 'products';
+  }
+
+  clear = () => {
     this.setState({ selectedGood: 'No goods selected' });
     this.setState(state => ({ selectedGoods: [] }));
-    for (let i = 0; i < allLi.length; i += 1) {
-      allLi[i].style.color = 'black';
-    }
-
-    for (let i = 0; i < allButton.length; i += 1) {
-      allButton[i].style.display = 'inline-block';
-    }
   }
 
   remover = (item) => {
@@ -55,10 +53,6 @@ class App extends React.Component {
         selectedGood: `${sumRemove} are selected`,
       }));
     }
-
-    document.querySelector(`#${item.slice(0, 1)}`).style.color = 'black';
-    document.querySelector(`#${item.slice(0, 2)}`).style.display
-      = 'inline-block';
   }
 
   adder = (item) => {
@@ -74,9 +68,6 @@ class App extends React.Component {
         selectedGood: `${sumAdd} are selected`,
       }));
     }
-
-    document.querySelector(`#${item.slice(0, 1)}`).style.color = 'green';
-    document.querySelector(`#${item.slice(0, 2)}`).style.display = 'none';
   }
 
   render() {
@@ -95,15 +86,12 @@ class App extends React.Component {
           {goodsFromServer.map(item => (
             <li
               key={goodsFromServer.indexOf(item)}
-              id={item.slice(0, 1)}
-              type="button"
-              className="product"
+              className={this.chooseClass(item)}
             >
               <>
                 {item}
                 <button
                   className="button is-success is-light"
-                  id={item.slice(0, 2)}
                   onClick={() => this.adder(item)}
                   type="button"
                 >

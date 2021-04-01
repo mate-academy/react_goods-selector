@@ -13,3 +13,7 @@
 .button {
   margin-left: 20px;
 }
+
+.selected {
+  color: green;
+}
