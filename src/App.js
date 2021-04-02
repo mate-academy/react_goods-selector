@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
 
 const goodsFromServer = [
   'Dumplings',
@@ -65,9 +66,9 @@ class App extends React.Component {
           )}
         </div>
         <div className="container shadow p-3 mb-5 bg-body rounded">
-          <ul className="list-group list-group-flush">
+          <ul className="list-group list-group-flush" >
             {goodsFromServer.map(good => (
-              <li className="list-group-item" key={good}>
+              <li className={classNames(`list-group-item`, {highlight: this.state.selectedGoods.includes(good)})} key={good}>
                 {good}
                 <button
                   type="button"
