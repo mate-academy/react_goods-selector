@@ -1,1 +1,48 @@
-// styles go here
+$button-gradient: #d8d9db 0%, #fff 80%, #fdfdfd 100%;
+$button-border: #8f9092;
+$button-text: #606060;
+$highlight-bottom: 0 4px 3px 1px #fcfcfc;
+$shadow-bottom: 0 6px 8px #d6d7d9;
+$shadow-top: 0 -4px 4px #cecfd1;
+$highlight-top: 0 -6px 4px #fefefe;
+$shadow-inset: inset 0 0 3px 0 #cecfd1;
+$button-shadow-base: $highlight-bottom,
+  $shadow-bottom,
+  $shadow-top,
+  $highlight-top;
+$button-shadow-default: $button-shadow-base, $shadow-inset;
+
+.selected {
+  background-color: red;
+  color: white;
+}
+
+.button {
+  margin-right: 50px;
+  outline: none;
+  cursor: pointer;
+  width: 80px;
+  height: 30px;
+  background-image: linear-gradient(to top, $button-gradient);
+  border-radius: 30px;
+  border: 1px solid $button-border;
+  box-shadow: $button-shadow-default;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: $button-text;
+  text-shadow: 0 1px #fff;
+}
+
+.list__item {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: $button-text;
+  padding: 20px;
+}
+
+.list__button {
+  position: absolute;
+  left: 150px;
+}
