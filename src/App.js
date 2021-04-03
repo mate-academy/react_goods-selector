@@ -17,7 +17,7 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGoods: [],
+    selectedGoods: ['Jam'],
   }
 
   addGoods = (good) => {
@@ -43,15 +43,25 @@ class App extends React.Component {
     return (
       <div>
         <div className="App">
-          {this.state.selectedGoods.length !== 0
+          {this.state.selectedGoods.length === 1
             ? (
               <h1>
-                {`Selected goods:
-                  ${this.state.selectedGoods.join(', ')}
-                  are selected`}
+                {`${this.state.selectedGoods.join(', ')}
+                is selected`}
               </h1>
             )
-            : <h1>Selected goods: No goods selected</h1>}
+            : this.state.selectedGoods.length > 1
+              ? (
+                <h1>
+                  {`${this.state.selectedGoods.slice(0, -1).join(', ')}
+                and
+                ${this.state.selectedGoods[this.state.selectedGoods.length - 1]}
+                are selected`}
+                </h1>
+              )
+              : (<h1>No goods selected</h1>)
+          }
+
           {this.state.selectedGoods.length !== 0
           && (
           <button
@@ -66,28 +76,38 @@ class App extends React.Component {
           )}
         </div>
         <div className="container shadow p-3 mb-5 bg-body rounded">
-          <ul className="list-group list-group-flush" >
+          <ul className="list-group list-group-flush">
             {goodsFromServer.map(good => (
-              <li className={classNames(`list-group-item`, {highlight: this.state.selectedGoods.includes(good)})} key={good}>
+              <li
+                className={classNames(`list-group-item`,
+                  { highlight: this.state.selectedGoods.includes(good) })}
+                key={good}
+              >
                 {good}
-                <button
-                  type="button"
-                  className="btn btn-outline-danger"
-                  onClick={() => {
-                    this.addGoods(good);
-                  }}
-                >
-                  Select
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-outline-success"
-                  onClick={() => {
-                    this.removeGood(good);
-                  }}
-                >
-                  Remove
-                </button>
+                {this.state.selectedGoods.includes(good)
+                  ? (
+                    <button
+                      type="button"
+                      className="btn btn-outline-danger"
+                      onClick={() => {
+                        this.removeGood(good);
+                      }}
+                    >
+                      Remove
+                    </button>
+                  )
+                  : (
+                    <button
+                      type="button"
+                      className="btn btn-outline-success"
+                      onClick={() => {
+                        this.addGoods(good);
+                      }}
+                    >
+                      Add
+                    </button>
+                  )
+              }
               </li>
             ))}
           </ul>
