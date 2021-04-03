@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+// import { ListOfGoods } from './components/ListOfGoods/ListOfGoods';
 
 const goodsFromServer = [
   'Dumplings',
@@ -14,50 +15,48 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-class App extends React.Component {
+class App extends React.PureComponent {
   state = {
     selectedGood: 'Jam',
-  }
+    isButtonHiden: false,
+  };
 
   addGood = (good) => {
-    this.setState({ selectedGood: good });
+    this.setState({
+      selectedGood: good,
+      isButtonHiden: false,
+    });
   }
 
-  removeGood = () => {
-    this.setState({ selectedGood: null });
+  removeGood = (good) => {
+    this.setState({
+      selectedGood: 'No goods selected',
+      isButtonHiden: true,
+    });
   }
 
   render() {
-    const { selectedGood } = this.state;
+    const { selectedGood, isButtonHiden } = this.state;
 
     return (
       <div className="App">
         <h1>
-          Selected good: -
-          {' '}
-          {
-            selectedGood
-              ? `${selectedGood}`
-              : `no goods`
-          }
-          {' '}
+          {`Selected good: - ${selectedGood} `}
           <button
             type="button"
-            className="button__remove"
-            onClick={this.removeGood}
+            hidden={isButtonHiden}
+            onClick={() => {
+              this.removeGood();
+            }}
           >
             X
           </button>
         </h1>
-        <ul className="list">
+        <ul>
           {goodsFromServer.map(good => (
-            <li
-              key={good}
-              className={selectedGood === good ? 'product' : ''}
-            >
+            <li key={good}>
               <button
                 type="button"
-                className={selectedGood !== good ? '' : 'button'}
                 onClick={() => {
                   this.addGood(good);
                 }}
