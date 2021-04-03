@@ -46,7 +46,7 @@ class App extends React.Component {
     }
 
     return `${selectedGoods.slice(0, -1).join(', ')}
-    and ${selectedGoods[selectedGoods.length - 1]} is selected`;
+    and ${selectedGoods[selectedGoods.length - 1]} are selected`;
   }
 
   render() {
@@ -55,6 +55,10 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>
+          {this.selectTitle()}
+        </h1>
+        <h2>
+          {`Selected goods: ${selectedGoods.length}`}
           <button
             className="button"
             hidden={selectedGoods.length === 0}
@@ -63,9 +67,7 @@ class App extends React.Component {
           >
             X
           </button>
-          {this.selectTitle()}
-        </h1>
-        {goodsFromServer.length}
+        </h2>
         <div className="list">
           {goodsFromServer.map(item => (
             <div key={item} className="list__item">

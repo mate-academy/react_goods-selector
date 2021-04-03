@@ -12,13 +12,25 @@ $button-shadow-base: $highlight-bottom,
   $highlight-top;
 $button-shadow-default: $button-shadow-base, $shadow-inset;
 
+.App {
+  margin: 15px 30px;
+  padding: 30px;
+  width: 500px;
+  border-radius: 50px;
+  box-shadow: $button-shadow-base;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: $button-text;
+}
 .selected {
   background-color: red;
   color: white;
 }
 
 .button {
-  margin-right: 50px;
+  position: absolute;
+  left: 300px;
   outline: none;
   cursor: pointer;
   width: 80px;
@@ -27,11 +39,11 @@ $button-shadow-default: $button-shadow-base, $shadow-inset;
   border-radius: 30px;
   border: 1px solid $button-border;
   box-shadow: $button-shadow-default;
-  font-family: "Source Sans Pro", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  color: $button-text;
   text-shadow: 0 1px #fff;
+}
+
+.list {
+  margin-top: 30px;
 }
 
 .list__item {
@@ -40,9 +52,4 @@ $button-shadow-default: $button-shadow-base, $shadow-inset;
   font-weight: 600;
   color: $button-text;
   padding: 20px;
-}
-
-.list__button {
-  position: absolute;
-  left: 150px;
 }
