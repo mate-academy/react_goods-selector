@@ -40,29 +40,31 @@ class App extends React.Component {
   }
 
   render() {
+    const { selectedGoods } = this.state;
+
     return (
       <div>
         <div className="App">
-          {this.state.selectedGoods.length === 1
+          {selectedGoods.length === 1
             ? (
               <h1>
-                {`${this.state.selectedGoods.join(', ')}
+                {`${selectedGoods.join(', ')}
                 is selected`}
               </h1>
             )
-            : this.state.selectedGoods.length > 1
+            : selectedGoods.length > 1
               ? (
                 <h1>
-                  {`${this.state.selectedGoods.slice(0, -1).join(', ')}
+                  {`${selectedGoods.slice(0, -1).join(', ')}
                 and
-                ${this.state.selectedGoods[this.state.selectedGoods.length - 1]}
+                ${selectedGoods[selectedGoods.length - 1]}
                 are selected`}
                 </h1>
               )
               : (<h1>No goods selected</h1>)
           }
 
-          {this.state.selectedGoods.length !== 0
+          {selectedGoods.length !== 0
           && (
           <button
             type="button"
@@ -80,11 +82,11 @@ class App extends React.Component {
             {goodsFromServer.map(good => (
               <li
                 className={classNames(`list-group-item`,
-                  { highlight: this.state.selectedGoods.includes(good) })}
+                  { highlight: selectedGoods.includes(good) })}
                 key={good}
               >
                 {good}
-                {this.state.selectedGoods.includes(good)
+                {selectedGoods.includes(good)
                   ? (
                     <button
                       type="button"
