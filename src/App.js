@@ -14,93 +14,108 @@ const goodsFromServer = [
   'Garlic',
 ];
 
+const renderGoods = [];
+
+for (let i = 0; i < goodsFromServer.length; i += 1) {
+  renderGoods[i] = {
+    name: goodsFromServer[i],
+    id: i,
+  };
+}
+
 class App extends React.Component {
   state = {
     selectedGood: 'No goods selected',
     selectedGoods: [],
   }
 
-  chooseClass = (item) => {
-    if (this.state.selectedGoods.includes(item)) {
-      return 'products selected';
-    }
-
-    return 'products';
-  }
-
   clear = () => {
-    this.setState({ selectedGood: 'No goods selected' });
-    this.setState(state => ({ selectedGoods: [] }));
+    this.setState({
+      selectedGood: 'No goods selected',
+      selectedGoods: [],
+    });
   }
 
-  remover = (item) => {
-    const newSelectedGoods = this.state.selectedGoods.filter(x => x !== item);
+  removeItem = (item) => {
+    const { selectedGoods } = this.state;
 
-    this.setState(state => ({ selectedGoods: newSelectedGoods }));
-
+    const newSelectedGoods = selectedGoods.filter(x => x !== item);
     const sumRemove = newSelectedGoods.join(', ');
 
     if (newSelectedGoods.length === 1) {
-      this.setState(state => ({
-        selectedGood: `${sumRemove} is selected`,
-      }));
+      this.setState({
+        selectedGood: `${newSelectedGoods[0]} is selected`,
+        selectedGoods: newSelectedGoods,
+      });
     } else if (newSelectedGoods.length === 0) {
-      this.setState(state => ({
+      this.setState({
         selectedGood: 'No goods selected',
-      }));
+        selectedGoods: newSelectedGoods,
+      });
     } else {
-      this.setState(state => ({
+      this.setState({
         selectedGood: `${sumRemove} are selected`,
-      }));
+        selectedGoods: newSelectedGoods,
+      });
     }
   }
 
-  adder = (item) => {
-    this.state.selectedGoods.push(item);
-    const sumAdd = this.state.selectedGoods.join(', ');
+  addItem = (item) => {
+    const { selectedGoods } = this.state;
 
-    if (this.state.selectedGoods.length === 1) {
-      this.setState(state => ({
-        selectedGood: `${sumAdd} is selected`,
-      }));
+    selectedGoods.push(item);
+    const sumAdd = selectedGoods.join(', ');
+
+    if (selectedGoods.length === 1) {
+      this.setState({
+        selectedGood: `${selectedGoods[0]} is selected`,
+      });
     } else {
-      this.setState(state => ({
+      this.setState({
         selectedGood: `${sumAdd} are selected`,
-      }));
+      });
     }
   }
 
   render() {
+    const { selectedGoods, selectedGood } = this.state;
+
     return (
       <div className="App">
         <h1 className="title">Shop</h1>
         <p>
           You choose:&nbsp;
-          {this.state.selectedGood}
+          {selectedGood}
         </p>
         <p>
-          {goodsFromServer.length - this.state.selectedGoods.length}
+          {goodsFromServer.length - selectedGoods.length}
           &nbsp;goods yet!
         </p>
         <div>
-          {goodsFromServer.map(item => (
+          {renderGoods.map(product => (
             <li
-              key={goodsFromServer.indexOf(item)}
-              className={this.chooseClass(item)}
+              key={product.id}
+              className={
+                selectedGoods.includes(product.name)
+                  ? 'products selected'
+                  : 'products'
+              }
             >
               <>
-                {item}
-                <button
-                  className="button is-success is-light"
-                  onClick={() => this.adder(item)}
-                  type="button"
-                >
-                  Add
-                </button>
-                {(this.state.selectedGoods.includes(item)) && (
+                {product.name}
+                {(!selectedGoods.includes(product.name)) && (
+                  <button
+                    className="button is-success is-light"
+                    onClick={() => this.addItem(product.name)}
+                    type="button"
+                  >
+                    Add
+                  </button>
+                )}
+                {(selectedGoods.includes(product.name)) && (
                   <button
                     className="button is-warning"
-                    onClick={() => this.remover(item)}
+                    onClick={() => this.removeItem(product.name)}
                     type="button"
                   >
                     Remove
@@ -110,7 +125,7 @@ class App extends React.Component {
             </li>
           ))}
         </div>
-        {(this.state.selectedGood !== 'No goods selected') && (
+        {(selectedGood !== 'No goods selected') && (
           <button
             className="button is-danger"
             onClick={() => this.clear()}
