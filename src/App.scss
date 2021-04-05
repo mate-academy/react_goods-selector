@@ -1,1 +1,47 @@
-// styles go here
+.App {
+  border: 1px solid black;
+  &__heading {
+    text-align: center;
+  }
+
+  &__count {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  &__clear {
+    padding: 10px;
+    margin-left: 49%;
+    background-color: rgb(174, 77, 77);
+    border-radius: 10px;
+    border: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 20px;
+
+    &:hover {
+      background-color: rgb(172, 44, 44);
+    }
+  }
+
+  &__list {
+    text-align: center;
+    list-style: none;
+  }
+
+  .listItem {
+    margin: 20px;
+    font-size: 20px;
+  }
+
+  &__add,
+  &__remove {
+    @extend .App__clear;
+    background-color: yellowgreen;
+    margin: 10px;
+  }
+
+  &__remove {
+    background-color: yellow;
+  }
+}

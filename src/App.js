@@ -14,11 +14,100 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-const App = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+export class App extends React.Component {
+  state ={
+    selected: [],
+  }
 
-export default App;
+  add = (ev) => {
+    const { ...state } = this.state;
+    const content = ev.target.previousSibling.textContent;
+
+    this.setState({
+      selected: [...state.selected, content],
+    });
+  }
+
+  remove = (ev) => {
+    const content = ev.target.previousSibling.previousSibling.textContent;
+    const last = this.state.selected.lastIndexOf(content);
+    const array = [...this.state.selected];
+
+    array.splice(last, 1);
+
+    if (last !== -1) {
+      this.setState({
+        selected: [...array],
+      });
+    }
+  }
+
+  clear = () => {
+    this.setState({
+      selected: [],
+    });
+  }
+
+  headingContent = () => {
+    const [...selected] = this.state.selected;
+
+    if (selected.length < 1) {
+      return 'No goods selected';
+    }
+
+    if (selected.length > 0 && selected.length < 2) {
+      return `${selected[0]} is selected`;
+    }
+
+    if (selected.length > 1 && selected.length <= 2) {
+      return `${selected[0]} and ${selected[1]} are selected`;
+    }
+
+    return `${selected.slice(0, -1).join(', ')} and ${
+      selected[selected.length - 1]} are selected`;
+  }
+
+  render() {
+    const [...selected] = this.state.selected;
+
+    return (
+      <div className="App">
+        <h1 className="App__heading">
+          {this.headingContent()}
+        </h1>
+        <p className="App__count">
+          Number of selected goods:
+          {selected.length}
+        </p>
+        <button
+          className="App__clear"
+          onClick={this.clear}
+          type="button"
+        >
+          Clear
+        </button>
+        <ul className="App__list">
+          {goodsFromServer.map(good => (
+            <React.Fragment key={good}>
+              <li className="listItem">{good}</li>
+              <button
+                className="App__add"
+                onClick={this.add}
+                type="button"
+              >
+                Add
+              </button>
+              <button
+                className="App__remove"
+                onClick={this.remove}
+                type="button"
+              >
+                Remove
+              </button>
+            </React.Fragment>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}
