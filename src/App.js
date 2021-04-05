@@ -68,15 +68,6 @@ class App extends React.Component {
         <div className="goods">
           <h2 className="goods__string">
             Selected goods:
-            {/* {!selected.length
-            ? 'No goods selected'
-            : selected.length === 1
-            ? `${selected} is selected`
-            : selected.length === 2
-            ? `${selected[0]} and ${selected[1]} are selected`
-            : `${selected.slice(0, -1).join(`, `)}`
-            + ` and ${selected.slice(-1)} are selected`
-            } */}
             {` ${this.listRenderer()}`}
           </h2>
           <p className="goods__number">
@@ -97,7 +88,7 @@ class App extends React.Component {
           {goodsFromServer.map(good => (
             <div
               className="products__item"
-              key={good}
+              key={`${Math.random()}`}
             >
               <li
                 className="products__content"
