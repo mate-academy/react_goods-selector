@@ -1,1 +1,46 @@
 // styles go here
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+}
+
+.list-item {
+  flex-basis: 48%;
+  text-align: center;
+  background-color: #a8d8a8;
+  margin: 10px;
+}
+
+.list-text.list__active {
+  color: red;
+}
+
+.btn {
+  color: #fff;
+  border: none;
+  background: green;
+  padding: 5px;
+  margin: 5px;
+}
+
+.products__delete {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background-color: red;
+  border: none;
+  padding: 10px;
+}
