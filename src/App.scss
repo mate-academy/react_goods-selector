@@ -1,1 +1,69 @@
-// styles go here
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  font-family: "Raleway", sans-serif;
+  background: #c5d5cb;
+}
+
+.App {
+  margin: 50px;
+}
+
+.active {
+  background: yellow;
+}
+
+.button {
+  cursor: pointer;
+}
+
+.reset-text {
+  font-weight: 700;
+}
+
+.add-remove-button {
+  margin: 5px 0;
+}
+
+.reset-button {
+  border-radius: 15px;
+  background: red;
+  color: white;
+}
+
+.list-of-goods {
+  list-style: none;
+  padding: 50px;
+  width: 30%;
+  background: #9fa8a3;
+  border-radius: 15px;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  line-height: 2;
+}
