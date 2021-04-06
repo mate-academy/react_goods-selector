@@ -29,11 +29,16 @@ body {
 
   &__product {
     text-align: center;
-    transition: color $duration;
+    transition: color $duration,
+    background-color $duration,
+    border-radius $duration;
   }
 
   &__product_selected {
+    border-radius: 20px;
     color: rgb(34, 53, 158);
+    background-color: rgba(255, 174, 0, 0.788);
+    box-shadow: 0 0 20px rgb(255, 174, 0);
   }
 
   &__buttons {
@@ -97,6 +102,7 @@ body {
   &__clear {
     display: inline-block;
     margin-left: 40px;
+    line-height: 30px;
     font-size: 20px;
     color: rgb(182, 27, 27);
   }
