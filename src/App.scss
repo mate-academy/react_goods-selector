@@ -1,9 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
 
-ul {
-  padding: 0;
-}
-
 .App {
   margin: 0 auto;
   max-width: 1200px;
@@ -37,6 +33,7 @@ ul {
   top: 20px;
   right: -10px;
   transform: rotate(45deg);
+
   &:hover {
     box-shadow: 0 0 5px 0 black;
   }
@@ -50,6 +47,7 @@ ul {
   list-style-type: none;
   min-width: 380px;
   margin: 0 auto;
+  padding: 0;
 
   &__item {
     color: lightslategray;
@@ -59,11 +57,6 @@ ul {
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
-  }
-
-  &__item--active {
-    background-color: lightslategray;
-    color: white;
   }
 
   &__button {
@@ -79,4 +72,9 @@ ul {
   &__button--active {
     display: none;
   }
+}
+
+.goodsListItemActive {
+  background-color: lightslategray;
+  color: white;
 }
