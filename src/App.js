@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
 
 class App extends React.Component {
   state = {
@@ -51,11 +52,12 @@ class App extends React.Component {
 
   render() {
     const { goodsFromServer, selectedGoods } = this.state;
+    const title = this.selectTitle();
 
     return (
       <div className="App">
         <h1>
-          {this.selectTitle()}
+          {title}
         </h1>
         <h2>
           {`Selected goods: ${selectedGoods.length}`}
@@ -71,7 +73,10 @@ class App extends React.Component {
         <div className="list">
           {goodsFromServer.map(item => (
             <div key={item} className="list__item">
-              <span className={selectedGoods.includes(item) && 'selected'}>
+              <span className={classNames(
+                { selected: selectedGoods.includes(item) },
+              )}
+              >
                 {item}
               </span>
               <button
