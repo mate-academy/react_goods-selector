@@ -26,16 +26,9 @@ export class App extends React.Component {
   }
 
   remove = (good) => {
-    const last = this.state.selected.lastIndexOf(good);
-    const array = [...this.state.selected];
-
-    array.splice(last, 1);
-
-    if (last !== -1) {
-      this.setState({
-        selected: [...array],
-      });
-    }
+    this.setState(prevState => ({
+      selected: prevState.selected.filter(item => item !== good),
+    }));
   }
 
   clear = () => {
@@ -65,11 +58,12 @@ export class App extends React.Component {
 
   render() {
     const [...selected] = this.state.selected;
+    const content = this.headingContent();
 
     return (
       <div className="App">
         <h1 className="App__heading">
-          {this.headingContent()}
+          {content}
         </h1>
         <p className="App__count">
           Number of selected goods:
