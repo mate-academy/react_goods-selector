@@ -62,13 +62,14 @@ class App extends React.Component {
 
   render() {
     const { selected } = this.state;
+    const title = this.listRenderer();
 
     return (
       <div className="card">
         <div className="card__goods">
           <h2>
             Selected goods:
-            {` ${this.listRenderer()}`}
+            {` ${title}`}
           </h2>
           <p>
             Number of goods selected:
@@ -79,7 +80,7 @@ class App extends React.Component {
           <button
             type="button"
             className="card__button"
-            onClick={() => this.clearGoods()}
+            onClick={this.clearGoods}
           >
             Clear
           </button>
