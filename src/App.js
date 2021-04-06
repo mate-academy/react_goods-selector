@@ -39,39 +39,37 @@ class App extends React.Component {
     });
   }
 
+  title = () => {
+    const {selectedGoods} = this.state;
+
+    if (selectedGoods.length === 1) {
+      return `${selectedGoods.join(', ')}
+      is selected`
+    }
+
+    if (selectedGoods.length > 1) {
+      return `${selectedGoods.slice(0, -1).join(', ')}
+      and
+      ${selectedGoods[selectedGoods.length - 1]}
+      are selected`
+    } else {
+      return 'No goods selected'
+    }
+  }
+
   render() {
     const { selectedGoods } = this.state;
 
     return (
       <div>
         <div className="App">
-          {selectedGoods.length === 1
-            ? (
-              <h1>
-                {`${selectedGoods.join(', ')}
-                is selected`}
-              </h1>
-            )
-            : selectedGoods.length > 1
-              ? (
-                <h1>
-                  {`${selectedGoods.slice(0, -1).join(', ')}
-                and
-                ${selectedGoods[selectedGoods.length - 1]}
-                are selected`}
-                </h1>
-              )
-              : (<h1>No goods selected</h1>)
-          }
-
+          <h1>{this.title()}</h1>
           {selectedGoods.length !== 0
           && (
           <button
             type="button"
             className="btn btn-danger"
-            onClick={() => {
-              this.removeGoods();
-            }}
+            onClick={this.removeGoods}
           >
             Remove All
           </button>
