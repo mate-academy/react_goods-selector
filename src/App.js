@@ -111,10 +111,7 @@ export class App extends React.Component {
           }
         </ul>
         <h1 className="goods-list">
-          Selected good:
-          {
-            showGoods
-          }
+          {`Selected good: ${showGoods}`}
         </h1>
         {
           selectedGoods.length !== 0
