@@ -40,15 +40,15 @@ class App extends React.Component {
     return 'No goods selected';
   }
 
-  selectGood = (event, sibling) => {
+  selectGood = (product) => {
     this.setState((prevState) => {
       const goods = prevState.selectedGoods;
-      const foundIndex = goods.indexOf(sibling.textContent);
+      const foundIndex = goods.indexOf(product);
 
       if (foundIndex !== -1) {
         goods.splice(foundIndex, 1);
       } else {
-        goods.push(sibling.textContent);
+        goods.push(product);
       }
 
       return ({
@@ -80,29 +80,32 @@ class App extends React.Component {
           X
         </button>
         <ul className="list-group list-group-flush">
-          {goodsFromServer.map((goods, index) => (
+          {goodsFromServer.map((product, index) => (
             <div key={uuid()}>
-              <li className={`list-group-item list-group-item--padded
-                  ${selectedGoods.includes(goods) ? 'selected' : ''}`
+              <li className={
+                classNames(
+                  'list-group-item list-group-item--padded',
+                  { selected: selectedGoods.includes(product) },
+                )
                 }
               >
-                {goods}
+                {product}
                 <button
                   type="button"
                   className={
                     classNames(
                       'btn btn-outline-warning list-group-item__button',
-                      { active: selectedGoods.includes(goods) },
+                      { active: selectedGoods.includes(product) },
                     )
                   }
                   data-bs-toggle="button"
                   onClick={
                     (event) => {
-                      this.selectGood(event, event.target.previousSibling);
+                      this.selectGood(product);
                     }
                   }
                 >
-                  {selectedGoods.includes(goods) ? 'Remove' : 'Add'}
+                  {selectedGoods.includes(product) ? 'Remove' : 'Add'}
                 </button>
               </li>
 
