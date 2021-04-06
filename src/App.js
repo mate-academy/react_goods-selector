@@ -121,10 +121,4 @@ class App extends React.Component {
   }
 }
 
-// <div className="app__goods">
-//   <h1 className="app__title">Selected good: -
-//     {this.selectedList()}
-//   </h1>
-// </div>
-
 export default App;
