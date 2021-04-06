@@ -23,7 +23,6 @@ class App extends React.Component {
 
   addGoods = (goods) => {
     // eslint-disable-next-line
-    const { selectedGoods } = this.state;
 
     this.setState(prevState => ({
       selectedGoods: [...prevState.selectedGoods, goods],
@@ -37,11 +36,10 @@ class App extends React.Component {
   }
 
   removeGoods = (goods) => {
-    const { selectedGoods } = this.state;
-
-    this.setState({
-      selectedGoods: selectedGoods.filter(product => product !== goods),
-    });
+    this.setState(prevState => ({
+      selectedGoods: prevState.selectedGoods
+        .filter(product => product !== goods),
+    }));
   }
 
   selectedList = () => {
