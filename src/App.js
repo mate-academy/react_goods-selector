@@ -103,24 +103,25 @@ class App extends React.Component {
             >
               <>
                 {product.name}
-                {(!selectedGoods.includes(product.name)) && (
-                  <button
-                    className="button is-success is-light"
-                    onClick={() => this.addItem(product.name)}
-                    type="button"
-                  >
-                    Add
-                  </button>
-                )}
-                {(selectedGoods.includes(product.name)) && (
-                  <button
-                    className="button is-warning"
-                    onClick={() => this.removeItem(product.name)}
-                    type="button"
-                  >
-                    Remove
-                  </button>
-                )}
+                {!selectedGoods.includes(product.name)
+                  ? (
+                    <button
+                      className="button is-success is-light"
+                      onClick={() => this.addItem(product.name)}
+                      type="button"
+                    >
+                      Add
+                    </button>
+                  ) : (
+                    <button
+                      className="button is-warning"
+                      onClick={() => this.removeItem(product.name)}
+                      type="button"
+                    >
+                      Remove
+                    </button>
+                  )
+                }
               </>
             </li>
           ))}
@@ -128,7 +129,7 @@ class App extends React.Component {
         {(selectedGood !== 'No goods selected') && (
           <button
             className="button is-danger"
-            onClick={() => this.clear()}
+            onClick={this.clear}
             type="button"
           >
             X
