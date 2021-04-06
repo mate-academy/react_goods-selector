@@ -1,0 +1,19 @@
+.App {
+  margin: 20px;
+}
+
+.title {
+  text-align: center;
+}
+
+.products {
+  margin: 20px;
+}
+
+.button {
+  margin-left: 20px;
+}
+
+.selected {
+  color: green;
+}
