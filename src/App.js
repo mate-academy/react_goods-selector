@@ -62,31 +62,62 @@ class App extends React.Component {
     }));
   }
 
+  showTitle() {
+    const { selectedGoods } = this.state;
+
+    if (selectedGoods.length === 0) {
+      return 'No goods selected';
+    }
+
+    if (selectedGoods.length === 1) {
+      return `${selectedGoods[0]} is  selected`;
+    }
+
+    return `${selectedGoods.slice(0, -1).join(', ')} 
+        and ${selectedGoods.slice(-1)} are selected`;
+  }
+
   render() {
     const { selectedGoods, goods } = this.state;
 
     return (
       <div className="App d-flex flex-column align-items-center m-4">
-        <h1>
-          {selectedGoods.length > 0 ? 'Selected:' : 'No goods selected'}
-          {' '}
-          {selectedGoods.join(', ')}
+        <h1 className="text-center">
+          {this.showTitle()}
         </h1>
-        <button
-          type="button"
-          className="btn btn-danger m-3"
-          onClick={() => {
-            this.removeSelectedGoods();
-          }
-          }
-        >
-          Remove all
-        </button>
-        <ul className="list-group d-inline-flex">
+        {selectedGoods.length > 0
+          ? (
+            <p>
+              Number of selected goods:
+              {' '}
+              {selectedGoods.length}
+            </p>
+          )
+          : ''
+        }
+        {selectedGoods.length > 0
+          ? (
+            <button
+              type="button"
+              className="btn btn-danger m-3"
+              onClick={() => {
+                this.removeSelectedGoods();
+              }
+            }
+            >
+              Remove all
+            </button>
+          )
+          : ''
+        }
+        <ul className="list-group  d-flex flex-row flex-wrap">
+          {' '}
+          {/* d-inline-flex  */}
           {goods.map(good => (
             <li
-              className={`list-group-item  d-flex justify-content-evenly
-                align-items-center p-4
+              className={`list-group-item  d-flex flex-grow-1 m-3 
+              justify-content-evenly
+              align-items-center p-4 shadow
                 ${good.selected ? 'list-group-item-danger'
                 : 'list-group-item-success'}`}
               key={good.id}
