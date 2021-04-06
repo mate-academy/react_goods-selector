@@ -32,54 +32,57 @@ class App extends React.Component {
   }
 
   removeGood = (goodToRemove) => {
-    if (this.state.selected.includes(goodToRemove)) {
-      this.setState(prevState => ({
-        selected: prevState.selected.filter(
-          good => good !== goodToRemove,
-        ),
-      }));
-    }
-  }
-
-  listRenderer() {
     const goods = this.state.selected;
 
-    if (!goods.length) {
-      return `No goods are selected`;
+    if (goods.includes(goodToRemove)) {
+      goods.splice(
+        goods.indexOf(goodToRemove), 1,
+      );
+      this.setState({
+        selected: goods,
+      });
     }
-
-    if (goods.length === 1) {
-      return `${goods} is selected`;
-    }
-
-    if (goods.length === 2) {
-      return `${goods[0]} and ${goods[1]} are selected`;
-    }
-
-    return `${goods.slice(0, -1).join(`, `)}`
-    + ` and ${goods.slice(-1)} are selected`;
   }
 
   render() {
     const { selected } = this.state;
+
+    const listRenderer = () => {
+      const goods = this.state.selected;
+
+      if (!goods.length) {
+        return `No goods are selected`;
+      }
+
+      if (goods.length === 1) {
+        return `${goods} is selected`;
+      }
+
+      if (goods.length === 2) {
+        return `${goods[0]} and ${goods[1]} are selected`;
+      }
+
+      return `${goods.slice(0, -1).join(`, `)}`
+      + ` and ${goods.slice(-1)} are selected`;
+    };
 
     return (
       <div className="cart">
         <div className="goods">
           <h2 className="goods__string">
             Selected goods:
-            {` ${this.listRenderer()}`}
+            {listRenderer()}
           </h2>
           <p className="goods__number">
             Number of goods selected:
-            <span className="goods__n">
+            <span className="goods__length">
               {` ${selected.length}`}
             </span>
           </p>
           <button
             type="button"
             className="goods__button"
-            onClick={() => this.clearGoods()}
+            onClick={this.clearGoods}
           >
             Clear
           </button>
