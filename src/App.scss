@@ -1,1 +1,32 @@
-// styles go here
+.card {
+  text-align: center;
+  align-items: center;
+
+  &__products {
+    list-style: none;
+  }
+
+  &__item {
+    margin: 15px 0;
+  }
+
+  &__button {
+    padding: 10px 25px;
+
+    &-add {
+      margin: 10px;
+
+      &:hover {
+        background-color: green;
+      }
+    }
+
+    &-remove {
+      margin: 10px;
+
+      &:hover {
+        background-color: red;
+      }
+    }
+  }
+}
