@@ -20,29 +20,53 @@ class App extends React.Component {
     goods: [],
   };
 
+  check = (goods) => {
+    if (goods.length === 0) {
+      return 'No goods selected';
+    }
+
+    if (goods.length === 1) {
+      return (
+        <>
+          {goods}
+          {' '}
+          is selected
+        </>
+      );
+    }
+
+    return (
+      <>
+        {goods.join(', ')}
+        {' '}
+        are selected
+      </>
+    );
+  }
+
+  add = (product) => {
+    this.setState(state => ({
+      goods: [
+        ...state.goods,
+        product,
+      ],
+    }));
+  }
+
+  remove = (product) => {
+    this.setState(state => (
+      state.goods.includes(product)
+      && state.goods.splice(state.goods.indexOf(product), 1)
+    ));
+  }
+
   render() {
     const { goods } = this.state;
 
     return (
       <div className="App">
         <h1 className="App__title title is-2">Selected goods</h1>
-        {(goods.length === 0) && (
-        <div className="App__order title is-4">No goods selected</div>
-        )}
-        {(goods.length === 1) && (
-        <div className="App__order title is-4">
-          {goods}
-          {' '}
-          is selected
-        </div>
-        )}
-        {(goods.length > 1) && (
-        <div className="App__order title is-4">
-          {goods.join(', ')}
-          {' '}
-          are selected
-        </div>
-        )}
+        <div className="App__order title is-4">{this.check(goods)}</div>
         <button
           className="App__button button is-danger is-outlined"
           type="button"
@@ -65,9 +89,7 @@ class App extends React.Component {
                 className="App__button button is-primary is-outlined"
                 type="button"
                 onClick={() => {
-                  this.setState(() => (
-                    goods.push(product)
-                  ));
+                  this.add(product);
                 }}
               >
                 add
@@ -76,10 +98,7 @@ class App extends React.Component {
                 className="App__button button is-link is-outlined"
                 type="button"
                 onClick={() => {
-                  this.setState(() => (
-                    goods.includes(product)
-                    && goods.splice(goods.indexOf(product), 1)
-                  ));
+                  this.remove(product);
                 }}
               >
                 remove
