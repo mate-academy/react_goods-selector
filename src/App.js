@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.scss';
 import { v4 as uuidv4 } from 'uuid';
+import classNames from 'classnames';
 
 const goodsFromServer = [
   'Dumplings',
@@ -25,34 +26,37 @@ const preparedGoods = goodsFromServer.map(good => (
 
 class App extends React.Component {
   state = {
-    goods: preparedGoods.map(good => (good.name === 'Jam' ? {
-      ...good, selected: true,
-    } : { ...good })),
+    goods: preparedGoods.map(good => (good.name === 'Jam'
+      ? {
+        ...good, selected: true,
+      }
+      : { ...good })),
     selectedGoods: ['Jam'],
   }
 
-  addGood(good) {
+  addGood = (good) => {
     this.setState(prevState => ({
-      goods: prevState.goods.map(item => (
-        (item === good) ? {
+      goods: prevState.goods.map(item => (item === good
+        ? {
           ...item, selected: true,
-        } : { ...item })),
+        }
+        : { ...item })),
       selectedGoods: [...prevState.selectedGoods, good.name],
     }));
   }
 
-  removeGood(good) {
+  removeGood = (good) => {
     this.setState(prevState => ({
-      goods: prevState.goods.map(item => (
-        (item === good) ? {
+      goods: prevState.goods.map(item => (item === good
+        ? {
           ...item, selected: false,
-        } : { ...item }
-      )),
+        }
+        : { ...item })),
       selectedGoods: prevState.selectedGoods.filter(item => item !== good.name),
     }));
   }
 
-  removeSelectedGoods() {
+  removeSelectedGoods = () => {
     this.setState(prevState => ({
       goods: prevState.goods.map(item => ({
         ...item,
@@ -62,7 +66,7 @@ class App extends React.Component {
     }));
   }
 
-  showTitle() {
+  showTitle = () => {
     const { selectedGoods } = this.state;
 
     if (selectedGoods.length === 0) {
@@ -73,17 +77,18 @@ class App extends React.Component {
       return `${selectedGoods[0]} is  selected`;
     }
 
-    return `${selectedGoods.slice(0, -1).join(', ')} 
-        and ${selectedGoods.slice(-1)} are selected`;
+    return `${selectedGoods.slice(0, -1).join(', ')}
+      and ${selectedGoods.slice(-1)} are selected`;
   }
 
   render() {
     const { selectedGoods, goods } = this.state;
+    const title = this.showTitle();
 
     return (
       <div className="App d-flex flex-column align-items-center m-4">
         <h1 className="text-center">
-          {this.showTitle()}
+          {title}
         </h1>
         {selectedGoods.length > 0
           ? (
@@ -100,10 +105,7 @@ class App extends React.Component {
             <button
               type="button"
               className="btn btn-danger m-3"
-              onClick={() => {
-                this.removeSelectedGoods();
-              }
-            }
+              onClick={this.removeSelectedGoods}
             >
               Remove all
             </button>
@@ -111,16 +113,15 @@ class App extends React.Component {
           : ''
         }
         <ul className="list-group  d-flex flex-row flex-wrap">
-          {' '}
-          {/* d-inline-flex  */}
           {goods.map(good => (
             <li
-              className={`list-group-item  d-flex flex-grow-1 m-3 
-              justify-content-evenly
-              align-items-center p-4 shadow
-                ${good.selected ? 'list-group-item-danger'
-                : 'list-group-item-success'}`}
               key={good.id}
+              className={classNames('list-group-item', 'd-flex', 'flex-grow-1',
+                'm-3', 'justify-content-evenly',
+                'align-items-center', 'p-4', 'shadow', {
+                  'list-group-item-danger': good.selected,
+                  'list-group-item-success': !good.selected,
+                })}
             >
               {good.name}
               {good.selected
