@@ -13,12 +13,10 @@ const goodsFromServer = [
   'Honey',
   'Jam',
   'Garlic',
-].map((item, index) => (
-  // eslint-disable-next-line no-param-reassign
-  item = {
-    id: index,
-    nameGoods: item,
-  }
+].map((item, index) => ({
+  id: index,
+  nameGoods: item,
+}
 ));
 
 export class App extends React.Component {
@@ -72,12 +70,20 @@ export class App extends React.Component {
 
   render() {
     const { listGoods } = this.state;
+    const listOfgood = this.getSelectedGoodsList();
 
     return (
       <>
         <div className="alert alert-success">
-          {this.getSelectedGoodsList()}
+          {listOfgood}
         </div>
+        <button
+          type="button"
+          className="btn btn-secondary margin"
+          onClick={this.clearList}
+        >
+          Clear all
+        </button>
         <div className="box">
           {goodsFromServer.map(goods => (
             <div
@@ -96,14 +102,7 @@ export class App extends React.Component {
                 className="btn btn-success margin"
                 onClick={() => this.removeGoods(goods.nameGoods)}
               >
-                Done
-              </button>
-              <button
-                type="button"
-                className="btn btn-secondary margin"
-                onClick={this.clearList}
-              >
-                Clear
+                Subtract
               </button>
               <button
                 type="button"
