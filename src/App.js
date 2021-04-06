@@ -20,11 +20,9 @@ export class App extends React.Component {
   }
 
   add = (good) => {
-    const { ...state } = this.state;
-
-    this.setState({
-      selected: [...state.selected, good],
-    });
+    this.setState(prevState => ({
+      selected: [...prevState.selected, good],
+    }));
   }
 
   remove = (good) => {
