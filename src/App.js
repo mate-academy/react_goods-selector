@@ -41,8 +41,6 @@ class App extends React.Component {
   }
 
   selectGood = (event, sibling) => {
-    event.target.classList.toggle('active');
-
     this.setState((prevState) => {
       const goods = prevState.selectedGoods;
       const foundIndex = goods.indexOf(sibling.textContent);
@@ -52,8 +50,6 @@ class App extends React.Component {
       } else {
         goods.push(sibling.textContent);
       }
-
-      this.validateClearSelectionState();
 
       return ({
         selectedGoods: goods,
@@ -65,18 +61,7 @@ class App extends React.Component {
     this.setState({
       selectedGoods: [],
     });
-    /* eslint-disable no-param-reassign */
-    event.target.style.visibility = 'hidden';
-    /* eslint-enable no-param-reassign */
   };
-
-  validateClearSelectionState() {
-    const clearButton = document.querySelector('#clear-button');
-
-    clearButton.style.visibility = (this.state.selectedGoods.length > 0)
-      ? 'visible'
-      : 'hidden';
-  }
 
   render() {
     const { selectedGoods } = this.state;
@@ -90,13 +75,17 @@ class App extends React.Component {
           id="clear-button"
           className="btn btn-outline-danger container__clear-button"
           onClick={this.clearSelection}
+          style={{ visibility: selectedGoods.length ? 'visible' : 'hidden' }}
         >
           X
         </button>
         <ul className="list-group list-group-flush">
           {goodsFromServer.map((goods, index) => (
             <div key={uuid()}>
-              <li className="list-group-item list-group-item--padded">
+              <li className={`list-group-item list-group-item--padded
+                  ${selectedGoods.includes(goods) ? 'selected' : ''}`
+                }
+              >
                 {goods}
                 <button
                   type="button"
