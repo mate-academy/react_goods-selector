@@ -19,18 +19,16 @@ export class App extends React.Component {
     selected: [],
   }
 
-  add = (ev) => {
+  add = (good) => {
     const { ...state } = this.state;
-    const content = ev.target.previousSibling.textContent;
 
     this.setState({
-      selected: [...state.selected, content],
+      selected: [...state.selected, good],
     });
   }
 
-  remove = (ev) => {
-    const content = ev.target.previousSibling.previousSibling.textContent;
-    const last = this.state.selected.lastIndexOf(content);
+  remove = (good) => {
+    const last = this.state.selected.lastIndexOf(good);
     const array = [...this.state.selected];
 
     array.splice(last, 1);
@@ -92,14 +90,14 @@ export class App extends React.Component {
               <li className="listItem">{good}</li>
               <button
                 className="App__add"
-                onClick={this.add}
+                onClick={() => this.add(good)}
                 type="button"
               >
                 Add
               </button>
               <button
                 className="App__remove"
-                onClick={this.remove}
+                onClick={() => this.remove(good)}
                 type="button"
               >
                 Remove
