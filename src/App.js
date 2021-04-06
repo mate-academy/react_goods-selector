@@ -72,23 +72,23 @@ export class App extends React.Component {
         Add to list
       </Button>
       {this.state.selectedGoods.includes(product)
-        ? (
-          <Button
-            size="small"
-            variant="contained"
-            color="secondary"
-            onClick={() => this.removeFromList(product)}
-          >
-            Remove from list
-          </Button>
-        )
-        : null
+      && (
+        <Button
+          size="small"
+          variant="contained"
+          color="secondary"
+          onClick={() => this.removeFromList(product)}
+        >
+          Remove from list
+        </Button>
+      )
       }
     </>
   )
 
   render() {
     const { selectedGoods } = this.state;
+    const showGoods = this.showGoods(selectedGoods.length);
 
     return (
       <div>
@@ -112,7 +112,9 @@ export class App extends React.Component {
         </ul>
         <h1 className="goods-list">
           Selected good:
-          {this.showGoods(selectedGoods.length)}
+          {
+            showGoods
+          }
         </h1>
         {
           selectedGoods.length !== 0
