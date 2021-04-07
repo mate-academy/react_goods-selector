@@ -22,8 +22,6 @@ class App extends React.Component {
   };
 
   addGoods = (goods) => {
-    // eslint-disable-next-line
-
     this.setState(prevState => ({
       selectedGoods: [...prevState.selectedGoods, goods],
     }));
@@ -59,10 +57,10 @@ class App extends React.Component {
 
   render() {
     const { selectedGoods } = this.state;
+    const list = this.selectedList();
 
     return (
       <div className="app">
-
         <ul className="app__products">
           { goodsFromServer.map(product => (
             <li key={product} className="app__products-item">
@@ -100,18 +98,18 @@ class App extends React.Component {
         <div className="app__products-info">
           <strong className="app__clear">Clear all:</strong>
           {selectedGoods.length > 0 && (
-          <button
-            className="app__button app__button-clear"
-            onClick={this.clearSelectedGoods}
-            type="button"
-          >
-            X
-          </button>
+            <button
+              className="app__button app__button-clear"
+              onClick={this.clearSelectedGoods}
+              type="button"
+            >
+              X
+            </button>
           )}
           <h1 className="app__products-text">
             Selected goods:
-            {' '}
-            {this.selectedList()}
+            <br />
+            {list}
           </h1>
         </div>
       </div>
