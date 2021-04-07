@@ -42,41 +42,48 @@ class App extends React.Component {
     });
   }
 
+  isSelected = (goods) => {
+    if (goods.length === 0) {
+      return 'No goods selected';
+    }
+
+    if (goods.length === 1) {
+      return (
+        <>
+          {`${goods} is selected`}
+        </>
+      );
+    }
+
+    return (
+      <>
+        {`${goods.join(', ')} are selected`}
+      </>
+    );
+  }
+
   render() {
     const { goods } = this.state;
 
     return (
       <div className="app">
         <h1 className="title">Selected good</h1>
-        {(goods.length === 0) && (
-          <div>
-            No goods selected
-          </div>
-        )}
-        {(goods.length === 1) && (
-          <div>
-            {`${goods} is selected`}
-          </div>
-        )}
-        {(goods.length > 1) && (
-          <div>
-            {`${goods.join(', ')} are selected`}
-          </div>
-        )}
+        <div>
+          {this.isSelected(goods)}
+        </div>
+
         <button
           className="button is-light is-danger"
           type="button"
           onClick={() => {
-            this.setState({
-              goods: [],
-            });
+            this.deleteGoods();
           }}
         >
           x
         </button>
         <ul className="app__list">
           {goodsFromServer.map(product => (
-            <li className="app__item">
+            <li className="app__item" key={product}>
               <span className="tag is-large">{`${product}: `}</span>
 
               <button
