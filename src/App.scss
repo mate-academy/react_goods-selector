@@ -1,1 +1,119 @@
-// styles go here
+$duration: 0.5s;
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: rgb(211, 212, 205);
+}
+
+.app {
+
+  &__products {
+    margin: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    gap: 20px;
+    padding: 10px;
+  }
+
+  &__products-item {
+    border: 2px solid rgb(16, 143, 143);
+    border-radius: 20px;
+    display: inline-block;
+    padding: 10px;
+  }
+
+  &__product {
+    text-align: center;
+    transition: color $duration,
+    background-color $duration,
+    border-radius $duration;
+  }
+
+  &__product_selected {
+    border-radius: 30px;
+    color: rgb(34, 53, 158);
+    background-color: rgba(255, 174, 0, 0.788);
+    box-shadow: 0 0 20px rgb(255, 174, 0);
+  }
+
+  &__buttons {
+    justify-content: space-around;
+    margin: 0 auto;
+    width: 180px;
+    display: flex;
+  }
+
+  &__button {
+    border-radius: 10px;
+    border: 2px solid;
+    height: 25px;
+    width: 80px;
+    font-size: 16px;
+    transition: transform $duration,
+      background-color $duration,
+      color $duration,
+      box-shadow $duration;
+
+    &:focus,
+    :active {
+      outline: none;
+      transform: scale(1.1);
+    }
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
+  &__button-add {
+    border-color: rgb(44, 223, 124);
+
+    &:hover {
+      color: #fff;
+      background-color: rgb(80, 211, 86);
+    }
+  }
+
+  &__button-remove {
+    border-color: rgb(240, 9, 9);
+
+    &:hover {
+      color: #fff;
+      background-color: rgb(155, 14, 73);
+    }
+  }
+
+  &__button-clear {
+    margin-left: 60px;
+    font-size: 20px;
+    color: blanchedalmond;
+    border: 2px solid rgb(145, 134, 146);
+    background-color: rgb(128, 30, 30);
+
+    &:hover {
+      background-color: rgb(252, 2, 2);
+      box-shadow: 0 0 20px rgb(4, 18, 223);
+    }
+  }
+
+  &__products-info {
+    margin-top: 100px;
+  }
+
+  &__clear {
+    display: inline-block;
+    margin-left: 40px;
+    line-height: 30px;
+    font-size: 20px;
+    color: rgb(182, 27, 27);
+  }
+
+  &__products-text {
+    color: rgb(67, 107, 90);
+  }
+}
