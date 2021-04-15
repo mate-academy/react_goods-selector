@@ -1,1 +1,74 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+
+  &__list {
+    padding: 0;
+    list-style: none;
+    font-weight: 900;
+    margin-bottom: 35px;
+  }
+
+  &__text {
+    color: rgb(173, 238, 43);
+    transition-duration: 0.5s;
+  }
+
+  &__item {
+    font-size: 22px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__button {
+    margin-left: 40px;
+    height: 30px;
+    width: 70px;
+    background-color: white;
+    border-radius: 20px;
+    color: green;
+    border: 2px solid green;
+    font-size: 14px;
+    font-weight: 900;
+    outline: none;
+
+    &:focus {
+      box-shadow: 0 0 12px rgba(green, 0.9);
+      color: white;
+      background-color: green;
+    }
+
+    &:hover {
+      background-color: green;
+      color: white;
+    }
+
+    &-delete {
+      margin-left: 10px;
+      color: red;
+      border: 2px solid red;
+
+      &-all {
+        width: 100px;
+        height: 40px;
+      }
+
+      &:hover {
+        color: white;
+        background-color: red;
+        box-shadow: 0 0 12px rgba(red, 0.9);
+      }
+
+      &:focus {
+        box-shadow: 0 0 12px rgba(red, 0.9);
+        color: white;
+        background-color: red;
+      }
+    }
+  }
+}
