@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 
 const goodsFromServer = [
@@ -14,11 +14,52 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-const App = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+const App = () => {
+  const [selectedGood, setSelected] = useState('Jam');
+
+  function selectTitle() {
+    if (selectedGood === null) {
+      return 'No goods selected';
+    }
+
+    return `${selectedGood} is Select`;
+  }
+
+  return (
+    <div className="App">
+      <ul>
+        <h1>
+          {selectTitle()}
+          <button
+            type="button"
+            onClick={() => setSelected(null)}
+            hidden={selectedGood === null}
+          >
+            X
+          </button>
+        </h1>
+        {goodsFromServer.map(product => (
+          <li
+            key={product}
+            className={selectedGood === product ? 'selected' : undefined}
+          >
+            <span>
+              {product}
+              {' '}
+            </span>
+
+            <button
+              type="button"
+              onClick={() => setSelected(product)}
+              hidden={selectedGood === product}
+            >
+              Select
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default App;
