@@ -17,35 +17,30 @@ const goodsFromServer = [
 const App = () => {
   const [selectedGood, setSelected] = useState('Jam');
 
-  function selectTitle() {
-    if (selectedGood === null) {
-      return 'No goods selected';
-    }
-
-    return `${selectedGood} is Select`;
-  }
-
   return (
     <div className="App">
       <ul>
         <h1>
-          {selectTitle()}
-          <button
-            type="button"
-            onClick={() => setSelected(null)}
-            hidden={selectedGood === null}
-          >
-            X
-          </button>
+          {selectedGood
+            ? `${selectedGood} is selected`
+            : 'No goods selected'
+          }
+          {selectedGood && (
+            <button
+              type="button"
+              onClick={() => setSelected(null)}
+            >
+              X
+            </button>
+          )}
         </h1>
         {goodsFromServer.map(product => (
           <li
             key={product}
-            className={selectedGood === product ? 'selected' : undefined}
+            className={selectedGood === product ? 'selected' : ''}
           >
             <span>
               {product}
-              {' '}
             </span>
 
             <button
