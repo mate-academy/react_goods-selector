@@ -16,34 +16,54 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    Jam: '',
+    goods: {
+      Jam: 'Jam',
+    },
   }
 
   select = (good) => {
+    const copy = { ...this.state.goods };
+
+    copy[good] = good;
+
     this.setState(prev => ({
       ...prev,
-      [good]: good,
-    }
-    ));
+      goods: copy,
+    }));
   }
 
   remove = (good) => {
-    delete this.state[good];
+    const copy = { ...this.state.goods };
+
+    delete copy[good];
     this.setState(prev => ({
       ...prev,
-    }
-    ));
+      goods: copy,
+    }));
   }
 
   reset = () => {
-    Object.keys(this.state).forEach((key) => {
-      delete this.state[key];
-      this.setState(prev => ({
-        ...prev,
-      }
-      ));
-    });
+    this.setState(prev => ({
+      ...prev,
+      goods: {},
+    }));
   }
+
+  prepareString = (good, index, arr) => (
+    (index === arr.length - 1 && arr.length !== 1)
+      ? (
+        <>
+          {' and '}
+          {good}
+        </>
+      )
+      : (
+        <>
+          {good}
+          {', '}
+        </>
+      )
+  )
 
   render() {
     return (
@@ -52,12 +72,12 @@ class App extends React.Component {
           {goodsFromServer.map(good => (
             <li
               key={good}
-              className={Object.keys(this.state).includes(good)
+              className={Object.keys(this.state.goods).includes(good)
                 ? 'selected'
                 : ''}
             >
               {good}
-              {!Object.keys(this.state).includes(good)
+              {!Object.keys(this.state.goods).includes(good)
                 ? (
                   <button
                     type="button"
@@ -90,28 +110,13 @@ class App extends React.Component {
           Reset
         </button>
         <h1>
-          {Object.keys(this.state).length > 0 && Object.keys(this.state)
-            .map((good, index, arr) => {
-              if (index === arr.length - 1 && arr.length !== 1) {
-                return (
-                  <>
-                    {' and '}
-                    {good}
-                  </>
-                );
-              }
-
-              return (
-                <>
-                  {good}
-                  {', '}
-                </>
-              );
-            })
+          {Object.keys(this.state.goods).length > 0
+          && Object.keys(this.state.goods)
+            .map(this.prepareString)
             }
-          {Object.keys(this.state).length > 1 && ' are selected'}
-          {Object.keys(this.state).length === 0 && 'No goods selected'}
-          {Object.keys(this.state).length === 1 && 'is selected'}
+          {Object.keys(this.state.goods).length > 1 && ' are selected'}
+          {Object.keys(this.state.goods).length === 0 && 'No goods selected'}
+          {Object.keys(this.state.goods).length === 1 && 'is selected'}
         </h1>
       </div>
     );
