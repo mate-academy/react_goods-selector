@@ -1,5 +1,3 @@
-/* eslint-disable no-mixed-operators */
-/* eslint-disable no-param-reassign */
 import React from 'react';
 import './App.scss';
 
@@ -18,40 +16,33 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    select: null,
+    Jam: '',
   }
 
-  componentDidMount() {
-    const liArr = document.querySelectorAll('li');
-
-    liArr.forEach((item) => {
-      if (item.innerText === 'JamSelect') {
-        item.setAttribute('selected', '');
-        item.lastChild.style.visibility = 'hidden';
-        this.setState({ select: 'Jam' });
-      }
-    });
+  select = (good) => {
+    this.setState(prev => ({
+      ...prev,
+      [good]: good,
+    }
+    ));
   }
 
-  componentDidUpdate() {
-    const liArr = document.querySelectorAll('li');
-
-    liArr.forEach((item) => {
-      if (item.innerText !== this.state.select) {
-        item.removeAttribute('selected');
-        item.lastChild.style.visibility = '';
-      }
-    });
+  remove = (good) => {
+    delete this.state[good];
+    this.setState(prev => ({
+      ...prev,
+    }
+    ));
   }
-
-  select = (event, good) => {
-    this.setState({ select: good });
-    event.target.style.visibility = 'hidden';
-    event.target.parentNode.setAttribute('selected', '');
-  };
 
   reset = () => {
-    this.setState({ select: null });
+    Object.keys(this.state).forEach((key) => {
+      delete this.state[key];
+      this.setState(prev => ({
+        ...prev,
+      }
+      ));
+    });
   }
 
   render() {
@@ -59,16 +50,34 @@ class App extends React.Component {
       <div className="App">
         <ul>
           {goodsFromServer.map(good => (
-            <li key={good}>
+            <li
+              key={good}
+              className={Object.keys(this.state).includes(good)
+                ? 'selected'
+                : ''}
+            >
               {good}
-              <button
-                type="button"
-                onClick={(event) => {
-                  this.select(event, good);
-                }}
-              >
-                Select
-              </button>
+              {!Object.keys(this.state).includes(good)
+                ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      this.select(good);
+                    }}
+                  >
+                    Select
+                  </button>
+                )
+                : (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      this.remove(good);
+                    }}
+                  >
+                    Remove
+                  </button>
+                )}
             </li>
           ))}
         </ul>
@@ -81,8 +90,28 @@ class App extends React.Component {
           Reset
         </button>
         <h1>
-          Selected good:
-          {this.state.select && this.state.select || 'no selected'}
+          {Object.keys(this.state).length > 0 && Object.keys(this.state)
+            .map((good, index, arr) => {
+              if (index === arr.length - 1 && arr.length !== 1) {
+                return (
+                  <>
+                    {' and '}
+                    {good}
+                  </>
+                );
+              }
+
+              return (
+                <>
+                  {good}
+                  {', '}
+                </>
+              );
+            })
+            }
+          {Object.keys(this.state).length > 1 && ' are selected'}
+          {Object.keys(this.state).length === 0 && 'No goods selected'}
+          {Object.keys(this.state).length === 1 && 'is selected'}
         </h1>
       </div>
     );
