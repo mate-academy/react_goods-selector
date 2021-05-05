@@ -1,1 +1,23 @@
 // styles go here
+.App {
+  text-align: center;
+  background-color: gray;
+}
+
+.table {
+  background-color: honeydew;
+}
+
+.button {
+  width: 80px;
+  height: 25px;
+  border-radius: 10px;
+
+  &__add {
+    background-color: rgb(6, 194, 6);
+  }
+
+  &__remove {
+    background-color: red;
+  }
+}
