@@ -22,9 +22,11 @@ class App extends React.Component {
   addGood = (product) => {
     const { goods } = this.state;
 
-    this.setState({
-      goods: [...goods, product],
-    });
+    if (!goods.includes(product)) {
+      this.setState({
+        goods: [...goods, product],
+      });
+    }
   }
 
   deleteGood = (product) => {
@@ -44,7 +46,7 @@ class App extends React.Component {
   checkGoods = () => {
     const { goods } = this.state;
 
-    if (goods.length < 1) {
+    if (!goods.length) {
       return `No goods selected`;
     }
 
