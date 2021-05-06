@@ -49,21 +49,27 @@ class App extends React.Component {
     }));
   }
 
-  prepareString = (good, index, arr) => (
-    (index === arr.length - 1 && arr.length !== 1)
+  parseString = (good, index, arr) => (
+    <React.Fragment key={good}>
+      {index > 0 && index !== arr.length - 1 ? ', ' : ''}
+      {good}
+      { arr.length === 1 ? ' is selected' : ''}
+      {index === arr.length - 2 ? ' and ' : ''}
+      {index === arr.length - 1 && arr.length > 1 ? ' are selected' : ''}
+    </React.Fragment>
+  )
+
+  prepareString = () => {
+    const goodsArr = Object.keys(this.state.goods);
+
+    return (goodsArr.length === 0)
       ? (
         <>
-          {' and '}
-          {good}
+          No goods selected
         </>
       )
-      : (
-        <>
-          {good}
-          {', '}
-        </>
-      )
-  )
+      : goodsArr.map(this.parseString);
+  }
 
   render() {
     return (
@@ -110,13 +116,7 @@ class App extends React.Component {
           Reset
         </button>
         <h1>
-          {Object.keys(this.state.goods).length > 0
-          && Object.keys(this.state.goods)
-            .map(this.prepareString)
-            }
-          {Object.keys(this.state.goods).length > 1 && ' are selected'}
-          {Object.keys(this.state.goods).length === 0 && 'No goods selected'}
-          {Object.keys(this.state.goods).length === 1 && 'is selected'}
+          {this.prepareString()}
         </h1>
       </div>
     );
