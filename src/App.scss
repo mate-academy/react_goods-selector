@@ -1,1 +1,57 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+.App {
+  margin-left: 1em;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+.btn {
+  background-color: wheat;
+  border: 1px solid antiquewhite;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px lightgray;
+  padding: 0.25em 0.75em;
+  text-align: center;
+
+  &:hover {
+    background-color: white;
+  }
+}
+
+.goods-list {
+  font-size: 18px;
+  display: flex;
+  flex-flow: column wrap;
+  padding: 0;
+  gap: 10px;
+  max-height: 300px;
+  max-width: 480px;
+  
+  &__item {
+    list-style: none;
+    padding: 0.5em;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    max-width: 200px;
+
+    display: flex;
+    justify-content: space-between;
+
+    &--selected {
+      background-color: lightgray;
+    }
+  }
+
+  &__button {
+    font-size: 16px;
+    margin-left: 1em;
+    display: inline-block;
+  }
+}
