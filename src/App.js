@@ -36,11 +36,11 @@ class App extends React.Component {
   }
 
   removeGood = (good) => {
-    this.setState(({ selectedGoods }) => {
-      selectedGoods.splice(selectedGoods.indexOf(good), 1);
-
-      return { selectedGoods };
-    });
+    this.setState(({ selectedGoods }) => ({
+      selectedGoods: selectedGoods.filter(
+        selectedGood => selectedGood !== good,
+      ),
+    }));
   }
 
   clearSelection = () => {
