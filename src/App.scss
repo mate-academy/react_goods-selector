@@ -1,3 +1,5 @@
+$max-width: 480px;
+
 * {
   box-sizing: border-box;
 }
@@ -9,6 +11,7 @@
     display: flex;
     align-items: center;
     gap: 20px;
+    max-width: $max-width;
   }
 }
 
@@ -25,21 +28,22 @@
   }
 }
 
-.goods-list {
+.GoodsList {
   font-size: 18px;
   display: flex;
   flex-flow: column wrap;
+  align-content: space-between;
   padding: 0;
   gap: 10px;
   max-height: 300px;
-  max-width: 480px;
+  max-width: $max-width;
   
   &__item {
     list-style: none;
     padding: 0.5em;
     border: 1px solid lightgrey;
     border-radius: 10px;
-    max-width: 200px;
+    width: 200px;
 
     display: flex;
     justify-content: space-between;
@@ -52,6 +56,5 @@
   &__button {
     font-size: 16px;
     margin-left: 1em;
-    display: inline-block;
   }
 }

@@ -17,73 +17,92 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGood: null,
+    selectedGoods: [],
   };
 
   componentDidMount() {
     this.setState({
-      selectedGood: 'Jam',
+      selectedGoods: ['Jam'],
     });
   }
 
-  selectGood = (good) => {
-    this.setState({
-      selectedGood: good,
+  addGood = (good) => {
+    this.setState(({ selectedGoods }) => {
+      selectedGoods.push(good);
+
+      return { selectedGoods };
+    });
+  }
+
+  removeGood = (good) => {
+    this.setState(({ selectedGoods }) => {
+      selectedGoods.splice(selectedGoods.indexOf(good), 1);
+
+      return { selectedGoods };
     });
   }
 
   clearSelection = () => {
     this.setState({
-      selectedGood: null,
+      selectedGoods: [],
     });
   };
 
+  renderButton = (className, clickHandler, label) => (
+    <button
+      type="button"
+      className={ClassNames('btn', className)}
+      onClick={clickHandler}
+    >
+      {label}
+    </button>
+  )
+
   render() {
-    const { selectedGood } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App">
         <header className="App__header">
-          <h1>
+          {
+            selectedGoods.length !== 0 && this.renderButton(
+              'App__button App__button--clear',
+              this.clearSelection.bind(this),
+              'X',
+            )
+          }
+          <h1 className="App__title">
             {
-              selectedGood
-                ? `Selected good: ${selectedGood}`
+              selectedGoods.length !== 0
+                ? `Selected goods: ${selectedGoods}`
                 : 'No goods selected'
             }
           </h1>
-          {
-            selectedGood
-            && (
-            <button
-              type="button"
-              className="btn btn-clear-selection"
-              onClick={this.clearSelection}
-            >
-              X
-            </button>
-            )
-          }
         </header>
-        <ul className="goods-list">
+        <ul className="GoodsList">
           {goodsFromServer.map(good => (
             <li
               key={good}
               className={ClassNames(
-                'goods-list__item',
-                selectedGood === good && 'goods-list__item--selected',
+                'GoodsList__item',
+                selectedGoods.includes(good) && 'GoodsList__item--selected',
               )}
             >
               {good}
               {
-                good === selectedGood
-                || (
-                <button
-                  type="button"
-                  className="btn goods-list__button"
-                  onClick={this.selectGood.bind(this, good)}
-                >
-                  Select
-                </button>
+                (
+                  selectedGoods.includes(good)
+                  && this.renderButton(
+                    'GoodsList__button GoodsList__button--remove',
+                    this.removeGood.bind(this, good),
+                    'Remove',
+                  )
+                ) || (
+                  this.renderButton(
+                    'GoodsList__button GoodsList__button--add',
+                    this.addGood.bind(this, good),
+                    'Add',
+                  )
                 )
               }
             </li>
