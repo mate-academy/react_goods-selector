@@ -27,11 +27,12 @@ class App extends React.Component {
   }
 
   addGood = (good) => {
-    this.setState(({ selectedGoods }) => {
-      selectedGoods.push(good);
-
-      return { selectedGoods };
-    });
+    this.setState(({ selectedGoods }) => ({
+      selectedGoods: [
+        ...selectedGoods,
+        good,
+      ],
+    }));
   }
 
   removeGood = (good) => {
