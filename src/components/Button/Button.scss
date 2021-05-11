@@ -1,0 +1,13 @@
+.btn {
+  background-color: wheat;
+  border: 1px solid antiquewhite;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px lightgray;
+  padding: 0.25em 0.75em;
+  font-size: 16px;
+  text-align: center;
+
+  &:hover {
+    background-color: white;
+  }
+}
