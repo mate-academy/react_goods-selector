@@ -19,11 +19,13 @@ class App extends React.Component {
     selectedGood: 'Jam',
   }
 
-  setSelectedGood = good => this.setState(() => ({
-    selectedGood: good,
-  }))
+  setSelectedGood = selectedGood => this.setState({
+    selectedGood,
+  })
 
   render() {
+    const { selectedGood } = this.state;
+
     return (
       <div className="App">
         <ul>
@@ -31,16 +33,17 @@ class App extends React.Component {
             <>
               <li
                 key={good}
-                className={this.state.selectedGood === good ? 'active' : ''}
+                className={selectedGood === good ? 'active' : ''}
               >
-                {`${good} `}
-                <button
-                  type="button"
-                  hidden={this.state.selectedGood === good}
-                  onClick={() => this.setSelectedGood(good)}
-                >
-                  Select
-                </button>
+                {good}
+                {!(selectedGood === good) && (
+                  <button
+                    type="button"
+                    onClick={() => this.setSelectedGood(good)}
+                  >
+                    Select
+                  </button>
+                )}
               </li>
             </>
           ))
@@ -50,19 +53,20 @@ class App extends React.Component {
           Selected good:
           {' '}
           <span>
-            {this.state.selectedGood
-              ? `${this.state.selectedGood} `
+            {selectedGood
+              ? `${selectedGood} `
               : 'Nothing '
             }
             is selected
           </span>
-          <button
-            type="button"
-            hidden={this.state.selectedGood === null}
-            onClick={() => this.setSelectedGood(null)}
-          >
-            X
-          </button>
+          {selectedGood && (
+            <button
+              type="button"
+              onClick={() => this.setSelectedGood(null)}
+            >
+              X
+            </button>
+          )}
         </h1>
       </div>
     );
