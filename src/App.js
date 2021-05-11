@@ -1,6 +1,8 @@
 import React from 'react';
-import ClassNames from 'classnames';
+import cn from 'classnames';
+
 import './App.scss';
+import { Button } from './components/Button';
 
 const goodsFromServer = [
   'Dumplings',
@@ -17,95 +19,99 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGoods: [],
+    goods: goodsFromServer.reduce((goodsObj, good) => ({
+      ...goodsObj,
+      [good]: false,
+    }), {}),
   };
 
   componentDidMount() {
-    this.setState({
-      selectedGoods: ['Jam'],
-    });
+    this.setState(state => ({
+      goods: {
+        ...state.goods,
+        Jam: true,
+      },
+    }));
   }
 
   addGood = (good) => {
-    this.setState(({ selectedGoods }) => ({
-      selectedGoods: [
-        ...selectedGoods,
-        good,
-      ],
+    this.setState(state => ({
+      goods: {
+        ...state.goods,
+        [good]: true,
+      },
     }));
   }
 
   removeGood = (good) => {
-    this.setState(({ selectedGoods }) => ({
-      selectedGoods: selectedGoods.filter(
-        selectedGood => selectedGood !== good,
-      ),
+    this.setState(state => ({
+      goods: {
+        ...state.goods,
+        [good]: false,
+      },
     }));
   }
 
   clearSelection = () => {
-    this.setState({
-      selectedGoods: [],
-    });
+    this.setState(state => ({
+      goods: Object.keys(state.goods).reduce((goodsObj, good) => ({
+        ...goodsObj,
+        [good]: false,
+      }), {}),
+    }));
   };
 
-  renderButton = (className, clickHandler, label) => (
-    <button
-      type="button"
-      className={ClassNames('btn', className)}
-      onClick={clickHandler}
-    >
-      {label}
-    </button>
-  )
+  getSelectedGoodsString = goods => (
+    Object.entries(goods)
+      .filter(([, isSelected]) => isSelected)
+      .map(([good]) => good)
+      .reduce((total, good) => ` ${total}, ${good}`)
+  );
 
   render() {
-    const { selectedGoods } = this.state;
+    const { goods } = this.state;
+    const haveSelectedGoods = Object.values(goods).some(v => v);
 
     return (
       <div className="App">
         <header className="App__header">
-          {
-            selectedGoods.length !== 0 && this.renderButton(
-              'App__button App__button--clear',
-              this.clearSelection.bind(this),
-              'X',
-            )
-          }
+          { haveSelectedGoods && (
+            <Button
+              clickHandler={() => {
+                this.clearSelection();
+              }}
+              label="X"
+            />
+          )}
           <h1 className="App__title">
             {
-              selectedGoods.length !== 0
-                ? `Selected goods: ${selectedGoods}`
+              haveSelectedGoods
+                ? `Selected goods: ${this.getSelectedGoodsString(goods)}`
                 : 'No goods selected'
             }
           </h1>
         </header>
         <ul className="GoodsList">
-          {goodsFromServer.map(good => (
+          {Object.entries(goods).map(([good, isSelected]) => (
             <li
               key={good}
-              className={ClassNames(
+              className={cn(
                 'GoodsList__item',
-                selectedGoods.includes(good) && 'GoodsList__item--selected',
+                isSelected && 'GoodsList__item--selected',
               )}
             >
               {good}
-              {
-                (
-                  selectedGoods.includes(good)
-                  && this.renderButton(
-                    'GoodsList__button GoodsList__button--remove',
-                    this.removeGood.bind(this, good),
-                    'Remove',
-                  )
-                ) || (
-                  this.renderButton(
-                    'GoodsList__button GoodsList__button--add',
-                    this.addGood.bind(this, good),
-                    'Add',
-                  )
-                )
-              }
+              <Button
+                className="GoodsList__button"
+                clickHandler={() => {
+                  if (isSelected) {
+                    this.removeGood(good);
+                  } else {
+                    this.addGood(good);
+                  }
+                }}
+                label={isSelected ? 'Remove' : 'Add'}
+              />
             </li>
           ))}
         </ul>

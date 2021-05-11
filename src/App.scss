@@ -15,19 +15,6 @@ $max-width: 480px;
   }
 }
 
-.btn {
-  background-color: wheat;
-  border: 1px solid antiquewhite;
-  border-radius: 10px;
-  box-shadow: 1px 1px 5px lightgray;
-  padding: 0.25em 0.75em;
-  text-align: center;
-
-  &:hover {
-    background-color: white;
-  }
-}
-
 .GoodsList {
   font-size: 18px;
   display: flex;
@@ -54,7 +41,6 @@ $max-width: 480px;
   }
 
   &__button {
-    font-size: 16px;
     margin-left: 1em;
   }
 }
