@@ -16,76 +16,82 @@ const goodsFromServer = [
 
 export class App extends React.Component {
   state = {
-    selectedGoodsArr: ['No goods'],
+    goodsList: goodsFromServer.map(good => ({
+      title: good,
+      isSelected: false,
+    })),
   };
 
+  ButtonIsSelected(title) {
+    const newGoodsList = this.state.goodsList.map((item) => {
+      if (item.title === title) {
+        return {
+          ...item,
+          isSelected: !item.isSelected,
+        };
+      }
+
+      return item;
+    });
+
+    this.setState(() => ({ goodsList: newGoodsList }));
+  }
+
+  clearList() {
+    const newGoodsList = this.state.goodsList.map(item => ({
+      ...item,
+      isSelected: false,
+    }));
+
+    this.setState(() => ({ goodsList: newGoodsList }));
+  }
+
   render() {
+    const selectedList = this.state.goodsList
+      .filter(item => item.isSelected === true)
+      .map(item => item.title);
+
     return (
       <div className="App">
         <h1>
-          {' '}
-          {`${this.state.selectedGoodsArr.map(
-            good => ` ${good}`,
-          )} are selected`}
-          <button
-            type="button"
-            id="xButton"
-            style={{ visibility: 'hidden' }}
-            onClick={() => {
-              this.setState({ selectedGoodsArr: ['No goods'] });
-              document.getElementById('xButton').style.visibility = 'hidden';
-            }}
-          >
-            {' '}
-            X
-            {' '}
-          </button>
+          {selectedList.length
+            ? (
+              <>
+                {' '}
+                {selectedList.join(', ')}
+                {' '}
+                are selected
+                {' '}
+                <button
+                  type="button"
+                  onClick={() => this.clearList()}
+                >
+                  {' '}
+                  X
+                </button>
+              </>
+            )
+            : 'No goods selected'}
         </h1>
         <ul>
-          {goodsFromServer.map(good => (
-            <li>
-              {' '}
-              {good}
-              <button
-                type="button"
-                id={good}
-                onClick={() => {
-                  if (this.state.selectedGoodsArr[0] === 'No goods') {
-                    this.setState(() => ({ selectedGoodsArr: [good] }));
-                  } else {
-                    this.setState(prevState => (
-                      prevState.selectedGoodsArr.push(good)));
-                  }
-
-                  const button = document.getElementById(good);
-
-                  button.style.visibility = 'hidden';
-                  document.getElementById('xButton').style.visibility
-                    = 'visible';
-                }}
-              >
-                {' '}
-                Add
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  this.setState(prev => (
-                    { selectedGoodsArr: prev.selectedGoodsArr.filter(
-                      arrGood => arrGood !== good,
-                    ) }));
-                  if (
-                    this.state.selectedGoodsArr.length === 1
-                    && this.state.selectedGoodsArr[0] === good
-                  ) {
-                    this.setState({ selectedGoodsArr: ['No goods'] });
-                  }
-
-                  document.getElementById(good).style.visibility = 'visible';
-                }}
-              >
-                remove
-              </button>
+          {this.state.goodsList.map(item => (
+            <li id={item.title}>
+              <span>{item.title}</span>
+              {item.isSelected ? (
+                <button
+                  type="button"
+                  onClick={() => this.ButtonIsSelected(item.title)}
+                >
+                  remove
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => this.ButtonIsSelected(item.title)}
+                >
+                  add
+                </button>
+              )}
             </li>
           ))}
         </ul>
