@@ -47,9 +47,15 @@ class App extends React.Component {
   }
 
   removeAllGoods = () => {
-    this.setState(state => ({
+    this.setState({
       goods: [],
-    }));
+    });
+  }
+
+  toggleGoodStatus = (status, good) => {
+    status
+      ? this.removeGood(good)
+      : this.addGood(good)
   }
 
   render() {
@@ -63,7 +69,7 @@ class App extends React.Component {
             <button
               type="button"
               className={goods.length ? 'delete-all' : ''}
-              onClick={() => this.removeAllGoods}
+              onClick={() => this.removeAllGoods()}
             />
             <span className="counter">
               Goods added:
@@ -92,11 +98,9 @@ class App extends React.Component {
                       <button
                         type="button"
                         className={`button ${isAdded && 'button--added'}`}
-                        onClick={() => {
-                          [this.addGood, this.removeGood][+isAdded](good);
-                        }}
+                        onClick={() => this.toggleGoodStatus(isAdded, good)}
                       >
-                        {['Add', 'Remove'][+isAdded]}
+                        {isAdded ? 'Remove' : 'Add'}
                       </button>
                     </li>
                   </div>
