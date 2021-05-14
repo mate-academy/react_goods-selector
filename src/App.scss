@@ -1,1 +1,150 @@
 // styles go here
+ul,
+h1 {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  background:none;
+  border:none;
+
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.App {
+  background: linear-gradient(to right, rgb(167, 199, 5), rgb(64, 84, 45));
+  margin: 50px auto;
+  box-shadow: inset 0 0 20px black;
+  display: flex;
+  flex-direction: column;
+  max-width: 750px;
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    color: blanchedalmond;
+    height: 160px;
+    padding: 10px 0;
+    align-items: center;
+
+    &__title {
+      text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.5);
+      display: flex;
+      text-align: center;
+      align-items: center;
+      flex-grow: 1;
+    }
+
+    .info-block {
+      text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.5);
+
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      gap: 30px;
+      align-items: center;
+
+      .counter {
+        border-radius: 2px;
+        margin-right: 20px;
+        font-size: 20px;
+      }
+
+      .delete-all {
+        box-shadow: 1px 1px 2px rgb(36, 30, 32);
+        border-radius: 8px;
+        background-size: 20px;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 35px;
+        height: 30px;
+        background-color: rgba(255, 0, 0, 0.9);
+        background-image: url("https://www.svgrepo.com/show/95622/remove-from-cart.svg");
+      }
+    }
+
+  }
+
+  .container {
+    padding: 30px 0;
+
+    .goods-list {
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+
+      .card-wrapper {
+        display: flex;
+        height: 140px;
+        width: 220px;
+        flex-grow: 1;
+        justify-content: center;
+        align-items: center;
+
+        .card {
+          height: 100px;
+          width: 200px;
+          padding-bottom: 5px;
+          border-radius: 5px;
+          background-color: rgb(219, 232, 207);
+          box-shadow: inset 2px 2px 25px rgb(9, 143, 9);
+          font-size: 25px;
+          display: flex;
+          flex-direction: column;
+          border: 1px solid rgb(85, 75, 75);
+          align-items: center;
+
+          &--added {
+            color: white;
+            box-shadow: inset 2px 2px 25px rgb(0, 0, 0);
+            background-color: rgba(113, 108, 108, 0.92);
+          }
+
+          .good {
+            display: flex;
+            flex-grow: 1;
+            align-items: center;
+          }
+
+          .button {
+            height: 40px;
+            width: 95%;
+            border-radius: 5px;
+            box-shadow: inset 0 0 10px rgb(9, 143, 9);
+            border: 1px solid rgba(0, 0, 0, 0.73);
+            transition: 0.3s;
+
+            &:active {
+              height: 30px;
+              width: 93%;
+            }
+            
+            &:hover {
+              box-shadow: inset 0 0 20px rgb(9, 143, 9);
+            }
+            &--added {
+              color: white;
+              font-size: 20px;
+              background-color: rgb(255, 0, 0);
+              box-shadow: inset 0 0 8px rgb(249, 4, 4);
+            }
+            &--added:hover {
+              box-shadow: inset 0 0 8px rgb(249, 4, 4);
+            }
+          }
+        }
+
+        .card:hover {
+          height: 104px;
+          width: 204px;
+        }
+      }
+
+    }
+  }
+}
