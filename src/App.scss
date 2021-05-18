@@ -1,1 +1,51 @@
-// styles go here
+body {
+  background-color: mistyrose;
+}
+
+.App {
+  &__heading {
+    display: inline-block;
+  }
+
+  &__btn {
+    display: inline-block;
+    margin: 0 30px;
+
+    border-radius: 10px;
+    background-color: red;
+    border: none;
+    cursor: pointer;
+    outline: none;
+
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+.list {
+  margin: 0;
+
+  &__item {
+    padding: 5px 0;
+  }
+
+  &__btn {
+    margin-left: 20px;
+
+    border-radius: 10px;
+    background-color: #7bc7c4;
+    border: none;
+    cursor: pointer;
+    outline: none;
+
+    &:hover {
+      color: white;
+      background-color: #357573;
+    }
+  }
+}
+
+.selected {
+  color: cornflowerblue;
+}
