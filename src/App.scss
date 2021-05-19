@@ -1,1 +1,37 @@
-// styles go here
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 600px;
+
+  &__button {
+    font-size: 0.75em;
+  }
+}
+
+.goods-list {
+  width: 600px;
+  padding: 10px;
+
+  font-size: 18px;
+  background-color: lightgray;
+  list-style: none;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+  }
+
+  &__button {
+    width: 70px;
+  }
+}
+
+.selected {
+  background-color: lightgreen;
+}
+
+.clicked {
+  display: none;
+}
