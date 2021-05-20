@@ -59,8 +59,8 @@ class App extends Component {
           </h1>
           <button
             type="button"
-            className={classNames('App__clear-button', {
-              'App__clear-button--disable': selectedGoods.length === 0,
+            className={classNames('App__clearButton', {
+              'App__clearButton--disable': selectedGoods.length === 0,
             })}
             onClick={this.clearAllGoods}
           >
@@ -79,7 +79,9 @@ class App extends Component {
             >
               <span>{good}</span>
               <button
-                className="App__addButton"
+                className={classNames('App__addButton', {
+                  'App__addButton--disable': selectedGoods.includes(good),
+                })}
                 type="button"
                 onClick={() => (
                   !selectedGoods.includes(good) && this.addGood(good)
@@ -88,7 +90,9 @@ class App extends Component {
                 Add
               </button>
               <button
-                className="App__removeButton"
+                className={classNames('App__removeButton', {
+                  'App__removeButton--disable': !selectedGoods.includes(good),
+                })}
                 type="button"
                 onClick={() => (
                   selectedGoods.includes(good) && this.removeGood(good)

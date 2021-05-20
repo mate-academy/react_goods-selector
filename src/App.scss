@@ -18,7 +18,7 @@
       background-color: #1900ff;
     }
   
-    &--hide {
+    &--disable {
       display: none;
     }
   }
@@ -37,7 +37,7 @@
       background-color: rgb(141, 26, 26);
     }
   
-    &--hide {
+    &--disable {
       display: none;
     }
   }
@@ -46,7 +46,7 @@
     display: flex;
   }
 
-  &__clear-button {
+  &__clearButton {
     width: 35px;
     font-size: 20px;
     background-color: #0075ff;
@@ -69,7 +69,7 @@
     background-color: #eee;
     font-size: 30px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
 
     &--active {
       font-size: 30px;
