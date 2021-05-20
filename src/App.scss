@@ -1,1 +1,49 @@
-// styles go here
+.App {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  &__title {
+    color: #333;
+    text-transform: uppercase;
+  }
+
+  &__removeAllBtn {
+    padding: 20px;
+    color: #eee;
+    text-transform: uppercase;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    background-color: #750b0b;
+  }
+}
+
+.goodsList {
+  padding: 0;
+  text-align: center;
+
+  &__item {
+    list-style: none;
+    background-color: #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    color: #333;
+    font-weight: bold;
+
+    &_selected {
+      background-color: #3a885d;
+      color: #ccc;
+    }
+  }
+
+  &__toggleBtn {
+    margin-left: 20px;
+    padding: 10px;
+    background-color: #eee;
+    color: #333;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    text-transform: uppercase;
+  }
+}
