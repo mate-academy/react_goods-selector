@@ -1,1 +1,80 @@
-// styles go here
+.App {
+  &__header {
+    display: inline;
+    margin: 0;
+  }
+
+  &__addButton {
+    width: 100px;
+    color: #fff;
+    font-size: 20px;
+    background-color: #0075ff;
+    border: none;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: #1900ff;
+    }
+  
+    &--disable {
+      display: none;
+    }
+  }
+
+  &__removeButton {
+    width: 100px;
+    color: #fff;
+    font-size: 20px;
+    background-color: #f00;
+    border: none;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: rgb(141, 26, 26);
+    }
+  
+    &--disable {
+      display: none;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+  }
+
+  &__clearButton {
+    width: 35px;
+    font-size: 20px;
+    background-color: #0075ff;
+    color: #fff;
+    border: none;
+    margin: 0 10px;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #1900ff;
+    }
+
+    &--disable {
+      display: none;
+    }
+  }
+
+  &__good {
+    background-color: #eee;
+    font-size: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    &--active {
+      font-size: 30px;
+      background-color: yellowgreen;
+    }
+  }
+  
+}
