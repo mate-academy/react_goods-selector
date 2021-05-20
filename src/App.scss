@@ -1,1 +1,24 @@
-// styles go here
+.selected {
+  background-color: yellow;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+li button {
+  width: 80px;
+  height: 50px;
+  margin: 5px;
+}
