@@ -1,6 +1,7 @@
 .App {
   &__header {
-    text-align: center;
+    display: inline;
+    margin: 0;
   }
 
   &__button {
@@ -18,6 +19,29 @@
     }
   
     &--hide {
+      display: none;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+  }
+
+  &__clear-button {
+    width: 35px;
+    font-size: 20px;
+    background-color: #0075ff;
+    color: #fff;
+    border: none;
+    margin: 0 10px;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #1900ff;
+    }
+
+    &--disable {
       display: none;
     }
   }

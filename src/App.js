@@ -43,11 +43,30 @@ class App extends Component {
       this.setState({ selectedGoods: [...goods, good] });
     };
 
+    const clearAllGoods = () => {
+      this.setState({ selectedGoods: [] });
+    };
+
     return (
       <div className="App">
-        <h1 className="App__header">
-          {goodsSelector(selectedGoods)}
-        </h1>
+        <div className="App__wrapper">
+          <h1 className="App__header">
+            {goodsSelector(selectedGoods)}
+          </h1>
+          <button
+            type="button"
+            className={
+              selectedGoods.length === 0
+                ? 'App__clear-button--disable'
+                : 'App__clear-button'
+            }
+            onClick={() => {
+              clearAllGoods();
+            }}
+          >
+            ✗
+          </button>
+        </div>
         <ul>
           {goodsFromServer.map(good => (
             <li
