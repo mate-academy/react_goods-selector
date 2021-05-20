@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer = [
@@ -19,50 +20,49 @@ class App extends Component {
     selectedGoods: ['Jam'],
   };
 
+  goodsSelector = (goods) => {
+    switch (goods.length) {
+      case 0:
+        return 'No goods selected';
+      case 1:
+        return `${goods[0]} is selected`;
+      default:
+        return `${goods.slice(0, goods.length - 1).join(', ')}`
+        + ` and ${goods[goods.length - 1]} are selected`;
+    }
+  }
+
+  removeGood = (good) => {
+    this.setState(state => ({
+      selectedGoods: state.selectedGoods.filter(product => product !== good),
+    }));
+  };
+
+  addGood = (good) => {
+    this.setState(state => ({
+      selectedGoods: [...state.selectedGoods, good],
+    }));
+  };
+
+  clearAllGoods = () => {
+    this.setState({ selectedGoods: [] });
+  };
+
   render() {
     const { selectedGoods } = this.state;
-
-    function goodsSelector(goods) {
-      switch (goods.length) {
-        case 0:
-          return 'No goods selected';
-        case 1:
-          return `${goods[0]} is selected`;
-        default:
-          return `${goods.slice(0, goods.length - 1).join(', ')}`
-          + ` and ${goods[goods.length - 1]} are selected`;
-      }
-    }
-
-    const removeGood = (goods, good) => {
-      this.setState({ selectedGoods: goods
-        .filter(product => product !== good) });
-    };
-
-    const addGood = (goods, good) => {
-      this.setState({ selectedGoods: [...goods, good] });
-    };
-
-    const clearAllGoods = () => {
-      this.setState({ selectedGoods: [] });
-    };
 
     return (
       <div className="App">
         <div className="App__wrapper">
           <h1 className="App__header">
-            {goodsSelector(selectedGoods)}
+            {this.goodsSelector(selectedGoods)}
           </h1>
           <button
             type="button"
-            className={
-              selectedGoods.length === 0
-                ? 'App__clear-button--disable'
-                : 'App__clear-button'
-            }
-            onClick={() => {
-              clearAllGoods();
-            }}
+            className={classNames('App__clear-button', {
+              'App__clear-button--disable': selectedGoods.length === 0,
+            })}
+            onClick={this.clearAllGoods}
           >
             ✗
           </button>
@@ -79,15 +79,22 @@ class App extends Component {
             >
               <span>{good}</span>
               <button
-                className="App__button"
+                className="App__addButton"
                 type="button"
                 onClick={() => (
-                  selectedGoods.includes(good)
-                    ? removeGood(selectedGoods, good)
-                    : addGood(selectedGoods, good)
+                  !selectedGoods.includes(good) && this.addGood(good)
                 )}
               >
-                {selectedGoods.includes(good) ? 'Remove' : 'Add'}
+                Add
+              </button>
+              <button
+                className="App__removeButton"
+                type="button"
+                onClick={() => (
+                  selectedGoods.includes(good) && this.removeGood(good)
+                )}
+              >
+                Remove
               </button>
             </li>
           ))}
