@@ -22,6 +22,10 @@ class App extends React.Component {
     })),
   };
 
+  componentDidMount() {
+    this.changeStatus(8);
+  }
+
   changeStatus = (index) => {
     this.setState((state) => {
       const copy = [...state.goods];
