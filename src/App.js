@@ -23,7 +23,7 @@ class App extends React.Component {
 
   clearSelected = () => {
     this.setState({ selectedGoods: [] });
-  }
+  };
 
   renderTitle = (array) => {
     switch (array.length) {
@@ -44,18 +44,38 @@ class App extends React.Component {
           are selected`
         );
     }
+  };
+
+  addProduct(product) {
+    this.setState((prevState) => {
+      prevState.selectedGoods.push(product);
+
+      return {
+        selectedGoods: prevState.selectedGoods,
+      };
+    });
+  }
+
+  removeProduct(product) {
+    this.setState(prevState => (
+      {
+        selectedGoods: prevState.selectedGoods.filter(
+          element => element !== product,
+        ),
+      }
+    ));
   }
 
   render() {
-    let { selectedGoods: curentProductList } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App">
         <h1 className="title">
           <>
-            {this.renderTitle(curentProductList)}
+            {this.renderTitle(selectedGoods)}
 
-            {curentProductList.length > 0 && (
+            {selectedGoods.length > 0 && (
               <button
                 type="button"
                 className="title__clear"
@@ -73,7 +93,7 @@ class App extends React.Component {
             <li key={product} className="product-list__item">
               <span
                 className={classNames({
-                  hightlighted: curentProductList.includes(product),
+                  hightlighted: selectedGoods.includes(product),
                 })}
               >
                 {product}
@@ -81,16 +101,12 @@ class App extends React.Component {
 
               <button
                 className={
-                  classNames({
-                    hidden: curentProductList.includes(product),
-                    'product-list__add': true,
+                  classNames('product-list__add', {
+                    hidden: selectedGoods.includes(product),
                   })
                 }
                 type="button"
-                onClick={() => {
-                  curentProductList.push(product);
-                  this.setState({ selectedGoods: curentProductList });
-                }}
+                onClick={this.addProduct.bind(this, product)}
               >
                 Add
               </button>
@@ -98,17 +114,12 @@ class App extends React.Component {
               <button
                 className={
                   classNames({
-                    hidden: !curentProductList.includes(product),
+                    hidden: !selectedGoods.includes(product),
                     'product-list__remove': true,
                   })
                 }
                 type="button"
-                onClick={() => {
-                  curentProductList = curentProductList.filter(
-                    element => element !== product,
-                  );
-                  this.setState({ selectedGoods: curentProductList });
-                }}
+                onClick={this.removeProduct.bind(this, product)}
               >
                 Remove
               </button>
