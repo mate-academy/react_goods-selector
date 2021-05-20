@@ -25,7 +25,7 @@ class App extends React.Component {
     this.setState({ selectedGoods: [] });
   }
 
-  renderTitle(array) {
+  renderTitle = (array) => {
     switch (array.length) {
       case 0:
         return (
@@ -34,36 +34,12 @@ class App extends React.Component {
 
       case 1:
         return (
-          <>
-            {`${array[0]} `}
-            is selected
-
-            <button
-              type="button"
-              className="title__clear"
-              title="Clear selected"
-              onClick={this.clearSelected}
-            >
-              x
-            </button>
-          </>
+          `${array[0]} is selected`
         );
 
       default:
         return (
-          <>
-            {`${array.join(', ')} `}
-            are selected
-
-            <button
-              type="button"
-              className="title__clear"
-              title="Clear selected"
-              onClick={this.clearSelected}
-            >
-              x
-            </button>
-          </>
+          `${array.join(', ')} are selected`
         );
     }
   }
@@ -74,15 +50,25 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1 className="title">
-          {this.renderTitle(curentProductList)}
+          <>
+            {this.renderTitle(curentProductList)}
+
+            {curentProductList.length > 0 && (
+              <button
+                type="button"
+                className="title__clear"
+                title="Clear selected"
+                onClick={this.clearSelected}
+              >
+                x
+              </button>
+            )}
+          </>
         </h1>
 
         <ul className="product-list">
           {goodsFromServer.map(product => (
-            <li
-              key={product}
-              className="product-list__item"
-            >
+            <li key={product} className="product-list__item">
               <span
                 className={classNames({
                   hightlighted: curentProductList.includes(product),
