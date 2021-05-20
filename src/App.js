@@ -47,23 +47,17 @@ class App extends React.Component {
   };
 
   addProduct(product) {
-    this.setState((prevState) => {
-      prevState.selectedGoods.push(product);
-
-      return {
-        selectedGoods: prevState.selectedGoods,
-      };
-    });
+    this.setState(({ selectedGoods }) => ({
+      selectedGoods: [...selectedGoods, product],
+    }));
   }
 
   removeProduct(product) {
-    this.setState(prevState => (
-      {
-        selectedGoods: prevState.selectedGoods.filter(
-          element => element !== product,
-        ),
-      }
-    ));
+    this.setState(prevState => ({
+      selectedGoods: prevState.selectedGoods.filter(
+        element => element !== product,
+      ),
+    }));
   }
 
   render() {
