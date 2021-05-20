@@ -1,1 +1,54 @@
-// styles go here
+.app {
+  width: 50%;
+}
+
+.clearAllBtn {
+  cursor: pointer;
+}
+
+.selectedTitleWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.list_item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  //width: 50%;
+  margin: 0 0 5px;
+  padding: 5px 10px;
+  border: 2px solid black;
+  border-radius: 8px;
+
+  background-color: lightblue;
+}
+
+.item_title {
+  margin: 0;
+}
+
+.item_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 25px;
+  height: 25px;
+
+  background-color: lightgreen;
+
+  cursor: pointer;
+}
+
+.selected {
+  background-color: lightcoral;
+}
