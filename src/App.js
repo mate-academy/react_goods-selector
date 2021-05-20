@@ -39,7 +39,9 @@ class App extends React.Component {
 
       default:
         return (
-          `${array.join(', ')} are selected`
+          `${array.slice(0, -1).join(', ')} 
+          and ${array[array.length - 1]} 
+          are selected`
         );
     }
   }
