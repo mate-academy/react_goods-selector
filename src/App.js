@@ -17,13 +17,7 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    chosenGoods: [],
-  }
-
-  componentDidMount() {
-    this.setState({
-      chosenGoods: ['Jam'],
-    });
+    chosenGoods: ['Jam'],
   }
 
   choseToggleHandler = (product) => {
@@ -44,10 +38,9 @@ class App extends React.Component {
     });
   }
 
-  render() {
-    const { chosenGoods } = this.state;
-
+  getTitle = () => {
     let title;
+    const { chosenGoods } = this.state;
 
     if (chosenGoods.length === 0) {
       title = 'No goods are selected';
@@ -57,13 +50,19 @@ class App extends React.Component {
       title = `${chosenGoods.join(', ')} are selected`;
     }
 
+    return title;
+  }
+
+  render() {
+    const { chosenGoods } = this.state;
+
     return (
       <div className="App">
         <h1 className="App__title">
-          { title }
+          {this.getTitle()}
         </h1>
 
-        {Boolean(chosenGoods.length) && (
+        {chosenGoods.length > 0 && (
           <button
             type="button"
             className="App__removeAllBtn"
@@ -94,11 +93,7 @@ class App extends React.Component {
                     this.choseToggleHandler(product);
                   }}
                 >
-                  {
-                    isChosen
-                      ? 'Remove'
-                      : 'Choose'
-                  }
+                  { isChosen ? 'Remove' : 'Choose' }
                 </button>
               </li>
             );
