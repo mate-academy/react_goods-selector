@@ -70,11 +70,9 @@ class App extends Component {
         <ul>
           {goodsFromServer.map(good => (
             <li
-              className={
-                selectedGoods.includes(good)
-                  ? 'App__good App__good--active'
-                  : 'App__good'
-              }
+              className={classNames('App__good', {
+                'App__good--active': selectedGoods.includes(good),
+              })}
               key={good}
             >
               <span>{good}</span>
