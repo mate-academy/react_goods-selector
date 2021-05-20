@@ -1,1 +1,54 @@
-// styles go here
+.title {
+  display: flex;
+  align-items: center;
+
+  &__clear {
+    margin-left: 15px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(255, 106, 106);
+    cursor: pointer;
+  }
+}
+
+.product-list {
+  padding: 0;
+  list-style: none;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 200px;
+    height: 30px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    border: 1px solid rgb(133, 133, 133);
+    background-color: rgb(233, 233, 233);
+  }
+
+  &__add {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(156, 253, 173);
+    cursor: pointer;
+  }
+
+  &__remove {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(255, 106, 106);
+    cursor: pointer;
+  }
+}
+
+.hightlighted {
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
