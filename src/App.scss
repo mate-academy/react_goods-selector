@@ -1,1 +1,20 @@
-// styles go here
+.goods-list__good {
+  margin-bottom: 15px;
+}
+
+.selected {
+  background-color: rgb(93, 209, 255);
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.goods-list__good-btn {
+  margin-left: 50px;
+  cursor: pointer;
+}
+
+.close {
+  margin-left: 30px;
+}
