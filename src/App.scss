@@ -1,1 +1,60 @@
-// styles go here
+.title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  color: rgba($color: #160502b6, $alpha: 1);
+
+  &__text {
+    font-size: 40px;
+    color: rgba($color: #000, $alpha: 1);
+  }
+
+  &__button {
+    height: 30px;
+    width: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgba($color: #df232381, $alpha: 1);
+    margin-left: 20px;
+  }
+
+}
+
+.goods {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  width: 2px;
+  gap: 10px;
+  list-style: none;
+
+  &__button {
+
+    color: rgb(0, 0, 0);
+    font-size: 21px;
+    font-weight: bold;
+    width: 120px;
+    height: 120px;
+
+  }
+}
+
+.active {
+  display: none;
+}
+
+.Active {
+  background-color: rgba($color: #9b063f25, $alpha: 1);
+  height: 120px;
+  width: 120px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.NoneActive {
+  background-color: rgb(253, 47, 92);
+  height: 120px;
+  width: 120px;
+  font-size: 20px;
+  font-weight: bold;
+}
