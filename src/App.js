@@ -26,9 +26,11 @@ class App extends React.Component {
     this.setState({ goodsList: [] });
     selectedList.forEach((item) => {
       item.classList.remove('selected');
+      item.classList.remove('selected');
       const good = item.querySelector('.goods-list__good-btn');
 
       good.innerText = 'Add';
+      good.classList.remove('selected-btn');
     });
   }
 
@@ -50,6 +52,7 @@ class App extends React.Component {
       });
 
       item.classList.remove('selected');
+      target.classList.remove('selected-btn');
       target.innerText = 'Add';
     } else {
       this.setState(prevState => ({
@@ -57,6 +60,7 @@ class App extends React.Component {
       }));
 
       item.classList.add('selected');
+      target.classList.add('selected-btn');
       target.innerText = 'Remove';
     }
   }
@@ -77,7 +81,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <h1>
+        <h1 className="title">
           {selectedItems}
           <button
             type="button"
@@ -102,7 +106,6 @@ class App extends React.Component {
                 onClick={(event) => {
                   this.option(event, good);
                 }}
-                value="Add"
               >
                 Add
               </button>
