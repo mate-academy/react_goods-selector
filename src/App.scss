@@ -1,1 +1,23 @@
 // styles go here
+.selected {
+  background-color: greenyellow;
+}
+
+.notSelected {
+  background-color: red;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 50px;
+  margin: 10px;
+  width: 150px;
+}
+
+.clear {
+  margin: 10px;
+  padding: 10px;
+  background-color: red;
+}
