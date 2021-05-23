@@ -1,1 +1,81 @@
-// styles go here
+.App {
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+.Title {
+  display: grid;
+  grid-template-columns: 1fr 0.2fr;
+
+  &-text {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: underline;
+  }
+
+  &-button {
+    border-radius: 8px;
+    background-color: #fff;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 2px solid rgb(29, 29, 29);
+
+    &:hover {
+      color: #fff;
+      background: red;
+    }
+
+    &:active {
+      transform: translateY(4px);
+    }
+  }
+}
+
+.List {
+  padding: 0;
+
+  &-item {
+    background: grey;
+    padding: 15px 0;
+    display: grid;
+    grid-template-columns: 1fr 0.2fr;
+    padding-left: 15px;
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  &-button {
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+
+    &:hover {
+      color: #fff;
+      background: red;
+    }
+
+    &:active {
+      transform: translateY(4px);
+    }
+
+    &--add {
+      &:hover {
+        background: green;
+      }
+    }
+    &--remove {
+      &:hover {
+        background: red;
+      }
+    }
+  }
+}
+
+.hidden {
+  display: none;
+}
