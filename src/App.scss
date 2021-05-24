@@ -1,1 +1,62 @@
-// styles go here
+.App {
+  width: 400px;
+  border: 2px solid #11698e;
+  margin: 0 auto;
+}
+
+.highlight {
+  color: yellow;
+  font-weight: bold;
+}
+
+.title {
+  text-align: center;
+}
+
+.selected__items {
+  padding-left: 50px;
+  min-height: 50px;
+  width: 320px;
+}
+
+.button_clear {
+  margin-left: 120px;
+  margin-bottom: 20px;
+  outline: none;
+  border: none;
+  background-color: #f05454;
+  padding: 10px 50px;
+}
+
+.list {
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    margin-right: 50px;
+    margin-bottom: 15px;
+
+    &-name {
+      text-transform: uppercase;
+      font-family: sans-serif;
+    }
+  }
+
+  &__button {
+
+    outline: none;
+
+    &_green {
+      margin-right: 10px;
+      padding: 10px;
+      background-color: #adce74;
+      border: 1px solid transparent;
+    }
+
+    &_red {
+      padding: 10px;
+      background-color: #fad5ad;
+      border: 1px solid transparent;
+    }
+  }
+}
