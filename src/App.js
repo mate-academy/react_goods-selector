@@ -54,8 +54,9 @@ class App extends React.Component {
         <ul>
           {goodsFromServer.map(good => (
             <>
-              <div className="App__good">
-                <li li key={good} className="App__good-name">{good}</li>
+              <li key={good} className="App__good">
+                <span key={good} className="App__good-name">{good}</span>
+
                 {goods.includes(good)
                   ? (
                     <button
@@ -80,7 +81,7 @@ class App extends React.Component {
                     </button>
                   )
                 }
-              </div>
+              </li>
             </>
           ))}
         </ul>
