@@ -28,7 +28,7 @@ export class App extends React.Component {
     }
   }
 
-  clickHandler(good) {
+  clickHandler = (good) => {
     if (this.state.selectedGoods.includes(good)) {
       this.setState(state => ({
         selectedGoods: state.selectedGoods.filter(elem => elem !== good),
