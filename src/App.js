@@ -17,7 +17,7 @@ const goodsFromServer = [
 
 export class App extends React.Component {
   state = {
-    selectedGoods: [],
+    selectedGoods: ['Jam'],
   }
 
   clearSelection = () => {
