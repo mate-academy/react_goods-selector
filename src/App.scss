@@ -1,1 +1,94 @@
-// styles go here
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+ul, h1 {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.App {
+  background: linear-gradient(135deg, white, rgb(236, 233, 233) 80%);
+  border: 2px solid grey;
+  border-radius: 20px;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 350px;
+  box-shadow: 7px 5px rgba(192, 192, 192, 0.705);
+  
+  .header {
+    background-color: rgba(255, 255, 255, 0.815);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 150px;
+    border: 2px solid rgba(116, 139, 121, 0.753);
+    border-radius: 10px;
+    box-shadow: inset 3px -3px rgba(182, 178, 178, 0.541);
+    margin: 20px;
+    padding: 30px;
+    font-size: 10px;
+
+    &__title {
+      color: rgb(83, 80, 80);
+    }
+  }
+
+  .main-content {
+    padding: 10px 0;
+
+    .goods-list {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      .button-wrapper {
+
+        .button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100px;
+          width: 100px;
+          border-radius: 10px;
+          border: 0.5px solid grey;
+          background: none;
+          color: rgb(87, 82, 82);
+          font-weight: bold;
+          font-size: 16px;
+          cursor: pointer;
+          box-shadow: 2px 2px 3px 1px grey;
+
+          &__active {
+            background-color: rgba(161, 170, 164, 0.39);
+            color: white;
+            box-shadow: inset 2px 3px grey;
+          }
+          &__noneactive {
+            background-color:none;
+          }
+        }
+
+        .clear-button {
+          height: 100px;
+          width: 100px;
+          border-radius: 10px;
+          border: 0.5px solid grey;
+          background: none;
+          background-image: url("https://www.svgrepo.com/show/14988/trash.svg");
+          background-size: 30px;
+          background-repeat: no-repeat;
+          background-position: center;
+          cursor: pointer;
+          box-shadow: 2px 2px 3px 1px grey;
+        }
+      }
+    }
+  }
+}
