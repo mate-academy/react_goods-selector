@@ -39,29 +39,16 @@ class App extends React.Component {
   render() {
     const { selectedGoods } = this.state;
     const goodsIsSelected = selectedGoods.length > 0;
-    const preparedTitleGoods = selectedGoods.map((item, index, array) => {
-      if (array.length > 1) {
-        if (index === array.length - 2) {
-          return `${item} and ${array[index + 1]}`;
-        }
-
-        return item;
-      }
-
-      return item;
-    });
 
     return (
       <div className="app">
         <h1>
           Selected good: -
           {goodsIsSelected
-            ? ` ${preparedTitleGoods.length > 1
-              ? preparedTitleGoods.slice(0, selectedGoods.length - 1).join(', ')
-              : preparedTitleGoods.join(', ')} 
-              ${selectedGoods.length === 1
-              ? 'is'
-              : 'are'} selected`
+            ? ` ${selectedGoods.slice(0, selectedGoods.length - 1).join(', ')}
+                ${selectedGoods.length > 1 ? 'and' : ''}
+                ${selectedGoods[selectedGoods.length - 1]}
+                ${selectedGoods.length === 1 ? 'is' : 'are'} selected`
             : ' No goods selected'
           }
         </h1>
@@ -97,3 +84,11 @@ class App extends React.Component {
 }
 
 export default App;
+
+// .map((item, index, array) => {
+//   if (index === array.length - 2) {
+//     return `${item} and ${array[index + 1]}`;
+//   };
+
+//   return `${item}`;
+// });
