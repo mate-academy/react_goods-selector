@@ -1,1 +1,47 @@
-// styles go here
+.App {
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 300px;
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 620px;
+  }
+
+  &__button {
+    margin-left: 15px;
+    padding: 5px 10px;
+    max-height: min-content;
+    width: 70px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(218, 10, 10);
+    cursor: pointer;
+  }
+}
+
+.goodsList {
+  padding: 0;
+  list-style: none;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 600px;
+    height: 30px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    border: 1px solid rgb(133, 133, 133);
+    background-color: rgb(233, 233, 233);
+  }
+
+  &__color {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(156, 253, 173);
+    cursor: pointer;
+  }
+}
