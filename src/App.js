@@ -21,7 +21,7 @@ class App extends React.Component {
     selectedGoods: ['Jam'],
   }
 
-  addToSelected = (product) => {
+  addRemoveSelected = (product) => {
     if (!this.state.selectedGoods.includes(product)) {
       this.setState(state => ({
         selectedGoods: [...state.selectedGoods, product],
@@ -44,20 +44,28 @@ class App extends React.Component {
           Selected goods:
           {' '}
           {
-            this.state.selectedGoods.map((good, index, array) => {
-              if (array.length > 1 && index === array.length - 2) {
-                return `${good} and `;
-              }
+            (this.state.selectedGoods.length === 0) ? (
+              'No goods selected'
+            ) : (
+              this.state.selectedGoods.map((good, index, array) => {
+                if (array.length > 1 && index === array.length - 2) {
+                  return `${good} and `;
+                }
 
-              return `${good} `;
-            })
+                return `${good} `;
+              })
+            )
           }
-          <button
-            type="button"
-            onClick={this.clearSelectedGoods}
-          >
-            X
-          </button>
+          {
+            (this.state.selectedGoods.length !== 0) && (
+              <button
+                type="button"
+                onClick={this.clearSelectedGoods}
+              >
+                X
+              </button>
+            )
+          }
         </h1>
         {`Length of all goods: ${goodsFromServer.length}`}
         <ul className="ProductList">
@@ -73,7 +81,7 @@ class App extends React.Component {
                   className={`${isSelected ? 'Active' : 'NoneActive'} Button`}
                   type="button"
                   onClick={() => {
-                    this.addToSelected(product);
+                    this.addRemoveSelected(product);
                   }}
                 >
                   {product}
