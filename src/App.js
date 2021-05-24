@@ -18,7 +18,7 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGoods: [],
+    selectedGoods: ['Jam'],
   }
 
   addToSelected = (product) => {
@@ -44,7 +44,6 @@ class App extends React.Component {
           Selected goods:
           {' '}
           {
-
             this.state.selectedGoods.map((good, index, array) => {
               if (array.length > 1 && index === array.length - 2) {
                 return `${good} and `;
