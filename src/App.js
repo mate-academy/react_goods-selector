@@ -54,7 +54,7 @@ class App extends React.Component {
                 {selectedItems.length === 1
                   ? `${selectedItems[0].name} is selected`
                   : `${selectedItems.map(good => good.name).join(', ')
-                  }are selected`
+                  } are selected`
                 }
               </h1>
               <button
