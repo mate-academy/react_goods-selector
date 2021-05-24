@@ -1,4 +1,5 @@
 import React from 'react';
+import { Goods } from './components/Goods';
 import './App.scss';
 
 const goodsFromServer = [
@@ -14,11 +15,10 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-const App = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+function App() {
+  return (
+    <Goods goods={goodsFromServer} />
+  );
+}
 
 export default App;
