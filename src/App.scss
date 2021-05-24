@@ -1,1 +1,51 @@
-// styles go here
+.hightlighted {
+  background: bisque;
+}
+
+.hide {
+  display: none;
+}
+
+.title {
+  display: flex;
+  gap: 20px;
+  background: rgb(255, 254, 196);
+}
+
+.btn {
+  width: 60px;
+  height: 60px;
+  font-size: 30px;
+  color: rgb(206, 50, 50);
+  background: none;
+}
+
+.product {
+  list-style: none;
+  padding-top: 20px;
+
+  &__item {
+    position: relative;
+    height: 70px;
+    font-size: 18px;
+    line-height: 20px;
+    color: rgb(30, 155, 30);
+    font-style: italic;
+    border-bottom: 1px solid rgb(173, 240, 173);
+  }
+
+  &__btn {
+    position: absolute;
+    left: 200px;
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    background:  rgb(173, 240, 173);
+    border-radius: 20%;
+    border: 1px solid rgb(218, 213, 213);
+  }
+
+  & > * {
+    margin-top: 5px;
+  }
+}
