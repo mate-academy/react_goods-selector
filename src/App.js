@@ -55,7 +55,7 @@ class App extends React.Component {
           {goodsFromServer.map(good => (
             <>
               <div className="App__good">
-                <li className="App__good-name">{good}</li>
+                <li li key={good} className="App__good-name">{good}</li>
                 {goods.includes(good)
                   ? (
                     <button
