@@ -1,1 +1,26 @@
-// styles go here
+.list {
+  padding: 0;
+}
+
+.item {
+  list-style: none;
+}
+
+.block,
+.select {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  border: 1px white solid;
+  height: 60px;
+  width: 50%;
+}
+
+.block {
+  background-color: green;
+}
+
+.select {
+  background-color: red;
+}
