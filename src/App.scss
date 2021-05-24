@@ -1,1 +1,47 @@
 // styles go here
+* {
+  padding: 0;
+  margin: 0;
+  font-family: Raleway, sans-serif;
+}
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+.goodList {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+.selected, .notSelected {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  margin-bottom: 5px;
+  background-color: #de8888;
+  border: 1px #7a3232;
+  border-radius: 10px;
+  list-style-type: none;
+}
+
+.button {
+
+}
+
+.clearButton {
+  width: 300px;
+  height: 30px;
+  background-color: #de0707;
+  border: 1px #7a3232;
+  border-radius: 10px;
+  cursor: pointer;
+}
