@@ -1,1 +1,56 @@
-// styles go here
+.App {
+  margin: 0 auto;
+  max-width: 480px;
+}
+
+.heading {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+
+  &__text {
+    margin: 0;
+    padding: 0;
+  }
+
+  &__button {
+    margin-left: 10px;
+    width: 50px;
+    height: 30px;
+    border: transparent;
+    background-color: red;
+    border-radius: 2px;
+    color: white;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: rgb(226, 235, 238);
+    border-radius: 2px;
+
+    &--selected {
+      background-color: rgb(195, 211, 216);
+    }
+  }
+
+  &__button {
+    border-radius: 2px;
+    color: white;
+    border: transparent;
+    background-color: rgb(26, 163, 26);
+
+    &--selected {
+      background-color: rgb(233, 52, 29);
+    }
+  }
+}
