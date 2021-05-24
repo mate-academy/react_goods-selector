@@ -30,7 +30,7 @@ ul, h1 {
     border: 2px solid rgba(116, 139, 121, 0.753);
     border-radius: 10px;
     box-shadow: inset 3px -3px rgba(182, 178, 178, 0.541);
-    margin: 20px;
+    margin: 20px 10px 0;
     padding: 30px;
     font-size: 10px;
 
@@ -43,10 +43,11 @@ ul, h1 {
     padding: 10px 0;
 
     .goods-list {
+      padding: 10px;
       display: flex;
       gap: 7px;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: space-between;
 
       .button-wrapper {
 
