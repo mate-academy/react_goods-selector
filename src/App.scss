@@ -1,1 +1,69 @@
-// styles go here
+@mixin elementStyle {
+  align-items: center;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  transition: background-color 300ms;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  grid-column-start: 1;
+}
+
+.appWrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 400px);
+}
+
+.goodsList {
+  list-style: none;
+  max-width: 400px;
+  grid-column-start: 2;
+}
+
+.selectedEl {
+  @include elementStyle;
+  background-color: rgb(226, 255, 197);
+}
+
+.unselectedEl {
+  @include elementStyle;
+  background-color: rgb(255, 191, 191);
+}
+
+.btn {
+  border-radius: 10px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+}
+
+.clearBtn {
+  grid-column-start: 2;
+  width: 100%;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background-color: rgb(255, 104, 104);
+  margin-top: 5px;
+}
