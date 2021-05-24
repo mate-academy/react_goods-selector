@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 
 import './App.scss';
 
@@ -75,35 +74,35 @@ class App extends React.Component {
           {goodsFromServer.map(good => (
             <li key={good} className="List-item">
               <span>{good}</span>
-              <button
-                type="button"
-                className={
-                  classNames('List-button', 'List-button--add', {
-                    hidden: selectedGoods.includes(good),
-                  })
-                }
-                onClick={() => (
-                  this.addGood(good))}
-              >
-                Add
-              </button>
+              {!selectedGoods.includes(good)
+                && (
+                  <button
+                    type="button"
+                    className="List-button List-button--add"
+                    onClick={() => (
+                      this.addGood(good))}
+                  >
+                    Add
+                  </button>
+                )
+              }
 
-              <button
-                type="button"
-                className={
-                  classNames('List-button', 'List-button--remove',
-                    {
-                      hidden: !selectedGoods.includes(good),
-                    })
-                }
-                onClick={() => (
-                  this.removeGood(good)
-                )}
-              >
-                Remove
-              </button>
+              {selectedGoods.includes(good)
+                && (
+                <button
+                  type="button"
+                  className="List-button List-button--remove"
+                  onClick={() => (
+                    this.removeGood(good)
+                  )}
+                >
+                  Remove
+                </button>
+                )
+              }
             </li>
           ))}
+          ,
         </ul>
 
       </div>
