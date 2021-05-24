@@ -1,1 +1,102 @@
-// styles go here
+$itemHeight: 40px;
+$itemVerticalMargin: 10px;
+$buttonWidth: 70px;
+$borderRadius: 24px;
+$buttonSelectedColor: orangered;
+$hoverColor: rgb(0, 199, 17);
+$outcolor: #d9ffbd;
+$resetSize: 70px;
+
+body {
+  background: linear-gradient(to bottom left, #1c9411, #08cc6a);
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.out {
+  position: relative;
+  text-align: center;
+  width: 50%;
+  color: green;
+  border-radius: $borderRadius;
+  height: $itemHeight * 2;
+  font-size: 60px;
+  border: lime solid 5px;
+  background-color: $outcolor;
+}
+
+.reset {
+  position: absolute;
+  right: -$resetSize - 15px;
+  border-radius: 50%;
+  border: white solid 3px;
+  color: white;
+  outline: none;
+  background-color: lime;
+  cursor: pointer;
+  border-style: solid;
+  width: $resetSize;
+  height: $resetSize;
+  font-size: 45px;
+  transition: 0.2s;
+
+  &:active {
+    transform: translate(3px, 3px);
+    background: orangered;
+  }
+}
+
+.list {
+  list-style-type: none;
+}
+
+.text {
+  margin-left: 30px;
+}
+
+.item {
+  position: relative;
+  color: white;
+  min-height: $itemHeight;
+  max-width: 30%;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: white solid 2px;
+  border-radius: $borderRadius;
+  margin: $itemVerticalMargin 0;
+}
+
+.selected {
+  background-color: #105733;
+}
+
+.button {
+  outline: none;
+  border-radius: $borderRadius;
+  color: white;
+  background-color: yellowgreen;
+  border: none;
+  min-width: $buttonWidth;
+  min-height: $itemHeight;
+  cursor: pointer;
+  transition: 0.5s;
+  font-size: 17px;
+
+  &Rem {
+    background: $buttonSelectedColor;
+    transform: translateX(-30px);
+    color: transparent;
+  }
+  
+  &Sel {
+    background: lime;
+    
+    &:hover {
+      background: $hoverColor;
+    }
+  }
+  
+
+}
