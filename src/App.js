@@ -28,6 +28,7 @@ class App extends React.Component {
         {good ? (
           <h1 className="goods__title">
             {good}
+            {' '}
             is selected
             {' '}
             <button
