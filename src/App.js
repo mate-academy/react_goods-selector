@@ -22,34 +22,37 @@ class App extends React.Component {
   addGood = (good) => {
     this.setState({
       selectedGood: good,
-      isButtonHiden: true,
     });
   }
 
   removeGood = () => {
     this.setState({
-      selectedGood: 'No goods',
-      isButtonHiden: true,
+      selectedGood: null,
     });
   }
 
   render() {
-    const { selectedGood, isButtonHiden } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <div className="App">
-        <h1>
-          {`Selected good: - ${selectedGood} selected `}
-          <button
-            type="button"
-            hidden={isButtonHiden}
-            onClick={() => {
-              this.removeGood();
-            }}
-          >
-            X
-          </button>
-        </h1>
+        {selectedGood
+          ? (
+            <h1>
+              {`${selectedGood} - selected`}
+              <button
+                type="button"
+                onClick={() => {
+                  this.removeGood();
+                }}
+              >
+                X
+              </button>
+            </h1>
+          )
+          : (
+            <h1>No goods selected</h1>
+          )}
         <ul>
           {goodsFromServer.map(good => (
             <li key={good} className={selectedGood === good ? 'active' : ''}>
