@@ -59,7 +59,13 @@ class App extends React.Component {
     return (
       <div className="wrapper">
         <h1>{this.state.title}</h1>
-        <button type="button" onClick={this.clear}>X</button>
+        <button
+          type="button"
+          className={this.state.selectedGood.length === 0 ? 'visibility' : null}
+          onClick={this.clear}
+        >
+          X
+        </button>
         <p>
           <strong>Your list: </strong>
           {this.state.selectedGood.join(', ')}
