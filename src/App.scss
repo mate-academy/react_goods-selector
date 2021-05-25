@@ -1,1 +1,36 @@
 // styles go here
+.wrapper {
+  text-align: center;
+  width: 700px;
+  border: 1px solid #ccc;
+  background-color: beige;
+  margin: 20px auto;
+}
+
+.visibility {
+  visibility: hidden;
+}
+
+button {
+  display: inline-block;
+  width: 100px;
+  height: 50px;
+  background-color: antiquewhite;
+  border-radius: 20px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+ul li {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.list--bg {
+  background-color: brown;
+}
