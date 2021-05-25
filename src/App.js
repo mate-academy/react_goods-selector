@@ -16,52 +16,48 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    goods: ['Jam'],
+    selectedGoods: ['Jam'],
   }
 
   render() {
-    const { goods } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App">
         <div className="top">
           <h1>
-            {goods.length === 0
+            {selectedGoods.length === 0
               ? 'No goods selected'
-              : (`${goods.map(good => (` ${good}`))} selected`)}
+              : (`${selectedGoods.map(good => (` ${good}`))} selected`)}
           </h1>
-          {goods.length === 0
-            ? ''
-            : (
-              <button
-                type="button"
-                onClick={() => {
-                  this.setState({ goods: [] });
-                }}
-              >
-                Clear all
-              </button>
-            )}
+          {!!selectedGoods.length && (
+            <button
+              type="button"
+              onClick={() => {
+                this.setState({ selectedGoods: [] });
+              }}
+            >
+              Clear all
+            </button>
+          )}
         </div>
 
         {goodsFromServer.map(good => (
           <div
             key={good}
-            className={goods.includes(good) ? 'active good' : 'good'}
+            className={selectedGoods.includes(good) ? 'active good' : 'good'}
           >
             {good}
-            {goods.includes(good)
-              ? ''
-              : (
-                <button
-                  type="button"
-                  onClick={() => {
-                    this.setState({ goods: [...goods, good] });
-                  }}
-                >
-                  Select
-                </button>
-              ) }
+            {!selectedGoods.includes(good) && (
+            <button
+              type="button"
+              onClick={() => {
+                this.setState({ selectedGoods: [...selectedGoods, good] });
+              }}
+            >
+              Select
+            </button>
+            )}
           </div>
         ))}
       </div>
