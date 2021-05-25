@@ -1,1 +1,32 @@
-// styles go here
+.list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  padding: 5px 15px;
+  width: 150px;
+  font-size: 18px;
+  font-weight: 600;
+  color: black;
+  list-style: none;
+  background-color: rgba(216, 212, 212, 0.99);
+  border: 1px solid grey;
+  &:hover {
+    box-shadow: 3px 3px 5px rgb(48, 44, 44);
+  }
+}
+
+.button {
+  background-color: #f0e4e4fd;
+  &:hover {
+    background-color: lightcyan;
+  }
+}
+
+.button-x {
+  margin-left: 10px;
+}
+
+.selected {
+  background-color: rgb(122, 122, 214);
+}
