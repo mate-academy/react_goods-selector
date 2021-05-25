@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.scss';
-import classNames from 'classnames';
 
 const goodsFromServer = [
   'Dumplings',
@@ -20,29 +19,45 @@ export class App extends React.Component {
     selectedGoods: ['Jam'],
   }
 
-  clearSelection = () => {
-    if (this.state.selectedGoods.length !== 0) {
-      this.setState({
-        selectedGoods: [],
-      });
+  addGood = (good) => {
+    if (this.state.selectedGoods.includes(good)) {
+      return;
     }
+
+    this.setState(({ selectedGoods }) => ({
+      selectedGoods: [...selectedGoods, good],
+    }));
   }
 
-  clickHandler = (good) => {
-    if (this.state.selectedGoods.includes(good)) {
-      this.setState(state => ({
-        selectedGoods: state.selectedGoods.filter(elem => elem !== good),
-      }));
-    } else {
-      this.setState((state) => {
-        state.selectedGoods.push(good);
+  removeGood = (good) => {
+    this.setState(state => ({
+      selectedGoods: state.selectedGoods.filter(product => product !== good),
+    }));
+  }
 
-        return {
-          selectedGoods: state.selectedGoods,
+  clearSelection = () => {
+    this.setState({ selectedGoods: [] });
+  }
 
-        };
-      });
+  stringMaker = () => {
+    let title = '';
+    const { selectedGoods } = this.state;
+    const arr = selectedGoods.slice(0, -1);
+
+    if (selectedGoods.length === 1) {
+      title = `${selectedGoods} is selected`;
     }
+
+    if (selectedGoods.length > 1) {
+      // eslint-disable-next-line
+      title += `${arr.join(', ')} and ${selectedGoods[selectedGoods.length - 1]} are selected`;
+    }
+
+    if (selectedGoods.length === 0) {
+      title = 'Please Select Anything';
+    }
+
+    return title;
   }
 
   render() {
@@ -50,41 +65,55 @@ export class App extends React.Component {
 
     return (
       <div className="App">
+        <h1 className="title">
+          {this.stringMaker()}
+        </h1>
+        <ul className="goodsList">
+          {goodsFromServer.map((good) => {
+            const isSelected = this.state.selectedGoods.includes(good);
+
+            return (
+              <li
+                key={good}
+                className={isSelected ? 'trueEl' : 'falseEl'}
+              >
+                {good}
+                {isSelected
+                  ? (
+                    <button
+                      className="btn"
+                      type="button"
+                      onClick={() => this.removeGood(good)}
+                    >
+                      Remove
+                    </button>
+                  )
+                  : (
+                    <button
+                      className="btn"
+                      type="button"
+                      onClick={() => this.addGood(good)}
+                    >
+                      Add Good
+                    </button>
+                  )
+                }
+              </li>
+            );
+          })}
+        </ul>
         {selectedGoods.length > 0
           ? (
-            <h1>
-              Selected good:
-              {' '}
-              { `${selectedGoods.join(', ')} `}
-              <button
-                type="button"
-                onClick={this.clearSelection}
-              >
-                Clear All
-              </button>
-            </h1>
-          )
-          : <h1>No Goods Selected</h1>
-        }
-
-        <ul>
-          {goodsFromServer.map(good => (
-            <li
-              key={good}
-              className={
-                classNames({ selected: selectedGoods.includes(good) })}
+            <button
+              className="clearBtn"
+              type="button"
+              onClick={this.clearSelection}
             >
-              {`${good}`}
-              <button
-                type="button"
-                onClick={() => this.clickHandler(good)}
-              >
-                Add/Remove
-              </button>
-            </li>
-          ))
-          }
-        </ul>
+              Clear all
+            </button>
+          )
+          : null
+        }
       </div>
     );
   }
