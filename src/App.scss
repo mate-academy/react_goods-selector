@@ -1,1 +1,36 @@
-// styles go here
+.app {
+  margin-left: 20px;
+  width: 400px;
+}
+
+.active {
+  border-radius: 5px;
+  display: none;
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+
+  font-size: 24px;
+  width: 400px;
+  list-style: none;
+
+  border: 2px solid blue;
+  border-radius: 5px;
+
+  &--active {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  
+    font-size: 24px;
+    width: 400px;
+    list-style: none;
+  
+    border: 2px solid blue;
+    border-radius: 5px;
+    background-color: yellowgreen;
+  }
+}
