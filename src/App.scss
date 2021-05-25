@@ -1,1 +1,17 @@
-// styles go here
+
+.goodStyle {
+  display: flex;
+  justify-content: space-between;
+  width: 150px;
+  background-color: lightgrey;
+  padding: 5px;
+  margin: 5px;
+}
+
+.selectedEl {
+  background-color: yellow;
+}
+
+.unselectedEl {
+  background-color: lightgrey;
+}
