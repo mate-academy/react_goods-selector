@@ -1,1 +1,10 @@
 // styles go here
+.hide {
+  visibility: hidden;
+}
+
+.selected {
+  background-color: green;
+  width: fit-content;
+  color: yellow;
+}
