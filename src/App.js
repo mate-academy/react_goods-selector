@@ -24,6 +24,14 @@ class App extends React.Component {
     this.setState({ selectedGoods: [] });
   }
 
+  btnRemove = (good) => {
+    this.setState(prevState => ({
+      selectedGoods: prevState.selectedGoods.filter(
+        product => product !== good,
+      ),
+    }));
+  }
+
   render() {
     const { selectedGoods } = this.state;
 
@@ -86,18 +94,11 @@ class App extends React.Component {
               <button
                 type="button"
                 className={
-                  classNames({
+                  classNames('good__remove', {
                     good__hidden: !selectedGoods.includes(good),
-                    good__remove: true,
                   })
                 }
-                onClick={() => {
-                  this.setState({
-                    selectedGoods: selectedGoods.filter(
-                      product => product !== good,
-                    ),
-                  });
-                }}
+                onClick={() => this.btnRemove(good)}
               >
                 Remove
               </button>
