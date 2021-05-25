@@ -1,1 +1,11 @@
-// styles go here
+.app {
+  &__list {
+    list-style: none;
+  }
+
+  &__item {
+    &--active {
+      background-color: chartreuse;
+    }
+  }
+}
