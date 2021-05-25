@@ -25,11 +25,8 @@ class App extends React.Component {
     this.setState({ goodsList: [] });
   }
 
-  option(event, good) {
-    const { target } = event;
-    const item = target.closest('.goods-list__good');
-
-    if (item.classList.contains('selected')) {
+  option(good) {
+    if (this.state.goodsList.includes(good)) {
       const index = this.state.goodsList.findIndex(pos => pos === good);
 
       this.setState((prevState) => {
@@ -92,8 +89,8 @@ class App extends React.Component {
                   classNames('goods-list__good-btn',
                     { 'selected-btn': this.state.goodsList.includes(good) })
                   }
-                onClick={(event) => {
-                  this.option(event, good);
+                onClick={() => {
+                  this.option(good);
                 }}
               >
                 {this.state.goodsList.includes(good) ? 'Remove' : 'Add'}
