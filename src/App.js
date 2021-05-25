@@ -41,23 +41,19 @@ class App extends React.Component {
 
   selectedGoodssTitle = () => {
     const { selectedGoods } = this.state;
+    const selected = [...selectedGoods];
+    const last = selected.splice(selected.length - 1, 1);
 
-    if (selectedGoods.length === 1) {
-      return `${selectedGoods} is selected`;
+    switch (selectedGoods.length) {
+      case 0:
+        return 'No goods selected';
+      case 1:
+        return `${selectedGoods} is selected`;
+      case 2:
+        return `${selectedGoods[0]} and ${selectedGoods[1]} are selected`;
+      default:
+        return `${selected.map(good => ` ${good}`)} and ${last} are selected`;
     }
-
-    if (selectedGoods.length === 2) {
-      return `${selectedGoods[0]} and ${selectedGoods[1]} is selected`;
-    }
-
-    if (selectedGoods.length > 2) {
-      const selected = [...selectedGoods];
-      const last = selected.splice(selected.length - 1, 1);
-
-      return `${selected.map(good => ` ${good}`)} and ${last} is selected`;
-    }
-
-    return 'No goods selected';
   };
 
   render() {
@@ -69,8 +65,7 @@ class App extends React.Component {
           <h1 className="App__wrapper--title">
             {this.selectedGoodssTitle()}
           </h1>
-          {selectedGoods.length !== 0
-          && (
+          {!!selectedGoods.length && (
           <button
             type="button"
             className="App__wrapper--button"
