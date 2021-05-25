@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer = [
@@ -53,7 +54,7 @@ class App extends React.Component {
                 ? (
                   <button
                     type="button"
-                    className={value === item ? 'active' : ''}
+                    className={classNames({ active: value === item })}
                     onClick={() => {
                       this.setState({ value: item });
                     }}
@@ -64,7 +65,7 @@ class App extends React.Component {
                 : (
                   <button
                     type="button"
-                    className={value === item ? 'active' : ''}
+                    className={classNames({ active: value === item })}
                     onClick={() => {
                       this.setState({ value: item });
                     }}
