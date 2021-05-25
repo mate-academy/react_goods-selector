@@ -1,1 +1,17 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+.clearbtn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+
+.App {
+  position: relative;
+}
+
+.selected {
+  background-color: rgb(230, 230, 230);
+}
