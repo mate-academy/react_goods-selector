@@ -17,7 +17,6 @@ const goodsFromServer = [
 class App extends React.Component {
   state = {
     good: 'Jam',
-    selected: true,
   }
 
   render() {
@@ -26,26 +25,24 @@ class App extends React.Component {
         <h1>
           Selected good: -
           {' '}
-          {this.state.selected
+          {this.state.good
             ? `${this.state.good} is selected`
             : 'No goods selected'
           }
           {' '}
-          {this.state.selected
-            ? (
+          {this.state.good
+            && (
               <button
                 type="button"
                 onClick={() => {
                   this.setState({
                     good: null,
-                    selected: false,
                   });
                 }}
               >
                 X
               </button>
             )
-            : ''
           }
         </h1>
 
@@ -54,21 +51,20 @@ class App extends React.Component {
             <li className="item" key={goodsFromServer.indexOf(good)}>
               <div className={good === this.state.good ? 'select' : 'block'}>
                 {good}
-                {good === this.state.good
-                  ? ''
-                  : (
+                {good !== this.state.good
+                  && (
                     <button
                       type="button"
                       onClick={() => {
                         this.setState({
                           good,
-                          selected: true,
                         });
                       }}
                     >
                       Select
                     </button>
-                  )}
+                  )
+                }
               </div>
             </li>
           ))}
