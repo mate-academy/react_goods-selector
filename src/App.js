@@ -19,27 +19,32 @@ class App extends React.Component {
     value: ['Jam'],
   }
 
+  removed = () => {
+    this.setState({ value: null });
+  }
+
   render() {
     const { value } = this.state;
 
     return (
       <div className="App">
-        {value ? (
-          <h1>
-            {`${value} - is selected`}
-            <button
-              type="button"
-              onClick={
-                () => {
-                  this.setState({ value: null });
-                }}
-            >
-              Cancel
-            </button>
-          </h1>
-        ) : (
-          <h1>No value selected</h1>
-        )}
+        {value
+          ? (
+            <h1>
+              {`${value} - is selected`}
+              <button
+                type="button"
+                onClick={
+                  this.removed
+                }
+              >
+                Cancel
+              </button>
+            </h1>
+          )
+          : (
+            <h1>No value selected</h1>
+          )}
         <ul>
           {goodsFromServer.map(good => (
             <li className="good" key={good}>
