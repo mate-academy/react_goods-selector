@@ -21,12 +21,14 @@ class App extends React.Component {
     selectedGood: 'Jam',
   }
 
+  isIncludes = good => this.state.goodsList.includes(good)
+
   close() {
     this.setState({ goodsList: [] });
   }
 
   option(good) {
-    if (this.state.goodsList.includes(good)) {
+    if (this.isIncludes(good)) {
       const index = this.state.goodsList.findIndex(pos => pos === good);
 
       this.setState((prevState) => {
@@ -79,7 +81,7 @@ class App extends React.Component {
               key={good}
               className={
                 classNames(`goods-list__good ${good}`,
-                  { selected: this.state.goodsList.includes(good) })
+                  { selected: this.isIncludes(good) })
               }
             >
               {good}
@@ -87,13 +89,13 @@ class App extends React.Component {
                 type="button"
                 className={
                   classNames('goods-list__good-btn',
-                    { 'selected-btn': this.state.goodsList.includes(good) })
+                    { 'selected-btn': this.isIncludes(good) })
                   }
                 onClick={() => {
                   this.option(good);
                 }}
               >
-                {this.state.goodsList.includes(good) ? 'Remove' : 'Add'}
+                {this.isIncludes(good) ? 'Remove' : 'Add'}
               </button>
             </li>
           ))}
