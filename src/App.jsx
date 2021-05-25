@@ -36,6 +36,23 @@ class App extends React.Component {
     this.setState({ selectedGoods: [] });
   }
 
+  goodsTitle = (goods, goodsIsSelected) => {
+    const lastItemOfgoods = goods[goods.length - 1];
+
+    if (goodsIsSelected) {
+      if (goods.length === 1) {
+        return ` ${goods} is selected`;
+      }
+
+      return (
+        `${goods.slice(0, goods.length - 1).join(', ')} and 
+        ${lastItemOfgoods} are selected`
+      );
+    }
+
+    return ' No goods selected';
+  }
+
   render() {
     const { selectedGoods } = this.state;
     const goodsIsSelected = selectedGoods.length > 0;
@@ -44,38 +61,37 @@ class App extends React.Component {
       <div className="app">
         <h1>
           Selected good: -
-          {goodsIsSelected
-            ? ` ${selectedGoods.slice(0, selectedGoods.length - 1).join(', ')}
-                ${selectedGoods.length > 1 ? 'and' : ''}
-                ${selectedGoods[selectedGoods.length - 1]}
-                ${selectedGoods.length === 1 ? 'is' : 'are'} selected`
-            : ' No goods selected'
-          }
+          {' '}
+          {this.goodsTitle(selectedGoods, goodsIsSelected)}
         </h1>
-        {goodsIsSelected
-          && <button type="button" onClick={this.clearItems}>X</button>
-        }
+        {goodsIsSelected && (
+          <button type="button" onClick={this.clearItems}>
+            X
+          </button>
+        )}
         <ul className="app__list">
-          {goodsFromServer.map(item => (
-            <li
-              key={item}
-              className={`app__item ${selectedGoods.includes(item)
-                && 'app__item--active'
-              }`}
-            >
-              <button
-                type="button"
-                onClick={() => (
-                  selectedGoods.includes(item)
-                    ? this.removeItem(item)
-                    : this.selectItem(item))}
+          {goodsFromServer.map((item) => {
+            const itemIsIncluded = selectedGoods.includes(item);
+
+            return (
+              <li
+                key={item}
+                className={`app__item ${itemIsIncluded && 'app__item--active'}`}
               >
-                {selectedGoods.includes(item) ? 'remove' : 'add'}
-              </button>
-              {' '}
-              {item}
-            </li>
-          ))}
+                <button
+                  type="button"
+                  onClick={() => (
+                    itemIsIncluded
+                      ? this.removeItem(item)
+                      : this.selectItem(item))}
+                >
+                  {itemIsIncluded ? 'remove' : 'add'}
+                </button>
+                {' '}
+                {item}
+              </li>
+            );
+          })}
         </ul>
         {goodsFromServer.length}
       </div>
@@ -84,11 +100,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-// .map((item, index, array) => {
-//   if (index === array.length - 2) {
-//     return `${item} and ${array[index + 1]}`;
-//   };
-
-//   return `${item}`;
-// });
