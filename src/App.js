@@ -17,7 +17,7 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGoods: 'Jam',
+    selectedGoods: ['Jam'],
   }
 
   addItem = (item) => {
@@ -33,24 +33,23 @@ class App extends React.Component {
   }
 
   clearItemSelection = () => {
-    this.state({ selectedGoods: [] });
+    this.setState({ selectedGoods: [] });
   }
 
   setTitle = () => {
     const products = [...this.state.selectedGoods];
     const lastProduct = products[products.length - 1];
 
-    if (products.length === 0) {
-      return 'No goods selected';
+    switch (products.length) {
+      case 0:
+        return `No goods selected`;
+      case 1:
+        return `${products[0]} is selected`;
+      default:
+        products.length -= 1;
+
+        return `${products.join(', ')} and ${lastProduct} are selected`;
     }
-
-    if (products.length === 1) {
-      return `${products[0]} is selected`;
-    }
-
-    products.length -= 1;
-
-    return `${products.join(', ')} and ${lastProduct} are selected`;
   }
 
   render() {
@@ -59,19 +58,16 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>
-          <span>
-            {this.setTitle()}
-          </span>
-
-          <button
-            type="button"
-            className={classNames(`title__button`, {
-              clicked: !selectedGoods.length,
-            })}
-            onClick={() => this.clearItemSelection()}
-          >
-            X
-          </button>
+          {this.setTitle()}
+          {selectedGoods.length > 0 && (
+            <button
+              type="button"
+              className="button-x"
+              onClick={this.clearItemSelection}
+            >
+              X
+            </button>
+          )}
         </h1>
 
         <ul>
