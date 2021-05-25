@@ -71,38 +71,43 @@ class App extends React.Component {
         </div>
 
         <ul className="List">
-          {goodsFromServer.map(good => (
-            <li key={good} className="List-item">
-              <span>{good}</span>
-              {!selectedGoods.includes(good)
-                && (
-                  <button
-                    type="button"
-                    className="List-button List-button--add"
-                    onClick={() => (
-                      this.addGood(good))}
-                  >
-                    Add
-                  </button>
-                )
-              }
+          {goodsFromServer.map((good) => {
+            const isSelected = selectedGoods.includes(good);
 
-              {selectedGoods.includes(good)
-                && (
-                <button
-                  type="button"
-                  className="List-button List-button--remove"
-                  onClick={() => (
-                    this.removeGood(good)
-                  )}
-                >
-                  Remove
-                </button>
-                )
-              }
-            </li>
-          ))}
-          ,
+            return (
+              <li key={good} className="List-item">
+                <span>{good}</span>
+
+                {!isSelected
+                  && (
+                    <button
+                      type="button"
+                      className="List-button List-button--add"
+                      onClick={() => (
+                        this.addGood(good))}
+                    >
+                      Add
+                    </button>
+                  )
+                }
+
+                {isSelected
+                  && (
+                    <button
+                      type="button"
+                      className="List-button List-button--remove"
+                      onClick={() => (
+                        this.removeGood(good)
+                      )}
+                    >
+                      Remove
+                    </button>
+                  )
+                }
+                ;
+              </li>
+            );
+          })}
         </ul>
 
       </div>
