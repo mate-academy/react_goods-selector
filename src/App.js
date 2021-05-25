@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.scss';
 import { v4 as uniqueKey } from 'uuid';
+import classnames from 'classnames';
 
 const goodsFromServer = [
   'Dumplings',
@@ -17,7 +18,7 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGood: '',
+    selectedGood: null,
   }
 
   clearSelection = () => {
@@ -26,25 +27,30 @@ class App extends React.Component {
     });
   }
 
-  goNext = (event, product) => {
+  goNext = (product) => {
     this.setState({
       selectedGood: product,
     });
   }
 
   render() {
+    const { selectedGood } = this.state;
+
     return (
       <div className="App">
         <div className="title">
           <h1>
-            {this.state.selectedGood
-              ? `${this.state.selectedGood} is selected`
+            {selectedGood
+              ? `${selectedGood} is selected`
               : 'No goods selected'
             }
           </h1>
           <button
             type="button"
-            className={this.state.selectedGood ? 'btn' : 'hide'}
+            className={classnames({
+              btn: selectedGood,
+              hide: !selectedGood,
+            })}
             onClick={this.clearSelection}
           >
             X
@@ -53,22 +59,25 @@ class App extends React.Component {
         <ul className="product">
           {goodsFromServer.map((product) => {
             const key = uniqueKey();
-            const isSelected = this.state.selectedGood === product;
+            const isSelected = selectedGood === product;
+            const productItemClass = classnames({
+              product__item: true,
+              hightlighted: isSelected,
+            });
 
             return (
               <li
                 key={key}
-                className={
-                  isSelected
-                    ? 'product__item hightlighted'
-                    : 'product__item'
-                }
+                className={productItemClass}
               >
                 {product}
                 <button
                   type="button"
-                  className={isSelected ? 'hide' : 'product__btn'}
-                  onClick={event => this.goNext(event, product)}
+                  className={classnames({
+                    hide: isSelected,
+                    product__btn: !isSelected,
+                  })}
+                  onClick={event => this.goNext(product)}
                 >
                   Select
                 </button>
