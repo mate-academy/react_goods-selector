@@ -1,1 +1,51 @@
-// styles go here
+.title {
+  padding-left: 40px;
+}
+
+.clearAll-button {
+  margin-left: 40px;
+  margin-bottom: 20px;
+  width: 100px;
+  height: 30px;
+}
+
+.goods {
+  &__wrapper {
+    background-color: #eee;
+    margin-bottom: 10px;
+    height: 30px;
+    border: 0.5px solid grey;
+    list-style: none;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
+    width: 300px;
+  }
+
+  &__button {
+    height: 20px;
+    border-radius: 2px;
+    border: 0.5px solid grey;
+
+    &:hover {
+      background: #0000ff30;
+      border: 0.5px solid grey;
+      border-radius: 2px;
+    }
+  }
+}
+
+.active {
+  color: green;
+  font-weight: 700;
+}
+
+.hover {
+  visibility: hidden;
+}
+
+.remove {
+  color: red;
+}
