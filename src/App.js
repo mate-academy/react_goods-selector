@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer = [
@@ -78,9 +77,7 @@ class App extends React.Component {
               <button
                 type="button"
                 className={
-                  classNames('btn', {
-                    good__hidden: selectedGoods.includes(good),
-                  })
+                  selectedGoods.includes(good) ? 'good__hidden' : 'btn'
                 }
                 onClick={() => {
                   this.setState({
@@ -94,9 +91,7 @@ class App extends React.Component {
               <button
                 type="button"
                 className={
-                  classNames('good__remove', {
-                    good__hidden: !selectedGoods.includes(good),
-                  })
+                  selectedGoods.includes(good) ? 'good__remove' : 'good__hidden'
                 }
                 onClick={() => this.btnRemove(good)}
               >
