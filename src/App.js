@@ -50,8 +50,8 @@ class App extends React.Component {
           {allGoods.map(good => (
             <li
               className={selectedGood === good
-                ? 'list__item_active'
-                : 'list__item'
+                ? 'active'
+                : ''
               }
               key={good}
             >
