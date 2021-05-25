@@ -26,13 +26,15 @@ class App extends React.Component {
       <div className="App">
         <h1>{`Selected good: ${good} is selected`}</h1>
 
-        <button
-          className={good === 'Nothing is selected' ? 'selectedButton' : ''}
-          type="button"
-          onClick={() => this.setState({ good: 'Nothing is selected' })}
-        >
-          clear
-        </button>
+        {good !== 'Nothing'
+          && (
+            <button
+              type="button"
+              onClick={() => this.setState({ good: 'Nothing' })}
+            >
+              clear
+            </button>
+          )}
 
         <br />
         <br />
@@ -44,13 +46,15 @@ class App extends React.Component {
 
               {': '}
 
-              <button
-                className={good.includes(item) ? 'selectedButton' : ''}
-                type="button"
-                onClick={() => this.setState({ good: item })}
-              >
-                select
-              </button>
+              {good !== item
+                && (
+                  <button
+                    type="button"
+                    onClick={() => this.setState({ good: item })}
+                  >
+                    select
+                  </button>
+                )}
             </li>
           ))}
         </ul>
