@@ -1,1 +1,24 @@
-// styles go here
+button {
+  margin: 0;
+}
+
+.App {
+  width: 700px;
+}
+
+.top {
+  background-color: grey;
+  padding: 10px;
+  margin: 10px;
+}
+
+.active {
+  background-color: greenyellow;
+}
+
+.good {
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+}
