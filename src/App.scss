@@ -1,1 +1,24 @@
-// styles go here
+.list {
+  margin-left: 0;
+  padding-left: 0; 
+  
+  &__good {
+    list-style-type: none;
+  }
+}
+
+.button {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  margin-bottom: 5px;
+  background-color: #fff;
+}
+
+.button--close {
+  color: red;
+}
+
+.active {
+  color: rgb(241, 241, 34);
+}
