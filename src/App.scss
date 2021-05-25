@@ -1,1 +1,86 @@
-// styles go here
+.App {
+  max-width: 700px;
+  margin: 0 auto;
+  font-family: sans-serif;
+
+  &__wrapper {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    &--title {
+      margin: 0;
+      max-width: 70%;
+    }
+
+    &--button {
+      height: 50px;
+      width: 50px;
+      background-color: salmon;
+      border: 3px solid transparent;
+      transition-duration: 400ms;
+      cursor: pointer;
+      border-radius: 10px;
+
+      &:active {
+        border: 3px solid #ec8b80;
+        background-color: #fdcfda;
+      }
+
+      &:hover {
+        border: 3px solid #ff6347;
+      }
+    }
+  }
+
+  &__list {
+    list-style: none;
+    padding: 20px;
+    border-top: 2px solid #000;
+
+    &--item {
+      margin: 5px auto;
+      padding: 0 20px;
+      height: 50px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &--title {
+      margin: 0;
+      font-weight: 600;
+    }
+
+    &--button {
+      height: 25px;
+      width: 70px;
+      border: 2px solid transparent;
+      border-radius: 5px;
+      cursor: pointer;
+      color: #fff;
+      background-color: #2a9f96;
+    }
+  }
+}
+
+.remove {
+  background-color: salmon;
+  transition-duration: 400ms;
+
+  &:active {
+    border: 3px solid #ec8b80;
+    background-color: #fdcfda;
+  }
+
+  &:hover {
+    border: 3px solid #ff6347;
+  }
+}
+
+.selected {
+  background-color: #a0ede7;
+}
