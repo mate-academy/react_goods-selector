@@ -21,7 +21,7 @@ class App extends React.Component {
     selectedGood: 'Jam',
   }
 
-  isIncludes = good => this.state.goodsList.includes(good)
+  isIncludes = good => this.state.goodsList.includes(good);
 
   close() {
     this.setState({ goodsList: [] });
@@ -76,29 +76,33 @@ class App extends React.Component {
           </button>
         </h1>
         <ul className="goods-list">
-          {goodsFromServer.map(good => (
-            <li
-              key={good}
-              className={
-                classNames(`goods-list__good ${good}`,
-                  { selected: this.isIncludes(good) })
-              }
-            >
-              {good}
-              <button
-                type="button"
+          {goodsFromServer.map((good) => {
+            const isIncludes = this.state.goodsList.includes(good);
+
+            return (
+              <li
+                key={good}
                 className={
-                  classNames('goods-list__good-btn',
-                    { 'selected-btn': this.isIncludes(good) })
-                  }
-                onClick={() => {
-                  this.option(good);
-                }}
+                classNames(`goods-list__good ${good}`,
+                  { selected: isIncludes })
+              }
               >
-                {this.isIncludes(good) ? 'Remove' : 'Add'}
-              </button>
-            </li>
-          ))}
+                {good}
+                <button
+                  type="button"
+                  className={
+                  classNames('goods-list__good-btn',
+                    { 'selected-btn': isIncludes })
+                  }
+                  onClick={() => {
+                    this.option(good);
+                  }}
+                >
+                  {isIncludes ? 'Remove' : 'Add'}
+                </button>
+              </li>
+            );
+          })}
         </ul>
       </div>
     );
