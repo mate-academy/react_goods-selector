@@ -16,11 +16,11 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    value: ['Jam'],
+    value: 'Jam',
   }
 
   remove = () => {
-    this.setState({ value: null });
+    this.setState({ value: '' });
   }
 
   render() {
