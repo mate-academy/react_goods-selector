@@ -40,13 +40,16 @@ class App extends React.Component {
         <br />
 
         <ul>
-          {goodsFromServer.map(item => (
-            <li className={good.includes(item) ? 'yellow' : ''}>
-              {item}
+          {goodsFromServer.map((item) => {
+            const isIncluded = good.includes(item) ? 'yellow' : '';
 
-              {': '}
+            return (
+              <li className={isIncluded}>
+                {item}
 
-              {good !== item
+                {': '}
+
+                {good !== item
                 && (
                   <button
                     type="button"
@@ -55,8 +58,10 @@ class App extends React.Component {
                     select
                   </button>
                 )}
-            </li>
-          ))}
+              </li>
+            );
+          })
+          }
         </ul>
 
         {goodsFromServer.length}
