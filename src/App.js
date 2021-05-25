@@ -16,25 +16,25 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    values: [],
+    value: null,
   }
 
   render() {
-    const { values } = this.state;
+    const { value } = this.state;
 
     return (
       <div className="App">
         <h1>
-          { values.length > 0
+          { value
             ? (
               <>
                 Selected good:
                 {' '}
-                {values}
+                {value}
                 <button
                   type="button"
                   onClick={() => {
-                    this.setState({ values: [] });
+                    this.setState({ value: null });
                   }}
                 >
                   x
@@ -49,13 +49,13 @@ class App extends React.Component {
           { goodsFromServer.map(item => (
             <li key={item} className="list__item">
               <span className="list__text">{item}</span>
-              {values.includes(item)
+              {value === item
                 ? (
                   <button
                     type="button"
-                    className={values === item ? 'active' : ''}
+                    className={value === item ? 'active' : ''}
                     onClick={() => {
-                      this.setState({ values: item });
+                      this.setState({ value: item });
                     }}
                   >
                     +
@@ -64,9 +64,9 @@ class App extends React.Component {
                 : (
                   <button
                     type="button"
-                    className={values === item ? 'active' : ''}
+                    className={value === item ? 'active' : ''}
                     onClick={() => {
-                      this.setState({ values: item });
+                      this.setState({ value: item });
                     }}
                   >
                     -
