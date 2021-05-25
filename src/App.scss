@@ -1,1 +1,22 @@
-// styles go here
+.app {
+  display: flex;
+  flex-direction: column;
+}
+
+.list {
+  width: 200px;
+  font-size: 18px;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul,
+li {
+  list-style-type: none;
+}
+
+.active {
+  background-color: yellow;
+}
