@@ -39,19 +39,24 @@ class App extends React.Component {
         ) : (
           <h1>Selected good: No goods selected</h1>
         )}
-
-        {goodsFromServer.map(good => (
-          <button
-            key={good}
-            type="button"
-            className={selectedGood === good ? 'active' : ''}
-            onClick={() => {
-              this.setState({ selectedGood: good });
-            }}
-          >
-            {good}
-          </button>
-        ))}
+        <ul className="list">
+          {goodsFromServer.map(good => (
+            <li key={good} className={selectedGood === good && 'active'}>
+              {good}
+              {' '}
+              {selectedGood !== good && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    this.setState({ selectedGood: good });
+                  }}
+                >
+                  Select
+                </button>
+              )}
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }
