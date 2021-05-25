@@ -17,15 +17,16 @@ const goodsFromServer = [
 class App extends React.Component {
   state = {
     title: 'No goods selected',
-    list: goodsFromServer,
+    list: [...goodsFromServer],
     selectedGood: ['Jam'],
   };
 
   onAddProduct = (newTitle) => {
-    this.state.selectedGood.push(newTitle);
+    const { selectedGood } = this.state;
 
     this.setState({
       title: `${newTitle} is selected`,
+      selectedGood: [...selectedGood, newTitle],
     });
   };
 
