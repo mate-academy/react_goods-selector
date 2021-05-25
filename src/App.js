@@ -68,34 +68,40 @@ class App extends React.Component {
           </button>
         </div>
         <ul className="Product__list">
-          {goodsFromServer.map(product => (
-            <li
-              key={product}
-              className={classNames('Product__item', {
-                Product__item_added: selectedGoods.includes(product),
-              })}
-            >
-              {product}
-              <button
-                type="button"
-                onClick={() => this.addProducts(product)}
-                className={classNames('Product__button', 'Product__button_g', {
-                  active: !selectedGoods.includes(product),
+          {goodsFromServer.map((product) => {
+            const isIncluded = selectedGoods.includes(product);
+
+            return (
+              <li
+                key={product}
+                className={classNames('Product__item', {
+                  Product__item_added: isIncluded,
                 })}
               >
-                add
-              </button>
-              <button
-                type="button"
-                onClick={() => this.removeProduct(product)}
-                className={classNames('Product__button', 'Product__button_r', {
-                  active: selectedGoods.includes(product),
-                })}
-              >
-                remove
-              </button>
-            </li>
-          ))}
+                {product}
+                <button
+                  type="button"
+                  onClick={() => this.addProducts(product)}
+                  className={classNames('Product__button',
+                    'Product__button_g', {
+                      active: !isIncluded,
+                    })}
+                >
+                  add
+                </button>
+                <button
+                  type="button"
+                  onClick={() => this.removeProduct(product)}
+                  className={classNames('Product__button',
+                    'Product__button_r', {
+                      active: isIncluded,
+                    })}
+                >
+                  remove
+                </button>
+              </li>
+            );
+          })}
         </ul>
       </div>
     );
