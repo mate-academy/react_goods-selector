@@ -67,7 +67,7 @@ class App extends React.Component {
                 <button
                   type="button"
                   className="btn btn-warning clearbtn "
-                  onClick={() => this.remoteAll()}
+                  onClick={this.remoteAll}
                 >
                   X
                 </button>
@@ -76,9 +76,10 @@ class App extends React.Component {
           }
           </div>
 
-          {goodsFromServer.map(item => (
-            <div key={item} className="list-group mb-1 fs-4">
-              <div
+          <ul className="list-group fs-4">
+            {goodsFromServer.map(item => (
+              <li
+                key={item}
                 className={
                   classNames('list-group-item d-flex justify-content-between',
                     { selected: selectedGoods.includes(item) })}
@@ -105,9 +106,9 @@ class App extends React.Component {
                     </button>
                   )
                 }
-              </div>
-            </div>
-          ))}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     );
