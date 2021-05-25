@@ -1,5 +1,5 @@
 # React Goods selector
-- Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_goods-selector/)
+- Replace `<your_account>` with your Github username in the [DEMO LINK](https://Dima-Batiuk.github.io/react_goods-selector/)
 - Follow the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline)
 
 ## Task
@@ -12,7 +12,7 @@
 1. Add a button `Select` next to each good in the list
 1. When you press the button the good becomes selected
 1. Don't show the button next to the selected good
-1. You can select another good by pressing its `Select` button 
+1. You can select another good by pressing its `Select` button
 1. Add button `X` for to the `h1` to clear the selection. (Set `null`)
 1. The clear button should not be visible if there is no selected good
 
