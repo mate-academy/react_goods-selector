@@ -17,7 +17,6 @@
     margin: 5px;
     width: 60px;
     height: 30px;
-    display: none;
 
     &-green {
       background-color: rgb(130, 201, 168);
@@ -41,6 +40,6 @@
 
 }
 
-.active {
-  display: inline-block;
+.hidden {
+  visibility: hidden;
 }

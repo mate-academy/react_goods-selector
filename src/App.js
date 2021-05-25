@@ -22,17 +22,19 @@ class App extends React.Component {
   };
 
   setTitle() {
-    const { selectedGoods } = this.state;
+    const goods = [...this.state.selectedGoods];
+    const lastGood = goods[goods.length - 1];
 
-    if (selectedGoods.length === 1) {
-      return `${selectedGoods[0]} is selected`;
+    switch (goods.length) {
+      case 1:
+        return `${goods[0]} is selected`;
+      case 0:
+        return 'No goods selected';
+      default:
+        goods.length -= 1;
+
+        return `${goods.join(', ')} and ${lastGood} are selected`;
     }
-
-    if (selectedGoods.length > 1) {
-      return `${selectedGoods.join(', ')} are selected`;
-    }
-
-    return 'No goods selected';
   }
 
   clickAdd= (good) => {
@@ -64,7 +66,7 @@ class App extends React.Component {
             type="button"
             onClick={this.clickRemoveAll}
             className={classNames('App__button', {
-              active: selectedGoods.length > 0,
+              hidden: selectedGoods.length === 0,
             })}
           >
             X
@@ -81,21 +83,20 @@ class App extends React.Component {
               {good}
               <button
                 type="button"
-                onClick={() => this.clickAdd(good)}
-                className={classNames('App__button', 'App__button-green', {
-                  active: !selectedGoods.includes(good),
+                onClick={() => (
+                  (selectedGoods.includes(good))
+                    ? this.clickRemove(good)
+                    : this.clickAdd(good)
+                )}
+                className={classNames('App__button', {
+                  'App__button-green': !selectedGoods.includes(good),
+                  'App__button-red': selectedGoods.includes(good),
                 })}
               >
-                Add
-              </button>
-              <button
-                type="button"
-                onClick={() => this.clickRemove(good)}
-                className={classNames('App__button', 'App__button-red', {
-                  active: selectedGoods.includes(good),
-                })}
-              >
-                Remove
+                {(selectedGoods.includes(good))
+                  ? 'Remove'
+                  : 'Add'
+                }
               </button>
             </li>
           ))}
