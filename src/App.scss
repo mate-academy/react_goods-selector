@@ -1,1 +1,17 @@
 // styles go here
+.active {
+  background-color: blue;
+  color:white;
+  border: none;
+}
+
+.list__item {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  border: lightgrey solid 1px;
+  margin: 5px;
+  padding: 10px 20px;
+  font-size: 20px;
+  background-color: azure;
+}
