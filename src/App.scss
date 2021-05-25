@@ -1,1 +1,29 @@
 // styles go here
+.app {
+  &__clear-button {
+    margin: 0 5px;
+  }
+
+  &__list {
+    padding-left: 0;
+  }
+
+  &__item {
+    list-style-type: none;
+    font-size: 20px;
+  }
+
+  &__button {
+    margin: 5px;
+    text-align: left;
+    font-size: 20px;
+  }
+}
+
+.selected {
+  font-size: 23px;
+}
+
+.active {
+  visibility: hidden;
+}
