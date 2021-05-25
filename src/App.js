@@ -16,9 +16,8 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGood: 'Jam is selected',
     good: 'Jam',
-    selected: 1,
+    selected: true,
   }
 
   render() {
@@ -27,24 +26,27 @@ class App extends React.Component {
         <h1>
           Selected good: -
           {' '}
-          {this.state.selectedGood}
+          {this.state.selected
+            ? `${this.state.good} is selected`
+            : 'No goods selected'
+          }
           {' '}
-          {this.state.selected === 0
-            ? ''
-            : (
+          {this.state.selected
+            ? (
               <button
                 type="button"
                 onClick={() => {
                   this.setState({
-                    selectedGood: 'No goods selected',
                     good: null,
-                    selected: 0,
+                    selected: false,
                   });
                 }}
               >
                 X
               </button>
-            )}
+            )
+            : ''
+          }
         </h1>
 
         <ul className="list">
@@ -59,9 +61,8 @@ class App extends React.Component {
                       type="button"
                       onClick={() => {
                         this.setState({
-                          selectedGood: `${good} is selected`,
                           good,
-                          selected: 1,
+                          selected: true,
                         });
                       }}
                     >
