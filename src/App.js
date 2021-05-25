@@ -33,11 +33,12 @@ class App extends React.Component {
     const index = this.state.selectedGood.indexOf(product);
 
     if (index > -1) {
-      const { selectedGood } = this.state;
-      const arr = selectedGood.splice(index, 1);
+      const { selectedGood: prev } = this.state;
+
+      prev.splice(index, 1);
 
       this.setState({
-        selectedGood: arr,
+        selectedGood: prev,
         title: `${product} is deleted`,
       });
     } else {
@@ -49,7 +50,7 @@ class App extends React.Component {
 
   clear = () => {
     this.setState({
-      selectedGood: ['Jam'],
+      selectedGood: [],
       title: 'No goods selected',
     });
   };
@@ -58,9 +59,7 @@ class App extends React.Component {
     return (
       <div className="wrapper">
         <h1>{this.state.title}</h1>
-        <button type="button" onClick={this.clear}>
-          X
-        </button>
+        <button type="button" onClick={this.clear}>X</button>
         <p>
           <strong>Your list: </strong>
           {this.state.selectedGood.join(', ')}
@@ -75,9 +74,8 @@ class App extends React.Component {
         >
           {this.state.list.map(product => (
             <>
-              <ul className="list">
+              <ul className="list" key={product}>
                 <li
-                  key={product}
                   className={
                     this.state.selectedGood.includes(product)
                       ? 'list--bg'
