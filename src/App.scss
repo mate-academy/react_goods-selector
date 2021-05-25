@@ -1,1 +1,77 @@
 // styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+h1 {
+  font-family: "Sharp-Sans-No2", sans-serif;
+  font-size: 25px;
+}
+
+button {
+  width: 80px;
+  height: 30px;
+
+  font-size: 9px;
+  line-height: 30px;
+  font-family: "Sharp-Sans-No2", sans-serif;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #f2f2f2;
+  cursor: pointer;
+
+  border: 1px solid #ccc;
+  background-color: darkslategrey;
+
+  transition: background-color 0.2s ease-out, color 0.2s ease-out;
+
+  &:hover {
+    color: #ccc;
+    background-color: brown;
+    border: 1px solid #ccc;
+  }
+
+  &:active {
+    transition: color 0s ease-out;
+    transform: scale(0.98);
+    color: rgba(0, 0, 0, 0.4);
+    border: 1px solid transparent;
+    box-shadow: inset 0 0 21px 10px #fcfaf4;
+  }
+}
+
+.good {
+  width: 120px;
+  margin-bottom: 5px;
+  border: 3px solid #ccc;
+}
+
+.item {
+  height: 30px;
+  line-height: 30px;
+
+  font-family: "Sharp-Sans-No2", sans-serif;
+  font-size: 15px;
+
+  &--active {
+    height: 30px;
+    line-height: 30px;
+    background-color: bisque;
+  }
+}
+
+.active {
+  visibility: hidden;
+}
+
+.cancel {
+  margin-left: 10px;
+  width: 30px;
+  height: 20px;
+  line-height: 18px;
+}
