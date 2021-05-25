@@ -1,1 +1,32 @@
-// styles go here
+.title {
+  width: 20%;
+  display: flex;
+  justify-content: space-around;
+
+  &__text {
+    width: 70%;
+  }
+}
+
+.remove-btn {
+  height: 30px;
+  width: 30px;
+  margin: auto auto;
+  background-color: rgb(223, 85, 85);
+  border: none;
+  border-radius: 8px;
+}
+
+.list li {
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  background-color: lightgray;
+  padding: 10px;
+}
+
+li.active {
+  background-color:lightseagreen;
+}
+
