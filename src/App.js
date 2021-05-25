@@ -20,21 +20,19 @@ class App extends React.Component {
     selectedGoods: ['Jam'],
   };
 
-  selectGood = good => this.setState(prevState => ({
-    selectedGoods: [...prevState.selectedGoods, good],
-  }));
+  selectGood = (good) => {
+    this.setState(prevState => ({
+      selectedGoods: [...prevState.selectedGoods, good],
+    }));
+  };
 
-  deleteGood = good => (
-    this.setState((prevState) => {
-      const allGoods = [...prevState.selectedGoods];
-
-      allGoods.splice(allGoods.indexOf(good), 1);
-
-      return {
-        selectedGoods: [...allGoods],
-      };
-    })
-  );
+  deleteGood = (good) => {
+    this.setState(prevState => ({
+      selectedGoods: prevState.selectedGoods.filter(
+        prevGood => prevGood !== good,
+      ),
+    }));
+  };
 
   clearGoods = () => this.setState({ selectedGoods: [] });
 
@@ -53,6 +51,8 @@ class App extends React.Component {
   };
 
   render() {
+    const { selectedGoods } = this.state;
+
     return (
       <div className="App">
         <h1>
@@ -68,34 +68,38 @@ class App extends React.Component {
         </h1>
         <span>{goodsFromServer.length}</span>
         <ul>
-          {goodsFromServer.map(good => (
-            <li
-              key={good}
-              className={classNames({
-                selected: this.state.selectedGoods.includes(good),
-                unselected: !this.state.selectedGoods.includes(good),
-              })}
-            >
-              {good}
-              {this.state.selectedGoods.includes(good) ? (
-                <button
-                  className="remove"
-                  onClick={() => this.deleteGood(good)}
-                  type="button"
-                >
-                  Remove
-                </button>
-              ) : (
-                <button
-                  className="select"
-                  onClick={() => this.selectGood(good)}
-                  type="button"
-                >
-                  Select
-                </button>
-              )}
-            </li>
-          ))}
+          {goodsFromServer.map((good) => {
+            const isUncluded = selectedGoods.includes(good);
+
+            return (
+              <li
+                key={good}
+                className={classNames({
+                  selected: isUncluded,
+                  unselected: !isUncluded,
+                })}
+              >
+                {good}
+                {isUncluded ? (
+                  <button
+                    className="remove"
+                    onClick={() => this.deleteGood(good)}
+                    type="button"
+                  >
+                    Remove
+                  </button>
+                ) : (
+                  <button
+                    className="select"
+                    onClick={() => this.selectGood(good)}
+                    type="button"
+                  >
+                    Select
+                  </button>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </div>
     );
