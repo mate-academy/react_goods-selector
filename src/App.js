@@ -26,28 +26,33 @@ class App extends React.Component {
       <div className="App">
         <h1>
           { values.length > 0
-            ? `Selected good: ${values}`
+            ? (
+              <>
+                Selected good:
+                {' '}
+                {values}
+                <button
+                  type="button"
+                  onClick={() => {
+                    this.setState({ values: [] });
+                  }}
+                >
+                  x
+                </button>
+              </>
+            )
             : 'No goods selected'
           }
-          <button
-            type="button"
-            onClick={() => {
-              this.setState({ values: [] });
-            }}
-          >
-            x
-          </button>
         </h1>
         <ul>
           {' '}
           { goodsFromServer.map(item => (
-            <li className="list__item">
+            <li key={item} className="list__item">
               <span className="list__text">{item}</span>
               {values.includes(item)
                 ? (
                   <button
                     type="button"
-                    key={item}
                     className={values === item ? 'active' : ''}
                     onClick={() => {
                       this.setState({ values: item });
@@ -59,7 +64,6 @@ class App extends React.Component {
                 : (
                   <button
                     type="button"
-                    key={item}
                     className={values === item ? 'active' : ''}
                     onClick={() => {
                       this.setState({ values: item });
