@@ -17,13 +17,13 @@ const goodsFromServer = [
 class App extends React.Component {
   state = {
     title: 'No goods selected',
-    // eslint-disable-next-line react/no-unused-state
     list: goodsFromServer,
-    selectedGood: [],
+    selectedGood: ['Jam'],
   };
 
   onAddProduct = (newTitle) => {
     this.state.selectedGood.push(newTitle);
+
     this.setState({
       title: `${newTitle} is selected`,
     });
@@ -41,10 +41,6 @@ class App extends React.Component {
         selectedGood: prev,
         title: `${product} is deleted`,
       });
-    } else {
-      this.setState({
-        title: `${product} was not selected`,
-      });
     }
   };
 
@@ -61,7 +57,7 @@ class App extends React.Component {
         <h1>{this.state.title}</h1>
         <button
           type="button"
-          className={this.state.selectedGood.length === 0 ? 'visibility' : null}
+          className={this.state.selectedGood.length === 0 && 'visibility'}
           onClick={this.clear}
         >
           X
@@ -70,51 +66,39 @@ class App extends React.Component {
           <strong>Your list: </strong>
           {this.state.selectedGood.join(', ')}
         </p>
-        <div
-          style={{
-            width: 700,
-            border: '1px solid #ccc',
-            backgroundColor: 'beige',
-            margin: '20px auto',
-          }}
-        >
-          {this.state.list.map(product => (
-            <>
-              <ul className="list" key={product}>
+        <div>
+          <ul className="list">
+            {this.state.list.map(product => (
+              <>
                 <li
+                  key={product}
                   className={
-                    this.state.selectedGood.includes(product)
-                      ? 'list--bg'
-                      : null
+                    this.state.selectedGood.includes(product) && 'list--bg'
                   }
                 >
                   {product}
+                  <button
+                    type="button"
+                    onClick={this.onDeleteProduct.bind(this, product)}
+                    className={
+                      !this.state.selectedGood.includes(product) && 'visibility'
+                    }
+                  >
+                    Delete
+                  </button>
+                  <button
+                    type="button"
+                    onClick={this.onAddProduct.bind(this, product)}
+                    className={
+                      this.state.selectedGood.includes(product) && 'visibility'
+                    }
+                  >
+                    Add
+                  </button>
                 </li>
-                <button
-                  type="button"
-                  onClick={this.onDeleteProduct.bind(this, product)}
-                  className={
-                    !this.state.selectedGood.includes(product)
-                      ? 'visibility'
-                      : null
-                  }
-                >
-                  Delete
-                </button>
-                <button
-                  type="button"
-                  onClick={this.onAddProduct.bind(this, product)}
-                  className={
-                    this.state.selectedGood.includes(product)
-                      ? 'visibility'
-                      : null
-                  }
-                >
-                  Add
-                </button>
-              </ul>
-            </>
-          ))}
+              </>
+            ))}
+          </ul>
         </div>
       </div>
     );

@@ -1,6 +1,10 @@
 // styles go here
 .wrapper {
   text-align: center;
+  width: 700px;
+  border: 1px solid #ccc;
+  background-color: beige;
+  margin: 20px auto;
 }
 
 .visibility {
@@ -11,22 +15,22 @@ button {
   display: inline-block;
   width: 100px;
   height: 50px;
-  position: relative;
-  right: 0;
   background-color: antiquewhite;
   border-radius: 20px;
 }
 
 .list {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
 }
 
 ul li {
   list-style: none;
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
 }
 
 .list--bg {
   background-color: brown;
-  padding: 20px;
 }
