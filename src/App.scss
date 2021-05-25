@@ -1,1 +1,15 @@
-// styles go here
+button {
+  cursor: pointer;
+  background-color: lightcyan;
+}
+
+.clicked {
+  background-color: salmon;
+}
+
+.smallButton {
+  height: 20px;
+  width: 20px;
+  background-image: url(./cross.png);
+  background-size: contain;
+}
