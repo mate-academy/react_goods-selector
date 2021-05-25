@@ -45,10 +45,12 @@ class App extends React.Component {
             </h1>
           )}
 
-        {goodsFromServer.map(el => (
-          <ul key={el}>
-            <li>
+        <ul>
+          {goodsFromServer.map(el => (
+            <li key={el}>
+
               {el}
+
               {this.state.selected !== el && (
                 <button
                   type="button"
@@ -60,8 +62,8 @@ class App extends React.Component {
                 </button>
               )}
             </li>
-          </ul>
-        ))}
+          ))}
+        </ul>
       </>
     );
   }
