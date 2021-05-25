@@ -27,28 +27,27 @@ class App extends React.Component {
     }));
   }
 
-  remoteItem = (item) => {
+  removeItem = (item) => {
     this.setState(state => ({
       selectedGoods: [...state.selectedGoods].filter(el => el !== item),
     }));
   }
 
-  remoteAll = () => {
+  removeAll = () => {
     this.setState({
       selectedGoods: [],
     });
   }
 
   createTitle = (listLength) => {
-    if (listLength === 0) {
-      return 'No goods selected';
+    switch (listLength) {
+      case 0:
+        return 'No goods selected';
+      case 1:
+        return `${this.state.selectedGoods[0]} is selected`;
+      default:
+        return `${this.state.selectedGoods.join(', ')} are selected`;
     }
-
-    if (listLength === 1) {
-      return `${this.state.selectedGoods[0]} is selected`;
-    }
-
-    return `${this.state.selectedGoods.join(', ')} are selected`;
   }
 
   render() {
@@ -62,18 +61,15 @@ class App extends React.Component {
               {this.createTitle(selectedGoods.length)}
             </h1>
 
-            {selectedGoods.length
-              ? (
-                <button
-                  type="button"
-                  className="btn btn-warning clearbtn "
-                  onClick={this.remoteAll}
-                >
-                  X
-                </button>
-              )
-              : ''
-          }
+            {selectedGoods.length && (
+            <button
+              type="button"
+              className="btn btn-warning clearbtn "
+              onClick={this.remoteAll}
+            >
+              X
+            </button>
+            )}
           </div>
 
           <ul className="list-group fs-4">
