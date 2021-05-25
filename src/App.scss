@@ -1,1 +1,34 @@
 // styles go here
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.goodsList {
+  border: 2px solid red;
+  margin: 10px;
+  padding: 10px;
+  list-style: none;
+}
+
+.normal {
+  background-color: rgb(238, 110, 110);
+  border: 1px solid rgb(255, 57, 57);
+  padding: 5px;
+}
+
+.active {
+  background-color: rgb(59, 121, 59);
+  border: 2px solid rgb(34, 121, 34);
+  padding: 5px;
+}
+
+.button {
+  position: absolute;
+  right: 50px;
+}
+
+.clearButton {
+  height: 35px;
+  margin-left: 10px;
+}
