@@ -1,25 +1,33 @@
 import React from 'react';
 import './App.scss';
 
+const goodsFromServer = [
+  'Dumplings',
+  'Carrot',
+  'Eggs',
+  'Ice cream',
+  'Apple',
+  'Bread',
+  'Fish',
+  'Honey',
+  'Jam',
+  'Garlic',
+];
+
 class App extends React.Component {
   state = {
-    goodsFromServer: [
-      'Dumplings',
-      'Carrot',
-      'Eggs',
-      'Ice cream',
-      'Apple',
-      'Bread',
-      'Fish',
-      'Honey',
-      'Jam',
-      'Garlic',
-    ],
+    goods: [...goodsFromServer],
     selectedGood: 'Jam',
   }
 
+  clearAllGoods = () => {
+    this.setState({
+      selectedGood: null,
+    });
+  }
+
   render() {
-    const { goodsFromServer, selectedGood } = this.state;
+    const { goods, selectedGood } = this.state;
 
     return (
       <div className="App">
@@ -30,11 +38,7 @@ class App extends React.Component {
             is selected
             <button
               type="button"
-              onClick={() => {
-                this.setState({
-                  selectedGood: null,
-                });
-              }}
+              onClick={this.clearAllGoods}
             >
               x
             </button>
@@ -42,11 +46,10 @@ class App extends React.Component {
         ) : (
           <h1>No goods selected</h1>
         )}
-        {goodsFromServer.map(good => (
+        {goods.map(good => (
           <div className={selectedGood === good ? 'active' : 'good'} key={good}>
             {good}
-            {selectedGood === good ? (''
-            ) : (
+            {selectedGood !== good && (
               <button
                 type="button"
                 className="button"
