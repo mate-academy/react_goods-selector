@@ -1,5 +1,6 @@
-/* eslint-disable max-len */
 import React from 'react';
+import classNames from 'classnames';
+
 import './App.scss';
 
 const goodsFromServer = [
@@ -20,28 +21,12 @@ class App extends React.Component {
     selectedGood: ['Jam'],
   };
 
-  componentDidUpdate() {
-    document.querySelectorAll('li').forEach((element) => {
-      if (this.state.selectedGood.includes(element.textContent)) {
-        element.classList.add('active');
-      } else {
-        element.classList.remove('active');
-      }
-    });
-
-    document.querySelectorAll('.clearAll-button').forEach((element) => {
-      if (this.state.selectedGood.length === 0) {
-        element.classList.add('hover');
-      } else {
-        element.classList.remove('hover');
-      }
-    });
-  }
-
-  selectedGoods = (selectedGood) => {
+  getSelectedGoodsTitle = (selectedGood) => {
     switch (selectedGood.length) {
-      case 0: return `No goods selected`;
-      case 1: return `${selectedGood} is selected`;
+      case 0:
+        return `No goods selected`;
+      case 1:
+        return `${selectedGood} is selected`;
       default: {
         const lastGood = selectedGood[selectedGood.length - 1];
 
@@ -58,16 +43,16 @@ class App extends React.Component {
       <div className="App">
         <>
           <h1 className="title">
-            {this.selectedGoods(selectedGood)}
+            {this.getSelectedGoodsTitle(selectedGood)}
           </h1>
           <button
             title="Clear the list of selected itemss"
             type="button"
-            className="clearAll-button"
+            className={classNames('clearAll-button', {
+              hover: selectedGood.length === 0,
+            })}
             onClick={() => {
-              this.setState(() => ({
-                selectedGood: [],
-              }));
+              this.setState({ selectedGood: [] });
             }}
           >
             X
@@ -78,14 +63,16 @@ class App extends React.Component {
           {goodsFromServer.map(good => (
             <div className="goods__wrapper" key={good}>
               <li
-                className={`goods__item ${good} ${good === 'Jam' ? 'active' : ''}`}
+                className={classNames('goods__item', {
+                  active: selectedGood.includes(good),
+                })}
               >
                 {good}
               </li>
               <button
                 className="goods__button"
                 type="button"
-                onClick={(event) => {
+                onClick={() => {
                   if (!selectedGood.includes(good)) {
                     this.setState(() => ({
                       selectedGood: [...selectedGood, good],
