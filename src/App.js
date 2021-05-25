@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer = [
@@ -21,17 +22,7 @@ class App extends React.Component {
   }
 
   close() {
-    const selectedList = document.querySelectorAll('.selected');
-
     this.setState({ goodsList: [] });
-    selectedList.forEach((item) => {
-      item.classList.remove('selected');
-      item.classList.remove('selected');
-      const good = item.querySelector('.goods-list__good-btn');
-
-      good.innerText = 'Add';
-      good.classList.remove('selected-btn');
-    });
   }
 
   option(event, good) {
@@ -50,18 +41,10 @@ class App extends React.Component {
           ...prevState, goodsList: updatedList,
         };
       });
-
-      item.classList.remove('selected');
-      target.classList.remove('selected-btn');
-      target.innerText = 'Add';
     } else {
       this.setState(prevState => ({
         ...prevState, goodsList: [...prevState.goodsList, good],
       }));
-
-      item.classList.add('selected');
-      target.classList.add('selected-btn');
-      target.innerText = 'Remove';
     }
   }
 
@@ -97,17 +80,23 @@ class App extends React.Component {
           {goodsFromServer.map(good => (
             <li
               key={good}
-              className={`goods-list__good ${good}`}
+              className={
+                classNames(`goods-list__good ${good}`,
+                  { selected: this.state.goodsList.includes(good) })
+              }
             >
               {good}
               <button
                 type="button"
-                className="goods-list__good-btn"
+                className={
+                  classNames('goods-list__good-btn',
+                    { 'selected-btn': this.state.goodsList.includes(good) })
+                  }
                 onClick={(event) => {
                   this.option(event, good);
                 }}
               >
-                Add
+                {this.state.goodsList.includes(good) ? 'Remove' : 'Add'}
               </button>
             </li>
           ))}
