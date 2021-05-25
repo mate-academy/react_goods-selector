@@ -24,10 +24,6 @@ class App extends React.Component {
   }
 
   addSelected = (item) => {
-    if (this.state.selectedGoods.includes(item)) {
-      return;
-    }
-
     this.setState(({ selectedGoods }) => ({
       selectedGoods: [...selectedGoods, item],
     }));
@@ -63,18 +59,15 @@ class App extends React.Component {
       <div className="App">
         <h1 className="title">
           {this.setTitle()}
-          {selectedGoods.length > 0
-            ? (
-              <button
-                type="button"
-                onClick={this.clearSelected}
-                className="clear"
-              >
-                X
-              </button>
-            )
-            : null
-        }
+          {selectedGoods.length > 0 && (
+          <button
+            type="button"
+            onClick={this.clearSelected}
+            className="clear"
+          >
+            X
+          </button>
+          )}
         </h1>
         <ul>
           {goodsFromServer.map((item) => {
