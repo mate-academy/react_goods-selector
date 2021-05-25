@@ -33,6 +33,7 @@ class App extends React.Component {
             {' '}
             <button
               type="button"
+              className="goods__remove-button"
               onClick={() => {
                 this.setState({ good: null });
               }}
@@ -49,10 +50,10 @@ class App extends React.Component {
         <ul className="goods__list">
           {goodsFromServer.map(goodFS => (
             <li
-              key="goodFS"
+              key={goodFS}
               className={classNames(
                 'goods__item',
-                { active: good === goodFS },
+                { 'goods__item--active': good === goodFS },
               )
               }
             >
@@ -61,6 +62,7 @@ class App extends React.Component {
               {good !== goodFS && (
               <button
                 type="button"
+                className="goods__item-button"
                 onClick={() => {
                   this.setState({
                     good: goodFS,
