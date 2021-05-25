@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.scss';
-import className from 'classnames';
 
 const goodsFromServer = [
   'Dumplings',
@@ -17,7 +16,7 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    value: 'Jam',
+    value: ['Jam'],
   }
 
   render() {
@@ -25,18 +24,20 @@ class App extends React.Component {
 
     return (
       <div className="app">
-        {value ? (
+        {value.length > 0 ? (
           <h1 className="app__title">
+
             <button
               type="button"
               className="app__clear-button"
               onClick={() => {
-                this.setState({ value: null });
+                this.setState({ value: [] });
               }}
             >
               X
             </button>
-            {`${value} is selected`}
+
+            {`Selected: ${value.map(good => ` ${good}`)}`}
           </h1>
         ) : (
           <h1>No goods selected</h1>
@@ -45,16 +46,18 @@ class App extends React.Component {
         <ul className="app__list">
           {goodsFromServer.map(good => (
             <li
-              className="app__item"
+              key={good}
+              className={
+                value.includes(good) ? 'app__item selected' : 'app__item'
+              }
             >
               <button
                 type="button"
                 className={
-                  className(['app__button', { active: value === good }])
+                  value.includes(good) ? 'app__button active' : 'app__button'
                 }
-                key={good}
                 onClick={() => {
-                  this.setState({ value: good });
+                  this.setState({ value: [...value, good] });
                 }}
               >
                 select
