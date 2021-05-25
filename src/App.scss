@@ -1,1 +1,53 @@
 // styles go here
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.clear {
+  height: 40px;
+  width: 40px;
+  border-radius: 10px;
+  border: 0;
+  background-color: rgba(163, 14, 171, 0.7);
+  color: rgb(90, 1, 94);
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: 20px;
+}
+
+.goods__item {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  background-color: green;
+  padding: 10px 15px;
+}
+
+.btn {
+  background-color: rgba(65, 227, 50, 0.5);
+  font-weight: bold;
+  border: 0;
+}
+
+.good__hidden {
+  display: none;
+}
+
+.good__remove {
+  background-color: rgba(255, 0, 25, 0.5);
+  font-weight: bold;
+  border: 0;
+}
