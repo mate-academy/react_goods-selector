@@ -18,7 +18,6 @@ const goodsFromServer = [
 class App extends React.Component {
   state = {
     goods: ['Jam'],
-    titleStatus: true,
   };
 
   changeTitle() {
@@ -41,7 +40,6 @@ class App extends React.Component {
   addGood(product) {
     this.setState(state => ({
       goods: [...state.goods, product],
-      titleStatus: true,
     }));
   }
 
@@ -51,20 +49,15 @@ class App extends React.Component {
         element => element !== product,
       ),
     }));
-
-    if (this.state.goods.length === 1) {
-      this.setState({ titleStatus: false });
-    }
   }
 
   clearСache() {
     this.setState({
-      goods: [], titleStatus: false,
+      goods: [],
     });
   }
 
   render() {
-    const { titleStatus } = this.state;
     const { goods } = this.state;
 
     return (
@@ -72,7 +65,7 @@ class App extends React.Component {
         <section className="container">
           <h1 className="title">
             {this.changeTitle()}
-            {titleStatus && (
+            {goods.length ? (
               <button
                 type="button"
                 onClick={() => this.clearСache()}
@@ -80,38 +73,47 @@ class App extends React.Component {
               >
                 Clear
               </button>
-            )}
+            ) : (
+              ''
+            )
+            }
           </h1>
 
           <ul className="list">
-            {goodsFromServer.map(name => (
-              <li
-                key={name}
-                className={classNames('item', {
-                  active: goods.includes(name),
-                })}
-              >
-                {name}
+            {goodsFromServer.map((name) => {
+              const incudes = goods.includes(name);
 
-                {goods.includes(name) ? (
-                  <button
-                    className="remove button"
-                    onClick={() => this.deleteGood(name)}
-                    type="button"
-                  >
-                    Remove
-                  </button>
-                ) : (
-                  <button
-                    className="select button"
-                    onClick={() => this.addGood(name)}
-                    type="button"
-                  >
-                    Select
-                  </button>
-                )}
-              </li>
-            ))}
+              return (
+                <li
+                  key={name}
+                  className={classNames('item', {
+                    active: incudes,
+                  })}
+                >
+                  {name}
+
+                  {incudes
+                    ? (
+                      <button
+                        className="remove button"
+                        onClick={() => this.deleteGood(name)}
+                        type="button"
+                      >
+                        Remove
+                      </button>
+                    )
+                    : (
+                      <button
+                        className="select button"
+                        onClick={() => this.addGood(name)}
+                        type="button"
+                      >
+                        Select
+                      </button>
+                    )}
+                </li>
+              );
+            })}
           </ul>
         </section>
       </main>
