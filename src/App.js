@@ -25,7 +25,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1 className="goods__title">
-          {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
+          {selectedGood ? `${selectedGood} selected` : 'No goods selected'}
           <button
             type="button"
             className="removeButton"
