@@ -1,6 +1,6 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
-// import className from 'classnames';
 
 const goodsFromServer = [
   'Dumplings',
@@ -49,17 +49,17 @@ class App extends React.Component {
         <ul className="list">
           {allGoods.map(good => (
             <li
-              className={selectedGood === good
-                ? 'active'
-                : ''
-              }
               key={good}
+              className={classNames({
+                active: selectedGood === good,
+              })
+              }
+
             >
               <span>
                 {good}
               </span>
-              {selectedGood === good ? (''
-              ) : (
+              {selectedGood !== good && (
                 <button
                   type="button"
                   className="button"
