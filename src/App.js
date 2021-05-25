@@ -58,19 +58,16 @@ class App extends React.Component {
               key={good}
             >
               {good}
-              {good.localeCompare(this.state.selected)
-                ? (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      this.selectGood(good);
-                    }}
-                  >
-                    add
-                  </button>
-                ) : (
-                  ''
-                )}
+              {!!good.localeCompare(this.state.selected) && (
+              <button
+                type="button"
+                onClick={() => {
+                  this.selectGood(good);
+                }}
+              >
+                add
+              </button>
+              )}
             </li>
           ))}
         </ul>
