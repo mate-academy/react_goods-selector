@@ -16,7 +16,7 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    good: 'Jam is selected',
+    good: 'Jam',
   }
 
   render() {
@@ -24,7 +24,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <h1>{`Selected good: ${good}`}</h1>
+        <h1>{`Selected good: ${good} is selected`}</h1>
 
         <button
           className={good === 'Nothing is selected' ? 'selectedButton' : ''}
@@ -47,7 +47,7 @@ class App extends React.Component {
               <button
                 className={good.includes(item) ? 'selectedButton' : ''}
                 type="button"
-                onClick={() => this.setState({ good: `${item} is selected` })}
+                onClick={() => this.setState({ good: item })}
               >
                 select
               </button>
