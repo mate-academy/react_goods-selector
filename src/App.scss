@@ -1,1 +1,45 @@
-// styles go here
+.App {
+  width: 30%;
+  margin: 0 auto;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+
+  &__block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    display: inline-block;
+  }
+
+  &__button {
+    margin: 5px;
+    width: 60px;
+    height: 30px;
+
+    &-green {
+      background-color: rgb(130, 201, 168);
+    }
+
+    &-red {
+      background-color: rgb(240, 162, 162);
+    }
+  }
+
+  &__product {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    align-items: center;
+
+    &--added {
+      background-color: rgb(230, 223, 221);
+    }
+  }
+
+}
+
+.hidden {
+  visibility: hidden;
+}
