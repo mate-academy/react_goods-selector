@@ -1,1 +1,21 @@
 // styles go here
+body {
+  font-size: 24px;
+}
+button {
+  display: inline-block;
+}
+h1 {
+  display: flex;
+  align-items: center;
+}
+.selected {
+  display: flex;
+  align-items: center;
+  background-color: yellowgreen;
+}
+.unselected {
+  display: flex;
+  align-items: center;
+  background-color: red;
+}
