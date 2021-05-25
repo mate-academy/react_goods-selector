@@ -1,1 +1,32 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.goods__title {
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.goods__list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 400px;
+}
+
+.goods__item {
+  height: 30px;
+  border: none;
+  border-radius: 3px;
+}
+
+.removeButton {
+  background-color: rgba($color: #f00, $alpha: 0.8);
+}
+
+.active {
+  background: yellowgreen;
+}
