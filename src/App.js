@@ -16,7 +16,7 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    good: 'No goods selected',
+    good: 'Jam is selected',
   }
 
   render() {
@@ -27,9 +27,9 @@ class App extends React.Component {
         <h1>{`Selected good: ${good}`}</h1>
 
         <button
-          className={good === '' ? 'selectedButton' : ''}
+          className={good === 'Nothing is selected' ? 'selectedButton' : ''}
           type="button"
-          onClick={() => this.setState({ good: '' })}
+          onClick={() => this.setState({ good: 'Nothing is selected' })}
         >
           clear
         </button>
