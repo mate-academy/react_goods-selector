@@ -76,7 +76,7 @@ class App extends React.Component {
               <button
                 type="button"
                 onClick={() => this.clearСache()}
-                className="button_title"
+                className="button_title button"
               >
                 Clear
               </button>
