@@ -16,7 +16,11 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGood: ['Jam'],
+    selectedGoods: ['Jam'],
+  }
+
+  reset = () => {
+    this.setState({ selectedGoods: [] });
   }
 
   title = (param) => {
@@ -27,66 +31,79 @@ class App extends React.Component {
         return `${param[0]} is selected`;
       default:
         return `${param.slice(0, -1).join(', ')}`
-        + ` and ${param[param.length - 1]} is selected `;
+          + ` and ${param[param.length - 1]} is selected `;
     }
   }
 
+  remove(good) {
+    this.setState(param => ({ selectedGoods: param.selectedGoods.filter(
+      element => element !== good,
+    ) }));
+  }
+
+  add(good) {
+    this.setState(({ selectedGoods }) => ({
+      selectedGoods: [...selectedGoods, good],
+    }));
+  }
+
   render() {
-    const { selectedGood } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App">
         <h1>
-          {this.title(selectedGood)}
-          <button
-            type="button"
-            className={selectedGood.length === 0
-              ? 'hide'
-              : ''}
-            onClick={() => {
-              this.setState({ selectedGood: [] });
-            }}
-          >
-            X
-          </button>
+          <>
+            {this.title(selectedGoods)}
+
+            {selectedGoods.length > 0 && (
+              <button
+                type="button"
+                onClick={this.reset}
+              >
+                X
+              </button>
+            )}
+          </>
         </h1>
 
         <ul>
-          {goodsFromServer.map(good => (
-            <>
-              <li
-                key={good}
-                className={selectedGood.includes(good)
-                  ? 'selected'
-                  : ''
-                }
-              >
-                {good}
-              </li>
+          {goodsFromServer.map((good) => {
+            const isIncluded = selectedGoods.includes(good);
 
-              <button
-                type="button"
-                className={selectedGood.includes(good) ? 'hide' : ''}
-                onClick={() => {
-                  this.setState({ selectedGood: [...selectedGood, good] });
-                }}
-              >
-                Add
-              </button>
+            return (
+              <>
+                <li
+                  key={good}
+                  className={isIncluded
+                    ? 'selected'
+                    : ''
+                  }
+                >
+                  {good}
+                </li>
 
-              <button
-                type="button"
-                className={selectedGood.includes(good) ? '' : 'hide'}
-                onClick={() => {
-                  this.setState(selectedGood.splice(selectedGood.findIndex(
-                    element => element === good,
-                  ), 1));
-                }}
-              >
-                Remove
-              </button>
-            </>
-          ))}
+                {isIncluded
+                  ? (
+                    <button
+                      type="button"
+                      onClick={this.remove.bind(this, good)}
+                    >
+                      Remove
+                    </button>
+                  )
+                  : (
+                    <button
+                      type="button"
+                      onClick={this.add.bind(this, good)}
+                    >
+                      Add
+                    </button>
+                  )}
+              </>
+            );
+          })
+          }
         </ul>
       </div>
     );
