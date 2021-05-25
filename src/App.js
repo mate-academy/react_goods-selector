@@ -1,4 +1,6 @@
 import React from 'react';
+import classNames from 'classnames';
+
 import './App.scss';
 
 const goodsFromServer = [
@@ -40,21 +42,23 @@ class App extends React.Component {
           <h1>No value selected</h1>
         )}
 
-        {goodsFromServer.map(n => (
-          <li type="square">
-            <button
-              type="button"
-              key={n}
-              className={selectedGood === n ? 'active' : ''}
-              onClick={() => {
-                this.setState({
-                  selectedGood: n,
-                });
-              }}
-            >
-              {n}
-            </button>
-          </li>
+        {goodsFromServer.map(good => (
+          <ul>
+            <li type="square">
+              <button
+                type="button"
+                key={good}
+                classNames={classNames({ active: selectedGood === good })}
+                onClick={() => {
+                  this.setState({
+                    selectedGood: good,
+                  });
+                }}
+              >
+                {good}
+              </button>
+            </li>
+          </ul>
         ))}
       </>
     );
