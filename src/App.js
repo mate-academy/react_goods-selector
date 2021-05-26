@@ -42,12 +42,14 @@ class App extends React.Component {
           <h1>No value selected</h1>
         )}
 
-        {goodsFromServer.map(good => (
-          <ul>
-            <li type="square">
+        <ul>
+          {goodsFromServer.map(good => (
+            <li
+              type="square"
+              key={good}
+            >
               <button
                 type="button"
-                key={good}
                 classNames={classNames({ active: selectedGood === good })}
                 onClick={() => {
                   this.setState({
@@ -58,8 +60,8 @@ class App extends React.Component {
                 {good}
               </button>
             </li>
-          </ul>
-        ))}
+          ))}
+        </ul>
       </>
     );
   }
