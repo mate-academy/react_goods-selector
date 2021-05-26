@@ -16,50 +16,55 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGood: 'Jam',
-  }
-
-  selectGood = (product) => {
-    this.setState({ selectedGood: product });
-  }
-
-  removeSelected = () => {
-    this.setState({ selectedGood: null });
+    good: 'Jam',
   }
 
   render() {
-    const { selectedGood } = this.state;
+    const { good } = this.state;
 
     return (
-      <div className="App">
-        <h1>
-          Selected good:
-          {' '}
-          {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
-        </h1>
-        <button
-          type="button"
-          className={selectedGood || 'hidden'}
-          onClick={this.removeSelected}
-        >
-          X
-        </button>
-        <ul>
-          {goodsFromServer.map(good => (
-            <li
-              key={good}
-              className={selectedGood !== good || 'selected'}
+      <div>
+        {good ? (
+          <h1>
+            {good}
+            {' '}
+            is selected
+            {' '}
+            <button
+              type="button"
+              onClick={() => {
+                this.setState({ good: null });
+              }}
             >
-              {good}
+              X
+            </button>
+          </h1>
+        ) : (
+          <h1>
+            No goods selected
+          </h1>
+        )
+        }
+        <ul>
+          {goodsFromServer.map(selectedGood => (
+            <li
+              key={selectedGood}
+            >
+              {selectedGood}
+              {' '}
+              {good !== selectedGood && (
               <button
                 type="button"
-                className={selectedGood !== good || 'hidden'}
                 onClick={() => {
-                  this.selectGood(good);
+                  this.setState({
+                    good: selectedGood,
+                  });
                 }}
               >
                 Select
               </button>
+              )
+              }
             </li>
           ))}
         </ul>
