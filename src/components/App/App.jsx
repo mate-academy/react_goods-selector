@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import { Product } from '../Product';
 
 const goodsFromServer = [
   'Dumplings',
@@ -14,7 +15,7 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-class App extends React.Component {
+export class App extends React.Component {
   state = {
     goodsCounter: 1,
     selectedGoods: ['Jam'],
@@ -77,21 +78,11 @@ class App extends React.Component {
 
                 return (
                   <li key={product}>
-                    <div className="button-wrapper">
-                      <button
-                        type="button"
-                        className={
-                          `button ${isProductSelected
-                            ? 'button__active'
-                            : 'button__noneactive'}`
-                        }
-                        onClick={() => {
-                          this.goodsHandler(product);
-                        }}
-                      >
-                        {product}
-                      </button>
-                    </div>
+                    <Product
+                      product={product}
+                      isProductSelected={isProductSelected}
+                      goodsHandler={this.goodsHandler}
+                    />
                   </li>
                 );
               },
