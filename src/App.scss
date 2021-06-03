@@ -1,1 +1,30 @@
-// styles go here
+ul {
+  width: 200px;
+  background-color:white;
+}
+
+li {
+  justify-content: space-between;
+  display: flex;
+  margin: 5px;
+}
+
+.selected {
+  background-color: yellow;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+
+    h1 {
+        height: 50px;
+        width: 300px;
+    }
+
+    button {
+        height: 40px;
+        margin: 10px;
+    }
+}
+
