@@ -19,11 +19,9 @@ export class App extends React.Component {
     selected: 'Jam',
   }
 
-   selectItem = (event) => {
-     const itemContainer = event.target.closest('li');
-
+   selectItem = (item) => {
      this.setState({
-       selected: itemContainer.children[0].innerText,
+       selected: item,
      });
    }
 
@@ -60,7 +58,7 @@ export class App extends React.Component {
                {selected !== item && (
                <button
                  type="button"
-                 onClick={event => (this.selectItem(event))}
+                 onClick={() => (this.selectItem(item))}
                >
                  select
                </button>
