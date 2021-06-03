@@ -42,9 +42,11 @@ export class App extends React.Component {
                ? `${selected} is selected `
                : 'No goods selected'}
            </h1>
+           {selected && (
            <button type="button" onClick={() => this.clearSelected()}>
              X
            </button>
+           )}
          </div>
          <ul className="list">
            {goodsFromServer.map(item => (
