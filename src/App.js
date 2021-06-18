@@ -19,38 +19,6 @@ class App extends React.Component {
     selectedGoods: [],
   }
 
-  makeUnselected = (item) => {
-    const itemsLi = [...document.querySelectorAll('.item')];
-
-    itemsLi.forEach((itemLi) => {
-      if (itemLi.textContent === item) {
-        itemLi.classList.remove('selected');
-
-        this.setState((prevState) => {
-          /* const index = prevState.selectedGoods.findIndex(item);
-
-          const newSelectedGoods = prevState.selectedGoods.splice(index, 1);
-
-          return {
-            selectedGoods: newSelectedGoods,
-          }; */
-        });
-      }
-    });
-  };
-
-  makeUnSelectedAll = () => {
-    const itemsLi = [...document.querySelectorAll('.item')];
-
-    this.setState({
-      selectedGoods: [],
-    });
-
-    itemsLi.forEach((itemLi) => {
-      itemLi.classList.remove('selected');
-    });
-  };
-
   renderList = (array) => {
     if (array.length === 0) {
       return 'No goods selected';
