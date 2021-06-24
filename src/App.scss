@@ -1,1 +1,18 @@
-// styles go here
+.selected {
+  background-color: greenyellow;
+}
+
+.listItem {
+  width: fit-content;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+  margin-bottom: 10px;
+}
+
+.invisible {
+  display: none;
+}

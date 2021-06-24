@@ -1,5 +1,6 @@
 # React Goods selector
-- Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_goods-selector/)
+- Replace `<your_account>` with your Github username in the
+- [DEMO LINK](https://Kirill-Osypov.github.io/react_goods-selector/)
 - Follow the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline)
 
 ## Task
