@@ -1,1 +1,39 @@
-// styles go here
+.selected {
+  display: flex;
+  align-items: center;
+}
+
+.products {
+  display: flex;
+  flex-direction: column;
+}
+button {
+  outline: none;
+  border: none;
+  background: none;
+}
+
+.product {
+  width: 100px;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+
+  &__delete {
+    margin-left: 100px;
+    position: fixed;
+    left: 20vw;
+    background-color: green;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+  }
+
+  &__mark {
+    background-color: yellow;
+  }
+}
+
+.mark__delete {
+  background-color: red;
+}
