@@ -1,1 +1,28 @@
-// styles go here
+.goods {
+  &__clear {
+    margin: 10px;
+    padding: 7px 10px;
+  }
+
+  &__button {
+    display: block;
+    padding: 10px;
+    font-family: "Verdana", sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    background: none;
+    border: none;
+
+    &_selected {
+      background-color: yellow;
+    }
+  }
+
+  &__title {
+    display: inline-block;
+  }
+}
+
+.invisible {
+  display: none;
+}
