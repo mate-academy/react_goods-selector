@@ -1,1 +1,44 @@
-// styles go here
+html {
+  font-family: Helvetica, sans-serif;
+}
+
+li {
+  list-style: none;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+
+}
+
+.button {
+  padding: 3px 10px;
+  font-size: 16px;
+
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+
+  &--reset {
+    width: 70px;
+    height: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    margin-left: 20px;
+
+    &::after {
+      content: 'Delete';
+      color: white;
+    }
+  }
+
+  &--good-selected {
+    font-weight: bold;
+    border-radius: 3px;
+    background-color: yellow;
+  }
+}
