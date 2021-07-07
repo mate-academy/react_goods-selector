@@ -1,1 +1,28 @@
 // styles go here
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+  padding: 5px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+button:hover {
+  color: green;
+}
+
+button:focus {
+  outline: none;
+  color: red;
+}
+
+.selected {
+  background-color: lightgoldenrodyellow;
+}
+
+.hidden {
+  display: none;
+}
