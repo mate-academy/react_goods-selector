@@ -1,0 +1,15 @@
+.App__button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: inherit;
+  font-size: 24px;
+}
+
+.App__list {
+  list-style-type: none;
+}
+
+.App__selected {
+  background: yellow;
+}
