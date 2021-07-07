@@ -1,1 +1,21 @@
 // styles go here
+button {
+  border: none;
+  outline: none;
+  background-color: white;
+  cursor: pointer;
+}
+
+h1 {
+  text-align: center;
+}
+
+.selected {
+  color: yellow;
+}
+
+.app {
+  display: grid;
+  grid-template-rows: auto;
+  row-gap: 10px;
+}
