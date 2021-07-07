@@ -1,1 +1,79 @@
-// styles go here
+.App {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  background-color: blanchedalmond;
+}
+
+.products {
+  padding: 20px;
+  background-color: darkgoldenrod;
+
+  &__title {
+    font-size: 50px;
+  }
+
+  &__tip {
+    font-style: italic;
+  }
+
+  &__list {
+    list-style: none;
+  }
+
+  &__item {
+    padding: 10px;
+    border: none;
+    background-color: initial;
+    outline: none;
+    font-size: 25px;
+    cursor: pointer;
+
+    &:hover {
+      font-weight: bold;
+    }
+
+    &_selected {
+      text-shadow: 1px 1px lightcyan;
+    }
+  }
+}
+
+.shoppingCart {
+  padding: 20px;
+  background-color: darkseagreen;
+
+  &__title {
+    font-size: 50px;
+  }
+
+  &__info {
+    font-size: 25px;
+  }
+
+  &__text {
+    font-size: 25px;
+    cursor: pointer;
+
+    &:hover {
+      font-weight: bold;
+    }
+  }
+}
+
+.removeButton {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  margin-top: 20px;
+  width: 300px;
+
+  font-size: 35px;
+  background-color: coral;
+  cursor: pointer;
+}
