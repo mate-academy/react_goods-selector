@@ -1,1 +1,57 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__heading {
+    font-family: monospace;
+    font-size: 30px;
+    text-transform: uppercase;
+  }
+
+  &__button-clear {
+    width: 50px;
+    height: 30px;
+
+    background-color: red;
+    color: white;
+
+    border: transparent;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+
+    transition: background-color 300ms;
+
+    &:hover {
+      background-color: rgb(139, 4, 4);
+    }
+  }
+
+  &__list {
+    padding: 0;
+    list-style-type: none;
+  }
+
+  &__list-item {
+    display: flex;
+    justify-content: space-between;
+
+    width: 200px;
+  }
+
+  &__button-select {
+    margin-left: 20px;
+    margin-bottom: 20px;
+
+    cursor: pointer;
+  }
+
+  &__selected {
+    display: flex;
+    justify-content: space-between;
+
+    width: 200px;
+    color: red;
+  }
+}
