@@ -1,24 +1,64 @@
 import React from 'react';
 import './App.scss';
 
-const goodsFromServer = [
-  'Dumplings',
-  'Carrot',
-  'Eggs',
-  'Ice cream',
-  'Apple',
-  'Bread',
-  'Fish',
-  'Honey',
-  'Jam',
-  'Garlic',
-];
+class App extends React.Component {
+  state = {
+    word: '',
+    goodsFromServer: [
+      'Dumplings',
+      'Carrot',
+      'Eggs',
+      'Ice cream',
+      'Apple',
+      'Bread',
+      'Fish',
+      'Honey',
+      'Jam',
+      'Garlic',
+    ],
+  }
 
-const App = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+  addGoods = (item) => {
+    this.setState({ word: `${item}` });
+  };
+
+  render() {
+    const { word, goodsFromServer } = this.state;
+
+    return (
+      <div className="App">
+        <h1 className="title">
+          Selected good:
+          {` ${word}`}
+        </h1>
+        <button
+          type="button"
+          className="delete-btn"
+          onClick={() => {
+            this.addGoods('');
+          }}
+        >
+          X
+        </button>
+        <div>
+          {goodsFromServer.map(item => (
+            <button
+              key={item}
+              type="button"
+              className={`button ${
+                item === this.state.word && 'button__active'
+              }`}
+              onClick={() => {
+                this.addGoods(item);
+              }}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+  }
+}
 
 export default App;
