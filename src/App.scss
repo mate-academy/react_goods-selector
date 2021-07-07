@@ -1,1 +1,39 @@
-// styles go here
+body {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 150px 150px;
+  max-width: 400px;
+}
+
+.list__button {
+  padding: 10px;
+  border-radius: 5px;
+  width: 100px;
+  background-color: white;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  font-weight: 600;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+  outline: none;
+
+  &--active {
+    text-shadow: 2px 3px 4px yellow;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    transform: scale(1.1);
+  }
+}
+
+.clear-button {
+  @extend .list__button;
+  width: 1fr;
+}
