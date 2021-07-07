@@ -1,1 +1,58 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+button {
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 5px;
+  display: block;
+  width: fit-content;
+}
+
+.selected {
+  border-radius: 15px;
+  background-color: green;
+  color: white;
+}
+
+.hidden {
+  display: inline-block;
+}
+
+.visible {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 10px;
+  background-color: yellow;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+
+  &::after {
+    content: " ";
+    position: absolute;
+    top: 15px;
+    left: 0;
+    height: 2px;
+    width: 30px;
+    background-color: red;
+    transform: rotate(45deg);
+  }
+
+  &::before {
+    content: " ";
+    position: absolute;
+    top: 15px;
+    left: 0;
+    height: 2px;
+    width: 30px;
+    background-color: red;
+    transform: rotate(-45deg);
+  }
+}

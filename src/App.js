@@ -14,11 +14,50 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-const App = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+class App extends React.Component {
+  state = {
+    selector: false,
+  };
+
+  closeButton = (text) => {
+    this.setState({ selector: false });
+  }
+
+  writeSelector = (event, value) => {
+    this.setState({ selector: value });
+  }
+
+  render() {
+    const { selector } = this.state;
+
+    return (
+      <div className="App">
+        <h1>
+          Selected good: -
+          {' '}
+          { selector }
+          <button
+            type="button"
+            className={selector ? 'visible' : 'hidden'}
+            onClick={this.closeButton}
+          />
+        </h1>
+        {goodsFromServer.map(good => (
+          <p key={Math.random()}>
+            <button
+              type="button"
+              className={selector === good ? 'selected' : ''}
+              onClick={(event) => {
+                this.writeSelector(event, good);
+              }}
+            >
+              {good}
+            </button>
+          </p>
+        ))}
+      </div>
+    );
+  }
+}
 
 export default App;
