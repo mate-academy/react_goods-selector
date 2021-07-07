@@ -1,1 +1,54 @@
-// styles go here
+h1 {
+  display: flex;
+}
+
+body {
+  background-color: rgb(245, 248, 250);
+}
+
+.button {
+  background-color: yellow;
+  margin: 5px 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  border: 3px solid black;
+  visibility: hidden;
+  outline: none;
+}
+
+.selected {
+  margin-left: 10px;
+  color: rgb(98, 59, 238);
+  font-size: 30px;
+}
+
+.good-list {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  margin-left: 40px;
+}
+
+.buttonList {
+  font-size: 20px;
+  background: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  visibility: visible;
+
+}
+
+.buttonList:hover {
+  color: rgb(98, 59, 238);
+  font-weight: bold;
+}
+
+.active {
+  background-color: yellow;
+}
+
+.visible {
+  visibility: visible;
+}
