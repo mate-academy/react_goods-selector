@@ -52,7 +52,14 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <span>
+        <span
+         hidden={!this.state.selectedGood.length}
+         onClick={() => (
+           this.state.selectedGood.map(good => (
+             this.setRemoveSelectedGood(good)
+           ))
+         )}
+        >
           X
         </span>
 
