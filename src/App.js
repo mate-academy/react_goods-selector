@@ -33,26 +33,31 @@ class App extends React.Component {
     ));
   };
 
+  actionWidthGoods = good => (
+    this.state.selectedGood.some(elem => elem === good)
+      ? this.setRemoveSelectedGood(good)
+      : this.setSelectedGood(good)
+  );
+
+  titleSelectedGoods = () => (
+    this.state.selectedGood.length
+      ? `${this.state.selectedGood.map((good, index) => (
+        1 + index === this.state.selectedGood.length && 1 + index > 1
+          ? ` and ${good}`
+          : good
+      )).join(', ')} is selected`
+      : 'no selected good'
+  );
+
   render() {
     return (
       <div className="App">
-        <span
-          hidden={!this.state.selectedGood.length}
-
-        >
+        <span>
           X
         </span>
 
         <h1>
-          {
-          this.state.selectedGood.length
-            ? `${this.state.selectedGood.map((good, index) => (
-              1 + index === this.state.selectedGood.length && 1 + index > 1
-                ? ` and ${good}`
-                : good
-            )).join(', ')} is selected`
-            : 'no selected good'
-        }
+          {this.titleSelectedGoods()}
         </h1>
 
         <ul>
@@ -67,11 +72,7 @@ class App extends React.Component {
 
               <button
                 type="button"
-                // onClick={() => {
-                //   this.state.selectedGood.some(elem => elem === good)
-                //     ? this.setRemoveSelectedGood(good)
-                //     : this.setSelectedGood(good);
-                // }}
+                onClick={() => this.actionWidthGoods(good)}
               >
 
                 {this.state.selectedGood.some(elem => elem === good)
