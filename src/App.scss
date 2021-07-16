@@ -1,1 +1,47 @@
-// styles go here
+html {
+  font-family: "Lucida Sans", sans-serif;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.goods-list {
+  max-width: 470px;
+  width: 100%;
+  padding: 15px;
+  list-style: none;
+  background: #efefef;
+  border-radius: 7px;
+}
+
+.goods {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  border-radius: 5px;
+}
+
+.selected {
+  background-color: lightgreen;
+}
+
+.btn {
+  width: 75px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  background-color: mediumpurple;
+}
+
+.reset {
+  padding: 5px;
+}
