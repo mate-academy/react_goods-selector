@@ -21,25 +21,28 @@ class App extends React.Component {
 
   addGood(good) {
     this.setState(({ selectedGoods }) => {
-      selectedGoods.push(good);
+      const selectedGoodsCopy = [...selectedGoods];
+
+      selectedGoodsCopy.push(good);
 
       return {
-        selectedGoods,
+        selectedGoods: selectedGoodsCopy,
       };
     });
   }
 
   removeGood(good) {
     this.setState(({ selectedGoods }) => {
-      const goodIndex = selectedGoods
+      const selectedGoodsCopy = [...selectedGoods];
+      const goodIndex = selectedGoodsCopy
         .findIndex(selectedGood => (
           selectedGood === good
         ));
 
-      selectedGoods.splice(goodIndex, 1);
+      selectedGoodsCopy.splice(goodIndex, 1);
 
       return {
-        selectedGoods,
+        selectedGoods: selectedGoodsCopy,
       };
     });
   }
