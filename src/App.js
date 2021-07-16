@@ -1,4 +1,6 @@
 import React from 'react';
+import { Clear, Remove, Add } from './Controls';
+import { Good } from './Good';
 import './App.scss';
 
 const goodsFromServer = [
@@ -70,15 +72,7 @@ class App extends React.Component {
         <h1>
           {userSelection}
           {selectedGoods.length !== 0
-            ? (
-              <button
-                type="button"
-                className="clear"
-                onClick={this.clear}
-              >
-                X
-              </button>
-            )
+            ? <Clear clear={this.clear} app={this} />
             : ''}
         </h1>
         {goodsFromServer.map((good) => {
@@ -90,24 +84,10 @@ class App extends React.Component {
               className={`container ${
                 selected ? 'selected' : ''}`}
             >
-              <span className="good">{good}</span>
+              <Good good={good} />
               {selected
-                ? (
-                  <button
-                    type="button"
-                    onClick={this.remove}
-                  >
-                    Remove
-                  </button>
-                )
-                : (
-                  <button
-                    type="button"
-                    onClick={this.add}
-                  >
-                    Add
-                  </button>
-                )
+                ? <Remove remove={this.remove} app={this} />
+                : <Add add={this.add} app={this} />
             }
             </div>
           );
