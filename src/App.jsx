@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import './App.scss';
 
@@ -20,31 +21,17 @@ class App extends React.Component {
   }
 
   addGood(good) {
-    this.setState(({ selectedGoods }) => {
-      const selectedGoodsCopy = [...selectedGoods];
-
-      selectedGoodsCopy.push(good);
-
-      return {
-        selectedGoods: selectedGoodsCopy,
-      };
-    });
+    this.setState(({ selectedGoods }) => ({
+      selectedGoods: [...selectedGoods, good],
+    }));
   }
 
   removeGood(good) {
-    this.setState(({ selectedGoods }) => {
-      const selectedGoodsCopy = [...selectedGoods];
-      const goodIndex = selectedGoodsCopy
-        .findIndex(selectedGood => (
-          selectedGood === good
-        ));
-
-      selectedGoodsCopy.splice(goodIndex, 1);
-
-      return {
-        selectedGoods: selectedGoodsCopy,
-      };
-    });
+    this.setState(({ selectedGoods }) => ({
+      selectedGoods: selectedGoods.filter(currentGood => (
+        currentGood !== good
+      )),
+    }));
   }
 
   render() {
@@ -81,12 +68,12 @@ class App extends React.Component {
             ));
 
             return (
-              <li key={good} className="App__item">
+              <li key={Math.random()} className="App__item">
                 <span
                   className={
-                    isSelected
-                      ? 'App__good App__good--selected'
-                      : 'App__good'
+                    classNames(
+                      'App__good', { 'App__good--selected': isSelected },
+                    )
                   }
                 >
                   {good}
