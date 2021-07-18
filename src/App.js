@@ -14,42 +14,6 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-const productNotSelected = (item, action) => (
-  <div key={item}>
-    <li className="noAdd">
-      { item }
-    </li>
-    <button
-      type="button"
-      className="addButton"
-      onClick={() => {
-        action(item);
-      }
-      }
-    >
-      Add
-    </button>
-  </div>
-);
-
-const productSelected = (item, action) => (
-  <div key={item}>
-    <li className="added">
-      { item }
-    </li>
-    <button
-      type="button"
-      className="removeButton"
-      onClick={() => {
-        action(item);
-      }
-      }
-    >
-      Remove
-    </button>
-  </div>
-);
-
 class App extends React.Component {
   state = {
     selectedGoods: ['Jam'],
@@ -107,10 +71,40 @@ class App extends React.Component {
           {goodsFromServer.map((item) => {
             const isProductSelected = this.state.selectedGoods.includes(item);
 
-            return isProductSelected ? (
-              productSelected(item, this.removeProduct)
-            ) : (
-              productNotSelected(item, this.addProduct)
+            return (
+              <div key={item}>
+                <li className={
+                  isProductSelected
+                    ? 'added'
+                    : null
+                  }
+                >
+                  { item }
+                </li>
+                <button
+                  type="button"
+                  className={
+                    isProductSelected
+                      ? 'removeButton'
+                      : 'addButton'
+                  }
+                  onClick={
+                    isProductSelected
+                      ? () => {
+                        this.removeProduct(item);
+                      }
+                      : () => {
+                        this.addProduct(item);
+                      }
+                  }
+                >
+                  {
+                    isProductSelected
+                      ? 'remove'
+                      : 'add'
+                  }
+                </button>
+              </div>
             );
           })
         }
