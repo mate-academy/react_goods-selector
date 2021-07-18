@@ -38,13 +38,20 @@ class App extends React.Component {
 
   render() {
     const { selectedGoods } = this.state;
+    let wordSelect;
+
+    if (selectedGoods.length === 1) {
+      wordSelect = 'is selected';
+    } else {
+      wordSelect = 'are selected';
+    }
 
     return (
       <>
         <h1>
           {selectedGoods.length === 0
             ? 'No goods selected'
-            : `${selectedGoods} is selected`
+            : `${selectedGoods} ${wordSelect}`
           }
           {' '}
           {selectedGoods.length > 0
