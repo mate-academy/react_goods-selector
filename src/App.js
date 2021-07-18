@@ -73,6 +73,10 @@ class App extends React.Component {
   }
 
   createProductList = () => {
+    if (this.state.selectedGoods.length === 0) {
+      return 'No goods selected';
+    }
+
     if (this.state.selectedGoods.length < 3) {
       return this.state.selectedGoods.join(' and ');
     }
