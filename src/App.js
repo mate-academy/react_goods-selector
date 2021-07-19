@@ -64,7 +64,7 @@ class App extends Component {
         >
           X
         </button>
-        <ul className="product__list">
+        <ul>
           {goodsFromServer.map(product => (
             <li
               key={product}
@@ -73,14 +73,12 @@ class App extends Component {
               {product}
               <button
                 type="button"
-                className="add"
                 onClick={() => this.addProduct(product)}
               >
                 Add
               </button>
               <button
                 type="button"
-                className="remove"
                 onClick={() => this.removeProduct(product)}
               >
                 Remove

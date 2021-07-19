@@ -1,8 +1,3 @@
-ul {
-  list-style: none;
-  padding: 0;
-}
-
 .product {
   display: flex;
   flex-direction: column;
@@ -17,5 +12,7 @@ ul {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    list-style: none;
+    padding: 0;
   }
 }
