@@ -16,18 +16,15 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    goods: [...goodsFromServer],
     selectedGoods: ['Jam'],
-
   }
 
-  addGoods = (value) => {
-    // this.setState({selectedGoods: [this.state.selectedGoods, ...value]})
-    if (!this.state.selectedGoods.includes(value)) {
-      this.setState(prevState => prevState.selectedGoods.push(value));
-    } else if (this.state.selectedGoods.includes(value)) {
+  addGoods = (good) => {
+    if (!this.state.selectedGoods.includes(good)) {
+      this.setState(prevState => prevState.selectedGoods.push(good));
+    } else {
       this.setState(prevState => ({
-        selectedGoods: prevState.selectedGoods.filter(x => x !== value),
+        selectedGoods: prevState.selectedGoods.filter(x => x !== good),
       }));
     }
   }
@@ -36,26 +33,27 @@ class App extends React.Component {
     this.setState({ selectedGoods: [] });
   }
 
+  headerText = (goods) => {
+    switch (goods) {
+      case 0:
+        return 'No goods selected';
+      case 1:
+        return `${this.state.selectedGoods} is selected`;
+      default:
+        return `${this.state.selectedGoods} are selected`;
+    }
+  };
+
   render() {
     const { selectedGoods } = this.state;
-    let wordSelect;
-
-    if (selectedGoods.length === 1) {
-      wordSelect = 'is selected';
-    } else {
-      wordSelect = 'are selected';
-    }
 
     return (
       <>
         <h1>
-          {selectedGoods.length === 0
-            ? 'No goods selected'
-            : `${selectedGoods} ${wordSelect}`
-          }
+          {this.headerText(selectedGoods.length)}
           {' '}
-          {selectedGoods.length > 0
-            ? (
+          {!!selectedGoods.length
+            && (
               <button
                 type="button"
                 onClick={() => this.cleanGoods()}
@@ -63,11 +61,10 @@ class App extends React.Component {
                 clean
               </button>
             )
-            : null
           }
         </h1>
         <ul>
-          {this.state.goods.map(good => (
+          {goodsFromServer.map(good => (
             <>
               {' '}
               <li className={selectedGoods.includes(good)
