@@ -24,7 +24,8 @@ class App extends React.Component {
       this.setState(prevState => prevState.selectedGoods.push(good));
     } else {
       this.setState(prevState => ({
-        selectedGoods: prevState.selectedGoods.filter(x => x !== good),
+        selectedGoods: prevState.selectedGoods
+          .filter(prevGood => prevGood !== good),
       }));
     }
   }
@@ -33,7 +34,7 @@ class App extends React.Component {
     this.setState({ selectedGoods: [] });
   }
 
-  headerText = (goods) => {
+  getheaderText = (goods) => {
     switch (goods) {
       case 0:
         return 'No goods selected';
@@ -50,7 +51,7 @@ class App extends React.Component {
     return (
       <>
         <h1>
-          {this.headerText(selectedGoods.length)}
+          {this.getheaderText(selectedGoods.length)}
           {' '}
           {!!selectedGoods.length
             && (
@@ -67,9 +68,11 @@ class App extends React.Component {
           {goodsFromServer.map(good => (
             <>
               {' '}
-              <li className={selectedGoods.includes(good)
-                ? 'show'
-                : 'hide'}
+              <li
+                key={good}
+                className={selectedGoods.includes(good)
+                  ? 'show'
+                  : 'hide'}
               >
                 {good}
               </li>
