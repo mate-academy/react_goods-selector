@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import './App.scss';
 
 const goodsFromServer = [
@@ -21,7 +22,6 @@ class App extends Component {
 
   renderTitle = () => {
     const selectedGoods = [...this.state.selectedGoods];
-    const lastSelectedGoods = [...selectedGoods].pop();
 
     switch (selectedGoods.length) {
       case 0:
@@ -29,24 +29,24 @@ class App extends Component {
       case 1:
         return `${selectedGoods[0]} is selected`;
       default:
-        selectedGoods.pop();
-
-        return `${selectedGoods.join(', ')} and
-          ${lastSelectedGoods} are selected`;
+        return `${selectedGoods.slice(0, -1).join(', ')} and
+          ${selectedGoods.slice(-1)} are selected`;
     }
   }
 
   addGoods = (goods) => {
-    this.setState(state => ({
-      selectedGoods: [...state.selectedGoods, goods],
+    this.setState(prevState => ({
+      selectedGoods: [...prevState.selectedGoods, goods],
     }));
   }
 
   removeGoods = (goods) => {
-    this.setState(state => ({
-      selectedGoods: state.selectedGoods.filter(item => item !== goods),
+    this.setState(prevState => ({
+      selectedGoods: prevState.selectedGoods.filter(item => item !== goods),
     }));
   }
+
+  resetSelectedGoods = () => this.setState({ selectedGoods: [] })
 
   render() {
     return (
@@ -56,29 +56,29 @@ class App extends Component {
         <button
           type="button"
           className="reset"
-          onClick={() => this.setState({ selectedGoods: [] })}
+          onClick={this.resetSelectedGoods}
           disabled={!this.state.selectedGoods.length}
         >
           Reset selections
         </button>
         <ul className="goods-list">
-          {goodsFromServer.map(item => (
+          {goodsFromServer.map(good => (
             <li
-              key={Math.random()}
-              className={this.state.selectedGoods.includes(item)
+              key={uuidv4()}
+              className={this.state.selectedGoods.includes(good)
                 ? 'selected goods' : 'goods'}
             >
-              <span>{item}</span>
+              <span>{good}</span>
               <button
                 type="button"
                 className="btn"
                 onClick={() => (
-                  this.state.selectedGoods.includes(item)
-                    ? this.removeGoods(item)
-                    : this.addGoods(item)
+                  this.state.selectedGoods.includes(good)
+                    ? this.removeGoods(good)
+                    : this.addGoods(good)
                 )}
               >
-                {this.state.selectedGoods.includes(item)
+                {this.state.selectedGoods.includes(good)
                   ? 'Unselect' : 'Select'}
               </button>
             </li>
