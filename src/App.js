@@ -19,16 +19,16 @@ class App extends React.Component {
     selectedGoods: ['Jam'],
   }
 
-  addProduct = (item) => {
+  addProduct = (product) => {
     this.setState(prevState => ({
-      selectedGoods: prevState.selectedGoods.concat(item),
+      selectedGoods: prevState.selectedGoods.concat(product),
     }));
   }
 
-  removeProduct = (item) => {
+  removeProduct = (good) => {
     this.setState(prevState => ({
       selectedGoods:
-        prevState.selectedGoods.filter(product => product !== item),
+        prevState.selectedGoods.filter(product => product !== good),
     }));
   }
 
@@ -56,9 +56,8 @@ class App extends React.Component {
           Selected good:
           {this.createProductList()}
         </h1>
-        {this.state.selectedGoods.length === 0
-          ? null
-          : (
+        {!!this.state.selectedGoods.length
+          && (
             <button
               type="button"
               className="deleteButton"
@@ -67,19 +66,19 @@ class App extends React.Component {
               Clear all
             </button>
           )}
-        <ul>
-          {goodsFromServer.map((item) => {
-            const isProductSelected = this.state.selectedGoods.includes(item);
+        <ul className="app__list">
+          {goodsFromServer.map((good) => {
+            const isProductSelected = this.state.selectedGoods.includes(good);
 
             return (
-              <div key={item}>
+              <div key={good}>
                 <li className={
                   isProductSelected
                     ? 'added'
-                    : null
+                    : 'noAdd'
                   }
                 >
-                  { item }
+                  { good }
                 </li>
                 <button
                   type="button"
@@ -91,10 +90,10 @@ class App extends React.Component {
                   onClick={
                     isProductSelected
                       ? () => {
-                        this.removeProduct(item);
+                        this.removeProduct(good);
                       }
                       : () => {
-                        this.addProduct(item);
+                        this.addProduct(good);
                       }
                   }
                 >
