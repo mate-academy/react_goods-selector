@@ -13,7 +13,10 @@ const goodsFromServer = [
   'Honey',
   'Jam',
   'Garlic',
-];
+].map(good => ({
+  id: uuidv4(),
+  good,
+}));
 
 class App extends Component {
   state = {
@@ -21,7 +24,7 @@ class App extends Component {
   }
 
   renderTitle = () => {
-    const selectedGoods = [...this.state.selectedGoods];
+    const { selectedGoods } = this.state;
 
     switch (selectedGoods.length) {
       case 0:
@@ -34,15 +37,17 @@ class App extends Component {
     }
   }
 
-  addGoods = (goods) => {
+  addGoods = (good) => {
     this.setState(prevState => ({
-      selectedGoods: [...prevState.selectedGoods, goods],
+      selectedGoods: [...prevState.selectedGoods, good],
     }));
   }
 
-  removeGoods = (goods) => {
+  removeGoods = (good) => {
     this.setState(prevState => ({
-      selectedGoods: prevState.selectedGoods.filter(item => item !== goods),
+      selectedGoods: prevState.selectedGoods.filter(
+        selectedGood => selectedGood !== good,
+      ),
     }));
   }
 
@@ -61,24 +66,26 @@ class App extends Component {
         >
           Reset selections
         </button>
+
         <ul className="goods-list">
           {goodsFromServer.map(good => (
             <li
-              key={uuidv4()}
-              className={this.state.selectedGoods.includes(good)
+              key={good.id}
+              className={this.state.selectedGoods.includes(good.good)
                 ? 'selected goods' : 'goods'}
             >
-              <span>{good}</span>
+              <span>{good.good}</span>
+
               <button
                 type="button"
                 className="btn"
                 onClick={() => (
-                  this.state.selectedGoods.includes(good)
-                    ? this.removeGoods(good)
-                    : this.addGoods(good)
+                  this.state.selectedGoods.includes(good.good)
+                    ? this.removeGoods(good.good)
+                    : this.addGoods(good.good)
                 )}
               >
-                {this.state.selectedGoods.includes(good)
+                {this.state.selectedGoods.includes(good.good)
                   ? 'Unselect' : 'Select'}
               </button>
             </li>
