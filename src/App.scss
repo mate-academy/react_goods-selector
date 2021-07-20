@@ -18,4 +18,7 @@ $reject_color:rgb(255, 90, 65);
   .reset {
     background-color: $reject_color
   }
+  .selected {
+    background: rgb(167, 255, 145);
+  }
 }

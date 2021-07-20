@@ -12,9 +12,7 @@ const goodsFromServer = [
   'Honey',
   'Jam',
   'Garlic',
-].map(item => ({
-  item,
-}));
+];
 
 class App extends Component {
   state = {
@@ -52,6 +50,8 @@ class App extends Component {
   resetSelectedGoods = () => this.setState({ selectedGoods: [] });
 
   render() {
+    const { selectedGoods } = this.state;
+
     return (
       <div className="App">
         <h1>{this.renderTitle()}</h1>
@@ -60,7 +60,7 @@ class App extends Component {
           type="button"
           className="reset"
           onClick={this.resetSelectedGoods}
-          disabled={!this.state.selectedGoods.length}
+          disabled={!selectedGoods.length}
         >
           Reset selections
         </button>
@@ -68,24 +68,24 @@ class App extends Component {
         <ul className="App__list">
           {goodsFromServer.map(value => (
             <li
-              key={value.item}
-              className={this.state.selectedGoods.includes(value.item)
+              key={value}
+              className={selectedGoods.includes(value)
                 ? 'selected goods' : 'goods'}
             >
-              <span>{value.item}</span>
+              <span>{value}</span>
               <button
                 type="button"
                 className={'App__button'
-                  && this.state.selectedGoods.includes(value.item)
+                  && selectedGoods.includes(value)
                   ? 'active'
                   : 'no_active'}
                 onClick={() => (
-                  this.state.selectedGoods.includes(value.item)
-                    ? this.removeGoods(value.item)
-                    : this.addGoods(value.item)
+                  selectedGoods.includes(value)
+                    ? this.removeGoods(value)
+                    : this.addGoods(value)
                 )}
               >
-                {this.state.selectedGoods.includes(value.item)
+                {selectedGoods.includes(value)
                   ? 'Unselect' : 'Select'}
               </button>
             </li>
