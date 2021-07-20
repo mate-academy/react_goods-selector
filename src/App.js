@@ -19,24 +19,18 @@ class App extends React.Component {
     selectedGoods: ['Jam'],
   }
 
-  renderingTitle = () => {
-    let renderTitle = '';
-
-    if (this.state.selectedGoods.length === 0) {
-      renderTitle = 'NO GOODS SELECTED';
-    } else if (this.state.selectedGoods.length === 1) {
-      renderTitle = `${this.state.selectedGoods} is selected`;
-    } else if (this.state.selectedGoods.length > 1) {
-      const lastItemSelected
-        = this.state.selectedGoods[this.state.selectedGoods.length - 1];
-      const copyOfSelected = [...this.state.selectedGoods];
-
-      copyOfSelected.length -= 1;
-      renderTitle
-        = `${copyOfSelected.join(', ')} and ${lastItemSelected} are selected`;
+  getRenderingTitle = () => {
+    if (this.state.selectedGoods.length === 1) {
+      return `${this.state.selectedGoods} is selected`;
     }
 
-    return renderTitle;
+    if (this.state.selectedGoods.length > 1) {
+      return `${this.state.selectedGoods.slice(0, -1).join(', ')}
+        and ${this.state.selectedGoods[this.state.selectedGoods.length - 1]}
+        are selected`;
+    }
+
+    return 'NO GOODS SELECTED';
   };
 
   isSelected = goods => (
@@ -51,19 +45,14 @@ class App extends React.Component {
 
   removeFromSelect = (goods) => {
     this.setState(
-      prevState => prevState.selectedGoods.splice(
-        prevState.selectedGoods.indexOf(goods), 1,
+      prevState => ({
+        selectedGoods: prevState.selectedGoods.filter(good => good !== goods),
+      }
       ),
     );
   };
 
-  clearSelect = () => {
-    this.setState(
-      prevState => prevState.selectedGoods.splice(
-        0, prevState.selectedGoods.length,
-      ),
-    );
-  };
+  clearGoods = () => (this.setState({ selectedGoods: [] }));
 
   render() {
     return (
@@ -71,7 +60,7 @@ class App extends React.Component {
         <div className="list-title">
           <h1>
             {
-            `Selected good: ${this.renderingTitle()}`
+            `Selected good: ${this.getRenderingTitle()}`
             }
           </h1>
           { this.state.selectedGoods.length
@@ -79,7 +68,7 @@ class App extends React.Component {
               <button
                 type="button"
                 className="button button--clear"
-                onClick={() => this.clearSelect()}
+                onClick={this.clearGoods}
               >
                 X
               </button>
@@ -94,29 +83,21 @@ class App extends React.Component {
               className={`list-item ${this.isSelected(goods) ? 'active' : ''}`}
             >
               {goods}
-              {this.isSelected(goods) || (
-                <button
-                  key={goods}
-                  type="button"
-                  className="button"
-                  onClick={() => {
-                    this.addGoodsToSelect(goods);
-                  }}
-                >
-                  Add
-                </button>
-              )}
-              {this.isSelected(goods) && (
-                <button
-                  type="button"
-                  className="button"
-                  onClick={() => {
+              <button
+                key={goods}
+                type="button"
+                className="button"
+                onClick={this.isSelected(goods)
+                  ? () => {
                     this.removeFromSelect(goods);
-                  }}
-                >
-                  Remove
-                </button>
-              )}
+                  }
+                  : () => {
+                    this.addGoodsToSelect(goods);
+                  }
+                }
+              >
+                {this.isSelected(goods) ? 'Remove' : 'Add'}
+              </button>
             </li>
           ))}
         </ul>
