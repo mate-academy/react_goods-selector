@@ -35,23 +35,23 @@ class App extends Component {
     }
   }
 
+  addGoods = (value) => {
+    this.setState(prevState => ({
+      selectedGoods: [...prevState.selectedGoods, value],
+    }));
+  };
+
+  removeGoods = (value) => {
+    this.setState(prevState => ({
+      selectedGoods: prevState.selectedGoods.filter(
+        selectedGood => selectedGood !== value,
+      ),
+    }));
+  };
+
+  resetSelectedGoods = () => this.setState({ selectedGoods: [] });
+
   render() {
-    const addGoods = (value) => {
-      this.setState(prevState => ({
-        selectedGoods: [...prevState.selectedGoods, value],
-      }));
-    };
-
-    const removeGoods = (value) => {
-      this.setState(prevState => ({
-        selectedGoods: prevState.selectedGoods.filter(
-          selectedGood => selectedGood !== value,
-        ),
-      }));
-    };
-
-    const resetSelectedGoods = () => this.setState({ selectedGoods: [] });
-
     return (
       <div className="App">
         <h1>{this.renderTitle()}</h1>
@@ -59,7 +59,7 @@ class App extends Component {
         <button
           type="button"
           className="reset"
-          onClick={resetSelectedGoods}
+          onClick={this.resetSelectedGoods}
           disabled={!this.state.selectedGoods.length}
         >
           Reset selections
@@ -82,8 +82,8 @@ class App extends Component {
                   : 'no_active'}
                 onClick={() => (
                   this.state.selectedGoods.includes(value.item)
-                    ? removeGoods(value.item)
-                    : addGoods(value.item)
+                    ? this.removeGoods(value.item)
+                    : this.addGoods(value.item)
                 )}
               >
                 {this.state.selectedGoods.includes(value.item)
