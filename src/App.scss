@@ -1,1 +1,50 @@
-// styles go here
+body {
+  background-color: rgb(206, 191, 191);
+}
+
+li {
+  list-style: outside;
+  padding: 10px 0;
+}
+
+.item {
+  width: max-content;
+}
+
+button {
+  width: 80px;
+  border-radius: 5%;
+}
+
+.buttonToAdd {
+  background-color: rgb(78, 216, 89);
+}
+
+.buttonToRemove {
+  background-color: rgb(216, 78, 78);
+}
+
+.added {
+  .buttonToAdd {
+    display: none;
+  }
+
+  .item {
+    background-color: rgb(0, 255, 76);
+  }
+}
+
+.notAdded {
+  .buttonToRemove {
+    display: none;
+  }
+}
+
+.visibleButtonToClear {
+  background-color: rgb(255, 0, 0);
+  opacity: 1;
+}
+
+.unvisibleButtonToClear {
+  opacity: 0;
+}
