@@ -1,3 +1,5 @@
+/* eslint-disable object-shorthand */
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import './App.scss';
 
@@ -16,61 +18,93 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGood: 'Jam',
+    selectedGoods: ['Jam'],
   }
 
   selectGood(good) {
-    this.setState({ selectedGood: good });
+    const { selectedGoods } = this.state;
+
+    selectedGoods.push(good);
+    this.setState({ selectedGoods: selectedGoods });
+  }
+
+  removeGood(good) {
+    const { selectedGoods } = this.state;
+
+    selectedGoods.splice(selectedGoods.indexOf(good), 1);
+
+    this.setState({ selectedGoods: selectedGoods });
   }
 
   clearSelected() {
-    this.setState({ selectedGood: null });
+    this.setState({ selectedGoods: [] });
   }
 
   render() {
-    const { selectedGood } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App">
-        <h1>
-          {selectedGood !== null
-            ? `${selectedGood} is selected`
-            : `No goods selected`
+        <h1 className="App__header">
+          {
+            selectedGoods.length !== 0
+              ? selectedGoods.length === 1
+                ? `${selectedGoods} is selected`
+                // eslint-disable-next-line max-len
+                : `${selectedGoods.join(', ').replace(/, ([^,]*)$/, ' and $1')} are selected`
+              : `No goods selected`
           }
           {' '}
           <button
             type="button"
-            className={selectedGood === null
-              ? 'hidden'
-              : 'clearSelected'
+            className={
+              selectedGoods.length === 0
+                ? 'hidden'
+                : 'App__clearSelected'
             }
             onClick={() => {
-              this.setState({ selectedGood: null });
+              this.setState({ selectedGoods: [] });
             }}
           >
             X
           </button>
         </h1>
-        <ul>
+        <ul className="App__list">
           {goodsFromServer.map(good => (
             <li
               key={good}
-              className={good === this.state.selectedGood
-                ? 'active'
-                : 'regular'}
+              className={
+                selectedGoods.includes(good)
+                  ? 'App__element--active'
+                  : 'App__element'
+                }
             >
-              {good}
-              {' '}
+              <span>{good}</span>
               <button
                 type="button"
-                className={good === this.state.selectedGood
-                  ? 'hidden'
-                  : 'clickable'}
+                className={
+                  selectedGoods.includes(good)
+                    ? 'hidden'
+                    : 'clickable'
+                }
                 onClick={() => {
                   this.selectGood(good);
                 }}
               >
-                Select
+                Add
+              </button>
+              <button
+                type="button"
+                className={
+                  selectedGoods.includes(good)
+                    ? 'clickable'
+                    : 'hidden'
+                }
+                onClick={() => {
+                  this.removeGood(good);
+                }}
+              >
+                Remove
               </button>
             </li>
           ))}

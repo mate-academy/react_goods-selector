@@ -1,5 +1,31 @@
-.active {
-  background-color: green;
+.App {
+  width: 60vw;
+  margin: 0 auto;
+
+  &__header {
+    text-align: center;
+  }
+
+  &__clearSelected:hover {
+    background-color: indianred;
+  }
+
+  &__list {
+    list-style: none;
+  }
+
+  &__element {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+
+    &--active {
+      width: 80%;
+      display: flex;
+      justify-content: space-between;
+      background-color: green;
+    }
+  }
 }
 
 .hidden {
