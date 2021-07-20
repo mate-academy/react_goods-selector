@@ -1,1 +1,24 @@
 // styles go here
+$reject_color:rgb(255, 90, 65);
+.App {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .active {
+    margin-left: 20px;
+    background-color: rgb(4, 251, 4);
+  }
+  .no_active {
+    margin-left: 20px;
+    background-color: $reject_color;
+  }
+  .reset {
+    background-color: $reject_color
+  }
+  .selected {
+    background: rgb(167, 255, 145);
+  }
+}
