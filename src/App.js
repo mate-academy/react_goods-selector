@@ -20,14 +20,14 @@ class App extends React.Component {
   }
 
   addProduct = (good) => {
-    this.setState(State => ({
-      selectedGoods: [...State.selectedGoods, good],
+    this.setState(state => ({
+      selectedGoods: [...state.selectedGoods, good],
     }));
   };
 
   removeProduct = (good) => {
-    this.setState(State => ({
-      selectedGoods: State.selectedGoods.filter(item => item !== good),
+    this.setState(state => ({
+      selectedGoods: state.selectedGoods.filter(item => item !== good),
     }));
   };
 
@@ -35,7 +35,7 @@ class App extends React.Component {
     this.setState({ selectedGoods: [] });
   };
 
-  listOfSelectedProducts = () => {
+  getListOfSelectedProducts = () => {
     const { selectedGoods } = this.state;
 
     switch (selectedGoods.length) {
@@ -63,7 +63,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>
-          {this.listOfSelectedProducts()}
+          {this.getListOfSelectedProducts()}
         </h1>
 
         <button
