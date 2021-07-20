@@ -68,12 +68,11 @@ class App extends Component {
         <ul className="App__list">
           {goodsFromServer.map(value => (
             <li
-              key={value.id}
+              key={value.item}
               className={this.state.selectedGoods.includes(value.item)
                 ? 'selected goods' : 'goods'}
             >
               <span>{value.item}</span>
-
               <button
                 type="button"
                 className={'App__button'
