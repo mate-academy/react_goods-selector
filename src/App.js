@@ -33,16 +33,16 @@ class App extends Component {
     }
   }
 
-  addGoods = (value) => {
+  addGoods = (good) => {
     this.setState(prevState => ({
-      selectedGoods: [...prevState.selectedGoods, value],
+      selectedGoods: [...prevState.selectedGoods, good],
     }));
   };
 
-  removeGoods = (value) => {
+  removeGoods = (good) => {
     this.setState(prevState => ({
       selectedGoods: prevState.selectedGoods.filter(
-        selectedGood => selectedGood !== value,
+        selectedGood => selectedGood !== good,
       ),
     }));
   };
@@ -66,26 +66,26 @@ class App extends Component {
         </button>
 
         <ul className="App__list">
-          {goodsFromServer.map(value => (
+          {goodsFromServer.map(good => (
             <li
-              key={value}
-              className={selectedGoods.includes(value)
+              key={good}
+              className={selectedGoods.includes(good)
                 ? 'selected goods' : 'goods'}
             >
-              <span>{value}</span>
+              <span>{good}</span>
               <button
                 type="button"
                 className={'App__button'
-                  && selectedGoods.includes(value)
+                  && selectedGoods.includes(good)
                   ? 'active'
                   : 'no_active'}
                 onClick={() => (
-                  selectedGoods.includes(value)
-                    ? this.removeGoods(value)
-                    : this.addGoods(value)
+                  selectedGoods.includes(good)
+                    ? this.removeGoods(good)
+                    : this.addGoods(good)
                 )}
               >
-                {selectedGoods.includes(value)
+                {selectedGoods.includes(good)
                   ? 'Unselect' : 'Select'}
               </button>
             </li>
