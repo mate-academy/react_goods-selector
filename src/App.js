@@ -23,23 +23,20 @@ class App extends React.Component {
   chooseElement = (ev, product) => {
     const element = ev.nativeEvent.path[2];
 
-    if (!this.state.chosenElements.includes(product)) {
+    if (this.state.chosenElements.includes(product)) {
+      this.setState(state => ({
+        chosenElements: state.chosenElements.filter(item => item !== product),
+      }));
+
+      element.style.backgroundColor = '';
+    } else {
       this.setState(state => ({
         chosenElements: [...state.chosenElements, product],
       }));
+
+      document.querySelector('.clear').hidden = false;
+      element.style.backgroundColor = '#ff6347';
     }
-
-    element.style.backgroundColor = '#ff6347';
-  }
-
-  removeElement = (ev, product) => {
-    const elemet = ev.nativeEvent.path[2];
-
-    this.setState(state => ({
-      chosenElements: state.chosenElements.filter(item => item !== product),
-    }));
-
-    elemet.style.backgroundColor = '';
   }
 
   clearElements = () => {
@@ -56,9 +53,15 @@ class App extends React.Component {
 
   selectedProducts = (products) => {
     switch (products.length) {
-      case 0: return ' No products were selected';
+      case 0:
+        document.querySelector('.clear').hidden = true;
+
+        return ' No products were selected';
+
       case 1: return ` ${products} is selected`;
-      default: return ` ${products.join(', ')} are selected`;
+
+      default: return ` ${products.slice(0, -1).join(', ')}
+        and ${products.slice(-1)} are selected`;
     }
   }
 
@@ -81,24 +84,16 @@ class App extends React.Component {
               >
                 {product}
                 <div className="buttons">
+
                   <button
                     className="button"
                     type="button"
                     onClick={(ev) => {
                       this.chooseElement(ev, product);
                     }}
-
                   >
-                    Choose
-                  </button>
-                  <button
-                    className="button"
-                    type="button"
-                    onClick={(ev) => {
-                      this.removeElement(ev, product);
-                    }}
-                  >
-                    Remove
+                    {this.state.chosenElements.includes(product)
+                      ? 'Choose' : 'Remove'}
                   </button>
                 </div>
               </div>
