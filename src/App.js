@@ -1,5 +1,3 @@
-/* eslint-disable object-shorthand */
-/* eslint-disable no-nested-ternary */
 import React from 'react';
 import './App.scss';
 
@@ -21,11 +19,17 @@ class App extends React.Component {
     selectedGoods: ['Jam'],
   }
 
+  clearSelectedGoods = () => {
+    this.setState({ selectedGoods: [] });
+  }
+
   selectGood(good) {
     const { selectedGoods } = this.state;
 
     selectedGoods.push(good);
-    this.setState({ selectedGoods: selectedGoods });
+    this.setState(state => ({
+      selectedGoods: state.selectedGoods,
+    }));
   }
 
   removeGood(good) {
@@ -33,11 +37,24 @@ class App extends React.Component {
 
     selectedGoods.splice(selectedGoods.indexOf(good), 1);
 
-    this.setState({ selectedGoods: selectedGoods });
+    this.setState(state => ({
+      selectedGoods: state.selectedGoods,
+    }));
   }
 
-  clearSelected() {
-    this.setState({ selectedGoods: [] });
+  showSelectedGoods() {
+    const { selectedGoods } = this.state;
+
+    if (selectedGoods.length !== 0) {
+      if (selectedGoods.length === 1) {
+        return `${selectedGoods} is selected`;
+      }
+
+      return `${selectedGoods.join(', ').replace(/, ([^,]*)$/, ' and $1')}`
+        + ` are selected`;
+    }
+
+    return `No goods selected`;
   }
 
   render() {
@@ -46,14 +63,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1 className="App__header">
-          {
-            selectedGoods.length !== 0
-              ? selectedGoods.length === 1
-                ? `${selectedGoods} is selected`
-                // eslint-disable-next-line max-len
-                : `${selectedGoods.join(', ').replace(/, ([^,]*)$/, ' and $1')} are selected`
-              : `No goods selected`
-          }
+          {this.showSelectedGoods()}
           {' '}
           <button
             type="button"
@@ -62,9 +72,7 @@ class App extends React.Component {
                 ? 'hidden'
                 : 'App__clearSelected'
             }
-            onClick={() => {
-              this.setState({ selectedGoods: [] });
-            }}
+            onClick={this.clearSelectedGoods}
           >
             X
           </button>
