@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import React from 'react';
 import './App.scss';
 
@@ -39,6 +40,18 @@ class App extends React.Component {
     }));
 
     elemet.style.backgroundColor = '';
+  }
+
+  clearElements = () => {
+    const products = document.querySelectorAll('.goods__product');
+
+    products.forEach((product) => {
+      product.style.backgroundColor = 'transparent';
+    });
+
+    this.setState(state => ({
+      chosenElements: [],
+    }));
   }
 
   selectedProducts = (products) => {
@@ -90,6 +103,14 @@ class App extends React.Component {
                 </div>
               </div>
             ))}
+
+            <button
+              type="button"
+              className="clear"
+              onClick={this.clearElements}
+            >
+              Clear All
+            </button>
           </div>
         </div>
       </>
