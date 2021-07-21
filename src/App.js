@@ -93,7 +93,7 @@ class App extends React.Component {
                     }}
                   >
                     {this.state.chosenElements.includes(product)
-                      ? 'Choose' : 'Remove'}
+                      ? 'Remove' : 'Choose'}
                   </button>
                 </div>
               </div>
