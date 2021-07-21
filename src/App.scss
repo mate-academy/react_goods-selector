@@ -1,1 +1,32 @@
-// styles go here
+html {
+  font-family: Roboto, sans-serif;
+  background-color: #eee;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.goods {
+  &__product {
+    padding: 5px;
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.button {
+  border: none;
+  border-radius: 16px;
+  background-color: rgba(#000, 0.65);
+  color: #fff;
+  cursor: pointer;
+}
