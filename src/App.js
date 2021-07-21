@@ -18,7 +18,7 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGoods: ['Carrot'],
+    selectedGoods: [],
   };
 
   showSelected = (selectedGoods) => {
