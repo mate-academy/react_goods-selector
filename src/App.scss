@@ -1,1 +1,29 @@
-// styles go here
+@import "~bootstrap/scss/bootstrap";
+
+.App {
+  background-color: $orange-200;
+}
+
+.title {
+  &__selected-goods {
+    text-justify: inter-word;
+  }
+}
+
+.btn-close {
+  opacity: 1;
+
+  &:hover {
+    background-color: $red-600;
+  }
+}
+
+.goods-list {
+  padding: 0;
+}
+
+.good {
+  &__button {
+    cursor: pointer;
+  }
+}
