@@ -1,13 +1,21 @@
 .app {
-  margin: 0 auto;
+  margin: 50px auto;
   max-width: 500px;
   padding: 30px 50px;
 
   color: whitesmoke;
+
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(101, 144, 218, 0.4);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .btn {
-  padding: 10px 20px;
+  box-sizing: border-box;
+  width: 100px;
+  height: 44px;
 
   font-family: "Trebuchet MS", "Lucida Sans Unicode", Arial, sans-serif;
   text-transform: uppercase;
@@ -66,7 +74,12 @@
 }
 
 .todo {
-  padding: 0 15px 0 25px;
+  margin-right: 15px;
+  padding-bottom: 10px;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid whitesmoke;
+  }
 
   display: flex;
   justify-content: space-between;
@@ -84,7 +97,7 @@
   &::after {
     content: "";
     position: absolute;
-    left: 0;
+    left: -25px;
     width: 15px;
     height: 20px;
     background: url(./images/tick.png) no-repeat center;

@@ -17,8 +17,11 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGood: [],
-    sentence: '',
+    selectedGood: ['Jam'],
+
+    get sentence() {
+      return this.selectedGood.join(', ');
+    },
   }
 
   addGood = (good) => {
@@ -33,7 +36,8 @@ class App extends React.Component {
 
   getClearList = () => {
     this.setState({
-      selectedGood: [], sentence: '',
+      selectedGood: [],
+      sentence: '',
     });
   }
 

@@ -8,7 +8,23 @@
     <style>
       body {
         margin: 0;
-        background-color: rgb(52, 63, 63);
+        background: linear-gradient(45deg, #000428, #004e92);
+        background-size: 300% 300%;
+        animation: bg 10s ease infinite;
+      }
+
+      @keyframes bg {
+        0% {
+          background-position: 0 50%;
+        }
+
+        50% {
+          background-position: 100% 50%;
+        }
+
+        100% {
+          background-position: 0 50%;
+        }
       }
     </style>
   </head>
