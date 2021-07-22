@@ -19,25 +19,16 @@ class App extends React.Component {
     chosenElements: ['Jam'],
   }
 
-  chooseElement = (ev, product) => {
-    const element = ev.nativeEvent.path[2];
-
+  chooseElement = (product) => {
     this.setState(state => ({
       chosenElements: [...state.chosenElements, product],
     }));
-
-    document.querySelector('.clear').classList.remove('hidden');
-    element.classList.add('active');
   }
 
-  removeElements = (ev, product) => {
-    const element = ev.nativeEvent.path[2];
-
+  removeElements = (product) => {
     this.setState(state => ({
       chosenElements: state.chosenElements.filter(item => item !== product),
     }));
-
-    element.classList.remove('active');
   }
 
   clearElements = () => {
@@ -46,10 +37,7 @@ class App extends React.Component {
 
   getSelectedProductsLength = (products) => {
     switch (products.length) {
-      case 0:
-        document.querySelector('.clear').classList.add('hidden');
-
-        return ' No products were selected';
+      case 0: return ' No products were selected';
 
       case 1: return ` ${products} is selected`;
 
@@ -85,11 +73,11 @@ class App extends React.Component {
                     <button
                       className="button"
                       type="button"
-                      onClick={(ev) => {
+                      onClick={() => {
                         if (chosenElements.includes(product)) {
-                          this.removeElements(ev, product);
+                          this.removeElements(product);
                         } else {
-                          this.chooseElement(ev, product);
+                          this.chooseElement(product);
                         }
                       }}
                     >
@@ -103,7 +91,9 @@ class App extends React.Component {
 
             <button
               type="button"
-              className="clear"
+              className={
+                `clear ${chosenElements.length === 0 ? 'hidden' : ''}`
+              }
               onClick={this.clearElements}
             >
               Clear All
