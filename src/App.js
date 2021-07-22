@@ -37,12 +37,15 @@ class App extends React.Component {
 
   getSelectedProductsLength = (products) => {
     switch (products.length) {
-      case 0: return ' No products were selected';
+      case 0: 
+        return ' No products were selected';
 
-      case 1: return ` ${products} is selected`;
+      case 1: 
+        return ` ${products} is selected`;
 
-      default: return ` ${products.slice(0, -1).join(', ')}
-        and ${products.slice(-1)} are selected`;
+      default: 
+        return ` ${products.slice(0, -1).join(', ')}
+          and ${products.slice(-1)} are selected`;
     }
   }
 
