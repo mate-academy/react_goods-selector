@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import React from 'react';
 import './App.scss';
 
@@ -23,38 +22,32 @@ class App extends React.Component {
   chooseElement = (ev, product) => {
     const element = ev.nativeEvent.path[2];
 
-    if (this.state.chosenElements.includes(product)) {
-      this.setState(state => ({
-        chosenElements: state.chosenElements.filter(item => item !== product),
-      }));
+    this.setState(state => ({
+      chosenElements: [...state.chosenElements, product],
+    }));
 
-      element.style.backgroundColor = '';
-    } else {
-      this.setState(state => ({
-        chosenElements: [...state.chosenElements, product],
-      }));
+    document.querySelector('.clear').classList.remove('hidden');
+    element.classList.add('active');
+  }
 
-      document.querySelector('.clear').hidden = false;
-      element.style.backgroundColor = '#ff6347';
-    }
+  removeElements = (ev, product) => {
+    const element = ev.nativeEvent.path[2];
+
+    this.setState(state => ({
+      chosenElements: state.chosenElements.filter(item => item !== product),
+    }));
+
+    element.classList.remove('active');
   }
 
   clearElements = () => {
-    const products = document.querySelectorAll('.goods__product');
-
-    products.forEach((product) => {
-      product.style.backgroundColor = 'transparent';
-    });
-
-    this.setState(state => ({
-      chosenElements: [],
-    }));
+    this.setState({ chosenElements: [] });
   }
 
-  selectedProducts = (products) => {
+  getSelectedProductsLength = (products) => {
     switch (products.length) {
       case 0:
-        document.querySelector('.clear').hidden = true;
+        document.querySelector('.clear').classList.add('hidden');
 
         return ' No products were selected';
 
@@ -66,38 +59,47 @@ class App extends React.Component {
   }
 
   render() {
+    const { chosenElements } = this.state;
+
     return (
       <>
         <div className="App">
           <h1>
             Selected goods:
-            {this.selectedProducts(this.state.chosenElements)}
+            {this.getSelectedProductsLength(chosenElements)}
           </h1>
           <div className="goods">
-            {goodsFromServer.map(product => (
-              <div
-                className="goods__product"
-                key={product}
-                style={product === 'Jam'
-                  ? { backgroundColor: '#ff6347' }
-                  : { backgroundColor: 'transparent' }}
-              >
-                {product}
-                <div className="buttons">
+            {goodsFromServer.map((product) => {
+              const selected = chosenElements.includes(product);
 
-                  <button
-                    className="button"
-                    type="button"
-                    onClick={(ev) => {
-                      this.chooseElement(ev, product);
-                    }}
-                  >
-                    {this.state.chosenElements.includes(product)
-                      ? 'Remove' : 'Choose'}
-                  </button>
+              return (
+                <div
+                  className={
+                    `goods__product ${selected ? 'active' : ''}`
+                  }
+                  key={product}
+                >
+                  {product}
+                  <div className="buttons">
+
+                    <button
+                      className="button"
+                      type="button"
+                      onClick={(ev) => {
+                        if (chosenElements.includes(product)) {
+                          this.removeElements(ev, product);
+                        } else {
+                          this.chooseElement(ev, product);
+                        }
+                      }}
+                    >
+                      {chosenElements.includes(product)
+                        ? 'Remove' : 'Choose'}
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
 
             <button
               type="button"
