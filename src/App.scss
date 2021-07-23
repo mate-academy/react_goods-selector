@@ -29,6 +29,7 @@ html {
     outline: none;
     border-color: none;
     border-radius: 10px;
+    transition: background-color 500ms;
 
     &:focus {
       border-color: white;
@@ -62,6 +63,7 @@ html {
   &__product {
     font-size: 20px;
     padding: 5px 10px;
+    transition: background-color 500ms;
 
     &--selected {
       background-color: hsl(348, 100%, 61%);
