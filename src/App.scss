@@ -1,1 +1,23 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  font-size: 1.5em;
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    background-color: rgb(223, 240, 240);
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: space-between;
+  }
+}
