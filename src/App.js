@@ -86,9 +86,7 @@ class App extends React.Component {
             onClick={this.clearGoodsList}
           />
           <span className="title__selected-goods w-75">
-            Selected good:
-            {' '}
-            {this.showSelected(this.state.selectedGoods)}
+            {`Selected good: ${this.showSelected(this.state.selectedGoods)}`}
           </span>
         </h1>
         <ol className="
