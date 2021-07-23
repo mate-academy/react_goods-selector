@@ -1,3 +1,10 @@
+body {
+  background-color: #CCCCFF;
+  background-image: linear-gradient(#4C596C, transparent 1px);
+  background-size: 2em 5.4em;
+  box-shadow: 2px 2px 2px rgba(0,0,0,.2), 1px 1px 2px rgba(0,0,0,0.2);
+}
+
 .App {
   font-family: "Roboto", sans-serif;
   display: flex;
@@ -63,7 +70,7 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 10px;
+    gap: 20px;
   }
   &__item {
     display: flex;
@@ -71,7 +78,6 @@
     justify-content: center;
     gap: 30px;
     padding: 5px 10px;
-    border-bottom: 3px solid rgb(134, 161, 157);
     border-radius: 15px;
   }
   &__good {
