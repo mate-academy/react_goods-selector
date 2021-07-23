@@ -22,7 +22,7 @@ class App extends React.Component {
   };
 
   showSelected = (selectedGoods) => {
-    let selectedGoodsList = 'No goods selected';
+    let output = 'No goods selected';
 
     if (selectedGoods.length > 1) {
       let firstPart = '';
@@ -36,25 +36,21 @@ class App extends React.Component {
 
       const lastPart = ` and ${selectedGoods[selectedGoods.length - 1]}`;
 
-      selectedGoodsList = `${firstPart + lastPart} are selected`;
+      output = `${firstPart + lastPart} are selected`;
     } else if (selectedGoods.length === 1) {
-      selectedGoodsList = `${selectedGoods} is selected`;
+      output = `${selectedGoods} is selected`;
     }
 
-    return (
-      <>
-        {selectedGoodsList}
-      </>
-    );
+    return output;
   };
 
-  addGoodToList = (good) => {
+  addGood = (good) => {
     this.setState(({ selectedGoods }) => ({
       selectedGoods: [...selectedGoods, good],
     }));
   };
 
-  removeGoodFromList = (good) => {
+  removeGood = (good) => {
     this.setState(({ selectedGoods }) => ({
       selectedGoods: selectedGoods.filter(currentGood => (
         currentGood !== good
@@ -67,32 +63,6 @@ class App extends React.Component {
       selectedGoods: [],
     });
   };
-
-  showButton = ({ text, isGoodSelected, action, good }) => (
-    <button
-      type="button"
-      className={
-            classNames(
-              'good__button',
-              'col',
-              'btn bg-gradient', {
-                'visually-hidden': isGoodSelected,
-                'btn-primary': action === 'add',
-                'btn-danger': action === 'delete',
-              },
-            )
-          }
-      onClick={() => {
-        if (action === 'add') {
-          this.addGoodToList(good);
-        } else if (action === 'delete') {
-          this.removeGoodFromList(good);
-        }
-      }}
-    >
-      {text}
-    </button>
-  )
 
   render() {
     return (
@@ -130,9 +100,7 @@ class App extends React.Component {
             container"
         >
           {goodsFromServer.map((good) => {
-            const isSelectedGood = this.state.selectedGoods.some(
-              selectedGood => (selectedGood === good),
-            );
+            const isSelectedGood = this.state.selectedGoods.includes(good);
 
             return (
               <li
@@ -154,19 +122,26 @@ class App extends React.Component {
                 >
                   {good}
                 </span>
-                {this.showButton({
-                  text: 'Add to list',
-                  isGoodSelected: isSelectedGood,
-                  action: 'add',
-                  good,
-                })}
-
-                {this.showButton({
-                  text: 'Delete from list',
-                  isGoodSelected: !isSelectedGood,
-                  action: 'delete',
-                  good,
-                })}
+                <button
+                  type="button"
+                  className={
+                        classNames(
+                          'good__button',
+                          'col',
+                          'btn bg-gradient', {
+                            'btn-primary': !isSelectedGood,
+                            'btn-danger': isSelectedGood,
+                          },
+                        )
+                      }
+                  onClick={() => (
+                    !isSelectedGood
+                      ? this.addGood(good)
+                      : this.removeGood(good)
+                  )}
+                >
+                  {!isSelectedGood ? 'Add to list' : 'Remove from list' }
+                </button>
               </li>
             );
           })}
