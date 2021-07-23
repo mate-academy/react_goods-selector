@@ -1,1 +1,16 @@
-// styles go here
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item {
+  height: 40px;
+  margin: 5px;
+  width: 200px;
+}
+
+.active {
+  border-radius: 40%;
+  background: coral;
+}
