@@ -1,1 +1,29 @@
-// styles go here
+.App {
+  background-color: rgb(209, 235, 218);
+}
+
+.selected {
+  width: 100px;
+  box-shadow: 4px 4px 4px 4px rgba(11, 158, 72, 0.5);
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.container {
+  width: 40vw;
+  display: flex;
+  padding-bottom: 24px;
+  justify-content: space-between;
+}
+
+.title {
+  padding-top: 24px;
+  text-align: center;
+}
+
+.btn-dark {
+  display: flex;
+  margin: 32px auto;
+}

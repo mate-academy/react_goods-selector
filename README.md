@@ -1,17 +1,17 @@
 # React Goods selector
-- Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_goods-selector/)
+- Replace `<your_account>` with your Github username in the [DEMO LINK](https://Anastasiia-Diachenko.github.io/react_goods-selector/)
 - Follow the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline)
 
 ## Task
-1. You are given an array of goods
-1. Display them as a list inside the `App` (DON'T create additional components)
-1. Add `h1` initially saying `No goods selected`
+1. You are given an array of goods +
+1. Display them as a list inside the `App` (DON'T create additional components) +
+1. Add `h1` initially saying `No goods selected` +
 1. Save a `selectedGood` in the `App`. Let it be `Jam` by default
 1. The `h1` should always show the name of the selected good `Jam is selected`
 1. The selected good should be hightlighted in the list (add CSS class with a background)
-1. Add a button `Select` next to each good in the list
+1. Add a button `Select` next to each good in the list +
 1. When you press the button the good becomes selected
-1. Don't show the button next to the selected good
+1. Don't show the button next to the selected good +
 1. You can select another good by pressing its `Select` button 
 1. Add button `X` for to the `h1` to clear the selection. (Set `null`)
 1. The clear button should not be visible if there is no selected good
