@@ -1,1 +1,71 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: beige;
+  font-size: 18px;
+}
+
+.products {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  &__title {
+    font-size: 2rem;
+  }
+
+  &__button {
+    display: inline-block;
+    padding: 10px 0;
+    margin-left: 50px;
+    width: 100px;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    outline: none;
+    border-color: none;
+    border-radius: 10px;
+
+    &:focus {
+      border-color: white;
+    }
+
+    &--clear {
+      background-color: hsl(348, 86%, 43%);
+    }
+
+    &--removed {
+      background-color: hsl(348, 100%, 61%);
+    }
+
+    &--added {
+      background-color: hsl(141, 71%, 48%);
+    }
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  &__product {
+    font-size: 20px;
+    padding: 5px 10px;
+
+    &--selected {
+      background-color: hsl(348, 100%, 61%);
+      color: white;
+    }
+  }
+}
