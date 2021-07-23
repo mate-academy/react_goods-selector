@@ -19,7 +19,7 @@ export class App extends React.Component {
     selectedGoods: [],
   }
 
-  clearList = () => {
+  clearGoodsList = () => {
     this.setState(state => ({
       selectedGoods: [],
     }));
@@ -48,20 +48,11 @@ export class App extends React.Component {
             : `${selectedGoods} are Selected `
           }
         </h1>
-        <div className="App__button-wrap">
-          <button
-            type="button"
-            onClick={this.clearList}
-            className="App__button-clear"
-          >
-            Clear
-          </button>
-        </div>
         <h2 className="App__title-list">
           Please select goods below:
         </h2>
         <ol className="App__list">
-          {goodsFromServer.map((good, i) => (
+          {goodsFromServer.map(good => (
             <li key={good} className="App__item">
               <p className="App__good">
                 {`${good}`}
@@ -84,6 +75,15 @@ export class App extends React.Component {
             </li>
           ))}
         </ol>
+        <div className="App__button-wrap">
+          <button
+            type="button"
+            onClick={this.clearGoodsList}
+            className="App__button-clear"
+          >
+            Clear
+          </button>
+        </div>
       </div>
     );
   }
