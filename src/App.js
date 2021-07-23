@@ -19,19 +19,17 @@ class App extends React.PureComponent {
     selectedGoods: [],
   };
 
-  getProduct = (event, good) => {
-    const { selectedGoods } = this.state;
-
-    this.setState({
-      selectedGoods: [...selectedGoods, good],
-    });
+  getProduct = (good) => {
+    this.setState(prevState => ({
+      selectedGoods: [...prevState.selectedGoods, good],
+    }));
   };
 
-  removeProduct = (event, good) => {
-    const { selectedGoods } = this.state;
-
-    selectedGoods.splice(selectedGoods.indexOf(good), 1);
-    this.forceUpdate();
+  removeProduct = (good) => {
+    this.setState(prevState => ({
+      selectedGoods:
+        prevState.selectedGoods.filter(product => product !== good),
+    }));
   };
 
   clearList = () => {
@@ -73,7 +71,7 @@ class App extends React.PureComponent {
             <li
               key={item}
               className={
-                selectedGoods.indexOf(item) >= 0
+                selectedGoods.includes(item)
                   ? 'selected'
                   : 'not-selected'
               }
@@ -85,8 +83,8 @@ class App extends React.PureComponent {
                     <button
                       type="button"
                       onClick={
-                        event => (
-                          this.getProduct(event, item)
+                        () => (
+                          this.getProduct(item)
                         )}
                     >
                       Select
@@ -96,8 +94,8 @@ class App extends React.PureComponent {
                     <button
                       type="button"
                       onClick={
-                        event => (
-                          this.removeProduct(event, item)
+                        () => (
+                          this.removeProduct(item)
                         )}
                     >
                       X
