@@ -1,1 +1,16 @@
-// styles go here
+.App {
+  margin: 0 auto;
+  width: 350px;
+  padding: 20px;
+
+  &__title {
+    display: flex;
+    font-family: "Otomanopee One", sans-serif;
+  }
+
+  &__listItem {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+  }
+}
