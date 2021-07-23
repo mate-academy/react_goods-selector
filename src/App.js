@@ -18,50 +18,64 @@ const goodsFromServer = [
 class App extends React.Component {
   state = {
     selectedGood: ['Jam'],
-
-    get sentence() {
-      return this.selectedGood.join(', ');
-    },
   }
 
   addGood = (good) => {
-    this.state.selectedGood.push(good);
+    this.setState(prev => ({
+      selectedGood: [...prev.selectedGood, good],
+    }));
   }
 
   removeGood = (good) => {
-    const index = this.state.selectedGood.indexOf(good);
-
-    this.state.selectedGood.splice(index, 1);
+    this.setState(prev => ({
+      selectedGood: [...prev.selectedGood].filter(item => item !== good),
+    }));
   }
 
   getClearList = () => {
     this.setState({
       selectedGood: [],
-      sentence: '',
     });
   }
 
+  makeList = () => {
+    const { selectedGood } = this.state;
+    const part = selectedGood.slice(0, -1).join(', ');
+
+    switch (selectedGood.length) {
+      case 0:
+        return '';
+
+      case 1:
+        return `${selectedGood.join(', ')} is selected`;
+
+      case 2:
+        return `${selectedGood[0]} and
+          ${selectedGood[1]} are selected`;
+
+      default:
+        return `${part} and
+          ${selectedGood[selectedGood.length - 1]} are selected`;
+    }
+  }
+
   render() {
-    const { selectedGood, sentence } = this.state;
-    const newSentence = () => (
-      this.setState({ sentence: selectedGood.join(', ') })
-    );
+    const { selectedGood } = this.state;
 
     return (
       <div className="app">
         <div className="list-title">
           <div className="list-title__block">
-            { (sentence)
-              ? (
-                <>
-                  <h1 className="list-title__title">Selected good:</h1>
-                  <p className="list-title__content">{sentence}</p>
-                </>
-              )
-              : <h1 className="list-title__title">No goods selected</h1> }
+            <h1 className="list-title__title">
+              {this.makeList().length > 0
+                ? ('Selected good:')
+                : ('No goods selected')
+              }
+            </h1>
+            <p className="list-title__content">{this.makeList()}</p>
           </div>
           {
-            (sentence)
+            (this.makeList().length > 0)
               ? (
                 <button
                   className="btn list-title__btn"
@@ -77,45 +91,40 @@ class App extends React.Component {
           }
         </div>
         <ul className="todo-list">
-          {
-            goodsFromServer.map(good => (
-              <li
-                className={classNames(`todo`, {
-                  active: sentence.includes(good),
-                })}
-                key={good}
-              >
-                <span className="todo__content">{good}</span>
-                {
-                  (!sentence.includes(good))
-                    ? (
-                      <button
-                        className="btn btn-add"
-                        type="button"
-                        onClick={() => {
-                          this.addGood(good);
-                          newSentence();
-                        }}
-                      >
-                        Select
-                      </button>
-                    )
-                    : (
-                      <button
-                        className="btn btn-remove"
-                        type="button"
-                        onClick={() => {
-                          this.removeGood(good);
-                          newSentence();
-                        }}
-                      >
-                        Remove
-                      </button>
-                    )
+          {goodsFromServer.map(good => (
+            <li
+              key={Math.random()}
+              className={classNames(`todo`, {
+                active: selectedGood.includes(good),
+              })}
+            >
+              <span className="todo__content">{good}</span>
+              {!selectedGood.includes(good)
+                ? (
+                  <button
+                    className="btn btn-add"
+                    type="button"
+                    onClick={() => {
+                      this.addGood(good);
+                    }}
+                  >
+                    Select
+                  </button>
+                )
+                : (
+                  <button
+                    className="btn btn-remove"
+                    type="button"
+                    onClick={() => {
+                      this.removeGood(good);
+                    }}
+                  >
+                    Remove
+                  </button>
+                )
                 }
-              </li>
-            ))
-          }
+            </li>
+          ))}
         </ul>
       </div>
     );

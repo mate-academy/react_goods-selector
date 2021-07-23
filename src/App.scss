@@ -38,7 +38,7 @@
 
 .list-title {
   margin: 0;
-  min-height: 120px;
+  min-height: 110px;
   padding: 0 15px 0 0;
 
   display: flex;
@@ -51,8 +51,9 @@
 
   &__content {
     margin-bottom: 0;
+    max-width: 350px;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 1.2em;
+    font-size: 1em;
   }
 
   &__btn {
