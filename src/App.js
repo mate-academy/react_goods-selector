@@ -20,7 +20,7 @@ export class App extends React.Component {
     selectedGoods: ['Jam'],
   }
 
-  selectedItemsList = () => {
+  turnSelecteItemsListToString = () => {
     const { selectedGoods } = this.state;
 
     switch (selectedGoods.length) {
@@ -34,19 +34,37 @@ export class App extends React.Component {
     }
   }
 
+  selectItem = (item) => {
+    this.setState((prevState) => {
+      if (prevState.selectedGoods.includes(item)) {
+        const index = prevState.selectedGoods.indexOf(item);
+
+        prevState.selectedGoods.splice(index, 1);
+      } else {
+        prevState.selectedGoods.push(item);
+      }
+
+      return {
+        selectedGoods: prevState.selectedGoods,
+      };
+    });
+  }
+
+  clearAllSelections = () => {
+    this.setState({
+      selectedGoods: [],
+    });
+  }
+
   render() {
     return (
       <div className="App">
         <h1>
-          {this.selectedItemsList()}
+          {this.turnSelecteItemsListToString()}
         </h1>
         <button
           type="button"
-          onClick={() => {
-            this.setState({
-              selectedGoods: [],
-            });
-          }}
+          onClick={this.clearAllSelections}
           disabled={this.state.selectedGoods.length === 0}
         >
           Clear all Selections
@@ -54,6 +72,7 @@ export class App extends React.Component {
         <ul>
           {goodsFromServer.map(item => (
             <li
+              key={item}
               className={classNames('goods__item', {
                 selectedGood: this.state.selectedGoods.includes(item),
               })}
@@ -62,19 +81,7 @@ export class App extends React.Component {
               <button
                 type="button"
                 onClick={() => {
-                  this.setState((prevState) => {
-                    if (prevState.selectedGoods.includes(item)) {
-                      const index = prevState.selectedGoods.indexOf(item);
-
-                      prevState.selectedGoods.splice(index, 1);
-                    } else {
-                      prevState.selectedGoods.push(item);
-                    }
-
-                    return {
-                      selectedGoods: prevState.selectedGoods,
-                    };
-                  });
+                  this.selectItem(item);
                 }}
               >
                 {this.state.selectedGoods.includes(item)
