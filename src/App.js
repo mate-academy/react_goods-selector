@@ -67,24 +67,24 @@ class App extends React.PureComponent {
             : <h1>No goods selected</h1>
         }
         <ul className="list">
-          {goodsFromServer.map(item => (
+          {goodsFromServer.map(good => (
             <li
-              key={item}
+              key={good}
               className={
-                selectedGoods.includes(item)
+                selectedGoods.includes(good)
                   ? 'selected'
                   : 'not-selected'
               }
             >
-              <span>{`${item} `}</span>
+              <span>{`${good} `}</span>
               {
-                selectedGoods.indexOf(item) < 0
+                selectedGoods.indexOf(good) < 0
                   ? (
                     <button
                       type="button"
                       onClick={
                         () => (
-                          this.getProduct(item)
+                          this.getProduct(good)
                         )}
                     >
                       Select
@@ -95,7 +95,7 @@ class App extends React.PureComponent {
                       type="button"
                       onClick={
                         () => (
-                          this.removeProduct(item)
+                          this.removeProduct(good)
                         )}
                     >
                       X
