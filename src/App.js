@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ListGroup, Button } from 'react-bootstrap';
 import './App.scss';
@@ -23,16 +22,17 @@ export class App extends Component {
   };
 
   setTitleList() {
-    const listLength = this.state.selectedGoods.length;
+    const { selectedGoods } = this.state;
+    const listLength = selectedGoods.length;
 
     switch (listLength) {
       case 0:
         return 'NO GOODS SELECTED';
       case 1:
-        return `${this.state.selectedGoods} is selected`;
+        return `${selectedGoods[0]} is selected`;
       default:
-        return `${this.state.selectedGoods.slice(0, -1).join(', ')} and
-          ${this.state.selectedGoods.slice(-1)} are selected`;
+        return `${selectedGoods.slice(0, -1).join(', ')} and
+          ${selectedGoods.slice(-1)} are selected`;
     }
   }
 
@@ -42,14 +42,14 @@ export class App extends Component {
     );
   }
 
-  goodIsSelected(good) {
-    const res = this.state.selectedGoods.includes(good);
-
-    return res;
+  isGodSelected(good) {
+    return this.state.selectedGoods.includes(good);
   }
 
   addGood(good) {
-    this.setState(prevState => prevState.selectedGoods.push(good));
+    this.setState(prevState => ({
+      selectedGoods: [...prevState.selectedGoods, good],
+    }));
   }
 
   removeGood(good) {
@@ -80,22 +80,21 @@ export class App extends Component {
         <ListGroup as="ul" className="list__group">
           {goodsFromServer.map(good => (
             <ListGroup.Item
-              key={uuidv4()}
-              active={this.goodIsSelected(good)}
+              key={good}
+              active={this.isGodSelected(good)}
               as="li"
               className="list__item"
             >
               { good }
               <Button
-                key={uuidv4()}
-                variant={this.goodIsSelected(good) ? 'danger' : 'success'}
+                variant={this.isGodSelected(good) ? 'danger' : 'success'}
                 className="list__selector"
-                onClick={this.goodIsSelected(good)
+                onClick={this.isGodSelected(good)
                   ? () => this.removeGood(good)
                   : () => this.addGood(good)
                 }
               >
-                {this.goodIsSelected(good) ? 'Remove' : 'Add'}
+                {this.isGodSelected(good) ? 'Remove' : 'Add'}
               </Button>
             </ListGroup.Item>
           ))}
