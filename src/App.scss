@@ -1,1 +1,57 @@
-// styles go here
+.App {
+  &__title {
+    font-family: monospace;
+    text-align: center;
+  }
+
+  &__reset {
+    margin-top: 50px;
+    text-align: center;
+
+    &-button {
+      background-color: transparent;
+      border: 2px solid #000;
+      cursor: pointer;
+      font-family: monospace;
+      font-size: 20px;
+      padding: 10px 20px;
+      text-transform: uppercase;
+
+      &:hover {
+        border-style: dashed;
+      }
+    }
+  }
+}
+
+.list {
+  font-family: monospace;
+  font-size: 22px;
+  margin: 0 auto;
+  padding: 0;
+  width: 400px;
+
+  &__item {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 5px;
+
+    &-name {
+      overflow: hidden;
+      white-space: nowrap;
+      width: 350px;
+    }
+
+    &-button {
+      background-color: transparent;
+      border: 2px solid #000;
+      border-radius: 50%;
+      cursor: pointer;
+      padding: 12px;
+
+      &--active {
+        background-color: #1cb360;
+      }
+    }
+  }
+}
