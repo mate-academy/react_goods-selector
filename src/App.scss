@@ -1,1 +1,21 @@
-// styles go here
+.selected {
+  background-color: red;
+  width: max-content;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.invisible {
+  display: none;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+}
