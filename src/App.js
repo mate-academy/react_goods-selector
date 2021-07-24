@@ -20,7 +20,7 @@ export class App extends React.Component {
     selectedGoods: ['Jam'],
   }
 
-  turnSelecteItemsListToString = () => {
+  formatTitle = () => {
     const { selectedGoods } = this.state;
 
     switch (selectedGoods.length) {
@@ -36,16 +36,25 @@ export class App extends React.Component {
 
   selectItem = (item) => {
     this.setState((prevState) => {
-      if (prevState.selectedGoods.includes(item)) {
-        const index = prevState.selectedGoods.indexOf(item);
+      const result = [...prevState.selectedGoods];
 
-        prevState.selectedGoods.splice(index, 1);
-      } else {
-        prevState.selectedGoods.push(item);
-      }
+      result.push(item);
 
       return {
-        selectedGoods: prevState.selectedGoods,
+        selectedGoods: result,
+      };
+    });
+  }
+
+  unSelectItem = (item) => {
+    this.setState((prevState) => {
+      const result = [...prevState.selectedGoods];
+      const index = result.indexOf(item);
+
+      result.splice(index, 1);
+
+      return {
+        selectedGoods: result,
       };
     });
   }
@@ -60,7 +69,7 @@ export class App extends React.Component {
     return (
       <div className="App">
         <h1>
-          {this.turnSelecteItemsListToString()}
+          {this.formatTitle()}
         </h1>
         <button
           type="button"
@@ -80,9 +89,15 @@ export class App extends React.Component {
               {item}
               <button
                 type="button"
-                onClick={() => {
-                  this.selectItem(item);
-                }}
+                onClick={
+                  this.state.selectedGoods.includes(item)
+                    ? () => {
+                      this.unSelectItem(item);
+                    }
+                    : () => {
+                      this.selectItem(item);
+                    }
+                }
               >
                 {this.state.selectedGoods.includes(item)
                   ? 'Unselect'
