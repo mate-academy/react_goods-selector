@@ -1,1 +1,24 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.notSelected,
+.selected {
+  padding: 5px;
+  width: 600px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.selected {
+  background-color:yellowgreen;
+}
