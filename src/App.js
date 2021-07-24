@@ -19,28 +19,6 @@ export class App extends React.Component {
     selectedGoods: ['Jam'],
   }
 
-  makeProductsList = () => {
-    const { selectedGoods } = this.state;
-
-    switch (selectedGoods.length) {
-      case 0:
-        return 'No goods selected';
-
-      case 1:
-        return `${selectedGoods} - is selected.`;
-
-      case 2:
-        return `${selectedGoods.join(' and ')} - are selected.`;
-
-      default: {
-        return `
-          ${selectedGoods.slice(0, -2).join(', ')},
-          ${selectedGoods.slice(-2).join(' and ')} are selected.
-        `;
-      }
-    }
-  };
-
   addProduct = (product) => {
     this.setState(prevState => ({
       selectedGoods: [...prevState.selectedGoods, product],
@@ -59,23 +37,29 @@ export class App extends React.Component {
 
   render() {
     const { selectedGoods } = this.state;
+    const title = selectedGoods.length === 1
+      ? `${selectedGoods} is selected`
+      : `${selectedGoods.slice(0, -1).join(', ')},
+      ${selectedGoods.slice(-1).join(' and ')} are selected.`;
 
     return (
       <section className="products">
-        <h1 className="products__title">
-          {this.makeProductsList()}
-        </h1>
-        {!!selectedGoods.length
-          && (
-          <button
-            type="button"
-            className="products__button products__button--clear"
-            onClick={() => this.clearList()}
-          >
-            Clear
-          </button>
-          )
-        }
+        {selectedGoods.length > 0 ? (
+          <h1 className="products__title">
+            {title}
+            <button
+              type="button"
+              className="products__button products__button--clear"
+              onClick={() => this.clearList()}
+            >
+              X
+            </button>
+          </h1>
+        ) : (
+          <h1 className="products__title">
+            No goods selected
+          </h1>
+        )}
         <ul className="products__list">
           {goodsFromServer.map((product, index) => {
             const isProductSelected = selectedGoods.includes(product);
@@ -86,7 +70,7 @@ export class App extends React.Component {
                   <span className={
                     isProductSelected
                       ? 'products__product products__product--selected '
-                      : 'products__product products__product--unselected'
+                      : 'products__product'
                     }
                   >
                     {`${index + 1}. ${product}`}
