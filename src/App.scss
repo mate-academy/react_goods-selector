@@ -1,1 +1,47 @@
-// styles go here
+.app {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: 30px auto;
+  background-color: gainsboro;
+  padding: 50px;
+  border-radius: 20px;
+}
+
+h1 {
+  margin: 0 auto;
+  font-size: 16px;
+}
+.app__list {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.activ {
+  display: none;
+}
+
+.activList {
+  background-color: papayawhip;
+}
+
+.list__button {
+    background-color: ghostwhite;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+}
+
+.clear--button {
+  width: 200px;
+  height: 30px;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background-color: gray;
+}
