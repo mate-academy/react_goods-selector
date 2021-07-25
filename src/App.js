@@ -48,7 +48,7 @@ class App extends React.Component {
             <>
               {`Selected products: ${selectedGoods}`}
               <button
-                className="button is-small is-rounded"
+                className="button is-small is-danger"
                 type="button"
                 onClick={
                   () => this.clearSelection()
@@ -61,40 +61,42 @@ class App extends React.Component {
         </h1>
         <ul>
           {goodsFromServer.map(good => (
-            <li
-              className="item"
-              key={good}
-            >
-              {!this.state.selectedGoods.includes(good)
-                ? (
-                  <>
-                    {good}
-                    <button
-                      className="button is-small is-rounded"
-                      type="button"
-                      onClick={
-                        () => this.addGood(good)
-                      }
-                    >
-                      Select
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    {good}
-                    <button
-                      className="button is-small is-rounded"
-                      type="button"
-                      onClick={
-                        () => this.removeGood(good)
-                      }
-                    >
-                      Remove
-                    </button>
-                  </>
-                )
-              }
-            </li>
+            !this.state.selectedGoods.includes(good)
+              ? (
+                <li
+                  className="product"
+                  key={good}
+                >
+                  {good}
+                  <button
+                    className="
+                        button is-small is-rounded is-success is-outlined"
+                    type="button"
+                    onClick={
+                      () => this.addGood(good)
+                    }
+                  >
+                    Select
+                  </button>
+                </li>
+              ) : (
+                <li
+                  className="product product--selected"
+                  key={good}
+                >
+                  {good}
+                  <button
+                    className="
+                        button is-small is-rounded is-danger is-outlined"
+                    type="button"
+                    onClick={
+                      () => this.removeGood(good)
+                    }
+                  >
+                    Remove
+                  </button>
+                </li>
+              )
           ))}
         </ul>
       </div>

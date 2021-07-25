@@ -8,14 +8,25 @@
 .row-with-items {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 15px;
+  padding-bottom: 15px;
   font-size: 25px;
   font-weight: 500;
+  border-bottom: 1px #000 solid;
 }
 
-.item {
+.product {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
+  padding: 5px;
   font-size: 22px;
+  border-radius: 3px;
+
+  &:first-child {
+    margin-top: 3px;
+  }
+
+  &--selected {
+    background-color: #dcffef;
+  }
 }
