@@ -1,1 +1,21 @@
-// styles go here
+.App {
+  margin: 0 auto;
+  width: 500px;
+  padding: 8px;
+  border: 0.5px black solid;
+}
+
+.row-with-items {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-size: 22px;
+}
