@@ -14,20 +14,22 @@
       margin: 10px 0;
     }
   }
-  &__btn-remove {
-    width: 100px;
-    background-color: rgb(160, 2, 2);
-    color: white;
-    padding: 5px;
-    border: none;
-  }
-
-  &__btn-add {
-    width: 100px;
-    background-color: rgb(62, 182, 126);
-    color: white;
-    padding: 5px;
-    border: none;
+  &__btn {
+    &-remove {
+      width: 100px;
+      color: white;
+      padding: 5px;
+      border: none;
+      background-color: rgb(160, 2, 2);
+    }
+    
+    &-add {
+      width: 100px;
+      color: white;
+      padding: 5px;
+      border: none;
+      background-color: rgb(62, 182, 126);
+    }
   }
 
   &__btn-clear {
