@@ -1,1 +1,42 @@
-// styles go here
+.App {
+  background-color: rgba(178, 219, 250, 0.25);
+  padding: 20px;
+  border-radius: 5px;
+
+  &__list {
+    max-width: 300px;
+    padding: 0;
+
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 20px;
+      margin: 10px 0;
+    }
+  }
+  &__btn {
+    &-remove {
+      width: 100px;
+      color: white;
+      padding: 5px;
+      border: none;
+      background-color: rgb(160, 2, 2);
+    }
+    
+    &-add {
+      width: 100px;
+      color: white;
+      padding: 5px;
+      border: none;
+      background-color: rgb(62, 182, 126);
+    }
+  }
+
+  &__btn-clear {
+    width: 100%;
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    border: none;
+  }
+}
