@@ -89,13 +89,17 @@ class App extends React.Component {
          </h1>
          <button
            type="button"
+           className={(this.state.goodsList.length < 1
+             ? 'App__button-disable'
+             : 'App__butoon'
+           )}
            onClick={() => this.removeAllGood()}
          >
            X
          </button>
          {goodsFromServer.map(good => (
            <p key={uuidv4()} className="App__good-container">
-             <span className={`App__good-border ${this.goodStatus(good)}`}>
+             <span className={`App__good-item ${this.goodStatus(good)}`}>
                {good}
              </span>
              {' '}
