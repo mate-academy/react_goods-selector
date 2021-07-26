@@ -39,6 +39,30 @@ class App extends Component {
     });
   }
 
+  showGoods = () => {
+    let message = '';
+    const selected = this.state.selectedGoods;
+    const len = selected.length;
+    const firstGood = selected[0];
+    const lastGood = selected[len - 1];
+    const lastExcludedGoods = selected.slice(0, len - 1).join(', ');
+
+    switch (len) {
+      case 0:
+        message = `No goods selected`;
+        break;
+
+      case 1:
+        message = `${firstGood} is selected`;
+        break;
+
+      default:
+        message = `${lastExcludedGoods} and ${lastGood} are selected`;
+    }
+
+    return message;
+  }
+
   render() {
     const { selectedGoods } = this.state;
 
@@ -71,16 +95,7 @@ class App extends Component {
             : (
               <>
                 <h1>
-                  {selectedGoods.map(good => (
-                    <span>
-                      {
-                     good === selectedGoods[0]
-                       ? `${good}`
-                       : `, ${good}`
-                     }
-
-                    </span>
-                  ))}
+                  {this.showGoods()}
                 </h1>
                 <button
                   type="button"
