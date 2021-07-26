@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import uuid from 'uuid';
 
 const goodsFromServer = [
   'Dumplings',
@@ -12,7 +13,10 @@ const goodsFromServer = [
   'Honey',
   'Jam',
   'Garlic',
-];
+].map(good => ({
+  id: uuid.v1(),
+  good,
+}));
 
 class App extends React.Component {
   state = {
@@ -56,25 +60,25 @@ class App extends React.Component {
           Reset
         </button>
         <ul className="list">
-          {goodsFromServer.map((good, i) => (
+          {goodsFromServer.map(good => (
             <li
-              key={Math.random}
+              key={good.id}
               className={
-                this.state.selectedGood.includes(good)
+                this.state.selectedGood.includes(good.good)
                   ? 'selected'
                   : 'notSelected'
                 }
             >
-              {good}
+              {good.good}
               <button
                 type="button"
                 onClick={() => (
-                  this.state.selectedGood.includes(good)
-                    ? this.deleteGood(good)
-                    : this.addGood(good)
+                  this.state.selectedGood.includes(good.good)
+                    ? this.deleteGood(good.good)
+                    : this.addGood(good.good)
                 )}
               >
-                {this.state.selectedGood.includes(good)
+                {this.state.selectedGood.includes(good.good)
                   ? 'Delete' : 'Select'
                 }
               </button>
