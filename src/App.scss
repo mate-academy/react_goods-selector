@@ -1,1 +1,25 @@
 // styles go here
+.App {
+  &__header{
+    margin: 0 auto ;
+    width: 50%;
+    height: 200px;
+  }
+
+  &__good-container {
+    margin-top: 25px;
+  }
+
+  &__good-border {
+    padding: 10px;
+    margin-top: 20px;
+  }
+
+  &__active {
+    border: 2px solid green;
+  }
+
+  &__disables {
+    border: 1px solid rgb(250, 0, 0);
+  }
+}

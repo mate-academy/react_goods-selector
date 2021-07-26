@@ -16,9 +16,10 @@ const goodsFromServer = [
 
 class App extends React.Component {
    state = {
-     goodsList: [],
+     goodsList: ['Jam'],
    }
 
+   // eslint-disable-next-line react/sort-comp
    addGood(good) {
      this.setState(({ goodsList }) => ({
        goodsList: [...goodsList, good],
@@ -45,7 +46,21 @@ class App extends React.Component {
      }
    }
 
-   show(good) {
+   makeListOfGoods = () => {
+     switch (this.state.goodsList.length) {
+       case 0:
+
+         return 'no good is selected';
+       case 1:
+
+         return ' is selected';
+
+       default:
+         return ' are selected';
+     }
+   }
+
+   buttonText(good) {
      // eslint-disable-next-line no-console
      console.log('it is alive');
 
@@ -53,10 +68,20 @@ class App extends React.Component {
        ? 'Remove' : 'Add';
    }
 
+   goodStatus = good => (this.state.goodsList.some(el => el === good)
+     ? 'App__active'
+     : 'App__disables');
+
    render() {
      return (
        <div className="App">
-         <h1>Selected good: -</h1>
+         <h1 className="App__header">
+           {
+             // eslint-disable-next-line react/jsx-one-expression-per-line
+             this.state.goodsList.map(good => <span> {good}{','} </span>)
+           }
+           {this.makeListOfGoods()}
+         </h1>
          <button
            type="button"
            onClick={() => this.removeAllGood()}
@@ -65,14 +90,16 @@ class App extends React.Component {
          </button>
          {goodsFromServer.map(good => (
            <>
-             <p>
-               {good}
+             <p className="App__good-container">
+               <span className={`App__good-border ${this.goodStatus(good)}`}>
+                 {good}
+               </span>
                {' '}
                <button
                  type="button"
                  onClick={() => this.changeStatus(good)}
                >
-                 {this.show(good)}
+                 {this.buttonText(good)}
                </button>
              </p>
            </>
