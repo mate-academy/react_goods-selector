@@ -14,11 +14,83 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-const App = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+class App extends React.Component {
+  state = {
+    selectedGoods: ['Jam'],
+  }
+
+  classNames = ['invisible', 'selected', 'flex'];
+
+  chooseTitle = () => {
+    const { selectedGoods } = this.state;
+
+    switch (selectedGoods.length) {
+      case 0:
+        return 'No goods selected';
+
+      case 1:
+        return `${selectedGoods[0]} is selected`;
+
+      default:
+        return `${selectedGoods.slice(0, -1).join(', ')} and ${
+          selectedGoods.slice(-1)} are selected`;
+    }
+  }
+
+  clearSelectedGoods = () => {
+    this.setState({ selectedGoods: [] });
+  }
+
+  selectGood = (good) => {
+    this.setState(state => (
+      { selectedGoods: [...state.selectedGoods, good] }
+    ));
+  }
+
+  render() {
+    const { selectedGoods } = this.state;
+
+    return (
+      <div className="App">
+        <h1>
+          {this.chooseTitle()}
+          {' '}
+          <button
+            className={selectedGoods.length ? null : this.classNames[0]}
+            type="button"
+            onClick={this.clearSelectedGoods}
+          >
+            X
+          </button>
+        </h1>
+
+        <ul className="list">
+          {goodsFromServer.map(good => (
+            <li
+              className={selectedGoods.includes(good)
+                ? this.classNames[1]
+                : this.classNames[2]
+              }
+              key={good}
+            >
+              <span>{good}</span>
+              {' '}
+              <button
+                className={selectedGoods.includes(good)
+                  ? this.classNames[0]
+                  : null
+                }
+                type="button"
+                onClick={() => this.selectGood(good)}
+              >
+                Select
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}
 
 export default App;
