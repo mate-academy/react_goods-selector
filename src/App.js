@@ -78,12 +78,7 @@ class App extends React.Component {
        <div className="App">
          <h1 className="App__header">
            {
-             this.state.goodsList.map(good => (
-               <span key={uuidv4()}>
-                 {good}
-                 {','}
-               </span>
-             ))
+             this.state.goodsList.join(', ')
            }
            {this.makeListOfGoods()}
          </h1>
@@ -105,6 +100,7 @@ class App extends React.Component {
              {' '}
              <button
                type="button"
+               className="App__good-item-button"
                onClick={() => this.changeStatus(good)}
              >
                {this.buttonText(good)}

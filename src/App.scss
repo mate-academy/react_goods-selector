@@ -12,7 +12,7 @@
 
   &__good-container {
     margin: 0 auto;
-    width: 50%;
+    width: 30%;
     display: flex;
     justify-content: space-between;
   }
@@ -23,11 +23,18 @@
     align-self: center;
   }
 
+  &__good-item-button {
+    max-height: 30px;
+    margin: auto 0;
+  }
+
   &__active {
     border: 2px solid green;
+    border-radius: 30px;
   }
 
   &__disables {
-    border: 1px solid rgb(250, 0, 0);
+    border: 2px solid rgb(250, 0, 0);
+    border-radius: 30px;
   }
 }
