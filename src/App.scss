@@ -1,1 +1,75 @@
-// styles go here
+.App {
+  max-width: 400px;
+  min-height: 400px;
+  margin: 0 auto;
+  background-color: #eee;
+  padding: 0 20px;
+  border: 1px solid #000;
+  border-radius: 10px;
+
+  &__title {
+    min-height: 150px;
+  }
+
+  &__list {
+    list-style: none;
+    display: flex;
+    padding-left: 0;
+    flex-direction: column;
+
+    font-weight: bold;
+    text-transform: uppercase;
+    gap: 20px;
+  }
+
+  &__item {
+    border: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 0 20px;
+  }
+}
+
+.button {
+  height: 50px;
+  width: 100px;
+  border-radius: 15px;
+  margin: 0 10px;
+  transition: transform 0.4s, background-color 0.4s;
+
+  &:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+}
+
+.active {
+  background-color: tomato;
+}
+
+.inactive {
+  background-color: chartreuse;
+}
+
+.reset {
+  background-color: red;
+  color: #eee;
+  font-weight: bold;
+  font-size: 1.5rem;
+
+  &:disabled {
+    background-color: #eee;
+    color: black;
+
+    &:hover {
+      transform: initial;
+      cursor: initial;
+    }
+  }
+}
+
+.selected {
+  background-color: chartreuse;
+}
