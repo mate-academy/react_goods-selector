@@ -42,6 +42,14 @@ export class App extends Component {
     );
   }
 
+  isSelectedGoodsLength() {
+    if (this.state.selectedGoods.length) {
+      return true;
+    }
+
+    return false;
+  }
+
   isGodSelected(good) {
     return this.state.selectedGoods.includes(good);
   }
@@ -69,11 +77,14 @@ export class App extends Component {
             {' '}
             {this.setTitleList()}
             {' '}
+            { this.isSelectedGoodsLength() && (
             <Button
               onClick={this.clearText}
             >
               X
             </Button>
+            )
+            }
           </h1>
         </div>
 
