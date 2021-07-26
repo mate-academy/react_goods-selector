@@ -19,15 +19,26 @@ class App extends React.Component {
     selectedProducts: ['Jam'],
   }
 
+  getTitle = () => {
+    if (this.state.selectedProducts.length === 1) {
+      return `${this.state.selectedProducts} is selected`;
+    }
+
+    return `${this.state.selectedProducts.slice(0, -1).join(', ')},
+      ${this.state.selectedProducts.slice(-1).join(' and ')} are selected.`;
+  }
+
   addProduct(product) {
     this.setState(state => (state.selectedProducts.push(product)));
   }
 
   deleteProduct(product) {
     this.setState(state => (
-      { selectedProducts: state.selectedProducts.filter(
-        value => value !== product,
-      ) }
+      {
+        selectedProducts: state.selectedProducts.filter(
+          value => value !== product,
+        ),
+      }
     ));
   }
 
@@ -40,13 +51,18 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <h1 className="App__title">
-          {!this.state.selectedProducts.length ? (
-            'No Products selected'
-          ) : (
-            `Selected products: ${selectedProducts}`
-          )}
-        </h1>
+
+        {selectedProducts.length > 0 ? (
+          <h1 className="App__title">
+            {this.getTitle()}
+          </h1>
+        ) : (
+          <h1 className="App__title">
+            No Products selected
+          </h1>
+
+        )}
+
         <button
           className="App__btn-close"
           type="button"
@@ -78,7 +94,7 @@ class App extends React.Component {
                 </li>
               ) : (
                 <li
-                  className="List__product"
+                  className="List__product active"
                   key={product}
                 >
                   {product}
