@@ -68,74 +68,59 @@ class App extends Component {
 
     return (
       <div className="App">
-        {
-          !selectedGoods.length
-            ? (
-              <>
-                <h1>
-                  No goods selected
-                </h1>
-                <ul>
-                  {goodsFromServer.map(good => (
-                    <React.Fragment>
-                      <li>
-                        {good}
-                      </li>
-                      <button
-                        type="button"
-                        onClick={() => this.selectGood(good)}
-                      >
-                        Select
-                      </button>
-                    </React.Fragment>
-                  ))}
-                </ul>
-              </>
-            )
-            : (
-              <>
-                <h1>
-                  {this.showGoods()}
-                </h1>
-                <button
-                  type="button"
-                  onClick={this.clearGoods}
-                >
-                  Clear goods
-                </button>
-                <ul className="goods">
-                  {goodsFromServer.map(good => (
-                    <React.Fragment>
-                      <li>
-                        <span
-                          key="good"
-                          className={
-                          selectedGoods.includes(good)
-                            ? 'selected'
-                            : 'unSelected'
-                          }
-                        >
-                          {good}
-                        </span>
-                      </li>
-                      <button
-                        type="button"
-                        onClick={() => this.selectGood(good)}
-                      >
-                        Add
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => this.unSelectGood(good)}
-                      >
-                        Remove
-                      </button>
-                    </React.Fragment>
-                  ))}
-                </ul>
-              </>
-            )
+        <h1>
+          {this.showGoods()}
+        </h1>
+        {selectedGoods.length
+          ? (
+            <button
+              type="button"
+              onClick={this.clearGoods}
+            >
+              X
+            </button>
+          )
+          : (<span> </span>)
         }
+
+        <ul className="goods">
+          {goodsFromServer.map(good => (
+            <>
+              <li>
+                <span
+                  key="good"
+                  className={
+                  selectedGoods.includes(good)
+                    ? 'selected'
+                    : 'unSelected'
+                  }
+                >
+                  {good}
+                </span>
+              </li>
+              <button
+                type="button"
+                onClick={() => this.selectGood(good)}
+              >
+                {selectedGoods.length
+                  ? 'Add'
+                  : 'Select'
+                }
+              </button>
+              {selectedGoods.length
+                ? (
+                  <button
+                    type="button"
+                    onClick={() => this.unSelectGood(good)}
+                  >
+                    Remove
+                  </button>
+                )
+                : (<span> </span>)
+              }
+            </>
+          ))}
+        </ul>
       </div>
     );
   }
