@@ -66,6 +66,10 @@ body {
       width: 70%;
     }
   }
+
+  &__button-invisible {
+    opacity: 0;
+  }
   &__list {
     display: flex;
     flex-direction: column;

@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer = [
@@ -16,7 +17,7 @@ const goodsFromServer = [
 
 export class App extends React.Component {
   state = {
-    selectedGoods: [],
+    selectedGoods: ['Jam'],
   }
 
   clearGoodsList = () => {
@@ -59,10 +60,10 @@ export class App extends React.Component {
                 &#9997;
               </p>
               <button
-                className={selectedGoods.includes(good)
-                  ? 'App__button--active'
-                  : 'App__button--hided'
-                }
+                className={classNames({
+                  'App__button--hided': !selectedGoods.includes(good),
+                  'App__button--active': selectedGoods.includes(good),
+                })}
                 type="button"
                 onClick={() => (
                   selectedGoods.includes(good)
@@ -75,11 +76,15 @@ export class App extends React.Component {
             </li>
           ))}
         </ol>
+
         <div className="App__button-wrap">
           <button
             type="button"
             onClick={this.clearGoodsList}
-            className="App__button-clear"
+            className={classNames({
+              'App__button-clear': selectedGoods.length > 0,
+              'App__button-invisible': selectedGoods.length <= 0,
+            })}
           >
             Clear
           </button>
@@ -88,3 +93,4 @@ export class App extends React.Component {
     );
   }
 }
+// App__button-invisible
