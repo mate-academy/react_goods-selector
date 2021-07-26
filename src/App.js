@@ -19,6 +19,8 @@ class App extends React.Component {
     selectedGoods: ['Jam'],
   }
 
+  classNames = ['invisible', 'selected', 'flex'];
+
   chooseTitle = () => {
     const { selectedGoods } = this.state;
 
@@ -39,7 +41,7 @@ class App extends React.Component {
     this.setState({ selectedGoods: [] });
   }
 
-  selectGood = good => () => {
+  selectGood = (good) => {
     this.setState(state => (
       { selectedGoods: [...state.selectedGoods, good] }
     ));
@@ -54,7 +56,7 @@ class App extends React.Component {
           {this.chooseTitle()}
           {' '}
           <button
-            className={selectedGoods.length ? null : 'invisible'}
+            className={selectedGoods.length ? null : this.classNames[0]}
             type="button"
             onClick={this.clearSelectedGoods}
           >
@@ -65,15 +67,21 @@ class App extends React.Component {
         <ul className="list">
           {goodsFromServer.map(good => (
             <li
-              className={selectedGoods.includes(good) ? 'selected' : 'flex'}
+              className={selectedGoods.includes(good)
+                ? this.classNames[1]
+                : this.classNames[2]
+              }
               key={good}
             >
               <span>{good}</span>
               {' '}
               <button
-                className={selectedGoods.includes(good) ? 'invisible' : null}
+                className={selectedGoods.includes(good)
+                  ? this.classNames[0]
+                  : null
+                }
                 type="button"
-                onClick={this.selectGood(good)}
+                onClick={() => this.selectGood(good)}
               >
                 Select
               </button>
