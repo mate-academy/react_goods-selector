@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import { v4 as uuidv4 } from 'uuid';
 
 const goodsFromServer = [
   'Dumplings',
@@ -77,8 +78,12 @@ class App extends React.Component {
        <div className="App">
          <h1 className="App__header">
            {
-             // eslint-disable-next-line react/jsx-one-expression-per-line
-             this.state.goodsList.map(good => <span> {good}{','} </span>)
+             this.state.goodsList.map(good => (
+               <span key={uuidv4()}>
+                 {good}
+                 {','}
+               </span>
+             ))
            }
            {this.makeListOfGoods()}
          </h1>
@@ -89,20 +94,18 @@ class App extends React.Component {
            X
          </button>
          {goodsFromServer.map(good => (
-           <>
-             <p className="App__good-container">
-               <span className={`App__good-border ${this.goodStatus(good)}`}>
-                 {good}
-               </span>
-               {' '}
-               <button
-                 type="button"
-                 onClick={() => this.changeStatus(good)}
-               >
-                 {this.buttonText(good)}
-               </button>
-             </p>
-           </>
+           <p key={uuidv4()} className="App__good-container">
+             <span className={`App__good-border ${this.goodStatus(good)}`}>
+               {good}
+             </span>
+             {' '}
+             <button
+               type="button"
+               onClick={() => this.changeStatus(good)}
+             >
+               {this.buttonText(good)}
+             </button>
+           </p>
          ))}
        </div>
      );
