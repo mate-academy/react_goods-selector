@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'react-bootstrap';
 
 const goodsFromServer = [
   'Dumplings',
@@ -16,42 +18,60 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    values: null,
+    good: 'Jam',
   }
 
   render() {
-    const { values } = this.state;
+    const { good } = this.state;
 
     return (
-      <div className="container">
-        {values ? (
+      <div>
+        {good ? (
           <h1>
-            Current value is
-            {values}
-            <button
-              type="button"
-              onClick={() => {
-                this.setState({ values: null });
-              }}
-            >
-              X
-            </button>
+            {good}
+            {' '}
+            is selected
+            {' '}
+            <>
+              <Button
+                variant="primary"
+                size="lg"
+                active
+                type="button"
+                onClick={() => {
+                  this.setState({ good: null });
+                }}
+              >
+                X
+              </Button>
+            </>
           </h1>
         ) : (
-          <h1>No value selected</h1>
+          <h1>No goods selected</h1>
         )}
         <ul>
           {goodsFromServer.map(goods => (
-            <li>
-              <button
-                type="button"
-                className={`item ${values === goods ? 'active' : ''}`}
-                onClick={() => {
-                  this.setState({ values: goods });
-                }}
-              >
-                {goods}
-              </button>
+            <li key={goods}>
+              {goods}
+              {' '}
+              {good !== goods && (
+                <>
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    active
+                    type="button"
+                    onClick={() => {
+                      this.setState({
+                        good: goods,
+                      });
+                    }}
+                  >
+                    Select
+                  </Button>
+                </>
+              )
+              }
             </li>
           ))}
         </ul>
