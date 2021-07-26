@@ -1,1 +1,57 @@
-// styles go here
+body {
+  background-color: teal;
+}
+
+.App {
+  text-align: center;
+}
+
+li {
+  list-style: none;
+}
+
+.item {
+  width: max-content;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+button {
+  width: 150px;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.buttonToAdd {
+  background-color: palegreen;
+}
+
+.buttonToRemove {
+  background-color: tomato;
+}
+
+.added {
+  .buttonToAdd {
+    display: none;
+  }
+
+  .item {
+    background-color: palegreen;
+  }
+}
+
+.notAdded {
+  .buttonToRemove {
+    display: none;
+  }
+}
+
+.showButton {
+  background-color: palevioletred;
+  opacity: 1;
+}
+
+.hideButton {
+  opacity: 0;
+}
