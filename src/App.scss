@@ -1,1 +1,30 @@
-// styles go here
+.App {
+  &__title {
+    text-align: center;
+  }
+  &__btn-close {
+    display: block;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+}
+
+
+.List {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  width: 600px;
+
+  &__product {
+    width: 300px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__btn {
+    width: 110px;
+    margin-left: 50px;
+  }
+}
