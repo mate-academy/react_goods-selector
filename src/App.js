@@ -35,18 +35,23 @@ export class App extends React.Component {
     this.setState({ selectedGoods: [] });
   }
 
+  getTitle = () => {
+    if (this.state.selectedGoods.length === 1) {
+      return `${this.state.selectedGoods} is selected`;
+    }
+
+    return `${this.state.selectedGoods.slice(0, -1).join(', ')},
+      ${this.state.selectedGoods.slice(-1).join(' and ')} are selected.`;
+  }
+
   render() {
     const { selectedGoods } = this.state;
-    const title = selectedGoods.length === 1
-      ? `${selectedGoods} is selected`
-      : `${selectedGoods.slice(0, -1).join(', ')},
-      ${selectedGoods.slice(-1).join(' and ')} are selected.`;
 
     return (
       <section className="products">
         {selectedGoods.length > 0 ? (
           <h1 className="products__title">
-            {title}
+            {this.getTitle()}
             <button
               type="button"
               className="products__button products__button--clear"
@@ -65,41 +70,42 @@ export class App extends React.Component {
             const isProductSelected = selectedGoods.includes(product);
 
             return (
-              <React.Fragment key={product}>
-                <li className="products__item">
-                  <span className={
+              <li
+                className="products__item"
+                key={product}
+              >
+                <span className={
+                  isProductSelected
+                    ? 'products__product products__product--selected '
+                    : 'products__product'
+                  }
+                >
+                  {`${index + 1}. ${product}`}
+                </span>
+                <button
+                  type="button"
+                  className={
                     isProductSelected
-                      ? 'products__product products__product--selected '
-                      : 'products__product'
-                    }
-                  >
-                    {`${index + 1}. ${product}`}
-                  </span>
-                  <button
-                    type="button"
-                    className={
-                      isProductSelected
-                        ? 'products__button products__button--removed'
-                        : 'products__button products__button--added'
-                    }
-                    onClick={
-                      isProductSelected
-                        ? () => {
-                          this.removeProduct(product);
-                        }
-                        : () => {
-                          this.addProduct(product);
-                        }
+                      ? 'products__button products__button--removed'
+                      : 'products__button products__button--added'
+                  }
+                  onClick={
+                    isProductSelected
+                      ? () => {
+                        this.removeProduct(product);
                       }
-                  >
-                    {
-                      isProductSelected
-                        ? 'Remove'
-                        : 'Add'
+                      : () => {
+                        this.addProduct(product);
+                      }
                     }
-                  </button>
-                </li>
-              </React.Fragment>
+                >
+                  {
+                    isProductSelected
+                      ? 'Remove'
+                      : 'Add'
+                  }
+                </button>
+              </li>
             );
           })}
         </ul>
