@@ -14,17 +14,17 @@
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  width: 600px;
+  gap: 15px;
+  width: 700px;
+  margin: auto;
 
   &__product {
     width: 300px;
-    margin-bottom: 10px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
   }
 
   &__btn {
     width: 110px;
-    margin-left: 50px;
   }
 }
