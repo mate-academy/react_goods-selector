@@ -56,6 +56,11 @@ body {
   background-color: #fff;
   border: 1px solid;
   border-radius: 5px;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(110%);
+  }
 
   &--hidden {
     display: none;

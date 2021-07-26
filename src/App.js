@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer = [
@@ -24,11 +25,9 @@ class App extends React.Component {
   };
 
   removeGood = (goodsList, requiredGood) => {
-    const index = goodsList.findIndex(good => good === requiredGood);
+    const filteredList = goodsList.filter(good => good !== requiredGood);
 
-    goodsList.splice(index, 1);
-
-    this.setState({ selectedGoods: [...goodsList] });
+    this.setState({ selectedGoods: [...filteredList] });
   };
 
   formatTitle = (goodsList) => {
@@ -53,7 +52,10 @@ class App extends React.Component {
         <h1 className="App__title">
           {this.formatTitle(selectedGoods)}
           <button
-            className="button button--remove"
+            className={classNames('button', {
+              'button--hidden': !selectedGoods.length,
+              'button--remove': selectedGoods.length,
+            })}
             type="button"
             onClick={() => {
               this.setState({ selectedGoods: [] });
@@ -66,35 +68,24 @@ class App extends React.Component {
           {goodsFromServer.map(good => (
             <li
               key={good}
-              className={
-                selectedGoods.includes(good)
-                  ? 'App__item App__item--selected'
-                  : 'App__item'
-              }
+              className={classNames('App__item', {
+                'App__item--selected': selectedGoods.includes(good),
+              })}
             >
               <span className="App__good">{good}</span>
               <button
-                className={
-                  selectedGoods.includes(good)
-                    ? 'button button--hidden'
-                    : 'button button--add'
-                }
-                type="button"
-                onClick={() => this.addGood(selectedGoods, good)}
-              >
-                Add
-              </button>
+                className={classNames('button', {
+                  'button--add': !selectedGoods.includes(good),
+                  'button--remove': selectedGoods.includes(good),
+                })}
 
-              <button
-                className={
-                  !selectedGoods.includes(good)
-                    ? 'button button--hidden'
-                    : 'button button--remove'
-                }
                 type="button"
-                onClick={() => this.removeGood(selectedGoods, good)}
+                onClick={selectedGoods.includes(good)
+                  ? () => this.removeGood(selectedGoods, good)
+                  : () => this.addGood(selectedGoods, good)
+                }
               >
-                Remove
+                {selectedGoods.includes(good) ? 'Remove' : 'Add'}
               </button>
             </li>
           ))}
