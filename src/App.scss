@@ -1,1 +1,38 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.App {
+  padding: 0 150px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.list {
+  width: 250px;
+
+  &__item {
+    padding: 10px;
+
+    &-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &-button {
+      margin-right: 10px;
+    }
+  }
+}
+
+.is-selected {
+  height: 2em;
+}
