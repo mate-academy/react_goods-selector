@@ -93,7 +93,7 @@ class App extends React.Component {
         <ul className="todo-list">
           {goodsFromServer.map(good => (
             <li
-              key={Math.random()}
+              key={good}
               className={classNames(`todo`, {
                 active: selectedGood.includes(good),
               })}
