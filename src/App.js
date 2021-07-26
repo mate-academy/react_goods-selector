@@ -15,22 +15,23 @@ const goodsFromServer = [
 ];
 
 class App extends React.Component {
-  constructor(prop) {
-    super(prop);
-    this.state = {
-      selectedGoods: 'Jam',
-    };
+  state = {
+    selectedGoods: 'Jam',
+  };
+
+  goodsBasket() {
+    if (this.state.selectedGoods !== null) {
+      return `${this.state.selectedGoods} is selected`;
+    }
+
+    return 'No goods selected';
   }
 
   render() {
     return (
       <div className="App border border-4 rounded-3">
         <h1 className="App__title">
-          {
-            this.state.selectedGoods !== null
-              ? `${this.state.selectedGoods} is selected`
-              : 'No goods selected'
-          }
+          {this.goodsBasket()}
           <button
             type="button"
             className={
