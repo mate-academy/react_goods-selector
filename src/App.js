@@ -76,8 +76,7 @@ class App extends React.Component {
                     ? this.removeGood(good)
                     : this.selectGood(good)
                 )}
-                className={classNames('list__button',
-                  { activ: !this.state.selectedGoods.includes(good) })}
+                className="list__button"
               >
                 {this.state.selectedGoods.includes(good)
                   ? 'Unselect'
