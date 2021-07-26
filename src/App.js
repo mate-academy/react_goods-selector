@@ -26,6 +26,13 @@ class App extends React.Component {
     }));
   }
 
+  removeGood = (good) => {
+    this.setState(prevState => ({
+      selectedGoods: prevState.selectedGoods
+        .filter(product => product !== good),
+    }));
+  }
+
   clearingSelectedGoodslist = () => {
     this.setState(() => ({
       selectedGoods: [],
@@ -64,11 +71,17 @@ class App extends React.Component {
               {good}
               <button
                 type="button"
-                onClick={() => this.selectGood(good)}
+                onClick={() => (
+                  this.state.selectedGoods.includes(good)
+                    ? this.removeGood(good)
+                    : this.selectGood(good)
+                )}
                 className={classNames('list__button',
-                  { activ: this.state.selectedGoods.includes(good) })}
+                  { activ: !this.state.selectedGoods.includes(good) })}
               >
-                Select
+                {this.state.selectedGoods.includes(good)
+                  ? 'Unselect'
+                  : 'Select'}
               </button>
             </li>
           ))}
