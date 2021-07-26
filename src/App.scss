@@ -1,1 +1,61 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.title {
+  text-align: center;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  border: 15px solid purple;
+  border-radius: 3%;
+  padding: 0;
+  background-color: rgb(185, 209, 236);
+}
+
+.noAdd,
+.added {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 30px;
+}
+
+.removeButton {
+  background-color: rgb(146, 25, 25);
+  color: white;
+  width: 20%;
+  margin: 0 auto 20px;
+  padding: 20px 0;
+}
+
+.addButton {
+  background-color: rgb(62, 190, 30);
+  width: 20%;
+  margin: 0 auto 20px;
+  padding: 20px 0;
+}
+
+.deleteButton {
+  background-color: red;
+  font-size: 30px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.added {
+  margin-top: 10px;
+  width: 100%;
+  background-color: rgb(75, 0, 0);
+  text-decoration: line-through;
+  color: white;
+}
