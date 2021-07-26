@@ -41,24 +41,24 @@ class App extends React.Component {
 
     return (
       <div className="App box">
-        <h1 className="row-with-items">
-          {!this.state.selectedGoods.length ? (
-            `No goods selected`
-          ) : (
-            <>
-              {`Selected products: ${selectedGoods}`}
-              <button
-                className="button is-small is-danger"
-                type="button"
-                onClick={
-                  () => this.clearSelection()
-                }
-              >
-                X
-              </button>
-            </>
-          )}
-        </h1>
+        <div className="wrap">
+          <h1 className="row-with-items">
+            {!this.state.selectedGoods.length ? (
+              `No goods selected`
+            ) : (
+              `Selected products: ${selectedGoods}`
+            )}
+          </h1>
+          <button
+            className="button is-small is-danger"
+            type="button"
+            onClick={
+              () => this.clearSelection()
+            }
+          >
+            X
+          </button>
+        </div>
         <ul>
           {goodsFromServer.map(good => (
             !this.state.selectedGoods.includes(good)

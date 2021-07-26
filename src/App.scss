@@ -5,13 +5,20 @@
   border: 0.5px black solid;
 }
 
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px #000 solid;
+}
+
 .row-with-items {
   display: flex;
   justify-content: space-between;
   padding-bottom: 15px;
   font-size: 25px;
   font-weight: 500;
-  border-bottom: 1px #000 solid;
+  max-width: 450px;
 }
 
 .product {
