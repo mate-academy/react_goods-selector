@@ -1,1 +1,46 @@
-// styles go here
+.clearButton {
+  padding: 16px;
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: 2px solid #333;
+  border-radius: 8px;
+  background-color: #333;
+  color: #099;
+
+  &:hover {
+    border-color: #099;
+  }
+  &--active {
+    visibility: hidden;
+  }
+}
+
+.list {
+  list-style: none;
+  width: 250px;
+}
+
+.selected {
+  font-size: 22px;
+  &--active {
+    background-color: #eee;
+    border: 2px solid #099;
+    border-radius: 8px;
+    font-size: 22px;
+  }
+
+}
+
+.selectButton {
+  text-transform: uppercase;
+  font-weight: bold;
+  border: 2px solid #333;
+  border-radius: 8px;
+  background-color: #333;
+  color: #099;
+
+  &:hover {
+    border-color: #099;
+  }
+}
