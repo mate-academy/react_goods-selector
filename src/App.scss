@@ -1,1 +1,30 @@
-// styles go here
+.listOfgoods {
+  border: 1px solid red;
+  width: 700px;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.item {
+  list-style-type: none;
+
+  margin-top: 5px;
+}
+
+.selected {
+  background-color: lightcoral;
+}
+
+.btn {
+  margin-top: 5px;
+  margin-left: 10px;
+  border: 1px solid black;
+}
+
+.btn-add {
+  background-color: lightgreen;
+}
+
+.btn-remove {
+  background-color: red;
+}
