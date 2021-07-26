@@ -81,7 +81,7 @@ class App extends React.Component {
             ));
 
             return (
-              <li key={Math.random()} className="App__item">
+              <li key={good} className="App__item">
                 <span>
                   {good}
                 </span>
