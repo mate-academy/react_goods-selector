@@ -19,7 +19,7 @@ class App extends React.Component {
     selectedGoods: 'Jam',
   };
 
-  goodsBasket() {
+  goodsBasketMassage() {
     if (this.state.selectedGoods !== null) {
       return `${this.state.selectedGoods} is selected`;
     }
@@ -31,7 +31,7 @@ class App extends React.Component {
     return (
       <div className="App border border-4 rounded-3">
         <h1 className="App__title">
-          {this.goodsBasket()}
+          {this.goodsBasketMassage()}
           <button
             type="button"
             className={
