@@ -39,25 +39,26 @@ class App extends React.Component {
     const { selectedGoods } = this.state;
 
     let message = '';
+    const lastItem = selectedGoods.slice(-1);
 
-    if (selectedGoods.length === 0) {
-      message = 'No goods selected';
-    }
+    const restOfItems = selectedGoods.slice(0, selectedGoods.length - 1);
 
-    if (selectedGoods.length === 1) {
-      message = `${selectedGoods.join('')} is selected`;
-    }
+    switch (selectedGoods.length) {
+      case (0):
+        message = 'No goods selected';
+        break;
 
-    if (selectedGoods.length === 2) {
-      message = `${selectedGoods.join(' and ')} are selected`;
-    }
+      case (1):
+        message = `${selectedGoods.join('')} is selected`;
+        break;
 
-    if (selectedGoods.length > 2) {
-      const lastItem = selectedGoods.slice(-1);
-      const restOfItems = selectedGoods.slice(0, selectedGoods.length - 1);
+      case (2):
+        message = `${selectedGoods.join(' and ')} are selected`;
+        break;
 
-      message = `${restOfItems.join(`, `)} and ${lastItem.join('')} 
-      are selected`;
+      default:
+        message = `${restOfItems.join(`, `)} and ${lastItem.join('')}
+        are selected`;
     }
 
     return message;
