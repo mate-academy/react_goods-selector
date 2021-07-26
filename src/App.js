@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer = [
@@ -14,11 +15,81 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-const App = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+export class App extends React.Component {
+  state = {
+    selectedGoods: ['Jam'],
+  }
 
-export default App;
+  clearGoodsList = () => {
+    this.setState(state => ({
+      selectedGoods: [],
+    }));
+  }
+
+  selectGoods = (good) => {
+    this.setState(state => ({
+      selectedGoods: [...state.selectedGoods, good],
+    }));
+  }
+
+  removeGoods = (good) => {
+    this.setState(state => ({
+      selectedGoods: state.selectedGoods.filter(item => item !== good),
+    }));
+  }
+
+  render() {
+    const { selectedGoods } = this.state;
+
+    return (
+      <div className="App">
+        <h1 className="App__title">
+          {selectedGoods.length <= 0
+            ? 'Your goods list empty'
+            : `${selectedGoods} are Selected `
+          }
+        </h1>
+        <h2 className="App__title-list">
+          Please select goods below:
+        </h2>
+        <ol className="App__list">
+          {goodsFromServer.map(good => (
+            <li key={good} className="App__item">
+              <p className="App__good">
+                {`${good}`}
+                &#9997;
+              </p>
+              <button
+                className={classNames({
+                  'App__button--hided': !selectedGoods.includes(good),
+                  'App__button--active': selectedGoods.includes(good),
+                })}
+                type="button"
+                onClick={() => (
+                  selectedGoods.includes(good)
+                    ? this.removeGoods(good)
+                    : this.selectGoods(good)
+                )}
+              >
+                {selectedGoods.includes(good) ? 'done ' : 'select' }
+              </button>
+            </li>
+          ))}
+        </ol>
+
+        <div className="App__button-wrap">
+          <button
+            type="button"
+            onClick={this.clearGoodsList}
+            className={classNames({
+              'App__button-clear': selectedGoods.length > 0,
+              'App__button-invisible': selectedGoods.length <= 0,
+            })}
+          >
+            Clear
+          </button>
+        </div>
+      </div>
+    );
+  }
+}

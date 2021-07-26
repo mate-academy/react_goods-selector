@@ -1,1 +1,129 @@
-// styles go here
+body {
+  background-color: #CCCCFF;
+  background-image: linear-gradient(#4C596C, transparent 1px);
+  background-size: 2em 5.4em;
+  box-shadow: 2px 2px 2px rgba(0,0,0,.2), 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.App {
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  &__title {
+    display: flex;
+    justify-content: center;
+  }
+  &__title-list {
+    display: flex;
+    justify-content: center;
+    font-size: 36px;
+  }
+  &__button-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+  }
+  &__button-clear {
+    align-self: flex-end;
+    font-family: monospace;
+    font-weight: bold;
+    background-color: red;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 45px;
+    margin: 0 0 2em;
+    max-width: 330px;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 100%;
+    transition: all 0.3s;
+    letter-spacing: 0;
+    &:hover {
+      letter-spacing: 5px;
+    }
+    &::before,
+    &::after {
+      backface-visibility: hidden;
+      border: 1px solid rgba(#fff, 0);
+      content: " ";
+      display: block;
+      margin: 0 auto;
+      position: relative;
+      transition: all 280ms ease-in-out;
+      width: 0;
+    }
+
+    &:hover:after,
+    &:hover:before {
+      backface-visibility: hidden;
+      border-color: #fff;
+      transition: width 350ms ease-in-out;
+      width: 70%;
+    }
+  }
+
+  &__button-invisible {
+    opacity: 0;
+  }
+  &__list {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    padding: 5px 10px;
+    border-radius: 15px;
+  }
+  &__good {
+    margin-left: 100px;
+  }
+  &__button--active {
+    display: block;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+
+    color: #fff;
+    text-decoration: none;
+    user-select: none;
+    background: rgb(212,75,56);
+    margin-right: 100px;
+    padding: 5px 26px;
+    border-radius: 3px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out,
+      margin-right 0.3s ease-in-out;
+    &:hover {
+      background: rgb(232,95,76);
+    }
+  }
+  &__button--hided {
+    display: block;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+    padding: 5px 20px;
+    border-radius: 3px;
+    background: rgb(64,199,129);
+    border: none;
+    box-shadow: 0 -3px rgb(53,167,110) inset;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out,
+      margin-right 0.3s ease-in-out;
+    &:hover {
+      background: rgb(33,147,90);
+    }
+  }
+}
