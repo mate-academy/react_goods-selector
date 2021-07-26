@@ -1,1 +1,76 @@
 // styles go here
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  &__title {
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 600px;
+    text-align: center;
+  }
+
+  &__list {
+    list-style: none;
+    width: 600px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #aaa;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background-color: #fff;
+    transition: background-color, 0.5s;
+
+    &--selected {
+      background-color: #a9f16c;
+    }
+  }
+
+  &__good {
+    display: block;
+  }
+}
+
+.button {
+  display: block;
+  outline: none;
+  font-weight: bold;
+  width: 68px;
+  background-color: #fff;
+  border: 1px solid;
+  border-radius: 5px;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(110%);
+  }
+
+  &--hidden {
+    display: none;
+  }
+
+  &--add {
+    color: #56b404;
+  }
+
+  &--remove {
+    color: #dd1e1e;
+  }
+}
