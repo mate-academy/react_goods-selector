@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer = [
@@ -14,11 +15,84 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-const App = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+class App extends React.Component {
+  state = {
+    selectedGood: ['Jam'],
+  }
+
+  updateTitle = () => {
+    const { selectedGood } = this.state;
+
+    if (selectedGood.length > 0) {
+      return `Selected product: ${selectedGood}`;
+    }
+
+    return 'Please select product from the list';
+  }
+
+  isSelected = (product) => {
+    this.setState({ selectedGood: product });
+  }
+
+  clearSelectedGoods = () => {
+    this.setState({ selectedGood: [] });
+  }
+
+  render() {
+    const { selectedGood } = this.state;
+
+    return (
+      <div className="App">
+        <h1 className="title">
+          {this.updateTitle()}
+        </h1>
+        <button
+          type="button"
+          className={
+            classNames(
+              'visible btn btn-dark',
+              { 'hidden btn btn-dark': selectedGood.length === 0 },
+            )
+          }
+          onClick={this.clearSelectedGoods}
+        >
+          X
+        </button>
+        <ol className="list">
+          {goodsFromServer.map(product => (
+            <div className="container table">
+              <li
+                key={product}
+                className={
+                  classNames(
+                    'product',
+                    { selected: product === this.state.selectedGood },
+                  )
+                }
+              >
+                {product}
+              </li>
+              <button
+                type="button"
+                className={
+                  classNames(
+                    'visible btn btn-success',
+                    // eslint-disable-next-line max-len
+                    { 'hidden btn btn-success': product === this.state.selectedGood },
+                  )
+                }
+                onClick={() => {
+                  this.isSelected(product);
+                }}
+              >
+                Select
+              </button>
+            </div>
+          ))}
+        </ol>
+      </div>
+    );
+  }
+}
 
 export default App;
