@@ -62,16 +62,27 @@ class App extends React.Component {
           </h1>
 
         )}
-
-        <button
-          className="App__btn-close"
-          type="button"
-          onClick={
-            () => this.clearProduct()
-          }
-        >
-          Remove selected products
-        </button>
+        {selectedProducts.length
+          ? (
+            <button
+              className="App__btn-close"
+              type="button"
+              onClick={
+                () => this.clearProduct()
+              }
+            >
+              Remove selected products
+            </button>
+          )
+          : (
+            <button
+              className="App__btn-close invisible"
+              type="button"
+            >
+              Remove selected products
+            </button>
+          )
+        }
         <ul className="List">
           {productsFromServer.map(
             product => (!this.state.selectedProducts.includes(product)
