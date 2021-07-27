@@ -1,1 +1,29 @@
 // styles go here
+.active {
+  background-color: red;
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  gap: 100px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list__wrapper {
+  display: flex;
+  flex-direction: column  ;
+  justify-content: center;
+  width: 1000px;
+}
+
+.header__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 1000px;
+  height: 450px;
+  margin-bottom: 450px;
+}
