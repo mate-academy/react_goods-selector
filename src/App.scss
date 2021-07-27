@@ -9,12 +9,11 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  border-bottom: 1px #000 solid;
+  border-top: 1px #000 solid;
 }
 
 .row-with-items {
   max-width: 90%;
-  padding-bottom: 15px;
   font-size: 25px;
   font-weight: 500;
 }
