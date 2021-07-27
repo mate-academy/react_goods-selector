@@ -37,9 +37,9 @@ export class App extends Component {
   }
 
   clearText = () => {
-    this.setState(
-      prevState => prevState.selectedGoods.splice(0),
-    );
+    this.setState({
+      selectedGoods: [],
+    });
   }
 
   isSelectedGoodsLength() {
