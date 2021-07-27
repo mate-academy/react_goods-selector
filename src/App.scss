@@ -1,1 +1,24 @@
-// styles go here
+.App {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 50%;
+  margin-top: 50px;
+  margin-left: 50px;
+}
+
+.list__group {
+  margin-top: 20px;
+}
+
+.list__item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 30px;
+}
+
+.list__selector {
+  width: 100px;
+}
