@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import { Title } from './Title';
 
 const goodsFromServer = [
   'Dumplings',
@@ -19,20 +20,9 @@ class App extends React.Component {
     selectedGoods: ['Jam'],
   }
 
-  addProduct = (good) => {
+  selectProduct = (good) => {
     this.setState(
       prevState => ({ selectedGoods: [...prevState.selectedGoods, good] }),
-    );
-  }
-
-  removeProduct = ({ good }) => {
-    this.setState(
-      prevState => (
-        {
-          selectedGoods:
-          [prevState.selectedGoods.filter(item => item !== good)],
-        }
-      ),
     );
   }
 
@@ -45,13 +35,7 @@ class App extends React.Component {
       <div className="App">
         <div className="panel">
           <div className="panel-heading">
-            <h1>
-              {this.state.selectedGoods.length
-                ? (`Selected good:
-                  ${this.state.selectedGoods.map(good => ` ${good} `)}`)
-                : ('No goods selected')
-            }
-            </h1>
+            <Title goodsList={this.state.selectedGoods} />
           </div>
           <ul className="list">
             {goodsFromServer.map(
@@ -66,7 +50,7 @@ class App extends React.Component {
                         className="list__button
                       button is-small is-light is-success is-rounded"
                         onClick={() => (
-                          this.addProduct(good))
+                          this.selectProduct(good))
                       }
                       >
                         Select
