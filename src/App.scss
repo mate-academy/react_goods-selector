@@ -1,1 +1,36 @@
-// styles go here
+.App {
+  margin: 0 auto;
+  width: 500px;
+  padding: 8px;
+  border: 0.5px black solid;
+}
+
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-top: 1px #000 solid;
+}
+
+.row-with-items {
+  max-width: 90%;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.product {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3px;
+  padding: 5px;
+  font-size: 22px;
+  border-radius: 3px;
+
+  &:first-child {
+    margin-top: 3px;
+  }
+
+  &--selected {
+    background-color: #dcffef;
+  }
+}
