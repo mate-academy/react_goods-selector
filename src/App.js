@@ -23,6 +23,7 @@ const preparedGoods = goodsFromServer.map(good => ({
 class App extends React.Component {
   state = {
     selectedGood: 'Jam',
+    id: preparedGoods.find(good => good.name === 'Jam').id,
   }
 
   selectGood = ({ name, id }) => {
@@ -40,11 +41,13 @@ class App extends React.Component {
   };
 
   render() {
+    const { selectedGood, id } = this.state;
+
     return (
       <div className="App">
         <h1>
-          {this.state.selectedGood
-            ? `${this.state.selectedGood} is selected`
+          {selectedGood
+            ? `${selectedGood} is selected`
             : `No goods selected`
           }
         </h1>
@@ -55,7 +58,7 @@ class App extends React.Component {
           {preparedGoods.map(good => (
             <li key={good.id}>
               {good.name}
-              {(this.state.id !== good.id)
+              {(id !== good.id)
                 && (
                   <button
                     type="button"
