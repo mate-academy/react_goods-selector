@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import './App.scss';
 import classNames from 'classnames';
 
@@ -13,7 +14,10 @@ const goodsFromServer = [
   'Honey',
   'Jam',
   'Garlic',
-];
+].map(good => ({
+  id: uuidv4(),
+  good,
+}));
 
 class App extends React.Component {
   state = {
@@ -33,11 +37,7 @@ class App extends React.Component {
     }));
   }
 
-  clearingSelectedGoodslist = () => {
-    this.setState(() => ({
-      selectedGoods: [],
-    }));
-  }
+  clearingSelectedGoodslist = () => this.setState({ selectedGoods: [] })
 
   makeSelectedGoodslist = () => {
     switch (this.state.selectedGoods.length) {
@@ -56,7 +56,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <h1>
+        <h1 className="app__title">
           Selected good:
           {' '}
           {this.makeSelectedGoodslist()}
@@ -65,20 +65,20 @@ class App extends React.Component {
           {goodsFromServer.map(good => (
             <li
               className={classNames('app__list',
-                { activList: this.state.selectedGoods.includes(good) })}
-              key={goodsFromServer.indexOf(good)}
+                { activList: this.state.selectedGoods.includes(good.good) })}
+              key={good.id}
             >
-              {good}
+              {good.good}
               <button
                 type="button"
                 onClick={() => (
-                  this.state.selectedGoods.includes(good)
-                    ? this.removeGood(good)
-                    : this.selectGood(good)
+                  this.state.selectedGoods.includes(good.good)
+                    ? this.removeGood(good.good)
+                    : this.selectGood(good.good)
                 )}
                 className="list__button"
               >
-                {this.state.selectedGoods.includes(good)
+                {this.state.selectedGoods.includes(good.good)
                   ? 'Unselect'
                   : 'Select'}
               </button>
@@ -88,7 +88,7 @@ class App extends React.Component {
         <button
           type="button"
           className="clear--button"
-          onClick={() => this.clearingSelectedGoodslist()}
+          onClick={this.clearingSelectedGoodslist}
         >
           Clear
         </button>
