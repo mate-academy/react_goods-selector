@@ -88,7 +88,7 @@ class App extends Component {
             <>
               <li>
                 <span
-                  key="good"
+                  key={good}
                   className={
                   selectedGoods.includes(good)
                     ? 'selected'
