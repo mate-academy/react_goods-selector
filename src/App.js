@@ -28,9 +28,9 @@ class App extends React.Component {
     return (
       <>
         <div className="header__wrapper">
-          {good.length === 1 ? (
+          {good.length >= 1 ? (
             <h1>
-              {`${fileteredGoods} are selected`}
+              {`${fileteredGoods} selected`}
               <Button
                 type="button"
                 name="reset"
