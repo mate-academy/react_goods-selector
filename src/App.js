@@ -54,42 +54,40 @@ class App extends React.Component {
               { 'hidden btn btn-dark': selectedGood.length === 0 },
             )
           }
-          onClick={() => {
-            this.clearSelectedGoods();
-          }}
+          onClick={this.clearSelectedGoods}
         >
           X
         </button>
         <ol className="list">
           {goodsFromServer.map(product => (
-            <>
-              <div className="container table">
-                <li
-                  key={product}
-                  className={product === this.state.selectedGood
-                    ? 'selected'
-                    : 'product'
-                  }
-                >
-                  {product}
-                </li>
-                <button
-                  type="button"
-                  className={
-                    classNames(
-                      'visible btn btn-success',
-                      // eslint-disable-next-line max-len
-                      { 'hidden btn btn-success': product === this.state.selectedGood },
-                    )
-                  }
-                  onClick={() => {
-                    this.isSelected(product);
-                  }}
-                >
-                  Select
-                </button>
-              </div>
-            </>
+            <div className="container table">
+              <li
+                key={product}
+                className={
+                  classNames(
+                    'product',
+                    { selected: product === this.state.selectedGood },
+                  )
+                }
+              >
+                {product}
+              </li>
+              <button
+                type="button"
+                className={
+                  classNames(
+                    'visible btn btn-success',
+                    // eslint-disable-next-line max-len
+                    { 'hidden btn btn-success': product === this.state.selectedGood },
+                  )
+                }
+                onClick={() => {
+                  this.isSelected(product);
+                }}
+              >
+                Select
+              </button>
+            </div>
           ))}
         </ol>
       </div>
