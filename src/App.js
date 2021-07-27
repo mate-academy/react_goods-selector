@@ -20,12 +20,20 @@ class App extends React.Component {
     selectedGoods: [`Jam`],
   }
 
-  clearSelection() {
+  clearSelection = () => {
     this.setState({ selectedGoods: [] });
   }
 
   addGood(good) {
-    this.setState(state => (state.selectedGoods.push(good)));
+    this.setState(
+      state => ({
+        ...state,
+        selectedGoods: [
+          ...state.selectedGoods,
+          good,
+        ],
+      }),
+    );
   }
 
   removeGood(good) {
@@ -42,19 +50,29 @@ class App extends React.Component {
     return (
       <div className="App box">
         <div className="wrap">
-          <h1 className="row-with-items">
-            {!this.state.selectedGoods.length ? (
+          <div className="row-with-items">
+            {!selectedGoods.length ? (
               `No goods selected`
             ) : (
-              `Selected products: ${selectedGoods}`
+              <>
+                Selected products:
+                {' '}
+                {
+                  <ul>
+                    {selectedGoods.map(good => (
+                      <li key={good}>
+                        {good}
+                      </li>
+                    ))}
+                  </ul>
+                }
+              </>
             )}
-          </h1>
+          </div>
           <button
             className="button is-small is-danger"
             type="button"
-            onClick={
-              () => this.clearSelection()
-            }
+            onClick={this.clearSelection}
           >
             X
           </button>

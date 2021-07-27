@@ -13,12 +13,10 @@
 }
 
 .row-with-items {
-  display: flex;
-  justify-content: space-between;
+  max-width: 90%;
   padding-bottom: 15px;
   font-size: 25px;
   font-weight: 500;
-  max-width: 450px;
 }
 
 .product {
