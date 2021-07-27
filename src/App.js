@@ -18,7 +18,7 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    good: ['Jam '],
+    good: ['Jam'],
   }
 
   render() {
@@ -28,7 +28,7 @@ class App extends React.Component {
     return (
       <>
         <div className="header__wrapper">
-          {good.length >= 1 ? (
+          {fileteredGoods.length >= 1 ? (
             <h1>
               {`${fileteredGoods} selected`}
               <Button
@@ -57,7 +57,7 @@ class App extends React.Component {
                     onClick={() => {
                       if (this.state.good.includes(element)) {
                         return this.setState(state => (
-                          { good: state.good.filter(
+                          { good: good.filter(
                             product => product !== element,
                           ) }));
                       }
