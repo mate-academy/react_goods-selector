@@ -62,9 +62,6 @@ class App extends React.Component {
    }
 
    buttonText(good) {
-     // eslint-disable-next-line no-console
-     console.log('it is alive');
-
      return this.state.goodsList.some(el => el === good)
        ? 'Remove' : 'Add';
    }
@@ -92,21 +89,27 @@ class App extends React.Component {
          >
            X
          </button>
-         {goodsFromServer.map(good => (
-           <p key={uuidv4()} className="App__good-container">
-             <span className={`App__good-item ${this.goodStatus(good)}`}>
-               {good}
-             </span>
-             {' '}
-             <button
-               type="button"
-               className="App__good-item-button"
-               onClick={() => this.changeStatus(good)}
-             >
-               {this.buttonText(good)}
-             </button>
-           </p>
-         ))}
+         <ul>
+           {goodsFromServer.map(good => (
+             <li key={uuidv4()} className="App__good-container">
+               <span className={`App__good-item ${this.goodStatus(good)}`}>
+                 {good}
+               </span>
+               {' '}
+               <button
+                 type="button"
+                 className="App__good-item-button"
+                 onClick={() => this.changeStatus(good)}
+               >
+                 {
+                   this.state.goodsList.some(el => el === good)
+                     ? 'Remove'
+                     : 'Add'
+                }
+               </button>
+             </li>
+           ))}
+         </ul>
        </div>
      );
    }
