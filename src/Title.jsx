@@ -2,25 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export const Title = ({ goodsList }) => {
-  if (goodsList.length > 1) {
-    return (
-      <h1 className="title is-primaty">
-        {`Selected goods: ${goodsList.map(good => ` ${good} `)}`}
-      </h1>
-    );
-  }
+  let selectedGoods = '';
 
-  if (goodsList.length === 1) {
-    return (
-      <h1 className="title is-primaty">
-        {`${goodsList} is selected`}
-      </h1>
-    );
+  switch (goodsList.length) {
+    case 1:
+      selectedGoods = `${goodsList} is selected`;
+      break;
+    case 0:
+      selectedGoods = `No goods selected`;
+      break;
+    default:
+      selectedGoods = `Selected goods:
+        ${goodsList.map(good => ` ${good} `)}`;
+      break;
   }
 
   return (
     <h1 className="title is-primaty">
-      No goods selected
+      {selectedGoods}
     </h1>
   );
 };

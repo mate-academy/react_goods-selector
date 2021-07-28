@@ -31,11 +31,14 @@ class App extends React.Component {
   }
 
   render() {
+    const { selectProduct, cleanList } = this;
+    const { selectedGoods } = this.state;
+
     return (
       <div className="App">
         <div className="panel">
           <div className="panel-heading">
-            <Title goodsList={this.state.selectedGoods} />
+            <Title goodsList={selectedGoods} />
           </div>
           <ul className="list">
             {goodsFromServer.map(
@@ -43,14 +46,14 @@ class App extends React.Component {
                 <>
                   <li key={good}>
                     {good}
-                    {!this.state.selectedGoods.includes(good)
+                    {!selectedGoods.includes(good)
                     && (
                       <button
                         type="submit"
                         className="list__button
                       button is-small is-light is-success is-rounded"
                         onClick={() => (
-                          this.selectProduct(good))
+                          selectProduct(good))
                       }
                       >
                         Select
@@ -68,7 +71,7 @@ class App extends React.Component {
               <button
                 type="submit"
                 className="button is-rounded is-black is-small"
-                onClick={this.cleanList}
+                onClick={cleanList}
               >
                 Clean product list
               </button>
