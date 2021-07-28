@@ -53,7 +53,7 @@ class App extends React.Component {
         <ul>
           {goodsFromServer.map(goods => (
             <li
-              key={Math.random()}
+              key={goods}
               className={
                     goods === selectedGoods
                       ? 'alert alert-danger'
