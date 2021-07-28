@@ -25,9 +25,11 @@ class App extends React.Component {
 
   render() {
     const { selectedGoods } = this.state;
+    const { saveHandler } = this;
 
     return (
       <div className="App">
+
         <h1 className="title">
           {selectedGoods
             ? (` ${selectedGoods} is selected `)
@@ -41,7 +43,7 @@ class App extends React.Component {
             }
             type="button"
             onClick={() => {
-              this.saveHandler('');
+              saveHandler('');
             }}
           >
             X
@@ -51,6 +53,7 @@ class App extends React.Component {
         <ul>
           {goodsFromServer.map(goods => (
             <li
+              key={Math.random()}
               className={
                     goods === selectedGoods
                       ? 'alert alert-danger'
@@ -66,7 +69,7 @@ class App extends React.Component {
                       }
                 type="button"
                 onClick={() => {
-                  this.saveHandler(goods);
+                  saveHandler(goods);
                 }}
               >
                 Select
