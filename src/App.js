@@ -20,110 +20,96 @@ class App extends React.Component {
   }
 
   getTitle = () => {
-    if (this.state.selectedProducts.length === 1) {
-      return `${this.state.selectedProducts} is selected`;
+    const { selectedProducts } = this.state;
+
+    if (selectedProducts.length === 1) {
+      return `${selectedProducts} is selected`;
     }
 
-    return `${this.state.selectedProducts.slice(0, -1).join(', ')},
-      ${this.state.selectedProducts.slice(-1).join(' and ')} are selected.`;
+    if (selectedProducts.length > 1) {
+      return `${selectedProducts.slice(0, -1).join(', ')},
+      ${selectedProducts.slice(-1).join(' and ')} are selected.`;
+    }
+
+    return 'No Products selected';
   }
 
-  addProduct(product) {
-    this.setState(state => (state.selectedProducts.push(product)));
-  }
-
-  deleteProduct(product) {
-    this.setState(state => (
-      {
-        selectedProducts: state.selectedProducts.filter(
-          value => value !== product,
-        ),
-      }
-    ));
+  handleProductChange(product) {
+    if (!this.state.selectedProducts.includes(product)) {
+      this.setState(
+        state => ({ selectedProducts: [...state.selectedProducts, product] }),
+      );
+    } else {
+      this.setState(state => (
+        {
+          selectedProducts:
+            state.selectedProducts.filter(prod => prod !== product),
+        }
+      ));
+    }
   }
 
   clearProduct() {
     this.setState({ selectedProducts: [] });
   }
 
-  render() {
-    const { selectedProducts } = this.state;
+  renderTitle() {
+    return (
+      <h1 className="App__title">
+        {this.getTitle()}
+      </h1>
+    );
+  }
 
+  renderBtn() {
+    return (
+      <button
+        className={`App__btn-close
+            ${this.state.selectedProducts.length ? '' : 'invisible'}
+        `}
+        type="button"
+        onClick={
+          () => this.clearProduct()
+        }
+      >
+        Remove selected products
+      </button>
+    );
+  }
+
+  renderProduct(product) {
+    const included = this.state.selectedProducts.includes(product);
+
+    return (
+      <li
+        className={`List__product ${included ? 'active' : ''}`}
+        key={product}
+      >
+        {product}
+        :
+        <button
+          className="List__btn"
+          type="button"
+          onClick={() => this.handleProductChange(product)}
+        >
+          {included ? 'Delete Product' : 'Add product'}
+        </button>
+      </li>
+    );
+  }
+
+  render() {
     return (
       <div className="App">
 
-        {selectedProducts.length > 0 ? (
-          <h1 className="App__title">
-            {this.getTitle()}
-          </h1>
-        ) : (
-          <h1 className="App__title">
-            No Products selected
-          </h1>
+        {this.renderTitle()}
 
-        )}
-        {selectedProducts.length
-          ? (
-            <button
-              className="App__btn-close"
-              type="button"
-              onClick={
-                () => this.clearProduct()
-              }
-            >
-              Remove selected products
-            </button>
-          )
-          : (
-            <button
-              className="App__btn-close invisible"
-              type="button"
-            >
-              Remove selected products
-            </button>
-          )
-        }
+        {this.renderBtn()}
+
         <ul className="List">
-          {productsFromServer.map(
-            product => (!this.state.selectedProducts.includes(product)
-              ? (
-                <li
-                  className="List__product"
-                  key={product}
-                >
-                  {product}
-                  :
-                  <button
-                    className="List__btn"
-                    type="button"
-                    onClick={
-                      () => this.addProduct(product)
-                    }
-                  >
-                    Add product
-                  </button>
-                </li>
-              ) : (
-                <li
-                  className="List__product active"
-                  key={product}
-                >
-                  {product}
-                  :
-                  <button
-                    className="List__btn"
-                    type="button"
-                    onClick={
-                      () => this.deleteProduct(product)
-                    }
-                  >
-                    Delete Product
-                  </button>
-                </li>
-              )
-            ),
-          )}
+          {productsFromServer.map(product => this.renderProduct(product))}
         </ul>
+
       </div>
     );
   }
