@@ -51,9 +51,12 @@ class App extends React.Component {
             : `No goods selected`
           }
         </h1>
-        <button type="button" onClick={this.removeGood}>
-          X
-        </button>
+        {(selectedGood)
+          && (
+            <button type="button" onClick={this.removeGood}>
+              X
+            </button>
+          )}
         <ul>
           {preparedGoods.map(good => (
             <li key={good.id}>
