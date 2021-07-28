@@ -1,1 +1,15 @@
-// styles go here
+.App {
+  width: 50vw;
+  margin: auto;
+  position: relative;
+
+}
+
+.list__button {
+  position: absolute;
+  right: 0;
+}
+
+li {
+  padding: 10px;
+}
