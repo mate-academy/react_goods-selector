@@ -1,1 +1,38 @@
-// styles go here
+.App {
+  &__title {
+    text-align: center;
+  }
+  &__btn-close {
+    display: block;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+}
+
+
+.List {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  width: 700px;
+  margin: auto;
+
+  &__product {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__btn {
+    width: 110px;
+  }
+}
+
+.active {
+  background-color: yellow;
+}
+
+.invisible {
+  opacity: 0;
+}
