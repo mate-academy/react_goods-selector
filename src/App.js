@@ -21,25 +21,38 @@ class App extends React.Component {
     good: ['Jam'],
   }
 
+  getGoodsLength = () => {
+    const { good } = this.state;
+
+    if (good.length === 0) {
+      return `No goods selected`;
+    }
+
+    if (good.length === 1) {
+      return `${good[0]} is selected`;
+    }
+
+    return `${good.slice(0, -1).join(', ')}
+      and ${good[good.length - 1]} are selected`;
+  }
+
   render() {
     const { good } = this.state;
-    const fileteredGoods = good.join(', ');
+    const { getGoodsLength } = this;
 
     return (
       <>
         <div className="header__wrapper">
-          {fileteredGoods.length >= 1 ? (
-            <h1>
-              {`${fileteredGoods} selected`}
-              <Button
-                type="button"
-                name="reset"
-                onClick={() => {
-                  this.setState({ good: [] });
-                }}
-              />
-            </h1>
-          ) : (<h1>No goods selected</h1>)}
+          <h1>
+            {getGoodsLength()}
+          </h1>
+          <Button
+            type="button"
+            name="reset"
+            onClick={() => {
+              this.setState({ good: [] });
+            }}
+          />
           <ul className="list__wrapper">
             {goodsFromServer.map(element => (
               <>
@@ -57,9 +70,11 @@ class App extends React.Component {
                     onClick={() => {
                       if (this.state.good.includes(element)) {
                         return this.setState(state => (
-                          { good: good.filter(
-                            product => product !== element,
-                          ) }));
+                          {
+                            good: good.filter(
+                              product => product !== element,
+                            ),
+                          }));
                       }
 
                       this.setState({
