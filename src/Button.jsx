@@ -9,6 +9,7 @@ export const Button = props => (
       onClick={props.onClick}
     >
       {props.name}
+
     </button>
   </div>
 );

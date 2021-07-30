@@ -16,7 +16,7 @@ const goodsFromServer = [
   'Garlic',
 ];
 
-class App extends React.Component {
+export class App extends React.Component {
   state = {
     good: ['Jam'],
   }
@@ -46,13 +46,15 @@ class App extends React.Component {
           <h1>
             {getGoodsLength()}
           </h1>
-          <Button
+          <button
             type="button"
-            name="reset"
             onClick={() => {
               this.setState({ good: [] });
             }}
-          />
+            disabled={!good.length}
+          >
+            reset
+          </button>
           <ul className="list__wrapper">
             {goodsFromServer.map(element => (
               <>
