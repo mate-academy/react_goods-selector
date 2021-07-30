@@ -36,24 +36,18 @@ class App extends Component {
   }
 
   setTitle = () => {
-    let titleStr = '';
     const { selectedGoods } = this.state;
     const arr = selectedGoods.slice(0, -1);
 
-    if (selectedGoods.length === 1) {
-      titleStr = `${selectedGoods} is sellect`;
+    switch (selectedGoods.length) {
+      case 0:
+        return `No goods selected`;
+      case 1:
+        return `${selectedGoods[0]} is selected`;
+      default:
+        return `${arr.join(', ')} and
+          ${selectedGoods.slice(-1)} are selected`;
     }
-
-    if (selectedGoods.length > 1) {
-      // eslint-disable-next-line
-      titleStr += `${arr.join(', ')} and ${selectedGoods[selectedGoods.length - 1]} are selected`;
-    }
-
-    if (selectedGoods.length === 0) {
-      titleStr = 'No goods selected';
-    }
-
-    return titleStr;
   }
 
   render() {
@@ -66,7 +60,7 @@ class App extends Component {
 
             return (
               <li
-                key={Math.random()}
+                key={good}
                 className={isSelected ? 'selectedEl' : 'unselectedEl'}
               >
                 {good}
