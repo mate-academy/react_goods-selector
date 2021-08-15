@@ -16,28 +16,53 @@ const goodsFromServer = [
 
 class App extends React.Component {
   state = {
-    selectedGood: [],
+    selectedGoods: [],
   };
 
+  removeGoods = (item) => {
+    this.setState((state) => {
+      const goodsArray = state.selectedGoods;
+
+      goodsArray.splice(goodsArray.indexOf(item), 1);
+
+      return { selectedGoods: [...goodsArray] };
+    });
+  }
+
+  addGoods = (item) => {
+    this.setState(state => (
+      { selectedGoods: [...state.selectedGoods, item] }
+    ));
+  }
+
   render() {
+    const { selectedGoods } = this.state;
+    let textWithGoods = '';
+
+    if (selectedGoods.length) {
+      if (selectedGoods.length > 1) {
+        textWithGoods = `${
+          selectedGoods.slice(0, selectedGoods.length - 1).join(', ')
+        } and ${
+          selectedGoods[selectedGoods.length - 1]
+        } are selected`;
+      } else {
+        textWithGoods = `${selectedGoods[0]} is selected`;
+      }
+    } else {
+      textWithGoods = 'No goods selected';
+    }
+
     return (
       <div className="App">
         <h1>
-          {this.state.selectedGood.length
-            ? (
-              <>
-                {this.state.selectedGood.join(', ')}
-                {this.state.selectedGood.length > 1 ? ' are ' : ' is '}
-                selected
-                <button
-                  type="button"
-                  onClick={() => this.setState({ selectedGood: [] })}
-                >
-                  X
-                </button>
-              </>
-            )
-            : 'No goods selected'}
+          {textWithGoods}
+          <button
+            type="button"
+            onClick={() => this.setState({ selectedGoods: [] })}
+          >
+            X
+          </button>
         </h1>
         {goodsFromServer.length}
         <ul>
@@ -45,23 +70,15 @@ class App extends React.Component {
             <li
               key={item}
               className={
-                this.state.selectedGood.includes(item) && 'selected'
+                selectedGoods.includes(item) && 'selected'
               }
             >
               {item}
-              {this.state.selectedGood.includes(item)
+              {selectedGoods.includes(item)
                 ? (
                   <button
                     type="button"
-                    onClick={() => {
-                      this.setState((state) => {
-                        const goodsArray = state.selectedGood;
-
-                        goodsArray.splice(goodsArray.indexOf(item), 1);
-
-                        return { selectedGood: [...goodsArray] };
-                      });
-                    }}
+                    onClick={() => this.removeGoods(item)}
                   >
                     Remove
                   </button>
@@ -69,11 +86,7 @@ class App extends React.Component {
                 : (
                   <button
                     type="button"
-                    onClick={() => {
-                      this.setState(state => (
-                        { selectedGood: [...state.selectedGood, item] }
-                      ));
-                    }}
+                    onClick={() => this.addGoods(item)}
                   >
                     Add
                   </button>
