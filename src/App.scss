@@ -19,7 +19,7 @@ $--main-button-width: 60px;
     display: block;
     width: 100px;
 
-    p {
+    .goodName {
       margin: 3px 0 0 10px;
     }
   }
@@ -40,9 +40,5 @@ $--main-button-width: 60px;
 }
 
 .hiden {
-  display: none;
-}
-
-.show {
-  display: block;
+  visibility: hidden;
 }
