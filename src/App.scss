@@ -1,1 +1,44 @@
-// styles go here
+$--main-button-width: 60px;
+
+.selectedGood {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 600px;
+
+  .buttonСlean {
+    height: 25px;
+    width: $--main-button-width;
+  }
+}
+
+.goodBox {
+  display: flex;
+
+  .good {
+    display: block;
+    width: 100px;
+
+    .goodName {
+      margin: 3px 0 0 10px;
+    }
+  }
+
+  .selected {
+    background-color: slategray;
+    color: white;
+  }
+
+  .buttonBox {
+    padding: 0 5px 5px;
+    height: 20px;
+
+    .button {
+      width: $--main-button-width;
+    }
+  }
+}
+
+.hiden {
+  visibility: hidden;
+}
