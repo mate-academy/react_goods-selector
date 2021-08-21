@@ -1,5 +1,5 @@
 import React from 'react';
-import classNames from 'classnames/bind';
+import classNames from 'classnames';
 
 import styles from './App.scss';
 
@@ -18,108 +18,76 @@ const goodsFromServer = [
   'Garlic',
 ];
 
+const NO_SELECTED = 'No goods selected';
+
 class App extends React.Component {
   state = {
-    selectedGood: 'No goods selected',
-    goods: [],
-    buttonСleanHiden: true,
-  }
-
-  componentDidMount() {
-    this.setState({
-      goods: goodsFromServer.map(good => {
-        return {
-          'name': good,
-          'hiden': false,
-          'selected': false,
-        };
-      }),
-    });
+    selectedGood: NO_SELECTED,
   }
 
   clickHandlerSelectedGood = () => {
-    this.setState((state) => ({
-      selectedGood: 'No goods selected',
-      buttonСleanHiden: true,
-      goods: state.goods.map(elem => {
-        return {
-          'name': elem.name,
-          'hiden': false,
-          'selected': false,
-        };
-      }),
-    }));
+    this.setState({
+      selectedGood: NO_SELECTED,
+    });
   }
 
   clickHandlerGood = (good) => {
-    this.setState((state) => ({
-      selectedGood: `${good} is selected`,
-      buttonСleanHiden: false,
-      goods: state.goods.map(elem => {
-        return {
-          'name': elem.name,
-          'hiden': elem.name === good ? true : false,
-          'selected': elem.name === good ? true : false,
-        };
-      }),
-    }));
+    this.setState({
+      selectedGood: good,
+    });
   }
 
   render() {
-    const { selectedGood, goods, buttonСleanHiden } = this.state;
-    const buttonСleanClassName = cn(
-      'buttonСlean',
-      { hiden: buttonСleanHiden }
-    );
+    const { selectedGood } = this.state;
+
+    const buttonСleanHiden = selectedGood !== NO_SELECTED;
 
     return (
       <div className="App">
         <div className="selectedGood">
           <h1>
-            Selected good: -
-            {selectedGood}
+            Selected good: - {` ${selectedGood} `}{selectedGood !== NO_SELECTED && 'is selected'}
           </h1>
-          <button
-            type="button"
-            className={buttonСleanClassName}
-            onClick={this.clickHandlerSelectedGood}
-          >
-            X
-          </button>
+          {buttonСleanHiden && (
+            <button
+              className="buttonСlean"
+              type="button"
+              onClick={this.clickHandlerSelectedGood}
+            >
+              X
+            </button>
+          )}
         </div>
 
         <ul>
-          {goods.map((good) => {
-            const goodName = good.name.split(' ').join('-');
+          {goodsFromServer.map((good) => {
+            const buttonShow = selectedGood !== good;
+
             const classNameGood = cn(
               'good',
-              {goodName},
-              {selected: good.selected}
+              {selected: !buttonShow}
             );
-            const classNameButton = cn(
-              'button',
-              {goodName},
-              {hiden: good.hiden}
-            );
-
+              
             return (
-              <li key={good.name}>
+              <li key={good}>
                 <div className="goodBox">
                   <div className={classNameGood}>
                     <p className="goodName">
-                      {good.name}
+                      {good}
                     </p>
                   </div>
                   <div className="buttonBox">
-                    <button
-                      type="button"
-                      className={classNameButton}
-                      onClick={() => {
-                        this.clickHandlerGood(good.name);
-                      }}
-                    >
-                      Select
-                    </button>
+                    {buttonShow && (
+                      <button
+                        className="button"
+                        type="button"
+                        onClick={() => {
+                          this.clickHandlerGood(good);
+                        }}
+                      >
+                        Select
+                      </button>
+                    )}
                   </div>
                 </div>
               </li>

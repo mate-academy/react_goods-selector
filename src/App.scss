@@ -10,6 +10,10 @@ $--main-button-width: 60px;
     height: 25px;
     width: $--main-button-width;
   }
+
+  .buttonСlean:hover {
+    cursor: pointer;
+  }
 }
 
 .goodBox {
@@ -36,9 +40,9 @@ $--main-button-width: 60px;
     .button {
       width: $--main-button-width;
     }
-  }
-}
 
-.hiden {
-  visibility: hidden;
+    .button:hover {
+      cursor: pointer;
+    }
+  }
 }
