@@ -1,1 +1,12 @@
-// styles go here
+.goods {
+  width: 160px;
+}
+
+.selected {
+  background-color: #cec4c5;
+  font-weight: bold;
+}
+
+.unSelected {
+  color: grey;
+}
