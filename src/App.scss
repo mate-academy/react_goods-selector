@@ -1,1 +1,43 @@
-// styles go here
+body {
+  background-color: rgb(184, 252, 210);
+}
+
+.goods {
+  text-align: center;
+  width: 100px;
+  cursor: pointer;
+  padding: 3px;
+  margin: 5px;
+  border: 1px solid rgb(68, 101, 109);
+  border-radius: 20px;
+}
+
+.goods:active {
+  background-color: rgb(141, 145, 206);
+}
+
+.goods__unvisited {
+  background-color: rgb(141, 145, 206);
+}
+
+.goods__visited {
+  background-color: rgb(187, 255, 0);
+}
+
+.button {
+  padding: 5px;
+  border-radius: 30px;
+}
+
+.button:hover {
+  color: bisque;
+  background-color: brown;
+}
+
+.button__hide {
+  visibility: hidden;
+}
+
+.button__visible {
+  visibility: visible;
+}
