@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
+import uniqid from 'uniqid';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -13,6 +15,13 @@ const goodsFromServer: string[] = [
   'Jam',
   'Garlic',
 ];
+
+const goodsWithId = goodsFromServer.map((good) => {
+  return {
+    name: good,
+    id: uniqid(),
+  };
+});
 
 interface State {
   selectedGoods: string[]
@@ -67,31 +76,36 @@ class App extends React.Component<{}, State> {
           )
           : <h1>No goods selected</h1>}
         <ul className="list">
-          {goodsFromServer.map(good => (
-            <>
-              <li
-                key={good}
-                className={selectedGoods.includes(good) ? 'list__item list__item--selected' : 'list__item'}
-              >
-                <h3>{good}</h3>
-                <button
-                  className="button"
-                  type="button"
-                  onClick={() => this.addItem(good)}
+          {goodsWithId.map(good => {
+            const { name, id } = good;
+
+            return (
+              <>
+                <li
+                  key={id}
+                  className={classNames('list__item',
+                    { 'list__item--selected': selectedGoods.includes(name) })}
                 >
-                  Add
-                </button>
-                <button
-                  className="button"
-                  type="button"
-                  onClick={() => this.removeItem(good)}
-                  disabled={!selectedGoods.includes(good)}
-                >
-                  Remove
-                </button>
-              </li>
-            </>
-          ))}
+                  <h3>{name}</h3>
+                  <button
+                    className="button"
+                    type="button"
+                    onClick={() => this.addItem(name)}
+                  >
+                    Add
+                  </button>
+                  <button
+                    className="button"
+                    type="button"
+                    onClick={() => this.removeItem(name)}
+                    disabled={!selectedGoods.includes(name)}
+                  >
+                    Remove
+                  </button>
+                </li>
+              </>
+            );
+          })}
         </ul>
       </div>
     );
