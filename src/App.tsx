@@ -18,7 +18,7 @@ interface State {
   selectedGoods: string[]
 }
 
-class App extends React.Component {
+class App extends React.Component<{}, State> {
   state: State = {
     selectedGoods: [],
   };
