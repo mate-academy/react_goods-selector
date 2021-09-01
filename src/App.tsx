@@ -77,14 +77,14 @@ export class App extends React.Component<{}, State> {
 
         <section className="cards">
           {goodsFromServer.map(good => (
-            <div className={this.state.selectedGood.includes(good) ? 'card__active' : 'card'}>
-              <h2 className="card__title">
+            <div className={this.state.selectedGood.includes(good) ? 'card__selected' : 'card'}>
+              <h2>
                 {good}
               </h2>
 
               <button
                 type="button"
-                className="button button__add"
+                className="button"
                 onClick={() => {
                   this.addGood(good);
                 }}
