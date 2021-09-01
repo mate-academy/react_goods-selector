@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import classNames from 'classnames';
-import uniqid from 'uniqid';
+import { v4 as uuidv4 } from 'uuid';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -16,15 +16,15 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-const goodsWithId = goodsFromServer.map((good) => {
-  return {
+const goodsWithId = goodsFromServer.map((good) => (
+  {
     name: good,
-    id: uniqid(),
-  };
-});
+    id: uuidv4(),
+  }
+));
 
 interface State {
-  selectedGoods: string[]
+  selectedGoods: string[];
 }
 
 class App extends React.Component<{}, State> {
@@ -37,23 +37,25 @@ class App extends React.Component<{}, State> {
   );
 
   addItem = (item: string) => {
-    const { selectedGoods } = this.state;
-
-    return this.setState({ selectedGoods: [...selectedGoods, item] });
+    this.setState((prevState) => ({
+      selectedGoods: [...prevState.selectedGoods, item],
+    }));
   };
 
   removeItem = (item: string) => {
-    const { selectedGoods } = this.state;
+    this.setState((prevState) => {
+      const { selectedGoods } = prevState;
 
-    if (selectedGoods.includes(item)) {
-      const lastIndex = selectedGoods.lastIndexOf(item);
+      if (selectedGoods.includes(item)) {
+        const lastIndex = selectedGoods.lastIndexOf(item);
 
-      selectedGoods.splice(lastIndex, 1);
+        selectedGoods.splice(lastIndex, 1);
 
-      return this.setState({ selectedGoods: [...selectedGoods] });
-    }
+        return { selectedGoods: [...selectedGoods] };
+      }
 
-    return null;
+      return null;
+    });
   };
 
   render() {
@@ -80,30 +82,28 @@ class App extends React.Component<{}, State> {
             const { name, id } = good;
 
             return (
-              <>
-                <li
-                  key={id}
-                  className={classNames('list__item',
-                    { 'list__item--selected': selectedGoods.includes(name) })}
+              <li
+                key={id}
+                className={classNames('list__item',
+                  { 'list__item--selected': selectedGoods.includes(name) })}
+              >
+                <h3>{name}</h3>
+                <button
+                  className="button"
+                  type="button"
+                  onClick={() => this.addItem(name)}
                 >
-                  <h3>{name}</h3>
-                  <button
-                    className="button"
-                    type="button"
-                    onClick={() => this.addItem(name)}
-                  >
-                    Add
-                  </button>
-                  <button
-                    className="button"
-                    type="button"
-                    onClick={() => this.removeItem(name)}
-                    disabled={!selectedGoods.includes(name)}
-                  >
-                    Remove
-                  </button>
-                </li>
-              </>
+                  Add
+                </button>
+                <button
+                  className="button"
+                  type="button"
+                  onClick={() => this.removeItem(name)}
+                  disabled={!selectedGoods.includes(name)}
+                >
+                  Remove
+                </button>
+              </li>
             );
           })}
         </ul>
