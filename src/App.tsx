@@ -1,5 +1,8 @@
 import React from 'react';
 import './App.scss';
+import { uuid } from 'uuidv4';
+import classNames from 'classnames';
+import { Button } from './Button';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -14,11 +17,86 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-const App: React.FC = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+type State = {
+  selectedGoods: string[];
+};
+
+class App extends React.Component<{}, State> {
+  state: State = {
+    selectedGoods: [],
+  };
+
+  addProduct = (item: string) => {
+    this.setState((prevState) => ({
+      selectedGoods: [
+        ...prevState.selectedGoods,
+        item,
+      ],
+    }));
+  };
+
+  deleteProduct = (item: string) => {
+    this.setState((prevState) => ({
+      selectedGoods: prevState.selectedGoods.filter(
+        product => product !== item,
+      ),
+    }
+    ));
+  };
+
+  showProducts = () => {
+    const { selectedGoods } = this.state;
+    const firstPart = selectedGoods.slice(0, -1);
+    const lastProduct = selectedGoods[selectedGoods.length - 1];
+
+    return selectedGoods.length > 1
+      ? `${firstPart.join(', ')} and ${lastProduct} are selected`
+      : `${lastProduct} is selected`;
+  };
+
+  render() {
+    const { selectedGoods } = this.state;
+
+    return (
+      <div className="App">
+        <h1>
+          {selectedGoods.length
+            ? `${this.showProducts()}`
+            : 'No goods selected'}
+        </h1>
+        <section className="cards">
+          {goodsFromServer.map(item => (
+            <div
+              key={uuid()}
+              className={classNames(
+                'cards__card',
+                'card',
+                { 'card--selected': selectedGoods.includes(item) },
+              )}
+            >
+              <h2>
+                {item}
+              </h2>
+              <Button
+                buttonName="Add"
+                action={() => {
+                  this.addProduct(item);
+                }}
+                disabled={selectedGoods.includes(item)}
+              />
+              <Button
+                buttonName="Remove"
+                action={() => {
+                  this.deleteProduct(item);
+                }}
+                disabled={!selectedGoods.includes(item)}
+              />
+            </div>
+          ))}
+        </section>
+      </div>
+    );
+  }
+}
 
 export default App;
