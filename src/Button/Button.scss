@@ -1,0 +1,16 @@
+.button {
+  padding: 10px 0;
+  width: 120px;
+  margin-top: 5px;
+  border-radius: 10px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: grey;
+  }
+
+  &:disabled {
+    cursor: default;
+    background-color: #fff;
+  }
+}
