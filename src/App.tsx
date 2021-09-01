@@ -51,12 +51,21 @@ class App extends React.Component<{}, State> {
   render() {
     const { selectedGoods } = this.state;
 
+    let pocketOfGoods = selectedGoods.join('');
+
+    if (selectedGoods.length > 1) {
+      const firstPart = selectedGoods.slice(0, -1).join(', ');
+      const lastPart = selectedGoods[selectedGoods.length - 1];
+
+      pocketOfGoods = `${firstPart} and ${lastPart}`;
+    }
+
     return (
       <div className="App">
         <div className="container">
           <h1>
             {selectedGoods.length > 0
-              ? `Selected good: ${selectedGoods.join(', ')}`
+              ? `Selected good: ${pocketOfGoods}`
               : 'No goods selected'}
           </h1>
           <button
