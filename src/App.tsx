@@ -48,10 +48,11 @@ class App extends React.Component<{}, State> {
 
       if (selectedGoods.includes(item)) {
         const lastIndex = selectedGoods.lastIndexOf(item);
+        const newSelectedGoods = [...selectedGoods];
 
-        selectedGoods.splice(lastIndex, 1);
+        newSelectedGoods.splice(lastIndex, 1);
 
-        return { selectedGoods: [...selectedGoods] };
+        return { selectedGoods: newSelectedGoods };
       }
 
       return null;
