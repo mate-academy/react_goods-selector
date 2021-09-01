@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import classNames from 'classnames';
 import { Button } from './Button';
 
@@ -44,6 +44,12 @@ class App extends React.Component<{}, State> {
     ));
   };
 
+  clearAllProducts = () => {
+    this.setState({
+      selectedGoods: [],
+    });
+  };
+
   showProducts = () => {
     const { selectedGoods } = this.state;
     const firstPart = selectedGoods.slice(0, -1);
@@ -64,10 +70,17 @@ class App extends React.Component<{}, State> {
             ? `${this.showProducts()}`
             : 'No goods selected'}
         </h1>
+        {!!selectedGoods.length && (
+          <Button
+            buttonName="Clear"
+            action={this.clearAllProducts}
+            disabled={false}
+          />
+        )}
         <section className="cards">
           {goodsFromServer.map(item => (
             <div
-              key={uuid()}
+              key={uuidv4()}
               className={classNames(
                 'cards__card',
                 'card',
