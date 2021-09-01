@@ -16,7 +16,7 @@ const goodsFromServer: string[] = [
 ];
 
 interface State {
-  selectedGoods: string[],
+  selectedGoods: string[];
 }
 
 class App extends React.Component<{}, State> {
@@ -44,7 +44,7 @@ class App extends React.Component<{}, State> {
     }
   };
 
-  reset = () => {
+  resetGoods = () => {
     this.setState({ selectedGoods: [] });
   };
 
@@ -62,7 +62,7 @@ class App extends React.Component<{}, State> {
           <button
             type="button"
             className="cards__button"
-            onClick={this.reset}
+            onClick={this.resetGoods}
           >
             Reset
           </button>
