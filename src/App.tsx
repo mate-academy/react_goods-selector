@@ -54,7 +54,7 @@ export class App extends React.Component<{}, State> {
                   ? 'Selected:'
                   : 'No goods selected'}
               </h1>
-              {selectedGoods.length !== 0 && (
+              {!!selectedGoods.length && (
                 <button
                   className="App__clear-button"
                   type="button"
