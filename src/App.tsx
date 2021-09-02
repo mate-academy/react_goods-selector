@@ -25,8 +25,6 @@ class App extends React.Component<{}, State> {
     addedToCart: [],
   };
 
-  array: string[] = [];
-
   addGood = (good: string) => {
     this.setState((state) => ({
       ...state,
