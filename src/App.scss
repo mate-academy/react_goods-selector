@@ -1,1 +1,81 @@
-// styles go here
+body,
+h1,
+p {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  background-color: whitesmoke;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: gray;
+  }
+}
+
+.container {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  justify-items: center;
+}
+
+.App {
+  padding: 50px;
+  border-radius: 5%;
+  background-color: wheat;
+  width: 500px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 100px;
+    padding: 5px;
+    border-radius: 5%;
+
+    &--selected {
+      background-color: coral;
+    }
+  }
+
+  &__button {
+    &--remove {
+      background-color: coral;
+      transition: 0.3s;
+
+      &:hover {
+        background-color: tomato;
+      }
+    }
+
+    &--add {
+      background-color: yellowgreen;
+      transition: 0.3s;
+
+      &:hover {
+        background-color: green;
+      }
+    }
+
+    &--unselect {
+      width: min-content;
+      margin: 0 auto;
+    }
+  }
+}
