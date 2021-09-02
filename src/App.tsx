@@ -75,40 +75,36 @@ class App extends React.Component<{}, State> {
           {goodsFromServer.map((good) => (
             <li key={good}>
               <div className="App__good">
-                <p
-                  className={classNames('App__good-text', { 'App__good-text-selected': selectedGoods.includes(good) })}
-                >
+                <p className={classNames('App__good-text', { 'App__good-text-selected': selectedGoods.includes(good) })}>
                   {good}
                 </p>
-                {
-                  selectedGoods.includes(good)
-                    ? (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          this.goodsOperationsHandler(Operation.Remove, good);
-                        }}
-                        onKeyDown={() => {
-                          this.goodsOperationsHandler(Operation.Remove, good);
-                        }}
-                      >
-                        Remove
-                      </button>
-                    )
-                    : (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          this.goodsOperationsHandler(Operation.Add, good);
-                        }}
-                        onKeyDown={() => {
-                          this.goodsOperationsHandler(Operation.Add, good);
-                        }}
-                      >
-                        Add
-                      </button>
-                    )
-                }
+                {selectedGoods.includes(good)
+                  ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        this.goodsOperationsHandler(Operation.Remove, good);
+                      }}
+                      onKeyDown={() => {
+                        this.goodsOperationsHandler(Operation.Remove, good);
+                      }}
+                    >
+                      Remove
+                    </button>
+                  )
+                  : (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        this.goodsOperationsHandler(Operation.Add, good);
+                      }}
+                      onKeyDown={() => {
+                        this.goodsOperationsHandler(Operation.Add, good);
+                      }}
+                    >
+                      Add
+                    </button>
+                  )}
               </div>
             </li>
           ))}
