@@ -24,7 +24,7 @@ export class App extends React.Component<{}, State> {
     selectedGoods: [],
   };
 
-  addItem = (item: string) => {
+  processItem = (item: string) => {
     const { selectedGoods } = this.state;
 
     if (!selectedGoods.includes(item)) {
@@ -34,7 +34,7 @@ export class App extends React.Component<{}, State> {
     }
 
     this.setState({
-      selectedGoods: selectedGoods.filter(inCart => inCart !== item),
+      selectedGoods: selectedGoods.filter(itemInCart => itemInCart !== item),
     });
   };
 
@@ -84,7 +84,7 @@ export class App extends React.Component<{}, State> {
                   className="App__button"
                   type="button"
                   onClick={() => {
-                    this.addItem(item);
+                    this.processItem(item);
                   }}
                 >
                   <p
