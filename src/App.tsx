@@ -1,4 +1,5 @@
 import React, { Props } from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -17,6 +18,8 @@ const goodsFromServer: string[] = [
 type State = {
   selectedGood: string | null;
 };
+
+// update to allow selecting multiple items
 
 class App extends React.Component<Props<State>, State> {
   state: State = {
@@ -58,8 +61,9 @@ class App extends React.Component<Props<State>, State> {
           {goodsFromServer.map(good => (
             <li
               key={good}
-              className={this.state.selectedGood === good ? 'selected' : ''}
-              // add classNames library instead of ternary
+              className={classNames('App__list', {
+                'App__list--selected': this.state.selectedGood === good,
+              })}
             >
               {good}
               {this.state.selectedGood === good || (

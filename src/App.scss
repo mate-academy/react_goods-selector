@@ -1,3 +1,8 @@
-.selected {
-  background-color: coral;
+.App {
+
+  &__list {
+    &--selected {
+      background-color: coral;
+    }
+  }
 }
