@@ -27,7 +27,6 @@ class App extends React.Component<{}, State> {
 
   addGood = (good: string) => {
     this.setState((state) => ({
-      ...state,
       addedToCart: [
         ...state.addedToCart,
         good,
@@ -37,16 +36,14 @@ class App extends React.Component<{}, State> {
 
   removeGood = (good: string) => {
     this.setState((state) => ({
-      ...state,
       addedToCart: state.addedToCart.filter(itemGood => itemGood !== good),
     }));
   };
 
   reset = () => {
-    this.setState((state) => ({
-      ...state,
+    this.setState({
       addedToCart: [],
-    }));
+    });
   };
 
   render() {
