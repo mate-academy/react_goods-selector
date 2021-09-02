@@ -19,8 +19,6 @@ type State = {
   selectedGood: string | null;
 };
 
-// update to allow selecting multiple items
-
 class App extends React.Component<Props<State>, State> {
   state: State = {
     selectedGood: 'Jam',
@@ -37,20 +35,22 @@ class App extends React.Component<Props<State>, State> {
   };
 
   render() {
+    const { selectedGood } = this.state;
+
     return (
       <div className="App">
-        {!this.state.selectedGood ? (
+        {!selectedGood ? (
           <h1 className="App__title">
             No goods selected
           </h1>
         ) : (
           <>
             <h1 className="App__title">
-              {`${this.state.selectedGood} is selected`}
+              {`${selectedGood} is selected`}
             </h1>
             <button
               type="button"
-              className="App__unselect-button"
+              className="App__button--unselect"
               onClick={this.unselectAll}
             >
               X
@@ -61,15 +61,15 @@ class App extends React.Component<Props<State>, State> {
           {goodsFromServer.map(good => (
             <li
               key={good}
-              className={classNames('App__list', {
-                'App__list--selected': this.state.selectedGood === good,
+              className={classNames('App__item', {
+                'App__item--selected': selectedGood === good,
               })}
             >
               {good}
-              {this.state.selectedGood === good || (
+              {selectedGood === good || (
                 <button
                   type="button"
-                  className="App__select-button"
+                  className="App__button--select"
                   onClick={() => {
                     this.selectGood(good);
                   }}
