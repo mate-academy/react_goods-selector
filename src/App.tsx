@@ -25,7 +25,6 @@ class App extends React.Component<{}, State> {
   };
 
   selectGood = (good: string) => {
-    this.state.selectedGood = good;
     this.setState({ selectedGood: good });
   };
 

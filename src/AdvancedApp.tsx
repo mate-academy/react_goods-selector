@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from './Button';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -24,22 +25,17 @@ class App extends React.Component<{}, State> {
   };
 
   addGood = (good: string) => {
-    this.state.goodsInCart.push(good);
     this.setState((prevState: State): State => {
       return {
-        goodsInCart: prevState.goodsInCart,
+        goodsInCart: [...prevState.goodsInCart, good],
       };
     });
   };
 
   removeGood = (good: string) => {
-    const goodToRemove = this.state.goodsInCart.findIndex(product => product === good);
-
-    this.state.goodsInCart.splice(goodToRemove, 1);
-
     this.setState((prevState: State): State => {
       return {
-        goodsInCart: prevState.goodsInCart,
+        goodsInCart: prevState.goodsInCart.filter(product => product !== good),
       };
     });
   };
@@ -62,13 +58,13 @@ class App extends React.Component<{}, State> {
         <h1 className="App__title">
           {goodsInCart.length ? titleLengthCheck : 'No goods in cart'}
         </h1>
-        <button
-          type="button"
-          className="App__button--unselect"
-          onClick={this.unselectAll}
-        >
-          X
-        </button>
+        {!goodsInCart.length || (
+          <Button
+            action={this.unselectAll}
+            stylingClass="App__button--unselect"
+            text="X"
+          />
+        )}
         <ul className="App__list">
           {goodsFromServer.map(good => (
             <li
@@ -77,25 +73,21 @@ class App extends React.Component<{}, State> {
             >
               {good}
               {goodsInCart.includes(good) ? (
-                <button
-                  type="button"
-                  className="App__button--remove"
-                  onClick={() => {
+                <Button
+                  action={() => {
                     this.removeGood(good);
                   }}
-                >
-                  Remove
-                </button>
+                  stylingClass="App__button--remove"
+                  text="Remove"
+                />
               ) : (
-                <button
-                  type="button"
-                  className="App__button--add"
-                  onClick={() => {
+                <Button
+                  action={() => {
                     this.addGood(good);
                   }}
-                >
-                  Add
-                </button>
+                  stylingClass="App__button--add"
+                  text="Add"
+                />
               )}
             </li>
           ))}
