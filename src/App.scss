@@ -1,1 +1,37 @@
-// styles go here
+.App {
+ display: block;
+ margin: 30px;
+}
+
+.Goods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.GoodItem {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+.GoodItem_title {
+  color: #000;
+}
+
+.container {
+  display: flex;
+  align-items: baseline;
+}
+
+.item {
+  padding: 2px;
+}
+
+.item:not(:nth-last-child(-n+2)):after {
+  content: ',';  
+}
+
+.item:last-child::before {
+  content: 'and ';  
+}
