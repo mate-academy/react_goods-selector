@@ -51,6 +51,8 @@ class App extends React.Component<Props<State>, State> {
 
   render() {
     const { goodsInCart } = this.state;
+    const itemsExceptTheLast = goodsInCart.slice(0, goodsInCart.length - 1);
+    const lastItem = goodsInCart.slice(goodsInCart.length - 1);
 
     return (
       <div className="App">
@@ -64,8 +66,8 @@ class App extends React.Component<Props<State>, State> {
               {goodsInCart.length === 1 ? (
                 `${goodsInCart} is selected`
               ) : (
-                `${goodsInCart.slice(0, goodsInCart.length - 1).join(', ')}
-                and ${goodsInCart.slice(goodsInCart.length - 1)} are selected`
+                `${itemsExceptTheLast.join(', ')}
+                and ${lastItem} are selected`
               )}
             </h1>
             <button
