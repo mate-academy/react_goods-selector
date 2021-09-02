@@ -21,10 +21,10 @@ type State = {
 
 class App extends React.Component<{}, State> {
   state: State = {
-    selectedGoods: [],
+    selectedGoods: ['Jam'],
   };
 
-  deleteSelectedGoods = () => {
+  clearSelectedGoods = () => {
     this.setState({ selectedGoods: [] });
   };
 
@@ -41,11 +41,27 @@ class App extends React.Component<{}, State> {
     this.setState({ selectedGoods: changedGoods });
   };
 
+  getStringOfProducts = () => {
+    const { selectedGoods } = this.state;
+    let stringOfProducts = '';
+
+    if (selectedGoods.length > 1) {
+      const productsWithoutLast = selectedGoods.slice(0, -1);
+
+      stringOfProducts = `${productsWithoutLast.join(', ')} `
+       + `and ${selectedGoods[selectedGoods.length - 1]} are selected`;
+    } else {
+      stringOfProducts = `${selectedGoods[0]} is selected`;
+    }
+
+    return stringOfProducts;
+  };
+
   render() {
     const { selectedGoods } = this.state;
-    const stringOfGoods = selectedGoods.join(', ');
+    const stringOfGoods = this.getStringOfProducts();
     const listTitle = selectedGoods.length
-      ? `Selected goods: ${stringOfGoods}`
+      ? stringOfGoods
       : 'No goods selected';
 
     return (
@@ -54,11 +70,11 @@ class App extends React.Component<{}, State> {
           <h1>
             {listTitle}
           </h1>
-          {selectedGoods.length !== 0 && (
+          {!!selectedGoods.length && (
             <button
               type="button"
               className="btn btn-secondary"
-              onClick={this.deleteSelectedGoods}
+              onClick={this.clearSelectedGoods}
             >
               Clear
             </button>
