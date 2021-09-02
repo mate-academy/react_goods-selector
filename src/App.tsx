@@ -28,23 +28,26 @@ class App extends React.Component<{}, State> {
   array: string[] = [];
 
   addGood = (good: string) => {
-    this.array.push(good);
-    this.setState(() => ({
-      addedToCart: this.array,
+    this.setState((state) => ({
+      ...state,
+      addedToCart: [
+        ...state.addedToCart,
+        good,
+      ],
     }));
   };
 
   removeGood = (good: string) => {
-    this.array.splice(this.array.lastIndexOf(good), 1);
-    this.setState(() => ({
-      addedToCart: this.array,
+    this.setState((state) => ({
+      ...state,
+      addedToCart: state.addedToCart.filter(itemGood => itemGood !== good),
     }));
   };
 
   reset = () => {
-    this.array = [];
-    this.setState(() => ({
-      addedToCart: this.array,
+    this.setState((state) => ({
+      ...state,
+      addedToCart: [],
     }));
   };
 
