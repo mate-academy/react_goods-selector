@@ -45,13 +45,17 @@ class App extends React.Component<{}, State> {
     const { selectedGoods } = this.state;
     let stringOfProducts = '';
 
-    if (selectedGoods.length > 1) {
+    if (selectedGoods.length === 0) {
+      return 'No goods selected';
+    }
+
+    if (selectedGoods.length === 1) {
+      stringOfProducts = `${selectedGoods[0]} is selected`;
+    } else {
       const productsWithoutLast = selectedGoods.slice(0, -1);
 
       stringOfProducts = `${productsWithoutLast.join(', ')} `
        + `and ${selectedGoods[selectedGoods.length - 1]} are selected`;
-    } else {
-      stringOfProducts = `${selectedGoods[0]} is selected`;
     }
 
     return stringOfProducts;
@@ -60,15 +64,12 @@ class App extends React.Component<{}, State> {
   render() {
     const { selectedGoods } = this.state;
     const stringOfGoods = this.getStringOfProducts();
-    const listTitle = selectedGoods.length
-      ? stringOfGoods
-      : 'No goods selected';
 
     return (
       <div className="App">
         <div className="App__header">
           <h1>
-            {listTitle}
+            {stringOfGoods}
           </h1>
           {!!selectedGoods.length && (
             <button
