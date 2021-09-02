@@ -29,26 +29,16 @@ class App extends React.Component<{}, State> {
     selectedGoods: ['Jam'],
   };
 
-  goodsOperationsHandler = (
-    event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>,
-    operation: Operation,
-    good?: string,
-  ) => {
-    event.preventDefault();
-
+  goodsOperationsHandler = (operation: Operation, good: string) => {
     switch (operation) {
       case Operation.Add:
-        if (good) {
-          this.setState((state) => ({ selectedGoods: [...state.selectedGoods, good] }));
-        }
+        this.setState((state) => ({ selectedGoods: [...state.selectedGoods, good] }));
 
         break;
       case Operation.Remove:
-        if (good) {
-          this.setState((state) => (
-            { selectedGoods: state.selectedGoods.filter(goodItem => goodItem !== good) }
-          ));
-        }
+        this.setState((state) => (
+          { selectedGoods: state.selectedGoods.filter(goodItem => goodItem !== good) }
+        ));
 
         break;
       default:
@@ -95,11 +85,11 @@ class App extends React.Component<{}, State> {
                     ? (
                       <button
                         type="button"
-                        onClick={(event) => {
-                          this.goodsOperationsHandler(event, Operation.Remove, good);
+                        onClick={() => {
+                          this.goodsOperationsHandler(Operation.Remove, good);
                         }}
-                        onKeyDown={(event) => {
-                          this.goodsOperationsHandler(event, Operation.Remove, good);
+                        onKeyDown={() => {
+                          this.goodsOperationsHandler(Operation.Remove, good);
                         }}
                       >
                         Remove
@@ -108,11 +98,11 @@ class App extends React.Component<{}, State> {
                     : (
                       <button
                         type="button"
-                        onClick={(event) => {
-                          this.goodsOperationsHandler(event, Operation.Add, good);
+                        onClick={() => {
+                          this.goodsOperationsHandler(Operation.Add, good);
                         }}
-                        onKeyDown={(event) => {
-                          this.goodsOperationsHandler(event, Operation.Add, good);
+                        onKeyDown={() => {
+                          this.goodsOperationsHandler(Operation.Add, good);
                         }}
                       >
                         Add
