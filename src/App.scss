@@ -6,13 +6,14 @@
 .Goods {
   display: flex;
   flex-wrap: wrap;
+  flex-basis: 10%;
   gap: 50px;
 }
 
 .GoodItem {
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
+  margin-top: 50px;  
 }
 
 .GoodItem_title {
