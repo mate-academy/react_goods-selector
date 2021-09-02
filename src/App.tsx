@@ -72,42 +72,31 @@ class App extends React.Component<{}, State> {
           )}
         </div>
         <ul>
-          {goodsFromServer.map((good) => (
-            <li key={good}>
-              <div className="App__good">
-                <p className={classNames('App__good-text', { 'App__good-text-selected': selectedGoods.includes(good) })}>
-                  {good}
-                </p>
-                {selectedGoods.includes(good)
-                  ? (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        this.goodsOperationsHandler(Operation.Remove, good);
-                      }}
-                      onKeyDown={() => {
-                        this.goodsOperationsHandler(Operation.Remove, good);
-                      }}
-                    >
-                      Remove
-                    </button>
-                  )
-                  : (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        this.goodsOperationsHandler(Operation.Add, good);
-                      }}
-                      onKeyDown={() => {
-                        this.goodsOperationsHandler(Operation.Add, good);
-                      }}
-                    >
-                      Add
-                    </button>
-                  )}
-              </div>
-            </li>
-          ))}
+          {goodsFromServer.map((good) => {
+            const isSelected = selectedGoods.includes(good);
+            const removeOrAdd = isSelected ? Operation.Remove : Operation.Add;
+
+            return (
+              <li key={good}>
+                <div className="App__good">
+                  <p className={classNames('App__good-text', { 'App__good-text--selected': isSelected })}>
+                    {good}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      this.goodsOperationsHandler(removeOrAdd, good);
+                    }}
+                    onKeyDown={() => {
+                      this.goodsOperationsHandler(removeOrAdd, good);
+                    }}
+                  >
+                    {isSelected ? 'Remove' : 'Add'}
+                  </button>
+                </div>
+              </li>
+            );
+          })}
         </ul>
       </div>
     );
