@@ -29,7 +29,13 @@ export class App extends React.Component<{}, State> {
 
     if (!selectedGoods.includes(item)) {
       this.setState({ selectedGoods: [...selectedGoods, item] });
+
+      return;
     }
+
+    this.setState({
+      selectedGoods: selectedGoods.filter(inCart => inCart !== item),
+    });
   };
 
   render() {
@@ -75,15 +81,21 @@ export class App extends React.Component<{}, State> {
             {goodsFromServer.map(item => (
               <li className="App__item-wrapper" key={item}>
                 <button
-                  className={classNames('App__button', {
-                    'App__button--pressed': selectedGoods.includes(item),
-                  })}
+                  className="App__button"
                   type="button"
                   onClick={() => {
                     this.addItem(item);
                   }}
                 >
-                  +
+                  <p
+                    className={classNames(
+                      'App__button-text', {
+                        'App__button-text--pressed': selectedGoods.includes(item),
+                      },
+                    )}
+                  >
+                    +
+                  </p>
                 </button>
                 <p className="App__item">
                   {item}
