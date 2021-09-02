@@ -1,4 +1,4 @@
-import React, { Props } from 'react';
+import React from 'react';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -18,7 +18,7 @@ type State = {
   goodsInCart: string[];
 };
 
-class App extends React.Component<Props<State>, State> {
+class App extends React.Component<{}, State> {
   state: State = {
     goodsInCart: [],
   };
@@ -45,40 +45,30 @@ class App extends React.Component<Props<State>, State> {
   };
 
   unselectAll = () => {
-    this.state.goodsInCart = [];
     this.setState({ goodsInCart: [] });
   };
 
   render() {
     const { goodsInCart } = this.state;
-    const itemsExceptTheLast = goodsInCart.slice(0, goodsInCart.length - 1);
+    const itemsExceptLastOne = goodsInCart.slice(0, goodsInCart.length - 1);
     const lastItem = goodsInCart.slice(goodsInCart.length - 1);
+
+    const titleLengthCheck = goodsInCart.length > 1
+      ? `${itemsExceptLastOne.join(', ')} and ${lastItem} are selected`
+      : `${goodsInCart} is selected`;
 
     return (
       <div className="App">
-        {goodsInCart.length === 0 ? (
-          <h1 className="App__title">
-            No goods in cart
-          </h1>
-        ) : (
-          <>
-            <h1 className="App__title">
-              {goodsInCart.length === 1 ? (
-                `${goodsInCart} is selected`
-              ) : (
-                `${itemsExceptTheLast.join(', ')}
-                and ${lastItem} are selected`
-              )}
-            </h1>
-            <button
-              type="button"
-              className="App__button--unselect"
-              onClick={this.unselectAll}
-            >
-              X
-            </button>
-          </>
-        )}
+        <h1 className="App__title">
+          {goodsInCart.length ? titleLengthCheck : 'No goods in cart'}
+        </h1>
+        <button
+          type="button"
+          className="App__button--unselect"
+          onClick={this.unselectAll}
+        >
+          X
+        </button>
         <ul className="App__list">
           {goodsFromServer.map(good => (
             <li

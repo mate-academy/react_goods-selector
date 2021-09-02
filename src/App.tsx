@@ -1,4 +1,4 @@
-import React, { Props } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import './App.scss';
 
@@ -16,10 +16,10 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  selectedGood: string | null;
+  selectedGood: string;
 };
 
-class App extends React.Component<Props<State>, State> {
+class App extends React.Component<{}, State> {
   state: State = {
     selectedGood: 'Jam',
   };
@@ -30,8 +30,7 @@ class App extends React.Component<Props<State>, State> {
   };
 
   unselectAll = () => {
-    this.state.selectedGood = null;
-    this.setState({ selectedGood: null });
+    this.setState({ selectedGood: '' });
   };
 
   render() {
