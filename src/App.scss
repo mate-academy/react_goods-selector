@@ -4,16 +4,11 @@ body {
 
 .goods {
   text-align: center;
-  width: 100px;
-  cursor: pointer;
+  width: 20%;
   padding: 3px;
   margin: 5px;
   border: 1px solid rgb(68, 101, 109);
   border-radius: 20px;
-}
-
-.goods:active {
-  background-color: rgb(141, 145, 206);
 }
 
 .goods__unvisited {
@@ -23,8 +18,13 @@ body {
 .goods__visited {
   background-color: rgb(187, 255, 0);
 }
+.select{
+  margin-left: 20px;
+  padding: 10px;
+}
 
 .button {
+  display: inline-block;
   padding: 5px;
   border-radius: 30px;
 }

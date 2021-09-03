@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
+// import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -15,81 +16,102 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-interface Option {
-  [key: string]: boolean;
-}
-
 type State = {
   goods?: string;
-  visited: Option;
+  products: string[];
 };
 
 class App extends React.Component<{}, State> {
   state: State = {
-    visited: { Jam: true },
+    products: ['Jam'],
+  };
+
+  stringEdit = () => {
+    const { products } = this.state;
+
+    const copyProducts = [...products];
+
+    copyProducts[products.length - 1] = `and ${products[products.length - 1]} are selected`;
+    const result = copyProducts.join(', ');
+    const indexOfcomma = result.lastIndexOf(',');
+
+    const firstHalf = result.substr(0, indexOfcomma);
+    const secondHalf = result.substr(indexOfcomma + 1, result.length);
+
+    return firstHalf + secondHalf;
   };
 
   render() {
-    const keys = Object.keys(this.state.visited);
-
+    const { products } = this.state;
     const performGoods = () => {
-      const finn = keys.filter(key => this.state.visited[key]);
-
-      if (finn.length === 1) {
-        return `${finn} is selected`;
+      if (products.length === 1) {
+        return `${products} is selected`;
       }
 
-      if (finn.length === 2) {
-        return `${finn.join(' and ')} are selected`;
+      if (products.length === 2) {
+        return `${[...products].join(' and ')} are selected`;
       }
 
-      if (finn.length > 2) {
-        finn[finn.length - 1] = `and ${finn[finn.length - 1]}`;
-
-        return `${finn.join(', ')} are selected`;
+      if (products.length > 2) {
+        return this.stringEdit();
       }
 
       return 'No goods selected';
     };
-
-    const showButton = () => keys.some(key => this.state.visited[key]);
 
     return (
       <div className="App">
         <h1>
           {performGoods()}
         </h1>
+
         <button
           type="button"
-          className={`button ${(showButton()) ? 'button__visible' : 'button__hide'}`}
+          className={`button ${(products.length) ? 'button__visible' : 'button__hide'}`}
           onClick={() => {
-            if (Object.keys(this.state.visited).length > 0) {
-              this.setState({ visited: {} });
+            if (products.length > 0) {
+              this.setState({ products: [] });
             }
           }}
         >
           X CLEAR X
         </button>
+
         <ol>
           {goodsFromServer.map(product => {
-            const { visited } = this.state;
-
             return (
-            // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-            // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
               <li
                 key={product}
-                onClick={() => {
-                  this.setState((prevState) => ({
-                    visited: {
-                      ...prevState.visited,
-                      [product]: !prevState.visited[product],
-                    },
-                  }));
-                }}
-                className={`goods ${(visited[product]) ? 'goods__unvisited' : 'goods__visited'}`}
+                className={`goods ${products.includes(product) ? 'goods__unvisited' : 'goods__visited'}`}
               >
                 {product}
+
+                <button
+                  type="button"
+                  className="select"
+                  onClick={() => {
+                    if (!products.includes(product)) {
+                      this.setState((prevState) => ({
+                        products: [
+                          ...prevState.products,
+                          product,
+                        ],
+                      }));
+                    } else {
+                      const indexOf = products.indexOf(product);
+
+                      products.splice(indexOf, 1);
+
+                      this.setState((prevState) => ({
+                        products: [
+                          ...prevState.products,
+                        ],
+                      }));
+                    }
+                  }}
+                >
+                  Select
+                </button>
               </li>
             );
           })}
