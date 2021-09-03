@@ -1,1 +1,133 @@
-// styles go here
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+
+$color-main: #ff9e00;
+
+h1,
+ul,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  background-color: #3f1268;
+}
+
+.App {
+
+  &__container {
+    max-width: 800px;
+    margin: 48px auto;
+  }
+
+  &__header {
+    overflow: hidden;
+    background-color: $color-main;
+    border: 2px solid $color-main;
+    border-radius: 24px;
+  }
+
+  &__title {
+    position: relative;
+    padding: 16px;
+  }
+
+  &__selected-items {
+    padding: 16px;
+    list-style: none;
+    background-color: #fff;
+  }
+
+  &__items {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    justify-content: center;
+    row-gap: 32px;
+    column-gap: 64px;
+    padding: 16px;
+    margin-top: 36px;
+    width: 100%;
+    list-style: none;
+  }
+
+  &__item-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: row-reverse;
+    font-weight: bold;
+    width: 100%;
+    border-radius: 16px;
+    border: 2px solid $color-main;
+    background-color: #fff;
+    overflow: hidden;
+  }
+
+  &__item {
+    flex-grow: 1;
+    padding: 16px;
+    color: #000;
+    transition: color 0.3s;
+    z-index: 2;
+  }
+
+  &__button {
+    padding: 0 16px;
+    color: #fff;
+    font-size: 32px;
+    font-weight: bold;
+    border: none;
+    height: auto;
+    align-self: stretch;
+    background-color: $color-main;
+    cursor: pointer;
+    z-index: 1;
+
+    &::before {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 0%;
+      height: 100%;
+      background-color: $color-main;
+      transition: width 0.3s;
+      z-index: -1;
+    }
+
+    &:hover {
+      &::before {
+        background-color: $color-main;
+        width: 100%;
+      }
+    }
+
+    &:hover + .App__item {
+      color: #fff;
+    }
+  }
+
+  &__clear-button {
+    position: absolute;
+    right: 16px;
+    top: 0;
+    height: 100%;
+    font-size: 200%;
+    font-weight: bold;
+    transform: rotate(45deg);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  &__button-text {
+    transition: transform 0.3s;
+    &--pressed {
+      color: #000;
+      transform: rotate(45deg);
+    }
+  }
+}
