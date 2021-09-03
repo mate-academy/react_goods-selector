@@ -25,12 +25,6 @@ class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  selectItem = (good: string) => {
-    this.setState({
-      selectedGood: good,
-    });
-  };
-
   render() {
     const { selectedGood } = this.state;
 
@@ -61,19 +55,16 @@ class App extends React.Component<{}, State> {
               }
             >
               {good}
-              {
-                selectedGood === good || (
-                  <button
-                    type="button"
-                    className="list__button"
-                    onClick={() => {
-                      this.selectItem(good);
-                    }}
-                  >
-                    Select
-                  </button>
-                )
-              }
+              <button
+                type="button"
+                className="list__button"
+                onClick={() => {
+                  this.setState({ selectedGood: good });
+                }}
+                hidden={selectedGood === good}
+              >
+                Select
+              </button>
             </li>
           ))}
         </ul>
