@@ -58,15 +58,18 @@ class App extends React.Component<{}, State> {
           Selected goods: -&nbsp;
           {this.message()}
         </h1>
-
-        <button
-          className="button button--reset"
-          type="button"
-          value="button"
-          onClick={this.clear}
-        >
-          Clear All
-        </button>
+        {this.state.selectedGoods.length > 1
+          ? (
+            <button
+              className="button button--reset"
+              type="button"
+              value="button"
+              onClick={this.clear}
+            >
+              Clear All
+            </button>
+          )
+          : (' ')}
         <ul className="list">
           {goodsFromServer.map(good => {
             return (
