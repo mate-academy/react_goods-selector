@@ -36,9 +36,6 @@ h2 {
   border: 1px solid black;
   border-radius: 10px;
 
-  &__active {
-    background-color:lighten(green, 10%)
-  }
   &__title {
     margin-top: 20px;
   }
@@ -56,12 +53,7 @@ h2 {
       background-color: green;
       border: none;
     }
-  
-    &--remove:hover {
-      background-color: red;
-      border: none;
-    }
-
+    
     &--reset {
       position: relative;
       top: 20px;
@@ -80,4 +72,8 @@ h2 {
 .card-btn {
   display: flex;
   flex-direction: column;
+}
+
+.isActive {
+  background-color:lighten(green, 10%)
 }

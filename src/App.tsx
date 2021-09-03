@@ -30,17 +30,9 @@ class App extends React.Component<{}, State> {
     }));
   };
 
-  removeToSelectedGood = (good: string) => {
-    const { selectedGoods } = this.state;
-
-    if (selectedGoods.includes(good)) {
-      const index = selectedGoods.lastIndexOf(good);
-
-      selectedGoods.splice(index, 1);
-    }
-
+  removeFromSelectedGood = (good: string) => {
     this.setState((state) => ({
-      selectedGoods: [...state.selectedGoods],
+      selectedGoods: [...state.selectedGoods.filter(item => item !== good)],
     }));
   };
 
@@ -52,7 +44,7 @@ class App extends React.Component<{}, State> {
 
   render() {
     const { selectedGoods } = this.state;
-    const { addToSelectedGood, removeToSelectedGood, resetState } = this;
+    const { addToSelectedGood, removeFromSelectedGood, resetState } = this;
 
     return (
       <div className="App">
@@ -61,25 +53,27 @@ class App extends React.Component<{}, State> {
             ? (`${selectedGoods.join(', ')} selected`)
             : ('No goods selected')}
         </h1>
-        {selectedGoods.length
-          ? (
-            <button
-              className="card__btn card__btn--reset"
-              type="button"
-              onClick={resetState}
-            >
-              Clear
-            </button>
-          )
-          : null}
+        {selectedGoods.length && (
+          <button
+            className="card__btn card__btn--reset"
+            type="button"
+            onClick={resetState}
+          >
+            Clear
+          </button>
+        )}
         <div className="container">
           {goodsFromServer.map(good => (
-            <div className={classNames(
-              'card',
-              { card__active: selectedGoods.includes(good) },
-            )}
+            <div
+              key={good}
+              className={classNames(
+                'card',
+                {
+                  isActive: selectedGoods.includes(good),
+                },
+              )}
             >
-              <h2 className="card__title" key={good}>
+              <h2 className="card__title">
                 {good}
               </h2>
               <div className="card-btn">
@@ -87,20 +81,16 @@ class App extends React.Component<{}, State> {
                   className="card__btn card__btn--select"
                   type="button"
                   onClick={() => {
-                    addToSelectedGood(good);
+                    if (selectedGoods.includes(good)) {
+                      removeFromSelectedGood(good);
+                    } else {
+                      addToSelectedGood(good);
+                    }
                   }}
                 >
-                  Select
-                </button>
-
-                <button
-                  className="card__btn card__btn--remove"
-                  type="button"
-                  onClick={() => {
-                    removeToSelectedGood(good);
-                  }}
-                >
-                  Remove
+                  {selectedGoods.includes(good)
+                    ? 'Remove'
+                    : 'Add'}
                 </button>
               </div>
             </div>
