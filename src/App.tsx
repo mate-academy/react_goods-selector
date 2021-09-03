@@ -17,56 +17,81 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  selectedGood: string;
+  selectedGoods: string[];
 };
 
 class App extends React.Component<{}, State> {
   state = {
-    selectedGood: 'Jam',
+    selectedGoods: ['Jam'],
+  };
+
+  addOrDelGood = (toggler: boolean, good: string) => {
+    if (toggler) {
+      this.setState((state) => ({
+        selectedGoods: state.selectedGoods.filter(item => item !== good),
+      }));
+    } else {
+      this.setState((state) => ({
+        selectedGoods: [...state.selectedGoods, good],
+      }));
+    }
   };
 
   render() {
-    const { selectedGood } = this.state;
+    const { selectedGoods } = this.state;
+
+    const amountGoods = (amount: number) => {
+      if (!amount) {
+        return 'No goods selected';
+      }
+
+      if (amount > 1) {
+        return `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods.slice(-1)} are selected`;
+      }
+
+      return `${selectedGoods[0]} is selected`;
+    };
 
     return (
       <div className="App">
         <h1 className="App__title">
-          {
-            selectedGood
-              ? `Selected good: - ${selectedGood}`
-              : 'No goods selected'
-          }
+          {amountGoods(selectedGoods.length)}
         </h1>
-        <button
-          type="button"
-          className="App__button"
-          onClick={() => {
-            this.setState({ selectedGood: '' });
-          }}
-        >
-          X
-        </button>
+        {!!selectedGoods.length && (
+          <button
+            type="button"
+            className="App__button"
+            onClick={() => {
+              this.setState({ selectedGoods: [] });
+            }}
+          >
+            X
+          </button>
+        )}
         <ul className="list">
-          {goodsFromServer.map(good => (
-            <li
-              key={good}
-              className={
-                classNames('list__good', { list__active: selectedGood === good })
-              }
-            >
-              {good}
-              <button
-                type="button"
-                className="list__button"
-                onClick={() => {
-                  this.setState({ selectedGood: good });
-                }}
-                hidden={selectedGood === good}
+          {goodsFromServer.map(good => {
+            const toggler = selectedGoods.includes(good);
+
+            return (
+              <li
+                key={good}
+                className={
+                  classNames('list__good', { list__active: toggler })
+                }
               >
-                Select
-              </button>
-            </li>
-          ))}
+                {good}
+                <button
+                  type="button"
+                  className="list__button"
+                  onClick={() => {
+                    this.addOrDelGood(toggler, good);
+                  }}
+                >
+                  {toggler ? '-' : '+'}
+                </button>
+              </li>
+            );
+          })}
         </ul>
       </div>
     );
