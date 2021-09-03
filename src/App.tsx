@@ -25,7 +25,7 @@ class App extends React.Component<{}, State> {
   };
 
   addProduct = (product: string) => {
-    this.setState((prevState: State): State => {
+    this.setState((prevState) => {
       const { selectedGoods } = prevState;
 
       return { selectedGoods: [...selectedGoods, product] };
@@ -33,7 +33,7 @@ class App extends React.Component<{}, State> {
   };
 
   deleteProduct = (product: string) => {
-    this.setState((state: State) : State => {
+    this.setState((state) => {
       return { selectedGoods: state.selectedGoods.filter(item => item !== product) };
     });
   };
@@ -62,10 +62,10 @@ class App extends React.Component<{}, State> {
     return (
       <div className="app">
         <h1 className="app__heading">
-          {length > 0 ? `${whatIsSelected} ${toBeForm} selected` : 'Nothing is selected'}
+          {length ? `${whatIsSelected} ${toBeForm} selected` : 'No goods selected'}
         </h1>
 
-        {selectedGoods.length > 0 && (
+        {!!selectedGoods.length && (
           <button
             type="button"
             onClick={this.clearSelection}
