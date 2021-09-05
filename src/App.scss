@@ -1,1 +1,9 @@
-// styles go here
+.goods {
+  &__prop {
+    margin-bottom: 5px;
+  }
+
+  &__item {
+    margin-right: 10px;
+  }
+}
