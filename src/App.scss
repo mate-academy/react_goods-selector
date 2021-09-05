@@ -1,1 +1,21 @@
-// styles go here
+.app {
+  &__title {
+    display: inline-block;
+    margin-right: 20px;
+  }
+
+  &__item {
+    display: inline-block;
+    width: 80px;
+    margin: 20px;
+    font-size: 20px;
+  }
+
+  &__button {
+    background-color: rgb(203, 233, 223);
+  }
+
+  &__selected {
+    text-decoration: underline;
+  }
+}
