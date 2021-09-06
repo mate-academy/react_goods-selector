@@ -60,14 +60,13 @@ export class App extends React.Component<{}, State> {
           )}
         </div>
 
-        <ul className="pt-5 row row-cols-auto">
+        <ul className="pt-5 row row-cols-auto d-flex justify-content-center">
           {goodsFromServer.map(good => (
             <div className={classNames(`
             col-6
             d-flex
             flex-column
-            justify-content-center
-            align-items-center
+            align-self-center
             border
             border-secondary
             rounded
