@@ -40,6 +40,20 @@ class App extends React.Component<{}, State> {
     });
   };
 
+  setListClear = () => {
+    this.setState((state) => {
+      const newGoods = Object.keys(state.selectedGood)
+        .reduce((a, b) => ({
+          ...a,
+          [b]: false,
+        }), {});
+
+      return {
+        selectedGood: newGoods,
+      };
+    });
+  };
+
   render() {
     const products = Object.keys(this.state.selectedGood)
       .filter(good => this.state.selectedGood[good]);
@@ -72,19 +86,7 @@ class App extends React.Component<{}, State> {
             <button
               type="button"
               className="App__clear-btn"
-              onClick={() => {
-                this.setState((state) => {
-                  const newGoods = Object.keys(state.selectedGood)
-                    .reduce((a, b) => ({
-                      ...a,
-                      [b]: false,
-                    }), {});
-
-                  return {
-                    selectedGood: newGoods,
-                  };
-                });
-              }}
+              onClick={this.setListClear}
             >
               Clear
             </button>
