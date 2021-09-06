@@ -1,1 +1,31 @@
-// styles go here
+.App {
+  height: 100vh;
+  background-color: rgb(59, 209, 209);
+  padding: 100px;
+}
+
+.title {
+  text-align: center;
+  font-size: 20px;
+}
+
+.btn-center {
+  display: block !important;
+  width: 50px;
+  margin: 0 auto !important;
+}
+
+.list-group {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.list-group-item-info {
+  display: flex !important;
+  justify-content: space-between;
+  height: 50px;
+}
+
+.visible {
+  display: none !important;
+}
