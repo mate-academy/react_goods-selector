@@ -24,7 +24,7 @@ class App extends React.Component<unknown, State> {
     selectedGoods: ['Jam'],
   };
 
-  removeSelectedGood = () => {
+  removeSelectedGoods = () => {
     this.setState(() => ({
       selectedGoods: [],
     }));
@@ -47,7 +47,14 @@ class App extends React.Component<unknown, State> {
             `${title} is selected`) : ('No goods selected')}
 
           {selectedGoods.length ? (
-            <button type="button" className="btn btn-outline-danger btn-sm" onClick={this.removeSelectedGood}>x</button>) : (<></>)}
+            <button
+              type="button"
+              className="btn btn-outline-danger btn-sm"
+              onClick={this.removeSelectedGoods}
+            >
+              x
+            </button>
+          ) : (<></>)}
         </div>
 
         <ul className="list-group-item">
