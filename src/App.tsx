@@ -36,6 +36,12 @@ class App extends React.Component<unknown, State> {
     }))
   );
 
+  clearGoods = () => {
+    this.setState({
+      selectedGoods: [],
+    });
+  };
+
   goodsCreator = (selectedGoods: string[]) => {
     let goods = '';
 
@@ -68,7 +74,15 @@ class App extends React.Component<unknown, State> {
     return (
       <div className="App">
         <main className="main">
+
           <h1 className="title">
+            <button
+              type="button"
+              className="goods__button goods__button--close"
+              onClick={this.clearGoods}
+            >
+              X
+            </button>
             {
               selectedGoods.length
                 ? `Selected goods ${this.goodsCreator(selectedGoods)}`
