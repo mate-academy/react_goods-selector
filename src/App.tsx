@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-// import classNames from 'classnames';
+import classNames from 'classnames';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const goodsFromServer: string[] = [
@@ -17,19 +17,15 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  selectedGoods: string[];
   selectedGood: string,
-  bgColor: string,
 };
 
 export class App extends React.Component<{}, State> {
   state = {
-    selectedGoods: goodsFromServer,
     selectedGood: 'Jam',
-    bgColor: 'bg-success text-light',
   };
 
-  titleHandler = (selectedGood: string) => {
+  title = (selectedGood: string) => {
     return this.state.selectedGood
       ? `${selectedGood} is selected`
       : 'No goods selected';
@@ -44,14 +40,15 @@ export class App extends React.Component<{}, State> {
   };
 
   render() {
-    const { selectedGoods, selectedGood, bgColor } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <div className="container-sm">
         <div className="text-center">
           <h1 className="">
-            {this.titleHandler(selectedGood)}
+            {this.title(selectedGood)}
           </h1>
+
           {selectedGood && (
             <button
               className="rounded border-0"
@@ -62,20 +59,21 @@ export class App extends React.Component<{}, State> {
             </button>
           )}
         </div>
+
         <ul className="pt-5 row row-cols-auto">
-          {selectedGoods.map(good => (
-            <div className={`
-              col-md-6
-              d-flex
-              flex-column
-              justify-content-center
-              align-items-center
-              border
-              border-secondary
-              rounded
-              w-25
-              m-2
-              ${good === selectedGood ? bgColor : ''}`}
+          {goodsFromServer.map(good => (
+            <div className={classNames(`
+            col-6
+            d-flex
+            flex-column
+            justify-content-center
+            align-items-center
+            border
+            border-secondary
+            rounded
+            w-25
+            m-2`,
+            { 'bg-success text-light': good === selectedGood })}
             >
               <li
                 key={good}
@@ -84,6 +82,7 @@ export class App extends React.Component<{}, State> {
                 {good}
                 {' '}
               </li>
+
               {selectedGood !== good
                 && (
                   <button
