@@ -1,1 +1,75 @@
-// styles go here
+body {
+  margin: 0;
+  background-color: aquamarine;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: cursive;
+}
+
+.App {
+  width: 700px;
+  border-radius: 10px;
+  background-color: burlywood;
+  padding: 15px;
+}
+
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+}
+
+.title-button {
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(202, 92, 64);
+
+  &--visible {
+    display: none;
+  }
+}
+
+.goodsList {
+  padding: 0;
+
+  &__item {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: cornflowerblue;
+    height: 35px;
+    margin-top: 5px;
+    border-radius: 10px;
+    padding: 0 20px;
+
+    &--active {
+      background-color: rgb(65, 172, 65);
+    }
+  }
+
+  &__button {
+    height: 30px;
+    background-color: rgb(65, 172, 65);
+    border: none;
+    border-radius: 10px;
+  
+    &--remove {
+      background-color: rgb(202, 92, 64);
+    }
+
+    &--visible {
+      display: none;
+    }
+  }
+}
