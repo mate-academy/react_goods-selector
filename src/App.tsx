@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -66,37 +67,40 @@ class App extends React.Component<unknown, State> {
 
     return (
       <div className="App">
-        <h1>
-          {
-            selectedGoods.length
-              ? `Selected goods ${this.goodsCreator(selectedGoods)}`
-              : 'No goods selected'
-          }
-        </h1>
+        <main className="main">
+          <h1 className="title">
+            {
+              selectedGoods.length
+                ? `Selected goods ${this.goodsCreator(selectedGoods)}`
+                : 'No goods selected'
+            }
+          </h1>
 
-        <ul className="goods">
-          {goodsFromServer
-            .map((good) => (
-              <li className="goods__prop" key={good}>
-                <span className="goods__item">
-                  {good}
-                </span>
+          <ul className="goods">
+            {goodsFromServer
+              .map((good) => (
+                <li className="goods__prop" key={good}>
+                  <span className={classNames('goods__item', { goods__selected: selectedGoods.includes(good) })}>
+                    {good}
+                  </span>
 
-                <button
-                  type="button"
-                  className="goods__button"
-                  onClick={() => {
-                    return selectedGoods.includes(good)
-                      ? this.removeGood(good)
-                      : this.addGood(good);
-                  }}
-                >
-                  {selectedGoods.includes(good) ? 'Remove' : 'Add'}
-                </button>
-              </li>
-            ))}
-        </ul>
+                  <button
+                    type="button"
+                    className="goods__button"
+                    onClick={() => {
+                      return selectedGoods.includes(good)
+                        ? this.removeGood(good)
+                        : this.addGood(good);
+                    }}
+                  >
+                    {selectedGoods.includes(good) ? 'Remove' : 'Add'}
+                  </button>
+                </li>
+              ))}
+          </ul>
+        </main>
       </div>
+
     );
   }
 }
