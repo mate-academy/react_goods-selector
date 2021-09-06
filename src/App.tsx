@@ -66,7 +66,8 @@ export class App extends React.Component<{}, State> {
             col-6
             d-flex
             flex-column
-            align-self-center
+            justify-content-center
+            align-items-center
             border
             border-secondary
             rounded
