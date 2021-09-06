@@ -31,22 +31,24 @@ class App extends React.Component<unknown, State> {
   };
 
   addSelectedGood = (good: string) => (
-    this.setState(prevState => ({
-      selectedGoods: [...prevState.selectedGoods, good],
+    this.setState(currentState => ({
+      selectedGoods: [...currentState.selectedGoods, good],
     }))
   );
 
   render() {
     const { selectedGoods } = this.state;
     const title = selectedGoods[selectedGoods.length - 1];
+    const hasTitle = selectedGoods.length > 0;
 
     return (
       <div className="App container">
         <div className="h1 d-flex justify-content-between">
-          {selectedGoods.length ? (
-            `${title} is selected`) : ('No goods selected')}
+          {hasTitle
+            ? `${title} is selected`
+            : ('No goods selected')}
 
-          {selectedGoods.length ? (
+          {hasTitle && (
             <button
               type="button"
               className="btn btn-outline-danger btn-sm"
@@ -54,7 +56,7 @@ class App extends React.Component<unknown, State> {
             >
               x
             </button>
-          ) : (<></>)}
+          )}
         </div>
 
         <ul className="list-group-item">
