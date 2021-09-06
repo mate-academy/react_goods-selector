@@ -1,1 +1,43 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body,
+h1,
+h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  &__title {
+    text-align: center;
+    margin-top: 20px;
+  }
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+
+  &__title {
+    margin-top: 20px;
+  }
+
+  &__button {
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+
+    &--reset {
+      display: block;
+      margin: 20px auto 0;
+    }
+  }
+}
