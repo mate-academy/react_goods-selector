@@ -1,1 +1,48 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.App {
+  background-color: bisque;
+  height: 100vh;
+}
+
+.main {
+  padding: 20px;
+}
+
+.title {
+  margin: 0;
+}
+
+.goods {
+  &__prop {
+    margin-bottom: 5px;
+  }
+
+  &__item {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px;
+    border-radius: 10px;
+  }
+
+  &__selected {
+    background-color: yellow;
+  }
+
+  &__button {
+    border-radius: 10px;
+    background-color: yellow;
+
+    &--close {
+      border-radius: 50%;
+      margin-right: 20px;
+      transform: translateY(-10px);
+    }
+  }
+}
