@@ -77,20 +77,8 @@ class App extends React.Component<{}, State> {
       <div className="App">
         <div className="App__header">
           <h1 className="App__title">
-            <span className="App__text">Selected Goods:</span>
-            {this.showSelectedProducts(selectedGoods)}
+            Goods
           </h1>
-          <button
-            type="button"
-            className={selectedGoods.length < 1
-              ? 'App__button--reset-off'
-              : 'App__button--reset'}
-            onClick={() => {
-              this.resetProduts();
-            }}
-          >
-            Reset
-          </button>
         </div>
         <section className="App__list">
           <div className="App__items">
@@ -116,6 +104,29 @@ class App extends React.Component<{}, State> {
                 </button>
               </li>
             ))}
+          </div>
+          <div className="App__column">
+            <h2 className="App__column-title">
+              Selected Goods:
+              {this.showSelectedProducts(selectedGoods)}
+            </h2>
+            <ul className="App__column-list">
+              {selectedGoods.map(item => (
+                <li className="App__column-item">{item}</li>
+              ))}
+            </ul>
+
+            <button
+              type="button"
+              className={selectedGoods.length < 1
+                ? 'App__button--reset-off'
+                : 'App__button--reset'}
+              onClick={() => {
+                this.resetProduts();
+              }}
+            >
+              Reset
+            </button>
           </div>
         </section>
       </div>

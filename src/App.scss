@@ -22,45 +22,15 @@ p {
   }
 
   &__title {
-    font-family: sans-serif;
-    font-weight: 300;
-    font-size: 25px;
-  }
-
-  &__text {
     font-size: 35px;
     font-weight: 700;
     font-family: sans-serif;
   }
 
-  &__button--reset {
-    margin-top: 30px;
-    padding: 10px 40px;
-    background-color: white;
-    border: 1px solid #a9a9a9;
-    border-radius: 4px;
-    opacity: 1;
-    transition: opacity 0.3s, background-color 0.4s;
-
-    &:hover {
-      background-color: #ffd700;
-      border: 1px solid transparent;
-    }
-  }
-
-  &__button--reset-off {
-    margin-top: 30px;
-    padding: 10px 40px;
-    background-color: white;
-    border: 1px solid #a9a9a9;
-    border-radius: 4px;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
   &__list {
+    display: flex;
     margin-top: 50px;
-    width: 60%;
+    width: 80%;
   }
 
   &__items {
@@ -77,9 +47,14 @@ p {
     align-items: center;
     min-width: 200px;
     min-height: 300px;
-    background-color: white;
+    background-color: #fff;
     border: #a9a9a9 solid 1px;
     border-radius: 20px;
+    transition: background-color 0.3s;
+
+    &-select {
+      background-color: #dcdcdc;
+    }
   }
 
   &__description {
@@ -99,6 +74,60 @@ p {
 
     &:hover {
       box-shadow: 3px 4px 18px -2px rgba(34, 60, 80, 0.2);
+    }
+  }
+
+  &__button--reset {
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    height: 45px;
+    width: 130px;
+    background-color: white;
+    border-radius: 4px;
+    opacity: 1;
+    transition: opacity 0.3s, background-color 0.4s, color 0.3s;
+    border: 0;
+
+    &:hover {
+      background-color: #ffd700;
+      color: #fff;
+    }
+  }
+
+  &__button--reset-off {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+    height: 45px;
+    width: 130px;
+    background-color: white;
+    border: 0;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  &__column {
+    position: relative;
+
+    min-height: 100%;
+    min-width: 300px;
+    background-color: #dcdcdc;
+    border-radius: 20px;
+
+    &-title {
+      margin: 40px 30px;
+      font-family: sans-serif;
+      font-size: 22px;
+      font-weight: 500;
+    }
+
+    &-item {
+      margin-top: 10px;
+      font-family: sans-serif;
     }
   }
 }
