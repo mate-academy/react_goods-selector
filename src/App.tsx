@@ -25,14 +25,14 @@ class App extends React.Component<{}, State> {
   };
 
   addToSelectedGood = (good: string) => {
-    this.setState((state) => ({
-      selectedGoods: [...state.selectedGoods, good],
+    this.setState((currentState) => ({
+      selectedGoods: [...currentState.selectedGoods, good],
     }));
   };
 
   removeFromSelectedGood = (good: string) => {
-    this.setState((state) => ({
-      selectedGoods: [...state.selectedGoods.filter(item => item !== good)],
+    this.setState((currentState) => ({
+      selectedGoods: [...currentState.selectedGoods.filter(item => item !== good)],
     }));
   };
 
@@ -49,19 +49,21 @@ class App extends React.Component<{}, State> {
     return (
       <div className="App">
         <h1 className="App__title">
-          {selectedGoods.length
+          {selectedGoods.length > 0
             ? (`${selectedGoods.join(', ')} selected`)
             : ('No goods selected')}
         </h1>
-        {selectedGoods.length && (
-          <button
-            className="card__btn card__btn--reset"
-            type="button"
-            onClick={resetState}
-          >
-            Clear
-          </button>
-        )}
+        {selectedGoods.length > 0
+          ? (
+            <button
+              className="card__btn card__btn--reset"
+              type="button"
+              onClick={resetState}
+            >
+              Clear
+            </button>
+          )
+          : ''}
         <div className="container">
           {goodsFromServer.map(good => (
             <div
