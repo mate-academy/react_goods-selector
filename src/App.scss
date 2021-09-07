@@ -1,1 +1,40 @@
 // styles go here
+html {
+  font-size: 14px;
+}
+.App {
+  height: 100vh;
+  background-color: aqua;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.goods-selector {
+  background-color: red;
+  width: 400px;
+
+  &__list {
+    border-radius: 10px;
+  }
+  &__list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+  }
+
+  &__header {
+    text-align: center;
+    font-size: 26px;
+  }
+
+  &__header-container {
+    position: relative;
+  }
+
+  &__header-button {
+    position: absolute;
+    bottom: 5px;
+    right: 20px;
+  }
+}
