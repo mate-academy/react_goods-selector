@@ -17,36 +17,54 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  selectedGood: string,
+  selectedGoods: string[],
 };
 
 class App extends React.Component<{}, State> {
   state = {
-    selectedGood: 'Jam',
+    selectedGoods: ['Jam'],
   };
 
-  title = (selectedGood: string) => {
-    return this.state.selectedGood
-      ? `${selectedGood} is selected`
-      : 'No goods selected';
+  title = () => {
+    const { selectedGoods } = this.state;
+
+    let message;
+
+    if (selectedGoods.length === 0) {
+      message = 'No goods selected';
+    }
+
+    if (selectedGoods.length === 1) {
+      message = `${selectedGoods[0]} is selected`;
+    }
+
+    if (selectedGoods.length >= 2) {
+      const firstPart = selectedGoods.slice(0, selectedGoods.length);
+
+      message = `${firstPart} are selected`;
+    }
+
+    return message;
   };
 
-  selecetGood = (good: string) => {
-    this.setState({ selectedGood: good });
+  selecetGood = (item: string) => {
+    this.setState((prevState) => ({
+      selectedGoods: [...prevState.selectedGoods, item],
+    }));
   };
 
   clearGood = () => {
-    this.setState({ selectedGood: '' });
+    this.setState({ selectedGoods: [] });
   };
 
   render() {
-    const { selectedGood } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App">
         <h1 className=".container-xxl d-flex justify-content-center">
-          {this.title(selectedGood)}
-          {selectedGood && (
+          {this.title()}
+          {selectedGoods.length >= 1 && (
             <button
               className="rounded border-0 btn btn-success"
               type="button"
@@ -62,12 +80,11 @@ class App extends React.Component<{}, State> {
               className={classNames(
                 'w-auto p-3',
                 'rounded',
-                { 'bg-success': good === selectedGood },
+                { 'bg-success': selectedGoods.includes(good) },
               )}
               key={good}
             >
               {good}
-              {' '}
               <button
                 className="btn btn-primary"
                 type="button"
