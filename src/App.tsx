@@ -44,6 +44,12 @@ class App extends React.Component<{}, State> {
     }
   };
 
+  removeAllSameGood = (value: string) => {
+    this.setState((state) => ({
+      selectedGoods: state.selectedGoods.filter(item => item !== value),
+    }));
+  };
+
   resetGoods = () => {
     this.setState({ selectedGoods: [] });
   };
@@ -101,6 +107,7 @@ class App extends React.Component<{}, State> {
                 >
                   Add
                 </button>
+
                 <button
                   type="button"
                   onClick={() => {
@@ -108,6 +115,15 @@ class App extends React.Component<{}, State> {
                   }}
                 >
                   Remove
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    this.removeAllSameGood(good);
+                  }}
+                >
+                  Remove all
                 </button>
               </div>
             ))}
