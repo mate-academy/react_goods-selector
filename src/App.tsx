@@ -16,63 +16,38 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  selectedGood: {
-    [key: string]: boolean,
-  },
+  selectedGoods: string[],
 };
 
 class App extends React.Component<{}, State> {
   state: State = {
-    selectedGood: {
-      Jam: true,
-    },
+    selectedGoods: ['Jam'],
   };
 
-  isChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = event.target;
-
-    this.setState((state: State) => {
-      const goods = state;
-
-      goods.selectedGood[name] = checked;
-
-      return goods;
-    });
-  };
-
-  setListClear = () => {
-    this.setState((state) => {
-      const newGoods = Object.keys(state.selectedGood)
-        .reduce((a, b) => ({
-          ...a,
-          [b]: false,
-        }), {});
-
-      return {
-        selectedGood: newGoods,
-      };
-    });
+  isChecked = (good: string) => {
+    return !this.state.selectedGoods.includes(good)
+      ? this.setState((state) => ({
+        selectedGoods: [...state.selectedGoods, good],
+      }))
+      : this.setState((state) => ({
+        selectedGoods: state.selectedGoods.filter(item => item !== good),
+      }));
   };
 
   render() {
-    const products = Object.keys(this.state.selectedGood)
-      .filter(good => this.state.selectedGood[good]);
-
-    let stringOfProducts = '';
-
-    if (products.length === 1) {
-      stringOfProducts = products.join('');
-    }
-
-    if (products.length > 1) {
-      stringOfProducts = `${products.slice(0, -1).join(', ')}`
-      + ' and '
-      + `${products[products.length - 1]}`;
-    }
+    const { selectedGoods: goods } = this.state;
+    const stringOfProducts = [
+      goods.slice(0, -1).join(', '),
+      goods.slice(-1),
+    ].join(
+      goods.length > 1
+        ? ' and '
+        : '',
+    );
 
     return (
       <div className="App">
-        {products.length ? (
+        {goods.length ? (
           <h1 className="App__title">
             {stringOfProducts}
             {' is selected'}
@@ -82,11 +57,11 @@ class App extends React.Component<{}, State> {
         )}
 
         <div className="App__button">
-          {!!products.length && (
+          {!!goods.length && (
             <button
               type="button"
               className="App__clear-btn"
-              onClick={this.setListClear}
+              onClick={() => this.setState({ selectedGoods: [] })}
             >
               Clear
             </button>
@@ -100,19 +75,17 @@ class App extends React.Component<{}, State> {
                 htmlFor={good}
                 className={classNames(
                   'App__label',
-                  { 'App__label-checked': this.state.selectedGood[good] },
+                  { 'App__label-checked': goods.includes(good) },
                 )}
               >
                 <p>{good}</p>
                 <input
                   type="checkbox"
                   className="App__checkbox"
-                  name={good}
                   id={good}
-                  checked={this.state.selectedGood[good] || false}
-                  onChange={this.isChecked}
+                  checked={goods.includes(good) || false}
+                  onChange={this.isChecked.bind(this, good)}
                 />
-                {/* <button type="button">Submit</button> */}
               </label>
             </li>
           ))}
