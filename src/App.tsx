@@ -38,6 +38,10 @@ class App extends React.Component<{}, State> {
       message = `${selectedGoods[0]} is selected`;
     }
 
+    if (selectedGoods.length === 2) {
+      message = `${selectedGoods[0]} and ${selectedGoods[1]} are selected`
+    }
+
     if (selectedGoods.length >= 2) {
       const firstPart = selectedGoods.slice(0, selectedGoods.length);
 
