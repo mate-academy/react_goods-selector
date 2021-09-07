@@ -1,1 +1,72 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body,
+h1,
+h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  &__title {
+    max-width: 30%;
+    margin: 20px;
+    line-height: 50px;
+  }
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  max-width: 30%;
+  min-width: 200px;
+  border: 1px solid black;
+  border-radius: 10px;
+
+  &__item {
+    margin: 20px;
+  }
+
+  &__title {
+    display: inline-block;
+    margin-top: 20px;
+  }
+
+  &__button {
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+    margin: 10px;
+    cursor: pointer;
+    background-color: lightgreen;
+    transition: background-color 0.3s ease;
+    border: none;
+    border-radius: 10px;
+
+    &--reset {
+      display: block;
+      margin: 20px;
+      background-color: orange;
+
+      &:hover {
+        background-color: red;
+      }
+    }
+
+    &--select:hover {
+      background-color: yellow;
+    }
+  }
+}
+
+.isActive {
+  background-color:lighten(green, 10%)
+}
