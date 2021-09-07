@@ -1,1 +1,58 @@
-// styles go here
+.App {
+  text-align: center;
+
+  &__title {
+    width: max-content;
+    margin: 0 auto 50px;
+  }
+  &__goods {
+    list-style: none;
+    width: max-content;
+    margin: 0 auto;
+  }
+
+  &__btn {
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+    margin: 0 auto 25px;
+    visibility: hidden;
+    
+    &--active {
+      visibility: visible;
+    }
+  }
+}
+
+.goods {
+  display: grid;
+  grid-template: repeat(2, 200px) / repeat(5, 150px);
+  gap: 25px;
+  padding: 0;
+
+  &__item {
+    background-color: gainsboro;
+    margin-bottom: 25px;
+  }
+}
+
+.item {
+  border: 1px solid darkslategrey;
+  border-radius: 10px;
+
+  &--selected {
+    background-color: greenyellow;
+  }
+
+  &__good-name {
+    width: max-content;
+    margin: 50px auto 0;
+  }
+
+  &__btn {
+    width: 100px;
+    height: 50px;
+    margin: 25px;
+    border-radius: 10px;
+  }
+}
