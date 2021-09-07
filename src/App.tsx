@@ -25,37 +25,46 @@ class App extends React.Component<{}, State> {
     selectedGoods: ['Jam'],
   };
 
+  remove = (good: string) => {
+    this.setState((state) => ({
+      selectedGoods: state.selectedGoods.filter(item => item !== good),
+    }));
+  };
+
+  add = (good: string) => {
+    this.setState((state) => ({
+      selectedGoods: [...state.selectedGoods, good],
+    }));
+  };
+
   addOrDelGood = (toggler: boolean, good: string) => {
     if (toggler) {
-      this.setState((state) => ({
-        selectedGoods: state.selectedGoods.filter(item => item !== good),
-      }));
+      this.remove(good);
     } else {
-      this.setState((state) => ({
-        selectedGoods: [...state.selectedGoods, good],
-      }));
+      this.add(good);
     }
+  };
+
+  amountGoods = (amount: number) => {
+    if (!amount) {
+      return 'No goods selected';
+    }
+
+    if (amount > 1) {
+      return `${this.state.selectedGoods.slice(0, -1).join(', ')} `
+      + `and ${this.state.selectedGoods.slice(-1)} are selected`;
+    }
+
+    return `${this.state.selectedGoods[0]} is selected`;
   };
 
   render() {
     const { selectedGoods } = this.state;
 
-    const amountGoods = (amount: number) => {
-      if (!amount) {
-        return 'No goods selected';
-      }
-
-      if (amount > 1) {
-        return `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods.slice(-1)} are selected`;
-      }
-
-      return `${selectedGoods[0]} is selected`;
-    };
-
     return (
       <div className="App">
         <h1 className="App__title">
-          {amountGoods(selectedGoods.length)}
+          {this.amountGoods(selectedGoods.length)}
         </h1>
         {!!selectedGoods.length && (
           <button
