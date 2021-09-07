@@ -49,21 +49,19 @@ class App extends React.Component<{}, State> {
     return (
       <div className="App">
         <h1 className="App__title">
-          {selectedGoods.length > 0
+          {selectedGoods.length
             ? (`${selectedGoods.join(', ')} selected`)
             : ('No goods selected')}
         </h1>
-        {selectedGoods.length > 0
-          ? (
-            <button
-              className="card__btn card__btn--reset"
-              type="button"
-              onClick={resetState}
-            >
-              Clear
-            </button>
-          )
-          : ''}
+        {!!selectedGoods.length && (
+          <button
+            className="card__btn card__btn--reset"
+            type="button"
+            onClick={resetState}
+          >
+            Clear
+          </button>
+        )}
         <div className="container">
           {goodsFromServer.map(good => (
             <div
