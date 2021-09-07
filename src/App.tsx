@@ -29,8 +29,8 @@ class App extends React.Component<{}, State> {
       <div className="app">
         <h1 className="app__title">
           {this.state.selectedGood
-            ? (`${this.state.selectedGood} is selected`)
-            : ('No goods selected')}
+            ? `${this.state.selectedGood} is selected`
+            : 'No goods selected'}
         </h1>
         <button
           type="button"
@@ -46,7 +46,12 @@ class App extends React.Component<{}, State> {
 
             return (
               <div>
-                <li key={good} className={classNames('app__item', { app__selected: selected })}>{good}</li>
+                <li
+                  key={good}
+                  className={classNames('app__item', { app__selected: selected })}
+                >
+                  {good}
+                </li>
                 {!selected
                   && (
                     <button
