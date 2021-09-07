@@ -42,12 +42,14 @@ h2 {
 
   &__button {
     display: inline-block;
-    width: 100px;
+    width: 80px;
     height: 40px;
     margin: 10px;
     cursor: pointer;
     background-color: lightgreen;
     transition: background-color 0.3s ease;
+    border: none;
+    border-radius: 10px;
 
     &--reset {
       display: block;
