@@ -34,7 +34,7 @@ class App extends React.Component<{}, State> {
     }));
   };
 
-  render() {
+  messages = () => {
     const { selectedGoods } = this.state;
 
     let message = '';
@@ -54,12 +54,18 @@ class App extends React.Component<{}, State> {
       message = `${firstPartOfGoods} and ${lastGood} are selected`;
     }
 
+    return message;
+  };
+
+  render() {
+    const { selectedGoods } = this.state;
+
     return (
       <div className="App">
         <h1 className="App-goods__title">
-          {message}
+          {this.messages()}
         </h1>
-        {!(!selectedGoods.length) && (
+        {(selectedGoods.length) && (
           <button
             type="button"
             className="App-goods__title-reset"
