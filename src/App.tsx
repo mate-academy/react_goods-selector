@@ -38,15 +38,17 @@ class App extends React.Component<{}, State> {
     return (
       <div className="App">
         <div className="App__top">
-          {selectedGoods
-            ? <h1>{`Selected good: - ${selectedGoods}`}</h1>
-            : <h1>No goods selected!</h1>}
+          <h1>
+            {selectedGoods
+              ? `Selected good: - ${selectedGoods}`
+              : 'No goods selected!'}
+          </h1>
 
           {selectedGoods && (
             <button
               type="button"
               className="App__button--clear button"
-              onClick={() => this.clearItem()}
+              onClick={this.clearItem}
             >
               Clear
             </button>
@@ -78,11 +80,5 @@ class App extends React.Component<{}, State> {
     );
   }
 }
-// const App: React.FC = () => (
-//   <div className="App">
-//     <h1>Selected good: -</h1>
-//     {goodsFromServer.length}
-//   </div>
-// );
 
 export default App;
