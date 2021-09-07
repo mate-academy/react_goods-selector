@@ -32,6 +32,17 @@ class App extends React.Component<{}, State> {
     selectedGoods: [],
   };
 
+  showGoods = () => {
+    const { selectedGoods } = this.state;
+
+    const goodsWithoutLast = selectedGoods.slice(0, -1);
+    const lastGood = selectedGoods[selectedGoods.length - 1];
+
+    return selectedGoods.length > 1
+      ? `${goodsWithoutLast.join(', ')} and ${lastGood} are selected`
+      : `${lastGood} is selected`;
+  };
+
   reset = () => (
     this.setState({ selectedGoods: [] })
   );
@@ -43,20 +54,12 @@ class App extends React.Component<{}, State> {
   };
 
   removeItem = (item: string) => {
-    this.setState((prevState) => {
-      const { selectedGoods } = prevState;
-
-      if (selectedGoods.includes(item)) {
-        const lastIndex = selectedGoods.lastIndexOf(item);
-        const newSelectedGoods = [...selectedGoods];
-
-        newSelectedGoods.splice(lastIndex, 1);
-
-        return { selectedGoods: newSelectedGoods };
-      }
-
-      return null;
-    });
+    this.setState((prevState) => ({
+      selectedGoods: prevState.selectedGoods.filter(
+        good => good !== item,
+      ),
+    }
+    ));
   };
 
   render() {
@@ -67,7 +70,7 @@ class App extends React.Component<{}, State> {
         {selectedGoods.length > 0
           ? (
             <>
-              <h1>{`Selected goods: ${selectedGoods.join(', ')}`}</h1>
+              <h1>{`Selected goods: ${this.showGoods()}`}</h1>
               <button
                 className="button"
                 type="button"
@@ -79,34 +82,31 @@ class App extends React.Component<{}, State> {
           )
           : <h1>No goods selected</h1>}
         <ul className="list">
-          {goodsWithId.map(good => {
-            const { name, id } = good;
-
-            return (
-              <li
-                key={id}
-                className={classNames('list__item',
-                  { 'list__item--selected': selectedGoods.includes(name) })}
+          {goodsWithId.map(good => (
+            <li
+              key={good.id}
+              className={classNames('list__item',
+                { 'list__item--selected': selectedGoods.includes(good.name) })}
+            >
+              <h3>{good.name}</h3>
+              <button
+                className="button"
+                type="button"
+                onClick={() => this.addItem(good.name)}
+                disabled={selectedGoods.includes(good.name)}
               >
-                <h3>{name}</h3>
-                <button
-                  className="button"
-                  type="button"
-                  onClick={() => this.addItem(name)}
-                >
-                  Add
-                </button>
-                <button
-                  className="button"
-                  type="button"
-                  onClick={() => this.removeItem(name)}
-                  disabled={!selectedGoods.includes(name)}
-                >
-                  Remove
-                </button>
-              </li>
-            );
-          })}
+                Add
+              </button>
+              <button
+                className="button"
+                type="button"
+                onClick={() => this.removeItem(good.name)}
+                disabled={!selectedGoods.includes(good.name)}
+              >
+                Remove
+              </button>
+            </li>
+          ))}
         </ul>
       </div>
     );
