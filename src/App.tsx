@@ -83,7 +83,7 @@ class App extends React.Component<{}, State> {
                   type="checkbox"
                   className="App__checkbox"
                   id={good}
-                  checked={goods.includes(good) || false}
+                  checked={goods.includes(good)}
                   onChange={this.isChecked.bind(this, good)}
                 />
               </label>
