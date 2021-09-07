@@ -17,6 +17,7 @@ const goodsFromServer: string[] = [
 type State = {
   selectedGood: string[],
 };
+
 export class App extends React.Component<{}, State> {
   state: State = {
     selectedGood: [],
@@ -33,39 +34,39 @@ export class App extends React.Component<{}, State> {
   };
 
   removeGood = (deleteGood:string) => {
-    const arrayOfGoods = this.state.selectedGood;
-
-    if (arrayOfGoods.includes(deleteGood)) {
-      arrayOfGoods.splice(arrayOfGoods.lastIndexOf(deleteGood), 1);
-    }
-
     this.setState((newGoods) => ({
-      selectedGood: [...newGoods.selectedGood],
+      selectedGood: newGoods.selectedGood.filter(good => good !== deleteGood),
     }));
   };
 
-  render() {
+  createMessage = (selectedGood: string[]) => {
     let message = '';
 
-    if (this.state.selectedGood.length === 0) {
+    if (selectedGood.length === 0) {
       message = 'No goods selected';
     }
 
-    if (this.state.selectedGood.length === 1) {
-      message = `${this.state.selectedGood.join(', ')} is selected`;
+    if (selectedGood.length === 1) {
+      message = `${selectedGood.join(', ')} is selected`;
     }
 
-    if (this.state.selectedGood.length > 1) {
-      const lastElem = this.state.selectedGood[this.state.selectedGood.length - 1];
-      const firstPart = this.state.selectedGood.slice(0, -1).join(', ');
+    if (selectedGood.length > 1) {
+      const lastElem = selectedGood[selectedGood.length - 1];
+      const firstPart = selectedGood.slice(0, -1).join(', ');
 
       message = `${firstPart} and ${lastElem} are selected`;
     }
 
+    return message;
+  };
+
+  render() {
+    const { selectedGood } = this.state;
+
     return (
       <div className="App">
         <h1 className="title">
-          {message}
+          {this.createMessage(selectedGood)}
         </h1>
         <button
           type="button"
@@ -77,7 +78,7 @@ export class App extends React.Component<{}, State> {
 
         <section className="cards">
           {goodsFromServer.map(good => (
-            <div className={this.state.selectedGood.includes(good) ? 'card__selected' : 'card'}>
+            <div className={selectedGood.includes(good) ? 'card__selected' : 'card'}>
               <h2>
                 {good}
               </h2>
