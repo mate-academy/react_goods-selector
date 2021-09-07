@@ -47,13 +47,13 @@ export class App extends React.Component<{}, State> {
     return message;
   };
 
-  selectedItem = (item: string) => {
+  addItem = (item: string) => {
     this.setState((prevState) => ({
       selectedGoods: [...prevState.selectedGoods, item],
     }));
   };
 
-  removedItem = (item: string) => {
+  removeItem = (item: string) => {
     this.setState((prevState) => ({
       selectedGoods: prevState.selectedGoods.filter(good => good !== item),
     }));
@@ -61,9 +61,9 @@ export class App extends React.Component<{}, State> {
 
   getRelevantFunction = (item: string) => {
     if (this.state.selectedGoods.includes(item)) {
-      this.removedItem(item);
+      this.removeItem(item);
     } else {
-      this.selectedItem(item);
+      this.addItem(item);
     }
   };
 
@@ -114,7 +114,6 @@ export class App extends React.Component<{}, State> {
                 className="w-100 text-center"
               >
                 {good}
-                {' '}
               </li>
 
               <button
