@@ -60,7 +60,7 @@ class App extends React.Component<{}, Props> {
 
         <button
           type="button"
-          className="list__button"
+          className="list__button-X"
           onClick={this.deleteGoods}
         >
           X
