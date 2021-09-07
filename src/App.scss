@@ -1,1 +1,53 @@
-// styles go here
+.goods {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 600px;
+  list-style: none;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+
+  &__goods {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 250px;
+    margin: 10px;
+    padding: 5px;
+  }
+
+  &__selected {
+    width: 400px;
+  }
+}
+
+.good {
+  &__selected {
+    border: 3px dashed #3CB371;
+    border-radius: 5px;
+  }
+}
+
+.button {
+  height: 20px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: aliceblue;
+    border-radius: inherit;
+  }
+
+  &__clear {
+    transform: translateY(150%);
+  }
+}
+
+.buttons {
+  width: 120px;
+  display: flex;
+  justify-content: space-between;
+}
