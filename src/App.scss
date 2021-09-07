@@ -1,1 +1,27 @@
-// styles go here
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.App {
+  width: 1200px;
+
+  &__title {
+    font-size: 20px;
+    height: 68px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.goodsList {
+  padding: 0;
+  
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    height: 68px;
+  }
+}
