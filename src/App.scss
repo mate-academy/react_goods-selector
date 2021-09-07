@@ -1,1 +1,37 @@
 // styles go here
+.container {
+  width: 80vw;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.cards {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 120px);
+  gap: 20px;
+}
+
+.card {
+  width: 100px;
+  height: 150px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid grey;
+  border-radius: 15px;
+
+  &__active {
+    background-color: lightgreen;
+  }
+
+  &__title {
+    font-size: 20px;
+  }
+}
