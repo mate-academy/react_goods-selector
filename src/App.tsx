@@ -20,7 +20,6 @@ type State = {
 
 class App extends React.Component<{}, State> {
   state = {
-    goods: goodsFromServer,
     selectedGoods: ['Jam'],
   };
 
@@ -31,12 +30,8 @@ class App extends React.Component<{}, State> {
   };
 
   removeWord = (word: string) => {
-    this.state.selectedGoods.splice(
-      this.state.selectedGoods.indexOf(word), 1,
-    );
-
     this.setState((prevState) => ({
-      selectedGoods: prevState.selectedGoods,
+      selectedGoods: prevState.selectedGoods.filter(selected => (selected !== word)),
     }));
   };
 
@@ -44,7 +39,7 @@ class App extends React.Component<{}, State> {
     this.setState({ selectedGoods: [] });
   };
 
-  render() {
+  checkSelectedWords = () => {
     let message = '';
 
     if (this.state.selectedGoods.length === 0) {
@@ -59,18 +54,22 @@ class App extends React.Component<{}, State> {
       message = '- are selected';
     }
 
+    return message;
+  };
+
+  render() {
     return (
       <div className="App">
-        <div className="title">
-          <h1 className="title__article">
+        <div className="card card__content">
+          <h1 className="card-title">
             {this.state.selectedGoods[this.state.selectedGoods.length - 1]}
             {' '}
-            {message}
+            {this.checkSelectedWords()}
           </h1>
 
           <button
             type="button"
-            className="title__button"
+            className="card-button"
             onClick={() => {
               this.resetList();
             }}
@@ -80,27 +79,31 @@ class App extends React.Component<{}, State> {
         </div>
 
         <div className="goods-list">
-          {this.state.goods.map(word => (
+          {goodsFromServer.map(word => (
 
-            <div className={this.state.selectedGoods.includes(word) ? 'active_item' : 'item'}>
-              <h2 key={word}>{word}</h2>
-              <button
-                type="button"
-                onClick={() => {
-                  this.addWord(word);
-                }}
-              >
-                Add
-              </button>
+            <div className="card card__list-card">
+              <div className={this.state.selectedGoods.includes(word) ? 'active_item' : 'item'}>
+                <h2 key={word}>{word}</h2>
+                <button
+                  type="button"
+                  className="card-button card-button--range"
+                  onClick={() => {
+                    this.addWord(word);
+                  }}
+                >
+                  Add
+                </button>
 
-              <button
-                type="button"
-                onClick={() => {
-                  this.removeWord(word);
-                }}
-              >
-                Remove
-              </button>
+                <button
+                  type="button"
+                  className="card-button card-button--range"
+                  onClick={() => {
+                    this.removeWord(word);
+                  }}
+                >
+                  Remove
+                </button>
+              </div>
             </div>
 
           ))}
