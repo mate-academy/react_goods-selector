@@ -1,1 +1,22 @@
-// styles go here
+.list {
+  list-style: none;
+  font-weight: bold;
+
+  &__item {
+    margin: 10px 0;
+  }
+
+  &__text {
+    display: inline;
+    margin-right: 10px;
+
+    &--selected {
+      background-color: yellowgreen;
+    }
+  }
+}
+
+.app__heading {
+  display: inline;
+  margin-right: 20px;
+}
