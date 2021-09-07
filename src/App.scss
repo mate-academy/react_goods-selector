@@ -15,8 +15,9 @@ h2 {
 
 .App {
   &__title {
-    text-align: center;
-    margin-top: 20px;
+    max-width: 30%;
+    margin: 20px;
+    line-height: 50px;
   }
 }
 
@@ -25,19 +26,45 @@ h2 {
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
+  max-width: 30%;
+  min-width: 200px;
+  border: 1px solid black;
+  border-radius: 10px;
+
+  &__item {
+    margin: 20px;
+  }
 
   &__title {
+    display: inline-block;
     margin-top: 20px;
   }
 
   &__button {
+    display: inline-block;
     width: 100px;
     height: 40px;
+    margin: 10px;
     cursor: pointer;
+    background-color: lightgreen;
+    transition: background-color 0.3s ease;
 
     &--reset {
       display: block;
-      margin: 20px auto 0;
+      margin: 20px;
+      background-color: orange;
+
+      &:hover {
+        background-color: red;
+      }
+    }
+
+    &--select:hover {
+      background-color: yellow;
     }
   }
+}
+
+.isActive {
+  background-color:lighten(green, 10%)
 }

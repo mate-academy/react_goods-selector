@@ -67,6 +67,7 @@ class App extends React.Component<{}, State> {
             key={good}
             className={classNames(
               'card',
+              'card__item',
               {
                 isActive: selectedGoods.includes(good),
               },
@@ -75,23 +76,21 @@ class App extends React.Component<{}, State> {
             <h2 className="card__title">
               {good}
             </h2>
-            <div className="card-button">
-              <button
-                className="card__button"
-                type="button"
-                onClick={() => {
-                  if (selectedGoods.includes(good)) {
-                    removeFromSelectedGood(good);
-                  } else {
-                    addToSelectedGood(good);
-                  }
-                }}
-              >
-                {selectedGoods.includes(good)
-                  ? 'Remove'
-                  : 'Add'}
-              </button>
-            </div>
+            <button
+              className="card__button card__button--select"
+              type="button"
+              onClick={() => {
+                if (selectedGoods.includes(good)) {
+                  removeFromSelectedGood(good);
+                } else {
+                  addToSelectedGood(good);
+                }
+              }}
+            >
+              {selectedGoods.includes(good)
+                ? 'Remove'
+                : 'Add'}
+            </button>
           </div>
         ))}
       </div>
