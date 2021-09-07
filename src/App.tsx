@@ -1,4 +1,6 @@
 import React from 'react';
+import { GoodsList } from './components/GoodsList';
+
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -74,7 +76,7 @@ class App extends React.Component<{}, State> {
           {goods.length && (
             goods.map((good: string) => (
               <div className="GoodItem">
-                <h3 key={good} className={!addedToCart.includes(good) ? ('text-primary') : ('text-light bg-dark')}>{good}</h3>
+                <GoodsList good={good} addedToCart={addedToCart} />
                 {!addedToCart.includes(good) && (
                   <button
                     type="submit"
