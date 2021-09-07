@@ -1,0 +1,19 @@
+.button {
+  height: 20px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: aliceblue;
+    border-radius: inherit;
+  }
+
+  &__clear {
+    transform: translateY(150%);
+  }
+}
+
+.buttons {
+  width: 120px;
+  display: flex;
+  justify-content: space-between;
+}

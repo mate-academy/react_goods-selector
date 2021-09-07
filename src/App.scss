@@ -3,11 +3,14 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
   width: 600px;
+  list-style: none;
 }
 
 .container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  height: 40px;
 
   &__goods {
     border: 1px solid black;
@@ -31,7 +34,6 @@
 
 .button {
   height: 20px;
-  transform: translateY(80%);
 
   &:hover {
     cursor: pointer;

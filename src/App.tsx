@@ -1,10 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
+import { Button } from './Button';
 import './App.scss';
-
-type State = {
-  selectedGoods: string[],
-};
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -25,19 +22,15 @@ class App extends React.Component<{}, State> {
   };
 
   getSelected = (good: string) => {
-    this.setState((state) => ({
-      selectedGoods: [...state.selectedGoods, good],
+    this.setState((currentState: State) => ({
+      selectedGoods: [...currentState.selectedGoods, good],
     }));
   };
 
   getRemoved = (good: string) => {
-    const { selectedGoods } = this.state;
-
-    if (selectedGoods.includes(good)) {
-      selectedGoods.splice(selectedGoods.indexOf(good), 1);
-
-      this.setState((state) => ({ selectedGoods: [...state.selectedGoods] }));
-    }
+    this.setState((currentState: State) => ({
+      selectedGoods: currentState.selectedGoods.filter(product => product !== good),
+    }));
   };
 
   deleteGoods = () => {
@@ -63,56 +56,48 @@ class App extends React.Component<{}, State> {
       <div className="App">
         <div className="container container__selected">
           <h1>
-            {selectedGoods.length > 0
-              ? `${allGoods} is selected`
-              : 'No goods selected'}
+            {selectedGoods.length > 0 ? `${allGoods} is selected` : 'No goods selected'}
           </h1>
           {selectedGoods.length > 0 && (
-            <button
-              className="button button__clear"
-              type="button"
-              onClick={() => {
+            <Button
+              classes="button button__clear"
+              action={() => {
                 this.deleteGoods();
                 window.location.reload();
               }}
-            >
-              X
-            </button>
+              text="X"
+            />
           )}
         </div>
-        <div className="goods">
+        <ul className="goods">
           {goodsFromServer.map(good => (
             <div className="container container__goods">
-              <p
+              <li
                 key={good}
                 className={classNames('good',
                   { good__selected: selectedGoods.includes(good) })}
               >
                 {good}
-              </p>
+              </li>
               <div className="buttons">
-                <button
-                  type="button"
-                  className="button"
-                  onClick={() => {
+                <Button
+                  action={() => {
                     this.getSelected(good);
                   }}
-                >
-                  Add
-                </button>
-                <button
-                  type="button"
-                  className="button"
-                  onClick={() => {
+                  classes="button"
+                  text="Add"
+                />
+                <Button
+                  action={() => {
                     this.getRemoved(good);
                   }}
-                >
-                  Remove
-                </button>
+                  classes="button"
+                  text="Remove"
+                />
               </div>
             </div>
           ))}
-        </div>
+        </ul>
       </div>
     );
   }
