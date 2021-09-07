@@ -39,7 +39,7 @@ class App extends React.Component<{}, State> {
     }
 
     if (selectedGoods.length === 2) {
-      message = `${selectedGoods[0]} and ${selectedGoods[1]} are selected`
+      message = `${selectedGoods[0]} and ${selectedGoods[1]} are selected`;
     }
 
     if (selectedGoods.length >= 2) {
