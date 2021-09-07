@@ -1,1 +1,18 @@
-// styles go here
+.title {
+  padding-bottom: 20px;
+}
+
+.goods-list {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 220px;
+}
+
+.active_item {
+  background-color: aquamarine;
+  margin-bottom: 20px;
+}
+
+.item {
+  margin-bottom: 20px;
+}
