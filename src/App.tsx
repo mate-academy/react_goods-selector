@@ -26,17 +26,17 @@ class App extends React.Component<{}, State> {
   };
 
   addGood = (good: string) => {
-    this.setState((state) => ({
+    this.setState((currentState) => ({
       addedToCart: [
-        ...state.addedToCart,
+        ...currentState.addedToCart,
         good,
       ],
     }));
   };
 
   removeGood = (good: string) => {
-    this.setState((state) => ({
-      addedToCart: state.addedToCart.filter(itemGood => itemGood !== good),
+    this.setState((currentState) => ({
+      addedToCart: currentState.addedToCart.filter(itemGood => itemGood !== good),
     }));
   };
 
@@ -65,9 +65,7 @@ class App extends React.Component<{}, State> {
         </div>
         <button
           type="submit"
-          onClick={() => {
-            this.reset();
-          }}
+          onClick={this.reset}
           className="btn btn-warning"
         >
           Reset
