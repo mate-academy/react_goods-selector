@@ -1,1 +1,39 @@
-// styles go here
+html {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.show {
+  opacity: 1;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.button {
+  opacity: 0;
+}
+
+.goods {
+
+  &__label {
+    font-size: 30px;
+    cursor: pointer;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+.select {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.active {
+  background-color: red;
+  color: white;
+}
