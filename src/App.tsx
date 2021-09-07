@@ -14,11 +14,11 @@ class App extends React.Component<{}, State> {
 
   isChecked = (good: string) => {
     return !this.state.selectedGoods.includes(good)
-      ? this.setState((state) => ({
-        selectedGoods: [...state.selectedGoods, good],
+      ? this.setState((currentState) => ({
+        selectedGoods: [...currentState.selectedGoods, good],
       }))
-      : this.setState((state) => ({
-        selectedGoods: state.selectedGoods.filter(item => item !== good),
+      : this.setState((currentState) => ({
+        selectedGoods: currentState.selectedGoods.filter(item => item !== good),
       }));
   };
 
