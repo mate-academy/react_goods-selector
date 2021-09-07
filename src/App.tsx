@@ -39,7 +39,7 @@ class App extends React.Component<{}, State> {
               this.setState({ selectedGood: '' });
             }}
             className={classNames(
-              'btn btn-primary',
+              'btn btn-danger',
               {
                 btn_hidden: selectedGood === '',
               },
