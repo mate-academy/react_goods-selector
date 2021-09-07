@@ -24,9 +24,11 @@ class App extends React.Component<{}, Props> {
   };
 
   addGoods = (goods: string) => {
-    this.setState((state => ({
-      selectedGood: [...state.selectedGood, goods],
-    })));
+    if (!this.state.selectedGood.includes(goods)) {
+      this.setState((state => ({
+        selectedGood: [...state.selectedGood, goods],
+      })));
+    }
   };
 
   deleteGoods = () => {
@@ -60,8 +62,10 @@ class App extends React.Component<{}, Props> {
 
         <button
           type="button"
-          className="list__button-X"
           onClick={this.deleteGoods}
+          className={(selectedGood.length !== 0)
+            ? 'list__button-X'
+            : 'list__button-X list__button-X--invisible'}
         >
           X
         </button>

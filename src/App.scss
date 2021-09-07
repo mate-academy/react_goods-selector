@@ -27,6 +27,10 @@ body {
     color: blanchedalmond;
     font-size: 25px;
     font-weight: bold;
+
+    &--invisible{
+      visibility: hidden;
+    }
   }
 
   &__active {
