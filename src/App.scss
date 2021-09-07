@@ -1,1 +1,54 @@
-// styles go here
+body,
+h1 {
+  margin: 10px 0;
+}
+
+.App {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 400px;
+
+  &__title {
+    text-align: center;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+
+    &--selected {
+      background-color: lightyellow;
+      transition: 0.5s;
+    }
+  }
+
+  &__button {
+
+    &--unselect {
+      width: min-content;
+      margin: 0 auto;
+    }
+
+    &__select {
+      background-color: #fff;
+    }
+  }
+
+  ul {
+    list-style: none;
+  }
+  
+  button {
+    background-color: lightblue;
+    border: 1px solid transparent;
+    transition: 0.5s;
+  
+    &:hover {
+      cursor: pointer;
+      border: 1px solid blue;
+    }
+  }
+}
