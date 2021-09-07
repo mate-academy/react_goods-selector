@@ -17,39 +17,73 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  selectedGood: string,
+  selectedGoods: string[],
 };
 
 export class App extends React.Component<{}, State> {
   state = {
-    selectedGood: 'Jam',
+    selectedGoods: ['Jam'],
   };
 
-  title = (selectedGood: string) => {
-    return this.state.selectedGood
-      ? `${selectedGood} is selected`
-      : 'No goods selected';
+  title = () => {
+    const { selectedGoods } = this.state;
+    let message;
+
+    if (selectedGoods.length === 0) {
+      message = 'No goods selected';
+    }
+
+    if (selectedGoods.length === 1) {
+      message = `${selectedGoods[0]} is selected`;
+    }
+
+    if (selectedGoods.length >= 2) {
+      const firstPart = selectedGoods.slice(0, selectedGoods.length - 1);
+      const secondPart = selectedGoods[selectedGoods.length - 1];
+
+      message = `${firstPart.join(', ')} and ${secondPart} are selected`;
+    }
+
+    return message;
   };
 
-  selectedItem = (word: string) => {
-    this.setState({ selectedGood: word });
+  selectedItem = (item: string) => {
+    this.setState((prevState) => ({
+      selectedGoods: [...prevState.selectedGoods, item],
+    }));
+  };
+
+  removedItem = (item: string) => {
+    this.setState((prevState) => ({
+      selectedGoods: prevState.selectedGoods.filter(good => good !== item),
+    }));
+  };
+
+  getRelevantFunction = (item: string) => {
+    if (this.state.selectedGoods.includes(item)) {
+      this.removedItem(item);
+    } else {
+      this.selectedItem(item);
+    }
   };
 
   clearButton = () => {
-    this.setState({ selectedGood: '' });
+    this.setState(() => ({
+      selectedGoods: [],
+    }));
   };
 
   render() {
-    const { selectedGood } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="container-sm">
         <div className="text-center">
           <h1 className="">
-            {this.title(selectedGood)}
+            {this.title()}
           </h1>
 
-          {selectedGood && (
+          {selectedGoods.length > 0 && (
             <button
               className="rounded border-0"
               type="button"
@@ -73,7 +107,7 @@ export class App extends React.Component<{}, State> {
             rounded
             w-25
             m-2`,
-            { 'bg-success text-light': good === selectedGood })}
+            { 'bg-success text-light': this.state.selectedGoods.includes(good) })}
             >
               <li
                 key={good}
@@ -83,16 +117,15 @@ export class App extends React.Component<{}, State> {
                 {' '}
               </li>
 
-              {selectedGood !== good
-                && (
-                  <button
-                    className="rounded border-0 my-2"
-                    type="button"
-                    onClick={() => this.selectedItem(good)}
-                  >
-                    Select
-                  </button>
-                )}
+              <button
+                className="rounded border-0 my-2"
+                type="button"
+                onClick={() => this.getRelevantFunction(good)}
+              >
+                {selectedGoods.includes(good)
+                  ? 'Remove'
+                  : 'Select'}
+              </button>
             </div>
           ))}
         </ul>
