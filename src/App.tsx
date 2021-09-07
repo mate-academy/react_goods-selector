@@ -37,14 +37,6 @@ class App extends React.Component<{}, State> {
     }));
   };
 
-  addOrDelGood = (toggler: boolean, good: string) => {
-    if (toggler) {
-      this.remove(good);
-    } else {
-      this.add(good);
-    }
-  };
-
   amountGoods = (amount: number) => {
     if (!amount) {
       return 'No goods selected';
@@ -92,9 +84,11 @@ class App extends React.Component<{}, State> {
                 <button
                   type="button"
                   className="list__button"
-                  onClick={() => {
-                    this.addOrDelGood(toggler, good);
-                  }}
+                  onClick={
+                    toggler
+                      ? () => this.remove(good)
+                      : () => this.add(good)
+                  }
                 >
                   {toggler ? '-' : '+'}
                 </button>
