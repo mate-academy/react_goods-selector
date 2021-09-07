@@ -48,9 +48,8 @@ class App extends React.Component<{}, State> {
     this.setState({ selectedGoods: [] });
   };
 
-  render() {
+  listForRender = () => {
     const { selectedGoods } = this.state;
-
     let pocketOfGoods = selectedGoods.join('');
 
     if (selectedGoods.length > 1) {
@@ -59,6 +58,13 @@ class App extends React.Component<{}, State> {
 
       pocketOfGoods = `${firstPart} and ${lastPart}`;
     }
+
+    return pocketOfGoods;
+  };
+
+  render() {
+    const { selectedGoods } = this.state;
+    const pocketOfGoods = this.listForRender();
 
     return (
       <div className="App">
