@@ -72,36 +72,12 @@ class App extends React.Component<{}, State> {
         >
           Reset
         </button>
-        <div className="Goods">
-          {goods.length && (
-            goods.map((good: string) => (
-              <div className="GoodItem">
-                <GoodsList good={good} addedToCart={addedToCart} />
-                {!addedToCart.includes(good) && (
-                  <button
-                    type="submit"
-                    onClick={() => {
-                      this.addGood(good);
-                    }}
-                    className="btn btn-primary"
-                  >
-                    Add
-                  </button>
-                )}
-                {addedToCart.includes(good) && (
-                  <button
-                    type="submit"
-                    onClick={() => {
-                      this.removeGood(good);
-                    }}
-                    className="btn btn-danger"
-                  >
-                    X
-                  </button>
-                )}
-              </div>
-            )))}
-        </div>
+        <GoodsList
+          goods={goods}
+          addedToCart={addedToCart}
+          addGood={this.addGood}
+          removeGood={this.removeGood}
+        />
       </div>
     );
   }
