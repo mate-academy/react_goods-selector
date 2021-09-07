@@ -22,7 +22,7 @@ type State = {
 
 class App extends React.Component<{}, State> {
   state: State = {
-    selectedGood: '',
+    selectedGood: 'Jam',
   };
 
   render() {
