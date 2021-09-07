@@ -14,11 +14,113 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-const App: React.FC = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+type State = {
+  selectedGoods: string[];
+  count: number,
+};
+
+class App extends React.Component<{}, State> {
+  state: State = {
+    selectedGoods: [],
+    count: 0,
+  };
+
+  addProduct = (product: string) => {
+    this.state.count += 1;
+    this.setState(({ selectedGoods }) => ({
+      selectedGoods: [...selectedGoods, product],
+    }));
+  };
+
+  removeProduct = (product: string) => {
+    this.state.count -= 1;
+    this.setState(({ selectedGoods }) => ({
+      selectedGoods: [...selectedGoods.filter(item => item !== product)],
+    }));
+  };
+
+  resetProduts = () => {
+    this.setState({
+      selectedGoods: [],
+      count: 0,
+    });
+  };
+
+  showSelectedProducts = (selectedGood: string[]) => {
+    let message = '';
+
+    if (selectedGood.length < 1) {
+      message = ' No goods selected...';
+    }
+
+    if (selectedGood.length >= 1) {
+      message = ` ${this.state.count} selected`;
+    }
+
+    return message;
+  };
+
+  makeChoice = (product: string) => {
+    const { selectedGoods } = this.state;
+
+    if (selectedGoods.some(item => item === product)) {
+      this.removeProduct(product);
+    } else {
+      this.addProduct(product);
+    }
+  };
+
+  render() {
+    const { selectedGoods } = this.state;
+
+    return (
+      <div className="App">
+        <div className="App__header">
+          <h1 className="App__title">
+            <span className="App__text">Selected Goods:</span>
+            {this.showSelectedProducts(selectedGoods)}
+          </h1>
+          <button
+            type="button"
+            className={selectedGoods.length < 1
+              ? 'App__button--reset-off'
+              : 'App__button--reset'}
+            onClick={() => {
+              this.resetProduts();
+            }}
+          >
+            Reset
+          </button>
+        </div>
+        <section className="App__list">
+          <div className="App__items">
+            {goodsFromServer.map(product => (
+              <li
+                key={product}
+                className={`App__item ${selectedGoods.some(item => item === product)
+                  ? 'App__item-select'
+                  : 'App__item'
+                }`}
+              >
+                <h2 className="App__description">{product}</h2>
+                <button
+                  type="button"
+                  className="App__button"
+                  onClick={() => {
+                    this.makeChoice(product);
+                  }}
+                >
+                  {selectedGoods.some(item => item === product)
+                    ? 'Remove'
+                    : 'Add'}
+                </button>
+              </li>
+            ))}
+          </div>
+        </section>
+      </div>
+    );
+  }
+}
 
 export default App;

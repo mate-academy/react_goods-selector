@@ -1,1 +1,104 @@
-// styles go here
+body,
+h1,
+li,
+p {
+  margin: 0;
+  list-style: none;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 100px;
+  }
+
+  &__title {
+    font-family: sans-serif;
+    font-weight: 300;
+    font-size: 25px;
+  }
+
+  &__text {
+    font-size: 35px;
+    font-weight: 700;
+    font-family: sans-serif;
+  }
+
+  &__button--reset {
+    margin-top: 30px;
+    padding: 10px 40px;
+    background-color: white;
+    border: 1px solid #a9a9a9;
+    border-radius: 4px;
+    opacity: 1;
+    transition: opacity 0.3s, background-color 0.4s;
+
+    &:hover {
+      background-color: #ffd700;
+      border: 1px solid transparent;
+    }
+  }
+
+  &__button--reset-off {
+    margin-top: 30px;
+    padding: 10px 40px;
+    background-color: white;
+    border: 1px solid #a9a9a9;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  &__list {
+    margin-top: 50px;
+    width: 60%;
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 200px;
+    min-height: 300px;
+    background-color: white;
+    border: #a9a9a9 solid 1px;
+    border-radius: 20px;
+  }
+
+  &__description {
+    font-family: sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  &__button {
+    height: 45px;
+    width: 130px;
+    background-color: #ffd700;
+    border: 0;
+    color: #fff;
+    border-radius: 4px;
+    transition: box-shadow 0.2s;
+
+    &:hover {
+      box-shadow: 3px 4px 18px -2px rgba(34, 60, 80, 0.2);
+    }
+  }
+}
