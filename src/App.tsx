@@ -62,7 +62,7 @@ class App extends React.Component<{}, State> {
       <div className="App">
         <div className="card card__content">
           <h1 className="card-title">
-            {this.state.selectedGoods[this.state.selectedGoods.length - 1]}
+            {this.state.selectedGoods.join(', ')}
             {' '}
             {this.checkSelectedWords()}
           </h1>
