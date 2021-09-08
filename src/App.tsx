@@ -1,4 +1,6 @@
 import React from 'react';
+import className from 'classnames';
+
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -14,19 +16,19 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-type Props = {
+type State = {
   selectedGood: string[];
 };
 
-class App extends React.Component<{}, Props> {
+class App extends React.Component<{}, State> {
   state = {
     selectedGood: ['Jam'],
   };
 
   addGoods = (goods: string) => {
     if (!this.state.selectedGood.includes(goods)) {
-      this.setState((state => ({
-        selectedGood: [...state.selectedGood, goods],
+      this.setState((currentState => ({
+        selectedGood: [...currentState.selectedGood, goods],
       })));
     }
   };
@@ -39,25 +41,24 @@ class App extends React.Component<{}, Props> {
     const { selectedGood } = this.state;
 
     if (selectedGood.length === 1) {
-      return `${selectedGood} is selected`;
+      return `Selected good: ${selectedGood} is selected`;
     }
 
     if (selectedGood.length > 1) {
-      return `${selectedGood.join(', ')} are selected`;
+      return `Selected good: ${selectedGood.join(', ')} are selected`;
     }
 
-    return 'No goods selected';
+    return 'Selected good: No goods selected';
   };
 
   render() {
     const { selectedGood } = this.state;
+    const message = this.aboutProducts();
 
     return (
       <div className="App">
         <h1 className="list__selected">
-          Selected good:
-          {' '}
-          {this.aboutProducts()}
+          {message}
         </h1>
 
         <button
@@ -69,22 +70,27 @@ class App extends React.Component<{}, Props> {
         >
           X
         </button>
-        {/* {goodsFromServer.length} */}
         <ul className="list">
           {goodsFromServer.map(goods => (
             <li
               key={goods}
-              className={selectedGood.includes(goods)
-                ? 'list__item list__item--active'
-                : 'list__item'}
+              className={className(
+                'list__item',
+                {
+                  'list__item list__item--active': selectedGood.includes(goods),
+                },
+              )}
             >
               {goods}
 
               <button
                 type="button"
-                className={selectedGood.includes(goods)
-                  ? 'list__button list__button--active'
-                  : 'list__button'}
+                className={className(
+                  'list__button',
+                  {
+                    'list__button--active': selectedGood.includes(goods),
+                  },
+                )}
                 onClick={() => {
                   this.addGoods(goods);
                 }}
