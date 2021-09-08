@@ -18,23 +18,138 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
+// interface Type {
+//  [key:string]: string,
+// }
+
+// type State = {
+//   selectGoods: string[],
+//   buttonCheck: boolean,
+// };
+
+// class App extends React.PureComponent<{}, State> {
+//  goodsStorage:Type = {};
+
+//  ending = '';
+
+//  state: State = {
+//    selectGoods: ['Jam'],
+//    buttonCheck: true,
+//  };
+
+//  isCheck = (good:string) => {
+//    return this.state.selectGoods.includes(good);
+//  };
+
+//  addProduct = (good: string) => {
+//    if (!this.state.selectGoods.includes(good)) {
+//      this.setState((currentState) => {
+//        return {
+//          selectGoods: [...currentState.selectGoods, good],
+//        };
+//      });
+
+//      this.setState({ buttonCheck: true });
+//    } else {
+//      this.setState((currentState) => {
+//        const { selectGoods } = currentState;
+//        const index = selectGoods.indexOf(good);
+
+//        selectGoods.splice(index, 1);
+
+//        console.log(selectGoods, 'splice');
+
+//        return {
+//          selectGoods: [...selectGoods],
+//        };
+//      });
+
+//      this.setState({ buttonCheck: false });
+//    }
+
+//    let { selectGoods } = this.state;
+
+//    if (selectGoods.length > 1) {
+//      selectGoods.splice(selectGoods.length - 1, 0, ' and ');
+//    }
+
+//    if (selectGoods.length > 3) {
+//      selectGoods = selectGoods.map((ell, _i, arr) => {
+//        if (arr.slice(-3).includes(ell)) {
+//          return `${ell}`;
+//        }
+
+//        return `${ell}, `;
+//      });
+//      console.log(selectGoods);
+//    }
+//  };
+
+//  cleanGoods = () => {
+//    this.setState({ buttonCheck: false });
+//    this.setState({ selectGoods: [] });
+//  };
+
+//  render() {
+//    console.log(this.state.selectGoods);
+
+//    return (
+//      <div className="App">
+//        <h1 className="App__title">
+//          {this.state.buttonCheck
+//            ? `${this.state.selectGoods.join(' ')} ${this.ending}`
+//            : 'No goods selected'}
+//        </h1>
+//        {this.state.buttonCheck
+//          && (
+//            <button
+//              type="button"
+//              className="button is-success App__button-remove"
+//              onClick={() => this.cleanGoods()}
+//            >
+//              X
+//            </button>
+//          )}
+//        <ul className="App__list">
+//          {goodsFromServer.map(good => {
+//            return (
+//              <li key={good} className="App__item">
+//                <p>
+//                  {good}
+//                </p>
+//                <button
+//                  type="button"
+//                  className={className('button', 'is-dark', { 'is-success': this.isCheck(good) })}
+//                  onClick={() => this.addProduct(`${good}`)}
+//                >
+//                  {this.isCheck(good) ? 'Add' : 'Remove'}
+//                </button>
+//              </li>
+//            );
+//          })}
+//        </ul>
+//      </div>
+//    );
+//  }
+// }
+
 interface Type {
   [key:string]: string,
 }
 
-type State = {
-  selectGoods: string[],
-  buttonCheck: boolean,
-};
+  type State = {
+    selectGoods: string[],
+    buttonCheck: boolean,
+  };
 
 class App extends React.PureComponent<{}, State> {
-  goodsStorage:Type = {};
+  goodsStorage:Type = { Jam: 'Jam' };
 
   ending = '';
 
   state: State = {
-    selectGoods: [],
-    buttonCheck: false,
+    selectGoods: ['Jam'],
+    buttonCheck: true,
   };
 
   isCheck = (good:string) => {
