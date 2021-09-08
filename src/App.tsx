@@ -72,13 +72,18 @@ class App extends React.Component<{}, Props> {
         {/* {goodsFromServer.length} */}
         <ul className="list">
           {goodsFromServer.map(goods => (
-            <li key={goods} className="list__item">
+            <li
+              key={goods}
+              className={selectedGood.includes(goods)
+                ? 'list__item list__item--active'
+                : 'list__item'}
+            >
               {goods}
 
               <button
                 type="button"
                 className={selectedGood.includes(goods)
-                  ? 'list__button list__active'
+                  ? 'list__button list__button--active'
                   : 'list__button'}
                 onClick={() => {
                   this.addGoods(goods);

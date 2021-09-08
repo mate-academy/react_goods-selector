@@ -33,12 +33,22 @@ body {
     }
   }
 
-  &__active {
-  background-color: rgb(3, 179, 18);
+  &__button{
+    &--active {
+     background-color: rgb(124, 124, 124);
+     opacity: 0.3;
+    }
   }
 
   &__item {
     display: flex;
     justify-content: space-between;
+    margin: 3px;
+    padding: 5px;
+
+    &--active {
+      border: 2px solid rgb(62, 219, 0);
+      border-radius: 10px;
+    }
   }
 }
