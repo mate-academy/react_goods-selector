@@ -30,6 +30,19 @@ class App extends React.Component<{}, State> {
     }));
   };
 
+  removeGood = (good: string) => {
+    const { selectedGoods } = this.state;
+
+    if (this.state.selectedGoods.includes(good)) {
+      const index = selectedGoods.lastIndexOf(good);
+
+      selectedGoods.splice(index, 1);
+      this.setState(prevState => ({
+        selectedGoods: [...prevState.selectedGoods],
+      }));
+    }
+  };
+
   resetGood = () => {
     this.setState({ selectedGoods: [] });
   };
@@ -91,6 +104,17 @@ class App extends React.Component<{}, State> {
                     }}
                   >
                     add
+                  </button>
+                )}
+                {selectedGoods.includes(good) && (
+                  <button
+                    type="button"
+                    className="App__button"
+                    onClick={() => {
+                      this.removeGood(good);
+                    }}
+                  >
+                    delete
                   </button>
                 )}
               </li>
