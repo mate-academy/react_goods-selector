@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 type State = {
@@ -88,7 +89,13 @@ class App extends React.Component<{}, State> {
               {good}
               {' '}
               <button
-                className="App__button App__button--list"
+                className={classNames(
+                  'App__button',
+                  'App__button--list',
+                  {
+                    'App__button--list--delete': selectedList.includes(good),
+                  },
+                )}
                 type="button"
                 onClick={() => this.changeListItem(good)}
               >

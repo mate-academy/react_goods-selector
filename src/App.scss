@@ -50,6 +50,10 @@
   &__button--list {
     background-color: lightgreen;
   }
+
+  &__button--list--delete {
+    background-color: coral;
+  }
   
   &__button--clear {
     display: block;
