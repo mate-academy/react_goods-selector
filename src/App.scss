@@ -1,1 +1,35 @@
-// styles go here
+.App {
+  &__button{
+    color: rgb(253, 253, 253);
+    background-color: rgb(52, 75, 124);
+    border-color: rgb(52, 75, 124);
+  }
+
+  &__good{
+    height: 30px;
+    width: 150px;
+    color: black;
+    list-style-type: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &--active{
+      box-sizing: border-box;
+      margin-bottom: 2px;
+      padding: 5px;
+      height: 30px;
+      width: 150px;
+      color: rgb(245, 228, 228);
+      list-style-type: none;
+  
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: rgb(22, 24, 44);
+      border-radius: 5px;
+    }
+  }
+}
+
