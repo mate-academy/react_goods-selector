@@ -1,1 +1,55 @@
 // styles go here
+body {
+  background-color: rgb(249, 255, 196);
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-size: 25px;
+}
+
+.list {
+  width: 25%;
+  font-size: 30px;
+
+  &__selected{
+    display: flex;
+    justify-content: space-between;
+
+    height: 140px;
+  }
+
+  &__button-X {
+    background-color: black;
+    color: blanchedalmond;
+    font-size: 25px;
+    font-weight: bold;
+
+    &--invisible{
+      visibility: hidden;
+    }
+  }
+
+  &__button{
+    &--active {
+     background-color: rgb(124, 124, 124);
+     opacity: 0.3;
+    }
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    margin: 3px;
+    padding: 5px;
+
+    &--active {
+      background-color: rgb(227, 255, 176);
+      border: 2px solid rgb(62, 219, 0);
+      border-radius: 10px;
+    }
+  }
+}
