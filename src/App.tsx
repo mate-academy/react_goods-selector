@@ -16,29 +16,29 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  selectedGoods: string[];
+  selectedGoods: string;
 };
 
 class App extends React.Component<unknown, State> {
   state: State = {
-    selectedGoods: ['Jam'],
+    selectedGoods: 'Jam',
   };
 
   removeSelectedGoods = () => {
     this.setState(() => ({
-      selectedGoods: [],
+      selectedGoods: '',
     }));
   };
 
   addSelectedGood = (good: string) => (
-    this.setState(currentState => ({
-      selectedGoods: [...currentState.selectedGoods, good],
+    this.setState(() => ({
+      selectedGoods: good,
     }))
   );
 
   render() {
     const { selectedGoods } = this.state;
-    const title = selectedGoods[selectedGoods.length - 1];
+    const title = selectedGoods;
     const hasTitle = selectedGoods.length > 0;
 
     return (
