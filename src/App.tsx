@@ -16,24 +16,20 @@ const goodsFromServer: string[] = [
 
 type State = {
   selectedGoods: string[];
-  count: number,
 };
 
 class App extends React.Component<{}, State> {
   state: State = {
     selectedGoods: [],
-    count: 0,
   };
 
   addProduct = (product: string) => {
-    this.state.count += 1;
     this.setState(({ selectedGoods }) => ({
       selectedGoods: [...selectedGoods, product],
     }));
   };
 
   removeProduct = (product: string) => {
-    this.state.count -= 1;
     this.setState(({ selectedGoods }) => ({
       selectedGoods: [...selectedGoods.filter(item => item !== product)],
     }));
@@ -42,7 +38,6 @@ class App extends React.Component<{}, State> {
   resetProduts = () => {
     this.setState({
       selectedGoods: [],
-      count: 0,
     });
   };
 
@@ -53,8 +48,12 @@ class App extends React.Component<{}, State> {
       message = ' No goods selected...';
     }
 
-    if (selectedGood.length >= 1) {
-      message = ` ${this.state.count} selected`;
+    if (selectedGood.length === 1) {
+      message = ` ${this.state.selectedGoods.length} is selected`;
+    }
+
+    if (selectedGood.length > 1) {
+      message = ` ${this.state.selectedGoods.length} are selected`;
     }
 
     return message;
