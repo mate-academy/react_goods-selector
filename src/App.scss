@@ -47,6 +47,7 @@ body {
     padding: 5px;
 
     &--active {
+      background-color: rgb(227, 255, 176);
       border: 2px solid rgb(62, 219, 0);
       border-radius: 10px;
     }
