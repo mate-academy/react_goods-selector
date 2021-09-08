@@ -51,9 +51,15 @@ class App extends React.Component<{}, State> {
     return message;
   };
 
-  selecetGood = (item: string) => {
+  addGood = (item: string) => {
     this.setState((prevState) => ({
       selectedGoods: [...prevState.selectedGoods, item],
+    }));
+  };
+
+  removeItem = (item: string) => {
+    this.setState((prevState) => ({
+      selectedGoods: prevState.selectedGoods.filter(good => good !== item),
     }));
   };
 
@@ -92,9 +98,15 @@ class App extends React.Component<{}, State> {
               <button
                 className="btn btn-primary"
                 type="button"
-                onClick={() => this.selecetGood(good)}
+                onClick={() => (
+                  this.state.selectedGoods.includes(good)
+                    ? this.removeItem(good)
+                    : this.addGood(good)
+                )}
               >
-                Select
+                {selectedGoods.includes(good)
+                  ? 'Remove'
+                  : 'Select'}
               </button>
             </li>
           ))}
