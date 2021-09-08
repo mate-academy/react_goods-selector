@@ -30,16 +30,28 @@ class App extends React.Component<{}, State> {
   };
 
   removeProduct = (product: string) => {
-    this.state.selectedGoods.splice(this.state.selectedGoods.indexOf(product), 1);
-
     this.setState((prevState) => ({
-      selectedGoods: [...prevState.selectedGoods],
+      selectedGoods: [...prevState.selectedGoods.filter(item => item !== product)],
     }));
   };
 
   clearTheGoods = () => {
     this.setState({ selectedGoods: [] });
   };
+
+  titleCorrectness() {
+    let title = 'No goods selected';
+
+    if (this.state.selectedGoods.length === 1) {
+      title = `${this.state.selectedGoods} is selected`;
+    }
+
+    if (this.state.selectedGoods.length >= 2) {
+      title = `${this.state.selectedGoods.join(', ')} are selected`;
+    }
+
+    return title;
+  }
 
   render() {
     const { selectedGoods } = this.state;
@@ -49,9 +61,7 @@ class App extends React.Component<{}, State> {
     return (
       <div className="app">
         <h1>
-          {selectedGoods.length === 0 && 'No goods selected'}
-          {selectedGoods.length === 1 && `${selectedGoods} is selected`}
-          {selectedGoods.length >= 2 && `${selectedGoods.join(', ')} are selected`}
+          {this.titleCorrectness()}
         </h1>
         <ul className="app__list">
           {goodsFromServer.map(product => {
