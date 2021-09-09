@@ -32,11 +32,8 @@ class App extends React.Component<{}, State> {
   };
 
   removeItem = (item: string) => {
-    const index = this.state.goodsList.indexOf(item);
-
-    this.state.goodsList.splice(index, 1);
     this.setState((currentState) => ({
-      goodsList: [...currentState.goodsList],
+      goodsList: [...currentState.goodsList.filter(good => good !== item)],
     }));
   };
 
@@ -51,8 +48,7 @@ class App extends React.Component<{}, State> {
       <div className="App">
         <h1 className="App__title alert alert-primary">
           {(goodsList.length === 0) ? titleEmpty : titleFull}
-          {(goodsList.length !== 0)
-          && (
+          {(goodsList.length !== 0) && (
             <button
               type="button"
               className="btn btn-primary"
@@ -66,46 +62,44 @@ class App extends React.Component<{}, State> {
         </h1>
         <ol className="goodsList list-group">
           {goodsFromServer.map((good) => (
-            <>
-              <li
-                key={good}
-                className={classNames(
-                  'goodsList__item alert alert-primary',
-                  {
-                    'alert-success': this.state.goodsList.includes(good),
-                  },
-                )}
-              >
-                {good}
+            <li
+              key={good}
+              className={classNames(
+                'goodsList__item alert alert-primary',
                 {
-                  (!goodsList.includes(good))
-                    ? (
-                      <button
-                        type="button"
-                        className="btn btn-success"
-                        key={good}
-                        onClick={() => {
-                          this.selectItem(good);
-                        }}
-                      >
-                        Add
-                      </button>
-                    )
-                    : (
-                      <button
-                        type="button"
-                        className="goodsList__button btn btn-danger"
-                        key={good}
-                        onClick={() => {
-                          this.removeItem(good);
-                        }}
-                      >
-                        Remove
-                      </button>
-                    )
-                }
-              </li>
-            </>
+                  'alert-success': this.state.goodsList.includes(good),
+                },
+              )}
+            >
+              {good}
+              {
+                (!goodsList.includes(good))
+                  ? (
+                    <button
+                      type="button"
+                      className="btn btn-success"
+                      key={good}
+                      onClick={() => {
+                        this.selectItem(good);
+                      }}
+                    >
+                      Add
+                    </button>
+                  )
+                  : (
+                    <button
+                      type="button"
+                      className="goodsList__button btn btn-danger"
+                      key={good}
+                      onClick={() => {
+                        this.removeItem(good);
+                      }}
+                    >
+                      Remove
+                    </button>
+                  )
+              }
+            </li>
           ))}
         </ol>
       </div>
