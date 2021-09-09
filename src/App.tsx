@@ -29,8 +29,8 @@ class App extends React.Component<{}, State> {
   };
 
   addGoods = (product: string) => {
-    this.setState((state) => ({
-      selectedGoods: [...state.selectedGoods, product],
+    this.setState((currentState) => ({
+      selectedGoods: [...currentState.selectedGoods, product],
     }));
   };
 
@@ -66,7 +66,7 @@ class App extends React.Component<{}, State> {
           {this.generateTitle()}
         </h1>
 
-        {(selectedGoods.length) && (
+        {(selectedGoods.length > 0) && (
           <button
             type="button"
             className="App-goods__title-reset"
