@@ -1,24 +1,21 @@
 .App {
-  &__button{
-    font-size: 15px;
-    color: rgb(253, 253, 253);
-    background-color: rgb(255, 165, 130);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-    &--selected {
-      background-color: rgb(252, 105, 105);
-      color:rgb(255, 255, 255);
-      font-size: 15px;
-    }
+  &__button{
+    font-size: 10px;
   }
 
   &__title {
+    text-align: center;
+    font-size: 20px;
     color: rgb(106, 106, 255);
   }
 
   &__reset {
     margin-top: 10px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(255, 104, 104);
     width: 160px;
     height: 40px;
   }
@@ -41,12 +38,9 @@
 
       height: 30px;
       width: 160px;
-
-      box-sizing: border-box;
-      color: rgb(255, 255, 255);
+      font-weight: 700;
+      color: rgba(158, 255, 202, 0.788);
       list-style-type: none;
-
-      background-color: rgb(151, 255, 166);
     }
   }
 }

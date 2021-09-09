@@ -55,7 +55,7 @@ export default class App extends React.Component<{}, State> {
     return (
       <div className="App">
         <h1 className="App__title">
-          {this.state.selectedGoods.length !== 0 ? `${this.state.selectedGoods[this.state.selectedGoods.length - 1]} is selected` : 'no selected goods'}
+          {this.state.selectedGoods.length !== 0 ? `${this.state.selectedGoods[this.state.selectedGoods.length - 1]} is selected` : 'No selected goods'}
         </h1>
 
         <ul>
@@ -69,15 +69,15 @@ export default class App extends React.Component<{}, State> {
               >
                 {good}
                 {selectedGoods.includes(good)
-                  ? <button type="button" className="App__button--selected" onClick={() => this.remove(good)}>Remove</button>
-                  : <button type="button" className="App__button" onClick={() => this.add(good)}>Add</button>}
+                  ? <button type="button" className="btn btn-outline-danger App__button" onClick={() => this.remove(good)}>Remove</button>
+                  : <button type="button" className="btn btn-outline-success App__button" onClick={() => this.add(good)}>Add</button>}
               </li>
             );
           })}
           {selectedGoods.length !== 0 && (
             <button
               type="button"
-              className="App__reset"
+              className="App__reset btn btn-outline-danger"
               onClick={this.reset}
             >
               Reset
