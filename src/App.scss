@@ -1,1 +1,31 @@
 // styles go here
+@import "bulma/sass/utilities/_all.sass";
+@import "bulma/sass/elements/button.sass";
+@import "bulma/sass/grid/columns";
+@import "bulma/sass/elements/icon";
+
+.App {
+  width: 50%;
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 100px);
+    gap: 20px;
+    padding: 0;
+    list-style: none;
+  }
+  &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 10px;
+    text-align: center;
+    height: 100px;
+    width: 100px;
+    margin-bottom: 20px;
+    padding: 5px;
+    background-color: blueviolet;
+  }
+  &__button-remove {
+    margin-left: 20px;
+  }
+}
