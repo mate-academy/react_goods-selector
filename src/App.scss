@@ -1,1 +1,23 @@
-// styles go here
+.App__title {
+  display: inline-block;
+  width: 600px;
+  height: 100px;
+  background-color: lightgray;
+  border-radius: 15px;
+}
+
+.GoodsList {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.GoodsList__item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.GoodsList__selectButton {
+  display: inline-block;
+}
+
+
