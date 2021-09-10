@@ -17,71 +17,82 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-interface Type {
-  [key:string]: string,
-}
-
   type State = {
-    selectGoods: string[],
+    selectGoodsStorage: string[],
     buttonCheck: boolean,
   };
 
 class App extends React.PureComponent<{}, State> {
-  goodsStorage:Type = { Jam: 'Jam' };
-
   ending = '';
 
   state: State = {
-    selectGoods: ['Jam'],
+    selectGoodsStorage: ['Jam'],
     buttonCheck: true,
   };
 
   isCheck = (good:string) => {
-    return !Object.prototype.hasOwnProperty.call(this.goodsStorage, good);
+    return this.state.selectGoodsStorage.includes(good);
   };
 
   addProduct = (good: string) => {
-    if (!Object.prototype.hasOwnProperty.call(this.goodsStorage, good)) {
-      this.goodsStorage[good] = good;
+    if (!this.state.selectGoodsStorage.includes(good)) {
+      this.setState((currentState) => {
+        return {
+          selectGoodsStorage: [...currentState.selectGoodsStorage, good],
+          buttonCheck: true,
+        };
+      });
     } else {
-      delete this.goodsStorage[good];
-    }
+      this.setState((currentState) => {
+        const { selectGoodsStorage } = currentState;
+        const index = selectGoodsStorage
+          .indexOf(good);
 
-    let selectGood = Object.keys(this.goodsStorage);
+        selectGoodsStorage
+          .splice(index, 1);
 
-    this.state.buttonCheck = !!selectGood.length;
-
-    if (selectGood.length > 1) {
-      selectGood.splice(selectGood.length - 1, 0, ' and ');
-    }
-
-    if (selectGood.length > 3) {
-      selectGood = selectGood.map((ell, _i, arr) => {
-        if (arr.slice(-3).includes(ell)) {
-          return `${ell}`;
+        if (!selectGoodsStorage.length) {
+          return {
+            selectGoodsStorage: [...selectGoodsStorage],
+            buttonCheck: false,
+          };
         }
 
-        return `${ell}, `;
+        return {
+          selectGoodsStorage: [...selectGoodsStorage],
+          buttonCheck: true,
+        };
       });
-      console.log(selectGood);
     }
-
-    this.ending = `${selectGood.length > 1 ? 'are' : 'is'} selected`;
-
-    this.setState({ selectGoods: selectGood });
   };
 
   cleanGoods = () => {
     this.setState({ buttonCheck: false });
-    this.goodsStorage = {};
+    this.setState({ selectGoodsStorage: [] });
   };
 
   render() {
+    let goodsSelector = [...this.state.selectGoodsStorage];
+
+    if (goodsSelector.length >= 3) {
+      goodsSelector = goodsSelector.map((ell, i, arr) => {
+        if (arr.slice(-2).includes(ell)) {
+          return i === arr.length - 2 ? ` ${ell} and` : `${ell}`;
+        }
+
+        return `${ell}, `;
+      });
+    }
+
+    if (goodsSelector.length === 2) {
+      goodsSelector.splice(1, 0, 'and');
+    }
+
     return (
       <div className="App">
         <h1 className="App__title">
           {this.state.buttonCheck
-            ? `${this.state.selectGoods.join(' ')} ${this.ending}`
+            ? `${goodsSelector.join(' ')} ${goodsSelector.length === 1 ? 'is' : 'are'} selected`
             : 'No goods selected'}
         </h1>
         {this.state.buttonCheck
