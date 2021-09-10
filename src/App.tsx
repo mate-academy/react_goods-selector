@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import React from 'react';
-// import classNames from 'classnames';
 
 import './App.scss';
 
@@ -18,101 +17,95 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  message: string,
   selectedGood: string | null,
-  selectedId: number,
 };
 
 class App extends React.Component<{}, State> {
   state = {
-    message: 'No goods selected',
     selectedGood: 'Jam',
-    selectedId: 8,
   };
 
-  componentDidMount() {
-    const { selectedGood } = this.state;
-    const test = Array.from(document.getElementsByClassName('goods-selector__list-item active') as HTMLCollectionOf<HTMLElement>);
+  decreaseGood = () => {
+    this.setState({
+      selectedGood: null,
+    });
+  };
 
-    test[0].getElementsByTagName('button')[0].style.visibility = 'hidden';
-    this.setState({ message: `${selectedGood} is selected` });
-  }
+  selectGood = (good: string) => {
+    this.setState(prevState => {
+      if (prevState.selectedGood !== good) {
+        return {
+          selectedGood: good,
+        };
+      }
+
+      return {
+        selectedGood: prevState.selectedGood,
+      };
+    });
+  };
 
   render() {
+    const { selectedGood } = this.state;
+
     return (
-      <div className="App">
-        <div className="goods-selector">
-          <div className="container">
-            <div className="row">
-              <div className="goods-selector__header-container">
-                <h1 className="goods-selector__header">
-                  {'Selected goods: '}
-                  <br />
-                  <strong className="goods-selector__header-message">{this.state.message}</strong>
-                </h1>
-                <button
-                  type="button"
-                  className="goods-selector__header-button btn btn-dark"
-                  onClick={(event) => {
-                    const eventHendle = event;
-
-                    eventHendle.currentTarget.style.visibility = 'hidden';
-                    const test = Array.from(document.getElementsByClassName('goods-selector__list-item active') as HTMLCollectionOf<HTMLElement>);
-
-                    test[0].classList.remove('active');
-                    test[0].getElementsByTagName('button')[0].style.visibility = 'visible';
-                    this.setState({ message: 'No goods selected' });
-                  }}
+      <div className="
+        App
+        d-flex
+        align-items-center
+        justify-content-center"
+      >
+        <div className="goods-selector__container container-fluid">
+          <h1 className="text-center">
+            {'Selected goods: '}
+            <br />
+            <strong>
+              {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
+            </strong>
+            {selectedGood && (
+              <button
+                type="button"
+                className="
+                  btn
+                  btn-dark
+                  d-inline-block ms-3"
+                onClick={this.decreaseGood}
+              >
+                X
+              </button>
+            )}
+          </h1>
+          <ul className="list-group">
+            {goodsFromServer.map(good => {
+              return (
+                <li
+                  key={good}
+                  className={
+                    classNames(`
+                      list-group-item
+                      d-flex
+                      justify-content-between
+                      align-items-center`,
+                    { active: selectedGood === good })
+                  }
                 >
-                  X
-                </button>
-              </div>
-              <ul className="goods-selector__list col">
-                {goodsFromServer.map((good, index) => {
-                  return (
-                    <li key={good} className={classNames('goods-selector__list-item list-group-item ', { active: this.state.selectedId === index })}>
-                      {good}
-                      <button
-                        type="button"
-                        className="btn btn-primary goods-selector__list-button"
-                        onClick={(event) => {
-                          this.setState(currentState => {
-                            if (currentState.selectedGood !== good) {
-                              this.setState({
-                                selectedGood: good,
-                                selectedId: goodsFromServer.indexOf(good),
-                                message: `${good} is selected`,
-                              });
-                            }
-                          });
-                          const eventHendle = event;
-
-                          eventHendle.currentTarget.style.visibility = 'hidden';
-                          const test = Array.from(document.getElementsByClassName('goods-selector__list-button') as HTMLCollectionOf<HTMLElement>);
-
-                          test.forEach((element) => {
-                            if (element !== eventHendle.currentTarget) {
-                              const el = element;
-
-                              el.style.visibility = 'visible';
-                            }
-                          });
-
-                          const btnHeader = document.querySelector('.goods-selector__header-button') as HTMLButtonElement;
-
-                          if (btnHeader.style.visibility === 'hidden') {
-                            btnHeader.style.visibility = 'visible';
-                          }
-                        }}
-                      >
-                        Select
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          </div>
+                  {good}
+                  {selectedGood !== good && (
+                    <button
+                      type="button"
+                      className="
+                        btn
+                        btn-primary
+                        goods-selector__list-button"
+                      onClick={() => this.selectGood(good)}
+                    >
+                      Select
+                    </button>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </div>
     );

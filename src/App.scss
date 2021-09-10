@@ -1,40 +1,12 @@
 // styles go here
-html {
-  font-size: 14px;
-}
 .App {
   height: 100vh;
-  background-color: aqua;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
+            linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
+            linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
 }
 
-.goods-selector {
-  background-color: red;
-  width: 400px;
-
-  &__list {
-    border-radius: 10px;
-  }
-  &__list-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center
-  }
-
-  &__header {
-    text-align: center;
-    font-size: 26px;
-  }
-
-  &__header-container {
-    position: relative;
-  }
-
-  &__header-button {
-    position: absolute;
-    bottom: 5px;
-    right: 20px;
-  }
+.goods-selector__container {
+  max-width: 500px;
+  background: linear-gradient(#e66465, #9198e5);
 }
