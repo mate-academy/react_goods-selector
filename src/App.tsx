@@ -100,7 +100,7 @@ class App extends React.PureComponent<{}, State> {
             <button
               type="button"
               className="button is-success App__button-remove"
-              onClick={() => this.cleanGoods()}
+              onClick={this.cleanGoods}
             >
               X
             </button>
