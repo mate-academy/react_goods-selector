@@ -15,23 +15,39 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  selectedGood:string;
+  selectedGood:string[];
 };
 
 class App extends React.Component {
   state: State = {
-    selectedGood: 'Jam',
+    selectedGood: ['Jam'],
   };
 
   selectGood = (goodTitle:string) => {
-    this.setState(() => (
-      { selectedGood: goodTitle }
+    this.setState((state:State) => ({
+      selectedGood: [...state.selectedGood, goodTitle],
+    }
     ));
+  };
+
+  unSelectGood = (goodTitle:string) => {
+    // const indexToRemoveInList = goodsFromServer.indexOf(goodTitle);
+    const indexToRemoveInTitle = this.state.selectedGood.indexOf(goodTitle);
+
+    this.setState((state:State) => {
+      const newTitleItems = [...state.selectedGood];
+
+      newTitleItems.splice(indexToRemoveInTitle, 1);
+
+      return {
+        selectedGood: newTitleItems,
+      };
+    });
   };
 
   clearCurrent = () => {
     this.setState(() => (
-      { selectedGood: null }
+      { selectedGood: [] }
     ));
   };
 
@@ -40,12 +56,12 @@ class App extends React.Component {
       <div className="App">
         <h1 className="App__title">
           {
-            this.state.selectedGood ? `${this.state.selectedGood} is selected` : 'No goods selected'
+            this.state.selectedGood.length > 0 ? `${this.state.selectedGood.join(', ')} is selected` : 'No goods selected'
           }
           {
             this.state.selectedGood !== null
             && (
-              <button onClick={this.clearCurrent} type="button">Clear current</button>
+              <button onClick={this.clearCurrent} className="GoodsList__resetButton" type="button">Clear chosen</button>
             )
           }
         </h1>
@@ -53,18 +69,29 @@ class App extends React.Component {
           {goodsFromServer.map(good => (
             <li className="GoodsList__item">
               {good}
-              {good !== this.state.selectedGood
-              && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    this.selectGood(good);
-                  }}
-                  className="GoodsList__selectButton"
-                >
-                  Select
-                </button>
-              )}
+              {!this.state.selectedGood.includes(good)
+                ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      this.selectGood(good);
+                    }}
+                    className="GoodsList__selectButton"
+                  >
+                    Select
+                  </button>
+                )
+                : (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      this.unSelectGood(good);
+                    }}
+                    className="GoodsList__unSelectButton"
+                  >
+                    Remove
+                  </button>
+                ) }
             </li>
           ))}
         </ul>
