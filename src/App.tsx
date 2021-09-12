@@ -2,36 +2,36 @@ import React from 'react';
 // import { render } from 'react-dom';
 import './App.scss';
 
+const goodsFromServer: string[] = [
+  'Dumplings',
+  'Carrot',
+  'Eggs',
+  'Ice cream',
+  'Apple',
+  'Bread',
+  'Fish',
+  'Honey',
+  'Jam',
+  'Garlic'];
+
 type State = {
-  goodsFromServer: string[],
   selectedGood: string[],
 };
 
 class App extends React.Component<{}, State> {
   state: State = {
-    goodsFromServer: [
-      'Dumplings',
-      'Carrot',
-      'Eggs',
-      'Ice cream',
-      'Apple',
-      'Bread',
-      'Fish',
-      'Honey',
-      'Jam',
-      'Garlic'],
-    selectedGood: [],
+    selectedGood: ['Jam'],
   };
 
   addItem = (item: string) => {
-    this.setState((state) => ({
-      selectedGood: [...state.selectedGood, item],
+    this.setState((currentState) => ({
+      selectedGood: [...currentState.selectedGood, item],
     }));
   };
 
   removeItem = (item: string) => {
-    this.setState((state) => ({
-      selectedGood: state.selectedGood.filter(x => x !== item),
+    this.setState((currentState) => ({
+      selectedGood: currentState.selectedGood.filter(x => x !== item),
     }));
   };
 
@@ -40,7 +40,7 @@ class App extends React.Component<{}, State> {
   };
 
   render() {
-    const { goodsFromServer, selectedGood } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <div className="main">
@@ -53,7 +53,6 @@ class App extends React.Component<{}, State> {
                 : ''}
               {selectedGood.join(',')}
             </p>
-            {}
 
           </h1>
 
@@ -61,7 +60,7 @@ class App extends React.Component<{}, State> {
             {goodsFromServer.map((good) => (
               <li
                 key={good}
-                className={selectedGood.find(x => x === good) ? 'selected' : 'notSelected'}
+                className={selectedGood.includes(good) ? 'selected' : 'notSelected'}
               >
                 <p>{good}</p>
                 {selectedGood.find((x) => good === x)
