@@ -1,5 +1,6 @@
+import classNames from 'classnames';
 import React from 'react';
-// import './App.scss';
+import './App.scss';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -51,44 +52,60 @@ class App extends React.PureComponent<Props, State> {
     return (
       <div
         className="App"
-        style={{ color: 'darkblue' }}
       >
-        <h1>
-          Selected good:
-          {!!selectedGoods.length || 'No goods selected'}
+        <h1 className="App__header">
+          Selected good
+          {preparedGoods.length > 1 && 's'}
+          :
+        </h1>
+        <div className="App__basket">
+          {!!selectedGoods.length || 'No good'}
           {preparedGoods.join(' ')}
+          {preparedGoods.length > 1 ? ' are ' : ' is '}
+          selected
           {!selectedGoods.length || (
             <button
+              className="App__button"
               type="button"
               onClick={() => this.setState({ selectedGoods: [] })}
+              title="click to clear the basket"
             >
               X
             </button>
           )}
-        </h1>
-        <ul>
+        </div>
+
+        <ul className="App__list">
           {goodsFromServer.map(good => (
             <li>
-              <span style={selectedGoods.includes(good) ? { backgroundColor: 'yellow' } : {}}>
-                {good}
-              </span>
-              {selectedGoods.includes(good)
-                ? (
-                  <button
-                    type="button"
-                    onClick={() => this.removeGood(good)}
-                  >
-                    Remove
-                  </button>
-                )
-                : (
-                  <button
-                    type="button"
-                    onClick={() => this.addGood(good)}
-                  >
-                    Select
-                  </button>
-                )}
+              <div className="App__item">
+                <span
+                  className={classNames('App__item-text', {
+                    'App__item-text-decorated': selectedGoods.includes(good),
+                  })}
+                >
+                  {good}
+                </span>
+                {selectedGoods.includes(good)
+                  ? (
+                    <button
+                      className="App__button-remove"
+                      type="button"
+                      onClick={() => this.removeGood(good)}
+                    >
+                      Remove
+                    </button>
+                  )
+                  : (
+                    <button
+                      className="App__button-add"
+                      type="button"
+                      onClick={() => this.addGood(good)}
+                    >
+                      Select
+                    </button>
+                  )}
+              </div>
             </li>
           ))}
         </ul>

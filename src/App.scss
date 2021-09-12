@@ -1,1 +1,69 @@
 // styles go here
+body {
+  background-color: aliceblue;
+  font-family: Arial, Helvetica, sans-serif;
+  color: darkslategray;
+}
+
+button {
+  background-color: transparent;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+}
+
+.App {
+  margin: 30px auto;
+  width: 600px;
+  border: 1px solid rebeccapurple;
+  border-radius: 5px;
+  padding: 20px;
+
+  &__basket {
+    position: relative;
+    background-color: #79664d;
+    padding: 30px 10px;
+    color: white;
+    border-radius: 4px;
+  }
+
+  &__button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    color: white;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.5;
+      transition: 500;
+    }
+
+    &-add {
+      padding: 2px 20px;
+      border-radius: 2px;
+      border: 1px solid #79664d;
+      color: #79664d;
+    }
+
+    &-remove {
+      padding: 2px 20px;
+      border-radius: 2px;
+      border: 1px solid #79664d;
+      color: white;
+      background-color: #79664d;
+    }
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2px;
+  }
+
+  &__item-text-decorated {
+    background-color: lightgrey;
+    text-decoration: line-through;
+  }
+}
