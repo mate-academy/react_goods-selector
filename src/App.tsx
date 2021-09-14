@@ -31,7 +31,6 @@ class App extends React.Component {
   };
 
   unSelectGood = (goodTitle:string) => {
-    // const indexToRemoveInList = goodsFromServer.indexOf(goodTitle);
     const indexToRemoveInTitle = this.state.selectedGood.indexOf(goodTitle);
 
     this.setState((state:State) => {
@@ -59,7 +58,7 @@ class App extends React.Component {
             this.state.selectedGood.length > 0 ? `${this.state.selectedGood.join(', ')} is selected` : 'No goods selected'
           }
           {
-            this.state.selectedGood !== null
+            this.state.selectedGood.length > 0
             && (
               <button onClick={this.clearCurrent} className="GoodsList__resetButton" type="button">Clear chosen</button>
             )
