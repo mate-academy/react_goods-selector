@@ -1,1 +1,35 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+.list {
+  width: 300px;
+
+}
+
+.list-item,
+.active-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+  padding: 5px;
+  border: 2px solid honeydew;
+  background-color: lavender;
+}
+
+.active-item {
+  background: aqua;
+}
+
+.button {
+  width: 100px;
+  background: aliceblue;
+}
+
+.block-button {
+  height: 40px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
