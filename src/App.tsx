@@ -23,23 +23,17 @@ type State = {
 };
 
 const formTitle = (goods: Good[]) => {
-  if (goods.length === 1) {
-    return `${goods[0]} is selected`;
+  const arr = [...goods];
+  const lastGood = arr.pop();
+
+  switch (goods.length) {
+    case 0:
+      return 'No goods selected';
+    case 1:
+      return `${goods[0]} is selected`;
+    default:
+      return `${arr.join(', ')} and ${lastGood} are selected`;
   }
-
-  let arr = [...goods];
-
-  arr.splice(goods.length - 1, 0, 'and');
-
-  arr = arr.map((item, i) => {
-    if (i < goods.length - 2) {
-      return `${item},`;
-    }
-
-    return item;
-  });
-
-  return `${arr.join(' ')} are selected`;
 };
 
 class App extends React.Component<Props, State> {
@@ -73,9 +67,7 @@ class App extends React.Component<Props, State> {
     return (
       <div className="App">
         <h1>
-          {selectedGoods.length !== 0
-            ? `${formTitle(selectedGoods)}`
-            : 'No goods selected'}
+          {formTitle(selectedGoods)}
           {' '}
           {selectedGoods.length !== 0 && (
             <button
@@ -88,7 +80,7 @@ class App extends React.Component<Props, State> {
         </h1>
         <ul>
           {goodsFromServer.map((good) => (
-            <li>
+            <li key={good}>
               {good}
               {' '}
               <button
