@@ -1,1 +1,88 @@
-// styles go here
+body {
+  margin: 0;
+  background: rgb(216, 216, 216);
+}
+
+ul,
+li,
+p {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.App {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  &__title {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #009191;
+    text-align: center;
+  }
+
+  &__button {
+    height: 40px;
+  }
+
+  &__clear-btn {
+    display: block;
+    width: 200px;
+    height: 100%;
+    margin: 0 auto;
+    font-size: 20px;
+
+    border-radius: 10px;
+    background: #e4f8ae;
+  }
+
+  &__list {
+    margin: 0 auto;
+    padding: 20px;
+    width: 300px;
+
+    background: rgb(122, 211, 110);
+    border-radius: 20px;
+  }
+
+  &__list-item {
+    margin-bottom: 5px;
+  }
+
+  &__label {
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+    padding: 5px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    color: #004b4b;
+  }
+
+  &__label-checked {
+    border-radius: 10px;
+    background: #bbf574;
+  }
+
+  &__checkbox {
+    -webkit-appearance: none;
+    background-color: #fafafa;
+    border: 1px solid #009191;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+  }
+
+  &__checkbox:checked::after {
+    content: '\2714';
+    font-size: 14px;
+    position: absolute;
+    top: 0px;
+    left: 3px;
+    color: #009191;
+  }
+}
