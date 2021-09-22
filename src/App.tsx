@@ -21,7 +21,7 @@ interface State {
 class App extends React.Component<{}, State> {
   state = {
     selectedGoods: ['Jam'],
-  };
+  }; 
 
   componentDidMount() {
     this.state.selectedGoods.forEach(good => {
@@ -36,79 +36,78 @@ class App extends React.Component<{}, State> {
       el.classList.remove('active');
     });
 
-    this.setState({ selectedGoods: ['No goods selected'] });
+    this.setState({ selectedGoods: [] });
   };
 
   message = () => {
-    if (this.state.selectedGoods.length < 1) {
+    const { selectedGoods } = this.state;
+    if (selectedGoods.length < 1) {
       return 'No goods selected';
     }
 
-    if (this.state.selectedGoods.length < 2) {
-      return this.state.selectedGoods;
+    if (selectedGoods.length < 2) {
+      return selectedGoods;
     }
 
-    return this.state.selectedGoods.slice(0, -1).join(', ').concat(' and ').concat() + this.state.selectedGoods.slice(-1);
+    return selectedGoods.slice(0, -1).join(', ').concat(' and ').concat() + selectedGoods.slice(-1);
+  };
+
+  selectOrRemove = (good: string) => {
+    if (!this.state.selectedGoods.includes(good)) {
+      this.setState((prev) => {
+        return { selectedGoods: [...prev.selectedGoods, good] };
+      });
+
+      return;
+    }
+
+    this.setState((prev) => {
+      const result = prev.selectedGoods.filter(el => el !== good);
+
+      return { selectedGoods: result };
+    });
+    document.getElementById(`${good}`)?.classList.remove('active');
   };
 
   render() {
+    const { selectedGoods } = this.state;
+
     return (
       <div className="App">
         <h1>
           Selected goods: -&nbsp;
           {this.message()}
         </h1>
-        {this.state.selectedGoods.length > 1
-          ? (
-            <button
-              className="button button--reset"
-              type="button"
-              value="button"
-              onClick={this.clear}
-            >
-              Clear All
-            </button>
-          )
-          : (' ')}
+        {selectedGoods.length > 0 && (
+          <button
+            className="button button--reset"
+            type="button"
+            value="button"
+            onClick={this.clear}
+          >
+            Clear All
+          </button>
+        )}
         <ul className="list">
-          {goodsFromServer.map(good => {
+          {goodsFromServer.map((good) => {
             return (
-              <>
-                <li
-                  id={good}
-                  className="item"
+              <li
+                id={good}
+                key={good}
+                className={`item ${selectedGoods.includes(good) ? 'active' : ''}`}
+              >
+                {good}
+                <button
+                  className="button button--toggler"
+                  type="button"
+                  value="button"
+                  onClick={() => {
+                    this.selectOrRemove(good);
+                  }}
                 >
-                  {good}
-                  <button
-                    className="button button--toggler"
-                    type="button"
-                    value="button"
-                    onClick={
-                      this.state.selectedGoods.indexOf(`${good}`) < 0
-                        ? () => {
-                          this.setState((prev) => {
-                            let result = [...prev.selectedGoods, good];
-
-                            result = result.filter(el => el !== 'No goods selected');
-                            document.getElementById(`${good}`)?.classList.add('active');
-
-                            return { selectedGoods: result };
-                          });
-                        }
-                        : () => {
-                          this.setState((prev) => {
-                            const result = prev.selectedGoods.filter(el => el !== good);
-
-                            return { selectedGoods: result };
-                          });
-                          document.getElementById(`${good}`)?.classList.remove('active');
-                        }
-                    }
-                  >
-                    {this.state.selectedGoods.indexOf(`${good}`) < 0 ? 'Select' : 'Remove'}
-                  </button>
-                </li>
-              </>
+                  {selectedGoods.includes(`${good}`) ? 'Remove' : 'Select'}
+                </button>
+              </li>
             );
           })}
         </ul>
