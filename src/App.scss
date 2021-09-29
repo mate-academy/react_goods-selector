@@ -1,1 +1,45 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(132, 230, 230);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cancelingButton {
+  font-weight: bold;
+  font-size: 18px;
+  color: red;
+}
+
+.show {
+  opacity: 1;
+}
+
+.hide {
+  opacity: 0;
+}
+
+.list {
+  list-style: none;
+}
+
+.list__item {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.list__item__button {
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+}
