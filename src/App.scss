@@ -1,1 +1,45 @@
 // styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.App__title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  margin-bottom: 20px;
+}
+
+.goodsList {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+
+  margin: 0;
+  padding: 0;
+
+  width: max-content;
+
+  list-style: none;
+
+  &__item {
+    align-self: flex-end;
+    margin-bottom: 10px;
+  }
+  
+  &__item_active {
+    color: green;
+    font-weight: bold;
+  }
+}
+
+.btn {
+  margin-left: 10px;
+  &_hidden {
+    visibility: hidden;
+  }
+}
