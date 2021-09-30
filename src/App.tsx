@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -14,11 +15,93 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-const App: React.FC = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+type State = {
+  selectedGoods: string[];
+};
+
+class App extends React.Component<{}, State> {
+  state = {
+    selectedGoods: ['Jam'],
+  };
+
+  resetGoods = () => {
+    this.setState({ selectedGoods: [] });
+  };
+
+  addGoods = (product: string) => {
+    this.setState((state) => ({
+      selectedGoods: [...state.selectedGoods, product],
+    }));
+  };
+
+  messages = () => {
+    const { selectedGoods } = this.state;
+
+    let message = '';
+
+    if (selectedGoods.length === 0) {
+      message = 'No selected goods';
+    }
+
+    if (selectedGoods.length === 1) {
+      message = `${selectedGoods} is selected`;
+    }
+
+    if (selectedGoods.length > 1) {
+      const firstPartOfGoods = selectedGoods.slice(0, -1).join(', ');
+      const lastGood = selectedGoods[selectedGoods.length - 1];
+
+      message = `${firstPartOfGoods} and ${lastGood} are selected`;
+    }
+
+    return message;
+  };
+
+  render() {
+    const { selectedGoods } = this.state;
+
+    return (
+      <div className="App">
+        <h1 className="App-goods__title">
+          {this.messages()}
+        </h1>
+        {(selectedGoods.length) && (
+          <button
+            type="button"
+            className="App-goods__title-reset"
+            onClick={this.resetGoods}
+          >
+            X
+          </button>
+        )}
+        <ul className="App-goods__list">
+          {goodsFromServer.map(good => (
+            <li
+              className={classNames(
+                !selectedGoods.includes(good)
+                  ? 'App-goods__item'
+                  : 'App-added',
+              )}
+              key={good}
+            >
+              {good}
+              {(!selectedGoods.includes(good)) && (
+                <button
+                  type="button"
+                  className="App-goods__button"
+                  onClick={() => {
+                    this.addGoods(good);
+                  }}
+                >
+                  add
+                </button>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}
 
 export default App;
