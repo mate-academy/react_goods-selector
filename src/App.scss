@@ -41,6 +41,13 @@ body {
   color: #d0d0d0;
 }
 
+.header-container {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
 .list {
   display: flex;
   flex-direction: column;
@@ -48,13 +55,6 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-
-  .header-container {
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-  }
 
   &__item {
     box-sizing: border-box;

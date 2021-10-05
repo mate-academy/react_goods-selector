@@ -64,9 +64,7 @@ export class App extends React.Component<{}, State> {
 
     return (
       <div className="App">
-        <h1
-          className="title"
-        >
+        <h1 className="title">
           Selected goods:
         </h1>
         <div className="container">
@@ -82,16 +80,16 @@ export class App extends React.Component<{}, State> {
           </button>
         </div>
 
-        <ul className="list">
-          <div className="header-container">
-            <div className="header-goods">
-              Goods
-            </div>
-
-            <div className="header-action">
-              Action
-            </div>
+        <div className="header-container">
+          <div className="header-goods">
+            Goods
           </div>
+
+          <div className="header-action">
+            Action
+          </div>
+        </div>
+        <ul className="list">
           {goodsFromServer.map(good => (
             <li
               key={good}
