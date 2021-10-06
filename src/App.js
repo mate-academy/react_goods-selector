@@ -1,3 +1,4 @@
+// import { element } from 'prop-types';
 import React from 'react';
 import './App.scss';
 
@@ -19,14 +20,16 @@ class App extends React.Component {
     selectedGoods: [],
   }
 
-  selectBtnClick = (arr, good) => {
-    arr.push(good);
-    this.setState({ selectedGoods: arr });
+  selectBtnClick = (good) => {
+    this.setState(prevArr => ({
+      selectedGoods: prevArr.selectedGoods.concat(good),
+    }));
   }
 
-  removeBtnClick = (arr, good) => {
-    arr.splice(arr.indexOf(good), 1);
-    this.setState({ selectedGoods: arr });
+  removeBtnClick = (good) => {
+    this.setState(prevArr => ({
+      selectedGoods: prevArr.selectedGoods.filter(element => element !== good),
+    }));
   }
 
   render() {
@@ -34,6 +37,7 @@ class App extends React.Component {
       <div className="App">
         <h1>
           Selected good: -
+          {' '}
           {this.state.selectedGoods.length}
         </h1>
         <h2>
@@ -52,13 +56,13 @@ class App extends React.Component {
             <li key={good}>
               <span>{good}</span>
               {
-                  this.state.selectedGoods.indexOf(good) === -1
+                  !this.state.selectedGoods.includes(good)
                     ? (
                       <button
                         type="button"
                         className="select"
                         onClick={() => {
-                          this.selectBtnClick(this.state.selectedGoods, good);
+                          this.selectBtnClick(good);
                         }}
                       >
                         Select
@@ -69,7 +73,7 @@ class App extends React.Component {
                         type="button"
                         className="remove"
                         onClick={() => {
-                          this.removeBtnClick(this.state.selectedGoods, good);
+                          this.removeBtnClick(good);
                         }}
                       >
                         X
