@@ -1,4 +1,6 @@
 import React from 'react';
+import classNames from 'classnames';
+
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -14,11 +16,114 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-const App: React.FC = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+interface State {
+  selectedGood: string[],
+}
+
+class App extends React.Component<{}, State> {
+  state: State = {
+    selectedGood: ['Jam'],
+  };
+
+  renderList = (list: string[]) => (
+    <ul className="list">
+      {list.map(item => {
+        const isSelected = this.state.selectedGood.includes(item);
+        const buttonText = isSelected ? 'Remove' : 'Add';
+
+        return (
+          <li
+            key={item}
+            className={classNames(
+              'list__item',
+              {
+                'list__item--selected': isSelected,
+              },
+            )}
+          >
+            {item}
+            <button
+              className="list__btn"
+              type="button"
+              onClick={() => this.toggleListItem(isSelected, item)}
+            >
+              {buttonText}
+            </button>
+          </li>
+        );
+      })}
+    </ul>
+  );
+
+  renderTitle = (): string => {
+    const { selectedGood } = this.state;
+    let h1Text = '';
+
+    if (selectedGood.length === 1) {
+      h1Text = `${selectedGood[0]} is selected.`;
+    }
+
+    if (selectedGood.length > 1) {
+      h1Text = selectedGood.reduce((text, listItem, i, arr) => {
+        if (i === 0) {
+          return listItem + text;
+        }
+
+        if (i === arr.length - 1) {
+          return `${text} and ${listItem} are selected`;
+        }
+
+        return `${text}, ${listItem}`;
+      }, '');
+    }
+
+    if (!selectedGood.length) {
+      h1Text = 'No goods selected';
+    }
+
+    return h1Text;
+  };
+
+  toggleListItem = (selected: boolean, item: string) => {
+    if (!selected) {
+      this.setState(({ selectedGood }) => {
+        return {
+          selectedGood: [...selectedGood, item],
+        };
+      });
+    } else {
+      this.setState(({ selectedGood }) => {
+        return {
+          selectedGood: [...selectedGood].filter(i => i !== item),
+        };
+      });
+    }
+  };
+
+  clearList = () => {
+    this.setState({ selectedGood: [] });
+  };
+
+  render() {
+    const { selectedGood } = this.state;
+
+    return (
+      <div className="App">
+        {selectedGood.length ? (
+          <button
+            type="button"
+            onClick={this.clearList}
+          >
+            X
+          </button>
+        ) : ''}
+
+        <h1>{this.renderTitle()}</h1>
+
+        {goodsFromServer.length && this.renderList(goodsFromServer)}
+      </div>
+    );
+  }
+}
 
 export default App;
