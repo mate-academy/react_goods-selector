@@ -55,16 +55,16 @@ class App extends React.Component<{}, State> {
     </ul>
   );
 
-  renderTitle = (): string => {
+  getTitle = (): string => {
     const { selectedGood } = this.state;
-    let h1Text = '';
+    let title = '';
 
     if (selectedGood.length === 1) {
-      h1Text = `${selectedGood[0]} is selected.`;
+      title = `${selectedGood[0]} is selected.`;
     }
 
     if (selectedGood.length > 1) {
-      h1Text = selectedGood.reduce((text, listItem, i, arr) => {
+      title = selectedGood.reduce((text, listItem, i, arr) => {
         if (i === 0) {
           return listItem + text;
         }
@@ -78,10 +78,10 @@ class App extends React.Component<{}, State> {
     }
 
     if (!selectedGood.length) {
-      h1Text = 'No goods selected';
+      title = 'No goods selected';
     }
 
-    return h1Text;
+    return title;
   };
 
   toggleListItem = (selected: boolean, item: string) => {
@@ -118,7 +118,7 @@ class App extends React.Component<{}, State> {
           </button>
         ) : ''}
 
-        <h1>{this.renderTitle()}</h1>
+        <h1>{this.getTitle()}</h1>
 
         {goodsFromServer.length && this.renderList(goodsFromServer)}
       </div>
