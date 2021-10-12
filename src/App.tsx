@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.scss';
+import 'bulma/css/bulma.css';
+import className from 'classnames';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -21,28 +23,53 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <h1>{this.state.selected ? `Selected good: - ${this.state.selected}` : 'No good selected'}</h1>
-        <ul className="good_list">
+      <div className="App column">
+        <h1 className={
+          className('content', 'is-large')
+        }
+        >
+          <strong>
+            {this.state.selected ? `Selected good: - ${this.state.selected}` : 'No good selected'}
+          </strong>
+        </h1>
+        <ul className="menu_list content">
           {goodsFromServer.map(good => (
             <li
               key={good}
               className={this.state.selected === good ? 'selected' : ''}
             >
-              <p>{good}</p>
+              <p>
+                {good}
+              </p>
               <button
                 type="button"
                 onClick={() => this.setState({ selected: good })}
-                className={this.state.selected === good ? 'disabled' : ''}
+                className={
+                  className(
+                    'button',
+                    'is-rounded',
+                    'is-primary',
+                    'is-small',
+                    { 'is-hidden': this.state.selected === good },
+                  )
+                }
               >
                 Select
               </button>
               <button
                 type="button"
                 onClick={() => this.setState({ selected: null })}
-                className={this.state.selected !== good ? 'disabled' : ''}
+                className={
+                  className(
+                    'button',
+                    'is-danger',
+                    'is-rounded',
+                    'is-small',
+                    { 'is-hidden': this.state.selected !== good },
+                  )
+                }
               >
-                X
+                Remove
               </button>
             </li>
           ))}
