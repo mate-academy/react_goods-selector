@@ -1,1 +1,53 @@
 // styles go here
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  margin: 0;
+}
+
+button,
+button:active,
+button:focus {
+  outline: none;
+  border: 0;
+}
+
+.button {
+  &-clear {
+    padding: 5px 15px;
+    font-size: 20px;
+    background-color: #000;
+    color: #fff;
+  }
+
+  &-item {
+    margin: 10px 20px 10px 0;
+    height: 30px;
+    width: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("./img/plus.png");
+    background-position: center;
+
+    &--selected {
+      background-image: url("./img/minus.png");
+    }
+  }
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 0 20px;
+  margin: 5px 0;
+  transform: translateX(-12%);
+}
