@@ -14,11 +14,42 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-const App: React.FC = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+class App extends React.Component {
+  state = {
+    selected: undefined,
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <h1>{this.state.selected ? `Selected good: - ${this.state.selected}` : 'No good selected'}</h1>
+        <ul className="good_list">
+          {goodsFromServer.map(good => (
+            <li
+              key={good}
+              className={this.state.selected === good ? 'selected' : ''}
+            >
+              <p>{good}</p>
+              <button
+                type="button"
+                onClick={() => this.setState({ selected: good })}
+                className={this.state.selected === good ? 'disabled' : ''}
+              >
+                Select
+              </button>
+              <button
+                type="button"
+                onClick={() => this.setState({ selected: null })}
+                className={this.state.selected !== good ? 'disabled' : ''}
+              >
+                X
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}
 
 export default App;
