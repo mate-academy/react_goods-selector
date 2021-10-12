@@ -25,7 +25,7 @@ class App extends React.Component {
     return (
       <div className="App column">
         <h1 className={
-          className('content', 'is-large')
+          className('content', 'is-large', 'title')
         }
         >
           <strong>
@@ -36,9 +36,20 @@ class App extends React.Component {
           {goodsFromServer.map(good => (
             <li
               key={good}
-              className={this.state.selected === good ? 'selected' : ''}
+              className={
+                className(
+                  'menu_list-item',
+                  { selected: this.state.selected === good },
+                )
+              }
             >
-              <p>
+              <p className={
+                className(
+                  'menu_list-text',
+                  { bordered: this.state.selected === good },
+                )
+              }
+              >
                 {good}
               </p>
               <button

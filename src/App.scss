@@ -1,3 +1,31 @@
 .App {
   margin: 100px;
 }
+
+.title {
+  text-align: center;
+}
+
+.bordered {
+  text-align: center;
+  //width: max-content;
+  border-radius: 3px;
+  background-color: hsl(0, 0%, 90%);
+}
+
+.menu_list {
+  height: 500px;
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.menu_list-item {
+  width: 80px;
+}
+
+.menu_list-text {
+  text-align: center;
+}
