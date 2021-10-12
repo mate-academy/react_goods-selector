@@ -77,7 +77,7 @@ class App extends React.Component<{}, State> {
             <h1 className="header__title">Selected goods:</h1>
           </div>
           {this.showSelectedGoodsList()}
-          <p><strong>Click to select, double click to remove</strong></p>
+          <p className="header__additional"><strong>Click to select, double click to remove</strong></p>
         </div>
         <ul className="goods-list">
           {goodsFromServer.map(good => (
