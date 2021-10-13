@@ -1,1 +1,64 @@
-// styles go here
+.App {
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 600px;
+  border: 2px solid #f00;
+  background-color: #f95;
+  border-radius: 20px;
+
+  &-head {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+  }
+
+  &-title {
+    margin: 0 auto;
+    padding: 10px;
+    text-align: center;
+  }
+
+  &-list {
+    margin: 25px;
+    padding: 25px;
+    border: 2px solid #f00;
+    border-radius: 10px;
+    list-style: none;
+
+    &__selected {
+      display: flex;
+      flex-direction: row;
+    }
+
+    &__item {
+      margin: 0;
+      margin-bottom: 10px;
+      padding: 0;
+      width: 100px;
+      height: 25px;
+      line-height: 25px;
+      text-align: center;
+
+      &-selected {
+        background-color: #f65;
+        border-radius: 5px;
+      }
+    }
+  }
+
+  &-button {
+    display: block;
+    margin: 0 25px;
+    padding: 0;
+    height: 25px;
+    width: 50px;
+
+    &__head {
+      margin: 15px 0;
+    }
+
+    &__hided {
+      display: none;
+    }
+  }
+}
