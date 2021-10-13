@@ -1,1 +1,39 @@
-// styles go here
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.goods__list {
+  display: flex;
+  padding: 4px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+}
+
+.goods__field {
+  width: 150px;
+  list-style: none;
+  padding: 4px;
+  margin-bottom: 8px;
+  background-color: rgb(230, 175, 144);
+
+  &--selected {
+    border: 2px solid rgb(10, 4, 107);
+    border-radius: 4px;
+  }
+}
+
+.button__block {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.button {
+  margin: 8px;
+  width: 100px;
+  border-radius: 8px;
+  font-size: 24px;
+}
