@@ -1,1 +1,54 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-family: Helvetica, sans-serif;
+  font-size: 14px;
+  text-align: center;
+  color: #005582;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+
+.card {
+  padding: 10px;
+  border: 1px solid #0086ad;
+  background-color:	#daf8e3;
+  border-radius: 4%;
+  margin: 10px;
+  width: 120px;
+  height: 150px;
+
+  &__selected {
+    padding: 10px;
+    border: 1px solid #0086ad;
+    background-color:	#97ebdb;
+    border-radius: 4%;
+    margin: 10px;
+    width: 120px;
+    height: 150px;
+  }
+}
+
+.button {
+  margin: 5px;
+  width: 90px;
+  height: 30px;
+
+  background-color: #00c2c7;
+  border-radius: 8%;
+  border: none;
+
+  cursor: pointer;
+  translate: 300ms;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
