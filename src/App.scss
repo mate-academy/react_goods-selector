@@ -1,1 +1,67 @@
-// styles go here
+.products {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 12px;
+  max-width: 400px;
+  background-color: rgb(167, 205, 255);
+  border-radius: 15px;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 80px;
+  }
+
+  &__title {
+    text-align: center;
+    font-size: 18px;
+    margin: 0 0 8px;
+    color: rgb(255, 255, 255);
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  &__field {
+    width: 300px;
+    padding: 4px;
+    margin-bottom: 8px;
+    background-color: rgb(224, 204, 255);
+
+    &--selected {
+      background-color: rgb(153, 255, 230);
+    }
+  }
+
+  &__item {
+    margin-bottom: 6px;
+  }
+}
+
+.btn {
+  width: 250px;
+  margin-bottom: 8px;
+}
+
+.reset_btn {
+  display: block;
+  width: 200px;
+  background-color: rgb(255, 189, 189);
+
+  &__hidden {
+    display: none;
+  }
+}
