@@ -1,1 +1,19 @@
-// styles go here
+.list {
+  &__item {
+    display: flex;
+    max-width: 250px;
+    border: 2px solid transparent;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+
+    &--selected {
+      border: 2px solid green;
+    }
+  }
+
+  &__btn {
+    margin-left: auto;
+  }
+}
