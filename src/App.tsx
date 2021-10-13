@@ -18,7 +18,7 @@ const goodsFromServer: string[] = [
 
 class App extends React.Component {
   state = {
-    selected: undefined,
+    selected: 'Jam',
   };
 
   render() {
@@ -61,7 +61,7 @@ class App extends React.Component {
                     'is-rounded',
                     'is-primary',
                     'is-small',
-                    { 'is-hidden': this.state.selected === good },
+                    { 'is-invisible': this.state.selected === good },
                   )
                 }
               >
@@ -76,11 +76,11 @@ class App extends React.Component {
                     'is-danger',
                     'is-rounded',
                     'is-small',
-                    { 'is-hidden': this.state.selected !== good },
+                    { 'is-invisible': this.state.selected !== good },
                   )
                 }
               >
-                Remove
+                X
               </button>
             </li>
           ))}
