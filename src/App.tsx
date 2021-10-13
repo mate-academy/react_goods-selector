@@ -20,7 +20,7 @@ interface State {
   selectedGoods: string[],
 }
 
-export default class App extends React.Component<{}, State>{
+export default class App extends React.Component<{}, State> {
   state:State = {
     selectedGoods: [],
   };
@@ -29,9 +29,8 @@ export default class App extends React.Component<{}, State>{
     this.setState((prevState) => {
       const goods = [...prevState.selectedGoods];
 
-      if(goods.includes(good)) {
-        
-        goods.splice(goods.indexOf(good), 1)
+      if (goods.includes(good)) {
+        goods.splice(goods.indexOf(good), 1);
       } else {
         goods.push(good);
       }
@@ -43,8 +42,8 @@ export default class App extends React.Component<{}, State>{
   };
 
   clearSelectedGoods = () => {
-    this.setState({selectedGoods: []})
-  }
+    this.setState({ selectedGoods: [] });
+  };
 
   render() {
     const { selectedGoods } = this.state;
@@ -53,44 +52,47 @@ export default class App extends React.Component<{}, State>{
       <div className="App">
         <h1 className="selected-goods">
           {
-          selectedGoods.length < 2
-          ? 'Selected good: '
-          : 'Selected goods: '
+            selectedGoods.length < 2
+              ? 'Selected good: '
+              : 'Selected goods: '
           }
           {
             selectedGoods.length
-            ? selectedGoods.join(', ')
-            : '-'
+              ? selectedGoods.join(', ')
+              : '-'
           }
         </h1>
 
-          {selectedGoods.length ? (<button
+        {selectedGoods.length ? (
+          <button
             type="button"
             className="btn-clear"
             onClick={this.clearSelectedGoods}
           >
             Clear
-          </button>)
-          : (<button
-            type="button"
-            className="btn-clear"
-            onClick={this.clearSelectedGoods}
-            style={{visibility:'hidden'}}
-          >
-            Clear
-          </button>)  
-        }
-  
+          </button>
+        )
+          : (
+            <button
+              type="button"
+              className="btn-clear"
+              onClick={this.clearSelectedGoods}
+              style={{ backgroundColor: '#c0c0c0', cursor: 'not-allowed' }}
+            >
+              Clear
+            </button>
+          )}
 
         <ul className="list">
           {goodsFromServer.map(good => (
-            <li key={good}
-                className={classNames('list__item', {
-                  list__item_selected: selectedGoods.includes(good),
-                })}
+            <li
+              key={good}
+              className={classNames('list__item', {
+                list__item_selected: selectedGoods.includes(good),
+              })}
             >
               <span className="list__name">{good}</span>
-              <button 
+              <button
                 type="button"
                 className={classNames('list__button', {
                   list__button_selected: selectedGoods.includes(good),
