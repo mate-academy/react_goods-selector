@@ -40,20 +40,19 @@ class App extends React.Component<{}, State> {
     }));
   };
 
-  showSelectedGoodsList = () => (
-    <ul className="selected-list">
-      {this.state.selectedGood.length !== 0
-        ? this.state.selectedGood.map(good => (
-          <li className="selected-list__item">
-            {good}
-          </li>
-        )) : (
-          <li className="selected-list__item">
-            No goods are selected
-          </li>
-        )}
-    </ul>
-  );
+  showSelectedGoodsList = () => {
+    const { selectedGood } = this.state;
+    const lastGood = selectedGood[selectedGood.length - 1];
+    const copy = [...selectedGood];
+
+    if (selectedGood.length === 1) {
+      return selectedGood[0];
+    }
+
+    copy.pop();
+
+    return (copy.length === 0) ? 'No goods are selected' : `${copy.join(', ')} and ${lastGood}`;
+  };
 
   render() {
     const { selectedGood } = this.state;
