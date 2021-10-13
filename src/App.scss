@@ -13,7 +13,7 @@
 }
 
 .menu_list {
-  height: 230px;
+  height: 250px;
   display: flex;
   align-content: center;
   flex-direction: column;
@@ -31,4 +31,8 @@
 
 .menu_list-text {
   text-align: center;
+}
+
+.button {
+  margin-bottom: 4px;
 }

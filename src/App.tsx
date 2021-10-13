@@ -55,13 +55,14 @@ class App extends React.Component {
               <button
                 type="button"
                 onClick={() => this.setState({ selected: good })}
+                disabled={this.state.selected === good}
                 className={
                   className(
                     'button',
                     'is-rounded',
                     'is-primary',
                     'is-small',
-                    { 'is-invisible': this.state.selected === good },
+                    // { 'is-invisible': this.state.selected === good },
                   )
                 }
               >
