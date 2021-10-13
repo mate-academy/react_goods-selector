@@ -1,1 +1,76 @@
 // styles go here
+body {
+    background: -webkit-linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+  font-family: Roboto, 'sans-serif';
+}
+
+.selected-goods {
+    margin: 0 auto;
+    height: 200px;
+    width: 500px;
+    background-color: rgba(212, 212, 212, 0.5);
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.btn-clear {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 16px;
+    margin-bottom: 20px;
+    background-color: orange;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        background-color: rgb(168, 111, 4);
+    }
+}
+
+.list {
+    margin: 0 auto;
+    font-size: 25px;
+    padding: 0;
+    list-style-type: none;
+    width: 500px;
+
+
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #9dcfb6;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        padding-left: 10px;
+    }
+
+    &__button {
+        padding: 7px 16px;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        background-color: #17e66d;
+        border-radius: 5px;
+
+        transition: all 0.2s ease-in-out;
+
+
+        &:hover {
+            background-color: #04923f; 
+        }
+
+        &_selected {
+            background-color: red;
+            &:hover {
+                background-color: rgb(185, 14, 14);
+            }
+        }
+
+    }
+}
