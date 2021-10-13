@@ -102,7 +102,7 @@ class App extends React.Component<{}, State> {
     } else {
       this.setState(({ Goods }) => {
         return {
-          Goods: [...Goods].filter(i => i !== item),
+          Goods: [...Goods].filter(x => x !== item),
         };
       });
     }
@@ -119,15 +119,16 @@ class App extends React.Component<{}, State> {
       <div className="app">
         <h1>{this.renderText()}</h1>
         {goodsFromServer.length && this.renderList(goodsFromServer)}
-        {Goods.length ? (
-          <button
-            className="button-clear"
-            type="button"
-            onClick={this.clearList}
-          >
-            Unselected All!
-          </button>
-        ) : ''}
+        {Goods.length
+          ? (
+            <button
+              className="button-clear"
+              type="button"
+              onClick={this.clearList}
+            >
+              Unselected All!
+            </button>
+          ) : ''}
       </div>
     );
   }
