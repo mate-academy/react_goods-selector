@@ -59,11 +59,12 @@
     cursor: pointer;
     text-align: center;
     transition: all 0.3s ease;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
 
     &:hover {
       color: rgb(114, 204, 114);
       transform: scale(1.05);
-      will-change: transform;
     }
   }
 }
