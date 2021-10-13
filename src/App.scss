@@ -1,1 +1,33 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    width: max-content;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__button--x {
+    margin-left: 25px;
+  }
+
+  &__list {
+    list-style: none;
+  }
+}
+
+li {
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 5px;
+  padding: 20px;
+  border: 1px solid grey;
+}
+
+.active {
+  background-color: green;
+}
