@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import './App.scss';
 
-export const goodsFromServer: string[] = [
+const goodsFromServer: string[] = [
   'Dumplings',
   'Carrot',
   'Eggs',

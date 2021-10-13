@@ -60,10 +60,6 @@
     text-align: center;
     transition: all 0.3s ease;
 
-    &:active {
-      transform: scale(1.1);
-    }
-
     &:hover {
       color: rgb(114, 204, 114);
       transform: scale(1.05);
