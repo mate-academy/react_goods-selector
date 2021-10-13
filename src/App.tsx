@@ -14,36 +14,32 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-class App extends React.Component<{}, {}> {
+class App extends React.Component<{}, { selectedGood: string[] }> {
   state = {
-    selectedGood: ['Jam'] as string[],
+    selectedGood: ['Jam'],
   };
 
-  addGood = (good: string) => {
-    const { selectedGood } = this.state;
+  addOrRemoveGood = (good: string) => {
+    this.setState((currentState) => {
+      const { selectedGood } = currentState;
 
-    if (!selectedGood.includes(good)) {
-      selectedGood.push(good);
-    } else {
-      const ind = selectedGood.indexOf(good);
+      if (!selectedGood.includes(good)) {
+        selectedGood.push(good);
+      } else {
+        const ind = selectedGood.indexOf(good);
 
-      selectedGood.splice(ind, 1);
-    }
+        selectedGood.splice(ind, 1);
+      }
 
-    this.setState(() => {
       return { selectedGood };
     });
   };
 
-  goToZero = () => {
-    const { selectedGood } = this.state;
-
-    selectedGood.length = 0;
-
-    this.setState({ selectedGood });
+  removeAllGoogs = () => {
+    this.setState({ selectedGood: [] });
   };
 
-  renderTitle = () => {
+  getTitle = () => {
     const { selectedGood } = this.state;
 
     let title;
@@ -84,14 +80,14 @@ class App extends React.Component<{}, {}> {
           <button
             type="button"
             onClick={() => {
-              this.goToZero();
+              this.removeAllGoogs();
             }}
           >
             X
 
           </button>
         )}
-        <h1>{this.renderTitle()}</h1>
+        <h1>{this.getTitle()}</h1>
         <ul>
           {goodsFromServer.map((good) => {
             const isGoodAdded = this.state.selectedGood.includes(good);
@@ -102,7 +98,7 @@ class App extends React.Component<{}, {}> {
                 <button
                   type="button"
                   onClick={() => {
-                    this.addGood(good);
+                    this.addOrRemoveGood(good);
                   }}
                 >
                   {isGoodAdded
