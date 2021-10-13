@@ -1,1 +1,28 @@
-// styles go here
+.goods {
+  &__title {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  &__list {
+    width: 500px;
+    margin: 0 auto;
+    padding: 0 10px;
+    border: 1px solid black;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+
+    &--selected {
+      background-color: yellowgreen;
+    }
+  }
+
+  &__btn {
+    width: 80px;
+  }
+}
