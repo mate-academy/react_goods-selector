@@ -1,1 +1,73 @@
-// styles go here
+body {
+  background-color: lightblue;
+}
+
+.page {
+  &__title {
+    text-align: center;
+
+    &-item {
+      text-transform: uppercase;
+      font-size: 25px;
+      background-color: #ffffffb2;
+      height: 30px;
+      margin-right: 10px;
+    }
+  }
+
+  &-button {
+    text-align: center;
+
+    &__clear {
+      text-transform: uppercase;
+      transform: translateY(-10%);
+      background-color: #ff00009f;
+      margin-left: 10px;
+      width: 30px;
+      height: 30px;
+      font-size: 18px;
+  
+      &:hover {
+        background-color: red;
+        cursor: pointer;
+      }
+    }
+
+    &__clear-all {
+      text-transform: uppercase;
+      background-color: #ff00009f;
+      border-radius: 4px;
+      height: 34px;
+      font-size: 28px;
+  
+      &:hover {
+        background-color: red;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.goods {
+  margin-right: auto;
+  margin-left: auto;
+  width: 300px;
+  margin-top: 150px;
+
+  &__list {
+    list-style: none;
+
+    &-item {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 10px 0;
+    }
+
+    &-item-text {
+      text-transform: uppercase;
+      margin: unset;
+      font-size: 24px;
+    }
+  }
+}
