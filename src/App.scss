@@ -1,1 +1,26 @@
 // styles go here
+.App {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  border: 2px solid black;
+
+  &__item {
+    display: flex;
+    margin: 5px;
+    padding: 3px 5px;
+    justify-content: space-between;
+
+    &--selected {
+      background-color: limegreen;
+    }
+  }
+}
