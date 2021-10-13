@@ -1,1 +1,32 @@
-// styles go here
+.active {
+  color: red;
+}
+
+.button {
+  justify-items: center;
+  margin-bottom: 5px;
+  &--reset {
+    display: block;
+  }
+  &--toggler {
+    margin-left: 10px;
+  }
+}
+
+.item {
+  width: fit-content;
+  padding: 20px;
+  border-radius: 10px;
+  border: solid grey 2px;
+  background-color: honeydew;
+  margin-bottom: 5px;
+}
+
+.list {
+  margin: 0 auto;
+  width: 800px;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
