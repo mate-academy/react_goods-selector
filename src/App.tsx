@@ -17,18 +17,18 @@ const goodsFromServer: string[] = [
 ];
 
 interface State {
-  Goods: string[],
+  goods: string[],
 }
 
 class App extends React.Component<{}, State> {
   state: State = {
-    Goods: [],
+    goods: ['Dumplings'],
   };
 
   renderList = (list: string[]) => (
     <ul>
       {list.map(item => {
-        const status = this.state.Goods.includes(item);
+        const status = this.state.goods.includes(item);
 
         return (
           <li
@@ -63,16 +63,16 @@ class App extends React.Component<{}, State> {
     </ul>
   );
 
-  renderText = (): string => {
-    const { Goods } = this.state;
+  getTitle = (): string => {
+    const { goods } = this.state;
     let titleText = '';
 
-    if (Goods.length === 1) {
-      titleText = `${Goods[0]} is selected.`;
+    if (goods.length === 1) {
+      titleText = `${goods[0]} is selected.`;
     }
 
-    if (Goods.length > 1) {
-      titleText = Goods.reduce((text, item, i, arr) => {
+    if (goods.length > 1) {
+      titleText = goods.reduce((text, item, i, arr) => {
         if (i === 0) {
           return item + text;
         }
@@ -85,7 +85,7 @@ class App extends React.Component<{}, State> {
       }, '');
     }
 
-    if (Goods.length === 0) {
+    if (goods.length === 0) {
       titleText = 'No goods selected';
     }
 
@@ -94,32 +94,32 @@ class App extends React.Component<{}, State> {
 
   switchList = (selected: boolean, item: string) => {
     if (selected === false) {
-      this.setState(({ Goods }) => {
+      this.setState(({ goods }) => {
         return {
-          Goods: [...Goods, item],
+          goods: [...goods, item],
         };
       });
     } else {
-      this.setState(({ Goods }) => {
+      this.setState(({ goods }) => {
         return {
-          Goods: [...Goods].filter(x => x !== item),
+          goods: [...goods].filter(x => x !== item),
         };
       });
     }
   };
 
   clearList = () => {
-    this.setState({ Goods: [] });
+    this.setState({ goods: [] });
   };
 
   render() {
-    const { Goods } = this.state;
+    const { goods } = this.state;
 
     return (
       <div className="app">
-        <h1>{this.renderText()}</h1>
+        <h1>{this.getTitle()}</h1>
         {goodsFromServer.length && this.renderList(goodsFromServer)}
-        {Goods.length
+        {goods.length
           ? (
             <button
               className="button-clear"
