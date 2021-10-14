@@ -1,1 +1,26 @@
-// styles go here
+.App {
+  text-align: center;
+}
+
+.closer:hover {
+  color: red;
+}
+
+.goods {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  &__list {
+    list-style-type: none;
+    padding-left: 20px;
+
+    &__good {
+      justify-content: center;
+    }
+  }
+
+  &__clicker:active {
+    color: rgb(55, 192, 55);
+  }
+}
