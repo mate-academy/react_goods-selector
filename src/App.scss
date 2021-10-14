@@ -1,1 +1,28 @@
 // styles go here
+.title {
+  margin-left: 40px;
+  width: 25%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.removeButton {
+  height: 28px;
+  width: 28px;
+  margin: auto auto;
+  border: none;
+  border-radius: 6px;
+}
+
+li {
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  background-color: lightcyan;
+  padding: 10px;
+}
+
+.active {
+  background-color: aqua;
+}
