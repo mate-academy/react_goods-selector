@@ -56,11 +56,11 @@ class App extends React.Component<{}, State> {
           : ''}
 
         {goodsFromServer.map(item => (
-          <label
+          <div
             key={item}
             className={selectedGood.includes(item)
-              ? 'label label--selected'
-              : 'label'}
+              ? 'goods goods--selected'
+              : 'goods'}
           >
             {item}
 
@@ -79,7 +79,7 @@ class App extends React.Component<{}, State> {
                   Select
                 </button>
               )}
-          </label>
+          </div>
         ))}
       </div>
     );
