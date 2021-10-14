@@ -5,9 +5,9 @@ body {
 .App {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  width: 500px;
+  gap: 10px;
   padding: 5px;
+  width: max-content;
 
   background-color: #445;
 
