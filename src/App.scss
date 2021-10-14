@@ -1,1 +1,62 @@
-// styles go here
+.App {
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+
+  &-Title {
+    height: 60px;
+    color: #fb4a4a;
+    text-align: center;
+  }
+
+  &-Remove-All {
+    height: 40px ;
+  }
+
+  &-Remove-All-Button {
+    width: 200px;
+    height: 32px;
+    box-shadow: 4px 2px 2px #0005;
+    transition-duration: 0.3s;
+    font-weight: bold;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 8px 4px 4px #0005;
+    }
+  }
+
+  &-List {
+    width: 40%;
+    list-style: none;
+  }
+
+  &-Item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 4px 12px;
+
+    &_Selected {
+      background-color: #0f04;
+    }
+  }
+
+  &-Good {
+    font-size: 24px;
+  }
+
+  &-Button {
+    width: 100px;
+    box-shadow: 4px 2px 2px #0005;
+    transition-duration: 0.3s;
+    font-weight: bold;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 8px 4px 4px #0005;
+    }
+  }
+}
