@@ -1,1 +1,38 @@
-// styles go here
+.App {
+  margin: 100px;
+}
+
+.title {
+  text-align: center;
+}
+
+.bordered {
+  text-align: center;
+  border-radius: 3px;
+  background-color: hsl(0, 0%, 90%);
+}
+
+.menu_list {
+  height: 250px;
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.menu_list-item {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin-top: 4px;
+  width: 80px;
+}
+
+.menu_list-text {
+  text-align: center;
+}
+
+.button {
+  margin-bottom: 4px;
+}
