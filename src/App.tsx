@@ -35,7 +35,11 @@ class App extends React.Component {
             {`Selected good: - ${selectedGood}`}
           </h1>
           <button
-            className="App-button App-button__head"
+            className={`
+              App-button
+              App-button__head
+              ${!isSelected && 'App-button__hided'}
+            `}
             type="button"
             onClick={() => {
               this.setState({
