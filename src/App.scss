@@ -1,1 +1,42 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  &__good-item {
+    background-color: #d759168f;
+    text-align: center;
+    border-radius: 15px;
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+
+  &__list-of-goods {
+    width: 333px;
+    line-height: 40px;
+    list-style: none;
+  }
+}
+
+.button {
+  text-decoration: none;
+  width: 100px;
+  height: 25px;
+  border-radius: 15px;
+  margin-left: 10%;
+  font-size: 11px;
+  letter-spacing: 3px;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: rgb(134, 134, 130);
+    color: white;
+  }
+}
