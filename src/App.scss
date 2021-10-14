@@ -1,1 +1,54 @@
-// styles go here
+.card {
+  &__content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  &__list-card {
+    justify-content: center;
+    width: 300px;
+    margin: 25px;
+  }
+}
+
+.card-title {
+  width: 700px;
+}
+
+.card-button {
+  width: 80px;
+  background-color: lightgreen;
+  border: 1px solid lightgreen;
+  border-radius: 4px;
+  margin: 0 20px;
+
+  transition: transform 0.5s;
+
+  &:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+}
+
+.goods-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.active_item {
+  padding-bottom: 20px;
+  // align-items: center;
+  // justify-content: center;
+  text-align: center;
+  width: 100%;
+  background-color: lightskyblue;
+}
+
+.item {
+  padding-bottom: 20px;
+  text-align: center;
+}
