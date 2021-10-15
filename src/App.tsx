@@ -1,4 +1,5 @@
 import React from 'react';
+import className from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -46,13 +47,18 @@ class App extends React.Component<{}, State> {
         </h1>
         <ul>
           {goodsFromServer.map((item) => (
-            <li className="list" key={item}>
+            <li
+              className={className('list',
+                { list__active: item === this.state.goods })}
+              key={item}
+            >
               <div>{item}</div>
               {item && (
                 <button
                   disabled={goods === item}
                   onClick={() => this.setState({ goods: item })}
-                  className="button"
+                  className={className('button',
+                    { button__active: item === this.state.goods })}
                   type="button"
                 >
                   {(goods !== item) ? 'select' : 'selected'}
