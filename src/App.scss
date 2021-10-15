@@ -1,1 +1,70 @@
-// styles go here
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+  width: 40%;
+
+  &__list {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  &__clear {
+    display: block;
+    width: 50%;
+    height: 50px;
+    font-size: 30px;
+    line-height: 50px;
+    margin: 15px auto;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+
+    &--none {
+      display: none;
+    }
+  }
+
+  &__container {
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__item {
+      width: 50%;
+      height: 50px;
+      margin: 10px;
+      padding-left: 10px;
+      font-size: 30px;
+      line-height: 50px;
+      font-weight: bold;
+      border: 1px solid rgb(87, 78, 68);
+  
+      &--selected {
+       background-color: rgb(41, 168, 126);
+       color: rgb(240, 228, 228);
+      }
+  }
+
+  &__btn {
+    width: 30%;
+    height: 50px;
+    margin: 10px;
+    font-size: 30px;
+    line-height: 50px;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid rgb(87, 78, 68);
+    background-color: rgb(154, 207, 223);
+    cursor: pointer;
+    transition-duration: 0.5s ;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
