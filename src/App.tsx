@@ -54,7 +54,10 @@ class App extends React.Component<{}, State> {
             </li>
           ))}
         </ul>
-        <p>Amount of goods in the list: {goodsFromServer.length}</p>
+        <p>
+          Amount of goods in the list:
+          {goodsFromServer.length}
+        </p>
         <button
           className={(selectedGood) ? 'Button' : 'Button--hidden'}
           type="button"
