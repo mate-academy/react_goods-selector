@@ -1,1 +1,40 @@
-// styles go here
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  border: 1px solid black;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.remove-button {
+  width: 40px;
+  padding: 3px;
+  margin-left: 10px;
+}
+
+.goods-list {
+  list-style: none;
+}
+
+.good-item {
+  background-color: yellow;
+  padding: 5px;
+  font-size: 20px;
+}
+
+.button {
+  margin-left: 10px;
+  padding: 3px;
+}
