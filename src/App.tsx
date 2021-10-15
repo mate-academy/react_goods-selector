@@ -19,7 +19,7 @@ class App extends React.Component<{}, { selectedGoods: string[] }> {
     selectedGoods: ['Jam'],
   };
 
-  addOrRemoveGood = (good: string) => {
+  changeSelectedGoodsHandler = (good: string) => {
     this.setState(((prevState: { selectedGoods: string[] }): { selectedGoods: string[] } => ({
       selectedGoods:
         (prevState.selectedGoods.includes(good))
@@ -28,7 +28,7 @@ class App extends React.Component<{}, { selectedGoods: string[] }> {
     })));
   };
 
-  whatIsSelected = () => {
+  getTitle = () => {
     const { selectedGoods } = this.state;
     let result = '';
 
@@ -56,7 +56,7 @@ class App extends React.Component<{}, { selectedGoods: string[] }> {
       <div className="App">
         <div className="App__heading">
           <h1 className="App__heading-text">
-            {this.whatIsSelected()}
+            {this.getTitle()}
           </h1>
           <button
             className="App__button"
@@ -85,7 +85,7 @@ class App extends React.Component<{}, { selectedGoods: string[] }> {
                     className="App__button"
                     type="button"
                     onClick={() => {
-                      this.addOrRemoveGood(good);
+                      this.changeSelectedGoodsHandler(good);
                     }}
                   >
                     {selectedGoods.includes(good) ? '-' : '+'}
