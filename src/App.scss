@@ -1,1 +1,24 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.goods-list {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  border: 2px solid #345;
+  
+  &__item {
+    display: flex;
+    margin: 5px;
+    padding: 5px;
+    justify-content: space-between;
+    border: 1px solid #642;
+    border-radius: 3px;
+  }
+}
