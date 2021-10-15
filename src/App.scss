@@ -1,1 +1,21 @@
-// styles go here
+.GoodsList {
+  width: 180px;
+
+  list-style: none;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+
+    &--selected {
+      background-color: aquamarine;
+    }
+  }
+
+}
+
+.Button {
+  &--hidden {
+    visibility: hidden;
+  }
+}
