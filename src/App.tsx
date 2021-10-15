@@ -24,7 +24,7 @@ class App extends React.Component<{}, State> {
     selectedGood: ['Jam'],
   };
 
-  isSelected = (item: string) => {
+  changeGoodsHandler = (item: string) => {
     if (!this.state.selectedGood.includes(item)) {
       this.setState(({ selectedGood }) => {
         return {
@@ -40,7 +40,7 @@ class App extends React.Component<{}, State> {
     }
   };
 
-  setTitle = () => {
+  getTitle = () => {
     const { selectedGood } = this.state;
 
     if (selectedGood.length === 0) {
@@ -56,7 +56,7 @@ class App extends React.Component<{}, State> {
     return `${firstGoods.join(', ')} and ${selectedGood[selectedGood.length - 1]} are selected`;
   };
 
-  clearTitle = () => {
+  clearSelectedGoods = () => {
     this.setState({ selectedGood: [] });
   };
 
@@ -66,14 +66,14 @@ class App extends React.Component<{}, State> {
     return (
       <div className="App">
         <h1 className="title">
-          {this.setTitle()}
+          {this.getTitle()}
           {' '}
           {selectedGood.length !== 0 && (
             <button
               className="title__button"
               type="button"
               onClick={() => {
-                this.clearTitle();
+                this.clearSelectedGoods();
               }}
             >
               x
@@ -91,7 +91,7 @@ class App extends React.Component<{}, State> {
                 className="list__button"
                 type="button"
                 onClick={() => {
-                  this.isSelected(item);
+                  this.changeGoodsHandler(item);
                 }}
               >
                 {selectedGood.includes(item) ? 'Remove' : 'Select'}
