@@ -12,15 +12,21 @@
   justify-content: center;
 
   &__list {
-    list-style-type: none;
-    padding-left: 20px;
+    margin: 0 auto;
 
     &__good {
+      padding-left: 20px;
+      list-style-type: none;
       justify-content: center;
+    }
+
+    &__good--selected {
+      color: rgb(55, 192, 55);
     }
   }
 
   &__clicker:active {
     color: rgb(55, 192, 55);
   }
+  
 }
