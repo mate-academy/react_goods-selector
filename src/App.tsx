@@ -64,10 +64,6 @@ class App extends React.Component<Props, State> {
         <div className="App__header">
           <button
             type="button"
-            className={classNames(
-              'clear-button',
-              { 'clear-button--hidden': selectedGood.length === 0 },
-            )}
             onClick={() => {
               this.setState((
                 { selectedGood: [] }
