@@ -25,7 +25,9 @@ class App extends React.PureComponent<{}, States> {
   };
 
   getTitle = () => {
-    return this.state.selectedGood === '' ? 'No goods selected' : `${this.state.selectedGood} is selected`;
+    return this.state.selectedGood === ''
+      ? 'No goods selected'
+      : `${this.state.selectedGood} is selected`;
   };
 
   render() {
@@ -44,30 +46,28 @@ class App extends React.PureComponent<{}, States> {
           )}
         </div>
         <ul className="list">
-          {goodsFromServer.map((good: string) => {
-            return (
-              <>
-                <li
-                  key={goodsFromServer.indexOf(good)}
-                  className={classNames('listItem', { selected: this.state.selectedGood === good })}
-                >
-                  {good}
-                </li>
-                {this.state.selectedGood !== good && (
-                  <button
-                    type="button"
-                    onClick={
-                      () => {
-                        this.setState({ selectedGood: good });
-                      }
+          {goodsFromServer.map((good: string) => (
+            <>
+              <li
+                key={goodsFromServer.indexOf(good)}
+                className={classNames('listItem', { selected: this.state.selectedGood === good })}
+              >
+                {good}
+              </li>
+              {this.state.selectedGood !== good && (
+                <button
+                  type="button"
+                  onClick={
+                    () => {
+                      this.setState({ selectedGood: good });
                     }
-                  >
-                    Select
-                  </button>
-                )}
-              </>
-            );
-          })}
+                  }
+                >
+                  Select
+                </button>
+              )}
+            </>
+          ))}
         </ul>
       </div>
     );
