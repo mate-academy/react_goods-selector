@@ -1,1 +1,45 @@
 // styles go here
+.App {
+  margin: 0 auto;
+  max-width: 500px;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 0 15px 15px;
+
+  &__title {
+    color: rgb(50, 5, 92);
+    display: flex;
+    align-items: center;
+
+    &-btn {
+      margin-left: 10px;
+      cursor: pointer;
+    }
+  }
+}
+
+.list {
+  margin: 0;
+  padding-left: 10px;
+
+  &__item {
+    list-style-type: none;
+    margin-bottom: 10px;
+    font-size: 18px;
+    padding: 4px;
+  }
+
+  &__btn {
+    margin-left: 5px;
+    cursor: pointer;
+  }
+}
+
+.active {
+  box-sizing: border-box;
+  background-color: rgb(158, 2, 179);
+  width: 40%;
+  border: 1px solid black;
+  border-radius: 4px;
+  font-size: 24px;
+}
