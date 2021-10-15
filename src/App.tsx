@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -14,11 +15,93 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-const App: React.FC = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+type State = {
+  selectedGood: string[],
+};
+
+class App extends React.Component<{}, State> {
+  state = {
+    selectedGood: ['Jam'],
+  };
+
+  changeGoodsHandler = (item: string) => {
+    if (!this.state.selectedGood.includes(item)) {
+      this.setState(({ selectedGood }) => {
+        return {
+          selectedGood: [...selectedGood, item],
+        };
+      });
+    } else {
+      this.setState(({ selectedGood }) => {
+        return {
+          selectedGood: [...selectedGood].filter(goods => goods !== item),
+        };
+      });
+    }
+  };
+
+  getTitle = () => {
+    const { selectedGood } = this.state;
+
+    if (selectedGood.length === 0) {
+      return 'No goods selected';
+    }
+
+    if (selectedGood.length === 1) {
+      return `${selectedGood} is selected`;
+    }
+
+    const firstGoods = selectedGood.slice(0, -1);
+
+    return `${firstGoods.join(', ')} and ${selectedGood[selectedGood.length - 1]} are selected`;
+  };
+
+  clearSelectedGoods = () => {
+    this.setState({ selectedGood: [] });
+  };
+
+  render() {
+    const { selectedGood } = this.state;
+
+    return (
+      <div className="App">
+        <h1 className="title">
+          {this.getTitle()}
+          {' '}
+          {selectedGood.length !== 0 && (
+            <button
+              className="title__button"
+              type="button"
+              onClick={() => {
+                this.clearSelectedGoods();
+              }}
+            >
+              x
+            </button>
+          )}
+        </h1>
+        <ul className="list">
+          {goodsFromServer.map(item => (
+            <li
+              className={classNames('list__item', { selected: selectedGood.includes(item) })}
+              key={item}
+            >
+              {item}
+              <button
+                className="list__button"
+                type="button"
+                onClick={() => {
+                  this.changeGoodsHandler(item);
+                }}
+              >
+                {selectedGood.includes(item) ? 'Remove' : 'Select'}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}
 
 export default App;

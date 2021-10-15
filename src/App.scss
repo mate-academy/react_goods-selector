@@ -1,1 +1,33 @@
-// styles go here
+.App {
+  color: #3f334d;
+}
+
+.title {
+  color: #3f334d;
+
+  &__button {
+    height: 20px;
+    width: 40px;
+  }
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+
+  &__item {
+    display: flex;
+    height: 30px;
+    width: 300px;
+  }
+
+  &__button {
+    margin-left: auto;
+    height: 20px;
+    width: 70px;
+  }
+}
+
+.selected {
+  color: #4f7cce;
+}
