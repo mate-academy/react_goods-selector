@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.scss';
-import classNames from 'classnames';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -16,46 +15,63 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  selected: string;
+  selectedGoods: string[];
 };
 
 class App extends React.Component<{}, State> {
   state = {
-    selected: goodsFromServer[0],
+    selectedGoods: ['Jam'],
+  };
+
+  toggleItem = (item: string) => {
+    const { selectedGoods } = this.state;
+
+    if (selectedGoods.includes(item)) {
+      this.setState({ selectedGoods: [...selectedGoods.filter(product => product !== item)] });
+    } else {
+      this.setState({ selectedGoods: [...selectedGoods, item] });
+    }
   };
 
   render() {
-    const { selected } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App">
         <h1>
-          {`Selected good: ${selected}`}
-          <button
-            type="button"
-            disabled={this.state.selected === 'no selected'}
-            onClick={() => {
-              this.setState({ selected: 'no selected' });
-            }}
-          >
-            X
-          </button>
+          {selectedGoods.length
+            ? `Selected goods: ${selectedGoods.join(', ')}`
+            : 'No goods selected'}
         </h1>
+
+        <button
+          type="button"
+          onClick={() => {
+            this.setState({ selectedGoods: [] });
+          }}
+        >
+          X
+        </button>
+
         <ul>
-          {goodsFromServer.map((element: string) => (
-            <li className={classNames({ active: element === this.state.selected })}>
-              {element}
-              <button
-                type="button"
-                disabled={element === this.state.selected}
-                onClick={() => {
-                  this.setState({ selected: element });
-                }}
+          {goodsFromServer.map((good) => {
+            const isSelected = selectedGoods.includes(good);
+
+            return (
+              <li
+                key={good}
               >
-                Select
-              </button>
-            </li>
-          ))}
+                {good}
+
+                <button
+                  type="button"
+                  onClick={() => this.toggleItem(good)}
+                >
+                  {isSelected ? 'Remove' : 'Add'}
+                </button>
+              </li>
+            );
+          })}
         </ul>
       </div>
     );
