@@ -1,1 +1,83 @@
-// styles go here
+body {
+  margin: 0;
+}
+
+.App {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 5px;
+  width: max-content;
+
+  background-color: #445;
+
+  font-family: Arial, Helvetica, sans-serif;
+  color: #fff;
+
+  border-radius: 10px;
+
+  &__heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 300px;
+    margin: 0;
+    padding: 10px;
+
+    background-color: #556;
+    border-radius: 10px;
+  }
+
+  &__heading-text {
+    margin: 0;
+  }
+
+  &__button {
+    height: 20px;
+    width: 20px;
+
+    color: #fff;
+    font-weight: bold;
+
+    background-color: #667;
+    border: none;
+    border-radius: 4px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 120px;
+    margin: 0;
+    padding: 10px;
+
+    list-style: none;
+    background-color: #556;
+    border-radius: 10px;
+  }
+
+  &__list-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px;
+
+    text-transform: lowercase;
+
+    background-color: #445;
+    border-radius: 5px;
+
+    &--selected {
+      display: flex;
+      justify-content: space-between;
+      padding: 3px;
+
+      text-transform: lowercase;
+      font-weight: bold;
+
+      background-color: #335;
+      border-radius: 5px;
+    }
+  }
+}
