@@ -1,1 +1,57 @@
 // styles go here
+.App {
+  width: 500px;
+  margin: 0 auto;
+
+  &__window {
+    height: 100px;
+    width: 460px;
+    padding: 15px 40px;
+    background: #96e169;
+    font-family: "Book Antiqua", sans-serif;
+  }
+
+  &__title {
+    font-size: 38px;
+    line-height: 38px;
+    padding-left: 40px;
+    font-family: "MV Boli", serif;
+  }
+}
+
+.list {
+  list-style: none;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 25px;
+    font-family: Bahnschrift, sans-serif;
+    margin-bottom: 15px;
+    transition-duration: 0.3s;
+
+    &--selected {
+      background: #d0de90;
+      border-radius: 15px;
+    }
+
+    &:hover {
+      color: blueviolet;
+    }
+  }
+
+  &__btn {
+    font-size: 25px;
+    color: #3388c5;
+    padding: 5px 15px;
+    border: 1px solid #000;
+    border-radius: 15px;
+    transition-duration: 0.3s;
+
+    &:hover {
+      background: aqua;
+      border: 1px solid #34d8ee;
+    }
+  }
+}
