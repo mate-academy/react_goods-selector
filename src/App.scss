@@ -1,1 +1,29 @@
-// styles go here
+.container {
+  max-width: 500px;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  max-width: 500px;
+}
+
+.items-list {
+  list-style: none;
+}
+
+.items {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.selected {
+  background-color: rgb(224, 240, 11);
+}
+
+.hidden {
+  display: none;
+}
