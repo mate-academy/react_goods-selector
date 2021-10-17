@@ -1,1 +1,39 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+
+  h1 {
+    color: red;
+  }
+
+  .GoodsList {
+    width: 400px;
+    padding: 10px;
+    border: 2px solid grey;
+    border-radius: 10px;
+    list-style: none;
+
+    &__item {
+      padding: 5px;
+      margin: 5px;
+      display: flex;
+      justify-content: space-between;
+      border: 1px solid teal;
+      border-radius: 10px;
+    }
+
+    .selected {
+      border: 2px solid red;
+    }
+  }
+}
+
+.Button {
+  &--clear {
+    width: 100px;
+  }
+  &.hidden {
+    visibility: hidden;
+  }
+}
