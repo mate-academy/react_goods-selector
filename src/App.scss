@@ -1,1 +1,16 @@
-// styles go here
+.selected {
+  color: red;
+}
+
+.notSelected {
+  color: darkblue;
+}
+
+.enable {
+  margin-left: 20px;
+  background-color: yellow;
+}
+
+.disable {
+  display: none;
+}
