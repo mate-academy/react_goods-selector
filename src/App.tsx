@@ -21,7 +21,7 @@ type State = {
 };
 
 class App extends React.Component<{}, State> {
-  state:State = {
+  state: State = {
     selectedGoods: [],
   };
 
