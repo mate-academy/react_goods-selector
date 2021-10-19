@@ -14,7 +14,7 @@ const goodsFromServer: Good[] = [
   'Garlic',
 ];
 
-type Good = 'Dumplings' | 'Carrot' | 'Eggs' | 'Ice cream' | 'Apple' | 'Bread' | 'Fish' | 'Honey' | 'Jam' | 'Garlic';
+type Good = string;
 
 type State = {
   selectedGoods: Good[];
@@ -26,10 +26,9 @@ export class App extends React.Component<{}, State> {
   };
 
   addGood(good: Good) {
-    const { selectedGoods } = this.state;
-
-    selectedGoods.push(good);
-    this.setState({ selectedGoods });
+    this.setState(state => {
+      return { selectedGoods: [...state.selectedGoods, good] };
+    });
   }
 
   header() {
@@ -47,7 +46,7 @@ export class App extends React.Component<{}, State> {
         return head;
 
       default:
-        head = `${selectedGoods.join(', ')} are selected`;
+        head = `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods.slice(-1)} are selected`;
 
         return head;
     }
@@ -73,7 +72,7 @@ export class App extends React.Component<{}, State> {
             <div className={selectedGoods.includes(good) ? 'goods__item active' : 'goods__item'}>
               {good}
               <button
-                className="goods__button"
+                className={selectedGoods.includes(good) ? 'goods__button-active' : 'goods__button'}
                 onClick={
                   selectedGoods.includes(good)
                     ? () => this.removeGood(good)

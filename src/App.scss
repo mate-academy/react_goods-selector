@@ -19,7 +19,11 @@
     border-radius: 5px;
     cursor: pointer;
 
-    &:hover {
+    &-active {
+      padding: 5px;
+      border: 1px solid black;
+      border-radius: 5px;
+      cursor: pointer;
       background: red;
     }
   }
