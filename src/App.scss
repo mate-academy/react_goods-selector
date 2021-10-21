@@ -1,1 +1,48 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+button {
+  background-color: bisque;
+  border: 2px solid rgb(230, 195, 120);
+  border-radius: 15px;
+  width: 90px;
+}
+
+.App {
+  margin: auto;
+  width: 50vw;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 auto;
+  background-color: rgb(231, 212, 137);
+}
+
+.Title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: aqua;
+}
+
+.clear-button {
+  background-color: brown;
+  height: 40px;
+  width: 140px;
+}
+
+.goods {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0;
+
+
+  &__list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
