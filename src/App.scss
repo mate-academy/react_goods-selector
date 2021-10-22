@@ -1,1 +1,39 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  &__good-item {
+    background-color: #1639d78f;
+    font-size: 20px;
+  
+  }
+  
+  &__list-of-goods {
+    width: 300px;
+    line-height: 40px;
+    border: 5px solid black;
+  }
+}
+
+.button {
+  width: 100px;
+  height: 25px;
+  border-radius: 10px;
+  margin-left: 15%;
+  font-size: 11px;
+  letter-spacing: 3px;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: rgb(134, 134, 130);
+    color: white;
+  }
+}
