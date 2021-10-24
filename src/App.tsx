@@ -1,7 +1,6 @@
 import React from 'react';
-import './App.scss';
 
-const goodsFromServer: string[] = [
+const goodsFromServer: Good[] = [
   'Dumplings',
   'Carrot',
   'Eggs',
@@ -14,88 +13,91 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-type Good = string | null | ChildNode | undefined;
+type Good = 'Dumplings'
+| 'Carrot'
+| 'Eggs'
+| 'Ice cream'
+| 'Apple'
+| 'Bread'
+| 'Fish'
+| 'Honey'
+| 'Jam'
+| 'Garlic';
 
-type State = {
-  selectedGoods: Good[],
-};
+interface State{
+  selectedGoods: Good []
+}
 
 class App extends React.Component<{}, State> {
   state: State = {
-    selectedGoods: [],
+    selectedGoods: ['Jam'],
   };
 
-  onClickGoodSelectHandler = (index: number) => {
-    const button = document.querySelector(`.App__item-button--select_${index}`);
-    const goodName = button?.previousSibling;
-    const currentGoods = [...this.state.selectedGoods];
-    const parent = button?.parentElement;
+  get selected() {
+    const { selectedGoods } = this.state;
 
-    if (parent) {
-      parent.style.color = 'green';
-    }
+    switch (selectedGoods.length) {
+      case 0:
+        return 'No goods selected';
 
-    if (goodName && this.isSelected(goodName.textContent) === false) {
-      this.setState({ selectedGoods: [...currentGoods, goodName.textContent] });
-    }
-  };
+      case 1:
+        return `${selectedGoods[0]} is selected`;
 
-  onClickGoodDismissHandler(index: number) {
-    const button = document.querySelector(`.App__item-button--dismiss_${index}`);
-    const parent = button?.parentElement;
-    const goodName = parent?.firstElementChild;
-    const currentGoods = [...this.state.selectedGoods];
-
-    if (parent) {
-      parent.style.color = '';
-    }
-
-    if (goodName && this.isSelected(goodName.textContent)) {
-      this.setState({
-        selectedGoods: [...currentGoods
-          .filter(good => good !== goodName.textContent)],
-      });
+      default:
+        return `${selectedGoods.join(', ')} are selected`;
     }
   }
 
-  isSelected(good: Good) {
-    return this.state.selectedGoods.includes(good);
-  }
+  addGood = (good: Good) => {
+    const { selectedGoods } = this.state;
+
+    selectedGoods.push(good);
+
+    this.setState({ selectedGoods });
+  };
+
+  removeGood = (good: Good) => {
+    const { selectedGoods } = this.state;
+
+    this.setState({ selectedGoods: selectedGoods.filter(item => item !== good) });
+  };
+
+  removeAll = () => {
+    this.setState({ selectedGoods: [] });
+  };
 
   render() {
     const { selectedGoods } = this.state;
 
     return (
       <div className="App">
-        <h1 className="App_title">
-          Selected goods:
-          {selectedGoods.length > 0
-            ? ` ${selectedGoods.join(', ')}`
-            : ' no selected goods'}
+        <h1>
+          {`Selected good: ${this.selected}`}
         </h1>
-        <ul className="App__list">
-          {goodsFromServer.map((good, index) => (
-            <li className="App__item">
-              <span className="App__item-name">{good}</span>
-              {!this.isSelected(good)
-                ? (
-                  <button
-                    type="submit"
-                    className={`App__item-button App__item-button--select_${index}`}
-                    onClick={() => this.onClickGoodSelectHandler(index)}
-                  >
-                    Select
-                  </button>
-                )
-                : (
-                  <button
-                    type="submit"
-                    className={`App__item-button App__item-button--dismiss_${index}`}
-                    onClick={() => this.onClickGoodDismissHandler(index)}
-                  >
-                    Dismiss
-                  </button>
-                )}
+        <div>
+          {this.state.selectedGoods.length !== 0 && (
+            <button
+              type="button"
+              onClick={this.removeAll}
+            >
+              Remove all goods
+            </button>
+          )}
+        </div>
+        <ul>
+          {goodsFromServer.map(good => (
+            <li key={good}>
+              <div>{good}</div>
+              <button
+                type="button"
+                onClick={
+                  selectedGoods.includes(good)
+                    ? () => this.removeGood(good)
+                    : () => this.addGood(good)
+                }
+              >
+                {selectedGoods.includes(good) ? 'Remove' : 'Add'}
+              </button>
             </li>
           ))}
         </ul>
