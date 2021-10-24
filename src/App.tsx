@@ -58,11 +58,23 @@ export class App extends React.Component<{}, State> {
     this.setState({ selectedGoods: selectedGoods.filter(item => item !== good) });
   }
 
+  clearList() {
+    this.setState({ selectedGoods: [] });
+  }
+
   render() {
     const { selectedGoods } = this.state;
 
     return (
       <div className="App">
+        <button
+          type="button"
+          onClick={() => {
+            this.clearList();
+          }}
+        >
+          x
+        </button>
         <h1>
           Selected good:
           {this.header()}
