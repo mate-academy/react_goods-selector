@@ -1,5 +1,3 @@
-// styles go here
-
 .goods-item {
   display: flex;
   justify-content: space-between;
@@ -18,16 +16,16 @@
 }
 
 $social: (
-  '1': #3b5999,
-  '2': #55acee,
-  '3': #0077B5,
-  '5': #088fce,
-  '6': #9caa19,
-  '7': #b30dc2,
-  '8': #682020,
-  '9': #dd4b39,
-  '10': #79db1e,
-  '4': #2d43a7,
+  "1": #3b5999,
+  "2": #55acee,
+  "3": #0077b5,
+  "5": #088fce,
+  "6": #9caa19,
+  "7": #b30dc2,
+  "8": #682020,
+  "9": #dd4d39,
+  "10": #79db1e,
+  "4": #2d43a7,
 );
 
 @each $name, $color in $social {
