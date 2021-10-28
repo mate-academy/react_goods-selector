@@ -24,20 +24,19 @@ class App extends React.Component<{}, State> {
   };
 
   selectItem = (item:string) => {
-    let newState:string[] = [];
-
-    newState = [...this.state.selected];
-
-    newState.push(item);
-    this.setState({ selected: newState });
+    this.setState(prevState => (
+      {
+        selected: [...prevState.selected, item],
+      }
+    ));
   };
 
   removeItem = (item:string) => {
-    let newState:string[] = [];
-
-    newState = this.state.selected.filter((x:string):boolean => x !== item);
-
-    this.setState({ selected: newState });
+    this.setState(prevState => (
+      {
+        selected: prevState.selected.filter((x:string):boolean => x !== item),
+      }
+    ));
   };
 
   render() {
@@ -47,49 +46,45 @@ class App extends React.Component<{}, State> {
       <div className="App">
         <h3 className="title">
           {selected.length === 0 ? 'Select items' : ' Selected -'}
-          {selected.map((item) => {
-            return (
-              <span className="selected-item" key={item}>
-                {' '}
-                { item }
-                {' '}
-              </span>
-            );
-          })}
+          {selected.map((item) => (
+            <span className="selected-item" key={item}>
+              {' '}
+              { item }
+              {' '}
+            </span>
+          ))}
         </h3>
         <ul>
-          {goodsFromServer.map((item) => {
-            return (
-              <li
-                key={item}
-                className={`goods-item ${selected.includes(item) ? 'isActive' : ''}`}
-              >
-                {item}
-                {selected.includes(item) ? (
+          {goodsFromServer.map((item) => (
+            <li
+              key={item}
+              className={`goods-item ${selected.includes(item) ? 'isActive' : ''}`}
+            >
+              {item}
+              {selected.includes(item) ? (
+                <button
+                  onClick={() => {
+                    this.removeItem(item);
+                  }}
+                  type="button"
+                >
+                  remove
+                </button>
+              )
+                : (
                   <button
                     onClick={() => {
-                      this.removeItem(item);
+                      this.selectItem(item);
                     }}
                     type="button"
                   >
-                    remove
+                    select
                   </button>
-                )
-                  : (
-                    <button
-                      onClick={() => {
-                        this.selectItem(item);
-                      }}
-                      type="button"
-                    >
-                      select
-                    </button>
-                  )}
-              </li>
-            );
-          })}
-        </ul>
+                )}
+            </li>
 
+          ))}
+        </ul>
       </div>
     );
   }
