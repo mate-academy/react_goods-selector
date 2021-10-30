@@ -1,1 +1,21 @@
 // styles go here
+.good {
+  margin-top: 10px;
+}
+
+.good:hover {
+  cursor: pointer;
+}
+
+.selected {
+  background-color: salmon;
+  width: max-content;
+}
+
+.button {
+  margin-left: 10px;
+}
+
+.title {
+  display: inline;
+}
