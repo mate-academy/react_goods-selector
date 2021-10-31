@@ -27,6 +27,7 @@ export class MediaContent extends React.Component<Props, State> {
         <audio
           autoPlay
           loop
+          controls
           muted={volume}
         >
           <source src="./audio/mortalKombat.mp3" />
