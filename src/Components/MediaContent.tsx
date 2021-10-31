@@ -29,7 +29,7 @@ export class MediaContent extends React.Component<Props, State> {
           loop
           muted={volume}
         >
-          <source src="./audio/mortalKombat.mp3" type="audio/mpeg" />
+          <source src="./audio/mortalKombat.mp3" />
           <track kind="captions" />
         </audio>
         <button
