@@ -17,11 +17,11 @@ export class MediaContent extends React.Component<Props, State> {
       <>
         <video
           autoPlay
-          loop
           muted={volume}
+          loop
           hidden
         >
-          <source src="./audio/mortalKombat.mp3" />
+          <source src="./audio/MC.mp4" />
           <track kind="captions" />
         </video>
         <video
