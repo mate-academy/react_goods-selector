@@ -69,6 +69,10 @@ html {
     background-image: url(./img/add.png);
   }
 
+  &__remove {
+    background-image: url(./img/remove.png);
+  }
+
   &__clear {
     position: absolute;
     bottom: 50px;
