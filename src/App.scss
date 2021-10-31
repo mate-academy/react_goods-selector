@@ -1,1 +1,116 @@
-// styles go here
+@font-face {
+  font-family: mortalKombat;
+  src: url(./font/mortalkombat3.ttf);
+}
+
+html {
+  font-family: mortalKombat, sans-serif;
+  font-style: italic;
+  font-size: 28px;
+  color: transparent;
+  text-shadow: 0 0 2px #ccc, 2px 2px 1px black;
+}
+
+.lists {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  &__all {
+    background-image: url(./img/all.png);
+    min-width: 370px;
+    width: 370px;
+    height: 600px;
+  }
+
+  &__selected {
+    position: relative;
+    background-image: url(./img/selected.png);
+    min-width: 600px;
+    width: 600px;
+    height: 370px;
+  }
+}
+
+.list {
+  box-sizing: border-box;
+  padding: 50px;
+  margin: 0;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &__all {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+  }
+}
+
+.button {
+  width: 26px;
+  height: 26px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &__add {
+    background-image: url(./img/add.png);
+  }
+
+  &__remove {
+    background-image: url(./img/remove.png);
+  }
+
+  &__clear {
+    position: absolute;
+    bottom: 50px;
+    left: 225px;
+    width: 148px;
+    height: 70px;
+    background-image: url(./img/clearAll.png);
+    font-family: inherit;
+    font-size: 18px;
+    font-style: inherit;
+    color: inherit;
+    text-shadow: inherit;
+  }
+
+  &__volume {
+    width: 65px;
+    height: 55px;
+    position: fixed;
+    top: 50px;
+    right: 50px;
+  
+    &--off {
+      background-image: url(./img/volumeOff.png);
+    }
+
+    &--on {
+      background-image: url(./img/volumeOn.png);
+    }
+  }
+}
+
+.video {
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  object-fit: cover;
+  width: 100%;
+  z-index: -1;
+}

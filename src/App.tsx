@@ -1,4 +1,9 @@
 import React from 'react';
+
+import { Title } from './Components/Title';
+import { MediaContent } from './Components/MediaContent';
+import { Lists } from './Components/Lists';
+
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -16,8 +21,9 @@ const goodsFromServer: string[] = [
 
 const App: React.FC = () => (
   <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
+    <Title />
+    <MediaContent />
+    <Lists goodsList={goodsFromServer} />
   </div>
 );
 
