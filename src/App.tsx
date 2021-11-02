@@ -2,6 +2,7 @@ import React from 'react';
 import './App.scss';
 import classNames from 'classnames';
 
+const cn = classNames;
 const goodsFromServer: string[] = [
   'Dumplings',
   'Carrot',
@@ -48,7 +49,7 @@ class App extends React.Component<Props, State> {
           {goodsFromServer.map((good) => (
             <li
               key={good}
-              className={classNames('goods__item', {
+              className={cn('goods__item', {
                 active: good === selectedGood,
               })}
             >
