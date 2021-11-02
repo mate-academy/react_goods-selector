@@ -1,1 +1,30 @@
-// styles go here
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__reset-button {
+    margin-left: 10px;
+  }
+}
+
+.goods {
+  min-width: 200px;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &.active {
+      background-color: aqua;
+    }
+  }
+}
