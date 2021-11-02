@@ -1,1 +1,22 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgb(82, 65, 233);
+  width: 600px;
+  margin: 0 auto;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.selected {
+  background-color: rgb(208, 204, 245);
+}
+
+.hide {
+  display: none;
+}
