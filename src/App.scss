@@ -1,1 +1,26 @@
 // styles go here
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.list {
+  &__item {
+    margin-bottom: 10px;
+
+    &--active {
+      background-color: goldenrod;
+      color: black;
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: purple;
+    }
+  }
+}
+
+.button {
+  margin-left: 10px;
+  cursor: pointer;
+}
