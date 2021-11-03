@@ -29,9 +29,7 @@ class App extends React.Component<{}, State> {
       this.setState(state => ({
         selectedGoods: [...state.selectedGoods, data],
       }));
-    }
-
-    if (method === 'Remove') {
+    } else (method === 'Remove') {
       this.setState(state => ({
         selectedGoods: state.selectedGoods.filter(good => good !== data),
       }));
