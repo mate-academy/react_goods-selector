@@ -36,7 +36,7 @@ class App extends React.Component<Props, State> {
     this.setState((state) => {
       const list = state.selectedGoodList.concat(good);
 
-      return { selectedGoodList: list };
+      return { ...state, selectedGoodList: list };
     });
   };
 
@@ -44,7 +44,7 @@ class App extends React.Component<Props, State> {
     this.setState((state) => {
       const list = state.selectedGoodList.filter(item => item !== good);
 
-      return { selectedGoodList: list };
+      return { ...state, selectedGoodList: list };
     });
   };
 
@@ -62,7 +62,7 @@ class App extends React.Component<Props, State> {
 
           {selectedGood && (
             <button
-              onClick={() => this.resetSelectedGood()}
+              onClick={this.resetSelectedGood}
               type="button"
               className="button"
             >
