@@ -1,1 +1,21 @@
 // styles go here
+button {
+  margin-left: 20px;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.App-list {
+  width: 300px;
+  border: 5px solid #000;
+  line-height: 30px;
+  text-align: center;
+}
+
+.selected {
+  background-color: aqua;
+}
