@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -14,11 +15,114 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-const App: React.FC = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+type AppState = {
+  selectedGoods: string[],
+  active: boolean,
+};
+
+class App extends React.Component<{}, AppState> {
+  state:AppState = {
+    selectedGoods: [],
+    active: false,
+  };
+
+  toggleClass = () => {
+    this.setState((prevState) => {
+      return {
+        active: !prevState.active,
+      };
+    });
+  };
+
+  addGood = (good:string) => {
+    this.setState((prevState) => {
+      return {
+        selectedGoods: [...prevState.selectedGoods, good],
+      };
+    });
+  };
+
+  deleteGood = (good:string) => {
+    this.setState((prevState) => {
+      return {
+        selectedGoods: prevState.selectedGoods
+          .filter((element:string) => element !== good),
+      };
+    });
+  };
+
+  showSelectedGoods = () => {
+    const { selectedGoods } = this.state;
+    const multipleItemsEnding = 'are selected';
+    const lastItem = selectedGoods.slice(-1);
+
+    if (selectedGoods.length === 1) {
+      return `${selectedGoods[0]} is selected`;
+    }
+
+    if (selectedGoods.length === 2) {
+      return `${selectedGoods[0]} and ${selectedGoods[1]} ${multipleItemsEnding}`;
+    }
+
+    return `${selectedGoods.slice(0, -1).join(', ')} 
+      and ${lastItem} ${multipleItemsEnding}`;
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <h1>
+          {this.state.selectedGoods.length === 0
+            ? 'No goods selected'
+            : this.showSelectedGoods()}
+        </h1>
+        {this.state.selectedGoods.length === 0
+          ? null
+          : (
+            <button
+              type="button"
+              onClick={() => this.setState({ selectedGoods: [] })}
+            >
+              X
+            </button>
+          )}
+        <ul className="list">
+          {goodsFromServer.map((good:string) => (
+            <li key={good} className="list__item">
+              <span
+                className={classNames('list__item--product', {
+                  green: this.state.selectedGoods.includes(good),
+                })}
+              >
+                {good}
+              </span>
+              <div className="list__item--buttons-container">
+                {this.state.selectedGoods.includes(good)
+                  ? (
+                    <button
+                      className="button"
+                      type="button"
+                      onClick={() => this.deleteGood(good)}
+                    >
+                      Remove
+                    </button>
+                  )
+                  : (
+                    <button
+                      className="button"
+                      type="button"
+                      onClick={() => this.addGood(good)}
+                    >
+                      Add
+                    </button>
+                  )}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}
 
 export default App;

@@ -1,1 +1,14 @@
 // styles go here
+.list__item {
+  max-width: max-content;
+  margin-bottom: 15px;
+}
+.list__item--product.green {
+  background-color: green;
+  color: white;
+}
+
+.button {
+  display: inline-block;
+  margin-top: 10px;
+}
