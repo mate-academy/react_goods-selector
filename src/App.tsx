@@ -17,21 +17,11 @@ const goodsFromServer: string[] = [
 
 type AppState = {
   selectedGoods: string[],
-  active: boolean,
 };
 
 class App extends React.Component<{}, AppState> {
   state:AppState = {
     selectedGoods: [],
-    active: false,
-  };
-
-  toggleClass = () => {
-    this.setState((prevState) => {
-      return {
-        active: !prevState.active,
-      };
-    });
   };
 
   addGood = (good:string) => {
