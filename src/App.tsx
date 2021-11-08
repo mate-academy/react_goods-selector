@@ -48,10 +48,28 @@ class App extends React.Component<{}, State> {
 
   render() {
     const { selectedGoods } = this.state;
+    let toBe;
+    let items;
+
+    switch (selectedGoods.length) {
+      case 0:
+        items = 'No goods';
+        toBe = '';
+        break;
+
+      case 1:
+        items = `${selectedGoods[0]}`;
+        toBe = 'is';
+        break;
+
+      default:
+        items = `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods.slice(-1)}`;
+        toBe = 'are';
+    }
 
     return (
       <div className="App">
-        <h1>{`Selected good: ${selectedGoods.join(', ')}`}</h1>
+        <h1>{`${items} ${toBe} selected`}</h1>
         <ul>
           {goodsFromServer.map((good) => (
             <li
