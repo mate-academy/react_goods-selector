@@ -1,1 +1,28 @@
-// styles go here
+.App {
+  &__button {
+    margin-left: 20px;
+
+    border-radius: 20px;
+
+    transition: background-color 0.5s;
+
+    &:hover {
+      background-color: rgb(193, 180, 206);
+    }
+
+    &--clear {
+      width: 130px;
+      height: 30px;
+    }
+  }
+
+  &__good {
+    width: max-content;
+
+    margin-bottom: 10px;
+
+    &--selected {
+      background-color: aquamarine;
+    }
+  }
+}
