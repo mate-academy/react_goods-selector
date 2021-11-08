@@ -92,7 +92,7 @@ class App extends React.Component<{}, State> {
             </li>
           ))}
         </ul>
-        {selectedGoods && (
+        {selectedGoods.length > 0 && (
           <button
             type="button"
             className="App__button App__button--clear"
