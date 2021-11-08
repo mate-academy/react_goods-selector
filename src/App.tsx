@@ -15,49 +15,66 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-class App extends React.Component {
-  state = {
-    selectedGood: 'Jam',
+type State = {
+  selectedGoods: string[],
+};
+
+class App extends React.Component<{}, State> {
+  state: State = {
+    selectedGoods: [],
   };
 
-  selectGood = (good: string) => {
-    this.setState(
-      { selectedGood: good },
-    );
+  addGood = (good: string) => {
+    this.setState((previousState) => {
+      return {
+        selectedGoods: [...previousState.selectedGoods, good],
+      };
+    });
+  };
+
+  deleteGood = (good: string) => {
+    this.setState((previousState) => {
+      return {
+        selectedGoods: previousState.selectedGoods.filter(item => item !== good),
+      };
+    });
   };
 
   clearSelection = () => {
     this.setState(
-      { selectedGood: '' },
+      { selectedGoods: [] },
     );
   };
 
   render() {
-    const { selectedGood } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App">
-        <h1>{`Selected good: ${selectedGood}`}</h1>
+        <h1>{`Selected good: ${selectedGoods.join(', ')}`}</h1>
         <ul>
           {goodsFromServer.map((good) => (
             <li
               key={good}
-              className={classNames('App__good', { 'App__good--selected': good === selectedGood })}
+              className={classNames('App__good',
+                { 'App__good--selected': selectedGoods.find(item => item === good) })}
             >
               {good}
-              {good !== selectedGood && (
-                <button
-                  type="button"
-                  className="App__button App__button--select"
-                  onClick={() => this.selectGood(good)}
-                >
-                  Select
-                </button>
-              )}
+              <button
+                type="button"
+                className="App__button App__button--select"
+                onClick={selectedGoods.find(item => item === good)
+                  ? () => this.deleteGood(good)
+                  : () => this.addGood(good)}
+              >
+                {selectedGoods.find(item => item === good)
+                  ? 'Remove'
+                  : 'Add'}
+              </button>
             </li>
           ))}
         </ul>
-        {selectedGood && (
+        {selectedGoods && (
           <button
             type="button"
             className="App__button App__button--clear"
