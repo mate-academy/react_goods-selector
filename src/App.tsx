@@ -15,12 +15,12 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-type AppState = {
+interface State {
   selectedGoods: string[],
-};
+}
 
-class App extends React.Component<{}, AppState> {
-  state:AppState = {
+class App extends React.Component<{}, State> {
+  state: State = {
     selectedGoods: [],
   };
 
@@ -58,6 +58,10 @@ class App extends React.Component<{}, AppState> {
       and ${lastItem} ${multipleItemsEnding}`;
   };
 
+  clearAllGoods() {
+    this.setState({ selectedGoods: [] });
+  }
+
   render() {
     return (
       <div className="App">
@@ -71,7 +75,7 @@ class App extends React.Component<{}, AppState> {
           : (
             <button
               type="button"
-              onClick={() => this.setState({ selectedGoods: [] })}
+              onClick={() => this.clearAllGoods()}
             >
               X
             </button>
