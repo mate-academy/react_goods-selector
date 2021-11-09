@@ -125,6 +125,13 @@ export class App extends React.Component<{}, State> {
             );
           })}
         </ul>
+        <div className="icons">
+          Icons made by &nbsp;
+          <a className="icons__link" href="https://www.freepik.com" title="Freepik">Freepik</a>
+          &nbsp;
+          from &nbsp;
+          <a className="icons__link" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+        </div>
       </div>
     );
   }
