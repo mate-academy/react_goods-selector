@@ -1,1 +1,8 @@
 // styles go here
+.GoodsItem {
+  padding: 0.25em;
+  width: fit-content;
+  &--active {
+    background-color: lightgreen;
+  }
+}
