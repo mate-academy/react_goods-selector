@@ -19,7 +19,7 @@ interface State {
   selectedGoods: string[]
 }
 
-class App extends React.Component<{}, State> {
+export class App extends React.Component<{}, State> {
   state: State = {
     selectedGoods: ['Jam'],
   };
@@ -129,5 +129,3 @@ class App extends React.Component<{}, State> {
     );
   }
 }
-
-export default App;
