@@ -46,51 +46,52 @@ class App extends React.Component<{}, State> {
     );
   };
 
-  render() {
+  displaySelectedGoods = () => {
     const { selectedGoods } = this.state;
-    let toBe;
-    let items;
 
     switch (selectedGoods.length) {
       case 0:
-        items = 'No goods';
-        toBe = '';
-        break;
+        return 'No goods selected';
 
       case 1:
-        items = `${selectedGoods[0]}`;
-        toBe = 'is';
-        break;
+        return `${selectedGoods[0]} is selected`;
 
       default:
-        items = `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods.slice(-1)}`;
-        toBe = 'are';
+        return `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods.slice(-1)} are selected`;
     }
+  };
+
+  render() {
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App">
-        <h1>{`${items} ${toBe} selected`}</h1>
+        <h1>{this.displaySelectedGoods()}</h1>
         <ul>
-          {goodsFromServer.map((good) => (
-            <li
-              key={good}
-              className={classNames('App__good',
-                { 'App__good--selected': selectedGoods.find(item => item === good) })}
-            >
-              {good}
-              <button
-                type="button"
-                className="App__button App__button--select"
-                onClick={selectedGoods.find(item => item === good)
-                  ? () => this.deleteGood(good)
-                  : () => this.addGood(good)}
+          {goodsFromServer.map((good) => {
+            const isSelected = selectedGoods.find(item => item === good);
+
+            return (
+              <li
+                key={good}
+                className={classNames('App__good',
+                  { 'App__good--selected': isSelected })}
               >
-                {selectedGoods.find(item => item === good)
-                  ? 'Remove'
-                  : 'Add'}
-              </button>
-            </li>
-          ))}
+                {good}
+                <button
+                  type="button"
+                  className="App__button App__button--select"
+                  onClick={selectedGoods.find(item => item === good)
+                    ? () => this.deleteGood(good)
+                    : () => this.addGood(good)}
+                >
+                  {isSelected
+                    ? 'Remove'
+                    : 'Add'}
+                </button>
+              </li>
+            );
+          })}
         </ul>
         {selectedGoods.length > 0 && (
           <button
