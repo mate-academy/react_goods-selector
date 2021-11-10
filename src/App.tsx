@@ -14,11 +14,55 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-const App: React.FC = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+export class App extends React.Component {
+  state = {
+    selectedGood: [],
+  };
 
-export default App;
+  changeTextProduct = (word: string) => {
+    const { selectedGood } = this.state;
+
+    this.setState({ selectedGood: [...selectedGood, word] });
+  };
+
+  removeTextProduct = () => {
+    this.setState({ selectedGood: [] });
+  };
+
+  render() {
+    const { selectedGood } = this.state;
+
+    return (
+      <div className="App">
+        <h1>
+          Selected good:
+          {selectedGood.length > 1
+            ? `${selectedGood.slice(0, -1).join(', ')} and ${selectedGood[selectedGood.length - 1]}`
+            : selectedGood}
+        </h1>
+        <button
+          type="button"
+          className="goods__button"
+          onClick={this.removeTextProduct}
+        >
+          remove
+        </button>
+        <ul className="goods">
+          {goodsFromServer.map(goods => (
+            <li className="goods__item" key={goods}>
+              {goods}
+              <br />
+              <button
+                type="button"
+                className="goods__button"
+                onClick={() => this.changeTextProduct(goods)}
+              >
+                buy
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}

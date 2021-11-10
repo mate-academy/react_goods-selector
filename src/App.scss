@@ -1,1 +1,22 @@
-// styles go here
+.goods {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+  &__item {
+    list-style: none;
+    text-align: center;
+    padding: 20px;
+    border: 2px solid greenyellow;
+    border-radius: 100%;
+    background-color: yellow;
+    color: green;
+  }
+
+  &__button {
+    background-color: white;
+    border: 2px solid green;
+    border-radius: 4px;
+    margin: 3px;
+    padding: 4px;
+  }
+}
