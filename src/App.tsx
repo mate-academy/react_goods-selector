@@ -33,8 +33,8 @@ class App extends React.Component<Props, State> {
     const activeGoods = Object.keys(this.state).filter(goods => this.state[goods]);
 
     if (activeGoods.length) {
-      const jointByAnd = activeGoods.splice(-2).join(' and ');
-      const jointAll = activeGoods.concat(jointByAnd).join(', ');
+      const jointByAnd = activeGoods.slice(-2).join(' and ');
+      const jointAll = activeGoods.slice(0, -2).concat(jointByAnd).join(', ');
 
       return jointByAnd.includes('and')
         ? jointAll.concat(' are selected')
