@@ -44,7 +44,7 @@ export class App extends React.Component {
         </h1>
         <button
           type="button"
-          className="goods__button"
+          className={selectedGood.length === 0 ? 'active' : 'goods__button'}
           onClick={this.removeTextProduct}
         >
           remove
@@ -56,7 +56,7 @@ export class App extends React.Component {
               <br />
               <button
                 type="button"
-                className="goods__button"
+                className={selectedGood.find(a => a === goods) ? 'goods__button' : ''}
                 onClick={() => this.changeTextProduct(goods)}
               >
                 buy
