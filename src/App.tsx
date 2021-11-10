@@ -37,25 +37,26 @@ export class App extends React.Component<{}, State> {
     this.setState({ selectedGoods: basketAfterRemoving });
   };
 
-  showBasket = () => {
+  formatBasket = () => {
     const { selectedGoods } = this.state;
-    let basket = '';
 
     if (selectedGoods.length === 0) {
       return 'No goods selected';
     }
 
     if (selectedGoods.length === 1) {
-      basket = `${selectedGoods[0]} is selected`;
-    } else {
+      return `${selectedGoods[0]} is selected`;
+    }
+
+    if (selectedGoods.length > 1) {
       const firstGroupOfGoods = selectedGoods.slice(0, -1);
       const lastAddedGood = selectedGoods[selectedGoods.length - 1];
 
-      basket = `${firstGroupOfGoods.join(', ')} `
+      return `${firstGroupOfGoods.join(', ')} `
         + `and ${lastAddedGood} are selected`;
     }
 
-    return basket;
+    return '';
   };
 
   clearBasket = () => {
@@ -68,7 +69,7 @@ export class App extends React.Component<{}, State> {
 
   render() {
     const { selectedGoods } = this.state;
-    const basketInfo = this.showBasket();
+    const basketInfo = this.formatBasket();
     const isBasketEmpty: boolean = selectedGoods.length === 0;
 
     return (
