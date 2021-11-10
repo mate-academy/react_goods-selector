@@ -83,7 +83,7 @@ export class App extends React.Component<{}, State> {
               type="button"
               onClick={this.clearBasket}
             >
-              X
+              Clear
             </button>
           </div>
         )}
