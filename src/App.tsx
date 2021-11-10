@@ -36,6 +36,8 @@ export class App extends React.Component {
       <div className="App">
         <h1>
           Selected good:
+          {' '}
+          {selectedGood.length === 0 ? 'No goods selected' : ''}
           {selectedGood.length > 1
             ? `${selectedGood.slice(0, -1).join(', ')} and ${selectedGood[selectedGood.length - 1]}`
             : selectedGood}
