@@ -36,7 +36,10 @@ class App extends React.Component<{}, State> {
         result = `${selectedGoods[0]} is selected`;
         break;
 
-      default: result = `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods.slice(-1)} are selected`;
+      default: result = `${selectedGoods
+        .slice(0, -1)
+        .join(', ')} and ${selectedGoods
+        .slice(-1)} are selected`;
     }
 
     return result;
@@ -53,7 +56,8 @@ class App extends React.Component<{}, State> {
   removeGood = (good: string) => {
     this.setState((prevState) => {
       return {
-        selectedGoods: prevState.selectedGoods.filter(item => good !== item),
+        selectedGoods: prevState.selectedGoods
+          .filter(item => good !== item),
       };
     });
   };
@@ -87,7 +91,7 @@ class App extends React.Component<{}, State> {
               <li
                 key={good}
                 className={selectedGoods.includes(good)
-                  ? 'App__item App__item--active'
+                  ? 'App__item App__item--selected'
                   : 'App__item'}
               >
                 {good}
