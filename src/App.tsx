@@ -56,7 +56,7 @@ export class App extends React.Component {
               <br />
               <button
                 type="button"
-                className={selectedGood.find(a => a === goods) ? 'goods__button' : ''}
+                className={selectedGood.find(a => a === goods) ? 'active' : 'goods__button'}
                 onClick={() => this.changeTextProduct(goods)}
               >
                 buy
