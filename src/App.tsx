@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 // import classNames from 'classnames';
 
@@ -64,15 +65,21 @@ export class App extends React.Component<{}, State> {
     return (
       <div className="App">
         <h1>{this.displaySelectedGoods()}</h1>
-        <ul>
+        <ul className="list">
           {goodsFromServer.map(good => {
             const isGoodSelected = selectedGoods.find((elem => elem === good));
 
             return (
-              <li key={good}>
+              <li
+                className={classNames('list__item', {
+                  'list__item--selected': isGoodSelected,
+                })}
+                key={good}
+              >
                 {good}
 
                 <button
+                  className={classNames('btn')}
                   type="button"
                   onClick={isGoodSelected
                     ? () => this.removeGood(good)
@@ -86,6 +93,7 @@ export class App extends React.Component<{}, State> {
         </ul>
         {!!selectedGoods.length && (
           <button
+            className="btn"
             type="button"
             onClick={this.clearGoods}
           >
