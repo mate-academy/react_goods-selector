@@ -48,15 +48,11 @@ export class App extends React.Component<{}, State> {
       return `${selectedGoods[0]} is selected`;
     }
 
-    if (selectedGoods.length > 1) {
-      const firstGroupOfGoods = selectedGoods.slice(0, -1);
-      const lastAddedGood = selectedGoods[selectedGoods.length - 1];
+    const firstGroupOfGoods = selectedGoods.slice(0, -1);
+    const lastAddedGood = selectedGoods[selectedGoods.length - 1];
 
-      return `${firstGroupOfGoods.join(', ')} `
-        + `and ${lastAddedGood} are selected`;
-    }
-
-    return '';
+    return `${firstGroupOfGoods.join(', ')} `
+      + `and ${lastAddedGood} are selected`;
   };
 
   clearBasket = () => {
