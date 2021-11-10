@@ -1,1 +1,33 @@
-// styles go here
+.goods {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10%;
+  padding: 20px;
+}
+
+.title-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  height: 100px;
+}
+
+.button {
+  margin-bottom: 10px;
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  background-color: rgba(0, 255, 255, 0.1);
+  transition: background-color 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    background-color: transparent;
+    box-shadow: 5px 5px 3px 0 rgba(0, 255, 255, 0.1);
+  }
+}
+
+.remove-button {
+  background-color: rgba(70, 200, 0, 0.3);
+}
