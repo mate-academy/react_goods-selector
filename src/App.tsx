@@ -50,14 +50,14 @@ class App extends React.Component<Props, State> {
     }));
   };
 
-  clearSelection = () => {
+  clearSelection = (): void => {
     this.setState({
       ...this.initialState,
     });
   };
 
-  isSelectedGoodsExist = () => {
-    return Object.values(this.state).find(stateItem => stateItem);
+  isSelectedGoodsExist = (): boolean => {
+    return Object.values(this.state).find(stateItem => stateItem) || false;
   };
 
   render() {
