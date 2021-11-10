@@ -78,8 +78,7 @@ export class App extends React.Component {
         <div>
           {goodsFromServer.map(item => (
             <div className="itemAndButton" key={item}>
-              <li className={classNames('item', {itemSelected: selectedGoods.includes(item)})}
-              >
+              <li className={classNames('item', { itemSelected: selectedGoods.includes(item) })}>
                 {item}
               </li>
 
