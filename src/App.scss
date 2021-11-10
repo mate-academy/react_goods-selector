@@ -1,1 +1,160 @@
-// styles go here
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Cookie", cursive;
+  background-color: #75ce9f;
+}
+
+.App {
+  &__title {
+    margin-top: 24px;
+    font-size: 54px;
+    text-align: center;
+    color: #019875;
+    user-select: none;
+  }
+}
+
+.goods-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 70px;
+  justify-content: space-evenly;
+  list-style: none;
+  margin-top: 60px;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    box-shadow: 4px 4px 8px 0 rgba(1, 152, 117, 0.2);
+    cursor: pointer;
+    transition: all 0.3s linear;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &--theme-green {
+      background-color: rgba(51, 171, 95, 0.7);
+    }
+
+    &--theme-salmon {
+      background-color: rgba(189, 217, 158, 0.7);
+    }
+  }
+
+  &__item-name {
+    font-size: 28px;
+    text-align: center;
+    user-select: none;
+  }
+
+  .goods-list__item-image {
+    width: 70px;
+    height: 70px;
+    margin-top: 12px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  
+    &--apple {
+      background-image: url(./png/apple.png);
+    }
+  
+    &--bread {
+      background-image: url(./png/bread.png);
+    }
+  
+    &--fish {
+      background-image: url(./png/tuna.png);
+    }
+  
+    &--jam {
+      background-image: url(./png/jam.png);
+    }
+  
+    &--honey {
+      background-image: url(./png/honey.png);
+    }
+  
+    &--icecream {
+      background-image: url(./png/icecream.png);
+    }
+  
+    &--dumplings {
+      background-image: url(./png/dumpling.png);
+    }
+
+    &--eggs {
+      background-image: url(./png/eggs.png);
+    }
+  
+    &--garlic {
+      background-image: url(./png/garlic.png);
+    }
+  
+    &--carrot {
+      background-image: url(./png/carrot.png);
+    }
+  }
+}
+
+.button {
+  width: 64px;
+  height: 28px;
+  margin-top: 24px;
+  border: none;
+  border-radius: 15px;
+  user-select: none;
+  font-family: "Vollkorn", serif;
+  cursor: pointer;
+
+  &--clear {
+    width: 50px;
+    border-radius: 15px;
+    background-color: #bfa8bb;
+  }
+
+  &--add {
+    background-color: rgba(1, 152, 117, 0.6);
+  }
+
+  &--remove {
+    background-color: #bfa8bb;
+  }
+}
+
+.wrapper-button {
+  position: absolute;
+  left: 740px;
+  top: 65px;
+}
+
+.icons {
+  font-size: 18px;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  user-select: none;
+
+  &::after {
+    content: url(./png/basket.png);
+    height: 24px;
+    width: 24px;
+    padding-left: 20px;
+  }
+
+  &__link {
+    text-decoration: none;
+    user-select: none;
+    color: #019875;
+  }
+}
