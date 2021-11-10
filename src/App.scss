@@ -26,6 +26,10 @@ html {
   padding-left: 10px;
   background-color: brown;
   color: white;
+
+  &Selected {
+    background-color: rgb(14, 124, 0);
+  }
 }
 
 .button {
