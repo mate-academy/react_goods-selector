@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -28,7 +29,7 @@ class App extends React.Component<Props, State> {
 
   initialState: State = { ...this.state };
 
-  getActiveGoods = (): string => {
+  getSelectedGoods = (): string => {
     const activeGoods = Object.keys(this.state).filter(goods => this.state[goods]);
 
     if (activeGoods.length) {
@@ -63,14 +64,15 @@ class App extends React.Component<Props, State> {
   render() {
     return (
       <div className="App">
-        <h1>{this.getActiveGoods()}</h1>
-        <ul className="GoodsList">
+        <h1>{this.getSelectedGoods()}</h1>
+        <ul className="goods-list">
           {goodsFromServer.map(good => {
             return (
               <li
-                className={
-                  `GoodsItem ${this.state[good] ? 'GoodsItem--active' : ''}`
-                }
+                className={classNames({
+                  'goods-list__item': true,
+                  'goods-list__item--active': this.state[good],
+                })}
               >
                 <span>{good}</span>
                 {' '}
@@ -80,12 +82,13 @@ class App extends React.Component<Props, State> {
                     this.changeGoodState(good);
                   }}
                 >
-                  {!(this.state[good]) ? 'Add' : 'Remove'}
+                  {!this.state[good] ? 'Add' : 'Remove'}
                 </button>
               </li>
             );
           })}
         </ul>
+
         {this.isSelectedGoodsExist()
           && (<button type="button" onClick={this.clearSelection}>X</button>)}
       </div>
