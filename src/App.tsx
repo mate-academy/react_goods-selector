@@ -22,31 +22,28 @@ interface State {
 }
 
 class App extends React.Component<Props, State> {
-  state = goodsFromServer.reduce((stateObj: State, good: GoodItem) => {
-    return { ...stateObj, [good]: false };
+  state: State = goodsFromServer.reduce((stateObj: State, goods: GoodItem) => {
+    return { ...stateObj, [goods]: false };
   }, {});
 
-  initialState = { ...this.state };
+  initialState: State = { ...this.state };
 
-  getActiveGoods() {
-    const activeGoods = Object.entries(this.state).reduce((goods: string[], goodState) => {
-      if (goodState[1]) {
-        goods.push(goodState[0]);
-      }
-
-      return goods;
-    }, []);
+  getActiveGoods = (): string => {
+    const activeGoods = Object.keys(this.state).filter(goods => this.state[goods]);
 
     if (activeGoods.length) {
-      const joinedByAnd = activeGoods.splice(-2).join(' and ');
+      const jointByAnd = activeGoods.splice(-2).join(' and ');
+      const jointAll = activeGoods.concat(jointByAnd).join(', ');
 
-      return activeGoods.concat(joinedByAnd).join(', ').concat(' are selected');
+      return jointByAnd.includes('and')
+        ? jointAll.concat(' are selected')
+        : jointAll.concat(' is selected');
     }
 
     return 'No goods selected';
-  }
+  };
 
-  changeGoodState = (good: GoodItem) => {
+  changeGoodState = (good: GoodItem): void => {
     this.setState(prevState => ({
       ...prevState,
       [good]: !prevState[good],
@@ -57,6 +54,10 @@ class App extends React.Component<Props, State> {
     this.setState({
       ...this.initialState,
     });
+  };
+
+  isSelectedGoodsExist = () => {
+    return Object.values(this.state).find(stateItem => stateItem);
   };
 
   render() {
@@ -87,12 +88,11 @@ class App extends React.Component<Props, State> {
             );
           })}
         </ul>
-        <button type="button" onClick={this.clearSelection}>X</button>
+        {this.isSelectedGoodsExist()
+          && (<button type="button" onClick={this.clearSelection}>X</button>)}
       </div>
     );
   }
-  // return (
-  // );
-};
+}
 
 export default App;
