@@ -41,6 +41,10 @@ export class App extends React.Component<{}, State> {
     });
   };
 
+  clearGoods = () => {
+    this.setState({ selectedGoods: [] });
+  };
+
   displaySelectedGoods() {
     const { selectedGoods } = this.state;
 
@@ -80,6 +84,14 @@ export class App extends React.Component<{}, State> {
             );
           })}
         </ul>
+        {!!selectedGoods.length && (
+          <button
+            type="button"
+            onClick={this.clearGoods}
+          >
+            Clear Selected Goods
+          </button>
+        )}
       </div>
     );
   }
