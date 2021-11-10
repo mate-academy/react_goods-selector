@@ -1,1 +1,48 @@
-// styles go here
+h1 {
+  display: inline-block;
+  margin: 12px 0;
+  width: fit-content;
+  border: 12px solid peru;
+  border-radius: 20px;
+  background-color: peru;
+}
+
+button {
+  cursor: pointer;
+}
+
+.list {
+  padding: 0;
+  background-color: peru;
+  display: grid;
+  grid-template: 1fr 1fr / 1fr 1fr;
+
+  &__button {
+    margin-left: 12px;
+    padding: 20px;
+    border: 0 transparent;
+    border-radius: 20px;
+    background-color: peru;
+  }
+
+  &__item {
+    margin: 8px;
+    padding: 20px;
+    border: 0 transparent;
+    border-radius: 20px;
+    background-color: beige;
+    font-size: 20px;
+    list-style: none;
+
+    &--active {
+      background-color: yellowgreen;
+    }
+  }
+
+  &__clear-button {
+    margin-left: 20px;
+    padding: 8px 24px;
+    border-radius: 20px;
+    background-color: beige;
+  }
+}
