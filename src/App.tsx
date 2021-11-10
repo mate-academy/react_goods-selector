@@ -76,11 +76,9 @@ class App extends React.Component<Props, State> {
                 {' '}
                 <button
                   type="button"
-                  onClick={
-                    () => {
-                      this.changeGoodState(good);
-                    }
-                  }
+                  onClick={() => {
+                    this.changeGoodState(good);
+                  }}
                 >
                   {!(this.state[good]) ? 'Add' : 'Remove'}
                 </button>
