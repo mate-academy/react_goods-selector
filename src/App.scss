@@ -1,1 +1,39 @@
 // styles go here
+.App {
+  text-align: center;
+}
+
+.good {
+
+  &__list {
+    width: 300px;
+    margin: 0 auto;
+    list-style-type: none;
+    padding: 10px;
+    background-color: aliceblue;
+
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    margin: 10px 0;
+  }
+
+  &__add {
+    padding: 10px;
+    background-color: cadetblue;
+    border: none;
+    border-radius: 5px;
+  }
+
+  &__clear {
+    padding: 10px;
+    margin-top: 20px;
+    background-color: cadetblue;
+    border: none;
+    border-radius: 5px;
+  }
+}
