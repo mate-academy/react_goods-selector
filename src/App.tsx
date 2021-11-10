@@ -26,11 +26,9 @@ export class App extends React.Component<Props, State> {
   };
 
   selectGood = (good: string) => {
-    this.setState((previousState) => {
-      return {
-        selectedGood: [...previousState.selectedGood, good],
-      };
-    });
+    this.setState((previousState) => ({
+      selectedGood: [...previousState.selectedGood, good],
+    }));
   };
 
   clearCart = () => {
@@ -59,8 +57,7 @@ export class App extends React.Component<Props, State> {
         {good}
 
         { selectedGood.includes(good)
-          ? null
-          : (
+          || (
             <button
               type="button"
               className="good__add"
