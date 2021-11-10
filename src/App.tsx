@@ -19,13 +19,13 @@ export class App extends React.Component {
     selectedGood: [],
   };
 
-  changeTextProduct = (word: string) => {
+  addProduct = (word: string) => {
     const { selectedGood } = this.state;
 
     this.setState({ selectedGood: [...selectedGood, word] });
   };
 
-  removeTextProduct = () => {
+  removeAllProduct = () => {
     this.setState({ selectedGood: [] });
   };
 
@@ -42,13 +42,15 @@ export class App extends React.Component {
             ? `${selectedGood.slice(0, -1).join(', ')} and ${selectedGood[selectedGood.length - 1]}`
             : selectedGood}
         </h1>
+
         <button
           type="button"
           className={selectedGood.length === 0 ? 'active' : 'goods__button'}
-          onClick={this.removeTextProduct}
+          onClick={this.removeAllProduct}
         >
           remove
         </button>
+
         <ul className="goods">
           {goodsFromServer.map(goods => (
             <li className="goods__item" key={goods}>
@@ -57,9 +59,9 @@ export class App extends React.Component {
               <button
                 type="button"
                 className={selectedGood.find(a => a === goods) ? 'active' : 'goods__button'}
-                onClick={() => this.changeTextProduct(goods)}
+                onClick={() => this.addProduct(goods)}
               >
-                buy
+                Buy
               </button>
             </li>
           ))}
