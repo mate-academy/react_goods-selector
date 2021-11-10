@@ -28,10 +28,11 @@ body {
     outline: none;
     visibility: hidden;
     cursor: pointer;
-    transition: background-color $transition-duration, border $transition-duration;
+    transition: background-color $transition-duration,
+      border $transition-duration;
 
     &:hover {
-      background-color: rgba(255, 255, 255, 0.411);
+      background-color: rgba(255, 255, 255, 0.41);
       border: 2px solid red;
     }
     
@@ -66,7 +67,7 @@ body {
   }
 
   &__list-btn {
+    min-width: 70px;
     cursor: pointer;
   }
 }
-
