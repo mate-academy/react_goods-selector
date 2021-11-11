@@ -65,7 +65,7 @@ export class App extends React.Component<{}, State> {
     return (
       <div className="App">
         <div className="title-wrap">
-          <h1>{isGoodsSelected ? this.returnSelectedGoods() : 'No goods selected'}</h1>
+          <h1>{isGoodsSelected ? this.formatSelectedGoods() : 'No goods selected'}</h1>
           {isGoodsSelected
             && (
               <button
