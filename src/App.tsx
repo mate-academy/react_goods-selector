@@ -47,7 +47,7 @@ export class App extends React.Component<{}, State> {
     this.setState({ selectedGoods: [] });
   };
 
-  returnSelectedGoods = () => {
+  formatSelectedGoods = () => {
     const { selectedGoods } = this.state;
 
     const firstPartofGoods = selectedGoods.slice(0, selectedGoods.length - 1);
