@@ -49,15 +49,15 @@ export class App extends React.Component<{}, State> {
     this.setState({ selectedGoods: [] });
   };
 
-  title = () => {
+  returnSelectedGoods = () => {
     const { selectedGoods } = this.state;
+
     const firstPartofGoods = selectedGoods.slice(0, selectedGoods.length - 1);
     const lastPartofGoods = selectedGoods.slice(-1);
-    const title = selectedGoods.length > 1
+
+    return (selectedGoods.length > 1)
       ? `${firstPartofGoods.join(', ')} and ${lastPartofGoods} are selected`
       : `${selectedGoods} is selected`;
-
-    return title;
   };
 
   render() {
@@ -67,7 +67,7 @@ export class App extends React.Component<{}, State> {
     return (
       <div className="App">
         <div className="title-wrap">
-          <h1>{isGoodsSelected ? this.title() : 'No goods selected'}</h1>
+          <h1>{isGoodsSelected ? this.returnSelectedGoods() : 'No goods selected'}</h1>
           {isGoodsSelected
             && (
               <button
