@@ -38,11 +38,9 @@ export class App extends React.Component<{}, State> {
   ifThisGoodsSelected = (goods: string) => {
     const { selectedGoods } = this.state;
 
-    const isSelected = !selectedGoods.includes(goods)
+    return (!selectedGoods.includes(goods))
       ? () => this.addGoods(goods)
       : () => this.removeGoods(goods);
-
-    return isSelected;
   };
 
   clearAllGoods = () => {
