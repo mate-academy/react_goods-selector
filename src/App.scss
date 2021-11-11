@@ -1,1 +1,37 @@
-// styles go here
+.App {
+  font-family: "Gill Sans MT", "Trebuchet MS", sans-serif;
+
+  &__title {
+    font-size: 30px;
+  }
+}
+
+.goods__ul {
+  padding-left: 2rem;
+  list-style-type: none;
+}
+
+.goods__li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 2rem;
+  background-position: 0 0;
+  background-size: 1.6rem 1.6rem;
+  background-repeat: no-repeat;
+}
+
+.goods__button {
+  width: 100px;
+}
+
+.goods__image {
+  width: 100px;
+  height: 100px;
+}
+
+.button-render-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
