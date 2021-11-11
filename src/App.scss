@@ -1,1 +1,40 @@
-// styles go here
+.App {
+  font-family: sans-serif;
+  padding-left: 50px;
+  &--ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  &--li {
+    font-size: 25px;
+
+    display: flex;
+    width: 300px;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 10px;
+
+    &--active {
+      background-color: rgb(248, 248, 206);
+    }
+  }
+
+  &--button {
+    font-weight: bold;
+    border-radius: 10px;
+    width: 120px;
+    height: 30px;
+    transition: all 0.3s;
+    background-color: rgb(0, 173, 0);
+
+    &--clear {
+      background-color: red;
+    }
+
+    &:hover {
+      background-color: red;
+      transform: scale(1.1);
+    }
+  }
+}
