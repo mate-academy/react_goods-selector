@@ -1,1 +1,73 @@
-// styles go here
+$transition-duration: 0.3s;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.App {
+  min-height: 100vh;
+  padding: 10px 20px;
+  font-size: 30px;
+  background-color: darkkhaki;
+
+  &__title {
+    margin: 0;
+    text-align: center;
+  }
+
+  &__clear-btn {
+    display: block;
+    margin: 10px auto 0;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 2px solid black;
+    outline: none;
+    visibility: hidden;
+    cursor: pointer;
+    transition: background-color $transition-duration,
+      border $transition-duration;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.41);
+      border: 2px solid red;
+    }
+    
+    &--active {
+      visibility: visible;
+    }
+  }
+
+  &__list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0;
+    margin: 15px 0 0;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    flex: 0 0 calc(50% - (10px * 2));
+    padding: 10px 20px;
+    color: #fff;
+    background-color: darkslateblue;
+    border-radius: 15px;
+
+    &--selected {
+      color: black;
+      background-color: red;
+    }
+  }
+
+  &__list-btn {
+    min-width: 70px;
+    cursor: pointer;
+  }
+}
