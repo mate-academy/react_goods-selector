@@ -1,1 +1,45 @@
-// styles go here
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: darken(#bb4a, 35%);
+}
+
+h1 {
+  color: #bbb;
+  border-bottom: 2px solid black;
+  display: flex;
+  justify-content: center;
+}
+
+.goods-list {
+  list-style-type: none;
+  margin-left: 50px;
+  list-style: none;
+  margin-bottom: 20px;
+  &__item {
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 30px;
+    margin-right: 30px;
+    width: max-content;
+  }
+}
+
+.active {
+  background: #bbb;
+}
+
+.button {
+  color: aliceblue;
+  border-radius: 15px;
+  padding: 5px;
+  background: darkmagenta;
+  margin-left: 10px;
+  &--clear {
+    margin-left: 50px;
+  }
+}
