@@ -18,8 +18,8 @@ interface State {
   selectedGoods: string[];
 }
 
-export class App extends React.Component {
-  state: State = {
+export class App extends React.Component<{}, State> {
+  state = {
     selectedGoods: ['Jam'],
   };
 
@@ -32,28 +32,42 @@ export class App extends React.Component {
   removeGoods = (goods: string) => {
     const { selectedGoods } = this.state;
 
-    this.setState(selectedGoods.splice(selectedGoods.indexOf(goods), 1));
+    this.setState({ selectedGoods: selectedGoods.filter(good => good !== goods) });
+  };
+
+  ifThisGoodsSelected = (goods: string) => {
+    const { selectedGoods } = this.state;
+
+    const isSelected = !selectedGoods.includes(goods)
+      ? () => this.addGoods(goods)
+      : () => this.removeGoods(goods);
+
+    return isSelected;
   };
 
   clearAllGoods = () => {
-    const { selectedGoods } = this.state;
-
-    this.setState(selectedGoods.splice(0, selectedGoods.length));
+    this.setState({ selectedGoods: [] });
   };
 
-  render() {
+  title = () => {
     const { selectedGoods } = this.state;
-    const isGoodsSelected = selectedGoods.length > 0;
     const firstPartofGoods = selectedGoods.slice(0, selectedGoods.length - 1);
     const lastPartofGoods = selectedGoods.slice(-1);
     const title = selectedGoods.length > 1
       ? `${firstPartofGoods.join(', ')} and ${lastPartofGoods} are selected`
       : `${selectedGoods} is selected`;
 
+    return title;
+  };
+
+  render() {
+    const { selectedGoods } = this.state;
+    const isGoodsSelected = selectedGoods.length > 0;
+
     return (
       <div className="App">
         <div className="title-wrap">
-          <h1>{isGoodsSelected ? title : 'No goods selected'}</h1>
+          <h1>{isGoodsSelected ? this.title() : 'No goods selected'}</h1>
           {isGoodsSelected
             && (
               <button
@@ -65,31 +79,21 @@ export class App extends React.Component {
               </button>
             )}
         </div>
-        <div className="goods">
+        <ul className="goods">
           {
             goodsFromServer.map(goods => (
-              <>
+              <li key={goods}>
                 <button
-                  className="add-button button"
+                  className={`button ${selectedGoods.includes(goods) && 'remove-button'}`}
                   type="submit"
-                  hidden={selectedGoods.includes(goods)}
-                  onClick={() => this.addGoods(goods)}
+                  onClick={this.ifThisGoodsSelected(goods)}
                 >
                   {goods}
                 </button>
-
-                <button
-                  className="remove-button button"
-                  type="submit"
-                  hidden={!selectedGoods.includes(goods)}
-                  onClick={() => this.removeGoods(goods)}
-                >
-                  {goods}
-                </button>
-              </>
+              </li>
             ))
           }
-        </div>
+        </ul>
       </div>
     );
   }
