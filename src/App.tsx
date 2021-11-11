@@ -46,7 +46,7 @@ class App extends React.Component<Props, State> {
 
     return (
       <div className="App">
-        <h1>
+        <h1 className="h1">
           {this.state.selectedGood.length
             ? `Selected good: ${selectedGoods}`
             : 'No goods selected'}
@@ -56,7 +56,7 @@ class App extends React.Component<Props, State> {
             <button
               type="button"
               className="list__clear-button"
-              onClick={() => this.clearSelection()}
+              onClick={this.clearSelection}
             >
               X
             </button>
