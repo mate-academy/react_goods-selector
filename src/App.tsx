@@ -14,8 +14,14 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-export class App extends React.Component {
-  state = {
+type Props = {};
+
+interface State {
+  selectedGood: string[]
+}
+
+export class App extends React.Component<Props, State> {
+  state: State = {
     selectedGood: [],
   };
 
@@ -29,6 +35,25 @@ export class App extends React.Component {
     this.setState({ selectedGood: [] });
   };
 
+  addList = () => {
+    const { selectedGood } = this.state;
+
+    switch (selectedGood.length) {
+      case 0:
+        return 'No goods selected';
+      case 1:
+        return selectedGood[0];
+      default:
+        return `${selectedGood.slice(0, -1).join(', ')} and ${selectedGood[selectedGood.length - 1]}`;
+    }
+  };
+
+  removeGood = (product: string) => {
+    const { selectedGood } = this.state;
+
+    this.setState({ selectedGood: selectedGood.filter(good => good !== product) });
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -36,11 +61,7 @@ export class App extends React.Component {
       <div className="App">
         <h1>
           Selected good:
-          {' '}
-          {selectedGood.length === 0 ? 'No goods selected' : ''}
-          {selectedGood.length > 1
-            ? `${selectedGood.slice(0, -1).join(', ')} and ${selectedGood[selectedGood.length - 1]}`
-            : selectedGood}
+          {this.addList()}
         </h1>
 
         <button
@@ -48,7 +69,7 @@ export class App extends React.Component {
           className={selectedGood.length === 0 ? 'active' : 'goods__button'}
           onClick={this.removeAllProduct}
         >
-          remove
+          Remove Goods
         </button>
 
         <ul className="goods">
@@ -56,13 +77,25 @@ export class App extends React.Component {
             <li className="goods__item" key={goods}>
               {goods}
               <br />
-              <button
-                type="button"
-                className={selectedGood.find(a => a === goods) ? 'active' : 'goods__button'}
-                onClick={() => this.addProduct(goods)}
-              >
-                Buy
-              </button>
+              {selectedGood.includes(goods)
+                ? (
+                  <button
+                    type="button"
+                    className="goods__button"
+                    onClick={() => this.removeGood(goods)}
+                  >
+                    Remove
+                  </button>
+                )
+                : (
+                  <button
+                    type="button"
+                    className="goods__button"
+                    onClick={() => this.addProduct(goods)}
+                  >
+                    Buy
+                  </button>
+                )}
             </li>
           ))}
         </ul>
