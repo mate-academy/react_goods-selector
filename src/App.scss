@@ -19,10 +19,12 @@
     justify-content: space-between;
     align-items: center;
     height: 40px;
+    padding-left: 10px;
     margin: 10px 0;
   }
 
   &__add {
+    width: 100px;
     padding: 10px;
     background-color: cadetblue;
     border: none;
@@ -36,4 +38,11 @@
     border: none;
     border-radius: 5px;
   }
+}
+
+.active {
+  background-color: gray;
+  border: none;
+  border-radius: 5px;
+
 }

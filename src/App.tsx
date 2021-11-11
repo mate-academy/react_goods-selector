@@ -25,9 +25,9 @@ export class App extends React.Component<Props, State> {
     selectedGood: ['Jam'],
   };
 
-  selectGood = (good: string) => {
-    this.setState((previousState) => ({
-      selectedGood: [...previousState.selectedGood, good],
+  addToCart = (good:string) => {
+    this.setState((prevState) => ({
+      selectedGood: [...prevState.selectedGood, good],
     }));
   };
 
@@ -37,59 +37,78 @@ export class App extends React.Component<Props, State> {
     );
   };
 
-  goodsInCart = () => {
+  formatTitleOfCart = () => {
     const { selectedGood } = this.state;
 
-    return (
-      (selectedGood.length > 1)
-        ? `${selectedGood.slice(0, -1).join(', ')} and ${selectedGood.slice(-1)} are selected`
-        : `${selectedGood} is selected`
-    );
+    switch (selectedGood.length) {
+      case 0:
+        return 'No goods selected';
+      case 1:
+        return `${selectedGood} is selected`;
+      default:
+        return `${selectedGood.slice(0, -1)
+          .join(', ')} and ${selectedGood
+          .slice(-1)} is selected`;
+    }
+  };
+
+  removeFromCart = (selected: string) => {
+    const { selectedGood } = this.state;
+
+    this.setState({
+      selectedGood: selectedGood.filter(
+        good => good !== selected,
+      ),
+    });
   };
 
   render() {
     const { selectedGood } = this.state;
-    const listOfGoods = goodsFromServer.map((good) => (
-      <li
-        key={good}
-        className={`good__item ${selectedGood.includes(good) ? 'good--active' : ''}`}
-      >
-        {good}
+    const renderedGood = goodsFromServer.map((good) => {
+      const isGoodSelected = selectedGood.includes(good);
+      const buttonEvents = isGoodSelected
+        ? () => this.removeFromCart(good)
+        : () => this.addToCart(good);
+      const changeButtonTitle = isGoodSelected
+        ? 'remove'
+        : 'add';
 
-        { selectedGood.includes(good)
-          || (
-            <button
-              type="button"
-              className="good__add"
-              onClick={() => {
-                this.selectGood(good);
-              }}
-            >
-              Add in Cart
-            </button>
-          )}
-      </li>
-    ));
+      return (
+        <li
+          key={good}
+          className={`good__item ${selectedGood.includes(good)
+            ? 'active'
+            : ''}`}
+        >
+          {good}
+          <button
+            type="button"
+            className="good__add"
+            onClick={buttonEvents}
+          >
+            {changeButtonTitle}
+          </button>
+        </li>
+      );
+    });
 
     return (
       <div className="App">
-        <h1>{ `${selectedGood.length === 0 ? 'No goods selected' : this.goodsInCart()}` }</h1>
+        <h1>
+          {this.formatTitleOfCart()}
+        </h1>
         <ul className="good__list">
-          {listOfGoods}
+          {renderedGood}
         </ul>
-        {(selectedGood.length > 0)
-          ? (
-            <button
-              type="button"
-              className="good__clear"
-              onClick={() => {
-                this.clearCart();
-              }}
-            >
-              Clear cart
-            </button>
-          )
-          : null}
+        {(selectedGood.length > 0) && (
+          <button
+            type="button"
+            className="good__clear"
+            onClick={this.clearCart}
+          >
+            Clear cart
+          </button>
+        )}
       </div>
     );
   }
