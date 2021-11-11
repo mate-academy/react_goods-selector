@@ -31,7 +31,7 @@ type Props = {
 
 };
 
-class App extends React.Component<Props, State> {
+export class App extends React.Component<Props, State> {
   state: State = {
     selectedGoods: [],
   };
