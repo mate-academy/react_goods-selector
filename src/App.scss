@@ -1,1 +1,73 @@
-// styles go here
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+
+html {
+  font-family: "Rubik", Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  padding: 0 50px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  box-sizing: border-box;
+  padding: 5px 25px;
+
+  background: #fff;
+  border: 2px solid #0d913f;
+  color: #0d913f;
+  text-align: center;
+
+  font-size: 16px;
+
+  &__clear-all {
+    margin-top: 5px;
+    right: 100px;
+    background: #0e9743;
+    color: #fff;
+    text-transform: uppercase;
+  }
+}
+
+.goods {
+  font-size: 20px;
+  width: 400px;
+  padding: 0;
+
+  &__good {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    text-align: center;
+    margin-bottom: 5px;
+    padding: 5px 5px 5px 20px;
+    border: 2px solid transparent;
+  }
+}
+
+.active {
+  background-color: rgb(151, 240, 173);
+}
