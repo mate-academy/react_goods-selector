@@ -1,1 +1,88 @@
-// styles go here
+.App {
+  background-color: beige;
+  text-align: center;
+  width: 75%;
+  margin: 0 auto;
+  border-radius: 50px;
+
+  &__notes {
+    margin: 0;
+    padding-top: 10px;
+    font-size: 50px;
+    font-style: italic;
+  }
+
+  &__title-goods {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: lightblue;
+    font-size: 40px;
+    height: 100px;
+  }
+
+  &__good {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding-top: 10px;
+    margin: 0 auto;
+
+    list-style-type: none;
+    border-bottom: 1px solid #000;
+    width: 75%;
+    font-size: 30px;
+  }
+
+  &__button {
+    margin: 20px 0;
+    font-size: 25px;
+    width: 50%;
+    border-radius: 50px;
+
+    background-color: lightgreen;
+
+    transition: 300ms;
+
+    &:hover {
+      cursor: pointer;
+      background-color: greenyellow;
+    }
+
+    &:active {
+      background-color: lime;
+    }
+
+    &--selected {
+      color: white;
+      background-color: rebeccapurple;
+
+      &:hover {
+        color: black;
+      }
+    }
+  }
+
+  &__clear-button {
+    padding: 5px;
+    margin: 20px;
+
+    font-size: 30px;
+    border-radius: 50px;
+    background-color: lightgreen;
+    border: 3px solid green;
+
+    transition: 300ms;
+
+    &:hover {
+      cursor: pointer;
+      background-color: lime;
+    }
+
+    &:active {
+      background-color: lightcoral;
+    }
+  }
+}
