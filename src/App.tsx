@@ -25,31 +25,27 @@ class App extends React.Component<{}, State> {
 
   getTitle = () => {
     const { selectedGoods } = this.state;
-    let result = '';
 
     switch (selectedGoods.length) {
       case 0:
-        result = 'No goods selected';
-        break;
+        return 'No goods selected';
 
       case 1:
-        result = `${selectedGoods[0]} is selected`;
-        break;
+        return `${selectedGoods[0]} is selected`;
 
-      default: result = `${selectedGoods
-        .slice(0, -1)
-        .join(', ')} and ${selectedGoods
-        .slice(-1)} are selected`;
+      default:
+        return `${selectedGoods
+          .slice(0, -1)
+          .join(', ')} and ${selectedGoods
+          .slice(-1)} are selected`;
     }
-
-    return result;
   };
 
   addGood = (good: string) => {
-    this.setState((prevState) => {
-      return {
-        selectedGoods: [...prevState.selectedGoods, good],
-      };
+    const { selectedGoods } = this.state;
+
+    this.setState({
+      selectedGoods: [...selectedGoods, good],
     });
   };
 
@@ -87,31 +83,35 @@ class App extends React.Component<{}, State> {
 
         <ul className="App__list">
           {
-            goodsFromServer.map(good => (
-              <li
-                key={good}
-                className={selectedGoods.includes(good)
-                  ? 'App__item App__item--selected'
-                  : 'App__item'}
-              >
-                {good}
-                <button
-                  type="button"
-                  onClick={
-                    selectedGoods.includes(good)
-                      ? () => this.removeGood(good)
-                      : () => this.addGood(good)
-                  }
-                  className="App__list-btn"
+            goodsFromServer.map(good => {
+              const isSelectedGood = selectedGoods.includes(good);
+
+              return (
+                <li
+                  key={good}
+                  className={isSelectedGood
+                    ? 'App__item App__item--selected'
+                    : 'App__item'}
                 >
-                  {
-                    selectedGoods.includes(good)
-                      ? 'Remove'
-                      : 'Add'
-                  }
-                </button>
-              </li>
-            ))
+                  {good}
+                  <button
+                    type="button"
+                    onClick={
+                      isSelectedGood
+                        ? () => this.removeGood(good)
+                        : () => this.addGood(good)
+                    }
+                    className="App__list-btn"
+                  >
+                    {
+                      isSelectedGood
+                        ? 'Remove'
+                        : 'Add'
+                    }
+                  </button>
+                </li>
+              );
+            })
           }
         </ul>
       </div>
