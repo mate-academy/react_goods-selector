@@ -25,8 +25,8 @@ class App extends React.Component<{}, State> {
   };
 
   addGood = (good: string) => (
-    this.setState(prevGood => ({
-      selectedGoods: [...prevGood.selectedGoods, good],
+    this.setState(prevState => ({
+      selectedGoods: [...prevState.selectedGoods, good],
     }))
   );
 
@@ -42,7 +42,7 @@ class App extends React.Component<{}, State> {
     )
   );
 
-  selectedGoods = () => {
+  showSelectedGoods = () => {
     const { selectedGoods } = this.state;
 
     switch (selectedGoods.length) {
@@ -66,10 +66,12 @@ class App extends React.Component<{}, State> {
           My notes
         </p>
         <h1 className="App__title-goods">
-          {this.selectedGoods()}
+          {this.showSelectedGoods()}
         </h1>
 
         {goodsFromServer.map((good) => {
+          const isSelected = selectedGoods.includes(good);
+
           return (
             <div>
               <li
@@ -80,12 +82,12 @@ class App extends React.Component<{}, State> {
                 <button
                   type="button"
                   className={classNames('App__button',
-                    { 'App__button--selected': selectedGoods.includes(good) })}
-                  onClick={selectedGoods.includes(good)
+                    { 'App__button--selected': isSelected })}
+                  onClick={isSelected
                     ? () => this.deleteGood(good)
                     : () => this.addGood(good)}
                 >
-                  {selectedGoods.includes(good) ? 'Remove' : 'Selected'}
+                  {isSelected ? 'Remove' : 'Selected'}
                 </button>
               </li>
             </div>
