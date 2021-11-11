@@ -28,7 +28,7 @@ interface State {
   selectedGoods: string[],
 }
 
-class App extends React.Component<{}, State> {
+export class App extends React.Component<{}, State> {
   state: State = {
     selectedGoods: ['Jam'],
   };
@@ -66,6 +66,45 @@ class App extends React.Component<{}, State> {
 
   render() {
     const { selectedGoods } = this.state;
+    const listOfGoodsToRender = goodsFromServer.map(
+      good => {
+        const isGoodSelected = selectedGoods.includes(good.value);
+
+        const buttonCallback = isGoodSelected
+          ? () => this.removeGood(good.value)
+          : () => this.addGood(good.value);
+
+        const buttonTitle = isGoodSelected
+          ? 'Remove good'
+          : 'Add good';
+
+        const buttonToRender = (
+          <button
+            className={classNames(
+              'App__item-button--add',
+              { 'App__item-button--remove': isGoodSelected },
+            )}
+            type="button"
+            onClick={buttonCallback}
+          >
+            {buttonTitle}
+          </button>
+        );
+
+        return (
+          <li
+            className={classNames(
+              'App__item--unactive',
+              { 'App__item--active': isGoodSelected },
+            )}
+            key={good.id}
+          >
+            {good.value}
+            {buttonToRender}
+          </li>
+        );
+      },
+    );
 
     return (
       <div className="App">
@@ -81,51 +120,9 @@ class App extends React.Component<{}, State> {
           Clear
         </button>
         <ul className="App__list">
-          {
-            goodsFromServer.map(
-              good => {
-                const isGoodSelected = selectedGoods.includes(good.value);
-
-                const buttonCallback = isGoodSelected
-                  ? () => this.removeGood(good.value)
-                  : () => this.addGood(good.value);
-
-                const buttonTitle = isGoodSelected
-                  ? 'Remove good'
-                  : 'Add good';
-
-                const buttonToRender = (
-                  <button
-                    className={classNames(
-                      'App__item-button--add',
-                      { 'App__item-button--remove': isGoodSelected },
-                    )}
-                    type="button"
-                    onClick={buttonCallback}
-                  >
-                    {buttonTitle}
-                  </button>
-                );
-
-                return (
-                  <li
-                    className={classNames(
-                      'App__item--unactive',
-                      { 'App__item--active': isGoodSelected },
-                    )}
-                    key={good.id}
-                  >
-                    {good.value}
-                    {buttonToRender}
-                  </li>
-                );
-              },
-            )
-          }
+          {listOfGoodsToRender}
         </ul>
       </div>
     );
   }
 }
-
-export default App;
