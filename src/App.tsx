@@ -24,19 +24,19 @@ export class App extends React.Component {
     selectedGoods: [],
   };
 
-  add = (item: string) => {
+  addItem = (item: string) => {
     this.setState((state: State) => ({
       selectedGoods: [...state.selectedGoods, item],
     }));
   };
 
-  remove = (item: string) => {
+  removeItem = (item: string) => {
     this.setState((state: State) => ({
-      selectedGoods: [...state.selectedGoods].filter(selectedItem => selectedItem !== item),
+      selectedGoods: state.selectedGoods.filter(selectedItem => selectedItem !== item),
     }));
   };
 
-  message = () => {
+  showChosenItems = () => {
     const { selectedGoods } = this.state;
 
     if (selectedGoods.length === 0) {
@@ -62,51 +62,39 @@ export class App extends React.Component {
     return (
       <div className="App">
         <h1 className="selectedItemsList">
-          {this.message()}
+          {this.showChosenItems()}
           {selectedGoods.length !== 0 && (
             <button
               type="button"
               className="button button--top"
-              onClick={() => {
-                this.removeSelections();
-              }}
+              onClick={this.removeSelections}
             >
               Remove all
             </button>
           )}
         </h1>
         <div>
-          {goodsFromServer.map(item => (
+          {goodsFromServer.map(item => {
+            const isItemSelected = selectedGoods.includes(item);
+
+            return (
             <div className="itemAndButton" key={item}>
-              <li className={classNames('item', { itemSelected: selectedGoods.includes(item) })}>
+              <li className={classNames('item', { itemSelected: isItemSelected })}>
                 {item}
               </li>
-
-              {selectedGoods.includes(item)
-                ? (
-                  <button
-                    type="button"
-                    className="button"
-                    onClick={() => {
-                      this.remove(item);
-                    }}
-                  >
-                    Remove
-                  </button>
-                )
-                : (
-                  <button
-                    type="button"
-                    className="button"
-                    onClick={() => {
-                      this.add(item);
-                    }}
-                  >
-                    Add
-                  </button>
-                )}
+              <button
+                type="button"
+                className="button"
+                onClick={isItemSelected
+                  ? () => { this.removeItem(item) }
+                  : () => { this.addItem(item) }
+                }
+              >
+                {isItemSelected ? `Remove` : `Add`}
+              </button>
             </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     );
