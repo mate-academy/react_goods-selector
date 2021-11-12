@@ -1,1 +1,60 @@
-// styles go here
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+html {
+  margin: 0;
+  font-family: Roboto, sans-serif;
+}
+
+.App {
+  display: grid;
+  justify-content: center;
+  width: 22vw;
+  border: solid 2px rgb(51, 44, 71);
+  border-radius: 10px;
+}
+
+.selectedItemsList {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 20vw;
+  min-height: 12vh;
+  text-transform: uppercase;
+  font-size: 20px;
+  color: rgb(51, 44, 71);
+}
+
+.itemAndButton {
+  width: 20vw;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  margin-bottom: 10px;
+
+}
+
+.item {
+  list-style-type: none;
+  line-height: 30px;
+  padding-left: 10px;
+  background-color: rgb(89, 86, 138);
+  color: white;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+
+  &Selected {
+    background-color: rgb(93, 192, 80);
+  }
+}
+
+.button {
+  color: white;
+  background-color: rgb(51, 44, 71);
+  border: solid 1px rgb(51, 44, 71);
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+
+  &--top {
+    margin-top: 10px;
+    border-radius: 10px;
+  }
+}
