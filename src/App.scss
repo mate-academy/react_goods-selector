@@ -1,1 +1,65 @@
-// styles go here
+body {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.printGoods {
+  width: 400px;
+  height: 100px;
+  border: 1px solid gray;
+  border-radius: 20px;
+  padding: 10px 30px;
+  background-color: rgb(223, 223, 223);
+
+  &__text {
+    font-size: 18px;
+    word-wrap: normal;
+  }
+}
+
+.list{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 400px;
+  padding: 30px;
+  background-color: dimgray;
+  list-style: none;
+  color: gainsboro;
+
+  border-radius: 20px;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    background-color: gray;
+    padding: 5px;
+    border-radius: 10px;
+    transition: 0.7s;
+
+    &--selected {
+      background-color:dodgerblue;
+    }
+  }
+}
+
+.button {
+  border-radius: 10px;
+
+  &--add {
+    background-color: darkseagreen;
+  }
+
+  &--remove {
+    background-color:indianred;
+  }
+
+  &--X {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    background-color:indianred;
+  }
+}
