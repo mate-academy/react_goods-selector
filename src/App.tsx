@@ -1,4 +1,3 @@
-// import { type } from 'os';
 import classNames from 'classnames';
 import React from 'react';
 import './App.scss';
@@ -33,12 +32,9 @@ class App extends React.Component {
     }
 
     const lastEl = selectedGoods[selectedGoods.length - 1];
-    const firstElements = [];
-
-    // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < selectedGoods.length - 1; i++) {
-      firstElements.push(selectedGoods[i]);
-    }
+    const firstElements = selectedGoods.slice(0, -1).map((item) => {
+      return item;
+    });
 
     return `${firstElements.join(', ')} and ${lastEl} are selected`;
   };
