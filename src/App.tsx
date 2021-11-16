@@ -2,7 +2,12 @@ import classNames from 'classnames';
 import React from 'react';
 import './App.scss';
 
-const goodsFromServer: string[] = [
+type GoodsArr = string[];
+type Prev = {
+  selectedGoods: GoodsArr
+};
+
+const goodsFromServer: GoodsArr = [
   'Dumplings',
   'Carrot',
   'Eggs',
@@ -46,7 +51,7 @@ class App extends React.Component {
       <div className="App">
         <div className="app-header">
           <h1>
-            { `${this.getHeadline()}` }
+            {this.getHeadline()}
           </h1>
           <button
             type="button"
@@ -84,16 +89,11 @@ class App extends React.Component {
                   )}
                   type="button"
                   onClick={() => {
-                    type Prev = {
-                      selectedGoods: []
-                    };
                     this.setState((prevState: Prev) => {
                       if (selectedGoods.includes(item)) {
-                        prevState.selectedGoods.splice(
-                          (selectedGoods.indexOf(item)), 1,
-                        );
-
-                        return prevState;
+                        return {
+                          selectedGoods: prevState.selectedGoods.filter(el => el !== item),
+                        };
                       }
 
                       return {
