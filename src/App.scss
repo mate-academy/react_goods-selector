@@ -1,1 +1,48 @@
-// styles go here
+.App {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  width: 50vw;
+  margin: 0 auto;
+  padding: 45px 30px 10px;
+  border: 1px dashed black;
+  border-radius: 30px;
+  position: relative;
+}
+
+.selection {
+  border: 2px solid black;
+  text-align: center;
+  padding: 15px;
+
+  &__clear {
+    font-size: 20px;
+    font-weight: bold;
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    top: 10px;
+    left: 45%;
+    border-radius: 50%;
+  }
+}
+
+.goods__list {
+  line-height: 30px;
+
+  &--selected {
+    line-height: 30px;
+    background-color: lightgray;
+  }
+}
+
+.goods__button {
+  margin-top: 4px;
+  float: right;
+
+  &--add {
+    background-color: chartreuse;
+  }
+
+  &--remove {
+    background-color: red;
+  }
+}
