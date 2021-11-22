@@ -14,14 +14,13 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-type Props = {};
 type State = {
-  selectedGood: string;
+  selectedGoods: string[];
 };
 
-class App extends React.Component<Props, State> {
+class App extends React.Component<{}, State> {
   state = {
-    selectedGood: '',
+    selectedGoods: [],
   };
 
   spans = document.getElementsByTagName('span');
@@ -29,19 +28,27 @@ class App extends React.Component<Props, State> {
   buttons = document.getElementsByTagName('button');
 
   render() {
-    const { selectedGood } = this.state;
-    const phrase = (selectedGood === 'Dumplings' || selectedGood === 'Eggs')
-      ? `${selectedGood} are selected`
-      : `${selectedGood} is selected`;
+    const { selectedGoods } = this.state;
+    let phrase = 'No goods selected';
+
+    if (selectedGoods.length === 1) {
+      const selectedGood = selectedGoods[0];
+
+      phrase = (selectedGood === 'Dumplings' || selectedGood === 'Eggs')
+        ? `${selectedGood} are selected`
+        : `${selectedGood} is selected`;
+    }
+
+    if (selectedGoods.length > 1) {
+      phrase = `${[...selectedGoods].slice(0, -1).join(', ')} and ${[...selectedGoods.slice(-1)]} are selected`;
+    }
 
     return (
       <div className="app">
         <h1>
-          {(selectedGood)
-            ? `Selected good: - ${phrase}`
-            : 'Selected good: - No goods selected'}
+          {`Selected good: - ${phrase}`}
           {' '}
-          {(this.state.selectedGood === '')
+          {(selectedGoods.length === 0)
             ? ''
             : (
               <button
@@ -49,10 +56,10 @@ class App extends React.Component<Props, State> {
                 onClick={() => {
                   for (let i = 0; i < this.spans.length; i += 1) {
                     this.spans[i].classList.remove('selected');
-                    this.buttons[i + 1].hidden = false;
+                    this.buttons[i + 1].textContent = 'Add';
                   }
 
-                  this.setState({ selectedGood: '' });
+                  this.setState({ selectedGoods: [] });
                 }}
               >
                 X
@@ -71,19 +78,48 @@ class App extends React.Component<Props, State> {
                   type="button"
                   onClick={(e) => {
                     const button = e.target;
+                    const buttonText = (button as HTMLButtonElement).textContent;
 
-                    this.setState({
-                      selectedGood: product,
-                    });
-                    for (let i = 0; i < this.spans.length; i += 1) {
-                      if (this.spans[i].textContent === product) {
-                        this.spans[i].classList.add('selected');
-                        (button as HTMLButtonElement).hidden = true;
+                    const buttonToggle = (action: string): void => {
+                      (button as HTMLButtonElement).textContent = action;
+
+                      for (let i = 0; i < this.spans.length; i += 1) {
+                        if (this.spans[i].textContent === product) {
+                          this.spans[i].classList.toggle('selected');
+                        }
                       }
+                    };
+
+                    switch (buttonText) {
+                      case 'Remuve':
+                        this.setState((prevState) => {
+                          const indexOfProduct = prevState.selectedGoods.indexOf(product);
+
+                          prevState.selectedGoods.splice(indexOfProduct, 1);
+                          buttonToggle('Add');
+
+                          return { selectedGoods: prevState.selectedGoods };
+                        });
+
+                        break;
+
+                      case 'Add':
+                        this.setState((prevState) => {
+                          buttonToggle('Remuve');
+
+                          return {
+                            selectedGoods: [...prevState.selectedGoods, product],
+                          };
+                        });
+
+                        break;
+
+                      default:
+                        break;
                     }
                   }}
                 >
-                  Select
+                  Add
                 </button>
               </li>
             );
