@@ -33,7 +33,7 @@ export class App extends React.Component<{}, { selectedGoods: string[] }> {
 
   removeItem = (item: string) => {
     this.setState((state) => ({
-      selectedGoods: [...state.selectedGoods.filter(element => element !== item)],
+      selectedGoods: state.selectedGoods.filter(element => element !== item),
     }));
   };
 
