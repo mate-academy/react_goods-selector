@@ -49,7 +49,7 @@ class App extends React.Component<{}, State> {
     } else if (selectedGoods.length === 1) {
       text = `${selectedGoods} is selected`;
     } else if (selectedGoods.length > 1) {
-      text = `${selectedGoods.join(' ,')} is selected`;
+      text = `${selectedGoods.join(' ,')} are selected`;
     }
 
     return (
