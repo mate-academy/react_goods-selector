@@ -1,1 +1,38 @@
-// styles go here
+.goodsBloc {
+  &-heading {
+    &-title {
+      display: inline-block;
+    }
+
+    &-btn {
+      margin-left: 15px;
+
+      &--emptyState {
+        display: none;
+      }
+    }
+  }
+}
+
+.list-item {
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+
+  &--selected {
+    background-color: lightgreen;
+  }
+}
+
+.btn {
+  height: 24px;
+
+  &--selected {
+    display: none;
+  }
+
+  &:last-child {
+    margin-left: 10px;
+  }
+}
