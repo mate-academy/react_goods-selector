@@ -32,16 +32,12 @@ class App extends React.Component<{}, State> {
 
   removeClick = (good: string) => {
     const { selectedGoods } = this.state;
-    const index = selectedGoods.indexOf(good);
-    const firstPart = selectedGoods.slice(0, index);
-    const secondPart = selectedGoods.slice(index + 1);
-    const result = firstPart.concat(secondPart);
+    const result = selectedGoods.filter(el => el !== good);
 
     this.setState({ selectedGoods: [...result] });
   };
 
-  render() {
-    const { selectedGoods } = this.state;
+  showTitleText = (selectedGoods: string[]) => {
     let text = '';
 
     if (selectedGoods.length === 0) {
@@ -49,14 +45,20 @@ class App extends React.Component<{}, State> {
     } else if (selectedGoods.length === 1) {
       text = `${selectedGoods} is selected`;
     } else if (selectedGoods.length > 1) {
-      text = `${selectedGoods.join(' ,')} are selected`;
+      text = `${selectedGoods.join(', ')} are selected`;
     }
+
+    return text;
+  };
+
+  render() {
+    const { selectedGoods } = this.state;
 
     return (
       <div className="goodsBloc">
         <div className="goodsBloc-heading">
           <h1 className="goodsBloc-heading-title">
-            {text}
+            {this.showTitleText(selectedGoods)}
           </h1>
           <button
             type="button"
@@ -78,7 +80,7 @@ class App extends React.Component<{}, State> {
               <span>
                 <button
                   type="button"
-                  className={classNames('btn', { 'btn--selected': selectedGoods.includes(good) })}
+                  className={classNames('btn', { 'btn--hide': selectedGoods.includes(good) })}
                   onClick={() => {
                     this.addClick(good);
                   }}
@@ -87,7 +89,7 @@ class App extends React.Component<{}, State> {
                 </button>
                 <button
                   type="button"
-                  className="btn"
+                  className={classNames('btn', { 'btn--hide': !selectedGoods.includes(good) })}
                   onClick={() => {
                     this.removeClick(good);
                   }}
