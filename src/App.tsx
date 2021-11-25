@@ -49,8 +49,21 @@ class App extends React.Component<{}, State> {
     });
   };
 
+  getDisplayingGoods = () => {
+    const { selectedGood } = this.state;
+
+    return {
+      0: 'No goods selected',
+      1: `${selectedGood[0]} is selected`,
+      2: `${selectedGood[0]} and ${selectedGood[1]} are selected`,
+      3: `${selectedGood.slice(0, -1).join(', ')} and ${selectedGood.slice(-1)} are selected`,
+    }[Math.min(selectedGood.length, 3)];
+  };
+
   render() {
     const { selectedGood } = this.state;
+
+    const goodsToDisplay = this.getDisplayingGoods();
 
     return (
       <div className="App">
@@ -58,7 +71,7 @@ class App extends React.Component<{}, State> {
           <h1>
             Selected good:
             <span className="GoodsDisplay__selected-item">
-              {selectedGood.join(' ')}
+              {goodsToDisplay}
             </span>
           </h1>
           {selectedGood.length > 0 && (
