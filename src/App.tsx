@@ -80,31 +80,27 @@ class App extends React.Component<{}, State> {
               <div className="GoodsList__content">
                 <li
                   key={good}
-                  className={classNames(
-                    'GoodsList__item',
-                    {
-                      'GoodsList__item--selected': isGoodSelected,
-                    },
-                  )}
+                  className={classNames('GoodsList__item', {
+                    'GoodsList__item--selected': isGoodSelected,
+                  })}
                 >
                   {good}
                 </li>
-                {!isGoodSelected && (
-                  <button
-                    className="Btn Btn--add"
-                    type="button"
-                    onClick={() => this.handleAdd(good)}
-                  >
-                    Add
-                  </button>
-                )}
-                {isGoodSelected && (
+                {isGoodSelected ? (
                   <button
                     className="Btn Btn--clear"
                     type="button"
                     onClick={() => this.removeFromSelected(good)}
                   >
                     X
+                  </button>
+                ) : (
+                  <button
+                    className="Btn Btn--add"
+                    type="button"
+                    onClick={() => this.handleAdd(good)}
+                  >
+                    Add
                   </button>
                 )}
               </div>
