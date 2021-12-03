@@ -1,1 +1,22 @@
-// styles go here
+li {
+  padding: 5px;
+}
+
+button {
+  margin: 10px;
+  padding: 5px;
+  width: 150px;
+  background-color: #fff;
+  border-radius: 0;
+  border-color: rgb(0, 143, 143);
+
+  &:hover {
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0.25px 0.25px 3px 0.25px rgb(0, 201, 201);
+  }
+}
+
+.chosen {
+  background-color: rgb(211, 226, 226);
+}
