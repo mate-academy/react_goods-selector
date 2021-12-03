@@ -16,30 +16,27 @@ const goodsFromServer: string[] = [
 ];
 
 class App extends React.Component {
-  selectedGoodsArray: string[] = [];
-
   state = {
-    selectedGood: 'Jam',
+    selectedGoodsArray: ['Jam'],
   };
 
   generateTitle() {
-    if (this.state.selectedGood !== '') {
-      this.selectedGoodsArray.push(this.state.selectedGood);
-    }
+    const { selectedGoodsArray } = this.state;
 
-    const lengthArray = this.selectedGoodsArray.length;
     let title = '';
 
-    title = this.selectedGoodsArray.join(', ');
+    title = selectedGoodsArray.join(', ');
+
+    const lengthArray = selectedGoodsArray.length;
 
     if (lengthArray >= 3) {
       const i = lengthArray - 1;
 
-      const arr = this.selectedGoodsArray.slice(0, i);
+      const arr = selectedGoodsArray.slice(0, i);
 
       title = arr.join(', ');
 
-      title = `${title} and ${this.selectedGoodsArray[i]}`;
+      title = `${title} and ${selectedGoodsArray[i]}`;
     }
 
     const rest = lengthArray >= 2 ? 'are selected' : 'is selected';
@@ -52,18 +49,20 @@ class App extends React.Component {
   }
 
   render() {
+    const { selectedGoodsArray } = this.state;
+
     return (
       <div className="App">
         <h1>
           {this.generateTitle()}
         </h1>
-        {this.selectedGoodsArray.length > 1 && (
+        {selectedGoodsArray.length > 1 && (
           <button
             type="button"
             onClick={() => {
-              this.setState({ selectedGood: '' });
-
-              this.selectedGoodsArray = [];
+              this.setState({
+                selectedGoodsArray: [],
+              });
             }}
           >
             Clear list
@@ -74,26 +73,30 @@ class App extends React.Component {
             return (
               <li
                 key={+index}
-                className={classNames({ chosen: this.selectedGoodsArray.includes(good) })}
+                className={classNames({ chosen: selectedGoodsArray.includes(good) })}
               >
                 {good}
-                {!this.selectedGoodsArray.includes(good) && (
+                {!selectedGoodsArray.includes(good) && (
                   <button
                     type="button"
                     onClick={() => {
-                      this.setState({ selectedGood: good });
+                      selectedGoodsArray.push(good);
+
+                      this.setState({ selectedGoodsArray });
                     }}
                   >
                     Add
                   </button>
                 )}
-                {this.selectedGoodsArray.includes(good) && (
+                {selectedGoodsArray.includes(good) && (
                   <button
                     type="button"
                     onClick={() => {
-                      this.selectedGoodsArray
-                = this.selectedGoodsArray.filter((valueGood: string) => valueGood !== good);
-                      this.setState({ selectedGood: '' });
+                      this.setState({
+                        selectedGoodsArray: selectedGoodsArray.filter(
+                          (valueGood: string) => valueGood !== good,
+                        ),
+                      });
                     }}
                   >
                     Remove
