@@ -1,1 +1,71 @@
-// styles go here
+@import './utils/variables';
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: $bodyBgColor;
+}
+
+.goods {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.good {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: $goodMaxWidth;
+
+  padding: 10px;
+
+  border: $goodBorder;
+  border-radius: 10px;
+
+  color: $goodTextColor;
+  background-color: $goodBgColor;
+
+  transition: opacity $transitionDelay;
+
+  &:hover {
+    opacity: 0.7;
+    cursor: pointer;
+  }
+}
+
+.selected {
+  background-color: $selectedBgColor;
+}
+
+.button {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: $buttonBgColor;
+
+  transition: opacity $transitionDelay;
+
+  &:hover {
+    opacity: 0.7;
+    cursor: pointer;
+  }
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.add {
+  background-color: $addBtnBgColor;
+}
+
+.remove {
+  background-color: $removeBtnBgColor;
+}
