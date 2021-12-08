@@ -23,20 +23,14 @@ class App extends React.Component<{}, State> {
     selectedGoods: ['Jam'],
   };
 
-  addGood = (good: string) => {
-    this.setState((prevState) => {
-      return {
-        selectedGoods: [...prevState.selectedGoods, good],
-      };
-    });
-  };
-
-  removeGood = (good: string) => {
-    this.setState((prevState) => {
-      return {
-        selectedGoods: prevState.selectedGoods.filter(item => item !== good),
-      };
-    });
+  toggleAdd = (good: string) => {
+    if (good) {
+      this.setState((prevState) => {
+        return !this.isGoodIncluded(good)
+          ? { selectedGoods: [...prevState.selectedGoods, good] }
+          : { selectedGoods: prevState.selectedGoods.filter(item => item !== good) };
+      });
+    }
   };
 
   clearAllGoods = () => {
@@ -86,25 +80,13 @@ class App extends React.Component<{}, State> {
           <section className="goods" key={good}>
             <div className="goods__good good">
               <div className="good__item">{good}</div>
-              {this.isGoodIncluded(good)
-                ? (
-                  <button
-                    type="button"
-                    className="button button--remove"
-                    onClick={() => this.removeGood(good)}
-                  >
-                    Remove
-                  </button>
-                )
-                : (
-                  <button
-                    type="button"
-                    className="button"
-                    onClick={() => this.addGood(good)}
-                  >
-                    Add
-                  </button>
-                )}
+              <button
+                type="button"
+                className="button button--remove"
+                onClick={() => this.toggleAdd(good)}
+              >
+                {!this.isGoodIncluded(good) ? 'add' : 'remove'}
+              </button>
             </div>
           </section>
         ))}
