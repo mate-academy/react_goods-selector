@@ -82,7 +82,7 @@ class App extends React.Component<{}, State> {
               <div className="good__item">{good}</div>
               <button
                 type="button"
-                className="button button--remove"
+                className="button"
                 onClick={() => this.toggleAdd(good)}
               >
                 {!this.isGoodIncluded(good) ? 'add' : 'remove'}
