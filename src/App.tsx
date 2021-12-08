@@ -60,7 +60,7 @@ class App extends React.Component<{}, State> {
       case 2:
         return `${selectedGoods[0]} and ${selectedGoods[1]} are selected`;
       default:
-        return `${selectedGoods.slice(0, -1)} and ${selectedGoods.slice(-1)} are selected`;
+        return `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods.slice(-1)} are selected`;
     }
   };
 
@@ -90,7 +90,7 @@ class App extends React.Component<{}, State> {
                 ? (
                   <button
                     type="button"
-                    className="button"
+                    className="button button--remove"
                     onClick={() => this.removeGood(good)}
                   >
                     Remove

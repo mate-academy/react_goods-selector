@@ -1,9 +1,10 @@
+$blue:#c4c1fb;
+$blueTransper: #c4c1fb94;
+$pink: #fb97ae;
+$white: #fff;
+
 * {
   box-sizing: border-box;
-}
-
-html {
-  background-color: #FB97AE;
 }
 
 body {
@@ -11,18 +12,20 @@ body {
 }
 
 .App {
-  max-width: 90%;
-  margin: 0 auto;
-  color: #FFF;
+  background: linear-gradient( rgba(0, 0, 0, 0.09), rgba(0, 0, 0, 0.28)),
+    url("./img/candy-gc997d9333_1920.jpg");
+  background-size: cover;
+  min-height: 100vh;
+  padding: 20px;
+  color: $white;
 }
 
 .title-block {
   margin-bottom: 30px;
-  font-size: 20px;
 
   &__selectedGood {
     display: inline-block;
-    background-color: #c4c1fb;
+    background-color: $blueTransper;
     padding: 10px;
     border-radius: 16px;
   }
@@ -36,20 +39,30 @@ body {
   &__item {
     min-width: 150px;
     margin: 10px 0;
+    font-size: 20px;
   }
 }
 
 .button {
-  background-color: #FFF;
-  border: 3px solid #c4c1fb;
-  color: #FB97AE;
+  background-color: $pink;
+  border: 3px solid $blue;
+  color: $white;
   width: 70px;
-  height: 30px;
+  height: 40px;
   border-radius: 20px;
   cursor: pointer;
+  transition: background-color 0.3s;
   &--clearAll {
     position: absolute;
     top: 30px;
     right: 30px;
+  }
+
+  &--remove {
+    background-color: transparent;
+  }
+
+  &:hover {
+    background-color: $blueTransper;
   }
 }
