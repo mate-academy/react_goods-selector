@@ -60,7 +60,7 @@ class App extends React.Component<{}, State> {
           <h1 className="products__title">
             <button
               type="button"
-              className="products__close"
+              className={classNames('products__close', { active__close: selectedGood.length === 0 })}
               disabled={selectedGood.length === 0}
               onClick={this.clearSelectedGood}
             >
