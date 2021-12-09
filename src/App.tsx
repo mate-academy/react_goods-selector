@@ -16,13 +16,11 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-type Props = {};
-
 type State = {
   goods: string[]
 };
 
-class App extends React.Component<Props, State> {
+class App extends React.Component<{}, State> {
   state: State = {
     goods: ['Jam'],
   };
