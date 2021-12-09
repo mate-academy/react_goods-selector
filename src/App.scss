@@ -1,1 +1,64 @@
-// styles go here
+$blue:#c4c1fb;
+$blueTransper: #c4c1fb94;
+$pink: #fb97ae;
+$white: #fff;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.App {
+  background: linear-gradient( rgba(0, 0, 0, 0.09), rgba(0, 0, 0, 0.28)),
+    url("./img/candy-gc997d9333_1920.jpg");
+  background-size: cover;
+  min-height: 100vh;
+  padding: 20px;
+  color: $white;
+}
+
+.title-block {
+  margin-bottom: 30px;
+
+  &__selectedGood {
+    display: inline-block;
+    background-color: $blueTransper;
+    padding: 10px;
+    border-radius: 16px;
+  }
+}
+
+.good {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+
+  &__item {
+    min-width: 150px;
+    margin: 10px 0;
+    font-size: 20px;
+  }
+}
+
+.button {
+  background-color: $pink;
+  border: 3px solid $blue;
+  color: $white;
+  width: 70px;
+  height: 40px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  &--clearAll {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+  }
+
+  &:hover {
+    background-color: $blueTransper;
+  }
+}
