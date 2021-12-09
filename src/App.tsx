@@ -70,7 +70,7 @@ class App extends React.Component<{}, State> {
             <button
               type="button"
               className="button button--clearAll"
-              onClick={() => this.clearAllGoods()}
+              onClick={this.clearAllGoods}
             >
               X
             </button>
