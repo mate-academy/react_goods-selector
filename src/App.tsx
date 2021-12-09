@@ -71,18 +71,18 @@ class App extends React.Component<{}, State> {
                   { selected: selectedGoods.includes(good) })
               }
               key={good}
-              onClick={() => {
-                if (!selectedGoods.includes(good)) {
-                  this.setState({ selectedGoods: [...selectedGoods, good] });
-                } else {
-                  this.setState(
-                    { selectedGoods: [...selectedGoods.filter(item => item !== good)] },
-                  );
-                }
-              }}
             >
               {good}
               <button
+                onClick={() => {
+                  if (!selectedGoods.includes(good)) {
+                    this.setState({ selectedGoods: [...selectedGoods, good] });
+                  } else {
+                    this.setState(
+                      { selectedGoods: [...selectedGoods.filter(item => item !== good)] },
+                    );
+                  }
+                }}
                 type="button"
                 className={
                   classNames('button',

@@ -29,14 +29,14 @@ body {
   border: $goodBorder;
   border-radius: 10px;
 
+  opacity: 0.7;
   color: $goodTextColor;
   background-color: $goodBgColor;
 
   transition: opacity $transitionDelay;
 
   &:hover {
-    opacity: 0.7;
-    cursor: pointer;
+    opacity: 1;
   }
 }
 
@@ -49,11 +49,13 @@ body {
   border-radius: 10px;
   padding: 5px 10px;
   background-color: $buttonBgColor;
+  opacity: 0.7;
+
 
   transition: opacity $transitionDelay;
 
   &:hover {
-    opacity: 0.7;
+    opacity: 1;
     cursor: pointer;
   }
 }
