@@ -1,1 +1,82 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+body,
+h1 {
+  margin: 0;
+}
+
+.app {
+  height: 100vh;
+  padding: 0 40px;
+  background-color: rgb(176, 171, 171);
+}
+
+.products {
+  width: 700px;
+
+  &__title {
+    display: grid;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px;
+    font-size: 30px;
+    color: rgb(28, 143, 169);
+
+    grid-template-columns: 100px 600px;
+    grid-template-rows: 70px;
+  }
+
+  &__close {
+    width: 60px;
+    height: 40px;
+    background-color: rgb(194, 125, 45);
+    color: rgb(101, 30, 0);
+    font-size: 18px;
+    border-radius: 2px;
+    border-color: rgb(101, 30, 0);
+    box-shadow: 0 1px 5px 2px rgba(79, 79, 79, 0.3);
+  }
+
+  &__goods {
+    display: grid;
+    list-style: none;
+
+    grid-template-columns: 100px 350px;
+  }
+
+  &__good {
+    display: inline-block;
+    padding: 10px;
+    font-weight: bold;
+    color: rgb(4, 46, 55);
+    border-radius: 5px;
+    // font-size: 18px;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__button {
+    width: 60px;
+    height: 36px;
+    border-radius: 5px;
+    background-color: rgba(65, 56, 46, 0.92);
+    color: rgba(255, 228, 196, 0.95);
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.active {
+  background-color: rgba(115, 193, 210, 0.35);
+
+  &__button {
+    background-color: rgba(65, 56, 46, 0.56);
+    color: rgb(186, 147, 103);
+  }
+}
