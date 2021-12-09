@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import classNames from 'classnames';
 import React from 'react';
 import './App.scss';
@@ -43,6 +41,22 @@ class App extends React.Component<{}, State> {
     }
   };
 
+  clearGoods = () => {
+    this.setState({ selectedGoods: [] });
+  };
+
+  addGood = (good: string) => {
+    this.setState((state) => ({
+      selectedGoods: [...state.selectedGoods, good],
+    }));
+  };
+
+  deleteGood = (good: string) => {
+    this.setState((state) => (
+      { selectedGoods: [...state.selectedGoods.filter(item => item !== good)] }
+    ));
+  };
+
   render() {
     const { selectedGoods } = this.state;
 
@@ -53,12 +67,10 @@ class App extends React.Component<{}, State> {
         </h1>
 
         <button
-          className={
-            classNames('button',
-              { hidden: selectedGoods.length === 0 })
-          }
+          className={classNames('button',
+            { hidden: selectedGoods.length === 0 })}
           type="button"
-          onClick={() => this.setState({ selectedGoods: [] })}
+          onClick={this.clearGoods}
         >
           X
         </button>
@@ -66,28 +78,18 @@ class App extends React.Component<{}, State> {
         <ul className="goods">
           {goodsFromServer.map(good => (
             <li
-              className={
-                classNames('good',
-                  { selected: selectedGoods.includes(good) })
-              }
+              className={classNames('good',
+                { selected: selectedGoods.includes(good) })}
               key={good}
             >
               {good}
               <button
-                onClick={() => {
-                  if (!selectedGoods.includes(good)) {
-                    this.setState({ selectedGoods: [...selectedGoods, good] });
-                  } else {
-                    this.setState(
-                      { selectedGoods: [...selectedGoods.filter(item => item !== good)] },
-                    );
-                  }
-                }}
+                onClick={() => (
+                  !selectedGoods.includes(good) ? this.addGood(good) : this.deleteGood(good)
+                )}
                 type="button"
-                className={
-                  classNames('button',
-                    { add: !selectedGoods.includes(good), remove: selectedGoods.includes(good) })
-                }
+                className={classNames('button',
+                  { add: !selectedGoods.includes(good), remove: selectedGoods.includes(good) })}
               >
                 {selectedGoods.includes(good) ? 'Remove' : 'Add'}
               </button>
