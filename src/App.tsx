@@ -33,6 +33,24 @@ class App extends React.Component<{}, State> {
     this.setState((prevState) => ({ selectedGood: [...prevState.selectedGood, good] }));
   };
 
+  createTitle = () => {
+    const { selectedGood } = this.state;
+
+    switch (selectedGood.length) {
+      case 0:
+        return 'No goods selected';
+
+      case 1:
+        return `${selectedGood[0]} is selected`;
+
+      case 2:
+        return `${selectedGood.join(' and ')} are selected`;
+
+      default:
+        return `${selectedGood.slice(0, -2).join(', ')}, ${selectedGood.slice(-2).join(' and ')} are selected`;
+    }
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -49,9 +67,7 @@ class App extends React.Component<{}, State> {
               X
             </button>
             <>
-              {selectedGood.join(selectedGood.length === 2 ? ' and ' : ', ') || 'No goods'}
-              {selectedGood.length === 1 ? ' is ' : selectedGood.length > 1 ? ' are ' : ' '}
-              selected
+              {this.createTitle()}
             </>
           </h1>
           <ul className="products__goods">
