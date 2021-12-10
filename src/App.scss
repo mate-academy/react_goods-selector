@@ -1,1 +1,21 @@
-// styles go here
+.products {
+  width: 200px;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 5px;
+  }
+}
+
+.active {
+  color: #11c1df;
+}
+
+.button {
+  width: 60px;
+  background-color: white;
+  border-color: white;
+}
