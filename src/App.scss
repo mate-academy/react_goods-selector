@@ -1,1 +1,71 @@
-// styles go here
+html {
+  font-family: "Patrick Hand", cursive;
+}
+
+body,
+h1,
+h2,
+ul,
+li,
+button {
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  box-sizing: border-box;
+  height: 100vh;
+  padding: 20px;
+  background-color: cornsilk;
+
+  &__title {
+    margin-bottom: 20px;
+  }
+
+  &__head {
+    background-color: white;
+    border-radius: 40px;
+    border: 2px solid black;
+    padding: 15px;
+    max-width: 720px;
+    margin: 0 auto 25px;
+  }
+
+  &__hidden {
+    display: none;
+  }
+
+  &__list {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 300px;
+    margin-bottom: 4px;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 24px;
+
+    &-selected {
+      background-color: yellowgreen;
+    }
+  }
+
+  &__button {
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    
+    &-red {
+      width: 100px;
+      color: white;
+      background-color: rgb(222, 13, 13);
+      font-size: 20px;
+      font-family: "Patrick Hand", cursive;
+    }
+  }
+}
