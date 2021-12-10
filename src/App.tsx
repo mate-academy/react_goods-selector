@@ -23,7 +23,7 @@ class App extends React.Component<{}, State> {
     selectedGoods: [],
   };
 
-  toggler = (good: string) => {
+  toggleSelectedGoods = (good: string) => {
     if (good) {
       this.setState((state) => {
         return !this.alreadyInSelectedGoods(good)
@@ -78,7 +78,7 @@ class App extends React.Component<{}, State> {
                   <button
                     type="button"
                     className="App__button-list"
-                    onClick={() => this.toggler(good)}
+                    onClick={() => this.toggleSelectedGoods(good)}
                   >
                     {!this.alreadyInSelectedGoods(good) ? 'Add' : 'Remove'}
                   </button>
