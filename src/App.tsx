@@ -36,39 +36,33 @@ class App extends React.Component<{}, State> {
   };
 
   removeGood = (selectedGood: string) => {
-    this.setState((state) => (
-      { goods: state.goods.filter(good => good !== selectedGood) }
-    ));
+    this.setState((state) => ({
+      goods: state.goods.filter(good => good !== selectedGood),
+    }));
   };
 
   goodsTitle = () => {
     const { goods } = this.state;
-    let title = '';
 
     switch (goods.length) {
       case 0: {
-        title = 'No goods selected';
-        break;
+        return 'No goods selected';
       }
 
       case 1: {
-        title = `${goods[0]} is selected`;
-        break;
+        return `${goods[0]} is selected`;
       }
 
       case 2: {
-        title = `${goods[0]} and ${goods[1]} are selected`;
-        break;
+        return `${goods[0]} and ${goods[1]} are selected`;
       }
 
       default: {
         const joinedGoods = goods.slice(0, goods.length - 1).join(', ');
 
-        title = `${joinedGoods} and ${goods[goods.length - 1]} are selected`;
+        return `${joinedGoods} and ${goods[goods.length - 1]} are selected`;
       }
     }
-
-    return title;
   };
 
   render() {
@@ -100,7 +94,8 @@ class App extends React.Component<{}, State> {
             goodsFromServer.map(item => (
               <div className="App__item">
                 <li
-                  className={classnames('App__good', { 'App__good--selected': goods.includes(item) })}
+                  className={classnames('App__good',
+                    { 'App__good--selected': goods.includes(item) })}
                   key={item}
                 >
                   {item}
