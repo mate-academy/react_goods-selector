@@ -1,1 +1,81 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-image: url('./img/1.jpg');
+}
+
+.App {
+  padding: 0 50px;
+}
+
+.products {
+  font-size: 24px;
+  color: rgb(233, 217, 147);
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  &__title {
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: 50px;
+  }
+
+  &__close {
+    width: 50px;
+    height: 50px;
+    background-color: bisque;
+    border: none;
+    font-size: 30px;
+    border-radius: 20px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(43, 11, 0, 0.75);
+      color: white;
+    }
+  }
+
+  &__goods {
+    display: grid;
+    grid-template-columns: 150px 500px;
+    list-style: none;
+  }
+
+  &__good {
+    display: inline-block;
+    padding: 10px;
+
+    &:not(:last-child) {
+      margin-bottom: 7px;
+    }
+  }
+
+  &__button {
+    width: 120px;
+    border-radius: 30px;
+    font-size: 20px;
+    background-color: rgba(100, 149, 237, 0.65);
+    color: rgb(221, 172, 107);
+    border: 1px solid rgb(238, 144, 101);
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(100, 149, 237, 0.95);
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 7px;
+    }
+  }
+}
+
+.active {
+  &__button {
+    background-color: rgba(43, 11, 0, 0.25);
+
+    &:hover {
+      background-color: rgba(43, 11, 0, 0.25);
+    }
+  }
+}
