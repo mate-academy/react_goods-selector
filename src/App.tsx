@@ -18,7 +18,18 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-const delicious:string[] = ['Appetizing', 'Flavorful', 'Fresh', 'Delish', 'Delectable', 'Tasteful', 'Tasty', 'Toothsome', 'Yummy', 'Flavorful'];
+const delicious:string[] = [
+  'Appetizing',
+  'Flavorful',
+  'Fresh',
+  'Delish',
+  'Delectable',
+  'Tasteful',
+  'Tasty',
+  'Toothsome',
+  'Yummy',
+  'Flavorful',
+];
 
 type State = {
   selectedGoods: string[],
