@@ -1,1 +1,86 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+li,
+p {
+  margin: 0;
+  list-style: none;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 10px;
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  &__text {
+    height: 50px;
+    align-self: center;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: normal;
+  }
+
+  &__list {
+    width: 100%;
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  &__card {
+    height: 150px;
+    padding: 10px;
+    text-align: center;
+    font-weight: 400;
+    border: 1px solid rgb(185, 181, 181);
+    border-radius: 10px;
+
+    &-selected {
+      border: 2px solid rgb(4, 114, 48);
+      background-color: rgb(88, 175, 123);
+    }
+  }
+
+  &__button {
+    position: relative;
+    top: 30px;
+    margin-bottom: 10px;
+    transition: all 1s;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
+  &__button--reset-off {
+    display: none;
+  }
+}
+
+.btn {
+  width: 80%;
+}
+
+.btn-danger {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+  border-radius: 100%;
+}
