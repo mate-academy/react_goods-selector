@@ -1,1 +1,37 @@
-// styles go here
+@import "~bootstrap/scss/bootstrap";
+
+body {
+  padding: 20px;
+}
+
+.productCards {
+  padding: 0 10%;
+  text-align: center;
+
+  &__products {
+    display: grid;
+    grid-template-columns: repeat(3, 300px);
+    gap: 20px;
+    justify-content: center;
+  }
+}
+
+
+.button {
+  font-size: 16px;
+  width: 100px;
+  margin: 0 auto;
+
+    &-close {
+      display: block;
+      padding: 10px 0;
+    }
+}
+
+.product {
+
+  &_selected {
+    background-color: rgba(244, 228, 12, 0.3);
+  }
+}
+
