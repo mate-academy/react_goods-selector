@@ -1,1 +1,16 @@
 // styles go here
+.active {
+  background-color: lightgray;
+}
+
+.active-button {
+  background-color: red;
+}
+
+.non-active-button {
+  background-color: lightgreen;
+}
+
+button {
+  border-radius: 10px;
+}
