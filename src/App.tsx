@@ -34,7 +34,7 @@ class App extends Component<{}, State> {
       <div className="App">
         <button
           type="button"
-          className={selected ? 'App__visible' : 'App__hiden'}
+          className={selected ? '' : 'App__hiden'}
           onClick={() => {
             this.setState({ selected: '' });
           }}
