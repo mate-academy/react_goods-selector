@@ -1,1 +1,13 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    display: flex;
+  }
+
+  &__title-cancel-button {
+    margin-left: 20px;
+    cursor: pointer;
+  }
+}
