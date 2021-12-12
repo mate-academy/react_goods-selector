@@ -1,1 +1,75 @@
-// styles go here
+@import './styles/_normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+
+.App {
+  padding: 40px 0;
+  height: 100vh;
+
+  font-family: 'Jost', sans-serif;
+  color: #664B2A;
+  background: center / contain repeat url('./styles/crello-369560084-stock-photo-top-view-fresh-buns-beige.jpeg');
+
+  &__container {
+    margin: 0 auto;
+    padding: 20px;
+    width: 600px;
+
+    position: relative;
+
+    background-color: #e9d6beab;
+  }
+
+  &__titleInfo {
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    font-size: 24px;
+  }
+  
+  &__selectedItems {
+    font-size: 32px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__item {
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__button {
+    padding: 4px 0;
+    width: 80px;
+
+    border-radius: 10px;
+    border-color: transparent;
+
+    background-color: #fff;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition: color, background-color 0.3s;
+
+    &:hover {
+      color: white;
+      background-color: #664B2A;
+    }
+
+    &--clear {
+      position: absolute;
+      top: 32px;
+      right: 20px;
+
+      width: 32px;
+    }
+  }
+}
