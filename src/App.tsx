@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -14,11 +14,60 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-const App: React.FC = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+type State = {
+  selected: string;
+};
+
+class App extends Component<{}, State> {
+  state = {
+    selected: 'Jam',
+  };
+
+  handleSelect = (good: string) => {
+    this.setState({ selected: good });
+  };
+
+  render() {
+    const { selected } = this.state;
+
+    return (
+      <div className="App">
+        <button
+          type="button"
+          className={selected ? 'App__visible' : 'App__hiden'}
+          onClick={() => {
+            this.setState({ selected: '' });
+          }}
+        >
+          X
+        </button>
+        <h1 className="App__title">
+          {selected
+            ? `${selected} is selected`
+            : 'No goods selected'}
+        </h1>
+        <ul>
+          {goodsFromServer.map(good => (
+            <li
+              key={good}
+              className={`App__item ${selected === good && 'App__item--active'}`}
+            >
+              <div className="App__span">{good}</div>
+              <button
+                className="App__btn"
+                type="button"
+                onClick={() => {
+                  this.handleSelect(good);
+                }}
+              >
+                Select
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}
 
 export default App;

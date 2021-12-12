@@ -1,1 +1,25 @@
-// styles go here
+.App {
+  &__hiden {
+    opacity: 0;
+  }
+
+  &__title {
+    display: inline-block;
+    margin-left: 20px;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    margin-bottom: 10px;
+
+    &--active {
+      background-color: rgb(109, 221, 178);
+    }
+  }
+
+  &__span {
+    display: inline-block;
+  }
+}
