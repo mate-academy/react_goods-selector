@@ -44,12 +44,21 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="Products">
-        <h1 className="products__card">
+      <div className="products">
+        <h1 className="select-products">
           {
             this.state.selectedGood.length
-              ? `Selected good:  ${this.state.selectedGood.join(', ')}
-                ${this.state.selectedGood.length === 1 ? 'is selected' : 'are selected'}`
+              ? (
+                <>
+                  <div className="select-products__title">Selected good:</div>
+                  <div className="select-products__list">
+                    {
+                      `${this.state.selectedGood.join(', ')}
+                      ${this.state.selectedGood.length === 1 ? 'is selected' : 'are selected'}`
+                    }
+                  </div>
+                </>
+              )
               : 'No goods selected'
           }
         </h1>
@@ -57,18 +66,16 @@ class App extends React.Component {
           className="button-clear"
           type="button"
           disabled={this.state.selectedGood.length === 0}
-          onClick={() => {
-            this.setState({ selectedGood: [] });
-          }}
+          onClick={() => this.setState({ selectedGood: [] })}
         >
-          {this.state.selectedGood.length ? 'Clear' : 'X'}
+          {this.state.selectedGood.length ? 'Clear list' : 'X'}
         </button>
         <ul className="products__list">
           {
             goodsFromServer.map(product => (
               <li key={product} className="product-container">
                 <button
-                  className="button1"
+                  className="button-select"
                   type="button"
                   onClick={() => {
                     if (this.isSelected(product)) {
@@ -78,9 +85,7 @@ class App extends React.Component {
                     }
                   }}
                 >
-                  {
-                    this.isSelected(product) ? 'remove' : 'select'
-                  }
+                  {this.isSelected(product) ? 'remove' : 'select'}
                 </button>
 
                 <span className={this.isSelected(product) ? 'product product-selected' : 'product'}>
