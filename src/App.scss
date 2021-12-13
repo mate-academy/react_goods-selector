@@ -1,1 +1,19 @@
-// styles go here
+.App {
+
+  &__title {
+    display: inline-block;
+    margin-left: 20px;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    margin-bottom: 10px;
+
+    &--select {
+      background-color: rgb(126, 109, 221);
+      color: #fff;
+    }
+  }
+}
