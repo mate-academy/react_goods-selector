@@ -4,6 +4,7 @@ import './App.scss';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { ButtonName } from './ButtonName';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -40,39 +41,59 @@ class App extends React.Component<{}, State> {
     selectedGoods: ['Jam'],
   };
 
+  reset = () => {
+    this.setState({ selectedGoods: [] });
+  };
+
+  addOrRemove = (el:string, selectedGoods:string[]) => {
+    if (!selectedGoods.includes(el)) {
+      this.setState(prevState => (
+        { selectedGoods: [...prevState.selectedGoods, el] }));
+    } else {
+      this.setState(prevState => ({
+        selectedGoods: [...prevState.selectedGoods].filter(
+          product => product !== el,
+        ),
+      }));
+    }
+  };
+
   render() {
     const { selectedGoods } = this.state;
+    const titleMaker = () => {
+      return (
+        selectedGoods.length
+          ? (
+            <h1 className="productCards__cartContent">
+              {selectedGoods.length > 1
+                ? `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods[selectedGoods.length - 1]} are `
+                : (`${selectedGoods.join(', ')} is `)}
+
+              selected
+
+            </h1>
+          )
+          : <h1 className="productCards__cartContent">No goods selected</h1>);
+    };
 
     return (
       <div className="App">
         <div className="productCards">
-          {selectedGoods.length
-            ? (
-              <h1 className="productCards__cartContent">
-                {selectedGoods.length > 1
-                  ? `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods[selectedGoods.length - 1]} are `
-                  : (`${selectedGoods.join(', ')} is `)}
-
-                selected
-
-              </h1>
-            )
-            : <h1 className="productCards__cartContent">No goods selected</h1>}
+          {titleMaker()}
 
           {selectedGoods.length > 0 && (
             <CloseButton
               type="button"
               className={classNames('button', 'button-close')}
               onClick={() => {
-                this.setState({ selectedGoods: [] });
+                this.reset();
               }}
             />
           )}
 
           <p className="productCards__amount">
             Goods amount:
-            {' '}
-            {selectedGoods.length}
+            {` ${selectedGoods.length}`}
           </p>
 
           <div className="productCards__products">
@@ -91,8 +112,7 @@ class App extends React.Component<{}, State> {
                   <Card.Title>{el}</Card.Title>
 
                   <Card.Text>
-                    {delicious[i]}
-                    {' '}
+                    {`${delicious[i]} `}
                     {el}
                   </Card.Text>
 
@@ -104,21 +124,10 @@ class App extends React.Component<{}, State> {
                       { selected: selectedGoods.includes(el) },
                     )}
                     onClick={() => {
-                      if (!selectedGoods.includes(el)) {
-                        this.setState(prevState => (
-                          { selectedGoods: [...prevState.selectedGoods, el] }));
-                      } else {
-                        this.setState(prevState => ({
-                          selectedGoods: [...prevState.selectedGoods].filter(
-                            product => product !== el,
-                          ),
-                        }));
-                      }
+                      this.addOrRemove(el, selectedGoods);
                     }}
                   >
-                    {!selectedGoods.includes(el)
-                      ? 'Select'
-                      : 'Remove'}
+                    <ButtonName callback={!selectedGoods.includes(el)} />
                   </Button>
                 </Card.Body>
               </Card>
