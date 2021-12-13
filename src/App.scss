@@ -1,1 +1,24 @@
 // styles go here
+.App {
+  font-size: 20px;
+
+  &__btn--hidden {
+    opacity: 0;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    gap: 20px;
+  }
+
+  &__item {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__good--active {
+    background-color: pink;
+  }
+}
