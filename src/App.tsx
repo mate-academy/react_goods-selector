@@ -20,23 +20,23 @@ type State = {
 
 export class App extends React.Component<{}, State> {
   state = {
-    selectedGoods: [''],
+    selectedGoods: ['Jam'],
   };
 
   getTitle() {
     const { selectedGoods } = this.state;
 
     switch (selectedGoods.length) {
-      case 1:
+      case 0:
         return 'No goods selected';
+      case 1:
+        return `${selectedGoods[0]} is selected`;
       case 2:
-        return `${selectedGoods[1]} is selected`;
-      case 3:
-        return `${selectedGoods[1]} and ${selectedGoods[2]} are selected`;
+        return `${selectedGoods[0]} and ${selectedGoods[1]} are selected`;
       default:
         return `${[...selectedGoods]
           .splice(3, selectedGoods.length - 1)
-          .join(', ')}, ${selectedGoods[1]} and ${selectedGoods[2]} are selected`;
+          .join(', ')}, ${selectedGoods[0]} and ${selectedGoods[1]} are selected`;
     }
   }
 
@@ -58,7 +58,7 @@ export class App extends React.Component<{}, State> {
 
   clearGoodsSelected() {
     this.setState({
-      selectedGoods: [''],
+      selectedGoods: [],
     });
   }
 
@@ -101,7 +101,7 @@ export class App extends React.Component<{}, State> {
             );
           })}
         </ul>
-        {selectedGoods.length > 1
+        {selectedGoods.length > 0
         && (
           <button
             type="button"
