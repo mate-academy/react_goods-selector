@@ -42,25 +42,44 @@ class App extends React.Component {
     );
   };
 
+  onClickFunc = (product : string) => {
+    if (this.isSelected(product)) {
+      this.setState({ selectedGood: this.deleteProduct(product) });
+    } else {
+      this.setState({ selectedGood: this.addProduct(product) });
+    }
+  };
+
+  renderSelectList = () => {
+    const listSelectedGood = this.state.selectedGood.join(', ');
+    const newLocal = this.state.selectedGood.length
+      ? (
+        <>
+          <div className="select-products__title">Selected good:</div>
+          <div className="select-products__list">
+            {`${this.state.selectedGood.length === 1
+              ? listSelectedGood
+              : this.state.selectedGood.map((item, i, arr) => {
+                if (arr[i] === arr[arr.length - 1]) {
+                  return ` and ${item}`;
+                }
+
+                return ` ${item}`;
+              })}
+              ${this.state.selectedGood.length === 1 ? 'is selected' : 'are selected'}`}
+          </div>
+        </>
+      )
+      : 'No goods selected';
+
+    return newLocal;
+  };
+
   render() {
     return (
       <div className="products">
         <h1 className="select-products">
-          {
-            this.state.selectedGood.length
-              ? (
-                <>
-                  <div className="select-products__title">Selected good:</div>
-                  <div className="select-products__list">
-                    {
-                      `${this.state.selectedGood.join(', ')}
-                      ${this.state.selectedGood.length === 1 ? 'is selected' : 'are selected'}`
-                    }
-                  </div>
-                </>
-              )
-              : 'No goods selected'
-          }
+          { this.renderSelectList() }
         </h1>
         <button
           className="button-clear"
@@ -77,13 +96,7 @@ class App extends React.Component {
                 <button
                   className="button-select"
                   type="button"
-                  onClick={() => {
-                    if (this.isSelected(product)) {
-                      this.setState({ selectedGood: this.deleteProduct(product) });
-                    } else {
-                      this.setState({ selectedGood: this.addProduct(product) });
-                    }
-                  }}
+                  onClick={() => this.onClickFunc(product)}
                 >
                   {this.isSelected(product) ? 'remove' : 'select'}
                 </button>
