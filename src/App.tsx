@@ -19,8 +19,8 @@ type State = {
 };
 
 export class App extends React.Component<{}, State> {
-  state = {
-    selectedGoods: ['Jam'],
+  state: State = {
+    selectedGoods: [],
   };
 
   getTitle() {
@@ -77,26 +77,24 @@ export class App extends React.Component<{}, State> {
             return (
               <li key={item} className={`goodsList__item ${isVisible && 'goodsList__item--selected'}`}>
                 {item}
-                {!isVisible
-              && (
-                <button
-                  type="button"
-                  onClick={() => this.getGood(item)}
-                  className="goodsList__button goodsList__button--add"
-                >
-                  Add
-                </button>
-              )}
-                {isVisible
-              && (
-                <button
-                  type="button"
-                  onClick={() => this.removeGood(item)}
-                  className="goodsList__button goodsList__button--remove"
-                >
-                  Remove
-                </button>
-              )}
+                {!isVisible && (
+                  <button
+                    type="button"
+                    onClick={() => this.getGood(item)}
+                    className="goodsList__button goodsList__button--add"
+                  >
+                    Add
+                  </button>
+                )}
+                {isVisible && (
+                  <button
+                    type="button"
+                    onClick={() => this.removeGood(item)}
+                    className="goodsList__button goodsList__button--remove"
+                  >
+                    Remove
+                  </button>
+                )}
               </li>
             );
           })}
