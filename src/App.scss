@@ -1,1 +1,76 @@
-// styles go here
+@import url("https://fonts.googleapis.com/css2?family=Barlow&display=swap");
+
+body {
+  font-family: "Barlow", sans-serif;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0;
+
+  background: linear-gradient(to left, #4b79a1, #283e51);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+button {
+  font-family: "Barlow", sans-serif;
+}
+
+.App {
+  width: 340px;
+
+  margin: 10px auto;
+  padding: 20px;
+
+  border-radius: 5px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+  background: white;
+
+  transition: transform 0.3s;
+}
+
+.product-list {
+  padding: 20px;
+
+  border: 1px solid #283e51;
+  border-radius: 5px;
+}
+
+.product-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 30px;
+
+  align-items: center;
+
+  &__button {
+    min-width: 70px;
+    justify-self: flex-end;
+  }
+
+  &__product {
+    &--active { 
+      color: #29a792;
+    }
+  }
+}
+
+.selected-goods {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 20px;
+
+  &__title {
+    font-size: 22px;
+  }
+
+  &__button {
+    min-width: 80px;
+  }
+}
