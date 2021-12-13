@@ -1,1 +1,15 @@
 // styles go here
+
+.product-selected {
+  font-weight: bold;
+}
+
+.button1 {
+  position: relative;
+  box-sizing: border-box;
+
+  border: 1px solid fade-out(#eee, .5);
+  border-radius: 30%;
+
+  cursor: pointer;
+}
