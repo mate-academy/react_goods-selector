@@ -27,6 +27,10 @@ class App extends Component<{}, State> {
     this.setState({ selectedGoods: good });
   };
 
+  clearSelect = () => {
+    this.setState({ selectedGoods: '' });
+  };
+
   render() {
     const { selectedGoods } = this.state;
 
@@ -35,16 +39,18 @@ class App extends Component<{}, State> {
         <button
           type="button"
           onClick={() => {
-            this.setState({ selectedGoods: '' });
+            this.clearSelect();
           }}
         >
           X
         </button>
+
         <h1 className="App__title">
           {selectedGoods
             ? `${selectedGoods} is selected`
             : 'No goods selected'}
         </h1>
+
         <ul>
           {goodsFromServer.map(good => (
             <li
@@ -52,14 +58,16 @@ class App extends Component<{}, State> {
               className={`App__item ${selectedGoods === good && 'App__item--select'}`}
             >
               <span>{good}</span>
-              <button
-                type="button"
-                onClick={() => {
-                  this.selectHandler(good);
-                }}
-              >
-                Select
-              </button>
+              {this.state.selectedGoods !== good && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    this.selectHandler(good);
+                  }}
+                >
+                  Select
+                </button>
+              )}
             </li>
           ))}
         </ul>
