@@ -94,7 +94,6 @@ class App extends React.Component<{}, State> {
                 <button
                   type="button"
                   className={classNames('products__button', { active__button: selected.includes(item) })}
-                  // disabled={selected.includes(item)}
                   onClick={() => (
                     this.addGood(item)
                   )}
