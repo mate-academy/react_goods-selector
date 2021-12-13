@@ -1,1 +1,63 @@
-// styles go here
+@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@700&family=Readex+Pro&family=Roboto:wght@400;700&display=swap");
+@import "./normalized.scss";
+
+.App {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    margin: 80px auto;
+    padding: 0 60px;
+    max-width: 1200px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  &__info {
+    width: 500px;
+  }
+
+  &__title {
+    margin: 0 auto;
+    padding: 20px 0;
+  }
+
+  &__displayedGoods {
+    padding: 20px 0;
+    font-size: 20px;
+  }
+
+  &__list {
+    width: 500px;
+    margin: 20px 0;
+  }
+
+  &__button {
+    padding: 8px;
+    margin: 4px;
+    border-radius: 10px;
+    border: 1px solid #839d83;
+    font-weight: bold;
+    background-color: #fff;
+    color: #0d6b6f;
+    box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.1);
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    
+    &--remove {
+      background-color: #cf3f34;
+      color: #fff;
+    }
+
+    &--clear {
+      background-color: #cf3f34;
+      color: #fff;
+    }
+
+    &--add:hover {
+      background-color: #839d83;
+      color: #fff;
+    }
+  }
+}
