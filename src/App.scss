@@ -1,1 +1,39 @@
-// styles go here
+html {
+  background-color: #ffe381;
+  font-size: 22px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, "Open Sans", sans-serif;
+  color: #231f20;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  line-height: 44px;
+}
+
+.App {
+  box-sizing: border-box;
+  border: 4px solid #6f8695;
+  border-radius: 8px;
+  padding: 20px;
+  margin: auto;
+  margin-top: 46px;
+  height: min-content;
+  width: 500px;
+  background-color: #dbfe87;
+}
+
+button {
+  border: none;
+  border-radius: 8px;
+  height: 28px;
+  background-color: coral;
+}
+
+h1 {
+  color: #1c448e;
+}
