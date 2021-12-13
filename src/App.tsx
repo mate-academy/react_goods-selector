@@ -31,15 +31,19 @@ class App extends React.Component<{}, State> {
 
   addGood = (good: string) => {
     this.setState((state) => {
-      const index = state.selectedGoods.indexOf(good);
-
-      if (index !== -1) {
-        state.selectedGoods.splice(index, 1);
-
-        return state;
+      if (state.selectedGoods.includes(good)) {
+        return this.removeGood(good);
       }
 
       return { selectedGoods: [...state.selectedGoods, good] };
+    });
+  };
+
+  removeGood = (goodToRemove: string) => {
+    this.setState((state) => {
+      return {
+        selectedGoods: state.selectedGoods.filter(good => good !== goodToRemove),
+      };
     });
   };
 
