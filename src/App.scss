@@ -1,1 +1,23 @@
-// styles go here
+.selected {
+  text-align: center;
+}
+
+.list {
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid darkseagreen;
+
+    &-green {
+      background-color: darkseagreen;
+    }
+  }
+}
+
+.btn-clear {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
