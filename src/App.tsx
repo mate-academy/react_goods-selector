@@ -14,11 +14,67 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-const App: React.FC = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+type State = {
+  selected: string;
+};
+
+class App extends React.Component<{}, State> {
+  state = {
+    selected: 'Jam',
+  };
+
+  clearSelected = () => {
+    this.setState({
+      selected: '',
+    });
+  };
+
+  selectGood = (newGood: string) => {
+    this.setState({
+      selected: newGood,
+    });
+  };
+
+  render() {
+    const { selected } = this.state;
+
+    return (
+      <div className="App">
+        <button
+          type="button"
+          className={selected ? 'App__btn--active' : 'App__btn--hidden'}
+          onClick={this.clearSelected}
+        >
+          X
+        </button>
+        <h1>
+          {selected
+            ? `${selected} is selected`
+            : 'No goods selected' }
+        </h1>
+
+        <ul className="App__list">
+          {goodsFromServer.map(good => (
+            <li key={good} className="App__item">
+              <span className={selected === good ? 'App__good--active' : 'App__good'}>
+                {good}
+              </span>
+
+              <button
+                type="button"
+                className={selected === good ? 'App__btn--hidden' : 'App__btn--active'}
+                onClick={() => {
+                  this.selectGood(good);
+                }}
+              >
+                Select
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}
 
 export default App;
