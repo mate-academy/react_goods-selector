@@ -1,1 +1,62 @@
-// styles go here
+@import "variables";
+
+.App {
+  &__wrapper {
+    height: 100vh;
+
+    padding: 32px;
+
+    background-color: $c-white;
+  }
+
+  &__title {
+    font-size: 28px;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    margin-bottom: 28px;
+  }
+
+  &__button {
+    height: 28px;
+    width: 28px;
+
+    border: 2px solid $c-lite-blue;
+    background-color: $c-lite-blue;
+    border-radius: 4px;
+  }
+}
+
+.goods {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    max-width: 300px;
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px 8px 0;
+    border-radius: 12px;
+    transition: padding $duration, background-color $duration;
+  }
+
+  &__active {
+    background-color: $c-hard-blue;
+    padding: 8px 12px;
+    border-radius: 12px;
+  }
+
+  &__button {
+    border: 2px solid $c-lite-blue;
+    background-color: $c-lite-blue;
+    border-radius: 4px;
+  }
+}
