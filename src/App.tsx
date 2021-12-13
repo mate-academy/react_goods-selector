@@ -25,14 +25,14 @@ export class App extends React.Component<{}, State> {
     selectedGoods: [],
   };
 
-  alreadyHasGoods = (good: string) => {
+  isGoodAdded = (good: string) => {
     return this.state.selectedGoods.find(item => item === good);
   };
 
-  productAdd = (product: string) => {
+  toggleSelectedGoods = (product: string) => {
     if (product) {
       this.setState((state) => {
-        return !this.alreadyHasGoods(product)
+        return !this.isGoodAdded(product)
           ? {
             selectedGoods: [...state.selectedGoods, product],
           }
@@ -97,9 +97,9 @@ export class App extends React.Component<{}, State> {
                 <button
                   type="button"
                   className="goods__button"
-                  onClick={() => this.productAdd(good)}
+                  onClick={() => this.toggleSelectedGoods(good)}
                 >
-                  {!this.alreadyHasGoods(good) ? 'Add' : 'Remove'}
+                  {!this.isGoodAdded(good) ? 'Add' : 'Remove'}
                 </button>
               </div>
             </div>
