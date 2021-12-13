@@ -15,79 +15,60 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  title: string;
-  selectedGood: string;
   selectedGoods: string[];
 };
 
 export class App extends React.Component<{}, State> {
   state = {
-    title: 'No goods selected',
-    selectedGood: '',
     selectedGoods: [''],
   };
 
   getTitle() {
     const { selectedGoods } = this.state;
 
-    if (selectedGoods.length === 3) {
-      return `${selectedGoods[1]} and ${selectedGoods[2]} are selected`;
+    switch (selectedGoods.length) {
+      case 1:
+        return 'No goods selected';
+      case 2:
+        return `${selectedGoods[1]} is selected`;
+      case 3:
+        return `${selectedGoods[1]} and ${selectedGoods[2]} are selected`;
+      default:
+        return `${[...selectedGoods]
+          .splice(3, selectedGoods.length - 1)
+          .join(', ')}, ${selectedGoods[1]} and ${selectedGoods[2]} are selected`;
     }
-
-    if (selectedGoods.length > 3) {
-      const otherGoods = [...selectedGoods].splice(3, selectedGoods.length - 1).join(', ');
-
-      return `${otherGoods}, ${selectedGoods[1]} and ${selectedGoods[2]} are selected`;
-    }
-
-    if (selectedGoods.length === 1) {
-      return '';
-    }
-
-    return `${selectedGoods[1]} is selected`;
   }
 
   getGood(value: string) {
     this.setState((prevState): State => {
-      const updatedGoods = [...prevState.selectedGoods, value];
-
       return {
-        ...prevState,
-        selectedGoods: updatedGoods,
+        selectedGoods: [...prevState.selectedGoods, value],
       };
     });
   }
 
   removeGood(value: string) {
     this.setState((prevState): State => {
-      const updatedGoods = prevState.selectedGoods.filter(item => item !== value);
-
       return {
-        ...prevState,
-        selectedGoods: updatedGoods,
+        selectedGoods: prevState.selectedGoods.filter(item => item !== value),
       };
     });
   }
 
   clearGoodsSelected() {
-    this.setState((prevState): State => {
-      return {
-        ...prevState,
-        selectedGood: '',
-        selectedGoods: [''],
-      };
+    this.setState({
+      selectedGoods: [''],
     });
   }
 
   render() {
-    const { title, selectedGoods } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App">
         <h1 className="App__title">
-          Selected good:
-          {' - '}
-          {this.getTitle() || title}
+          {`Selected good: - ${this.getTitle()}`}
         </h1>
         <ul className="App__list goodsList">
           {goodsFromServer.map((item) => {
