@@ -35,7 +35,7 @@ export class App extends React.Component<{}, State> {
         return `${selectedGoods[0]} and ${selectedGoods[1]} are selected`;
       default:
         return `${[...selectedGoods]
-          .splice(3, selectedGoods.length - 1)
+          .splice(2, selectedGoods.length - 1)
           .join(', ')}, ${selectedGoods[0]} and ${selectedGoods[1]} are selected`;
     }
   }
