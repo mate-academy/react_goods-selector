@@ -37,14 +37,18 @@ class App extends React.Component {
   };
 
   deleteProduct = (product: string) => {
-    return this.state.selectedGood.filter(
-      (item: string) => item !== product,
-    );
+    this.setState((pre : State) => {
+      return {
+        selectedGood: pre.selectedGood.filter(
+          (item: string) => item !== product,
+        ),
+      };
+    });
   };
 
   onClickFunc = (product : string) => {
     if (this.isSelected(product)) {
-      this.setState({ selectedGood: this.deleteProduct(product) });
+      this.deleteProduct(product);
     } else {
       this.setState({ selectedGood: this.addProduct(product) });
     }
