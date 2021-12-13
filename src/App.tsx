@@ -51,22 +51,18 @@ class App extends React.Component {
   };
 
   renderSelectList = () => {
-    const listSelectedGood = this.state.selectedGood.join(', ');
     const newLocal = this.state.selectedGood.length
       ? (
         <>
           <div className="select-products__title">Selected good:</div>
           <div className="select-products__list">
-            {`${this.state.selectedGood.length === 1
-              ? listSelectedGood
+            {this.state.selectedGood.length === 1
+              ? `${this.state.selectedGood[0]} is selected`
               : this.state.selectedGood.map((item, i, arr) => {
-                if (arr[i] === arr[arr.length - 1]) {
-                  return ` and ${item}`;
-                }
-
-                return ` ${item}`;
+                return arr[i] === arr[arr.length - 1]
+                  ? ` and ${item} are selected`
+                  : ` ${item}`;
               })}
-              ${this.state.selectedGood.length === 1 ? 'is selected' : 'are selected'}`}
           </div>
         </>
       )
