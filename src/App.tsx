@@ -57,7 +57,11 @@ class App extends React.Component<{}, State> {
           {goodsFromServer.map(good => (
             <li
               key={good}
-              className={`App__item ${selectedGoods === good && 'App__item--select'}`}
+              className={
+                selectedGoods === good
+                  ? 'App__item App__item--selected'
+                  : 'App__item'
+              }
             >
               <span>{good}</span>
               {this.state.selectedGoods !== good && (
