@@ -33,7 +33,7 @@ class App extends React.Component<{}, State> {
     this.setState((prevState) => ({ selectedGood: [...prevState.selectedGood, good] }));
   };
 
-  createTitle = () => {
+  selectedItemsTitle = () => {
     const { selectedGood } = this.state;
 
     switch (selectedGood.length) {
@@ -53,23 +53,23 @@ class App extends React.Component<{}, State> {
 
   render() {
     const { selectedGood } = this.state;
+    const title = this.selectedItemsTitle();
 
     return (
       <div className="app">
         <section className="products">
-          <h1 className="products__title">
+          <div className="products__header">
             <button
               type="button"
               className={classNames('products__close', { active__close: selectedGood.length === 0 })}
-              disabled={selectedGood.length === 0}
               onClick={this.clearSelectedGood}
             >
               X
             </button>
-            <>
-              {this.createTitle()}
-            </>
-          </h1>
+            <h1 className="products__title">
+              {title}
+            </h1>
+          </div>
           <ul className="products__goods">
             {goodsFromServer.map((good) => (
               <>

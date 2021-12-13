@@ -13,19 +13,25 @@ h1 {
   background-color: rgb(176, 171, 171);
 }
 
+
+
 .products {
   width: 700px;
 
-  &__title {
+  &__header {
     display: grid;
     align-items: center;
     justify-content: space-between;
     padding: 40px;
-    font-size: 30px;
-    color: rgb(28, 143, 169);
 
     grid-template-columns: 100px 700px;
     grid-template-rows: 70px;
+  }
+
+  &__title {
+    font-size: 30px;
+    color: rgb(28, 143, 169);
+    grid-column: 2 / 3;
   }
 
   &__close {
@@ -80,8 +86,6 @@ h1 {
   }
 
   &__close {
-    background-color: rgb(199, 148, 90);
-    color: rgba(101, 30, 0, 0.79);
-    font-size: 18px;
+    display: none;
   }
 }
