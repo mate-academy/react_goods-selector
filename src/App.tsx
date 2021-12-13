@@ -29,11 +29,13 @@ class App extends React.Component {
   };
 
   addProduct = (product: string) => {
-    const newSelectedGood : string[] = this.state.selectedGood;
+    this.setState((pre : State) => {
+      pre.selectedGood.push(product);
 
-    newSelectedGood.push(product);
-
-    return newSelectedGood;
+      return {
+        selectedGood: pre.selectedGood,
+      };
+    });
   };
 
   deleteProduct = (product: string) => {
@@ -50,7 +52,7 @@ class App extends React.Component {
     if (this.isSelected(product)) {
       this.deleteProduct(product);
     } else {
-      this.setState({ selectedGood: this.addProduct(product) });
+      this.addProduct(product);
     }
   };
 
@@ -78,7 +80,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="products">
-        <h1 className="select-products">
+        <h1 className="select-products-list">
           { this.renderSelectList() }
         </h1>
         <button

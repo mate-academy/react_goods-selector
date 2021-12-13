@@ -4,8 +4,16 @@ $gapProduct: 40px;
   margin-left: $gapProduct;
 }
 
+.product-container {
+  margin-bottom: 10px;
+}
+
 .product-selected {
   font-weight: bold;
+}
+
+.select-products-list {
+  height: 110px;
 }
 
 .button-select {
@@ -18,6 +26,11 @@ $gapProduct: 40px;
   border-radius: 30%;
 
   cursor: pointer;
+}
+
+.button-clear {
+  padding: 10px;
+
 }
 
 .products__list {
