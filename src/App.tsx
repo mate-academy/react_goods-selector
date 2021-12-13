@@ -31,10 +31,6 @@ class App extends React.Component<{}, State> {
 
   addGood = (good: string) => {
     this.setState((state) => {
-      if (state.selectedGoods.includes(good)) {
-        return this.removeGood(good);
-      }
-
       return { selectedGoods: [...state.selectedGoods, good] };
     });
   };
@@ -95,7 +91,7 @@ class App extends React.Component<{}, State> {
                   type="button"
                   className={classNames('products__button', { active__button: selected.includes(item) })}
                   onClick={() => (
-                    this.addGood(item)
+                    selected.includes(item) ? this.removeGood(item) : this.addGood(item)
                   )}
                 >
                   {selected.includes(item) ? 'Remove' : 'Add'}
