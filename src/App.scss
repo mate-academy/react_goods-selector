@@ -1,1 +1,77 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+body,
+h1 {
+  margin: 0;
+}
+
+.app {
+  height: 100vh;
+  padding: 0 40px;
+  background-color: snow
+}
+
+.goods {
+  padding-left: 200px;
+  width: 600px;
+
+  &__selected {
+    display: grid;
+    align-items: center;
+    align-self: center;
+    padding: 40px;
+    font-size: 25px;
+    color: rgba(65, 56, 46, 0.5);
+  }
+
+  &__close {
+    width: 90px;
+    height: 40px;
+    background-color: red;
+    color: yellow;
+    font-size: 20px;
+    border-radius: 16px;
+    border: solid 1px black;
+  }
+
+  &__items {
+    justify-content: center;
+    padding: 20px;
+    background-color: burlywood;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 100px 100px;
+    list-style: none;
+    border: solid lightsalmon 2px;
+  }
+
+  &__item {
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 8px;
+  }
+
+  &__button {
+    justify-self: end;
+    width: 72px;
+    height: 36px;
+    font-size: 15px;
+    border-radius: 7px;
+    background-color: greenyellow
+  }
+}
+
+.active {
+  background-color: rgba(123, 255, 0, 0.35);
+
+  &__button {
+    background-color: rgba(187, 109, 20, 0.56);
+  }
+
+  &__close {
+    background-color: rgba(65, 56, 46, 0.55);
+    font-size: 20px;
+  }
+}
