@@ -30,7 +30,17 @@ class App extends React.Component<{}, State> {
   };
 
   addGood = (good: string) => {
-    this.setState((state) => ({ selectedGoods: [...state.selectedGoods, good] }));
+    this.setState((state) => {
+      const index = state.selectedGoods.indexOf(good);
+
+      if (index !== -1) {
+        state.selectedGoods.splice(index, 1);
+
+        return state;
+      }
+
+      return { selectedGoods: [...state.selectedGoods, good] };
+    });
   };
 
   dispalySelected = () => {
@@ -80,12 +90,12 @@ class App extends React.Component<{}, State> {
                 <button
                   type="button"
                   className={classNames('products__button', { active__button: selected.includes(item) })}
-                  disabled={selected.includes(item)}
+                  // disabled={selected.includes(item)}
                   onClick={() => (
                     this.addGood(item)
                   )}
                 >
-                  {selected.includes(item) ? 'Added' : 'Add'}
+                  {selected.includes(item) ? 'Remove' : 'Add'}
                 </button>
               </>
             ))}
