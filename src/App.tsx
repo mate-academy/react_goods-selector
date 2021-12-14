@@ -65,16 +65,18 @@ export class App extends React.Component<{}, State> {
 
   render() {
     const { goods, selectedGoods } = this.state;
+    const isSelected = !!selectedGoods.length;
+    const listOfSelected = this.getSelectedItems();
 
     return (
       <div className="App">
         <div className="App__content">
           <div className="App__titles">
             <h1 className="App__title">
-              {this.getSelectedItems()}
+              {listOfSelected}
             </h1>
 
-            {selectedGoods.length ? (
+            {isSelected && (
               <button
                 type="button"
                 onClick={this.clearSelection}
@@ -82,7 +84,7 @@ export class App extends React.Component<{}, State> {
               >
                 x
               </button>
-            ) : ''}
+            )}
           </div>
 
           <ul className="App__list">
