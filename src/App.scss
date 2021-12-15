@@ -1,1 +1,22 @@
-// styles go here
+body {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  height: 100vh;
+  background-color: tomato;
+  text-align: center;
+  padding: 20px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  color: #333;
+}
+
+.button {
+  height: 40px;
+  min-width: 160px;
+  background-color: #fff;
+  border: 1px solid green;
+  cursor: pointer;
+  font-size: 18px;
+}
