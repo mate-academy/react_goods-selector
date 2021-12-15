@@ -21,33 +21,44 @@ type State = {
 
 class App extends React.Component<{}, State> {
   state = {
-    // eslint-disable-next-line react/no-unused-state
     selectedGoods: ['Jam'],
   };
 
   addGood = (addedGood: string) => {
-    this.setState((prevState) => (
-      {
-        selectedGoods: [...prevState.selectedGoods, addedGood],
-      }
-    ));
+    this.setState((prevState) => ({
+      selectedGoods: [...prevState.selectedGoods, addedGood],
+    }));
   };
 
   removeGood = (removedGood: string) => {
-    this.setState((prevState) => (
-      {
-        selectedGoods: prevState.selectedGoods.filter((good) => good !== removedGood),
-      }
-    ));
+    this.setState((prevState) => ({
+      selectedGoods: prevState.selectedGoods.filter((good) => good !== removedGood),
+    }));
   };
 
   render() {
+    let resultingString = '';
+
+    const { selectedGoods } = this.state;
+
+    switch (selectedGoods.length) {
+      case 0:
+        resultingString = 'No goods selected';
+        break;
+      case 1:
+        resultingString = `${selectedGoods[0]} is selected`;
+        break;
+      default:
+        resultingString = `${selectedGoods.slice(0, selectedGoods.length - 1).join(', ')} and `
+          + `${selectedGoods.slice(-1)} are selected`;
+        break;
+    }
+
     return (
       <div className="App">
         <h1>
-          {'Selected good: '}
           <span>
-            {this.state.selectedGoods.join(', ')}
+            {resultingString}
           </span>
         </h1>
         <ul className="goodsList">
