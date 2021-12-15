@@ -16,12 +16,30 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  productList: string[] | [];
+  productList: string[];
 };
 
 class App extends React.Component<{}, State> {
   state = {
     productList: ['Jam'],
+  };
+
+  clear = () => {
+    this.setState({ productList: [] });
+  };
+
+  deleteProduct = (productIndex: number) => {
+    this.setState(prev => {
+      prev.productList.splice(productIndex, 1);
+
+      return {
+        productList: prev.productList,
+      };
+    });
+  };
+
+  addProduct = (product: string) => {
+    this.setState(prev => ({ productList: [product, ...prev.productList] }));
   };
 
   titleCreate = () => {
@@ -44,21 +62,18 @@ class App extends React.Component<{}, State> {
 
   render() {
     const { productList } = this.state;
+    const title = this.titleCreate();
 
     return (
       <div className="app">
         <div className="app__head">
           <h1 className="app__title">
-            {this.titleCreate()}
+            {title}
           </h1>
           <button
             className={classNames('app__button app__button-red', { app__hidden: productList.length === 0 })}
             type="button"
-            onClick={
-              () => {
-                this.setState({ productList: [] });
-              }
-            }
+            onClick={this.clear}
           >
             Clear
           </button>
@@ -67,6 +82,7 @@ class App extends React.Component<{}, State> {
         <ul className="app__list">
           {goodsFromServer.map(product => {
             const isActive = productList.includes(product);
+            const productIndex = productList.indexOf(product);
 
             return (
               <li
@@ -74,32 +90,16 @@ class App extends React.Component<{}, State> {
                 key={product}
               >
                 {product}
-                {isActive ? (
-                  <button
-                    className="app__button"
-                    type="button"
-                    onClick={
-                      () => {
-                        productList.splice(productList.indexOf(product), 1);
-                        this.setState({ productList: [...productList] });
-                      }
-                    }
-                  >
-                    -
-                  </button>
-                ) : (
-                  <button
-                    className="app__button"
-                    type="button"
-                    onClick={
-                      () => {
-                        this.setState({ productList: [product, ...productList] });
-                      }
-                    }
-                  >
-                    +
-                  </button>
-                )}
+                <button
+                  className="app__button"
+                  type="button"
+                  onClick={() => {
+                    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+                    isActive ? this.deleteProduct(productIndex) : this.addProduct(product);
+                  }}
+                >
+                  {isActive ? '-' : '+'}
+                </button>
               </li>
             );
           })}
