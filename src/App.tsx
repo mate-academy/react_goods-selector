@@ -46,24 +46,24 @@ class App extends React.Component<{}, State> {
     this.setState({ selectedGoods: [] });
   };
 
-  add = (el:string, selectedGoods:string[]) => {
-    if (!selectedGoods.includes(el)) {
+  add = (el:string) => {
+    if (!this.state.selectedGoods.includes(el)) {
       this.setState(prevState => (
         { selectedGoods: [...prevState.selectedGoods, el] }));
     }
   };
 
-  remove = (el:string, selectedGoods:string[]) => {
-    if (selectedGoods.includes(el)) {
+  remove = (el:string) => {
+    if (this.state.selectedGoods.includes(el)) {
       this.setState(prevState => ({
-        selectedGoods: [...prevState.selectedGoods].filter(
+        selectedGoods: prevState.selectedGoods.filter(
           product => product !== el,
         ),
       }));
     }
   };
 
-  titleMaker = (goods:string[]) => {
+  createTitle = (goods:string[]) => {
     return (
       goods.length
         ? (
@@ -85,15 +85,13 @@ class App extends React.Component<{}, State> {
     return (
       <div className="App">
         <div className="productCards">
-          {this.titleMaker(selectedGoods)}
+          {this.createTitle(selectedGoods)}
 
           {selectedGoods.length > 0 && (
             <CloseButton
               type="button"
               className={classNames('button', 'button-close')}
-              onClick={() => {
-                this.reset();
-              }}
+              onClick={this.reset}
             />
           )}
 
@@ -132,7 +130,7 @@ class App extends React.Component<{}, State> {
                           'selected',
                         )}
                         onClick={() => {
-                          this.add(el, selectedGoods);
+                          this.add(el);
                         }}
                       >
                         Select
@@ -146,7 +144,7 @@ class App extends React.Component<{}, State> {
                           'button',
                         )}
                         onClick={() => {
-                          this.remove(el, selectedGoods);
+                          this.remove(el);
                         }}
                       >
                         Remove
