@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -23,19 +24,25 @@ class App extends React.Component<{}, State> {
     selectedGoods: ['Jam'],
   };
 
-  addGood = (add: string) => {
+  addGood = (addGood: string) => {
     this.setState((state) => ({
-      selectedGoods: [...state.selectedGoods, add],
+      selectedGoods: [...state.selectedGoods, addGood],
     }));
   };
 
-  removeGood = (remove: string) => {
+  removeGood = (removeGood: string) => {
     this.setState((state) => ({
-      selectedGoods: state.selectedGoods.filter((good) => good !== remove),
+      selectedGoods: state.selectedGoods.filter((good) => good !== removeGood),
     }));
   };
 
-  render() {
+  clearGoods = () => {
+    this.setState({
+      selectedGoods: [],
+    });
+  };
+
+  itemsTitle = () => {
     let result = '';
 
     const { selectedGoods } = this.state;
@@ -55,11 +62,28 @@ class App extends React.Component<{}, State> {
         break;
     }
 
+    return result;
+  };
+
+  render() {
+    const title = this.itemsTitle();
+    const { selectedGoods } = this.state;
+
     return (
       <div className="App">
         <h1 className="title">
-          {result}
+          {title}
         </h1>
+
+        <button
+          type="button"
+          className={classNames('button button__clear', { button__hidden: selectedGoods.length === 0 })}
+          onClick={() => {
+            this.clearGoods();
+          }}
+        >
+          Clear products
+        </button>
 
         <ul className="goods">
           {

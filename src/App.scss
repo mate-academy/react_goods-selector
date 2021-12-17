@@ -19,4 +19,13 @@ ul {
   border: 1px solid green;
   cursor: pointer;
   font-size: 18px;
+
+  &__hidden {
+    display: none;
+  }
+
+  &__clear {
+    background-color: purple;
+    color: #fff;
+  }
 }
