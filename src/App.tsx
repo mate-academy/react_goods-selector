@@ -70,7 +70,10 @@ class App extends React.Component<{}, State> {
 
         <button
           type="button"
-          className={classNames('button button__clear', { button__hidden: selectedGoods.length === 0 })}
+          className={classNames(
+            'button button__clear',
+            { button__hidden: selectedGoods.length === 0 },
+          )}
           onClick={() => {
             this.clearGoods();
           }}
