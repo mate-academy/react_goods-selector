@@ -43,26 +43,19 @@ class App extends React.Component<{}, State> {
   };
 
   itemsTitle = () => {
-    let result = '';
-
     const { selectedGoods } = this.state;
 
     switch (selectedGoods.length) {
       case 0:
-        result = 'No goods selected';
-        break;
+        return 'No goods selected';
 
       case 1:
-        result = `${selectedGoods[0]} is selected`;
-        break;
+        return `${selectedGoods[0]} is selected`;
 
       default:
-        result = `${selectedGoods.slice(0, selectedGoods.length - 1).join(', ')} and `
+        return`${selectedGoods.slice(0, selectedGoods.length - 1).join(', ')} and `
           + `${selectedGoods.slice(-1)} are selected`;
-        break;
     }
-
-    return result;
   };
 
   render() {
