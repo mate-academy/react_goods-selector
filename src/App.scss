@@ -1,1 +1,46 @@
-// styles go here
+.App {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  margin: 50px auto;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    margin: 0 auto 16px;
+  }
+
+  &__header-title {
+    margin: 0;
+    color: darkcyan;
+  }
+
+  &__goodsList {
+    min-width: 400px;
+    margin: 0 auto;
+    padding-left: 0;
+  }
+
+  &__goodsList-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 16px;
+    margin: 8px 0;
+    border-radius: 4px;
+    list-style: none;
+  
+    &--added {
+      background-color: rgb(140, 179, 252);
+    }
+  }
+
+  &__button {
+    cursor: pointer;
+
+    &--clear {
+      min-width: 80px;
+      margin-right: 20px;
+      height: 40px;
+    }
+  }
+}
