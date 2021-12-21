@@ -1,1 +1,34 @@
-// styles go here
+body {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  color: #333;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: center;
+
+  .title {
+    color: rgb(48, 48, 63);
+  }
+}
+
+.good-list__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid rgb(95, 78, 78);
+
+  &.active {
+    background-color: rgba(253, 4, 4, 0.6);
+  }
+}
+
+.buttons {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
