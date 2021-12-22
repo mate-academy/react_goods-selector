@@ -35,30 +35,38 @@ class App extends React.Component<{}, State> {
     ));
   };
 
+  generateTitle = (goods:string[]) => {
+    return (
+      goods.length
+        ? (
+          <>
+            {goods.length > 1
+              ? `${goods.slice(0, -1).join(', ')} and ${goods[goods.length - 1]} are `
+              : `${goods.join('')} is `}
+            selected
+          </>
+        )
+        : 'No goods selected'
+    );
+  };
+
   render() {
     const { selectedGood } = this.state;
 
     return (
       <div className="App">
-        {selectedGood.length
-          ? (
-            <h1>
-              {selectedGood.length > 1
-                ? `${selectedGood.slice(0, -1).join(', ')} and ${selectedGood[selectedGood.length - 1]} are `
-                : `${selectedGood.join('')} is `}
-              selected
-              <button
-                className="App__clear-btn"
-                type="button"
-                onClick={() => {
-                  this.setState({ selectedGood: [] });
-                }}
-              >
-                X
-              </button>
-            </h1>
-          )
-          : <h1>No goods selected</h1>}
+        <h1>
+          {this.generateTitle(selectedGood)}
+          <button
+            className="App__clear-btn"
+            type="button"
+            onClick={() => {
+              this.setState({ selectedGood: [] });
+            }}
+          >
+            X
+          </button>
+        </h1>
         <ul className="App__list">
           {goodsFromServer.map(good => (
             <li
