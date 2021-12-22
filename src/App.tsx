@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -74,30 +75,17 @@ class App extends React.Component<{}, State> {
               className="App__item"
             >
               {good}
-              &nbsp;
-              {selectedGood.includes(good)
-                ? (
-                  <button
-                    type="button"
-                    className="App__remove-btn"
-                    onClick={() => {
-                      this.removeGood(good);
-                    }}
-                  >
-                    Remove
-                  </button>
-                )
-                : (
-                  <button
-                    type="button"
-                    className="App__add-btn"
-                    onClick={() => {
-                      this.addGood(good);
-                    }}
-                  >
-                    Add
-                  </button>
+              <button
+                type="button"
+                className={classNames('App__btn', { 'App__btn--active': selectedGood.includes(good) })}
+                onClick={(
+                  selectedGood.includes(good)
+                    ? () => this.removeGood(good)
+                    : () => this.addGood(good)
                 )}
+              >
+                {selectedGood.includes(good) ? 'Remove' : 'Add'}
+              </button>
             </li>
           ))}
         </ul>
