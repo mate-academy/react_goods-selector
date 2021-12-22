@@ -1,1 +1,63 @@
-// styles go here
+.App {
+
+  &__clear-btn {
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 22px;
+    color: red;
+  }
+
+  &__list {
+    list-style: none;
+  }
+
+  &__item {
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 22px;
+    margin: 5px 0;
+  }
+
+  &__btn {
+    width: 80px;
+    outline: none;
+    background: none;
+    border: 1px solid green;
+    padding: 5px 10px;
+    color: green;
+    cursor: pointer;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background-color: green;
+      z-index: -1;
+      transition: width 0.3s;
+    }
+
+    &:hover {
+      color: #fff
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+  }
+
+  &__btn--active {
+    color: rgb(255, 100, 100);;
+    border-color: rgb(255, 100, 100);;
+
+    &::after {
+      background-color: rgb(255, 100, 100);
+    }
+  }
+}
