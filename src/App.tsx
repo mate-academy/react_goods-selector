@@ -58,15 +58,17 @@ class App extends React.Component<{}, State> {
       <div className="App">
         <h1>
           {this.generateTitle(selectedGood)}
-          <button
-            className="App__clear-btn"
-            type="button"
-            onClick={() => {
-              this.setState({ selectedGood: [] });
-            }}
-          >
-            X
-          </button>
+          {selectedGood.length > 0 && (
+            <button
+              className="App__clear-btn"
+              type="button"
+              onClick={() => {
+                this.setState({ selectedGood: [] });
+              }}
+            >
+              X
+            </button>
+          )}
         </h1>
         <ul className="App__list">
           {goodsFromServer.map(good => (
