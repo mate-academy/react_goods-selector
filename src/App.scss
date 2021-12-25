@@ -1,1 +1,56 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.068);
+  border-radius: 30px;
+  margin: 0 auto;
+  width: 600px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.568);
+
+  &__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 0 15px;
+  }
+
+  &__btn {
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.418);
+
+    &--clear {
+      height: 40px;
+      min-width: 80px;
+    }
+  }
+
+  &__title {
+    color: teal;
+  }
+
+  &__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 300px;
+    padding: 0;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 6px;
+    
+    &--remove {
+      box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.418);
+      background-color: rgba(0, 0, 248, 0.466);
+      color: rgb(61, 20, 20);
+    }
+  }
+}
