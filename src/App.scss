@@ -30,35 +30,6 @@ body {
   color: $titleColor;
 }
 
-.list {
-  list-style: none;
-  line-height: 2;
-  font-size: 20px;
-
-  &__item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 10px;
-    border-bottom: 1px dotted $mainColor;
-
-    &:last-of-type {
-      border-bottom: 0
-    }
-
-    &:hover {
-      background-color: $hoverListElementColor;
-      cursor: pointer;
-      border-radius: 10px;
-      font-weight: bold;
-
-      & .btn {
-        font-weight: bold;
-      }
-    }
-  }
-}
-
 .btn {
   box-sizing: border-box;
   appearance: none;
@@ -73,7 +44,6 @@ body {
   padding: 10px 15px;
   text-align: center;
   text-transform: uppercase;
-  // font-family: Arial, Helvetica, sans-serif;
   font-weight: 700;
   transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
   &:hover,
@@ -81,5 +51,34 @@ body {
     color: #fff;
     outline: 0;
     box-shadow: 0 0 40px 40px $mainColor inset;
+  }
+}
+
+.list {
+  list-style: none;
+  line-height: 2;
+  font-size: 20px;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    border-bottom: 1px dotted $mainColor;
+
+    &:last-of-type {
+      border-bottom: 0;
+    }
+
+    &:hover {
+      background-color: $hoverListElementColor;
+      cursor: pointer;
+      border-radius: 10px;
+      font-weight: bold;
+
+      & .btn {
+        font-weight: bold;
+      }
+    }
   }
 }
