@@ -53,16 +53,25 @@ class App extends React.Component<Props, State> {
   };
 
   render() {
-    const {
-      selectedGoods,
-    } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App">
-        <h1>
-          {this.makephrase(this.state.selectedGoods)}
-          {' '}
-        </h1>
+        <div className="container">
+          <h1 className="title">
+            {this.makephrase(this.state.selectedGoods)}
+            {' '}
+          </h1>
+          <button
+            type="button"
+            className="clearButton"
+            onClick={() => {
+              this.setState({ selectedGoods: [] });
+            }}
+          >
+            X
+          </button>
+        </div>
         {
           goodsFromServer.map((item) => (
             <p>

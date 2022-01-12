@@ -1,6 +1,22 @@
 // styles go here
+.App {
+  padding: 10px;
+  background-color: rgb(192, 192, 192);
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px rgb(128, 128, 128);
+}
+
+.title {
+  color: rgb(226, 224, 224);
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
 .active {
+  box-shadow: 5px 5px 5px rgb(105, 105, 105);
   background-color: lightgray;
+  border-radius: 10px;
 }
 
 .active-button {
@@ -13,4 +29,22 @@
 
 button {
   border-radius: 10px;
+}
+
+.clearButton {
+  color: #fff;
+  height: 20px;
+  padding: 0 10px;
+  margin: 10px 20px;
+  display: inline-block;
+  background-color: royalblue;
+}
+
+.container {
+  padding-left: 20px;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(8, 8, 196);
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px #fff;
 }
