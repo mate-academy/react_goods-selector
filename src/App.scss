@@ -1,4 +1,8 @@
 // styles go here
+li {
+  margin-bottom: 15px;
+}
+
 .App {
   padding: 10px;
   background-color: rgb(192, 192, 192);
@@ -41,6 +45,7 @@ button {
 }
 
 .container {
+  margin-bottom: 20px;
   padding-left: 20px;
   display: flex;
   justify-content: space-between;

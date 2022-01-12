@@ -32,7 +32,7 @@ class App extends React.Component<Props, State> {
     return array;
   };
 
-  makephrase = (array: string[]) => {
+  selectedGoodsTitle = (array: string[]) => {
     if (!array.length) {
       return 'No goods selected';
     }
@@ -52,6 +52,20 @@ class App extends React.Component<Props, State> {
     return `${phrase} and ${array[array.length - 1]} are selected`;
   };
 
+  addRemoveItem = (item: string) => {
+    if (!this.state.selectedGoods.includes(item)) {
+      this.setState((prevState: State) => ({
+        selectedGoods: [...prevState.selectedGoods, item],
+      }));
+    } else {
+      const index = this.state.selectedGoods.indexOf(item);
+
+      this.setState((prevState: State) => ({
+        selectedGoods: this.remover(index, prevState.selectedGoods),
+      }));
+    }
+  };
+
   render() {
     const { selectedGoods } = this.state;
 
@@ -59,7 +73,7 @@ class App extends React.Component<Props, State> {
       <div className="App">
         <div className="container">
           <h1 className="title">
-            {this.makephrase(this.state.selectedGoods)}
+            {this.selectedGoodsTitle(this.state.selectedGoods)}
             {' '}
           </h1>
           <button
@@ -74,34 +88,22 @@ class App extends React.Component<Props, State> {
         </div>
         {
           goodsFromServer.map((item) => (
-            <p>
-              <li
-                key={item}
-                className={selectedGoods.includes(item) ? 'active' : ''}
+            <li
+              key={item}
+              className={selectedGoods.includes(item) ? 'active' : ''}
+            >
+              <button
+                className={selectedGoods.includes(item) ? 'active-button' : 'non-active-button'}
+                type="button"
+                onClick={() => {
+                  this.addRemoveItem(item);
+                }}
               >
-                <button
-                  className={selectedGoods.includes(item) ? 'active-button' : 'non-active-button'}
-                  type="button"
-                  onClick={() => {
-                    if (!selectedGoods.includes(item)) {
-                      this.setState((prevState: State) => ({
-                        selectedGoods: [...prevState.selectedGoods, item],
-                      }));
-                    } else {
-                      const index = selectedGoods.indexOf(item);
-
-                      this.setState((prevState: State) => ({
-                        selectedGoods: this.remover(index, prevState.selectedGoods),
-                      }));
-                    }
-                  }}
-                >
-                  {selectedGoods.includes(item) ? 'Remove' : 'Add'}
-                </button>
-                {' '}
-                {item}
-              </li>
-            </p>
+                {selectedGoods.includes(item) ? 'Remove' : 'Add'}
+              </button>
+              {' '}
+              {item}
+            </li>
           ))
         }
       </div>
