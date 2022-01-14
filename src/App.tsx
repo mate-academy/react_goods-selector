@@ -52,6 +52,7 @@ class App extends React.Component<{}, State> {
     return (
       <button
         type="button"
+        className={this.state.selectedGoods.includes(good) ? 'btn btn-warning' : 'btn btn-success'}
         onClick={() => {
           this.selector(good);
         }}
@@ -79,16 +80,44 @@ class App extends React.Component<{}, State> {
         <h1>
           {this.getMessage()}
         </h1>
-        <ul>
-          {goodsFromServer.map((good) => {
-            return (
-              <li key={good} className={this.state.selectedGoods.includes(good) ? 'added' : ''}>
-                {good}
-                {this.getButton(good)}
-              </li>
-            );
-          })}
-        </ul>
+        <div className="table-responsive">
+          <table
+            className="
+              table
+              table-striped
+              table-hover
+              table-bordered
+            "
+          >
+            <thead>
+              <tr className="bg-info">
+                <th>Grosery</th>
+                <th>Add to cart</th>
+                <th>Added</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {goodsFromServer.map((good) => {
+                return (
+
+                  <tr className={this.state.selectedGoods.includes(good) ? 'bg-info' : ''}>
+                    <th>
+                      {good}
+                    </th>
+                    <th>
+                      {this.getButton(good)}
+                    </th>
+                    <th>
+                      {this.state.selectedGoods.includes(good) ? 'This item was added to your cart' : 'Press add button to add this item to your cart'}
+                    </th>
+                  </tr>
+
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   }
