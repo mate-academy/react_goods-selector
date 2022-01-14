@@ -25,22 +25,23 @@ class App extends React.Component<{}, State> {
 
   getMessage = () => {
     let message = '';
+    const { selectedGoods } = this.state;
 
-    switch (this.state.selectedGoods.length) {
+    switch (selectedGoods.length) {
       case 0:
         message = 'No goods selected';
         break;
 
       case 1:
-        message = `${this.state.selectedGoods[0]} is selected`;
+        message = `${selectedGoods[0]} is selected`;
         break;
 
       case 2:
-        message = `${this.state.selectedGoods[0]} and ${this.state.selectedGoods[1]} are selected`;
+        message = `${selectedGoods[0]} and ${selectedGoods[1]} are selected`;
         break;
 
       default:
-        message = `${this.state.selectedGoods.slice(0, this.state.selectedGoods.length - 1)} and ${this.state.selectedGoods[this.state.selectedGoods.length - 1]} are selected`;
+        message = `${selectedGoods.slice(0, selectedGoods.length - 1)} and ${selectedGoods[selectedGoods.length - 1]} are selected`;
         break;
     }
 
