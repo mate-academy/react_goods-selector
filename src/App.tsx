@@ -76,47 +76,53 @@ class App extends React.Component<{}, State> {
 
   render() {
     return (
-      <div>
-        <h1>
-          {this.getMessage()}
-        </h1>
-        <div className="table-responsive">
-          <table
-            className="
-              table
-              table-striped
-              table-hover
-              table-bordered
-            "
-          >
-            <thead>
-              <tr className="bg-info">
-                <th>Grosery</th>
-                <th>Add to cart</th>
-                <th>Added</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {goodsFromServer.map((good) => {
-                return (
-
-                  <tr className={this.state.selectedGoods.includes(good) ? 'bg-info' : ''}>
-                    <th>
-                      {good}
-                    </th>
-                    <th>
-                      {this.getButton(good)}
-                    </th>
-                    <th>
-                      {this.state.selectedGoods.includes(good) ? 'This item was added to your cart' : 'Press add button to add this item to your cart'}
-                    </th>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-4">
+            <h1>
+              The goods you have selected:
+            </h1>
+            {this.getMessage()}
+          </div>
+          <div className="col-md-8">
+            <div className="table-responsive">
+              <table
+                className="
+                  table
+                  table-striped
+                  table-hover
+                  table-bordered
+                "
+              >
+                <thead>
+                  <tr className="bg-info">
+                    <th>Grosery</th>
+                    <th>Add to cart</th>
+                    <th>Added</th>
                   </tr>
+                </thead>
 
-                );
-              })}
-            </tbody>
-          </table>
+                <tbody>
+                  {goodsFromServer.map((good) => {
+                    return (
+
+                      <tr className={this.state.selectedGoods.includes(good) ? 'bg-info' : ''}>
+                        <th>
+                          {good}
+                        </th>
+                        <th>
+                          {this.getButton(good)}
+                        </th>
+                        <th>
+                          {this.state.selectedGoods.includes(good) ? 'This item was added to your cart' : 'Press add button to add this item to your cart'}
+                        </th>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     );
