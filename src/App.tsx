@@ -15,7 +15,11 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-export class App extends React.Component {
+type State = {
+  selectedGood: string,
+};
+
+export class App extends React.Component<{}, State> {
   state = {
     selectedGood: 'Jam',
   };
@@ -45,17 +49,20 @@ export class App extends React.Component {
 
         <ul>
           {goodsFromServer.map(good => (
-            <li>
-              <div
+            <li key={good}>
+              <span
                 className={classNames({
                   selectedGood: selectedGood === good,
                 })}
               >
                 {good}
-              </div>
-
+              </span>
+              {' '}
               <button
                 type="button"
+                className={classNames({
+                  buttonVisibility: selectedGood === good,
+                })}
                 onClick={() => {
                   this.setState({ selectedGood: good });
                 }}
