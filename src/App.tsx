@@ -51,9 +51,12 @@ export class App extends React.Component<{}, State> {
           {goodsFromServer.map(good => (
             <li key={good}>
               <span
-                className={classNames({
-                  selectedGood: selectedGood === good,
-                })}
+                className={classNames(
+                  'good-item',
+                  {
+                    selectedGood: selectedGood === good,
+                  },
+                )}
               >
                 {good}
               </span>
