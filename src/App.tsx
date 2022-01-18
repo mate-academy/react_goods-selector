@@ -2,16 +2,16 @@ import React from 'react';
 import './App.scss';
 
 const goodsFromServer: string[] = [
-  ' Dumplings',
-  ' Carrot',
-  ' Eggs',
-  ' Ice cream',
-  ' Apple',
-  ' Bread',
-  ' Fish',
-  ' Honey',
-  ' Jam',
-  ' Garlic',
+  'Dumplings',
+  'Carrot',
+  'Eggs',
+  'Ice cream',
+  'Apple',
+  'Bread',
+  'Fish',
+  'Honey',
+  'Jam',
+  'Garlic',
 ];
 
 interface State {
@@ -41,7 +41,7 @@ class App extends React.Component<{}, State> {
         break;
 
       default:
-        message = `${selectedGoods.slice(0, selectedGoods.length - 1)} and ${selectedGoods[selectedGoods.length - 1]} are selected`;
+        message = `${selectedGoods.slice(0, selectedGoods.length - 1).join(', ')} and ${selectedGoods[selectedGoods.length - 1]} are selected`;
         break;
     }
 
@@ -114,7 +114,9 @@ class App extends React.Component<{}, State> {
                           {this.getButton(good)}
                         </th>
                         <th>
-                          {this.state.selectedGoods.includes(good) ? 'This item was added to your cart' : 'Press add button to add this item to your cart'}
+                          {this.state.selectedGoods.includes(good)
+                            ? 'This item was added to your cart'
+                            : 'Press add button to add this item to your cart'}
                         </th>
                       </tr>
                     );
