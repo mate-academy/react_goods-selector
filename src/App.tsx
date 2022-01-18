@@ -22,7 +22,7 @@ type State = {
 class App extends React.Component<{}, State> {
   state: State = {
     goods: goodsFromServer,
-    selectedGoods: [],
+    selectedGoods: ['Jam'],
   };
 
   select = (good: string) => {
@@ -74,6 +74,10 @@ class App extends React.Component<{}, State> {
     return title;
   };
 
+  delete = () => {
+    this.setState({ selectedGoods: [] });
+  };
+
   render() {
     const { goods, selectedGoods } = this.state;
 
@@ -81,6 +85,15 @@ class App extends React.Component<{}, State> {
       <div className="App">
         <h1>
           {this.stringOfGoods(selectedGoods)}
+          <button
+            type="button"
+            className="button__delete"
+            onClick={
+              () => this.delete()
+            }
+          >
+            Delete selected goods
+          </button>
         </h1>
         <ul>
           {goods.map(good => {
