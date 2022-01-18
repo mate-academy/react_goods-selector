@@ -21,19 +21,22 @@ type State = {
 };
 
 const showSelectedGoods = (goods: string[]): string => {
-  if (goods.length === 1) {
-    return `${goods[0]} is selected`;
+  switch (goods.length) {
+    case 0:
+      return 'No goods selected';
+
+    case 1:
+      return `${goods[0]} is selected`;
+
+    case 2:
+      return `${goods[0]} and ${goods[1]} are selected`;
+
+    default: {
+      const lastGoodInd = goods.length - 1;
+
+      return `${goods.slice(0, lastGoodInd).join(', ')} and ${goods[lastGoodInd]} are selected`;
+    }
   }
-
-  if (goods.length === 2) {
-    return `${goods[0]} and ${goods[1]} are selected`;
-  }
-
-  let selectedGoods = goods.slice(0, goods.length - 1).join(', ');
-
-  selectedGoods += ` and ${goods[goods.length - 1]} are selected`;
-
-  return selectedGoods;
 };
 
 class App extends React.Component<{}, State> {
@@ -63,9 +66,7 @@ class App extends React.Component<{}, State> {
     return (
       <div className="App">
         <h1>
-          {selectedGoods.length
-            ? `${showSelectedGoods(selectedGoods)}`
-            : 'No goods selected'}
+          {showSelectedGoods(selectedGoods)}
         </h1>
 
         <button
@@ -89,29 +90,28 @@ class App extends React.Component<{}, State> {
             >
               {good}
 
-              <button
-                className={classNames(
-                  { disable: selectedGoods.includes(good) },
-                )}
-                type="button"
-                onClick={() => {
-                  this.clickOnGoodHandler(good);
-                }}
-              >
-                Add
-              </button>
+              {selectedGoods.includes(good)
+                ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      this.removeGoodHandler(good);
+                    }}
+                  >
+                    Remove
+                  </button>
+                )
 
-              <button
-                className={classNames(
-                  { disable: !selectedGoods.includes(good) },
+                : (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      this.clickOnGoodHandler(good);
+                    }}
+                  >
+                    Add
+                  </button>
                 )}
-                type="button"
-                onClick={() => {
-                  this.removeGoodHandler(good);
-                }}
-              >
-                Remove
-              </button>
             </li>
           ))}
         </ul>
