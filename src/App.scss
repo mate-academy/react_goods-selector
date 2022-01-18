@@ -1,1 +1,14 @@
 // styles go here
+.list {
+  &__item {
+    &--selected {
+      background-color: aquamarine;
+    }
+  }
+}
+
+.button {
+  &__clear {
+    display: inline-block;
+  }
+}
