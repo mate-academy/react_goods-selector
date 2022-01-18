@@ -36,10 +36,6 @@ class App extends React.Component<{}, State> {
         message = `${selectedGoods[0]} is selected`;
         break;
 
-      case 2:
-        message = `${selectedGoods[0]} and ${selectedGoods[1]} are selected`;
-        break;
-
       default:
         message = `${selectedGoods.slice(0, selectedGoods.length - 1).join(', ')} and ${selectedGoods[selectedGoods.length - 1]} are selected`;
         break;
