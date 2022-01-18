@@ -1,4 +1,6 @@
 import React from 'react';
+import classNames from 'classnames';
+import 'bulma/css/bulma.min.css';
 import './App.scss';
 
 type Good = string;
@@ -17,49 +19,95 @@ const goodsFromServer: Good[] = [
 ];
 
 type State = {
-  selectedGood: Good
+  selectedGoods: Good[]
 };
 
 class App extends React.Component<{}, State> {
   state = {
-    selectedGood: 'Jam',
+    selectedGoods: ['Jam'],
   };
 
   goodSelector = (selectedGood: Good) => {
-    this.setState({ selectedGood });
+    this.setState(state => {
+      const good = [selectedGood];
+      const selectedGoods = state.selectedGoods.concat(good);
+
+      return {
+        selectedGoods,
+      };
+    });
+  };
+
+  goodRemover = (selectedGood: Good) => {
+    this.setState(state => {
+      const selectedGoods = state.selectedGoods
+        .filter(good => good !== selectedGood);
+
+      return {
+        selectedGoods,
+      };
+    });
   };
 
   render(): React.ReactNode {
-    const { selectedGood } = this.state;
+    const { selectedGoods } = this.state;
     const resetButton = (
       <button
         type="button"
-        onClick={() => this.setState({ selectedGood: '' })}
+        onClick={() => this.setState({ selectedGoods: [] })}
       >
         X
       </button>
     );
 
+    function getListInformation(list: Good[]): string {
+      const listCopy = [...list];
+
+      const endGood = listCopy.pop();
+
+      switch (list.length) {
+        case 0:
+          return 'No goods selected';
+        case 1:
+          return `${list[0]} is selected`;
+        case 2:
+          return `${list.join(' and ')} are selected`;
+        default:
+          return `${listCopy.join(', ')} and ${endGood} are selected`;
+      }
+    }
+
     return (
-      <div className="App">
-        {selectedGood
-          ? (
-            <>
-              <h1>
-                {`${selectedGood} is selected`}
-                {resetButton}
-              </h1>
-            </>
-          )
-          : <h1>No goods selected</h1>}
-        {goodsFromServer.length}
+      <div className="App box">
+        <h1 className="title is-1">
+          {getListInformation(selectedGoods)}
+        </h1>
+        {selectedGoods.length !== 0 && (
+          <div>
+            <span className="title is-4">Reset your selections -</span>
+            {resetButton}
+          </div>
+        )}
+
         <ul>
           {goodsFromServer.map(good => (
             <>
-              <li key={good}>
-                {good}
-                {selectedGood !== good
-                  && (
+              <li key={good} className="listItem">
+                <span
+                  className={classNames('listItem__text', { selected: selectedGoods.includes(good) })}
+                >
+                  {good}
+                </span>
+                {selectedGoods.includes(good)
+                  ? (
+                    <button
+                      type="button"
+                      onClick={() => this.goodRemover(good)}
+                    >
+                      Remove
+                    </button>
+                  )
+                  : (
                     <button
                       type="button"
                       onClick={() => this.goodSelector(good)}

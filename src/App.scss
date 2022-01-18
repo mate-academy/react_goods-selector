@@ -1,1 +1,11 @@
-// styles go here
+.selected {
+  background-color: rgb(113, 248, 113);
+}
+
+.listItem {
+  margin-top: 10px;
+
+  &__text {
+    margin-right: 10px;
+  }
+}
