@@ -1,1 +1,53 @@
 // styles go here
+body{
+  padding: 0;
+  margin: 0;
+}
+
+.title {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 20%;
+}
+
+.sheet {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &__good {
+    padding: 5px 50px;
+    text-align: center;
+  }
+}
+
+.app {
+  position: relative;
+  margin: 0 auto;
+  min-width: 768px;
+  width: 1024px;
+  display: flex;
+  justify-content: center;
+  &__list {
+    margin: 20px auto;
+    min-width: 300px;
+    padding-top: 50px;
+  }
+
+  &__item {
+    padding: 5px;
+    list-style: none;
+  }
+}
+
+.buttonVisibility {
+  visibility: hidden;
+}
+
+.button {
+  cursor: pointer;
+  padding: 5px 15px;
+  margin-right: 10px;
+  background-color: rgba(95, 245, 35, 0.705);
+}
