@@ -1,1 +1,14 @@
 // styles go here
+.selectedGood {
+  background-color: green;
+}
+
+.good-item {
+  display: inline-block;
+  margin-bottom: 4px;
+  width: 70px;
+}
+
+.buttonVisibility {
+  visibility: hidden;
+}
