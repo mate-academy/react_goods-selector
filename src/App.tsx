@@ -23,7 +23,7 @@ type State = {
 };
 
 class App extends React.Component<{}, State> {
-  state = {
+  state: State = {
     selectedGoods: ['Jam'],
   };
 
@@ -49,74 +49,72 @@ class App extends React.Component<{}, State> {
     });
   };
 
+  getListInformation = (list: Good[]) => {
+    const listCopy = [...list];
+
+    const endGood = listCopy.pop();
+
+    switch (list.length) {
+      case 0:
+        return 'No goods selected';
+      case 1:
+        return `${list[0]} is selected`;
+      case 2:
+        return `${list.join(' and ')} are selected`;
+      default:
+        return `${listCopy.join(', ')} and ${endGood} are selected`;
+    }
+  };
+
   render(): React.ReactNode {
     const { selectedGoods } = this.state;
-    const resetButton = (
-      <button
-        type="button"
-        onClick={() => this.setState({ selectedGoods: [] })}
-      >
-        X
-      </button>
-    );
-
-    function getListInformation(list: Good[]): string {
-      const listCopy = [...list];
-
-      const endGood = listCopy.pop();
-
-      switch (list.length) {
-        case 0:
-          return 'No goods selected';
-        case 1:
-          return `${list[0]} is selected`;
-        case 2:
-          return `${list.join(' and ')} are selected`;
-        default:
-          return `${listCopy.join(', ')} and ${endGood} are selected`;
-      }
-    }
 
     return (
       <div className="App box">
         <h1 className="title is-1">
-          {getListInformation(selectedGoods)}
+          {this.getListInformation(selectedGoods)}
         </h1>
         {selectedGoods.length !== 0 && (
           <div>
             <span className="title is-4">Reset your selections -</span>
-            {resetButton}
+            <button
+              type="button"
+              onClick={() => this.setState({ selectedGoods: [] })}
+            >
+              X
+            </button>
           </div>
         )}
 
         <ul>
           {goodsFromServer.map(good => (
-            <>
-              <li key={good} className="listItem">
-                <span
-                  className={classNames('listItem__text', { selected: selectedGoods.includes(good) })}
-                >
-                  {good}
-                </span>
-                {selectedGoods.includes(good)
-                  ? (
-                    <button
-                      type="button"
-                      onClick={() => this.goodRemover(good)}
-                    >
-                      Remove
-                    </button>
-                  )
-                  : (
-                    <button
-                      type="button"
-                      onClick={() => this.goodSelector(good)}
-                    >
-                      Select
-                    </button>
-                  )}
-              </li>
-            </>
+            <li key={good} className="listItem">
+              <span
+                className={classNames(
+                  'listItem__text',
+                  { selected: selectedGoods.includes(good) },
+                )}
+              >
+                {good}
+              </span>
+              {selectedGoods.includes(good)
+                ? (
+                  <button
+                    type="button"
+                    onClick={() => this.goodRemover(good)}
+                  >
+                    Remove
+                  </button>
+                )
+                : (
+                  <button
+                    type="button"
+                    onClick={() => this.goodSelector(good)}
+                  >
+                    Select
+                  </button>
+                )}
+            </li>
           ))}
         </ul>
       </div>
