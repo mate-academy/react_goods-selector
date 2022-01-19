@@ -20,10 +20,10 @@ export class App extends React.Component<{}, State> {
     selectedGoods: ['Jam'],
   };
 
-  getButtonWith = (text: string, setState: string[]) => {
+  getButtonWith = (text: string, setState: string[], addclassName?: string) => {
     return (
       <button
-        className="button"
+        className={`button ${addclassName}`}
         type="button"
         onClick={() => {
           this.setState({ selectedGoods: setState });
@@ -40,32 +40,34 @@ export class App extends React.Component<{}, State> {
     return (
       <div className="app">
         <h1 className="title">
-          {selectedGoods.length !== 0 && this.getButtonWith('Clear all', [])}
           {selectedGoods.length > 0
-            ? `${selectedGoods[selectedGoods.length - 1]} selected`
+            ? `${selectedGoods.join(', ')} selected`
             : 'No goods selected'}
         </h1>
-        <ul className="app__list">
-          {selectedGoods.map(good => (
-            <li className="app__item" key={good}>
-              <div className="sheet">
-                <div className="sheet__good">{good}</div>
-                {selectedGoods.includes(good) && this.getButtonWith('X', selectedGoods.filter(el => el !== good))}
-              </div>
-            </li>
-          ))}
-        </ul>
+        {selectedGoods.length !== 0 && this.getButtonWith('Clear all', [], 'button--big')}
+        <div className="wrapper">
+          <ul className="app__list">
+            {selectedGoods.map(good => (
+              <li className="app__item" key={good}>
+                <div className="sheet">
+                  <div className="sheet__good">{good}</div>
+                  {selectedGoods.includes(good) && this.getButtonWith('X', selectedGoods.filter(el => el !== good))}
+                </div>
+              </li>
+            ))}
+          </ul>
 
-        <ul className="app__list">
-          {goods.map((good) => (
-            <li key={good} className="app__item">
-              <div className="sheet">
-                <div className="sheet__good">{good}</div>
-                {!selectedGoods.includes(good) && this.getButtonWith('select', [...selectedGoods, good])}
-              </div>
-            </li>
-          ))}
-        </ul>
+          <ul className="app__list">
+            {goods.map((good) => (
+              <li key={good} className="app__item">
+                <div className="sheet">
+                  <div className="sheet__good">{good}</div>
+                  {!selectedGoods.includes(good) && this.getButtonWith('select', [...selectedGoods, good])}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   }

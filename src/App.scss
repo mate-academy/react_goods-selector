@@ -4,18 +4,22 @@ body{
   margin: 0;
 }
 
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+}
+
 .title {
   display: flex;
-  position: absolute;
-  top: 0;
-  left: 20%;
+  min-height: 75px;
 }
 
 .sheet {
+  width: 100%;
   margin: 0;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   &__good {
     padding: 5px 50px;
     text-align: center;
@@ -23,19 +27,19 @@ body{
 }
 
 .app {
-  position: relative;
   margin: 0 auto;
-  min-width: 768px;
-  width: 1024px;
+  max-width: 768px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   &__list {
-    margin: 20px auto;
+    margin: 0 auto;
+    padding-top: 30px;
     min-width: 300px;
-    padding-top: 50px;
   }
 
   &__item {
+    display: flex;
     padding: 5px;
     list-style: none;
   }
@@ -46,8 +50,17 @@ body{
 }
 
 .button {
+  font-family:'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
   cursor: pointer;
-  padding: 5px 15px;
+  height: calc(max-content + 15px);
+  min-width: 50px;
   margin-right: 10px;
+  border: none;
+  border-radius: 30px;
   background-color: rgba(95, 245, 35, 0.705);
+
+  &--big{
+    min-width: 80px;
+    height: 30px;
+  }
 }
