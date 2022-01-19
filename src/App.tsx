@@ -1,5 +1,4 @@
 import React from 'react';
-import className from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -15,10 +14,24 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-class App extends React.Component<{}, State> {
+export class App extends React.Component<{}, State> {
   state = {
     goods: goodsFromServer,
     selectedGoods: ['Jam'],
+  };
+
+  getButtonWith = (text: string, setState: string[]) => {
+    return (
+      <button
+        className="button"
+        type="button"
+        onClick={() => {
+          this.setState({ selectedGoods: setState });
+        }}
+      >
+        {text}
+      </button>
+    );
   };
 
   render(): React.ReactNode {
@@ -27,15 +40,7 @@ class App extends React.Component<{}, State> {
     return (
       <div className="app">
         <h1 className="title">
-          <button
-            className={className('button', 'button--close', { buttonVisibility: selectedGoods.length === 0 })}
-            type="button"
-            onClick={() => {
-              this.setState({ selectedGoods: [] });
-            }}
-          >
-            Clear all
-          </button>
+          {selectedGoods.length !== 0 && this.getButtonWith('Clear all', [])}
           {selectedGoods.length > 0
             ? `${selectedGoods[selectedGoods.length - 1]} selected`
             : 'No goods selected'}
@@ -45,15 +50,7 @@ class App extends React.Component<{}, State> {
             <li className="app__item" key={good}>
               <div className="sheet">
                 <div className="sheet__good">{good}</div>
-                <button
-                  className={className('button', { buttonVisibility: !selectedGoods.includes(good) })}
-                  type="button"
-                  onClick={() => {
-                    this.setState({ selectedGoods: selectedGoods.filter(el => el !== good) });
-                  }}
-                >
-                  X
-                </button>
+                {selectedGoods.includes(good) && this.getButtonWith('X', selectedGoods.filter(el => el !== good))}
               </div>
             </li>
           ))}
@@ -64,15 +61,7 @@ class App extends React.Component<{}, State> {
             <li key={good} className="app__item">
               <div className="sheet">
                 <div className="sheet__good">{good}</div>
-                <button
-                  className={className('button', { buttonVisibility: selectedGoods.includes(good) })}
-                  type="button"
-                  onClick={() => {
-                    this.setState({ selectedGoods: [...selectedGoods, good] });
-                  }}
-                >
-                  select
-                </button>
+                {!selectedGoods.includes(good) && this.getButtonWith('select', [...selectedGoods, good])}
               </div>
             </li>
           ))}
@@ -81,5 +70,3 @@ class App extends React.Component<{}, State> {
     );
   }
 }
-
-export default App;
