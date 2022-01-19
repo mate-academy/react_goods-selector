@@ -52,7 +52,7 @@ class App extends React.Component<{}, State> {
   getListInformation = (list: Good[]) => {
     const listCopy = [...list];
 
-    const endGood = listCopy.pop();
+    const lastGood = listCopy.pop();
 
     switch (list.length) {
       case 0:
@@ -62,7 +62,7 @@ class App extends React.Component<{}, State> {
       case 2:
         return `${list.join(' and ')} are selected`;
       default:
-        return `${listCopy.join(', ')} and ${endGood} are selected`;
+        return `${listCopy.join(', ')} and ${lastGood} are selected`;
     }
   };
 
