@@ -20,7 +20,7 @@ type State = {
 };
 
 export class App extends React.Component<{}, State> {
-  state = {
+  state: State = {
     selectedGood: 'Jam',
   };
 
