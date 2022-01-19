@@ -1,14 +1,34 @@
-// styles go here
-.list {
-  &__item {
-    &--selected {
-      background-color: aquamarine;
-    }
-  }
+.App {
+  display: flex;
+  flex-direction: column;
 }
 
-.button {
-  &__clear {
-    display: inline-block;
-  }
+.title {
+  height: 100px;
+  text-align: center;
+}
+
+.clear-button {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.content {
+  align-self: center;
+}
+
+.list{
+  margin: 20px 0 20px;
+  width: 400px;
+}
+
+.list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-group-item.active {
+  background-color: rgb(243, 178, 39);
+  border-color: rgb(243, 178, 39);
 }

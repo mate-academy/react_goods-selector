@@ -1,6 +1,5 @@
 import React from 'react';
-// import classNames from 'classnames';
-// import { isPropertySignature } from 'typescript';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -21,7 +20,7 @@ type State = {
 };
 
 class App extends React.Component<{}, State> {
-  state = {
+  state: State = {
     selectedGoods: ['Jam'],
   };
 
@@ -52,16 +51,20 @@ class App extends React.Component<{}, State> {
   showSelectedGoods = () => {
     const { selectedGoods } = this.state;
 
-    if (selectedGoods.length === 0) {
-      return 'No goods selected';
-    }
+    switch (selectedGoods.length) {
+      case 0:
+        return 'No goods selected';
 
-    if (selectedGoods.length === 1) {
-      return `${selectedGoods[0]} is selected`;
-    }
+      case 1:
+        return `${selectedGoods[0]} is selected`;
 
-    return `${selectedGoods.slice(0, -1).join(', ')}`
-    + ` and ${selectedGoods[selectedGoods.length - 1]} are selected`;
+      default: {
+        const selectedGoodsAsString = selectedGoods.slice(0, -1).join(', ');
+        const lastSelectedGood = selectedGoods[selectedGoods.length - 1];
+
+        return `${selectedGoodsAsString} and ${lastSelectedGood} are selected`;
+      }
+    }
   };
 
   render() {
@@ -69,51 +72,54 @@ class App extends React.Component<{}, State> {
 
     return (
       <div className="App">
-        <h1>
-          {this.showSelectedGoods()}
-        </h1>
-        {selectedGoods.length > 0 && (
-          <>
-            Clear selection
-            <button
-              type="button"
-              onClick={this.clearGoods}
-              className="button__clear"
-            >
-              X
-            </button>
-          </>
-        )}
+        <h1 className="title">{this.showSelectedGoods()}</h1>
+        <div className="content">
+          <h3>Goods:</h3>
 
-        <br />
-        <br />
-        Goods:
-        <br />
-        <ul>
-          {goodsFromServer.map(good => (
-            <li
-              key={good}
-              className={`list__item ${selectedGoods.includes(good)
-                ? 'list__item--selected'
-                : ''
-              }`}
-            >
-              {good}
-              {'   '}
-              {selectedGoods.includes(good)
-                ? (
-                  <button type="button" onClick={() => this.removeGood(good)}>
-                    Remove
-                  </button>
-                )
-                : (
-                  <button type="button" onClick={() => this.addGood(good)}>
-                    Add
-                  </button>
-                )}
-            </li>
-          ))}
-        </ul>
+          <ul className="list list-group">
+            {goodsFromServer.map(good => (
+              <li
+                key={good}
+                className={classNames('list__item', 'list-group-item',
+                  { active: selectedGoods.includes(good) })}
+              >
+                {good}
+                {'   '}
+                {selectedGoods.includes(good)
+                  ? (
+                    <button
+                      type="button"
+                      onClick={() => this.removeGood(good)}
+                      className="btn btn-outline-danger"
+                    >
+                      Remove
+                    </button>
+                  )
+                  : (
+                    <button
+                      type="button"
+                      onClick={() => this.addGood(good)}
+                      className="btn btn-outline-success"
+                    >
+                      Add
+                    </button>
+                  )}
+              </li>
+            ))}
+          </ul>
+          {selectedGoods.length > 0 && (
+            <>
+              <strong>Clear selection</strong>
+              <button
+                type="button"
+                onClick={this.clearGoods}
+                className="btn btn-outline-warning clear-button"
+              >
+                X
+              </button>
+            </>
+          )}
+        </div>
       </div>
     );
   }
