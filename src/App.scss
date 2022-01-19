@@ -1,1 +1,29 @@
-// styles go here
+.goods__item--selected {
+  background-color: rgb(222, 184, 135);
+}
+
+.App {
+  background-color: rgb(245, 222, 179);
+  border: 5px solid black;
+  border-radius: 32px;
+  padding: 15px;
+
+  &__button {
+    background-color: rgb(233, 192, 140);
+    margin-right: 15px;
+
+    &--remove {
+      position: relative;
+      bottom: 5px;
+      font-weight: inherit;
+      font-size: 15px;
+    }
+  }
+}
+
+.goods {
+  &__item {
+    margin-bottom: 5px;
+    max-width: 500px;
+  }
+}
