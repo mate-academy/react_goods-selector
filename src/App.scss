@@ -1,1 +1,39 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  height: 100px;
+  text-align: center;
+}
+
+.clear-button {
+  margin-top: 20px;
+  display: inline-block;
+  margin-left: 10px;
+
+  &__title {
+    font-weight: bold;
+  }
+}
+
+.content {
+  align-self: center;
+}
+
+.list {
+  margin-top: 20px;
+  width: 400px;
+}
+
+.list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-group-item.active {
+  background-color: rgb(243, 178, 39);
+  border-color: rgb(243, 178, 39);
+}
