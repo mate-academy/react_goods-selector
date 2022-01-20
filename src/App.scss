@@ -1,1 +1,35 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 100px;
+}
+
+.ui.segment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  min-height: 80px;
+}
+
+.ui.middle.aligned.divided.list {
+  padding: 0 16px;
+}
+
+.ui.button.clear {
+  width: 100px;
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.ui.button.select {
+  width: 100px;
+}
+
+.item.selected {
+  background-color: grey;
+  color: #fff;
+}
