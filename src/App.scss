@@ -1,1 +1,53 @@
-// styles go here
+body {
+  background-color: rgb(223, 203, 26);
+}
+
+.clear-button {
+  width: 100%;
+  border-radius: 5px;
+  border: 3px ridge purple;
+  background-color: rgb(236, 106, 30);
+
+  &:hover {
+    background-color: fuchsia;
+  }
+}
+
+.toppic {
+  text-align: center;
+  color: red;
+}
+
+.list {
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  list-style: none;
+  align-items: center;
+  text-align: center;
+
+  &__button {
+    margin-left: 10px;
+    background-color: lightcoral;
+    border-radius: 5px;
+    border: 1px solid red;
+
+    &:hover {
+      background-color: rgb(255, 238, 0);
+    }
+  }
+
+  &__item {
+    font-weight: 700;
+    color: orangered;
+    line-height: 40px;
+    border-radius: 10px;
+    height: 40px;
+    width: 40vw;
+    background-color: orange;
+
+    &--selected {
+      background-color: greenyellow;
+    }
+  }
+}
