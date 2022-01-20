@@ -45,7 +45,6 @@ class App extends React.Component<{}, State> {
 
   getTitle = () => {
     const copySelectedGood = [...this.state.selectedGood];
-    // const { selectedGood } = copy;
 
     if (copySelectedGood.length === 0) {
       return 'No goods selected';
@@ -61,9 +60,6 @@ class App extends React.Component<{}, State> {
   };
 
   render() {
-    // eslint-disable-next-line no-console
-    console.log(this.state.selectedGood);
-
     return (
       <Card style={{ width: '30rem' }}>
         <Card.Body>
