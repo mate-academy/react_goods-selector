@@ -34,7 +34,7 @@ export class App extends React.Component<{}, State> {
     );
   };
 
-  render(): React.ReactNode {
+  render() {
     const { selectedGoods, goods } = this.state;
 
     return (
