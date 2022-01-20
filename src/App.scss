@@ -1,1 +1,23 @@
-// styles go here
+.list {
+  display: flex;
+
+  &__goods {
+    list-style-type: none;
+    padding-left: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+.button {
+  background-color: rgb(255, 251, 0);
+}
