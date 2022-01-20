@@ -1,1 +1,18 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  text-align: center;
+}
+
+.list {
+  display: flex;
+  align-self: center;
+}
+
+.selected {
+  background-color: rgb(36, 36, 36);
+  color: white;
+}
