@@ -1,4 +1,6 @@
 import React from 'react';
+import classNames from 'classnames';
+
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -14,11 +16,84 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-const App: React.FC = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+type State = {
+  selectedGood: string;
+};
+
+class App extends React.Component<{}, State> {
+  state: State = {
+    selectedGood: 'Jam',
+  };
+
+  selectGood = (good: string) => {
+    this.setState({ selectedGood: good });
+  };
+
+  clearSelect = () => {
+    this.setState({ selectedGood: '' });
+  };
+
+  render() {
+    const { selectedGood } = this.state;
+
+    return (
+      <div className="App">
+        <h1
+          className={classNames(
+            'title',
+            {
+              hidden: selectedGood === '',
+            },
+          )}
+        >
+          {`${selectedGood} is selected`}
+        </h1>
+        <button
+          type="button"
+          onClick={() => {
+            this.clearSelect();
+          }}
+          className={classNames(
+            'title__button',
+            {
+              hidden: selectedGood === '',
+            },
+          )}
+        >
+          X
+        </button>
+        <ul className="list">
+          {goodsFromServer.map(good => (
+            <li
+              key={goodsFromServer.indexOf(good)}
+              className={classNames(
+                'list__item',
+                {
+                  selected: selectedGood === good,
+                },
+              )}
+            >
+              {good}
+              <button
+                type="button"
+                onClick={() => {
+                  this.selectGood(good);
+                }}
+                className={classNames(
+                  'list__button',
+                  {
+                    hidden: selectedGood === good,
+                  },
+                )}
+              >
+                Select
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}
 
 export default App;
