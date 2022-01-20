@@ -1,1 +1,19 @@
 // styles go here
+@import "~bootstrap/scss/bootstrap";
+
+.card {
+  background-color: #eee;
+}
+
+.clearButton {
+  margin-bottom: 10px;
+}
+
+.btn-primary,
+.btn-light {
+  min-width: 90px;
+}
+
+.item {
+  margin-left: 20px;
+}
