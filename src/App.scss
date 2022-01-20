@@ -1,1 +1,30 @@
-// styles go here
+li {
+  font-family: sans-serif;
+  display: inline-block;
+  margin: 5px;
+  width: 100px;
+  text-align: center;
+  transition: border .2s;
+  border: 2px solid transparent;
+
+}
+
+h1 {
+  display: inline-block;
+  width: 350px;
+}
+
+.cross {
+  display: inline-block;
+
+}
+
+
+.selected {
+  border: 2px solid greenyellow;
+  border-radius: 3px;
+}
+
+.hidden {
+  display: none;
+}
