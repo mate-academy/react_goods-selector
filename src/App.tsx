@@ -41,7 +41,7 @@ export class App extends React.Component<{}, State> {
       <div className="app">
         <h1 className="title">
           {selectedGoods.length > 0
-            ? `${selectedGoods.join(', ')} selected`
+            ? `${selectedGoods.join(', ')} ${selectedGoods.length > 1 ? 'are' : 'is'}     selected`
             : 'No goods selected'}
         </h1>
 
