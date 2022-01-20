@@ -15,7 +15,7 @@ const goodsFromServer: string[] = [
 ];
 
 export class App extends React.Component<{}, State> {
-  state = {
+  state: State = {
     goods: goodsFromServer,
     selectedGoods: ['Jam'],
   };
