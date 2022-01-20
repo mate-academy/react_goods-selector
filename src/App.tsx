@@ -26,7 +26,7 @@ export class App extends React.Component<{}, State> {
     selectedGoods: ['Jam'],
   };
 
-  getButtonWith = (action: string, good?: string) => {
+  getButtonAction = (action: string, good?: string) => {
     if (good && action === 'select') {
       this.setState((state) => ({ selectedGoods: [...state.selectedGoods, good] }));
     } else if (good && action === 'remove') {
@@ -54,7 +54,7 @@ export class App extends React.Component<{}, State> {
               type="button"
               className="button button--big"
               onClick={() => {
-                this.getButtonWith('ClearAll');
+                this.getButtonAction('ClearAll');
               }}
             >
               Clear All
@@ -73,7 +73,7 @@ export class App extends React.Component<{}, State> {
                         type="button"
                         className="button"
                         onClick={() => {
-                          this.getButtonWith('remove', good);
+                          this.getButtonAction('remove', good);
                         }}
                       >
                         remove
@@ -95,7 +95,7 @@ export class App extends React.Component<{}, State> {
                         type="button"
                         className="button"
                         onClick={() => {
-                          this.getButtonWith('select', good);
+                          this.getButtonAction('select', good);
                         }}
                       >
                         select
