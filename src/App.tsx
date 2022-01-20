@@ -32,7 +32,7 @@ class App extends React.Component<{}, State> {
   };
 
   addGoodHandler = (good: string) => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       selectedGood: [...prevState.selectedGood, good],
     }));
   };
@@ -43,32 +43,48 @@ class App extends React.Component<{}, State> {
     }));
   };
 
+  getTitle = () => {
+    const copySelectedGood = [...this.state.selectedGood];
+    // const { selectedGood } = copy;
+
+    if (copySelectedGood.length === 0) {
+      return 'No goods selected';
+    }
+
+    if (copySelectedGood.length === 1) {
+      return `${copySelectedGood} is selected`;
+    }
+
+    const lastItem = copySelectedGood.pop();
+
+    return `${copySelectedGood.join(', ')} and ${lastItem} are selected`;
+  };
+
   render() {
+    // eslint-disable-next-line no-console
+    console.log(this.state.selectedGood);
+
     return (
       <Card style={{ width: '30rem' }}>
         <Card.Body>
-
-          {this.state.selectedGood.length > 0
-            ? (
-              <Card.Title>
-                {`${this.state.selectedGood.join(', ')} is selected`}
-              </Card.Title>
-            )
-            : (
-              <Card.Title>
-                No goods selected
-              </Card.Title>
+          <Card.Title>
+            {this.getTitle()}
+          </Card.Title>
+          <Card.Subtitle>
+            {this.state.selectedGood.length > 0 && (
+              <Button
+                className="clearButton"
+                variant="warning"
+                type="button"
+                onClick={() => {
+                  this.clearHandler();
+                }}
+              >
+                Clear All
+              </Button>
             )}
-          <Button
-            className="clearButton"
-            variant="warning"
-            type="button"
-            onClick={() => {
-              this.clearHandler();
-            }}
-          >
-            X
-          </Button>
+          </Card.Subtitle>
+
           <ListGroup as="ul">
             {goodsFromServer.map(good => (
               <ListGroup.Item
