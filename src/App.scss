@@ -1,1 +1,38 @@
 // styles go here
+.App {
+  display: flex;
+}
+
+.title {
+  width: 300px;
+}
+
+.close {
+  height: 30px;
+  width: 30px;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+
+  &__item {
+    box-sizing: border-box;
+    height: 50px;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  &__button {
+    &--red {
+      background-color: red;
+    }
+
+    &--green {
+      background-color: green;
+    }
+  }
+}
