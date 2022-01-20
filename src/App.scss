@@ -1,1 +1,14 @@
-// styles go here
+.selectedGood {
+  color: white;
+  background-color: black;
+}
+
+.good {
+  font-size: 18px;
+  font-weight: bold;
+  padding-right: 10px;
+}
+
+.buttonVisible {
+  visibility: hidden;
+}
