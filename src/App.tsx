@@ -40,15 +40,10 @@ class App extends React.Component<Props, State> {
 
     return (
       <div className="App">
-        <h1
-          className={classNames(
-            'title',
-            {
-              hidden: selectedGood === '',
-            },
-          )}
-        >
-          {`${selectedGood} is selected`}
+        <h1>
+          {selectedGood
+            ? `${selectedGood} is selected`
+            : 'No goods selected'}
         </h1>
         <button
           type="button"
