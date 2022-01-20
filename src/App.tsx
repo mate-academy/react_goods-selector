@@ -44,7 +44,9 @@ export class App extends React.Component<{}, State> {
             ? `${selectedGoods.join(', ')} selected`
             : 'No goods selected'}
         </h1>
+
         {selectedGoods.length !== 0 && this.getButtonWith('Clear all', [], 'button--big')}
+
         <div className="wrapper">
           <ul className="app__list">
             {selectedGoods.map(good => (
