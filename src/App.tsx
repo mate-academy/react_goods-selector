@@ -80,8 +80,11 @@ class App extends React.Component<{}, State> {
             {goodsFromServer.map(good => (
               <li
                 key={good}
-                className={classNames('list__item', 'list-group-item',
-                  { active: selectedGoods.includes(good) })}
+                className={classNames(
+                  'list__item',
+                  'list-group-item',
+                  { active: selectedGoods.includes(good) },
+                )}
               >
                 {good}
                 {'   '}
@@ -108,16 +111,16 @@ class App extends React.Component<{}, State> {
             ))}
           </ul>
           {selectedGoods.length > 0 && (
-            <>
-              <strong>Clear selection</strong>
+            <div className="clear-button">
+              <span className="clear-button__title">Clear selection </span>
               <button
                 type="button"
                 onClick={this.clearGoods}
-                className="btn btn-outline-warning clear-button"
+                className="btn btn-outline-warning"
               >
                 X
               </button>
-            </>
+            </div>
           )}
         </div>
       </div>

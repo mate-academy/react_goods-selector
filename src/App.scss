@@ -9,16 +9,21 @@
 }
 
 .clear-button {
+  margin-top: 20px;
   display: inline-block;
   margin-left: 10px;
+
+  &__title {
+    font-weight: bold;
+  }
 }
 
 .content {
   align-self: center;
 }
 
-.list{
-  margin: 20px 0 20px;
+.list {
+  margin-top: 20px;
   width: 400px;
 }
 
