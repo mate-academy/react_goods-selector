@@ -87,7 +87,7 @@ export class App extends React.Component<{}, State> {
             );
           })}
         </ul>
-        {this.state.selectedGoods.length && (
+        {!!this.state.selectedGoods.length && (
           <button
             className="clear-button"
             type="button"
