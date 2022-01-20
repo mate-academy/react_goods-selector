@@ -1,1 +1,60 @@
-// styles go here
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    color: rgb(17, 17, 145);
+  }
+
+  &__button--x {
+    margin-left: 30px;
+    padding: 10px;
+    background-color: rgb(255, 67, 67);
+    border-radius: 50%;
+    transition: opacity 0.3s;
+    box-shadow: 3px 3px 1px 1px rgba(0, 0, 0, 0.589);
+    font-weight: bold;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &__list {
+    list-style: none;
+  }
+
+  &__good-name {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  &__button {
+    padding: 7px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: rgb(166, 226, 166);
+    }
+  }
+
+  &__item {
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  border: 1px solid grey;
+  border-radius: 20px;
+  }
+
+  &__item_active {
+    color: rgb(146, 255, 222);
+    background-color: green;
+  }
+}
+
