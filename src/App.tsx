@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-wrap-multilines */
 import React from 'react';
 import './App.scss';
 
@@ -14,24 +15,25 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
+interface State {
+  goods: string[],
+  selectedGoods: string[]
+}
+
 export class App extends React.Component<{}, State> {
   state: State = {
     goods: goodsFromServer,
     selectedGoods: ['Jam'],
   };
 
-  getButtonWith = (text: string, setState: string[], addclassName?: string) => {
-    return (
-      <button
-        className={`button ${addclassName}`}
-        type="button"
-        onClick={() => {
-          this.setState({ selectedGoods: setState });
-        }}
-      >
-        {text}
-      </button>
-    );
+  getButtonWith = (action: string, good?: string) => {
+    if (good && action === 'select') {
+      this.setState((state) => ({ selectedGoods: [...state.selectedGoods, good] }));
+    } else if (good && action === 'remove') {
+      this.setState((state) => ({ selectedGoods: state.selectedGoods.filter(el => el !== good) }));
+    } else {
+      this.setState({ selectedGoods: [] });
+    }
   };
 
   render() {
@@ -41,11 +43,23 @@ export class App extends React.Component<{}, State> {
       <div className="app">
         <h1 className="title">
           {selectedGoods.length > 0
-            ? `${selectedGoods.join(', ')} ${selectedGoods.length > 1 ? 'are' : 'is'}     selected`
+            ? `${selectedGoods.join(', ')} ${selectedGoods.length > 1 ? 'are' : 'is'}`
+              + ' selected'
             : 'No goods selected'}
         </h1>
 
-        {selectedGoods.length !== 0 && this.getButtonWith('Clear all', [], 'button--big')}
+        {selectedGoods.length !== 0
+          && (
+            <button
+              type="button"
+              className="button button--big"
+              onClick={() => {
+                this.getButtonWith('ClearAll');
+              }}
+            >
+              Clear All
+            </button>
+          )}
 
         <div className="wrapper">
           <ul className="app__list">
@@ -53,7 +67,18 @@ export class App extends React.Component<{}, State> {
               <li className="app__item" key={good}>
                 <div className="sheet">
                   <div className="sheet__good">{good}</div>
-                  {selectedGoods.includes(good) && this.getButtonWith('X', selectedGoods.filter(el => el !== good))}
+                  {selectedGoods.includes(good)
+                    && (
+                      <button
+                        type="button"
+                        className="button"
+                        onClick={() => {
+                          this.getButtonWith('remove', good);
+                        }}
+                      >
+                        remove
+                      </button>
+                    )}
                 </div>
               </li>
             ))}
@@ -64,7 +89,18 @@ export class App extends React.Component<{}, State> {
               <li key={good} className="app__item">
                 <div className="sheet">
                   <div className="sheet__good">{good}</div>
-                  {!selectedGoods.includes(good) && this.getButtonWith('select', [...selectedGoods, good])}
+                  {!selectedGoods.includes(good)
+                    && (
+                      <button
+                        type="button"
+                        className="button"
+                        onClick={() => {
+                          this.getButtonWith('select', good);
+                        }}
+                      >
+                        select
+                      </button>
+                    )}
                 </div>
               </li>
             ))}
