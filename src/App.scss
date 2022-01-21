@@ -1,1 +1,13 @@
-// styles go here
+.selectedGood {
+  background-color: greenyellow;
+}
+
+.buttonVisibility {
+  visibility: hidden;
+}
+
+.good {
+  display: inline-block;
+  margin-bottom: 4px;
+  width: 80px;
+}
