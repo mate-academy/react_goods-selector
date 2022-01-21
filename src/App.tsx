@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -15,13 +16,11 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  goods: string[],
   selectedGoods: string[],
 };
 
-class App extends React.Component<{}, State> {
+export class App extends React.Component<{}, State> {
   state: State = {
-    goods: goodsFromServer,
     selectedGoods: ['Jam'],
   };
 
@@ -35,11 +34,7 @@ class App extends React.Component<{}, State> {
     this.setState(oldState => {
       oldState.selectedGoods.splice(oldState.selectedGoods.indexOf(good), 1);
 
-      const result = {
-        selectedGoods: oldState.selectedGoods,
-      };
-
-      return result;
+      return { selectedGoods: oldState.selectedGoods };
     });
   };
 
@@ -55,20 +50,8 @@ class App extends React.Component<{}, State> {
         title = `${goods[0]} is selected`;
         break;
 
-      case (2):
-        title = `${goods[0]} and ${goods[1]} are selected`;
-        break;
-
       default:
-        for (let i = 0; i < goods.length; i += 1) {
-          if (i === goods.length - 2) {
-            title += `${goods[i]} `;
-          } else if (i === goods.length - 1) {
-            title += `and ${goods[i]} are selected`;
-          } else {
-            title += `${goods[i]}, `;
-          }
-        }
+        return `${[...goods].splice(0, goods.length - 1).join(', ')} and ${goods[goods.length - 1]} are selected`;
     }
 
     return title;
@@ -79,37 +62,52 @@ class App extends React.Component<{}, State> {
   };
 
   render() {
-    const { goods, selectedGoods } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App">
-        <button
-          type="button"
-          className="button__res"
-          onClick={
-            () => this.delete()
-          }
-        >
-          x
-        </button>
+        {!!this.state.selectedGoods.length && (
+          <button
+            type="button"
+            className="button__res"
+            onClick={
+              () => this.delete()
+            }
+          >
+            x
+          </button>
+        )}
         <span>
           {'    '}
         </span>
         <h1 className="title">
           {this.stringOfGoods(selectedGoods)}
         </h1>
-        <ul>
-          {goods.map(good => {
+        <ul className="ul">
+          {goodsFromServer.map(good => {
             const selected = selectedGoods.includes(good);
 
             return (
               <>
-                <li key={good} className={selected ? 'selected' : 'not-selected'}>
+                <li
+                  key={good}
+                  className={classNames('not-selected', {
+                    sel: selected,
+                  })}
+                >
                   {good}
                   <div className="button">
-                    {!selectedGoods.includes(good)
-                      ? <button type="button" className="button-55" onClick={() => this.select(good)}>Select</button>
-                      : <button type="button" className="button-56" onClick={() => this.remove(good)}>Remove</button>}
+                    <button
+                      type="button"
+                      className={classNames('button-55', {
+                        'button-56': selected,
+                      })}
+                      onClick={selected
+                        ? () => this.remove(good)
+                        : () => this.select(good)}
+                    >
+                      {selected ? 'remove' : 'select'}
+                    </button>
                   </div>
                 </li>
               </>
@@ -120,5 +118,3 @@ class App extends React.Component<{}, State> {
     );
   }
 }
-
-export default App;
