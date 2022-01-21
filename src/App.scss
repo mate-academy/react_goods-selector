@@ -1,1 +1,88 @@
-// styles go here
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Varela Round", sans-serif;
+}
+
+.App {
+  min-height: 100vh;
+  padding: 10px 20px;
+  font-size: 30px;
+
+  &__title {
+    margin-top: 100px;
+    text-align: left;
+    font-size: 30px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+
+    gap: 10px;
+    padding: 0;
+    margin: 15px 0 0;
+    list-style: none;
+
+    &--element {
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      border-radius: 20px;
+    }
+
+    &--good {
+      min-width: 50px;
+    }
+  }
+}
+
+.active {
+  background-color: rgb(192, 233, 164);
+}
+
+.button {
+  font-family: "Varela Round", sans-serif;
+  color: white;
+  background-color: rgb(255, 181, 85);
+  margin: 10px  15px 10px auto;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: 3px solid rgb(216, 144, 49);
+  outline: none;
+  cursor: pointer;
+  transition: all 0.5s;
+
+  &:hover {
+    background-color: rgb(255, 153, 19);
+    border-color: rgb(172, 97, 0);
+  }
+
+  &__active {
+    background-color: rgb(255, 144, 144);
+    border-color: rgb(216, 69, 49);
+
+    &:hover {
+      background-color: rgb(255, 83, 83);
+      border-color: rgb(153, 35, 19);
+    }
+  }
+
+  &__cleaner {
+    background-color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 50px;
+    outline: none;
+    position: absolute;
+    left: 700px;
+    top: 200px;
+    transition: background-color 0.5s, border-color 0.5s;
+  }
+}
