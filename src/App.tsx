@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -24,41 +25,23 @@ class App extends React.Component<{}, State> {
   };
 
   getMessage = () => {
-    let message = '';
     const { selectedGoods } = this.state;
+    const firstPartOfGoods = selectedGoods.slice(0, selectedGoods.length - 1).join(', ');
+    const restOfGoods = selectedGoods[selectedGoods.length - 1];
 
     switch (selectedGoods.length) {
       case 0:
-        message = 'No goods selected';
-        break;
+        return 'No goods selected';
 
       case 1:
-        message = `${selectedGoods[0]} is selected`;
-        break;
+        return `${selectedGoods[0]} is selected`;
 
       default:
-        message = `${selectedGoods.slice(0, selectedGoods.length - 1).join(', ')} and ${selectedGoods[selectedGoods.length - 1]} are selected`;
-        break;
+        return `${firstPartOfGoods} and ${restOfGoods} are selected`;
     }
-
-    return message;
   };
 
-  getButton = (good: string) => {
-    return (
-      <button
-        type="button"
-        className={this.state.selectedGoods.includes(good) ? 'btn btn-warning' : 'btn btn-success'}
-        onClick={() => {
-          this.selector(good);
-        }}
-      >
-        {this.state.selectedGoods.includes(good) ? 'Remove' : 'Add'}
-      </button>
-    );
-  };
-
-  selector = (good: string) => {
+  selectGoods = (good: string) => {
     const { selectedGoods } = this.state;
 
     if (selectedGoods.includes(good)) {
@@ -78,7 +61,9 @@ class App extends React.Component<{}, State> {
             <h1>
               The goods you have selected:
             </h1>
-            {this.getMessage()}
+            <p>
+              {this.getMessage()}
+            </p>
           </div>
           <div className="col-md-8">
             <div className="table-responsive">
@@ -100,14 +85,30 @@ class App extends React.Component<{}, State> {
 
                 <tbody>
                   {goodsFromServer.map((good) => {
+                    const goodSelected = this.state.selectedGoods.includes(good);
+
                     return (
 
-                      <tr className={this.state.selectedGoods.includes(good) ? 'bg-info' : ''}>
+                      <tr key="good" className={goodSelected ? 'bg-info' : ''}>
                         <th>
                           {good}
                         </th>
                         <th>
-                          {this.getButton(good)}
+                          <button
+                            type="button"
+                            className={classNames(
+                              'btn',
+                              {
+                                'btn-warning': goodSelected,
+                                'btn-success': !goodSelected,
+                              },
+                            )}
+                            onClick={() => {
+                              this.selectGoods(good);
+                            }}
+                          >
+                            {this.state.selectedGoods.includes(good) ? 'Remove' : 'Add'}
+                          </button>
                         </th>
                         <th>
                           {this.state.selectedGoods.includes(good)
