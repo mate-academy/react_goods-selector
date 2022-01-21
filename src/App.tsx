@@ -52,7 +52,7 @@ class App extends React.Component<{}, State> {
     return (
       <div className="App">
         <h1>{this.titleGood()}</h1>
-        {selectedGoods.length > 0 ? (
+        {selectedGoods.length > 0 && (
           <button
             type="button"
             onClick={() => {
@@ -61,8 +61,6 @@ class App extends React.Component<{}, State> {
           >
             X
           </button>
-        ) : (
-          (' ')
         )}
 
         <div className="list">
@@ -70,19 +68,17 @@ class App extends React.Component<{}, State> {
             {goodsFromServer.map(good => (
               <li key={good} className="list__item">
                 {good}
-                {selectedGoods.includes(good)
-                  ? (' ')
-                  : (
-                    <button
-                      type="button"
-                      className="button"
-                      onClick={() => {
-                        this.selectGood(good);
-                      }}
-                    >
-                      Select
-                    </button>
-                  )}
+                {!selectedGoods.includes(good) && (
+                  <button
+                    type="button"
+                    className="button"
+                    onClick={() => {
+                      this.selectGood(good);
+                    }}
+                  >
+                    Select
+                  </button>
+                )}
               </li>
             ))}
           </ul>
