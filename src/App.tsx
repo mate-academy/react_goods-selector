@@ -27,15 +27,6 @@ class App extends React.Component<{}, State> {
     selectedGoods: [],
   };
 
-  // handleClick = (item: string) => {
-  //   if (!this.state.selectedGoods.includes(item)) {
-  //     this.setState({ selectedGoods: [...prev.selectedGoods, item] });
-  //   } else {
-  //     this.state.selectedGoods.splice(selectedGoods.indexOf(item), 1);
-  //     this.setState({ selectedGoods });
-  //   }
-  // };
-
   handleClick = (item: string) => {
     this.setState(prev => {
       let goods = {};
