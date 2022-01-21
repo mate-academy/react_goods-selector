@@ -29,16 +29,13 @@ class App extends React.Component<{}, State> {
 
   handleClick = (item: string) => {
     this.setState(prev => {
-      let goods = {};
-
       if (!prev.selectedGoods.includes(item)) {
-        goods = { selectedGoods: [...prev.selectedGoods, item] };
-      } else {
-        prev.selectedGoods.splice(prev.selectedGoods.indexOf(item), 1);
-        goods = { selectedGoods: prev.selectedGoods };
+        return { selectedGoods: [...prev.selectedGoods, item] };
       }
 
-      return goods;
+      prev.selectedGoods.splice(prev.selectedGoods.indexOf(item), 1);
+
+      return { selectedGoods: prev.selectedGoods };
     });
   };
 
