@@ -26,11 +26,9 @@ export class App extends React.Component<{}, State> {
   };
 
   addGood = (good: string) => {
-    this.setState((state) => {
-      return {
-        selectedGoods: [...state.selectedGoods, good],
-      };
-    });
+    this.setState((state) => ({
+      selectedGoods: [...state.selectedGoods, good],
+    }));
   };
 
   removeGood = (good: string) => {
@@ -47,6 +45,8 @@ export class App extends React.Component<{}, State> {
 
   displayGoods = () => {
     const { selectedGoods } = this.state;
+    const displayAllExceptLastElement = (array: string[]) => [...array].splice(0, array.length - 1).join(', ');
+    const displayLastElement = (array: string[]) => array[array.length - 1];
 
     switch (selectedGoods.length) {
       case 0:
@@ -54,7 +54,7 @@ export class App extends React.Component<{}, State> {
       case 1:
         return `${selectedGoods[0]} is selected`;
       default:
-        return `${[...selectedGoods].splice(0, selectedGoods.length - 1).join(', ')} and ${selectedGoods[selectedGoods.length - 1]} are selected`;
+        return `${displayAllExceptLastElement(selectedGoods)} and ${displayLastElement(selectedGoods)} are selected`;
     }
   };
 
@@ -68,9 +68,11 @@ export class App extends React.Component<{}, State> {
 
             return (
               <li
-                className={classNames('list__item', {
-                  'list__item--selected': isSelected,
-                })}
+                className={classNames(
+                  'list__item', {
+                    'list__item--selected': isSelected,
+                  },
+                )}
                 key={good}
               >
                 {good}
