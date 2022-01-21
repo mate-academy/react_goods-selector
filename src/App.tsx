@@ -27,16 +27,31 @@ class App extends React.Component<{}, State> {
     selectedGoods: [],
   };
 
-  isSelected = (item: string, selectedGoods: string[]) => {
-    if (!this.state.selectedGoods.includes(item)) {
-      this.setState({ selectedGoods: [...selectedGoods, item] });
-    } else {
-      selectedGoods.splice(selectedGoods.indexOf(item), 1);
-      this.setState({ selectedGoods });
-    }
+  // handleClick = (item: string) => {
+  //   if (!this.state.selectedGoods.includes(item)) {
+  //     this.setState({ selectedGoods: [...prev.selectedGoods, item] });
+  //   } else {
+  //     this.state.selectedGoods.splice(selectedGoods.indexOf(item), 1);
+  //     this.setState({ selectedGoods });
+  //   }
+  // };
+
+  handleClick = (item: string) => {
+    this.setState(prev => {
+      let goods = {};
+
+      if (!prev.selectedGoods.includes(item)) {
+        goods = { selectedGoods: [...prev.selectedGoods, item] };
+      } else {
+        prev.selectedGoods.splice(prev.selectedGoods.indexOf(item), 1);
+        goods = { selectedGoods: prev.selectedGoods };
+      }
+
+      return goods;
+    });
   };
 
-  setClearList = () => {
+  clearList = () => {
     this.setState({ selectedGoods: [] });
   };
 
@@ -47,12 +62,12 @@ class App extends React.Component<{}, State> {
       case 1:
         return `${selectedGoods} is selected`;
       default: {
-        const title = selectedGoods.map((item) => {
-          if (selectedGoods.indexOf(item) < selectedGoods.length - 2) {
+        const title = selectedGoods.map((item, index) => {
+          if (index < selectedGoods.length - 2) {
             return `${item},`;
           }
 
-          if (selectedGoods.indexOf(item) === selectedGoods.length - 2) {
+          if (index === selectedGoods.length - 2) {
             return `${item}`;
           }
 
@@ -82,14 +97,12 @@ class App extends React.Component<{}, State> {
                 { selected: selectedGoods.includes(item) },
               )}
             >
-              <div
-                className="right floated content"
-              >
+              <div className="right floated content">
                 <button
                   className="ui button"
                   type="button"
                   onClick={() => {
-                    this.isSelected(item, selectedGoods);
+                    this.handleClick(item);
                   }}
                 >
                   {selectedGoods.includes(item) ? 'Remove' : 'Add'}
@@ -104,7 +117,7 @@ class App extends React.Component<{}, State> {
             <button
               className="ui button"
               type="button"
-              onClick={this.setClearList}
+              onClick={this.clearList}
             >
               X
             </button>
