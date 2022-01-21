@@ -1,1 +1,14 @@
-// styles go here
+.app {
+  padding: 50px;
+
+  &__selected {
+    background-color: aquamarine;
+  }
+
+  &__good {
+    font-size: 25px;
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
