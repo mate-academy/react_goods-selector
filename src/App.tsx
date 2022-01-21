@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames/bind';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -17,14 +18,12 @@ const goodsFromServer: string[] = [
 interface State {
   goods: string[];
   selectedGood: string[];
-  buttonStatus: string;
 }
 
 export class App extends React.Component<{}, State> {
   state = {
     goods: [...goodsFromServer],
     selectedGood: [''],
-    buttonStatus: 'list__button--green',
   };
 
   oldSelected = [''];
@@ -58,7 +57,7 @@ export class App extends React.Component<{}, State> {
   };
 
   render() {
-    const { goods, selectedGood, buttonStatus } = this.state;
+    const { goods, selectedGood } = this.state;
 
     if (selectedGood[0] === '') {
       selectedGood.length = 0;
@@ -66,60 +65,64 @@ export class App extends React.Component<{}, State> {
 
     return (
       <div className="App">
+        <div className="container">
+          <ul className="list">
+            {goods.map((good) => {
+              const isButtonPress = selectedGood.includes(good);
+
+              return (
+                <li
+                  className="list__item"
+                  key={good}
+                >
+                  <button
+                    className={classNames('list__button', {
+                      'list__button--red': isButtonPress,
+                    })}
+                    type="button"
+                    onClick={() => (
+                      isButtonPress
+                        ? this.removeButton(good)
+                        : this.addButton(good)
+                    )}
+                  >
+                    {
+                      isButtonPress
+                        ? 'Remove'
+                        : 'Add'
+                    }
+                  </button>
+                  <span className="list__title">
+                    {good}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+
+          <div className="close">
+            {
+              !!selectedGood.length
+              && (
+                <button
+                  className="close__button"
+                  type="button"
+                  onClick={() => (
+                    this.setState({
+                      selectedGood: [''],
+                    })
+                  )}
+                >
+                  X
+                </button>
+              )
+            }
+          </div>
+        </div>
+
         <h1 className="title">
           {this.pretier(selectedGood)}
         </h1>
-        <ul className="list">
-          {goods.map((good) => {
-            return (
-              <li
-                className="list__item"
-                key={good}
-              >
-                <button
-                  className={`list__button ${buttonStatus}`}
-                  type="button"
-                  onClick={() => {
-                    if (selectedGood.includes(good)) {
-                      this.removeButton(good);
-                      this.setState({
-                        buttonStatus: 'list__button--green',
-                      });
-                    } else {
-                      this.addButton(good);
-                      this.setState({
-                        buttonStatus: 'list__button--red',
-                      });
-                    }
-                  }}
-                >
-                  {
-                    selectedGood.includes(good)
-                      ? 'Remove'
-                      : 'Add'
-                  }
-                </button>
-                {good}
-              </li>
-            );
-          })}
-        </ul>
-        {
-          !!selectedGood.length
-          && (
-            <button
-              className="close"
-              type="button"
-              onClick={() => (
-                this.setState({
-                  selectedGood: [''],
-                })
-              )}
-            >
-              X
-            </button>
-          )
-        }
       </div>
     );
   }
