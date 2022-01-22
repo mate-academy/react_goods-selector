@@ -19,44 +19,79 @@ const goodsFromServer: string[] = [
 
 type State = {
   selectedGood: string,
-  selectedItem: string,
+  selectedGoodsArray: string[]
 };
 
 export class App extends React.Component<{}, State> {
   state: State = {
     selectedGood: '',
-    selectedItem: '',
+    selectedGoodsArray: [],
   };
 
-  ClickHandler = (item: string) => {
-    this.setState({
-      selectedGood: `${item} is selected`,
-      selectedItem: `${item}`,
-    });
+  chooseItemHandler = (item: string) => {
+    this.state.selectedGoodsArray.push(item);
+    this.setState(prevState => ({
+      selectedGood: `${prevState.selectedGoodsArray} is selected`,
+    }));
   };
 
-  resetSelectedItem() {
+  RemoveItemHandler = (item: string) => {
+    const indexItem = this.state.selectedGoodsArray.indexOf(item);
+
+    if (indexItem === -1) {
+      return;
+    }
+
+    this.state.selectedGoodsArray.splice(indexItem, 1);
+    this.setState(prevState => ({
+      selectedGood: `${prevState.selectedGoodsArray} is selected`,
+    }));
+  };
+
+  resetSelectedItems() {
     this.setState({
       selectedGood: '',
-      selectedItem: '',
+      selectedGoodsArray: [],
     });
   }
 
   render() {
-    const { selectedGood, selectedItem } = this.state;
+    const { selectedGood, selectedGoodsArray } = this.state;
+    let SelectedValues = '';
+
+    switch (selectedGoodsArray.length) {
+      case 1:
+        SelectedValues = `${selectedGoodsArray.join('')} is selected`;
+        break;
+
+      case 2:
+        SelectedValues = `${selectedGoodsArray[0]} and ${selectedGoodsArray[1]} are selected`;
+        break;
+
+      case 3:
+        SelectedValues = `${selectedGoodsArray[0]},${selectedGoodsArray[1]}  and ${selectedGoodsArray[2]} are selected`;
+        break;
+      case 0:
+        SelectedValues = 'None of items selected';
+        break;
+
+      default:
+        SelectedValues = `${selectedGoodsArray} are selected`;
+        break;
+    }
 
     return (
       <div className="App">
         <h1>
           {selectedGood === ''
             ? 'No items selected'
-            : `${selectedGood}`}
-          {selectedGood
+            : `${SelectedValues}`}
+          {selectedGoodsArray.length > 0
             ? (
               <Button
                 type="button"
                 onClick={() => (
-                  this.resetSelectedItem()
+                  this.resetSelectedItems()
                 )}
               >
                 X
@@ -64,27 +99,39 @@ export class App extends React.Component<{}, State> {
             )
             : ('')}
         </h1>
-        <ListGroup as="ul">
+        <ListGroup
+          as="ul"
+        >
           {goodsFromServer.map((item: string) => (
             <ListGroupItem
               className={classNames(
                 'd-flex justify-content-between align-items-center',
                 {
-                  active: selectedItem === item,
+                  active: this.state.selectedGoodsArray.includes(item) === true,
                 },
               )}
               as="li"
               key={item}
             >
               {item}
-              <Button
-                type="button"
-                onClick={() => {
-                  this.ClickHandler(item);
-                }}
-              >
-                Select
-              </Button>
+              <div>
+                <Button
+                  type="button"
+                  onClick={() => {
+                    this.chooseItemHandler(item);
+                  }}
+                >
+                  Add
+                </Button>
+                <Button
+                  type="button"
+                  onClick={() => {
+                    this.RemoveItemHandler(item);
+                  }}
+                >
+                  Remove
+                </Button>
+              </div>
             </ListGroupItem>
           ))}
         </ListGroup>
