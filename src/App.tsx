@@ -61,7 +61,7 @@ export class App extends React.Component<{}, State> {
 
     switch (selectedGoodsArray.length) {
       case 1:
-        SelectedValues = `${selectedGoodsArray.join('')} is selected`;
+        SelectedValues = `${selectedGoodsArray} is selected`;
         break;
 
       case 2:
