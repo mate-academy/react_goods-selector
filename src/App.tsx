@@ -72,7 +72,7 @@ export class App extends React.Component<{}, State> {
         SelectedValues = `${selectedGoodsArray[0]},${selectedGoodsArray[1]}  and ${selectedGoodsArray[2]} are selected`;
         break;
       case 0:
-        SelectedValues = 'None of items selected';
+        SelectedValues = 'No items selected';
         break;
 
       default:
