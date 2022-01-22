@@ -3,6 +3,10 @@ import './App.scss';
 
 import classNames from 'classnames';
 
+type State = {
+  selectedGood: string
+};
+
 const goodsFromServer: string[] = [
   'Dumplings',
   'Carrot',
@@ -17,7 +21,7 @@ const goodsFromServer: string[] = [
 ];
 
 class App extends React.Component {
-  state = {
+  state: State = {
     selectedGood: 'Jam',
   };
 
@@ -51,8 +55,8 @@ class App extends React.Component {
           </button>
         )}
         <ul className="goods__list">
-          {goodsFromServer.map(value => (
-            <div className="goods__items">
+          {goodsFromServer.map((value) => (
+            <div key={value + Math.random()} className="goods__items">
               <li className={
                 classNames(
                   'goods__item',
