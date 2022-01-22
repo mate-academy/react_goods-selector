@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.scss';
 
+import classNames from 'classnames';
+
 const goodsFromServer: string[] = [
   'Dumplings',
   'Carrot',
@@ -14,11 +16,72 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-const App: React.FC = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+class App extends React.Component {
+  state = {
+    selectedGood: 'Jam',
+  };
+
+  clearAll = () => {
+    this.setState({
+      selectedGood: '',
+    });
+  };
+
+  selectGood = (good: string) => {
+    this.setState({
+      selectedGood: good,
+    });
+  };
+
+  render(): React.ReactNode {
+    return (
+      <div className="App">
+        {
+          this.state.selectedGood
+            ? <h1>{`${this.state.selectedGood} is selected`}</h1>
+            : <h1>No goods selected</h1>
+        }
+        {this.state.selectedGood && (
+          <button
+            type="button"
+            onClick={this.clearAll}
+            className="button__clear"
+          >
+            X
+          </button>
+        )}
+        <ul className="goods__list">
+          {goodsFromServer.map(value => (
+            <div className="goods__items">
+              <li className={
+                classNames(
+                  'goods__item',
+                  { item__selected: value === this.state.selectedGood },
+                )
+              }
+              >
+                {value}
+              </li>
+              <button
+                type="button"
+                onClick={() => {
+                  this.selectGood(value);
+                }}
+                className={
+                  classNames(
+                    'items__button',
+                    { 'items__button-inactive': value === this.state.selectedGood },
+                  )
+                }
+              >
+                Select
+              </button>
+            </div>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}
 
 export default App;

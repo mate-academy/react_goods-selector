@@ -1,1 +1,61 @@
-// styles go here
+li, ul{
+  margin: 0;
+  padding: 0;
+}
+
+.goods {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border: 2px solid black;
+    width: 500px;
+    background-color: antiquewhite;
+    list-style: none;
+    padding: 20px;
+
+  }
+  &__items {
+    display: flex;
+  }
+  &__item {
+    margin-right: 10px;
+    display: inline-block;
+    width:  150px;
+  }
+}
+
+.item {
+  &__selected {
+    color: rgb(28, 4, 162);
+    font-size: 20px;
+    font-weight: 600;
+  }
+}
+
+.items {
+  &__button {
+    background-color: rgb(177, 176, 176);
+    font-weight: 600;
+
+    &:hover {
+      background-color: grey;
+    }
+  }
+
+  &__button-inactive{
+    visibility: hidden;
+  }
+}
+
+.button {
+  &__clear{
+    width: 50px;
+    background-color: rgb(177, 176, 176);
+    font-weight: 600;
+
+    &:hover {
+      background-color: grey;
+    }
+  }
+}
