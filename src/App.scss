@@ -1,1 +1,31 @@
-// styles go here
+.App {
+  margin: 30px;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.box {
+  margin-top: 20px;
+  width: 150px;
+}
+
+.button {
+  width: 100px;
+}
+
+.selected {
+  background-color: orange !important;
+}
+
+.title {
+  margin-left: 300px;
+  position: fixed;
+}
+
+.delete {
+  margin-left: 650px;
+  position: fixed !important;
+}
