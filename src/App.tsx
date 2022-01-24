@@ -20,28 +20,28 @@ type State = {
   selectedGoods: string[];
 };
 
-const showSelectedGoods = (goods: string[]): string => {
-  switch (goods.length) {
-    case 0:
-      return 'No goods selected';
-
-    case 1:
-      return `${goods[0]} is selected`;
-
-    case 2:
-      return `${goods[0]} and ${goods[1]} are selected`;
-
-    default: {
-      const lastGoodInd = goods.length - 1;
-
-      return `${goods.slice(0, lastGoodInd).join(', ')} and ${goods[lastGoodInd]} are selected`;
-    }
-  }
-};
-
 class App extends React.Component<{}, State> {
   state = {
     selectedGoods: ['Jam'],
+  };
+
+  showSelectedGoods = (goods: string[]): string => {
+    switch (goods.length) {
+      case 0:
+        return 'No goods selected';
+
+      case 1:
+        return `${goods[0]} is selected`;
+
+      case 2:
+        return `${goods[0]} and ${goods[1]} are selected`;
+
+      default: {
+        const lastGoodInd = goods.length - 1;
+
+        return `${goods.slice(0, lastGoodInd).join(', ')} and ${goods[lastGoodInd]} are selected`;
+      }
+    }
   };
 
   clickOnGoodHandler = (name: string): void => {
@@ -66,7 +66,7 @@ class App extends React.Component<{}, State> {
     return (
       <div className="App">
         <h1>
-          {showSelectedGoods(selectedGoods)}
+          {this.showSelectedGoods(selectedGoods)}
         </h1>
 
         <button
@@ -80,40 +80,44 @@ class App extends React.Component<{}, State> {
         </button>
 
         <ul className="list">
-          {goodsFromServer.map((good) => (
-            <li
-              className={classNames(
-                'list__item',
-                { active: selectedGoods.includes(good) },
-              )}
-              key={good}
-            >
-              {good}
+          {goodsFromServer.map((good) => {
+            const isSelected = selectedGoods.includes(good);
 
-              {selectedGoods.includes(good)
-                ? (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      this.removeGoodHandler(good);
-                    }}
-                  >
-                    Remove
-                  </button>
-                )
-
-                : (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      this.clickOnGoodHandler(good);
-                    }}
-                  >
-                    Add
-                  </button>
+            return (
+              <li
+                className={classNames(
+                  'list__item',
+                  { active: isSelected },
                 )}
-            </li>
-          ))}
+                key={good}
+              >
+                {good}
+
+                {isSelected
+                  ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        this.removeGoodHandler(good);
+                      }}
+                    >
+                      Remove
+                    </button>
+                  )
+
+                  : (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        this.clickOnGoodHandler(good);
+                      }}
+                    >
+                      Add
+                    </button>
+                  )}
+              </li>
+            );
+          })}
         </ul>
       </div>
     );
