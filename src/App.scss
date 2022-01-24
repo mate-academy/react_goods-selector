@@ -1,4 +1,4 @@
-li {
+.list__item {
   font-family: sans-serif;
   display: inline-block;
   margin: 5px;
@@ -6,19 +6,13 @@ li {
   text-align: center;
   transition: border .2s;
   border: 2px solid transparent;
-
 }
 
-h1 {
+.header {
   display: inline-block;
   width: 350px;
+  text-align: center;
 }
-
-.cross {
-  display: inline-block;
-
-}
-
 
 .selected {
   border: 2px solid greenyellow;
