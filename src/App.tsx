@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.scss';
 import classNames from 'classnames';
-// import { render } from 'react-dom';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -17,35 +16,43 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  isGoodSelected: boolean;
   infoString: string;
+  selectedGood: string;
 };
 
 class App extends React.Component<{}, State> {
   state: State = {
-    isGoodSelected: false,
     infoString: 'No goods selected',
+    selectedGood: '',
   };
 
+  componentDidMount() {
+    this.setState({
+      infoString: 'Jam is selected',
+      selectedGood: 'Jam',
+    });
+  }
+
   render() {
-    const { isGoodSelected } = this.state;
-    const { infoString } = this.state;
+    const { infoString, selectedGood } = this.state;
 
     return (
       <div className="App">
-        <h1 className="info">{infoString}</h1>
+        <div className="info">
+          <h1>{infoString}</h1>
+        </div>
         <button
           type="button"
           className={
             classNames(
               'button-hidden',
-              { 'button-visible': isGoodSelected },
+              { 'button-visible': (selectedGood.length !== 0) },
             )
           }
           onClick={() => {
             this.setState({
-              isGoodSelected: !isGoodSelected,
-              infoString: '',
+              infoString: 'No goods selected',
+              selectedGood: '',
             });
           }}
         >
@@ -59,7 +66,7 @@ class App extends React.Component<{}, State> {
                 className={
                   classNames(
                     'good',
-                    { 'good-bg': isGoodSelected },
+                    { 'good-bg': selectedGood === good },
                   )
                 }
               >
@@ -70,13 +77,13 @@ class App extends React.Component<{}, State> {
                 className={
                   classNames(
                     'button',
-                    { 'button-hidden': isGoodSelected },
+                    { 'button-hidden': selectedGood === good },
                   )
                 }
                 onClick={() => {
                   this.setState({
-                    isGoodSelected: !isGoodSelected,
                     infoString: `${good} is selected`,
+                    selectedGood: good,
                   });
                 }}
               >
