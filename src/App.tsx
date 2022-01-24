@@ -32,13 +32,13 @@ export class App extends React.Component<{}, State> {
 
   remove = (good: string) => {
     this.setState(oldState => {
-      oldState.selectedGoods.splice(oldState.selectedGoods.indexOf(good), 1);
+      [...oldState.selectedGoods].splice(oldState.selectedGoods.indexOf(good), 1);
 
       return { selectedGoods: oldState.selectedGoods };
     });
   };
 
-  stringOfGoods = (goods: string[]) => {
+  getTitle = (goods: string[]) => {
     let title = '';
 
     switch (goods.length) {
@@ -57,7 +57,7 @@ export class App extends React.Component<{}, State> {
     return title;
   };
 
-  delete = () => {
+  clear = () => {
     this.setState({ selectedGoods: [] });
   };
 
@@ -66,13 +66,11 @@ export class App extends React.Component<{}, State> {
 
     return (
       <div className="App">
-        {!!this.state.selectedGoods.length && (
+        {selectedGoods.length > 0 && (
           <button
             type="button"
             className="button__res"
-            onClick={
-              () => this.delete()
-            }
+            onClick={() => this.clear()}
           >
             x
           </button>
@@ -81,36 +79,34 @@ export class App extends React.Component<{}, State> {
           {'    '}
         </span>
         <h1 className="title">
-          {this.stringOfGoods(selectedGoods)}
+          {this.getTitle(selectedGoods)}
         </h1>
         <ul className="ul">
           {goodsFromServer.map(good => {
             const selected = selectedGoods.includes(good);
 
             return (
-              <>
-                <li
-                  key={good}
-                  className={classNames('not-selected', {
-                    sel: selected,
-                  })}
-                >
-                  {good}
-                  <div className="button">
-                    <button
-                      type="button"
-                      className={classNames('button-55', {
-                        'button-56': selected,
-                      })}
-                      onClick={selected
-                        ? () => this.remove(good)
-                        : () => this.select(good)}
-                    >
-                      {selected ? 'remove' : 'select'}
-                    </button>
-                  </div>
-                </li>
-              </>
+              <li
+                key={good}
+                className={classNames('not-selected', {
+                  sel: selected,
+                })}
+              >
+                {good}
+                <div className="button">
+                  <button
+                    type="button"
+                    className={classNames('button-55', {
+                      'button-56': selected,
+                    })}
+                    onClick={selected
+                      ? () => this.remove(good)
+                      : () => this.select(good)}
+                  >
+                    {selected ? 'remove' : 'select'}
+                  </button>
+                </div>
+              </li>
             );
           })}
         </ul>
