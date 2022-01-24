@@ -27,7 +27,7 @@ class App extends React.Component<{}, State> {
   getMessage = () => {
     const { selectedGoods } = this.state;
     const firstPartOfGoods = selectedGoods.slice(0, selectedGoods.length - 1).join(', ');
-    const restOfGoods = selectedGoods[selectedGoods.length - 1];
+    const lastGood = selectedGoods[selectedGoods.length - 1];
 
     switch (selectedGoods.length) {
       case 0:
@@ -37,20 +37,21 @@ class App extends React.Component<{}, State> {
         return `${selectedGoods[0]} is selected`;
 
       default:
-        return `${firstPartOfGoods} and ${restOfGoods} are selected`;
+        return `${firstPartOfGoods} and ${lastGood} are selected`;
     }
   };
 
-  selectGoods = (good: string) => {
+  selectGood = (good: string) => {
     const { selectedGoods } = this.state;
+    const goods = [...selectedGoods];
 
-    if (selectedGoods.includes(good)) {
-      selectedGoods.splice(selectedGoods.indexOf(good), 1);
+    if (goods.includes(good)) {
+      goods.splice(goods.indexOf(good), 1);
     } else {
-      selectedGoods.push(good);
+      goods.push(good);
     }
 
-    this.setState(prevState => ({ selectedGoods: prevState.selectedGoods }));
+    this.setState({ selectedGoods: goods });
   };
 
   render() {
@@ -89,7 +90,10 @@ class App extends React.Component<{}, State> {
 
                     return (
 
-                      <tr key="good" className={goodSelected ? 'bg-info' : ''}>
+                      <tr
+                        key="good"
+                        className={classNames({ 'bg-info': goodSelected })}
+                      >
                         <th>
                           {good}
                         </th>
@@ -104,7 +108,7 @@ class App extends React.Component<{}, State> {
                               },
                             )}
                             onClick={() => {
-                              this.selectGoods(good);
+                              this.selectGood(good);
                             }}
                           >
                             {this.state.selectedGoods.includes(good) ? 'Remove' : 'Add'}
