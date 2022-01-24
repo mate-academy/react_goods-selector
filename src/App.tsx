@@ -67,33 +67,31 @@ class App extends React.Component<{}, State> {
         </h1>
         <div>
           Reset your selections
-          <button
-            type="button"
-            onClick={() => this.resetSelected()}
-          >
-            x
-          </button>
+          {selectedGood.length > 0 && (
+            <button
+              type="button"
+              className="btn btn-outline-success"
+              onClick={() => this.resetSelected()}
+            >
+              x
+            </button>
+          )}
         </div>
 
-        <ul>
+        <ul className="list-group">
           {goodsFromServer.map(item => (
             ((selectedGood.includes(item)
               ? (
-                <li key={item} className="active">
+                <li key={item} className="list-group-item active">
                   {item}
-                  <button
-                    type="button"
-                    onClick={() => this.addStyleSelect(item)}
-                  >
-                    selected
-                  </button>
                 </li>
               )
               : (
-                <li key={item}>
+                <li key={item} className="list-group-item">
                   {item}
                   <button
                     type="button"
+                    className="btn btn-outline-success"
                     onClick={() => (
                       this.addStyleSelect(item)
                     )}

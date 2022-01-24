@@ -1,5 +1,15 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 500px;
+}
+
 .active {
   color: red;
   background-color: blueviolet;
+}
+
+.btn {
+  margin-left: 10px;
 }
