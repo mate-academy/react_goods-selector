@@ -1,1 +1,20 @@
-// styles go here
+.list__item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 20px;
+  width: 140px;
+  margin-bottom: 5px;
+}
+
+.cross {
+  height: 20px;
+}
+
+.select-button {
+  display: inline-block;
+}
+
+.active {
+  background-color: aquamarine;
+}
