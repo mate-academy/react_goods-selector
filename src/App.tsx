@@ -18,78 +18,70 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  selectedGood: string,
-  selectedGoodsArray: string[]
+  selectedGoods: string[]
 };
 
 export class App extends React.Component<{}, State> {
   state: State = {
-    selectedGood: '',
-    selectedGoodsArray: [],
+    selectedGoods: [],
   };
 
   chooseItemHandler = (item: string) => {
-    this.state.selectedGoodsArray.push(item);
-    this.setState(prevState => ({
-      selectedGood: `${prevState.selectedGoodsArray} is selected`,
-    }));
+    if (!(this.state.selectedGoods.includes(item))) {
+      this.setState(prevState => ({
+        selectedGoods: [...prevState.selectedGoods, item],
+      }));
+    }
   };
 
   RemoveItemHandler = (item: string) => {
-    const indexItem = this.state.selectedGoodsArray.indexOf(item);
-
-    if (indexItem === -1) {
-      return;
-    }
-
-    this.state.selectedGoodsArray.splice(indexItem, 1);
     this.setState(prevState => ({
-      selectedGood: `${prevState.selectedGoodsArray} is selected`,
+      selectedGoods: prevState.selectedGoods.filter(element => element !== item),
     }));
   };
 
   resetSelectedItems() {
     this.setState({
-      selectedGood: '',
-      selectedGoodsArray: [],
+      selectedGoods: [],
     });
   }
 
   render() {
-    const { selectedGood, selectedGoodsArray } = this.state;
+    const { selectedGoods } = this.state;
     let SelectedValues = '';
 
-    switch (selectedGoodsArray.length) {
+    switch (selectedGoods.length) {
       case 1:
-        SelectedValues = `${selectedGoodsArray} is selected`;
+        SelectedValues = `${selectedGoods} is selected`;
         break;
 
       case 2:
-        SelectedValues = `${selectedGoodsArray[0]} and ${selectedGoodsArray[1]} are selected`;
+        SelectedValues = `${selectedGoods[0]} and ${selectedGoods[1]} are selected`;
         break;
 
       case 3:
-        SelectedValues = `${selectedGoodsArray[0]},${selectedGoodsArray[1]}  and ${selectedGoodsArray[2]} are selected`;
+        SelectedValues = `${selectedGoods[0]},${selectedGoods[1]}  and ${selectedGoods[2]} are selected`;
         break;
       case 0:
         SelectedValues = 'No items selected';
         break;
 
       default:
-        SelectedValues = `${selectedGoodsArray} are selected`;
+        SelectedValues = `${selectedGoods} are selected`;
         break;
     }
 
     return (
       <div className="App">
         <h1>
-          {selectedGood === ''
+          {selectedGoods.join('') === ''
             ? 'No items selected'
             : `${SelectedValues}`}
-          {selectedGoodsArray.length > 0
+          {selectedGoods.length > 0
             ? (
               <Button
                 type="button"
+                className="btn btn-danger"
                 onClick={() => (
                   this.resetSelectedItems()
                 )}
@@ -107,7 +99,7 @@ export class App extends React.Component<{}, State> {
               className={classNames(
                 'd-flex justify-content-between align-items-center',
                 {
-                  active: this.state.selectedGoodsArray.includes(item) === true,
+                  active: (this.state.selectedGoods.includes(item)),
                 },
               )}
               as="li"
@@ -117,6 +109,7 @@ export class App extends React.Component<{}, State> {
               <div>
                 <Button
                   type="button"
+                  className="addButton btn btn-success"
                   onClick={() => {
                     this.chooseItemHandler(item);
                   }}
@@ -125,6 +118,7 @@ export class App extends React.Component<{}, State> {
                 </Button>
                 <Button
                   type="button"
+                  className="btn btn-danger"
                   onClick={() => {
                     this.RemoveItemHandler(item);
                   }}
