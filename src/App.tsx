@@ -93,9 +93,8 @@ class App extends React.Component<{}, State> {
                       ml-3"
                     type="button"
                     onClick={() => {
-                      selectedGoods.splice(selectedGoods.indexOf(good), 1);
                       this.setState({
-                        selectedGoods,
+                        selectedGoods: selectedGoods.filter(g => g !== good),
                       });
                     }}
                   >
