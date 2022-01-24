@@ -51,7 +51,12 @@ class App extends React.Component<{}, State> {
             return (
               <div className="ui container" key={good}>
                 <li
-                  className={classNames('list__item', { selected: this.state.selectedGood === good })}
+                  className={classNames(
+                    'list__item',
+                    {
+                      selected: this.state.selectedGood === good,
+                    },
+                  )}
                 >
                   {good}
                 </li>
