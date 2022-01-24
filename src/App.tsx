@@ -49,17 +49,23 @@ class App extends React.Component<{}, State> {
           {goodsFromServer.map((good) => (
             <li key={good}>
               <span
-                className={classNames('good', {
-                  isSelectedGood: selectedGoods === good,
-                })}
+                className={classNames(
+                  'good',
+                  {
+                    isSelectedGood: selectedGoods === good,
+                  },
+                )}
               >
                 {good}
               </span>
               <button
                 type="button"
-                className={classNames('good', {
-                  isVisible: selectedGoods === good,
-                })}
+                className={classNames(
+                  'good',
+                  {
+                    isVisible: selectedGoods === good,
+                  },
+                )}
                 onClick={() => this.setState({ selectedGoods: good })}
               >
                 Select
