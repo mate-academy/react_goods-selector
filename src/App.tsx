@@ -29,12 +29,14 @@ class App extends React.Component<{}, State> {
   }
 
   render() {
+    const { selectedGood } = this.state;
+
     return (
       <div className="App">
-        {this.state.selectedGood
+        {selectedGood
           ? (
             <>
-              <h1 className="header">{`${this.state.selectedGood} is selected`}</h1>
+              <h1 className="header">{`${selectedGood} is selected`}</h1>
 
               <button
                 type="button"
@@ -47,30 +49,28 @@ class App extends React.Component<{}, State> {
           )
           : <h1 className="header">No goods selected</h1>}
         <ul>
-          {goodsFromServer.map(good => {
-            return (
-              <div className="ui container" key={good}>
-                <li
-                  className={classNames(
-                    'list__item',
-                    {
-                      selected: this.state.selectedGood === good,
-                    },
-                  )}
-                >
-                  {good}
-                </li>
+          {goodsFromServer.map(good => (
+            <div className="ui container" key={good}>
+              <li
+                className={classNames(
+                  'list__item',
+                  {
+                    selected: selectedGood === good,
+                  },
+                )}
+              >
+                {good}
+              </li>
 
-                <button
-                  className={this.state.selectedGood === good ? 'hidden' : 'ui button mini'}
-                  type="button"
-                  onClick={() => this.clickHandler(good)}
-                >
-                  Select
-                </button>
-              </div>
-            );
-          })}
+              <button
+                className={selectedGood === good ? 'hidden' : 'ui button mini'}
+                type="button"
+                onClick={() => this.clickHandler(good)}
+              >
+                Select
+              </button>
+            </div>
+          ))}
         </ul>
       </div>
     );
