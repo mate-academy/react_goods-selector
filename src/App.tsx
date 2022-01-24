@@ -24,10 +24,6 @@ class App extends React.Component<{}, State> {
     selected: goodsFromServer[8],
   };
 
-  // clickHandler = (value: string) => {
-  //   this.setState({ selected: value });
-  // };
-
   render() {
     const { selected } = this.state;
 
