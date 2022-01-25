@@ -19,7 +19,6 @@ type State = {
   selectedGoods: string[],
 };
 
-// eslint-disable-next-line react/prefer-stateless-function
 class App extends React.Component<{}, State> {
   state = {
     selectedGoods: ['Jam'],
@@ -43,6 +42,18 @@ class App extends React.Component<{}, State> {
     }
   };
 
+  removeGood = (good: string) => {
+    this.setState(({ selectedGoods }) => ({
+      selectedGoods: selectedGoods.filter(el => el !== good),
+    }));
+  };
+
+  addGood = (good: string) => {
+    this.setState(({ selectedGoods }) => ({
+      selectedGoods: [...selectedGoods, good],
+    }));
+  };
+
   render() {
     return (
       <div className="App">
@@ -59,41 +70,41 @@ class App extends React.Component<{}, State> {
             </button>
           )}
           <ul className="App_list">
-            {goodsFromServer.map(good => (
-              <li
-                key={good}
-                className={classNames(
-                  'App_list-item box',
-                  {
-                    'has-background-primary-light': this.state.selectedGoods.includes(good),
-                  },
-                )}
-              >
-                {good}
-                {' '}
-                {this.state.selectedGoods.includes(good) ? (
-                  <button
-                    type="button"
-                    className="button is-danger is-outlined"
-                    onClick={() => this.setState(({ selectedGoods }) => ({
-                      selectedGoods: selectedGoods.filter(el => el !== good),
-                    }))}
-                  >
-                    Remove
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    className="button is-primary is-outlined"
-                    onClick={() => this.setState(({ selectedGoods }) => ({
-                      selectedGoods: [...selectedGoods, good],
-                    }))}
-                  >
-                    Add
-                  </button>
-                )}
-              </li>
-            ))}
+            {goodsFromServer.map(good => {
+              const isGoodSelected = this.state.selectedGoods.includes(good);
+
+              return (
+                <li
+                  key={good}
+                  className={classNames(
+                    'App_list-item box',
+                    {
+                      'has-background-primary-light': isGoodSelected,
+                    },
+                  )}
+                >
+                  {good}
+                  {' '}
+                  {isGoodSelected ? (
+                    <button
+                      type="button"
+                      className="button is-danger is-outlined"
+                      onClick={() => this.removeGood(good)}
+                    >
+                      Remove
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="button is-primary is-outlined"
+                      onClick={() => this.addGood(good)}
+                    >
+                      Add
+                    </button>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>
