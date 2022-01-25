@@ -2,7 +2,7 @@ import React from 'react';
 import './App.scss';
 import classNames from 'classnames';
 
-const goodsFromServer: string[] = [
+const goodsFromServer = [
   'Dumplings',
   'Carrot',
   'Eggs',
@@ -15,14 +15,21 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-export class App extends React.Component {
+type State = {
+  goods: string[],
+  selectedGood: string,
+};
+
+type Props = {};
+
+export class App extends React.Component<Props, State> {
   state = {
-    goods: goodsFromServer,
+    goods: [...goodsFromServer],
     selectedGood: 'Jam',
   };
 
   selectedHandler = (good: string) => {
-    this.setState({ selectedGood: `${good} is selected` });
+    this.setState({ selectedGood: good });
   };
 
   render() {
@@ -33,7 +40,9 @@ export class App extends React.Component {
         <h1>
           Selected good: -
           {' '}
-          {!selectedGood ? 'No goods selected' : selectedGood}
+          {!selectedGood
+            ? 'No goods selected'
+            : `${selectedGood} is selected`}
         </h1>
         <button
           className="removeGood"
@@ -46,23 +55,21 @@ export class App extends React.Component {
         </button>
         <ul className="App__list">
           {this.state.goods.map((good) => (
-            <>
-              <li key={good} className={classNames({ App__item: selectedGood.includes(good) })}>
-                {good}
-                {' '}
-                <button
-                  type="button"
-                  onClick={() => {
-                    this.selectedHandler(good);
-                  }}
-                  className={classNames({
-                    buttonVisible: selectedGood.includes(good),
-                  })}
-                >
-                  Select
-                </button>
-              </li>
-            </>
+            <li key={good} className={classNames({ App__item: selectedGood === good })}>
+              {good}
+              {' '}
+              <button
+                type="button"
+                onClick={() => {
+                  this.selectedHandler(good);
+                }}
+                className={classNames({
+                  buttonVisible: selectedGood === good,
+                })}
+              >
+                Select
+              </button>
+            </li>
           ))}
         </ul>
       </div>
