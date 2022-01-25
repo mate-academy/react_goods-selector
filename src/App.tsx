@@ -18,51 +18,55 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  selected: string[];
+  selectedGoods: string[];
 };
 
 class App extends React.Component<{}, State> {
   state: State = {
-    selected: [],
+    selectedGoods: [],
   };
 
   selectItem = (item: string) => {
     this.setState((state) => ({
-      selected: [...state.selected, item],
+      selectedGoods: [...state.selectedGoods, item],
     }));
   };
 
   removeItem = (item: string) => {
     this.setState((state) => ({
-      selected: state.selected.filter(el => el !== item),
+      selectedGoods: state.selectedGoods.filter(el => el !== item),
     }));
   };
 
   removeItems = () => {
-    this.setState({ selected: [] });
+    this.setState({ selectedGoods: [] });
   };
 
   getItems = () => {
-    const { selected } = this.state;
+    const { selectedGoods } = this.state;
 
-    if (selected.length === 1) {
-      return `${selected.join()} is selected`;
+    if (selectedGoods.length === 1) {
+      return `${selectedGoods.join()} is selected`;
     }
 
-    return `${selected.join(', ')} are selected`;
+    return `${selectedGoods.join(', ')} are selected`;
+  };
+
+  selectedItem = (item: string) => {
+    return this.state.selectedGoods.includes(item);
   };
 
   render() {
-    const { selected } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="box">
         <h1 className="title">
-          {selected.length !== 0
+          {selectedGoods.length !== 0
             ? this.getItems()
             : 'No goods selected'}
           {' '}
-          {selected.length !== 0 && (
+          {selectedGoods.length !== 0 && (
             <button
               type="button"
               className="button is-danger"
@@ -80,14 +84,14 @@ class App extends React.Component<{}, State> {
                 <div className="block">
                   <span className={classNames(
                     {
-                      'tag is-success is-light': selected.includes(good),
+                      'tag is-success is-light': this.selectedItem(good),
                     },
                   )}
                   >
                     {good}
                   </span>
                   {' '}
-                  {selected.includes(good)
+                  {this.selectedItem(good)
                     ? (
                       <button
                         type="button"
