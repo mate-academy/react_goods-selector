@@ -22,25 +22,17 @@ type State = {
 };
 
 class App extends React.Component<{}, State> {
-  state = {
+  state: State = {
     goods: goodsFromServer,
     selectedGoods: [],
   };
 
   addHandler = (good: string) => {
-    this.setState((prevState) => {
-      return {
-        selectedGoods: [...prevState.selectedGoods, good],
-      };
-    });
+    this.setState(state => ({ selectedGoods: [...state.selectedGoods, good] }));
   };
 
   removeHandler = (good: string) => {
-    this.setState((prevState) => {
-      return {
-        selectedGoods: prevState.selectedGoods.filter(item => item !== good),
-      };
-    });
+    this.setState(state => ({ selectedGoods: state.selectedGoods.filter(item => item !== good) }));
   };
 
   clearHandler = () => {
@@ -79,21 +71,27 @@ class App extends React.Component<{}, State> {
             : ''}
           {this.getGoodsList()}
         </h1>
-        {goods.map(good => (
-          <li
-            key={good}
-            className={cn('list__item', { selected: selectedGoods.some(item => item === good) })}
-          >
-            {good}
-            {selectedGoods.some(item => item === good)
-              ? (
-                <button type="button" onClick={() => this.removeHandler(good)}>Remove</button>
-              )
-              : (
-                <button type="button" onClick={() => this.addHandler(good)}>Add</button>
-              )}
-          </li>
-        ))}
+        <ul>
+          {goods.map(good => {
+            const isSelectedGood = selectedGoods.includes(good);
+
+            return (
+              <li
+                key={good}
+                className={cn('list__item', { selected: isSelectedGood })}
+              >
+                {good}
+                {isSelectedGood
+                  ? (
+                    <button type="button" onClick={() => this.removeHandler(good)}>Remove</button>
+                  )
+                  : (
+                    <button type="button" onClick={() => this.addHandler(good)}>Add</button>
+                  )}
+              </li>
+            );
+          })}
+        </ul>
       </div>
     );
   }
