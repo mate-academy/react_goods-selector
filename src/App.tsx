@@ -79,42 +79,46 @@ class App extends React.Component<{}, State> {
 
         <div>
           <ul className="content">
-            {goodsFromServer.map(good => (
-              <li key={good}>
-                <div className="block">
-                  <span className={classNames(
-                    {
-                      'tag is-success is-light': this.selectedItem(good),
-                    },
-                  )}
-                  >
-                    {good}
-                  </span>
-                  {' '}
-                  {this.selectedItem(good)
-                    ? (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          this.removeItem(good);
-                        }}
-                      >
-                        Remove
-                      </button>
-                    )
-                    : (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          this.selectItem(good);
-                        }}
-                      >
-                        Select
-                      </button>
+            {goodsFromServer.map(good => {
+              const isSelected = selectedGoods.includes(good);
+
+              return (
+                <li key={good}>
+                  <div className="block">
+                    <span className={classNames(
+                      {
+                        'tag is-success is-light': isSelected,
+                      },
                     )}
-                </div>
-              </li>
-            ))}
+                    >
+                      {good}
+                    </span>
+                    {' '}
+                    {isSelected
+                      ? (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            this.removeItem(good);
+                          }}
+                        >
+                          Remove
+                        </button>
+                      )
+                      : (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            this.selectItem(good);
+                          }}
+                        >
+                          Select
+                        </button>
+                      )}
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>
