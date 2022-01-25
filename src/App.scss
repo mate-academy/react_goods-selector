@@ -1,1 +1,25 @@
 // styles go here
+body {
+  background-color: black;
+  color: green;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.App {
+  margin: 0 auto;
+  border: 1px solid salmon;
+  padding: 10px;
+  width: 50%;
+}
+
+.button {
+  color: rgb(123, 255, 0);
+  background-color: rgb(116, 104, 102);
+
+  &:hover {
+    color: red;
+  }
+  &:active {
+    color: red;
+  }
+}
