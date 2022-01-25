@@ -12,10 +12,6 @@ const goodsFromServer: string[] = [
   'Honey',
   'Jam',
   'Garlic',
-  'plov',
-  'borsh',
-  'kotleta',
-  'oladki',
 ];
 
 type State = {
