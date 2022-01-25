@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -86,7 +87,7 @@ class App extends React.Component<{}, State> {
       <div className="App">
         <h1>
           {this.displaySelectedGoods()}
-          {(this.state.selectedGood.length > 0) && (
+          {(selectedGood.length > 0) && (
             <button
               type="button"
               className="button"
@@ -104,7 +105,7 @@ class App extends React.Component<{}, State> {
         <ul>
           {goodsFromServer.map(good => (
             <li key={good}>
-              {!this.state.selectedGood.includes(good)
+              {!selectedGood.includes(good)
               && (
                 <button
                   type="button"
@@ -116,8 +117,12 @@ class App extends React.Component<{}, State> {
                   Add
                 </button>
               )}
-              {good}
-              {this.state.selectedGood.includes(good)
+              <span
+                className={classNames('', { selectedGood: selectedGood.includes(good) })}
+              >
+                {good}
+              </span>
+              {selectedGood.includes(good)
               && (
                 <button
                   type="button"
