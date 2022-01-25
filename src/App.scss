@@ -1,1 +1,63 @@
 // styles go here
+body {
+  background-color: black;
+  color: green;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.App {
+  border: 1px solid salmon;
+  padding: 0px 35px 20px;
+  width: 50%;
+
+}
+
+.header {
+  height: 100px;
+}
+
+.counter {
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+
+  &__item {
+    line-height: 25px;
+
+  }
+}
+
+.button {
+  color: rgb(123, 255, 0);
+  background-color: rgb(116, 104, 102);
+
+  &:hover {
+    color: red;
+  }
+
+  &:active {
+    color: red;
+  }
+
+  &--add {
+  }
+
+  &--remove {
+  }
+
+  &--clear {
+    line-height: 20px;
+    border-radius: 50%;
+    top: -5px;
+    position: relative;
+    margin-left: 6px;
+  }
+}
+
+.selectedGood {
+  color: brown;
+  text-decoration: line-through;
+  margin-right: 10px;
+}
