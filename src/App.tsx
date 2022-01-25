@@ -46,7 +46,7 @@ class App extends React.Component<{}, State> {
     const { selected } = this.state;
 
     if (selected.length === 1) {
-      return `${selected.join(', ')} is selected`;
+      return `${selected.join()} is selected`;
     }
 
     return `${selected.join(', ')} are selected`;
