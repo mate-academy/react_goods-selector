@@ -25,56 +25,35 @@ class App extends React.Component<{}, State> {
     selectedGoods: ['Jam'],
   };
 
-  select = (good: string) => {
+  selectGood = (good: string) => {
     this.setState(oldState => ({
       selectedGoods: [...oldState.selectedGoods, good],
     }));
   };
 
-  remove = (good: string) => {
-    this.setState(oldState => {
-      oldState.selectedGoods.splice(oldState.selectedGoods.indexOf(good), 1);
-
-      const result = {
-        selectedGoods: oldState.selectedGoods,
-      };
-
-      return result;
-    });
+  removeGood = (good: string) => {
+    this.setState(oldState => ({
+      selectedGoods: oldState.selectedGoods.filter(elem => elem !== good),
+    }));
   };
 
-  stringOfGoods = (goods: string[]) => {
-    let title = '';
+  displaySelectedGoods = (goods: string[]) => {
+    const displayAllExceptLastElement = (array: string[]) => [...array].splice(0, array.length - 1).join(', ');
+    const displayLastElement = (array: string[]) => array[array.length - 1];
 
     switch (goods.length) {
       case (0):
-        title = 'No goods selected';
-        break;
+        return 'No goods selected';
 
       case (1):
-        title = `${goods[0]} is selected`;
-        break;
-
-      case (2):
-        title = `${goods[0]} and ${goods[1]} are selected`;
-        break;
+        return `${goods[0]} is selected`;
 
       default:
-        for (let i = 0; i < goods.length; i += 1) {
-          if (i === goods.length - 2) {
-            title += `${goods[i]} `;
-          } else if (i === goods.length - 1) {
-            title += `and ${goods[i]} are selected`;
-          } else {
-            title += `${goods[i]}, `;
-          }
-        }
+        return `${displayAllExceptLastElement(goods)} and ${displayLastElement(goods)} are selected`;
     }
-
-    return title;
   };
 
-  delete = () => {
+  deleteAllGoods = () => {
     this.setState({ selectedGoods: [] });
   };
 
@@ -84,12 +63,12 @@ class App extends React.Component<{}, State> {
     return (
       <div className="App">
         <h1>
-          {this.stringOfGoods(selectedGoods)}
+          {this.displaySelectedGoods(selectedGoods)}
           <button
             type="button"
             className="button__delete"
             onClick={
-              () => this.delete()
+              () => this.deleteAllGoods()
             }
           >
             Delete selected goods
@@ -104,8 +83,8 @@ class App extends React.Component<{}, State> {
                 <li key={good} className={selected ? 'button__selected' : 'button'}>
                   {good}
                   {!selectedGoods.includes(good)
-                    ? <button type="button" onClick={() => this.select(good)}>Select</button>
-                    : <button type="button" onClick={() => this.remove(good)}>Remove</button>}
+                    ? <button type="button" onClick={() => this.selectGood(good)}>Select</button>
+                    : <button type="button" onClick={() => this.removeGood(good)}>Remove</button>}
                 </li>
               </>
             );
