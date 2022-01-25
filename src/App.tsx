@@ -26,22 +26,21 @@ export class App extends React.Component<{}, State> {
     selectedGood: [''],
   };
 
-  oldSelected = [''];
-
   addButton = (good: string) => {
-    this.oldSelected = [...this.state.selectedGood];
-    this.setState({
-      selectedGood: [...this.oldSelected, good],
-    });
+    this.setState((state) => ({
+      selectedGood: [...state.selectedGood, good],
+    }));
   };
 
   removeButton = (good: string) => {
-    // eslint-disable-next-line no-console
-    console.log(good);
+    this.setState((state) => ({
+      selectedGood: [...state.selectedGood.filter((item) => (item !== good))],
+    }));
+  };
 
-    this.oldSelected = [...this.state.selectedGood];
+  clearGoods = () => {
     this.setState({
-      selectedGood: [...this.oldSelected.filter((item) => (item !== good))],
+      selectedGood: [''],
     });
   };
 
@@ -107,11 +106,7 @@ export class App extends React.Component<{}, State> {
                 <button
                   className="close__button"
                   type="button"
-                  onClick={() => (
-                    this.setState({
-                      selectedGood: [''],
-                    })
-                  )}
+                  onClick={this.clearGoods}
                 >
                   X
                 </button>
