@@ -42,8 +42,6 @@ class App extends React.Component<{}, State> {
     const i = this.state.selectedGood.findIndex(item => item === good);
 
     this.state.selectedGood.splice(i, 1);
-    // eslint-disable-next-line no-console
-    console.log(i);
 
     this.setState((prevState) => ({
       selectedGood: [
