@@ -52,10 +52,6 @@ class App extends React.Component<{}, State> {
     return `${selectedGoods.join(', ')} are selected`;
   };
 
-  selectedItem = (item: string) => {
-    return this.state.selectedGoods.includes(item);
-  };
-
   render() {
     const { selectedGoods } = this.state;
 
