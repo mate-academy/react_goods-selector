@@ -69,31 +69,37 @@ class App extends React.Component<{}, State> {
 
     return (
       <div className="App">
-        <h1>
-          {this.displaySelectedGoods()}
-          {(selectedGood.length > 0) && (
-            <button
-              type="button"
-              className="button"
-              onClick={() => {
-                this.clearSelected();
-              }}
-            >
-              X
-            </button>
-          )}
-        </h1>
-        <p>
+        <div className="header">
+          <h1>
+            {this.displaySelectedGoods()}
+            {(selectedGood.length > 0) && (
+              <button
+                type="button"
+                className="button button--clear"
+                onClick={() => {
+                  this.clearSelected();
+                }}
+              >
+                X
+              </button>
+            )}
+          </h1>
+        </div>
+        <p className="counter">
           {`${selectedGood.length} from ${goodsFromServer.length}`}
         </p>
-        <ul>
+
+        <ul className="list">
           {goodsFromServer.map(good => (
-            <li key={good}>
+            <li
+              key={good}
+              className="list__item"
+            >
               {!selectedGood.includes(good)
               && (
                 <button
                   type="button"
-                  className="button"
+                  className="button button--add"
                   onClick={() => {
                     this.selectHandler(good);
                   }}
@@ -110,7 +116,7 @@ class App extends React.Component<{}, State> {
               && (
                 <button
                   type="button"
-                  className="button"
+                  className="button button--remove"
                   onClick={() => {
                     this.removeHandler(good);
                   }}

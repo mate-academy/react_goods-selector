@@ -6,10 +6,27 @@ body {
 }
 
 .App {
-  margin: 0 auto;
   border: 1px solid salmon;
-  padding: 10px;
+  padding: 0px 35px 20px;
   width: 50%;
+
+}
+
+.header {
+  height: 100px;
+}
+
+.counter {
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+
+  &__item {
+    line-height: 25px;
+
+  }
 }
 
 .button {
@@ -23,9 +40,24 @@ body {
   &:active {
     color: red;
   }
+
+  &--add {
+  }
+
+  &--remove {
+  }
+
+  &--clear {
+    line-height: 20px;
+    border-radius: 50%;
+    top: -5px;
+    position: relative;
+    margin-left: 6px;
+  }
 }
 
 .selectedGood {
   color: brown;
   text-decoration: line-through;
+  margin-right: 10px;
 }
