@@ -21,7 +21,7 @@ type State = {
   selectedGoods: string[],
 };
 
-class App extends React.Component<{}, State> {
+export class App extends React.Component<{}, State> {
   state: State = {
     goods: goodsFromServer,
     selectedGoods: [],
@@ -96,5 +96,3 @@ class App extends React.Component<{}, State> {
     );
   }
 }
-
-export default App;
