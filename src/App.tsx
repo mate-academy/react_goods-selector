@@ -16,32 +16,36 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  selectedGoods: string,
+  selectedGood: string,
 };
 
 class App extends React.Component<{}, State> {
   state: State = {
-    selectedGoods: 'Jam',
+    selectedGood: 'Jam',
+  };
+
+  clearSelectedGood = () => {
+    this.setState({
+      selectedGood: '',
+    });
   };
 
   render() {
-    const { selectedGoods } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <div className="App">
         <h1>
-          {selectedGoods}
+          {selectedGood}
           {' '}
           is Selected
         </h1>
         <button
           type="button"
           className={classNames({
-            isVisible: selectedGoods === '',
+            isVisible: selectedGood === '',
           })}
-          onClick={() => this.setState({
-            selectedGoods: '',
-          })}
+          onClick={this.clearSelectedGood}
         >
           X
         </button>
@@ -52,7 +56,7 @@ class App extends React.Component<{}, State> {
                 className={classNames(
                   'good',
                   {
-                    isSelectedGood: selectedGoods === good,
+                    isSelectedGood: selectedGood === good,
                   },
                 )}
               >
@@ -63,10 +67,10 @@ class App extends React.Component<{}, State> {
                 className={classNames(
                   'good',
                   {
-                    isVisible: selectedGoods === good,
+                    isVisible: selectedGood === good,
                   },
                 )}
-                onClick={() => this.setState({ selectedGoods: good })}
+                onClick={() => this.setState({ selectedGood: good })}
               >
                 Select
               </button>
