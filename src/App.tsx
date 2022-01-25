@@ -24,6 +24,14 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  clearSelectedGood = () => {
+    this.setState({ selectedGood: '' });
+  };
+
+  selectGood = (good: string) => {
+    this.setState({ selectedGood: good });
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -40,9 +48,7 @@ export class App extends React.Component<{}, State> {
             <button
               className="app__button--x"
               type="button"
-              onClick={() => {
-                this.setState({ selectedGood: '' });
-              }}
+              onClick={this.clearSelectedGood}
             >
               Х
             </button>
@@ -57,10 +63,7 @@ export class App extends React.Component<{}, State> {
               <button
                 type="button"
                 className="app__button"
-                disabled={good === selectedGood}
-                onClick={() => {
-                  this.setState({ selectedGood: good });
-                }}
+                onClick={() => this.selectGood(good)}
               >
                 Select
               </button>
