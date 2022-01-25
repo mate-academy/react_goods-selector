@@ -59,7 +59,9 @@ export class App extends React.Component<{}, State> {
     const { goods, selectedGood } = this.state;
 
     if (selectedGood[0] === '') {
-      selectedGood.length = 0;
+      this.setState((state) => ({
+        selectedGood: [...state.selectedGood.filter((item) => (item !== ''))],
+      }));
     }
 
     return (
