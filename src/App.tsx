@@ -111,11 +111,11 @@ class App extends React.Component<{}, State> {
                               this.selectGood(good);
                             }}
                           >
-                            {this.state.selectedGoods.includes(good) ? 'Remove' : 'Add'}
+                            {goodSelected ? 'Remove' : 'Add'}
                           </button>
                         </th>
                         <th>
-                          {this.state.selectedGoods.includes(good)
+                          {goodSelected
                             ? 'This item was added to your cart'
                             : 'Press add button to add this item to your cart'}
                         </th>
