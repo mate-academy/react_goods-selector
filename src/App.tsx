@@ -25,55 +25,39 @@ class App extends React.Component<{}, State> {
   };
 
   selectHandler = (good: string) => {
-    if (!this.state.selectedGood.includes(good)) {
-      this.setState((prevState) => ({
-        selectedGood: [
-          ...prevState.selectedGood,
-          good,
-        ],
-      }));
-    }
-  };
-
-  removeHandler = (good: string) => {
-    const i = this.state.selectedGood.findIndex(item => item === good);
-
-    this.state.selectedGood.splice(i, 1);
-
     this.setState((prevState) => ({
       selectedGood: [
         ...prevState.selectedGood,
+        good,
+      ],
+    }));
+  };
+
+  removeHandler = (good: string) => {
+    this.setState((prevState) => ({
+      selectedGood: [
+        ...prevState.selectedGood.filter(item => item !== good),
       ],
     }));
   };
 
   displaySelectedGoods = () => {
-    if (this.state.selectedGood.length === 0) {
-      return 'No goods selected';
-    }
+    const selectedGoods = [...this.state.selectedGood];
 
-    if (this.state.selectedGood.length === 1) {
-      return `${this.state.selectedGood[0]} is selected`;
-    }
+    switch (selectedGoods.length) {
+      case (0):
+        return 'No goods selected';
 
-    const result = [];
+      case (1):
+        return `${selectedGoods[0]} is selected`;
 
-    for (let i = 0; i < this.state.selectedGood.length; i += 1) {
-      switch (i) {
-        case (this.state.selectedGood.length - 1):
-          result.push(`${this.state.selectedGood[i]} are selected.`);
-          break;
+      default:
+      {
+        const last = selectedGoods.pop();
 
-        case (this.state.selectedGood.length - 2):
-          result.push(`${this.state.selectedGood[i]} and `);
-          break;
-
-        default:
-          result.push(`${this.state.selectedGood[i]}, `);
+        return `${selectedGoods.join(', ')} and ${last} are selected.`;
       }
     }
-
-    return result.join('');
   };
 
   clearSelected = () => {
