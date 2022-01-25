@@ -1,1 +1,30 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &_box {
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+  }
+
+  &_title {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+  }
+
+  &_list {
+    width: 100%;
+  }
+
+  &_list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
