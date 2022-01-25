@@ -1,1 +1,12 @@
-// styles go here
+.list {
+  list-style: none;
+  font-size: 24px;
+}
+
+.selected {
+  background-color: yellow;
+}
+
+.hidden {
+  visibility: hidden;
+}
