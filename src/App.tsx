@@ -53,7 +53,7 @@ export class App extends React.Component<{}, State> {
       {
         const tail = selectedGoods.pop();
 
-        return `${selectedGoods.join(', ')} and ${tail} is selected`;
+        return `${selectedGoods.join(', ')} and ${tail} are selected`;
       }
     }
   };
