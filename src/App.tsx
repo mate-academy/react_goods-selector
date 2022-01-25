@@ -17,7 +17,7 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  selectedGood: string;
+  selectedGood: string | null;
 };
 
 class App extends React.Component<{}, State> {
@@ -30,7 +30,7 @@ class App extends React.Component<{}, State> {
   };
 
   clearSelect = () => {
-    this.setState({ selectedGood: '' });
+    this.setState({ selectedGood: null });
   };
 
   render() {
@@ -42,7 +42,7 @@ class App extends React.Component<{}, State> {
           className={classNames(
             'title',
             {
-              hidden: selectedGood === '',
+              hidden: !selectedGood,
             },
           )}
         >
@@ -56,7 +56,7 @@ class App extends React.Component<{}, State> {
           className={classNames(
             'title__button',
             {
-              hidden: selectedGood === '',
+              hidden: !selectedGood,
             },
           )}
         >
@@ -65,7 +65,7 @@ class App extends React.Component<{}, State> {
         <ul className="list">
           {goodsFromServer.map(good => (
             <li
-              key={goodsFromServer.indexOf(good)}
+              key={good}
               className={classNames(
                 'list__item',
                 {
