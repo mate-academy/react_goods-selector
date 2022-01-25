@@ -31,11 +31,9 @@ export class App extends React.Component<{}, State> {
   };
 
   remove = (good: string) => {
-    this.setState(oldState => {
-      [...oldState.selectedGoods].splice(oldState.selectedGoods.indexOf(good), 1);
-
-      return { selectedGoods: oldState.selectedGoods };
-    });
+    this.setState(oldState => ({
+      selectedGoods: oldState.selectedGoods.filter(elem => elem !== good),
+    }));
   };
 
   getTitle = (goods: string[]) => {
@@ -70,7 +68,7 @@ export class App extends React.Component<{}, State> {
           <button
             type="button"
             className="button__res"
-            onClick={() => this.clear()}
+            onClick={this.clear}
           >
             x
           </button>
