@@ -16,13 +16,11 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-type Props = {};
-
 type State = {
   selectedGood: string;
 };
 
-class App extends React.Component<Props, State> {
+class App extends React.Component<{}, State> {
   state: State = {
     selectedGood: 'Jam',
   };
@@ -47,9 +45,7 @@ class App extends React.Component<Props, State> {
         </h1>
         <button
           type="button"
-          onClick={() => {
-            this.clearSelect();
-          }}
+          onClick={this.clearSelect}
           className={classNames(
             'title__button',
             {
@@ -74,9 +70,7 @@ class App extends React.Component<Props, State> {
               <br />
               <button
                 type="button"
-                onClick={() => {
-                  this.selectGood(good);
-                }}
+                onClick={() => this.selectGood(good)}
                 className={classNames(
                   'list__button',
                   {
