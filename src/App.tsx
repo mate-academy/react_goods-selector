@@ -52,12 +52,10 @@ class App extends React.Component<{}, State> {
     return (
       <div className="App">
         <h1>{this.titleGood()}</h1>
-        {selectedGoods.length > 0 && (
+        {!!selectedGoods.length && (
           <button
             type="button"
-            onClick={() => {
-              this.setState({ selectedGoods: [] });
-            }}
+            onClick={this.deleteGood}
           >
             X
           </button>
