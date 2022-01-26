@@ -46,37 +46,40 @@ export class App extends React.Component<{}, State> {
     });
   }
 
-  render() {
-    const { selectedGoods } = this.state;
+  showItemsHandler() {
     let SelectedValues = '';
 
-    switch (selectedGoods.length) {
+    switch (this.state.selectedGoods.length) {
       case 1:
-        SelectedValues = `${selectedGoods} is selected`;
+        SelectedValues = `${this.state.selectedGoods} is selected`;
         break;
 
       case 2:
-        SelectedValues = `${selectedGoods[0]} and ${selectedGoods[1]} are selected`;
+        SelectedValues = `${this.state.selectedGoods[0]} and ${this.state.selectedGoods[1]} are selected`;
         break;
 
       case 3:
-        SelectedValues = `${selectedGoods[0]},${selectedGoods[1]}  and ${selectedGoods[2]} are selected`;
+        SelectedValues = `${this.state.selectedGoods[0]},${this.state.selectedGoods[1]}  and ${this.state.selectedGoods[2]} are selected`;
         break;
       case 0:
         SelectedValues = 'No items selected';
         break;
 
       default:
-        SelectedValues = `${selectedGoods} are selected`;
+        SelectedValues = `${this.state.selectedGoods} are selected`;
         break;
     }
+
+    return SelectedValues;
+  }
+
+  render() {
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App">
         <h1>
-          {selectedGoods.join('') === ''
-            ? 'No items selected'
-            : `${SelectedValues}`}
+          {this.showItemsHandler()}
           {selectedGoods.length > 0
             ? (
               <Button
