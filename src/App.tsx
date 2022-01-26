@@ -84,36 +84,40 @@ export class App extends React.Component<{}, State> {
         )}
 
         <ul className="card-content">
-          {goodsFromServer.map((good) => (
-            <li
-              key={good}
-              className={classNames(
-                'card-text',
-                { selected: selectedGoods.includes(good) },
-              )}
-            >
-              {good}
-              {selectedGoods.includes(good)
-                ? (
-                  <button
-                    className="button is-danger is-rounded"
-                    type="button"
-                    onClick={() => this.removeGood(good)}
-                  >
-                    Remove
-                  </button>
-                )
-                : (
-                  <button
-                    className="button is-success is-rounded"
-                    type="button"
-                    onClick={() => this.addGood(good)}
-                  >
-                    Add
-                  </button>
+          {goodsFromServer.map((good) => {
+            const isGood = selectedGoods.includes(good);
+
+            return (
+              <li
+                key={good}
+                className={classNames(
+                  'card-text',
+                  { selected: isGood },
                 )}
-            </li>
-          ))}
+              >
+                {good}
+                {isGood
+                  ? (
+                    <button
+                      className="button is-danger is-rounded"
+                      type="button"
+                      onClick={() => this.removeGood(good)}
+                    >
+                      Remove
+                    </button>
+                  )
+                  : (
+                    <button
+                      className="button is-success is-rounded"
+                      type="button"
+                      onClick={() => this.addGood(good)}
+                    >
+                      Add
+                    </button>
+                  )}
+              </li>
+            );
+          })}
         </ul>
       </div>
     );
