@@ -20,6 +20,12 @@ class App extends React.Component<Props, {}> {
     selectedGood: 'Jam',
   };
 
+  selectGood = (good: string) => {
+    this.setState({
+      selectedGood: good,
+    });
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -28,7 +34,7 @@ class App extends React.Component<Props, {}> {
         <h1>
           {selectedGood}
           { ' ' }
-          is selected
+          selected
         </h1>
 
         <ul>
@@ -46,7 +52,7 @@ class App extends React.Component<Props, {}> {
               <button
                 type="button"
                 onClick={() => {
-                  this.setState({ selectedGood: good });
+                  this.selectGood(good);
                 }}
                 className={classNames({
                   buttonVisible: selectedGood === good,
@@ -64,7 +70,7 @@ class App extends React.Component<Props, {}> {
             buttonVisible: selectedGood === 'No goods',
           })}
           onClick={() => {
-            this.setState({ selectedGood: 'No goods' });
+            this.selectGood('No goods');
           }}
         >
           Clear
