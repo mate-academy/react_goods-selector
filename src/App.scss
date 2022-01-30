@@ -1,1 +1,43 @@
-// styles go here
+.App {
+  .Goods{
+    width: 300px;
+    padding: 0;
+    list-style: none;
+    &__item{
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 5px 20px;
+      border: 1px solid gray;
+      box-shadow: 0 0 5px 2px gray;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+    &__button{
+      border: 1px solid gray;
+      box-shadow: 0 0 5px 1px gray;
+      &--add{
+        background-color: rgb(213, 255, 232);
+      }
+      &--remove{
+        background-color: rgb(253, 227, 227);
+      }
+    }
+  }
+
+  .Title{
+    display: flex;
+    align-items: center;
+  }
+
+  .Delete__button{
+    margin-left: 20px;
+    box-shadow: 0 0 5px 1px gray;
+    background-color: rgb(253, 227, 227);
+    border: 1px solid gray;
+
+  }
+
+  .active{
+    background: rgb(159, 237, 237);
+  }
+}
