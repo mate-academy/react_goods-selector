@@ -46,6 +46,10 @@ class App extends React.Component<{}, State> {
     return 'No goods selected';
   };
 
+  getChange = (item:string, firstArg:string, secondArg:string) => {
+    return this.state.selectedGood.includes(item) ? firstArg : secondArg;
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -71,7 +75,7 @@ class App extends React.Component<{}, State> {
               <div className="list">
                 <li
                   key={goodsFromServer.indexOf(item)}
-                  className={(selectedGood.includes(item)) ? 'list__selected' : 'list__notSelected'}
+                  className={this.getChange(item, 'list__selected', 'list__notSelected')}
                 >
                   {item}
                 </li>
@@ -80,9 +84,9 @@ class App extends React.Component<{}, State> {
                   onClick={() => {
                     this.getClick(item);
                   }}
-                  className={(selectedGood.includes(item)) ? 'btn btn__isNotVisible' : 'btn btn__isVisible'}
+                  className={this.getChange(item, 'btn btn__isNotVisible', 'btn btn__isVisible')}
                 >
-                  {(selectedGood.includes(item)) ? 'Remove' : 'Add'}
+                  {this.getChange(item, 'Remove', 'Add')}
                 </button>
               </div>
             );
