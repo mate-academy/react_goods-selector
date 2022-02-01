@@ -20,7 +20,7 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-class App extends React.Component {
+class App extends React.Component<{}, State> {
   state: State = {
     selectedGood: 'Jam',
   };
@@ -38,14 +38,16 @@ class App extends React.Component {
   };
 
   render(): React.ReactNode {
+    const { selectedGood } = this.state;
+
     return (
       <div className="App">
         {
-          this.state.selectedGood
-            ? <h1>{`${this.state.selectedGood} is selected`}</h1>
+          selectedGood
+            ? <h1>{`${selectedGood} is selected`}</h1>
             : <h1>No goods selected</h1>
         }
-        {this.state.selectedGood && (
+        {selectedGood && (
           <button
             type="button"
             onClick={this.clearAll}
@@ -56,11 +58,11 @@ class App extends React.Component {
         )}
         <ul className="goods__list">
           {goodsFromServer.map((value) => (
-            <div key={value + Math.random()} className="goods__items">
+            <div key={value} className="goods__items">
               <li className={
                 classNames(
                   'goods__item',
-                  { item__selected: value === this.state.selectedGood },
+                  { item__selected: value === selectedGood },
                 )
               }
               >
@@ -74,7 +76,7 @@ class App extends React.Component {
                 className={
                   classNames(
                     'items__button',
-                    { 'items__button-inactive': value === this.state.selectedGood },
+                    { 'items__button-inactive': value === selectedGood },
                   )
                 }
               >
