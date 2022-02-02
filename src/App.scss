@@ -1,1 +1,64 @@
 // styles go here
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: rgba(245, 211, 100, 0.87);
+}
+
+.App {
+  &__title {
+    margin-bottom: 20px;
+
+    &__goods {
+      font-size: 30px;
+      color: rgb(8, 47, 80);
+    }
+  }
+
+  &__goods-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    font-size: 24px;
+
+    &__good {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 5px;
+    }
+
+    &__good-item {
+      min-width: 150px;
+      background-color: rgb(228, 118, 85);
+      border-radius: 10px;
+      color: rgb(33, 32, 36);
+      min-height: 40px;
+    }
+  }
+}
+
+.btn {
+  width: 70px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: rgb(69, 131, 182);
+  margin-left: 10px;
+}
+
+.clear {
+  position: absolute;
+  right: 40px;
+  width: 70px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: rgb(211, 46, 46);
+  color: aliceblue;
+}
+
+.btn:active {
+  color: red;
+}
