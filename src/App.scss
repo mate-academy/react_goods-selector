@@ -1,1 +1,37 @@
-// styles go here
+.result-container {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+}
+
+.reset-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: tomato;
+}
+
+.goods-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+
+    width: 200px;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: black;
+    width: 80%;
+  }
+}
+
+.active {
+  background-color: aqua;
+}
