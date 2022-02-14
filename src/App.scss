@@ -1,1 +1,22 @@
 // styles go here
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0 30px;
+}
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid  transparent;
+  padding: 10px;
+  margin: 10px 0 0;
+}
+
+.active {
+  background-color: rgba(114, 226, 189, 0.568);
+  border: 1px solid  rgb(60, 119, 99);
+}
