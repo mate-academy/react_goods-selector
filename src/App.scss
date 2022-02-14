@@ -1,1 +1,50 @@
-// styles go here
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: larger;
+  margin: 40px;
+}
+
+ul {
+  list-style: none;
+}
+
+ul,
+li {
+  padding: 0;
+  margin: 0;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.title-button {
+  height: 40px;
+  width: 40px;
+  text-align: center;
+}
+
+.good-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  max-width: 300px;
+  margin-bottom: 20px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.good {
+  &--selected {
+    background-color: aquamarine;
+  }
+}
+
+.button {
+  font-size: inherit;
+}
