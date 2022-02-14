@@ -81,22 +81,13 @@ class App extends React.Component<Props, State> {
 
                 {goodIsSelected
                   ? (
-                    <div>
-                      <button
-                        type="button"
-                        className="button"
-                        onClick={selectHandler}
-                      >
-                        Add
-                      </button>
-                      <button
-                        type="button"
-                        className="button"
-                        onClick={removeHandler}
-                      >
-                        Remove
-                      </button>
-                    </div>
+                    <button
+                      type="button"
+                      className="button"
+                      onClick={removeHandler}
+                    >
+                      Remove
+                    </button>
                   )
                   : (
                     <button
@@ -104,7 +95,7 @@ class App extends React.Component<Props, State> {
                       className="button"
                       onClick={selectHandler}
                     >
-                      Select
+                      Add
                     </button>
                   )}
               </div>

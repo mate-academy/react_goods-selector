@@ -8,7 +8,7 @@ export function formatGoods(goods: string[]): string {
 
     default:
       return `${goods
-        .slice(0, goods.length - 1)
+        .slice(0, -1)
         .join(', ')} and ${goods[goods.length - 1]} are selected`;
   }
 }
