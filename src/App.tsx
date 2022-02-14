@@ -79,6 +79,16 @@ export default class App extends React.Component<{}, State> {
     });
   };
 
+  itemToggle = (item: string) => {
+    const { selected } = this.state;
+
+    if (selected.includes(item)) {
+      this.removeItem(item);
+    } else {
+      this.addItem(item);
+    }
+  };
+
   clearSelection = () => {
     this.setState((state) => {
       const { selected } = state;
@@ -93,38 +103,31 @@ export default class App extends React.Component<{}, State> {
     const { selected } = this.state;
 
     return (
-      goodsFromServer.map((item) => (
-        <li
-          key={item}
-          className={
-            `list__item
-            ${selected.includes(item) && 'list__item--selected'}
-            `
-          }
-        >
-          {item}
-          <div className="list__buttons">
-            <button
-              type="button"
-              className="list__button"
-              onClick={() => {
-                this.addItem(item);
-              }}
-            >
-              select
-            </button>
-            <button
-              type="button"
-              className="list__button"
-              onClick={() => {
-                this.removeItem(item);
-              }}
-            >
-              remove
-            </button>
-          </div>
-        </li>
-      ))
+      goodsFromServer.map((item) => {
+        return (
+          <li
+            key={item}
+            className={`list__item
+                  ${selected.includes(item) && 'list__item--selected'}
+            `}
+          >
+            {item}
+            <div className="list__buttons">
+              <button
+                type="button"
+                className="list__button"
+                onClick={() => {
+                  this.itemToggle(item);
+                }}
+              >
+                {selected.includes(item)
+                  ? 'Remove'
+                  : 'Add'}
+              </button>
+            </div>
+          </li>
+        );
+      })
     );
   };
 
