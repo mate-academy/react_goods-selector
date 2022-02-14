@@ -39,7 +39,7 @@ export default class App extends React.Component<{}, State> {
 
       case length > 2:
         text = `
-        ${selected.join(', ').replace(/,(?=[^,]*$)/, ' and')}
+        ${selected.join(', ').replace(/,(?=[^,]*$)/, ' and')} are selected
         `;
         break;
 
