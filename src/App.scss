@@ -1,1 +1,67 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+body, h1 {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  background-color: #ddd;
+  padding: 20px;
+  max-height: 100%;
+
+  &__data-info {
+    font-size: 24px;
+  }
+
+  &__list {
+    max-height: 100vh;
+  }
+
+  &__item {
+    padding: 5px;
+    height: max-content;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 200px;
+
+    transition: box-shadow 0.3s;
+
+    &--on {
+      background-color:rgba(255, 192, 203, 0.849);
+    }
+
+    &--off {
+      background-color:rgba(127, 255, 212, 0.863);
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+
+    &:hover {
+      box-shadow: 2px 2px 5px grey;
+    }
+  }
+
+  &__btn-clear {
+    margin-bottom: 10px;
+    width: 200px;
+    border-radius: 10px;
+    background-color:rgba(47, 114, 201, 0.815);
+    color: white;
+  }
+
+  &__btn {
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}
