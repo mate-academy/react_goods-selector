@@ -25,26 +25,26 @@ export default class App extends React.Component<{}, State> {
 
   headingText = () => {
     const { selected } = this.state;
-    const { length } = selected;
+    // const { length } = selected;
     let text = '';
 
-    switch (true) {
-      case length === 1:
+    switch (selected.length) {
+      case 0:
+        text = 'No goods selected';
+        break;
+
+      case 1:
         text = `selected ${selected[0]}`;
         break;
 
-      case length === 2:
+      case 2:
         text = `${selected[0]} and ${selected[1]} are selected`;
         break;
 
-      case length > 2:
+      default:
         text = `
         ${selected.join(', ').replace(/,(?=[^,]*$)/, ' and')} are selected
         `;
-        break;
-
-      default:
-        text = 'No goods selected';
         break;
     }
 
@@ -52,34 +52,18 @@ export default class App extends React.Component<{}, State> {
   };
 
   addItem = (item: string) => {
-    this.setState((state) => {
-      const { selected } = state;
-
-      if (!selected.includes(item)) {
-        return {
-          selected: selected.concat(item),
-        };
-      }
-
-      return state;
-    });
+    this.setState((state) => ({
+      selected: [...state.selected, item],
+    }));
   };
 
   removeItem = (item: string) => {
-    this.setState((state) => {
-      const { selected } = state;
-
-      if (selected.includes(item)) {
-        const itemIndex = state.selected.indexOf(item);
-
-        selected.splice(itemIndex, 1);
-      }
-
-      return state;
-    });
+    this.setState((state) => ({
+      selected: state.selected.filter((stateItem) => stateItem !== item),
+    }));
   };
 
-  itemToggle = (item: string) => {
+  toggleItem = (item: string) => {
     const { selected } = this.state;
 
     if (selected.includes(item)) {
@@ -117,7 +101,7 @@ export default class App extends React.Component<{}, State> {
                 type="button"
                 className="list__button"
                 onClick={() => {
-                  this.itemToggle(item);
+                  this.toggleItem(item);
                 }}
               >
                 {selected.includes(item)
