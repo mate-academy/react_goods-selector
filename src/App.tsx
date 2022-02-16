@@ -64,7 +64,9 @@ class App extends React.Component<{}, State> {
           {goods.map(good => (
             <div className="goods__list">
               <li
-                className={classnames('goods__item', { 'goods__item--selected': this.checkGood(good) })}
+                className={classnames('goods__item', {
+                  'goods__item--selected': this.checkGood(good),
+                })}
               >
                 {good}
               </li>
