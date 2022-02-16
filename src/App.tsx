@@ -34,10 +34,6 @@ class App extends React.Component<{}, State> {
     this.setState({ selectedGood: '' });
   }
 
-  cleanGood() {
-    this.setState({ selectedGood: '' });
-  }
-
   checkGood(good: string) {
     return this.state.selectedGood === good;
   }
@@ -57,7 +53,7 @@ class App extends React.Component<{}, State> {
             type="button"
             className="goods__clear"
             onClick={() => {
-              this.cleanGood();
+              this.removeGood();
             }}
           >
             X
@@ -73,29 +69,19 @@ class App extends React.Component<{}, State> {
                 {good}
               </li>
 
-              {this.checkGood(good)
-                ? (
-                  <button
-                    type="button"
-                    className="goods__button"
-                    onClick={() => {
-                      this.removeGood();
-                    }}
-                  >
-                    Remove
-                  </button>
-                )
-                : (
-                  <button
-                    type="button"
-                    className="goods__button"
-                    onClick={() => {
-                      this.addGood(good);
-                    }}
-                  >
-                    Add
-                  </button>
+              <button
+                type="button"
+                className="goods__button"
+                onClick={() => (
+                  this.checkGood(good)
+                    ? this.removeGood()
+                    : this.addGood(good)
                 )}
+              >
+                {this.checkGood(good)
+                  ? 'Remove'
+                  : 'Add'}
+              </button>
             </div>
           ))}
         </ul>
