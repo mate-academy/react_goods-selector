@@ -82,7 +82,7 @@ class App extends React.Component<{}, State> {
         <ul className="app__list list">
           {goodsFromServer.map(good => (
             <li
-              className="list__item"
+              className={`list__item ${this.isIncluded(good) && 'list__item--active'}`}
               key={good}
             >
               {good}
