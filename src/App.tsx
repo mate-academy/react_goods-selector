@@ -17,32 +17,31 @@ const goodsFromServer: string[] = [
 class App extends React.Component {
   state = {
     data: [...goodsFromServer],
-    selectedGoods: [],
+    selectedGoods: ['Jam'],
   };
 
   createSelected() {
     const goods: string[] = this.state.selectedGoods;
     const { length } = this.state.selectedGoods;
+    const goodsOut = [...goods];
 
-    if (length === 0) {
-      return 'No Selected';
+    goodsOut.pop();
+
+    const output = goodsOut.join(', ');
+
+    switch (length) {
+      case 0:
+        return 'No Selected';
+      case 1:
+        return `${goods[0]} is selected`;
+      default:
+
+        return `${output} and ${goods[goods.length - 1]} are selected`;
     }
-
-    if (length === 1) {
-      return `${goods[0]} is selected`;
-    }
-
-    let output = '';
-
-    for (let i = 0; i < length - 1; i += 1) {
-      output += `${goods[i]} , `;
-    }
-
-    return `${output.substring(0, output.length - 2)} and ${goods[goods.length - 1]} are selected`;
   }
 
   addWord(word: string) {
-    const arr: string[] = this.state.selectedGoods;
+    const arr: string[] = [...this.state.selectedGoods];
 
     arr.push(word);
 
@@ -50,28 +49,25 @@ class App extends React.Component {
   }
 
   removeWord(word: string) {
-    const arr: string[] = this.state.selectedGoods;
-    const index: number = arr.indexOf(word);
+    const arr: string[] = [...this.state.selectedGoods];
+    const index: number = arr.findIndex((el => el === word));
 
-    if (index >= 0) {
-      arr.splice(index, 1);
-    }
+    arr.splice(index, 1);
 
     return arr;
   }
 
-  check(word: string) {
-    const arr: string[] = this.state.selectedGoods;
-    const index: number = arr.indexOf(word);
+  checkSameGood(word: string) {
+    const arr: string[] = [...this.state.selectedGoods];
 
-    if (index >= 0) {
+    if (arr.includes(word)) {
       return true;
     }
 
     return false;
   }
 
-  check2() {
+  checkAnyGood() {
     if (this.state.selectedGoods.length > 0) {
       return true;
     }
@@ -89,15 +85,15 @@ class App extends React.Component {
           <p className="app__selectedList__list">
             {this.createSelected()}
           </p>
-          {!this.check2() && (
+          {!this.checkAnyGood() && (
             <button
               type="button"
               className="app__selectedList__non"
             >
-              Please, all what you want
+              All that you want...
             </button>
           )}
-          {this.check2() && (
+          {this.checkAnyGood() && (
             <button
               type="button"
               className="app__selectedList__clear"
@@ -113,7 +109,7 @@ class App extends React.Component {
             {this.state.data.map(good => (
               <li className="app__selectedForm__list__item">
                 {`${good}`}
-                {!this.check(good) && (
+                {!this.checkSameGood(good) && (
                   <button
                     type="button"
                     className="app__selectedForm__list__item__add"
@@ -124,7 +120,7 @@ class App extends React.Component {
                     Add
                   </button>
                 )}
-                {this.check(good) && (
+                {this.checkSameGood(good) && (
                   <button
                     type="button"
                     className="app__selectedForm__list__item__remove"
