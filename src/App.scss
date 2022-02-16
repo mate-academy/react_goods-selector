@@ -1,1 +1,49 @@
-// styles go here
+.app {
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: rgb(115, 115, 173);
+
+  width: 150px;
+  padding: 5px;
+
+  &__title {
+    font-size: 18px;
+    width: 150px;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 5px;
+  }
+}
+
+.button {
+  color: white;
+  border-radius: 5px;
+
+  &--clear {
+    color: white;
+    background-color: rgb(170, 13, 13);
+  }
+  &--add {
+    background-color: rgb(54, 7, 163);
+  }
+
+  &--remove {
+    background-color: rgb(87, 11, 11);
+  }
+}
