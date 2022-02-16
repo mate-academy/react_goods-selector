@@ -1,1 +1,92 @@
-// styles go here
+.app {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 300px;
+
+  margin: 32px;
+  padding: 0;
+
+  border: 2px solid black;
+  border-radius: 12px;
+
+  font-family: Arial;
+
+  &__selectedList {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 100%;
+    height: 144px;
+    background-color: #ddd;
+
+    &__title {
+      margin: 0;
+      text-align: center;
+      font-size: 2em;
+      font-weight: bold;
+    }
+
+    &__list {
+      margin: 0;
+      padding: 0 5px;
+      font-style: italic;
+    }
+
+    &__clear {
+      background-color: red;
+      border-radius: 4px;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+  }
+  &__selectedForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 100%;
+
+    background-color: #ddd;
+    
+    &__list {
+      margin: 0;
+      padding: 10px;
+      
+      &__item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        margin: 5px;
+        padding: 2px;
+
+        font-size: 1.5em;
+
+        border: 1px solid black;
+        border-radius: 4px;
+        background-color: #eee;
+
+        &__add {
+          background-color: rgb(11, 206, 37);
+          border-radius: 4px;
+          font-weight: bold;
+        }
+
+        &__remove {
+          background-color: red;
+          border-radius: 4px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+.active {
+  background-color: rgba(114, 226, 189, 0.568);
+  border: 1px solid  rgb(60, 119, 99);
+}
