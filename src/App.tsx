@@ -16,7 +16,7 @@ const goodsFromServer: string[] = [
 
 class App extends React.Component {
   state = {
-    data: goodsFromServer,
+    data: [...goodsFromServer],
     selectedGoods: [],
   };
 
@@ -71,6 +71,14 @@ class App extends React.Component {
     return false;
   }
 
+  check2() {
+    if (this.state.selectedGoods.length > 0) {
+      return true;
+    }
+
+    return false;
+  }
+
   render() {
     return (
       <div className="app">
@@ -81,13 +89,23 @@ class App extends React.Component {
           <p className="app__selectedList__list">
             {this.createSelected()}
           </p>
-          <button
-            type="button"
-            className="app__selectedList__clear"
-            onClick={() => this.setState({ selectedGoods: [] })}
-          >
-            X
-          </button>
+          {!this.check2() && (
+            <button
+              type="button"
+              className="app__selectedList__non"
+            >
+              Please, select what you want
+            </button>
+          )}
+          {this.check2() && (
+            <button
+              type="button"
+              className="app__selectedList__clear"
+              onClick={() => this.setState({ selectedGoods: [] })}
+            >
+              X
+            </button>
+          )}
         </div>
 
         <div className="app__selectedForm">
