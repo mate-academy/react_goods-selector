@@ -28,21 +28,15 @@ class App extends React.Component<Props, State> {
   };
 
   selectHandler(good: string) {
-    const { selectedGoods } = this.state;
-
-    this.setState({ selectedGoods: [...selectedGoods, good] });
+    this.setState((state) => ({
+      selectedGoods: [...state.selectedGoods, good],
+    }));
   }
 
   removeHandler(good: string) {
-    const { selectedGoods } = this.state;
-    const index = selectedGoods.indexOf(good);
-
-    this.setState({
-      selectedGoods: [
-        ...selectedGoods.slice(0, index),
-        ...selectedGoods.slice(index + 1),
-      ],
-    });
+    this.setState((state) => ({
+      selectedGoods: state.selectedGoods.filter(g => g !== good),
+    }));
   }
 
   resetSelection() {
