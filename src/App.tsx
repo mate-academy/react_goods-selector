@@ -94,7 +94,7 @@ class App extends React.Component {
               type="button"
               className="app__selectedList__non"
             >
-              Please, select what you want
+              Please, all what you want
             </button>
           )}
           {this.check2() && (
