@@ -27,17 +27,17 @@ class App extends React.Component<Props, State> {
     selectedGoods: ['Jam'],
   };
 
-  selectHandler(good: string) {
+  selectHandler = (good: string) => {
     this.setState((state) => ({
       selectedGoods: [...state.selectedGoods, good],
     }));
-  }
+  };
 
-  removeHandler(good: string) {
+  removeHandler = (good: string) => {
     this.setState((state) => ({
       selectedGoods: state.selectedGoods.filter(g => g !== good),
     }));
-  }
+  };
 
   resetSelection() {
     this.setState({ selectedGoods: [] });
