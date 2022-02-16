@@ -27,6 +27,28 @@ class App extends React.Component<Props, State> {
     selectedGoods: ['Jam'],
   };
 
+  selectHandler(good: string) {
+    const { selectedGoods } = this.state;
+
+    this.setState({ selectedGoods: [...selectedGoods, good] });
+  }
+
+  removeHandler(good: string) {
+    const { selectedGoods } = this.state;
+    const index = selectedGoods.indexOf(good);
+
+    this.setState({
+      selectedGoods: [
+        ...selectedGoods.slice(0, index),
+        ...selectedGoods.slice(index + 1),
+      ],
+    });
+  }
+
+  resetSelection() {
+    this.setState({ selectedGoods: [] });
+  }
+
   render() {
     const { selectedGoods } = this.state;
     const title = selectedGoods.length ? formatGoods(selectedGoods) : 'No goods selected';
@@ -43,7 +65,7 @@ class App extends React.Component<Props, State> {
               type="button"
               className="title-button"
               onClick={() => {
-                this.setState({ selectedGoods: [] });
+                this.resetSelection();
               }}
             >
               x
@@ -55,22 +77,9 @@ class App extends React.Component<Props, State> {
           {goodsFromServer.map(good => {
             const goodIsSelected = selectedGoods.includes(good);
 
-            const selectHandler = () => {
-              selectedGoods.push(good);
-              this.setState({ selectedGoods });
-            };
-
-            const removeHandler = () => {
-              const index = selectedGoods.indexOf(good);
-
-              selectedGoods.splice(index, 1);
-              this.setState({ selectedGoods });
-            };
-
             return (
-              <div className="good-container">
+              <div className="good-container" key={good}>
                 <li
-                  key={good}
                   className={classNames(
                     'good',
                     { 'good--selected': goodIsSelected },
@@ -84,7 +93,9 @@ class App extends React.Component<Props, State> {
                     <button
                       type="button"
                       className="button"
-                      onClick={removeHandler}
+                      onClick={() => {
+                        this.removeHandler(good);
+                      }}
                     >
                       Remove
                     </button>
@@ -93,7 +104,9 @@ class App extends React.Component<Props, State> {
                     <button
                       type="button"
                       className="button"
-                      onClick={selectHandler}
+                      onClick={() => {
+                        this.selectHandler(good);
+                      }}
                     >
                       Add
                     </button>
