@@ -118,13 +118,18 @@ export default class App extends React.Component<{}, State> {
       <div className="app">
         <div className="app__header">
           <h1 className="app__listText">{this.headingText()}</h1>
-          <button
-            className="app__cleanerButton"
-            type="button"
-            onClick={() => this.clearSelection()}
-          >
-            X
-          </button>
+          {this.state.selected.length === 0
+            || (
+              <>
+                <button
+                  className="app__cleanerButton"
+                  type="button"
+                  onClick={() => this.clearSelection()}
+                >
+                  X
+                </button>
+              </>
+            )}
         </div>
         <ul className="list">
           {this.makeGoodsList()}
