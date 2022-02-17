@@ -1,1 +1,46 @@
-// styles go here
+body {
+  background-color: grey;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    font-style: italic;
+    color: palegreen;
+  }
+}
+
+.button {
+  font-style: italic;
+  font-weight: bold;
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.list {
+  list-style: none;
+
+  .list__item {
+    font-style: italic;
+  }
+
+  .list__button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 8px;
+  }
+}
