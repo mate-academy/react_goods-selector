@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -86,9 +87,9 @@ class App extends React.Component<{}, State> {
           {goodsFromServer.map((product) => (
             <li
               key={product}
-              className={basket.includes(product)
-                ? 'products__item products__item--active'
-                : 'products__item'}
+              className={classNames('products__item', {
+                'products__item--active': basket.includes(product),
+              })}
             >
               {product}
               {' '}
