@@ -16,7 +16,7 @@ const goodsFromServer: string[] = [
 
 const App: React.FC = () => (
   <div className="App">
-    <h1>Selected good: -</h1>
+    <h1>Selected good: start -</h1>
     {goodsFromServer.length}
   </div>
 );
