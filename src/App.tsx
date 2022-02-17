@@ -66,7 +66,7 @@ class App extends React.Component<{}, State> {
                 key={good}
                 className={classNames('goods__item', {
                   'goods__item--isSelected':
-                   this.state.selectedGood === good,
+                   selectedGood === good,
                 })}
               >
                 {good}
