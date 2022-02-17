@@ -35,13 +35,27 @@ class App extends React.Component {
       <div className="App">
         <div className="display display__title">
           <h1>{name ? `${name} is selected` : 'No goods selected'}</h1>
-          <button type="button" onClick={this.unselected} hidden={name === ''}>X</button>
+
+          <button
+            type="button"
+            onClick={this.unselected}
+            hidden={name === ''}
+          >
+            X
+          </button>
         </div>
         <ul>
           {goods.map(good => (
             <div className="display">
               <li id={(name === good) ? good : ''}>{good}</li>
-              <button type="button" onClick={() => this.selected(good)} hidden={name === good}>{`Select ${good}`}</button>
+
+              <button
+                type="button"
+                onClick={() => this.selected(good)}
+                hidden={name === good}
+              >
+                {`Select ${good}`}
+              </button>
             </div>
           ))}
         </ul>
