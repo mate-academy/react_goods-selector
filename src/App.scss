@@ -1,1 +1,74 @@
-// styles go here
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+
+.goods {
+
+  &__title {
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 600px;
+    gap: 30px;
+    padding: 0 20px;
+    background-color: rgb(56, 175, 56);
+  }
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 600px;
+    padding-bottom: 20px;
+    list-style: none;
+    color: white;
+  }
+
+  &__list-wrapp {
+    background-color: rgb(18, 119, 18);
+    width: 600px;
+    padding: 20px;
+    margin: 0;
+    box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  }
+
+  &__item {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 20%;
+    height: 30px;
+    padding-left: 5%;
+    &--isSelected {
+      background-color: rgb(94, 179, 108);
+      box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+      border-radius: 15px;
+    }
+  }
+
+  &__button {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 25%;
+    height: 30px;
+    font-size: 18px;
+    box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+    border: none;
+    border-radius: 15px;
+
+  }
+}
+
+.title {
+  &__button {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+    border: none;
+    border-radius: 50%;
+
+  }
+}
