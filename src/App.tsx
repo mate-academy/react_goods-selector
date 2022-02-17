@@ -54,7 +54,7 @@ class App extends React.Component<{}, State> {
 
     return (
       `${goods.slice(0, goods.length - 1).join(', ')}`
-      + ` and ${goods.slice(goods.length - 1)} are`
+      + ` and ${goods.slice(goods.length - 1)} are `
     );
   };
 
