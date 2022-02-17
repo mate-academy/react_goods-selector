@@ -74,25 +74,17 @@ export class App extends React.Component<{}, State> {
               >
                 {good}
               </li>
-              {this.state.allSelectedGood.includes(good)
-                ? (
-                  <button
-                    type="button"
-                    className="goods__button"
-                    onClick={() => this.removeGood(good)}
-                  >
-                    Remove
-                  </button>
-                )
-                : (
-                  <button
-                    type="button"
-                    className="goods__button"
-                    onClick={() => this.selectGood(good)}
-                  >
-                    Add
-                  </button>
-                )}
+              <button
+                type="button"
+                className="goods__button"
+                onClick={this.state.allSelectedGood.includes(good)
+                  ? () => this.removeGood(good)
+                  : () => this.selectGood(good)}
+              >
+                {`${this.state.allSelectedGood.includes(good)
+                  ? 'Remove'
+                  : 'Add'}`}
+              </button>
             </div>
           ))}
         </ul>
