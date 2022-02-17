@@ -1,1 +1,18 @@
-// styles go here
+.selected {
+  background-color: rgb(2, 90, 2);
+  color: rgb(207, 204, 200)
+}
+
+.title {
+  display: flex;
+}
+
+.list {
+  list-style: none;
+
+  &:nth-child(n) {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+}
