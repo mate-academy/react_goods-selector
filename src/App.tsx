@@ -13,7 +13,6 @@ const goodsFromServer: string[] = [
   'Jam',
   'Garlic',
 ];
-// type Basket = string[];
 
 type State = {
   basket: string[],
@@ -24,31 +23,16 @@ class App extends React.Component<{}, State> {
     basket: [],
   };
 
-  addRemoveProduct = (product: string) => {
-    // eslint-disable-next-line no-console
-    console.log(product);
-    // const { basket } = this.state;
-    const isIn = this.state.basket.findIndex(el => el === product);
+  addProduct = (product: string) => {
+    this.setState(({ basket }) => ({
+      basket: [...basket, product],
+    }));
+  };
 
-    // eslint-disable-next-line no-console
-    console.log(isIn);
-
-    if (isIn === -1) {
-      this.setState(({ basket }) => ({
-        basket: [...basket, product],
-      }));
-    }
-
-    if (isIn >= 0) {
-      this.state.basket.splice(isIn, 1);
-
-      this.setState(({ basket }) => ({
-        basket: [...basket],
-      }));
-    }
-
-    // eslint-disable-next-line no-console
-    console.log(this.state);
+  removeProduct = (product: string) => {
+    this.setState(({ basket }) => ({
+      basket: basket.filter(el => el !== product),
+    }));
   };
 
   getTitle = (basket: string[]) => {
@@ -59,10 +43,6 @@ class App extends React.Component<{}, State> {
 
       case 1: {
         return `${basket[0]} is selected`;
-      }
-
-      case 2: {
-        return `${basket[0]} and ${basket[1]} are selected`;
       }
 
       default: {
@@ -76,6 +56,13 @@ class App extends React.Component<{}, State> {
 
   render() {
     const { basket } = this.state;
+    const addRemoveProduct = (product: string) => {
+      if (basket.includes(product)) {
+        return this.removeProduct(product);
+      }
+
+      return this.addProduct(product);
+    };
 
     return (
       <div className="App">
@@ -99,7 +86,8 @@ class App extends React.Component<{}, State> {
           {goodsFromServer.map((product) => (
             <li
               key={product}
-              className={basket.includes(product) ? 'products__item products__item--active'
+              className={basket.includes(product)
+                ? 'products__item products__item--active'
                 : 'products__item'}
             >
               {product}
@@ -108,7 +96,7 @@ class App extends React.Component<{}, State> {
                 className="products__btn"
                 type="button"
                 onClick={() => {
-                  this.addRemoveProduct(product);
+                  addRemoveProduct(product);
                 }}
               >
                 {basket.includes(product) ? 'Remove' : 'Add'}
