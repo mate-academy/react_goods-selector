@@ -1,1 +1,25 @@
-// styles go here
+.goods {
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 400px;
+    margin-left: 40px;
+    gap: 30px;
+  }
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 400px;
+    padding-bottom: 20px;
+    list-style: none;
+  }
+
+  &__item {
+    &--isSelected {
+      background-color: cadetblue;
+    }
+  }
+}
