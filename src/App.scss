@@ -1,1 +1,38 @@
-// styles go here
+.app {
+  &__title {
+    display: flex;
+    align-items: center;
+
+    &-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 20px;
+      margin-left: 50px;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    padding: 0;
+  }
+
+  &__good {
+    display: flex;
+    justify-content: space-between;
+
+
+    &-text {
+      list-style: none;
+      background-color: red;
+
+      &--target {
+        list-style: none;
+        background-color: green;
+      }
+    }
+  }
+}
