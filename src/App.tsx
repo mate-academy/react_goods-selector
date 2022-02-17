@@ -55,13 +55,15 @@ export class App extends React.Component<{}, State> {
               ? `${allSelectedGood} is selected`
               : 'No goods selected'}
           </h1>
-          <button
-            className="App__button"
-            type="button"
-            onClick={() => this.removeGoods()}
-          >
-            X
-          </button>
+          {(allSelectedGood.length !== 0) && (
+            <button
+              className="App__button"
+              type="button"
+              onClick={() => this.removeGoods()}
+            >
+              X
+            </button>
+          )}
         </div>
 
         <ul>
