@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -26,26 +27,44 @@ class App extends React.Component<{}, State> {
     selectedItems: ['Jam'],
   };
 
-  selectItem = (item: string) => {
-    let newItems = [...this.state.selectedItems];
+  addItem = (item: string) => {
+    if (!this.state.selectedItems.includes(item)) {
+      const newItems = [...this.state.selectedItems, item];
 
-    if (newItems.includes(item)) {
-      newItems = newItems.filter(prod => prod !== item);
-    } else {
-      newItems.push(item);
+      this.setState({ selectedItems: [...newItems] });
     }
+  };
+
+  removeItem = (item: string) => {
+    const newItems = [...this.state.selectedItems].filter(prod => prod !== item);
 
     this.setState({ selectedItems: [...newItems] });
   };
 
   render() {
     const stating = this.state.selectedItems;
-    const selevted = stating.length === 1 ? '' : `${[...stating].slice(0, -1).join(', ')} and `;
+    const selevted = stating.length === 1 ? ''
+      : `${[...stating].slice(0, -1).join(', ')} and `;
+
     const last = stating[stating.length - 1];
+    let titleText = '';
+
+    switch (stating.length) {
+      case 0:
+        titleText = 'No goods selected';
+        break;
+      case 1:
+        titleText = `${last} is selected`;
+        break;
+      default:
+        titleText = `${selevted}${last} are selected`;
+    }
 
     return (
       <div className="App">
-        <h1>{stating.length === 0 ? 'No goods selected' : `${selevted}${last} are selected`}</h1>
+        <h1>
+          {titleText}
+        </h1>
         <button
           type="button"
           className={classSelect}
@@ -58,21 +77,30 @@ class App extends React.Component<{}, State> {
             return (
               <li
                 key={good}
-                className={stating.includes(good) ? 'item active' : 'item'}
+                className={classNames(stating.includes(good) && 'active', 'item')}
               >
                 <h2>{good}</h2>
-                <button
-                  type="button"
-                  className={stating.includes(good) ? classUnSelect : classSelect}
-                  onClick={() => this.selectItem(good)}
-                >
-                  {stating.includes(good) ? 'remove' : 'add'}
-                </button>
+                <div>
+                  <button
+                    type="button"
+                    className={classSelect}
+                    onClick={() => this.addItem(good)}
+                  >
+                    add
+                  </button>
+
+                  <button
+                    type="button"
+                    className={classUnSelect}
+                    onClick={() => this.removeItem(good)}
+                  >
+                    remove
+                  </button>
+                </div>
               </li>
             );
           })}
         </ul>
-        {goodsFromServer.length}
       </div>
     );
   }
