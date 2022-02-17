@@ -1,1 +1,84 @@
-// styles go here
+.app {
+  font-style: italic;
+  min-width: 768px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+  box-sizing: border-box;
+
+  background-color: #bde0bf;
+
+  &__title {
+    text-align: center;
+  }
+}
+
+.basket {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  padding: 48px;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 5px;
+
+
+  &__icon {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background-image: url(./Img/basket.jpg);
+    background-size: cover;
+
+  }
+  &__count {
+    position: absolute;
+    right: 16px;
+    top: 5px;
+    color: white;
+  }
+
+  &__container {
+    position: relative;
+    box-sizing: border-box;
+    width: 500px;
+    height: 100px;
+    padding: 24px 40px 24px 24px;
+    border: 1px solid #000;
+  }
+
+  &__clear {
+    position: absolute;
+    right: -36px;
+    top: 34px;
+    width: 100px;
+    height: 30px;
+    transform: rotate(90deg);
+  }
+}
+
+.list {
+  &__product {
+    list-style: none;
+    margin-bottom: 10px;
+  }
+
+  &__product:last-child {
+    margin-bottom: 0px;
+  }
+
+  &__button {
+    margin-right: 24px;
+    width: 84px;
+    height: 36px;
+    border-radius: 5px;
+
+    &--add {
+      background-color: greenyellow;
+    }
+
+    &--remove {
+      background-color: rgb(226, 180, 208);
+    }
+  }
+}
