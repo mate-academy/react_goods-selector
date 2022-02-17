@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames/bind';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -23,18 +24,16 @@ class App extends React.Component<{}, State> {
     selectedGoods: ['Jam'],
   };
 
-  select = (newGood: string) => {
-    this.setState(({ selectedGoods }) => {
-      return { selectedGoods: [...selectedGoods, newGood] };
-    });
+  select = (newProduct: string) => {
+    this.setState(({ selectedGoods }) => ({
+      selectedGoods: [...selectedGoods, newProduct],
+    }));
   };
 
-  remove = (goodToRemove: string) => {
-    this.setState(({ selectedGoods }) => {
-      return ({
-        selectedGoods: selectedGoods.filter(good => good !== goodToRemove),
-      });
-    });
+  remove = (productToRemove: string) => {
+    this.setState(({ selectedGoods }) => ({
+      selectedGoods: selectedGoods.filter(product => product !== productToRemove),
+    }));
   };
 
   deleteAll = () => {
@@ -46,44 +45,47 @@ class App extends React.Component<{}, State> {
   render() {
     const { selectedGoods } = this.state;
 
+    const goodsList = selectedGoods.length === 1
+      ? selectedGoods[0]
+      : `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods.slice(-1)}`;
+
     return (
       <div className="App">
         <h1 className="App__title">
-          {`Selected goods: ${selectedGoods.length > 0
-            ? (selectedGoods.join(', '))
-            : ('No selected goods')
+          {`Already in basket: ${selectedGoods.length > 0
+            ? goodsList
+            : ('empty')
           }`}
         </h1>
         <ul className="App__list">
-          {goodsFromServer.map((good) => {
+          {goodsFromServer.map((product) => {
+            const buttonMethod = () => (
+              selectedGoods.includes(product)
+                ? this.remove(product)
+                : this.select(product)
+            );
+
+            const buttonName = selectedGoods.includes(product)
+              ? 'Remove'
+              : 'Add';
+
             return (
               <li
-                key={good}
+                key={product}
                 className="App__item"
               >
                 <span
-                  className={
-                    selectedGoods.includes(good)
-                      ? 'App__good App__good--active'
-                      : 'App__good'
-                  }
+                  className={classNames('App__product',
+                    { 'App__product--active': selectedGoods.includes(product) })}
                 >
-                  {good}
+                  {product}
                 </span>
                 <button
                   type="button"
                   className="App__button"
-                  onClick={
-                    selectedGoods.includes(good)
-                      ? () => this.remove(good)
-                      : () => this.select(good)
-                  }
+                  onClick={buttonMethod}
                 >
-                  {
-                    selectedGoods.includes(good)
-                      ? 'Delete'
-                      : 'Add'
-                  }
+                  {buttonName}
                 </button>
               </li>
             );
