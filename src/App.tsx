@@ -43,11 +43,11 @@ class App extends React.Component<{}, State> {
 
   display = (arr: string[]) => {
     if (arr.length === 1) {
-      return `${this.state.selectedGoods.join('')} is`;
+      return `${this.state.selectedGoods.join('')} is `;
     }
 
     if (arr.length === 2) {
-      return `${this.state.selectedGoods.join(' and ')} are`;
+      return `${this.state.selectedGoods.join(' and ')} are `;
     }
 
     const goods = this.state.selectedGoods;
@@ -67,10 +67,9 @@ class App extends React.Component<{}, State> {
         <h1 className="title">
           Selected good:
           {' '}
-          {this.display(selectedGoods)}
-          {' '}
           {AnyGoodSelected ? (
             <>
+              {this.display(selectedGoods)}
               selected
               {' '}
               <button
