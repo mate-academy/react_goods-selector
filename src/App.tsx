@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -37,20 +38,21 @@ class App extends React.Component<{}, State> {
     this.setState((state) => ({ selectedGoods: [...state.selectedGoods, good] }));
   };
 
-  createGoodsList = () => {
+  getSelectedGoods = () => {
     const { selectedGoods } = this.state;
 
-    const leng = selectedGoods.length;
+    const { length } = selectedGoods;
 
-    if (leng === 0) {
-      return 'No goods selected';
+    switch (length) {
+      case 0:
+        return 'No goods selected';
+
+      case 1:
+        return `${selectedGoods[0]} is selected`;
+
+      default:
+        return `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods[length - 1]} are selected`;
     }
-
-    if (leng === 1) {
-      return `${selectedGoods[0]} is selected`;
-    }
-
-    return `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods[leng - 1]} are selected`;
   };
 
   isIncluded = (good: string) => {
@@ -65,7 +67,7 @@ class App extends React.Component<{}, State> {
     return (
       <div className="app">
         <h1 className="app__title">
-          {this.createGoodsList()}
+          {this.getSelectedGoods()}
         </h1>
         <div className="container">
           {`Goods in list: ${selectedGoods.length}`}
@@ -73,7 +75,7 @@ class App extends React.Component<{}, State> {
             <button
               className="button button--clear"
               type="button"
-              onClick={() => this.clear()}
+              onClick={this.clear}
             >
               X
             </button>
@@ -82,7 +84,10 @@ class App extends React.Component<{}, State> {
         <ul className="app__list list">
           {goodsFromServer.map(good => (
             <li
-              className={`list__item ${this.isIncluded(good) && 'list__item--active'}`}
+              className={classNames('list__item', {
+                'list__item--active':
+                this.isIncluded(good),
+              })}
               key={good}
             >
               {good}
