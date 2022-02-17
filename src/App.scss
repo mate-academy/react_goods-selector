@@ -1,1 +1,17 @@
 // styles go here
+.list {
+  margin: 0;
+  padding: 0;
+  width: 300px;
+  list-style: none;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+
+    &--selected {
+      background-color: green;
+    }
+  }
+}
