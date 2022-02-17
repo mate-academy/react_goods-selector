@@ -14,7 +14,11 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-class App extends React.Component {
+type State = {
+  selectedGoods: string[],
+};
+
+class App extends React.Component<{}, State> {
   state = {
     data: [...goodsFromServer],
     selectedGoods: ['Jam'],
@@ -24,55 +28,41 @@ class App extends React.Component {
     const goods: string[] = this.state.selectedGoods;
     const { length } = this.state.selectedGoods;
     const goodsOut = [...goods];
-
-    goodsOut.pop();
+    const endEl = goodsOut.pop();
 
     const output = goodsOut.join(', ');
 
     switch (length) {
       case 0:
         return 'No Selected';
+
       case 1:
         return `${goods[0]} is selected`;
+
       default:
 
-        return `${output} and ${goods[goods.length - 1]} are selected`;
+        return `${output} and ${endEl} are selected`;
     }
   }
 
   addWord(word: string) {
-    const arr: string[] = [...this.state.selectedGoods];
-
-    arr.push(word);
-
-    return arr;
+    this.setState((prevState) => ({
+      selectedGoods: [...prevState.selectedGoods, word],
+    }));
   }
 
   removeWord(word: string) {
-    const arr: string[] = [...this.state.selectedGoods];
-    const index: number = arr.findIndex((el => el === word));
-
-    arr.splice(index, 1);
-
-    return arr;
+    this.setState((prevState) => ({
+      selectedGoods: [...prevState.selectedGoods.filter(good => good !== word)],
+    }));
   }
 
   checkSameGood(word: string) {
-    const arr: string[] = [...this.state.selectedGoods];
-
-    if (arr.includes(word)) {
-      return true;
-    }
-
-    return false;
+    return (this.state.selectedGoods.includes(word)) || false;
   }
 
   checkAnyGood() {
-    if (this.state.selectedGoods.length > 0) {
-      return true;
-    }
-
-    return false;
+    return (this.state.selectedGoods.length > 0) || false;
   }
 
   render() {
@@ -109,28 +99,24 @@ class App extends React.Component {
             {this.state.data.map(good => (
               <li className="app__selectedForm__list__item">
                 {`${good}`}
-                {!this.checkSameGood(good) && (
+                {(!this.checkSameGood(good)) ? (
                   <button
                     type="button"
                     className="app__selectedForm__list__item__add"
-                    onClick={
-                      () => this.setState({ selectedGoods: this.addWord(good) })
-                    }
+                    onClick={() => this.addWord(good)}
                   >
                     Add
                   </button>
-                )}
-                {this.checkSameGood(good) && (
-                  <button
-                    type="button"
-                    className="app__selectedForm__list__item__remove"
-                    onClick={
-                      () => this.setState({ selectedGoods: this.removeWord(good) })
-                    }
-                  >
-                    Remove
-                  </button>
-                )}
+                )
+                  : (
+                    <button
+                      type="button"
+                      className="app__selectedForm__list__item__remove"
+                      onClick={() => this.removeWord(good)}
+                    >
+                      Remove
+                    </button>
+                  )}
               </li>
             ))}
           </ul>
