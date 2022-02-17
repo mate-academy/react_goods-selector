@@ -36,10 +36,6 @@ class App extends React.Component<{}, State> {
     });
   }
 
-  checkedGood(good: string) {
-    return this.state.selectedGood === good;
-  }
-
   render() {
     const { selectedGood } = this.state;
 
@@ -62,6 +58,7 @@ class App extends React.Component<{}, State> {
         <ul>
           {goodsFromServer.map((good) => (
             <div className="goods__list">
+
               <li
                 key={good}
                 className={classNames('goods__item', {
@@ -71,16 +68,17 @@ class App extends React.Component<{}, State> {
               >
                 {good}
               </li>
+
               <button
                 type="button"
                 className="goods__button"
                 onClick={() => (
-                  this.checkedGood(good)
+                  selectedGood === good
                     ? this.clearGood()
                     : this.addGood(good)
                 )}
               >
-                {this.checkedGood(good)
+                {selectedGood === good
                   ? 'Remove'
                   : 'Add'}
               </button>
