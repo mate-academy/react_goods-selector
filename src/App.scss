@@ -1,1 +1,101 @@
 // styles go here
+body {
+  background-color: #ffffff;
+}
+.App {
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  height: 500px;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  align-items: stretch;
+}
+
+.wrapper {
+  height: 439px;
+  width: 200px;
+  margin: 20px;
+  padding: 10px;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24);
+}
+
+h1 {
+  font-size: 18px;
+  text-align: center;
+  max-width: 300px;
+  margin: 0;
+}
+
+.products {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  padding: 10px;
+  width: 200px;
+  list-style: none;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24);
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-between;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    margin: 3px;
+
+
+    &--active {
+      background-color: #02fa59;
+    }
+
+  }
+
+  &__btn {
+    width: 90px;
+    height: 25px;
+    border: none;
+    padding: 5px 15px;
+    color: #fff;
+    background: #448AFF;
+    text-align: center;
+    text-transform: uppercase;
+
+    transition: all 200ms ease-in-out;
+
+    &:hover {
+      box-shadow: 0px 6px 8px -3px rgba(0, 0, 0, 0.3);
+      transform: translateY(-2px);
+    }
+    &:active {
+      box-shadow: 0px 6px 8px -3px rgba(0, 0, 0, 0.3);
+      transform: translateY(0px);
+    }
+
+    &-reset {
+      width: 80px;
+      height: 30px;
+      border: none;
+      padding: 5px 15px;
+      color: #fff;
+      background: #31e26c;
+      text-align: center;
+      height: 40px;
+      margin-top: 20px;
+      text-transform: uppercase;
+      transition: all 200ms ease-in-out;
+
+      &:hover {
+        box-shadow: 0px 6px 8px -3px rgba(0, 0, 0, 0.3);
+        transform: translateY(-2px);
+      }
+      &:active {
+        box-shadow: 0px 6px 8px -3px rgba(0, 0, 0, 0.3);
+        transform: translateY(0px);
+      }
+    }
+  }
+
+}
