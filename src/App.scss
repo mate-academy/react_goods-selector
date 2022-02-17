@@ -1,1 +1,38 @@
-// styles go here
+.App {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  &__title {
+    margin: 20px auto;
+    width: fit-content;
+  }
+
+  &__list {
+    background-color: beige;
+    width: 200px;
+    padding: 20px;
+    margin: 0 auto;
+    border-radius: 10px;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+  }
+
+  &__product--active {
+    text-decoration: line-through;
+  }
+
+  &__button {
+    margin-left: 30px;
+    font-family: inherit;
+  }
+
+  &__delete {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 20px;
+  }
+}
