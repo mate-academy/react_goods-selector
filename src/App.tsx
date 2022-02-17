@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import './list.scss';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -114,14 +115,17 @@ export default class App extends React.Component<{}, State> {
 
   render() {
     return (
-      <div className="App">
-        <h1>{this.headingText()}</h1>
-        <button
-          type="button"
-          onClick={() => this.clearSelection()}
-        >
-          clear list
-        </button>
+      <div className="app">
+        <div className="app__header">
+          <h1 className="app__listText">{this.headingText()}</h1>
+          <button
+            className="app__cleanerButton"
+            type="button"
+            onClick={() => this.clearSelection()}
+          >
+            X
+          </button>
+        </div>
         <ul className="list">
           {this.makeGoodsList()}
         </ul>

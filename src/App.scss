@@ -1,17 +1,19 @@
-// styles go here
-.list {
-  margin: 0;
-  padding: 0;
-  width: 300px;
-  list-style: none;
+.app {
+  width: 500px;
+  margin: 0 auto;
 
-  &__item {
+  &__header {
     display: flex;
-    justify-content: space-between;
-    gap: 15px;
+  }
 
-    &--selected {
-      background-color: green;
-    }
+  &__cleanerButton {
+    margin: auto 0;
+    width: 30px;
+    height: 30px;
+  }
+
+  &__listText {
+    width: 450px;
+    display: block;
   }
 }
