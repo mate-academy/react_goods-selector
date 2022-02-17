@@ -1,1 +1,29 @@
-// styles go here
+.App {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  height: 110px;
+}
+
+.goods {
+  margin: 20px auto;
+  width: 350px;
+  list-style: none;
+  padding: 0;
+  box-shadow: 3px 5px 5px 2px #5a64699e;
+
+  &__item{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    font-size: 22px;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+
+    &--active {
+      background-color: #0f990f;
+    }
+  }
+}
