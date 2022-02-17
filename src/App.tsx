@@ -26,6 +26,13 @@ class App extends React.Component<{}, State> {
   };
 
   adder = (word: string) => {
+    if (this.state.selectedGoods.includes(word)) {
+      // eslint-disable-next-line no-alert
+      alert(`${word} already selected`);
+
+      return;
+    }
+
     this.setState(prevState => ({ selectedGoods: [...prevState.selectedGoods, word] }));
   };
 
