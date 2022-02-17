@@ -1,1 +1,37 @@
-// styles go here
+* {
+  margin: 0;
+}
+
+.App {
+  &__selectBlock {
+    margin: 10px 0 20px 40px;
+  }
+  &__button {
+    width: 80px;
+    margin-top: 5px;
+  }
+}
+
+.goods {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 400px;
+    list-style: none;
+  }
+
+  &__button {
+    width: 80px;
+    margin-bottom: 10px;
+  }
+
+  &__item {
+    transition-duration: 0.5s;
+    &--selected {
+      background-color: cadetblue;
+      max-width: 80px;
+      transform: scale(1.2);
+    }
+  }
+}
