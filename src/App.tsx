@@ -38,10 +38,6 @@ export class App extends React.Component<{}, State> {
     return this.state.selectedGood === good;
   };
 
-  selectGoods(good: string) {
-    return this.state.selectedGood === good;
-  }
-
   render() {
     const { selectedGood, goods } = this.state;
 
@@ -64,30 +60,26 @@ export class App extends React.Component<{}, State> {
             <div className="goods__list">
               <li
                 className={classNames('goods__item', {
-                  'goods__item--selected': this.selectGoods(good),
+                  'goods__item--selected': this.selectGood(good),
                 })}
               >
                 {good}
               </li>
-              {this.selectGood(good)
-                ? (
-                  <button
-                    type="button"
-                    className="goods__button"
-                    onClick={() => this.removeGood()}
-                  >
-                    Remove
-                  </button>
-                )
-                : (
-                  <button
-                    type="button"
-                    className="goods__button"
-                    onClick={() => this.addGood(good)}
-                  >
-                    Add
-                  </button>
+
+              <button
+                type="button"
+                className="goods__button"
+                onClick={() => (
+                  this.selectGood(good)
+                    ? this.removeGood()
+                    : this.addGood(good)
                 )}
+              >
+                {this.selectGood(good)
+                  ? 'Remove'
+                  : 'Add'}
+              </button>
+
             </div>
           ))}
         </ul>
