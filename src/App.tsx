@@ -30,24 +30,22 @@ class App extends React.Component<{}, State> {
   ) => {
     const button = event.target as HTMLElement;
     const buttonText = button.textContent;
-    let newGoods: string[];
+    const { addGood, removeGood } = this;
 
-    this.setState((state) => {
-      if (buttonText === 'Add') {
+    switch (buttonText) {
+      case 'Add':
+        addGood(selectedGood);
         button.textContent = 'Remove';
+        break;
 
-        newGoods = [...state.selectedGoods, selectedGood];
-      } else {
+      case 'Remove':
+        removeGood(selectedGood);
         button.textContent = 'Add';
+        break;
 
-        newGoods = state.selectedGoods
-          .filter(good => good !== selectedGood);
-      }
-
-      return {
-        selectedGoods: newGoods,
-      };
-    });
+      default:
+        break;
+    }
   };
 
   getStringOfSelected = (goods: string[]) => {
@@ -68,6 +66,20 @@ class App extends React.Component<{}, State> {
     this.setState({
       selectedGoods: [],
     });
+  };
+
+  addGood = (selectedGood: string) => {
+    this.setState(state => ({
+      selectedGoods: [...state.selectedGoods, selectedGood],
+    }));
+  };
+
+  removeGood = (selectedGood: string) => {
+    this.setState(state => ({
+      selectedGoods: state.selectedGoods.filter(
+        good => selectedGood !== good,
+      ),
+    }));
   };
 
   render() {
