@@ -26,11 +26,10 @@ export class App extends React.Component<{}, State> {
     goods: goodsFromServer,
   };
 
-  selectGoods = (good: string) => {
-    const mass = [...this.state.allSelectedGood];
-
-    mass.push(good);
-    this.setState({ allSelectedGood: [...mass] });
+  selectGood = (good: string) => {
+    this.setState((state) => ({
+      allSelectedGood: [...state.allSelectedGood, good],
+    }));
   };
 
   removeGoods = () => {
@@ -38,10 +37,9 @@ export class App extends React.Component<{}, State> {
   };
 
   removeGood = (good: string) => {
-    // eslint-disable-next-line react/no-access-state-in-setstate
-    const mass = [...this.state.allSelectedGood];
-
-    this.setState({ allSelectedGood: mass.filter(item => item !== good) });
+    this.setState((state) => ({
+      allSelectedGood: state.allSelectedGood.filter(item => item !== good),
+    }));
   };
 
   render() {
@@ -59,7 +57,7 @@ export class App extends React.Component<{}, State> {
             <button
               className="App__button"
               type="button"
-              onClick={() => this.removeGoods()}
+              onClick={this.removeGoods}
             >
               X
             </button>
@@ -90,7 +88,7 @@ export class App extends React.Component<{}, State> {
                   <button
                     type="button"
                     className="goods__button"
-                    onClick={() => this.selectGoods(good)}
+                    onClick={() => this.selectGood(good)}
                   >
                     Add
                   </button>
