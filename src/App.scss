@@ -1,1 +1,64 @@
-// styles go here
+body {
+  font-family: sans-serif;
+  background-color: darkseagreen;
+}
+
+.App {
+  margin: 5px 35px;
+}
+
+.check_goods {
+  min-height: 110px;
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: forestgreen;
+}
+
+.container__item {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid black;
+  padding: 25px;
+  border-radius: 5px;
+  margin: 5px 0;
+  background-color: mediumseagreen;
+  font-size: 25px;
+
+  &--active {
+    background-color: indianred;
+  }
+
+  &_good {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &_button {
+    transition: 1s;
+    width: 90px;
+    height: 35px;
+
+    &:hover {
+      box-shadow: 7px 3px 3px grey;
+      background-color: #7fff99;
+      transform: scale(1.1);
+    }
+  }
+}
+
+.button {
+  box-sizing: border-box;
+  border: 1px solid #7fff00;
+  background-color: #7fff00;
+  border-radius: 5px;
+
+  &_delete:hover {
+    background-color: palegreen;
+    box-shadow: 5px 0 5px 2px grey;
+  }
+}
