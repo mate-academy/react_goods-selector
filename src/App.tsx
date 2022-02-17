@@ -68,7 +68,7 @@ class App extends React.Component<{}, State> {
           {this.createGoodsList()}
         </h1>
         <div className="container">
-          {`Goods in list: ${this.state.selectedGoods.length}`}
+          {`Goods in list: ${selectedGoods.length}`}
           {selectedGoods.length > 0 && (
             <button
               className="button button--clear"
@@ -91,9 +91,7 @@ class App extends React.Component<{}, State> {
                   <button
                     className="list__button button button--add"
                     type="button"
-                    onClick={() => {
-                      this.addGood(good);
-                    }}
+                    onClick={() => this.addGood(good)}
                   >
                     Select
                   </button>
@@ -101,9 +99,7 @@ class App extends React.Component<{}, State> {
                   <button
                     className="list__button button button--remove"
                     type="button"
-                    onClick={() => {
-                      this.removeGood(good);
-                    }}
+                    onClick={() => this.removeGood(good)}
                   >
                     Remove
                   </button>
