@@ -23,21 +23,21 @@ class App extends React.Component<{}, State> {
     selectedGoods: ['Jam'],
   };
 
-  clear() {
+  clear = () => {
     this.setState({ selectedGoods: [] });
-  }
+  };
 
-  removeGood(good: string) {
+  removeGood = (good: string) => {
     this.setState((state) => ({
       selectedGoods: state.selectedGoods.filter((product) => product !== good),
     }));
-  }
+  };
 
-  addGood(good: string) {
+  addGood = (good: string) => {
     this.setState((state) => ({ selectedGoods: [...state.selectedGoods, good] }));
-  }
+  };
 
-  createGoodsList() {
+  createGoodsList = () => {
     const { selectedGoods } = this.state;
 
     const leng = selectedGoods.length;
@@ -51,13 +51,13 @@ class App extends React.Component<{}, State> {
     }
 
     return `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods[leng - 1]} are selected`;
-  }
+  };
 
-  isIncluded(good: string) {
+  isIncluded = (good: string) => {
     const { selectedGoods } = this.state;
 
     return selectedGoods.includes(good);
-  }
+  };
 
   render() {
     const { selectedGoods } = this.state;
