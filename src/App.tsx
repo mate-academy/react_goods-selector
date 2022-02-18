@@ -16,45 +16,44 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  addGoods:string[]
+  selectedGoods:string[]
   dataGoods: string[]
 };
 
 class App extends React.Component<{}, State> {
   state: State = {
-    addGoods: ['Jam'],
+    selectedGoods: ['Jam'],
     dataGoods: goodsFromServer,
   };
 
   create = (good: string) => {
     this.setState((state) => (
-      { addGoods: [...state.addGoods, good] }
+      { selectedGoods: [...state.selectedGoods, good] }
     ));
   };
 
   deleteGoods = () => {
     this.setState(() => (
-      { addGoods: [] }
+      { selectedGoods: [] }
     ));
   };
 
   deleteGood = (good: string) => {
-    this.setState(({ addGoods }) => ({
-      addGoods: addGoods.filter(item => item !== good),
+    this.setState(({ selectedGoods }) => ({
+      selectedGoods: selectedGoods.filter(item => item !== good),
     }));
   };
 
   render() {
-    const { addGoods, dataGoods } = this.state;
+    const { selectedGoods, dataGoods } = this.state;
 
     return (
       <div className="App">
         <div className="check_goods">
           <h1>
-            {(addGoods.length === 0)
+            {(selectedGoods.length === 0)
               ? 'No selected goods'
-              : `${addGoods}`
-              + ' is selected' }
+              : `${selectedGoods.join(', ')} is selected` }
           </h1>
           <button
             onClick={this.deleteGoods}
@@ -66,7 +65,7 @@ class App extends React.Component<{}, State> {
         </div>
 
         {dataGoods.map((good) => {
-          const isSelected = addGoods.includes(good);
+          const isSelected = selectedGoods.includes(good);
           const buttonText = isSelected
             ? 'Delete'
             : 'Add';
@@ -74,7 +73,7 @@ class App extends React.Component<{}, State> {
           return (
             <div
               className={classNames('container__item',
-                { 'container__item--active': addGoods.includes(good) })}
+                { 'container__item--active': selectedGoods.includes(good) })}
             >
               <li
                 key={good}
