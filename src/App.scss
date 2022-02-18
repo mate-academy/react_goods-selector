@@ -18,13 +18,16 @@
     justify-content: space-between;
     height: 30px;
     padding: 0 15px;
+    font-size: 20px;
     margin-bottom: 20px;
     gap: 5px;
     // background-color: red;
 
 
     &--selected {
-      background-color: red;
+      background-color: greenyellow;
+      border-radius: 5px;
+      align-items: center;
     }
   }
 }

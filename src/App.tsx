@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-// import classNames from 'classnames';
+import classNames from 'classnames';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -24,6 +24,14 @@ class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  selectGood(good: string) {
+    this.setState({ selectedGood: good });
+  }
+
+  removeGood() {
+    this.setState({ selectedGood: '' });
+  }
+
   render() {
     const { selectedGood } = this.state;
     const visible = selectedGood === '';
@@ -36,7 +44,7 @@ class App extends React.Component<{}, State> {
             <button
               type="button"
               onClick={() => {
-                this.setState({ selectedGood: '' });
+                this.removeGood();
               }}
             >
               X
@@ -53,18 +61,20 @@ class App extends React.Component<{}, State> {
               <li
                 key={good}
                 className={
-                  good === selectedGood
-                    ? 'container__item container__item--selected' : 'container__item'
+                  classNames('container__item', {
+                    'container__item--selected': good === selectedGood,
+                  })
                 }
               >
                 {good}
+
                 {(good !== selectedGood)
                 && (
                   <button
                     className="waves-effect waves-light btn"
                     type="button"
                     onClick={() => {
-                      this.setState({ selectedGood: good });
+                      this.selectGood(good);
                     }}
                   >
                     Select
