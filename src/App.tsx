@@ -53,8 +53,8 @@ class App extends React.Component<{}, State> {
           <h1>
             {(addGoods.length === 0)
               ? 'No selected goods'
-              // eslint-disable-next-line no-useless-concat
-              : `${addGoods}` + ' is selected' }
+              : `${addGoods}`
+              + ' is selected' }
           </h1>
           <button
             onClick={() => this.deleteGoods()}
@@ -64,7 +64,7 @@ class App extends React.Component<{}, State> {
             Delete goods
           </button>
         </div>
-        {/* eslint-disable-next-line array-callback-return */}
+
         {dataGoods.map((good) => {
           const isSelected = addGoods.includes(good);
           const buttonText = isSelected
