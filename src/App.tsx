@@ -14,61 +14,55 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-class App extends React.Component {
+type State = {
+  data: string[],
+  selected: string[],
+};
+
+class App extends React.Component<{}, State> {
   state = {
     data: goodsFromServer,
     selected: [],
+  };
+
+  clear = () => {
+    this.setState({
+      selected: [],
+    });
   };
 
   createSelected() {
     const arr: string[] = this.state.selected;
     const { length } = this.state.selected;
 
-    if (length === 0) {
-      return 'No Selected';
+    switch (length) {
+      case 0:
+        return 'No Selected';
+      case 1:
+        return `${arr[0]} is selected`;
+      default:
+        break;
     }
 
-    if (length === 1) {
-      return `${arr[0]} is selected`;
-    }
+    const output = arr.join(', ');
 
-    let output = '';
-
-    for (let i = 0; i < length - 1; i += 1) {
-      output += `${arr[i]} , `;
-    }
-
-    return `${output.substring(0, output.length - 2)} and ${arr[arr.length - 1]} are selected`;
+    return `${output.replace(new RegExp(',([^,]*)$'), ' and$1')} are selected`;
   }
 
   addWord(word: string) {
-    const arr: string[] = this.state.selected;
-
-    arr.push(word);
-
-    return arr;
+    this.setState(state => ({
+      selected: [...state.selected, word],
+    }));
   }
 
   removeWord(word: string) {
-    const arr: string[] = this.state.selected;
-    const index: number = arr.indexOf(word);
-
-    if (index >= 0) {
-      arr.splice(index, 1);
-    }
-
-    return arr;
+    this.setState((state) => ({
+      selected: state.selected.filter((select) => select !== word),
+    }));
   }
 
   check(word: string) {
-    const arr: string[] = this.state.selected;
-    const index: number = arr.indexOf(word);
-
-    if (index >= 0) {
-      return true;
-    }
-
-    return false;
+    return this.state.selected.some(select => select === word);
   }
 
   render() {
@@ -79,7 +73,7 @@ class App extends React.Component {
           <button
             type="button"
             className="app__clear"
-            onClick={() => this.setState({ selected: [] })}
+            onClick={this.clear}
           >
             Clear
           </button>
@@ -87,30 +81,31 @@ class App extends React.Component {
 
         <ul>
           {this.state.data.map(good => (
-            <li>
+            <li key={good}>
               {`${good} - `}
-              {!this.check(good) && (
-                <button
-                  type="button"
-                  className="app__add"
-                  onClick={
-                    () => this.setState({ selected: this.addWord(good) })
-                  }
-                >
-                  Add
-                </button>
-              )}
-              {this.check(good) && (
-                <button
-                  type="button"
-                  className="app__remove"
-                  onClick={
-                    () => this.setState({ selected: this.removeWord(good) })
-                  }
-                >
-                  Remove
-                </button>
-              )}
+              {this.check(good)
+                ? (
+                  <button
+                    type="button"
+                    className="app__remove"
+                    onClick={
+                      () => this.removeWord(good)
+                    }
+                  >
+                    Remove
+                  </button>
+                )
+                : (
+                  <button
+                    type="button"
+                    className="app__add"
+                    onClick={
+                      () => this.addWord(good)
+                    }
+                  >
+                    Add
+                  </button>
+                )}
             </li>
           ))}
         </ul>
