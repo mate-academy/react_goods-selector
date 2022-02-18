@@ -1,1 +1,58 @@
-// styles go here
+.App {
+  width: 380px;
+  background-color: rgba(50, 4, 65, 0.1);
+  border-radius: 20px;
+  padding: 15px;
+  margin: 20px auto;
+}
+
+.app {
+  display: flex;
+  align-items: center;
+
+  &_title {
+    color: rgb(50, 4, 65);
+    margin-right: 40px;
+
+    &__button {
+      height: 40px;
+      width: 40px;
+      color: rgb(50, 4, 65);
+      background-color: rgba(50, 4, 65, 0.2);
+      border-radius: 10px;
+    }
+  }
+}
+
+.goods {
+  &_list {
+    list-style: none;
+  }
+
+  &_container {
+    width: 280px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  &_item {
+    font-size: 20px;
+    color: rgb(50, 4, 65);
+    margin-right: 30px;
+
+    &__active {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  }
+
+  &_button {
+    width: 70px;
+    height: 30px;
+    color: rgb(50, 4, 65);
+    background-color: rgba(50, 4, 65, 0.2);
+    border-radius: 10px;
+    border: 1px solid rgb(50, 4, 65);
+  }
+}
