@@ -21,7 +21,7 @@ const goodsFromServer: string[] = [
 
 class App extends React.Component<{}, State> {
   state:State = {
-    selectedGood: 'Jim',
+    selectedGood: 'Jam',
   };
 
   clear = () => {
@@ -39,7 +39,7 @@ class App extends React.Component<{}, State> {
             Selected good: -
             {selectedGood}
           </h1>
-          {this.state.selectedGood !== '' && (
+          {selectedGood !== '' && (
             <button className="button" type="button" onClick={this.clear}>
 
               Clear
@@ -49,16 +49,21 @@ class App extends React.Component<{}, State> {
         <ul>
           {goodsFromServer.map(good => {
             return (
-              <li className={classNames('App__item', { active: this.state.selectedGood === good })}>
+              <li className={classNames('App__item', {
+                active: this.state.selectedGood === good,
+              })}
+              >
                 {good}
                 {' - '}
-                <button
-                  className="button"
-                  type="button"
-                  onClick={() => this.setState({ selectedGood: good })}
-                >
-                  Add
-                </button>
+                {selectedGood !== good && (
+                  <button
+                    className="button"
+                    type="button"
+                    onClick={() => this.setState({ selectedGood: good })}
+                  >
+                    Add
+                  </button>
+                )}
               </li>
             );
           })}
