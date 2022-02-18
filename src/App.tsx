@@ -26,23 +26,23 @@ class App extends React.Component<{}, State> {
     dataGoods: goodsFromServer,
   };
 
-  create(good: string) {
+  create = (good: string) => {
     this.setState((state) => (
       { addGoods: [...state.addGoods, good] }
     ));
-  }
+  };
 
-  deleteGoods() {
+  deleteGoods = () => {
     this.setState(() => (
       { addGoods: [] }
     ));
-  }
+  };
 
-  deleteGood(good: string) {
+  deleteGood = (good: string) => {
     this.setState(({ addGoods }) => ({
       addGoods: addGoods.filter(item => item !== good),
     }));
-  }
+  };
 
   render() {
     const { addGoods, dataGoods } = this.state;
@@ -57,7 +57,7 @@ class App extends React.Component<{}, State> {
               + ' is selected' }
           </h1>
           <button
-            onClick={() => this.deleteGoods()}
+            onClick={this.deleteGoods}
             type="button"
             className="button button_delete"
           >
