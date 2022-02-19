@@ -1,1 +1,35 @@
-// styles go here
+.goodList {
+  border: 3px solid blue;
+  width: 500px;
+  margin: 0;
+  padding: 0;
+}
+
+.goodStyle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  background-color: aquamarine;
+
+  &--selected {
+    background-color: rgb(230, 52, 150);
+  }
+}
+
+.button {
+  width: 100px;
+  height: 25px;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 500px;
+  height: 50px;
+}
+
+
+
+
