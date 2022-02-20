@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 import './list.scss';
 
@@ -37,10 +38,6 @@ export default class App extends React.Component<{}, State> {
         text = `${selected[0]} is selected`;
         break;
 
-      case 2:
-        text = `${selected[0]} and ${selected[1]} are selected`;
-        break;
-
       default:
         text = `${selected.slice(0, -1).join(', ')} and ${selected.slice(-1)} are selected`;
         break;
@@ -72,13 +69,15 @@ export default class App extends React.Component<{}, State> {
   };
 
   clearSelection = () => {
-    this.setState((state) => {
-      const { selected } = state;
-
-      selected.length = 0;
-
-      return state;
+    this.setState({
+      selected: [],
     });
+  };
+
+  isIncluded = (item: string) => {
+    const { selected } = this.state;
+
+    return selected.includes(item);
   };
 
   makeGoodsList = () => {
@@ -89,9 +88,10 @@ export default class App extends React.Component<{}, State> {
         return (
           <li
             key={item}
-            className={`list__item
-                  ${selected.includes(item) && 'list__item--selected'}
-            `}
+            className={classNames('list__item', {
+              'list__item--selected':
+                this.isIncluded(item),
+            })}
           >
             {item}
             <div className="list__buttons">
@@ -118,18 +118,13 @@ export default class App extends React.Component<{}, State> {
       <div className="app">
         <div className="app__header">
           <h1 className="app__listText">{this.headingText()}</h1>
-          {this.state.selected.length === 0
-            || (
-              <>
-                <button
-                  className="app__cleanerButton"
-                  type="button"
-                  onClick={() => this.clearSelection()}
-                >
-                  X
-                </button>
-              </>
-            )}
+          <button
+            className="app__cleanerButton"
+            type="button"
+            onClick={this.clearSelection}
+          >
+            X
+          </button>
         </div>
         <ul className="list">
           {this.makeGoodsList()}
