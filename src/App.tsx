@@ -58,7 +58,7 @@ class App extends React.Component<{}, State> {
               </div>
             </>
           )}
-        <ul className="goodList">
+        <ul className="goodsList">
           {goodsFromServer.map((item) => (
             <li
               key={item}
