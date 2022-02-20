@@ -1,0 +1,14 @@
+.list {
+  padding: 0;
+  list-style: none;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+
+    &--selected {
+      color: green;
+    }
+  }
+}

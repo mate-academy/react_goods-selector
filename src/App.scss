@@ -1,1 +1,22 @@
-// styles go here
+.app {
+  width: 500px;
+  margin: 0 auto;
+
+  &__header {
+    display: flex;
+  }
+
+  &__cleanerButton {
+    margin: auto 0;
+    width: 30px;
+    height: 30px;
+
+    &--hidden {
+      display: none;
+    }
+  }
+
+  &__listText {
+    width: 450px;
+  }
+}
