@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -15,121 +16,130 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  selected: string[];
+  selectedGoods: string[],
 };
 
-export default class App extends React.Component<{}, State> {
+class App extends React.Component<{}, State> {
   state = {
-    selected: ['Jam'],
+    selectedGoods: ['Jam'],
   };
 
-  headingText = () => {
-    const { selected } = this.state;
-    // const { length } = selected;
-    let text = '';
+  toggleSelection = (
+    event: React.MouseEvent,
+    selectedGood: string,
+  ) => {
+    const button = event.target as HTMLElement;
+    const buttonText = button.textContent;
+    const { addGood, removeGood } = this;
 
-    switch (selected.length) {
-      case 0:
-        text = 'No goods selected';
+    switch (buttonText) {
+      case 'Add':
+        addGood(selectedGood);
+        button.textContent = 'Remove';
         break;
 
-      case 1:
-        text = `selected ${selected[0]}`;
-        break;
-
-      case 2:
-        text = `${selected[0]} and ${selected[1]} are selected`;
+      case 'Remove':
+        removeGood(selectedGood);
+        button.textContent = 'Add';
         break;
 
       default:
-        text = `
-        ${selected.join(', ').replace(/,(?=[^,]*$)/, ' and')} are selected
-        `;
         break;
     }
-
-    return text;
   };
 
-  addItem = (item: string) => {
-    this.setState((state) => ({
-      selected: [...state.selected, item],
-    }));
-  };
+  getStringOfSelected = (goods: string[]) => {
+    const lastGood = goods[goods.length - 1];
+    const goodsExceptOfLast = goods.slice(0, -1).join(', ');
 
-  removeItem = (item: string) => {
-    this.setState((state) => ({
-      selected: state.selected.filter((stateItem) => stateItem !== item),
-    }));
-  };
-
-  toggleItem = (item: string) => {
-    const { selected } = this.state;
-
-    if (selected.includes(item)) {
-      this.removeItem(item);
-    } else {
-      this.addItem(item);
+    switch (goods.length) {
+      case 0:
+        return 'No goods selected';
+      case 1:
+        return `${goods[0]} is selected`;
+      default:
+        return `${goodsExceptOfLast} and ${lastGood} are selected`;
     }
   };
 
-  clearSelection = () => {
-    this.setState((state) => {
-      const { selected } = state;
-
-      selected.length = 0;
-
-      return state;
+  removeAllGoods = () => {
+    this.setState({
+      selectedGoods: [],
     });
   };
 
-  makeGoodsList = () => {
-    const { selected } = this.state;
+  addGood = (selectedGood: string) => {
+    this.setState(state => ({
+      selectedGoods: [...state.selectedGoods, selectedGood],
+    }));
+  };
 
-    return (
-      goodsFromServer.map((item) => {
-        return (
-          <li
-            key={item}
-            className={`list__item
-                  ${selected.includes(item) && 'list__item--selected'}
-            `}
-          >
-            {item}
-            <div className="list__buttons">
-              <button
-                type="button"
-                className="list__button"
-                onClick={() => {
-                  this.toggleItem(item);
-                }}
-              >
-                {selected.includes(item)
-                  ? 'Remove'
-                  : 'Add'}
-              </button>
-            </div>
-          </li>
-        );
-      })
-    );
+  removeGood = (selectedGood: string) => {
+    this.setState(state => ({
+      selectedGoods: state.selectedGoods.filter(
+        good => selectedGood !== good,
+      ),
+    }));
   };
 
   render() {
+    const {
+      toggleSelection,
+      getStringOfSelected,
+      removeAllGoods,
+      state,
+    } = this;
+    const { selectedGoods } = state;
+    const isAnyGoodSelected = selectedGoods.length > 0;
+
     return (
       <div className="App">
-        <h1>{this.headingText()}</h1>
-        <button
-          type="button"
-          onClick={() => this.clearSelection()}
-        >
-          clear list
-        </button>
-        <ul className="list">
-          {this.makeGoodsList()}
+        <h1 className="App__title">
+          {getStringOfSelected(selectedGoods)}
+          {isAnyGoodSelected && (
+            <button type="button" onClick={removeAllGoods}>
+              X
+            </button>
+          )}
+        </h1>
+
+        <ul className="App__list">
+          {goodsFromServer.map((good) => {
+            const isSelected = selectedGoods.includes(good);
+            const buttonText = isSelected
+              ? 'Remove'
+              : 'Add';
+
+            return (
+              <li className="App__item" key={good}>
+                <p
+                  className={
+                    classNames(
+                      'App__item-title',
+                      {
+                        selected: isSelected,
+                      },
+                    )
+                  }
+                >
+                  {good}
+                </p>
+
+                <button
+                  type="button"
+                  onClick={(event) => {
+                    toggleSelection(event, good);
+                  }}
+                >
+                  {buttonText}
+                </button>
+              </li>
+            );
+          })}
         </ul>
-        {`Goods in list: ${goodsFromServer.length}`}
       </div>
     );
   }
 }
+
+export default App;
