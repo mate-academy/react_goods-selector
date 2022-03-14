@@ -21,23 +21,33 @@ type State = {
   selectedGoods: string[],
 };
 
-const getGoodsString = (goods: string[]): string => {
-  switch (goods.length) {
-    case 0:
-      return 'No goods selected';
-    case 1:
-      return `${goods[0]} is selected`;
-    case 2:
-      return `${goods.join(' and ')} are selected`;
-    default:
-      return `${goods.slice(0, -1).join(', ')} and ${goods.at(-1)} are selected`;
-  }
-};
-
 class App extends Component<Props, State> {
   state = {
     selectedGoods: ['Jam'],
   };
+
+  getGoodsString = (goods: string[]): string => {
+    switch (goods.length) {
+      case 0:
+        return 'No goods selected';
+      case 1:
+        return `${goods[0]} is selected`;
+      case 2:
+        return `${goods.join(' and ')} are selected`;
+      default:
+        return `${goods.slice(0, -1).join(', ')} and ${goods.at(-1)} are selected`;
+    }
+  };
+
+  clearSelected = () => this.setState({ selectedGoods: [] });
+
+  removeFromSelected = (index: number) => this.setState((state) => (
+    { selectedGoods: state.selectedGoods.slice(index, 1) }
+  ));
+
+  addToSelected = (good: string) => this.setState(
+    (state) => ({ selectedGoods: [...state.selectedGoods, good] }),
+  );
 
   render() {
     const { selectedGoods } = this.state;
@@ -46,16 +56,14 @@ class App extends Component<Props, State> {
       <div className="App">
         <div className="App__header">
           <h1 className="App__title">
-            {getGoodsString(selectedGoods)}
+            {this.getGoodsString(selectedGoods)}
           </h1>
 
           {!!selectedGoods.length && (
             <button
               type="button"
               className="App__clear button"
-              onClick={() => {
-                this.setState({ selectedGoods: [] });
-              }}
+              onClick={this.clearSelected}
             >
               X
             </button>
@@ -63,8 +71,8 @@ class App extends Component<Props, State> {
         </div>
 
         <ul className="App__list">
-          {goodsFromServer.map((good) => {
-            const index: number = selectedGoods.indexOf(good);
+          {goodsFromServer.map((good, index) => {
+            const include: boolean = selectedGoods.includes(good);
 
             return (
               <li
@@ -73,36 +81,28 @@ class App extends Component<Props, State> {
                   classNames(
                     'App__item',
                     {
-                      'App__item--selected': index !== -1,
+                      'App__item--selected': include,
                     },
                   )
                 }
               >
                 <span>{good}</span>
 
-                {index === -1 ? (
+                {include ? (
                   <button
                     type="button"
                     className="App__item-button button"
-                    onClick={() => {
-                      this.setState((state) => ({ selectedGoods: [...state.selectedGoods, good] }));
-                    }}
+                    onClick={() => this.removeFromSelected(index)}
                   >
-                    Add
+                    Remove
                   </button>
                 ) : (
                   <button
                     type="button"
                     className="App__item-button button"
-                    onClick={() => {
-                      this.setState(() => {
-                        selectedGoods.splice(index, 1);
-
-                        return { selectedGoods };
-                      });
-                    }}
+                    onClick={() => this.addToSelected(good)}
                   >
-                    Remove
+                    Add
                   </button>
                 )}
               </li>
