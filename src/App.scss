@@ -1,1 +1,77 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: lightgreen;
+  padding: 20px;
+  width: 500px;
+  height: 500px;
+  margin: auto;
+  border-radius: 10px;
+
+  &__title-container {
+    margin: 0 0 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__title {
+    margin: 0;
+    width: 90%;
+    text-align: center;
+  }
+
+  &__title-button {
+    width: 30px;
+    height: 30px;
+    background-color: lightgoldenrodyellow;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    padding: 0;
+    border-radius: 5px;
+    transition: all 0.5s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  &__list {
+    padding: 10px;
+    font-size: 20px;
+    background-color: lightgoldenrodyellow;
+    border-radius: 10px;
+
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 0 5px;
+
+      &--selected {
+        background: lightgreen;
+      }
+
+      &__good {
+        margin: 0;
+      }
+    }
+
+    &-button {
+      width: 80px;
+      font-weight: bold;
+      font-size: 14px;
+      background-color: lightgoldenrodyellow;
+      border-radius: 5px;
+      transition: all 0.5s;
+
+      &:hover {
+        transform: translateX(-5px);
+      }
+
+      &--selected {
+        background-color: lightgreen;
+      }
+    }
+  }
+}
