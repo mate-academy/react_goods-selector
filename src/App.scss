@@ -31,7 +31,7 @@ body, h1 {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    max-width: 200px;
+    max-width: 250px;
 
     transition: box-shadow 0.3s;
 
@@ -64,7 +64,7 @@ body, h1 {
 
   &__btn {
     font-size: 24px;
-    width: 40px;
+    width: 120px;
     height: 40px;
     border-radius: 50%;
     cursor: pointer;

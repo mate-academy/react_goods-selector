@@ -37,6 +37,18 @@ class App extends React.Component<{}, Prop> {
     }
   };
 
+  removeGood = (good: string) => {
+    this.setState(state => (
+      { selectedGoods: [...state.selectedGoods.filter(item => item !== good)] }
+    ));
+  };
+
+  addGood = (good: string) => {
+    this.setState(state => (
+      { selectedGoods: [...state.selectedGoods, good] }
+    ));
+  };
+
   createTitle = (goods : string[]) => {
     return (
       goods.length
@@ -69,6 +81,8 @@ class App extends React.Component<{}, Prop> {
             Cancel Selected Goods
           </button>
           {goodsFromServer.map(good => {
+            const includes = selectedGoods.includes(good);
+
             return (
               <li
                 key={good}
@@ -79,15 +93,23 @@ class App extends React.Component<{}, Prop> {
                 )}
               >
                 <h3>{ good }</h3>
-                <button
-                  className="App__btn"
-                  type="button"
-                  onClick={() => {
-                    this.toggle(good);
-                  }}
-                >
-                  {selectedGoods.includes(good) ? '-' : '+'}
-                </button>
+                {includes ? (
+                  <button
+                    type="button"
+                    className="App__btn"
+                    onClick={() => this.removeGood(good)}
+                  >
+                    Remove
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="App__btn"
+                    onClick={() => this.addGood(good)}
+                  >
+                    Add
+                  </button>
+                )}
               </li>
             );
           })}
