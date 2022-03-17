@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -36,6 +37,12 @@ class App extends React.Component<Props, State> {
     return () => { };
   };
 
+  clear = () => {
+    return () => {
+      this.setState({ selectedGoods: [] });
+    };
+  };
+
   isSelected = (good: string) => {
     return this.state.selectedGoods.includes(good);
   };
@@ -61,15 +68,28 @@ class App extends React.Component<Props, State> {
   render() {
     return (
       <div className="App">
-        <h1>{`Selected goods: ${this.createH1Text()}`}</h1>
-        <ul>
+        <h1>
+          {`Selected goods: ${this.createH1Text()}`}
+        </h1>
+        <button
+          type="button"
+          onClick={this.clear()}
+          className="button"
+        >
+          Clear
+        </button>
+        <ul className="goodsList">
           {goodsFromServer.map(good => (
-            <li>
+            <>
+              <li className={classNames('goodsList__item', { 'goodsList__item--selected': this.isSelected(good) })}>
+                {good}
+              </li>
               {this.isSelected(good)
                 ? (
                   <button
                     type="button"
                     onClick={this.removeGood(good)}
+                    className="button button--remove"
                   >
                     Remove
                   </button>
@@ -78,12 +98,12 @@ class App extends React.Component<Props, State> {
                   <button
                     type="button"
                     onClick={this.addGood(good)}
+                    className="button button--add"
                   >
-                    Select
+                    add
                   </button>
                 )}
-              {good}
-            </li>
+            </>
           ))}
         </ul>
       </div>
