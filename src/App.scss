@@ -1,1 +1,23 @@
-// styles go here
+.goodsList {
+  &__item {
+    margin: 20px 0;
+    width: max-content;
+    padding: 10px;
+    border-radius: 10px;
+    &--selected {
+      background-color: yellow;
+    }
+  }
+}
+
+.button {
+  width: 70px;
+  padding: 5px;
+  &--add {
+    background-color: #34d417;
+  }
+
+  &--remove {
+    background-color: #f22d0a;
+  }
+}
