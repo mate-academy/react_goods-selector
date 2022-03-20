@@ -89,10 +89,10 @@ export class App extends React.Component<{}, State> {
 
           <ul className="App__list">
             {
-              goods.map((good) => (
+              goods.map(good => (
                 <>
                   <li
-                    key={goods.indexOf(good)}
+                    key={good}
                     className={classNames('App__item', {
                       'App__item--selected': selectedGoods.includes(good),
                     })}
