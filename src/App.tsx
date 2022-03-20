@@ -28,13 +28,9 @@ class App extends React.Component<Props, State> {
   };
 
   addGood = (good: string) => {
-    if (!this.state.selectedGoods.includes(good)) {
-      return () => {
-        this.setState(state => ({ selectedGoods: [...state.selectedGoods, good] }));
-      };
-    }
-
-    return () => { };
+    return () => {
+      this.setState(state => ({ selectedGoods: [...state.selectedGoods, good] }));
+    };
   };
 
   clear = () => {
