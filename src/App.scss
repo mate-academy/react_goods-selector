@@ -1,1 +1,21 @@
-// styles go here
+.App {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: lightgray;
+}
+
+.item {
+  display: inline;
+  margin: 5px 5px;
+  font-style: italic;
+}
+
+.select {
+  display: inline-block;
+  margin: 5px 5px;
+}
+
+.active {
+  background-color: red;
+}
