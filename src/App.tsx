@@ -1,4 +1,5 @@
 import React from 'react';
+import ClassNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -14,17 +15,9 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-// Types are required by TypeScript Engine for the App Class Component
-type Props = {};
-type State = {
-  selectedGood: string,
-  startIndex: number,
-};
-
 class App extends React.Component<Props, State> {
   state = {
     selectedGood: 'Jam',
-    startIndex: -1,
   };
 
   /* This method clears a product name in the <h1> title
@@ -32,12 +25,11 @@ class App extends React.Component<Props, State> {
   productTitle = () => {
     this.setState({
       selectedGood: '',
-      startIndex: -1,
     });
   };
 
   render() {
-    const { startIndex, selectedGood } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <div className="App">
@@ -47,24 +39,28 @@ class App extends React.Component<Props, State> {
           {this.state.selectedGood
             ? `${selectedGood} is selected`
             : 'No goods selected'}
-          <button
-            type="button"
-            onClick={this.productTitle}
-          >
-            X
-          </button>
+          {selectedGood && (
+            <button
+              type="button"
+              onClick={this.productTitle}
+            >
+              X
+            </button>
+          )}
         </h1>
 
         <ul>
-          {goodsFromServer.map((good, index) => (
+          {goodsFromServer.map((good) => (
             <>
               <li
                 key={good}
-                className={`item ${startIndex !== index ? '' : 'active'}`}
+                className={ClassNames('item', {
+                  active: selectedGood === good,
+                })}
               >
                 {good}
               </li>
-              {startIndex !== index ? (
+              {selectedGood !== good ? (
                 <button
                   className="select"
                   key={`${good}product`}
@@ -72,7 +68,6 @@ class App extends React.Component<Props, State> {
                   onClick={() => {
                     this.setState({
                       selectedGood: good,
-                      startIndex: index,
                     });
                   }}
                 >
