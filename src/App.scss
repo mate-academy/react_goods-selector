@@ -1,1 +1,19 @@
-// styles go here
+.selected {
+  background-color: burlywood;
+}
+
+.item-button {
+  margin-left: 10px;
+}
+
+.clear-button {
+  box-sizing: border-box;
+  margin-left: 10px;
+  font-size: 1.5rem;
+  font-weight: 900;
+  background-color: coral;
+}
+
+.hidden {
+  display: none;
+}
