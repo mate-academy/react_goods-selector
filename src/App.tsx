@@ -20,6 +20,10 @@ class App extends React.Component {
     selectedGood: 'Jam',
   };
 
+  clickHandler = (message: string) => {
+    this.setState({ selectedGood: message });
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -28,18 +32,19 @@ class App extends React.Component {
         <h1>
           {`Selected good: ${selectedGood ? `${selectedGood} is selected` : 'No goods selected'}`}
 
-          <button
-            type="button"
-            className={classNames(
-              'clear-button',
-              { hidden: selectedGood === '' },
-            )}
-            onClick={() => {
-              this.setState({ selectedGood: '' });
-            }}
-          >
-            X
-          </button>
+          {selectedGood && (
+            <button
+              type="button"
+              className={classNames(
+                'clear-button',
+              )}
+              onClick={() => {
+                this.clickHandler('');
+              }}
+            >
+              X
+            </button>
+          )}
         </h1>
 
         <ul>
@@ -59,13 +64,12 @@ class App extends React.Component {
                   { hidden: good === selectedGood },
                 )}
                 onClick={() => {
-                  this.setState({ selectedGood: good });
+                  this.clickHandler(good);
                 }}
               >
                 Select
               </button>
             </li>
-
           ))}
         </ul>
       </div>
