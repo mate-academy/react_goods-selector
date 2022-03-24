@@ -22,7 +22,7 @@ type State = {
 
 export class App extends React.Component<{}, State> {
   state = {
-    selectedGoods: [] as string[],
+    selectedGoods: ['Jam'],
   };
 
   handleAddButtonClick = (itemToAdd: string) => {
@@ -50,11 +50,10 @@ export class App extends React.Component<{}, State> {
       selectedGoods.includes(item)
     );
 
-    const formattedGoodsList
-      = selectedGoods.length === 1
-        ? selectedGoods[0].toLowerCase()
-        : (`${selectedGoods.slice(0, -1).join(', ')}`
-            + ` and ${selectedGoods.slice(-1)}`).toLowerCase();
+    const formattedGoodsList = selectedGoods.length === 1
+      ? selectedGoods[0]
+      : (`${selectedGoods.slice(0, -1).join(', ')}`
+          + ` and ${selectedGoods.slice(-1)}`);
 
     const getButtonTextContent = (item: string) => (
       hasItem(item) ? 'Remove' : 'Add'
@@ -71,19 +70,19 @@ export class App extends React.Component<{}, State> {
         <h1 className="App__title">
           {selectedGoods.length === 0
             ? 'No goods selected'
-            : `Goods selected: ${formattedGoodsList}`}
+            : `Goods selected: ${formattedGoodsList.toLowerCase()}`}
         </h1>
 
         <ul className="App__list">
           {goodsFromServer.map(item => (
             <li
+              key={item}
               className="
                 App__item
                 d-flex
                 justify-content-between
                 align-items-center
               "
-              key={item}
             >
               <span
                 className={classNames(
