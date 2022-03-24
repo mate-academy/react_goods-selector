@@ -1,11 +1,19 @@
+import './App.scss';
 import React from 'react';
 import classNames from 'classnames';
-import './App.scss';
+import { Button } from 'react-bootstrap';
 
 const goodsFromServer: string[] = [
-  'Dumplings', 'Carrot', 'Eggs',
-  'Ice cream', 'Apple', 'Bread',
-  'Fish', 'Honey', 'Jam', 'Garlic',
+  'Dumplings',
+  'Carrot',
+  'Eggs',
+  'Ice cream',
+  'Apple',
+  'Bread',
+  'Fish',
+  'Honey',
+  'Jam',
+  'Garlic',
 ];
 
 type State = {
@@ -44,9 +52,9 @@ export class App extends React.Component<{}, State> {
 
     const formattedGoodsList
       = selectedGoods.length === 1
-        ? selectedGoods[0]
-        : `${selectedGoods.slice(0, -1).join(', ')}`
-          + ` and ${selectedGoods.slice(-1)}`;
+        ? selectedGoods[0].toLowerCase()
+        : (`${selectedGoods.slice(0, -1).join(', ')}`
+            + ` and ${selectedGoods.slice(-1)}`).toLowerCase();
 
     const getButtonTextContent = (item: string) => (
       hasItem(item) ? 'Remove' : 'Add'
@@ -68,36 +76,42 @@ export class App extends React.Component<{}, State> {
 
         <ul className="App__list">
           {goodsFromServer.map(item => (
-            <li className="App__item" key={item}>
+            <li
+              className="
+                App__item
+                d-flex
+                justify-content-between
+                align-items-center
+              "
+              key={item}
+            >
               <span
                 className={classNames(
                   'App__item-text',
-                  { 'App__item-text--active': hasItem(item) },
+                  { 'App__item-text--disabled': hasItem(item) },
                 )}
               >
                 {item}
               </span>
 
-              <button
-                className="App__item-button"
-                type="button"
+              <Button
+                className="App__item-button ms-3"
                 onClick={() => getButtonMethod(item)}
               >
                 {getButtonTextContent(item)}
-              </button>
+              </Button>
             </li>
           ))}
         </ul>
 
         {selectedGoods.length > 0
           && (
-            <button
+            <Button
               className="App__clearButton"
-              type="button"
               onClick={this.handleClearButtonClick}
             >
               Clear
-            </button>
+            </Button>
           )}
       </div>
     );

@@ -3,5 +3,73 @@
 }
 
 html {
-  font-family: Arial,  Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+%border-primary {
+  border-radius: 7px;
+  border: 1px solid lightgrey;
+}
+
+%bsh-primary {
+  box-shadow: rgba(0, 0, 0, 0.05) 0 6px 24px 0,
+  rgba(0, 0, 0, 0.08) 0 0 0 1px;
+}
+
+.App {
+  padding: 15px;
+  letter-spacing: -1px;
+
+  &__title {
+    width: max-content;
+    padding: 10px;
+
+    font-size: 1.75rem;
+    @extend %border-primary;
+    @extend %bsh-primary;
+  }
+
+  &__list {
+    margin: 0;
+    padding: 10px;
+    width: 17vw;
+
+    list-style: none;
+    @extend %border-primary;
+    @extend %bsh-primary;
+  }
+
+  &__item {
+    padding: 5px 5px 5px 15px;
+
+    font-size: 1.25rem;
+    font-weight: 600;
+    @extend %border-primary;
+    @extend %bsh-primary;
+
+    &-button {
+      padding: 3px 10px;
+      font-weight: 600;
+    }
+
+    &-text {
+      &--disabled {
+        color: lightgrey;
+      }
+    }
+
+    &:not(:first-child) {
+      margin-top: 5px;
+    }
+
+    &:hover {
+      background-color: #e6e6e6;
+    }
+  }
+
+  &__clearButton {
+    margin-top: 10px;
+    width: 17vw;
+    font-weight: 600;
+  }
 }
