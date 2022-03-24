@@ -7,7 +7,8 @@
 body {
   background-color: #d1c5abb2;
   font-family: "Arial", "Helvetica", sans-serif;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,6 +21,7 @@ body {
   box-shadow: 0 0 15px #d1c5ab,
     0 0 45px #d1c5ab;
   border-radius: 15px;
+  margin: 20px;
 
   &__title-box {
     display: flex;
