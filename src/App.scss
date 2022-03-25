@@ -4,6 +4,26 @@
 
 .item-button {
   margin-left: 10px;
+
+  &--add {
+    border-radius: 5px;
+    border-color: transparent;
+    background-color: lightgreen;
+
+    &:hover {
+      background-color: #90be90;
+    }
+  }
+
+  &--remove {
+    border-radius: 5px;
+    border-color: transparent;
+    background-color: lightcoral;
+
+    &:hover {
+      background-color: #be8067;
+    }
+  }
 }
 
 .clear-button {
