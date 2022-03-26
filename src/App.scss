@@ -1,1 +1,41 @@
-// styles go here
+.App {
+  text-align: center;
+
+  &__header {
+    margin-bottom: 40px;
+  }
+}
+
+.container {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list {
+  padding-left: 0;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+
+    &_active {
+      background-color: greenyellow;
+    }
+  }
+}
+
+.button {
+  cursor: pointer;
+
+  &--close {
+    margin-right: 16px;
+  }
+}
