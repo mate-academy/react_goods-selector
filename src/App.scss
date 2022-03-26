@@ -14,10 +14,8 @@ body {
 
   &__main {
     margin-bottom: 50px;
-  }
-
-  &__title {
-    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
   }
 
   &__selected-list {
@@ -62,36 +60,3 @@ body {
     }
   }
 }
-
-
-/* CSS */
-.button-23 {
-  background-color: aquamarine;
-  border: 1px solid #222222;
-  border-radius: 10px;
-  box-sizing: border-box;
-  color: #222222;
-  cursor: pointer;
-  display: inline-block;
-  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 10px;
-  margin: 0;
-  outline: none;
-  padding: 13px 13px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  touch-action: manipulation;
-  transition: box-shadow .2s,-ms-transform .1s,-webkit-transform .1s,transform .1s;
-  user-select: none;
-  -webkit-user-select: none;
-  width: auto;
-}
-
-.button-23:focus-visible {
-  box-shadow: #222222 0 0 0 2px, rgba(255, 255, 255, 0.8) 0 0 0 4px;
-  transition: box-shadow .2s;
-}
-

@@ -1,28 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
+import { createSentence } from './helper';
+import { goodsFromServer } from './goodsList';
 
 import './App.scss';
-
-const goodsFromServer: string[] = [
-  'Dumplings',
-  'Carrot',
-  'Eggs',
-  'Ice cream',
-  'Apple',
-  'Bread',
-  'Fish',
-  'Honey',
-  'Jam',
-  'Garlic',
-];
-
-const createSentence = (goods: string[]): string => {
-  if (goods.length >= 2) {
-    return `${goods.slice(0, -1).join(', ')} and ${goods.slice(-1)} are selected`;
-  }
-
-  return goods.length ? `${goods[0]} is selected` : 'No goods selected';
-};
+import './button.css';
 
 type State = {
   selectedGoods: string[]
@@ -56,22 +38,18 @@ class App extends React.Component<{}, State> {
     return (
       <div className="App">
         <div className="App__main">
-          <h1 className="App__title">
-            Selected good:
-          </h1>
-
-          <p className="App__selected-list">
+          <h1 className="App__selected-list">
             {createSentence(selectedGoods)}
-          </p>
+          </h1>
 
           {selectedGoods.length
             ? (
               <button
                 type="button"
-                className="button-23"
+                className="button-23 button-23--small"
                 onClick={this.clearSelected}
               >
-                x
+                ✕
               </button>
             )
             : ''}
