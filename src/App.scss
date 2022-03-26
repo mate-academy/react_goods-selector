@@ -1,1 +1,41 @@
-// styles go here
+html {
+  font-family: sans-serif;
+}
+
+body, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+.App__title {
+  font-size: 1.5rem;
+  margin-left: 6px;
+}
+
+.GoodsList {
+  list-style: none;
+  width: 30vw;
+}
+
+.GoodsList__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid gray;
+  margin: 4px;
+  padding: 8px;
+}
+
+button,
+.GoodsList__item-button {
+  background-color: #eee;
+  border: 2px solid gray;
+  margin: 10px 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.GoodsList__item-button {
+  margin: 0;
+  padding: 5px 10px;
+}
