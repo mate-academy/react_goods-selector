@@ -1,20 +1,21 @@
 .App {
   text-align: center;
-
-  &__header {
-    margin-bottom: 40px;
-  }
 }
 
 .container {
   width: 600px;
   margin: 0 auto;
+  margin-bottom: 40px;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  &__title {
+    margin-right: 48px;
+  }
 }
 
 .list {
