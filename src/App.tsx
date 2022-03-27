@@ -14,7 +14,12 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-class App extends React.Component {
+interface State {
+  selectedGood: string;
+  selectedGoods: string[];
+}
+
+class App extends React.Component<{}, State> {
   state = {
     selectedGood: 'Jam',
     selectedGoods: ['Jam'],
