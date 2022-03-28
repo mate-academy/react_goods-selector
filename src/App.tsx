@@ -14,6 +14,24 @@ class App extends React.Component<{}, State> {
     selectedGoods: ['Jam'],
   };
 
+  setGoodSelected = (good: string) => this.setState({ selectedGood: good });
+
+  resetGoodSelection = () => this.setState({ selectedGood: '' });
+
+  addGoodsSelected = (good: string) => this.setState(
+    prevState => ({ selectedGoods: [...prevState.selectedGoods, good] }),
+  );
+
+  removeGoodsSelection = (good: string) => {
+    const { selectedGoods } = this.state;
+
+    const newSelected = selectedGoods.filter(selected => selected !== good);
+
+    this.setState({ selectedGoods: newSelected });
+  };
+
+  resetGoodsSelection = () => this.setState({ selectedGoods: [] });
+
   render() {
     const { selectedGood, selectedGoods } = this.state;
     const goodsTitle = getGoodsTitle(selectedGoods);
@@ -27,9 +45,7 @@ class App extends React.Component<{}, State> {
               <button
                 className="button button--close"
                 type="button"
-                onClick={() => (
-                  this.setState({ selectedGood: '' })
-                )}
+                onClick={this.resetGoodSelection}
               >
                 X
               </button>
@@ -47,9 +63,7 @@ class App extends React.Component<{}, State> {
                   <button
                     className="button"
                     type="button"
-                    onClick={() => {
-                      this.setState({ selectedGood: good });
-                    }}
+                    onClick={() => this.setGoodSelected(good)}
                   >
                     Select
                   </button>
@@ -66,9 +80,7 @@ class App extends React.Component<{}, State> {
               <button
                 className="button button--close"
                 type="button"
-                onClick={() => (
-                  this.setState({ selectedGoods: [] })
-                )}
+                onClick={this.resetGoodsSelection}
               >
                 X
               </button>
@@ -76,7 +88,7 @@ class App extends React.Component<{}, State> {
           </section>
 
           <ul className="list">
-            {goodsFromServer.map(good => {
+            {goodsFromServer.map((good) => {
               const isSelected = selectedGoods.find(selected => selected === good);
 
               return (
@@ -90,10 +102,7 @@ class App extends React.Component<{}, State> {
                       <button
                         className="button"
                         type="button"
-                        onClick={() => {
-                          selectedGoods.push(good);
-                          this.setState({ selectedGoods });
-                        }}
+                        onClick={() => this.addGoodsSelected(good)}
                       >
                         Add
                       </button>
@@ -101,11 +110,7 @@ class App extends React.Component<{}, State> {
                       <button
                         className="button"
                         type="button"
-                        onClick={() => {
-                          const newSelected = selectedGoods.filter(selected => selected !== good);
-
-                          this.setState({ selectedGoods: newSelected });
-                        }}
+                        onClick={() => this.removeGoodsSelection(good)}
                       >
                         Remove
                       </button>
