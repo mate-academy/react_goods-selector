@@ -1,1 +1,43 @@
-// styles go here
+.App {
+  display: flex;
+  justify-content: space-around;
+}
+
+.container {
+  width: 400px;
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__title {
+    margin-right: 48px;
+  }
+}
+
+.list {
+  padding-left: 0;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+
+    &_active {
+      background-color: greenyellow;
+    }
+  }
+}
+
+.button {
+  cursor: pointer;
+
+  &--close {
+    margin-right: 16px;
+  }
+}
