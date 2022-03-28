@@ -78,7 +78,7 @@ export class App extends React.Component<{}, State> {
             </li>
           ))}
         </ul>
-        {selectedGoods.length && (
+        {!!selectedGoods.length && (
           <button
             type="button"
             onClick={() => {
