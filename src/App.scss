@@ -1,1 +1,75 @@
-// styles go here
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: lightblue;
+  height: 100vh;
+}
+
+.goods {
+  border: 1px solid lightgrey;
+  min-width: 50%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px;
+  background-color: lightgrey;
+  margin: 0;
+  padding: 20px;
+  list-style-type: none;
+}
+
+.good {
+  display: flex;
+  justify-content: space-between;
+  min-height: 30px;
+  padding: 5px;
+  border: 1px solid bisque;
+  border-radius: 10px;
+  margin: 5px;
+
+  &:hover {
+    transform: scale(1.04);
+    border-color: aqua;
+    background-color: rgb(250, 236, 217);
+  }
+}
+
+.checked {
+  background-color: red;
+  display: none;
+}
+
+.checked::after {
+  content: "X";
+  color: black;
+  background-color: red;
+  width: 20px;
+  height: 20px;
+}
+
+.good__name {
+  font-size: 20px;
+  padding-left: 15px;
+  font-weight: bold;
+}
+
+.good__btn {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+h1 {
+  display: flex;
+  align-items: center;
+}
+
+.btn-cancel {
+  background-color: red;
+  border-radius: 5px;
+  box-shadow: 0 0 10px;
+}
