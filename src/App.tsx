@@ -65,7 +65,6 @@ class App extends React.Component<Props, State> {
             type="button"
             onClick={() => {
               this.removeAll();
-              this.titleMaker(selectedGoods);
             }}
             hidden={selectedGoods.length < 1}
             className="goods__remove"
