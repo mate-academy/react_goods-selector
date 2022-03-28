@@ -89,7 +89,7 @@ class App extends React.Component<{}, State> {
 
           <ul className="list">
             {goodsFromServer.map((good) => {
-              const isSelected = selectedGoods.find(selected => selected === good);
+              const isSelected = selectedGoods.includes(good);
 
               return (
                 <li key={good} className="list__item">
