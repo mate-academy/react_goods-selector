@@ -17,15 +17,12 @@ class App extends React.Component<{}, State> {
 
   toggleGood = (item: string) => {
     const { selectedGoods } = this.state;
-    const itemInArray = selectedGoods.indexOf(item);
 
-    if (itemInArray !== -1) {
-      selectedGoods.splice(itemInArray, 1);
-    } else {
-      selectedGoods.push(item);
-    }
-
-    this.setState({ selectedGoods });
+    this.setState(prevState => ({
+      selectedGoods: selectedGoods.includes(item)
+        ? [...prevState.selectedGoods].filter(good => good !== item)
+        : [...prevState.selectedGoods, item],
+    }));
   };
 
   clearSelected = () => {
@@ -42,17 +39,15 @@ class App extends React.Component<{}, State> {
             {createSentence(selectedGoods)}
           </h1>
 
-          {selectedGoods.length
-            ? (
-              <button
-                type="button"
-                className="button-23 button-23--small"
-                onClick={this.clearSelected}
-              >
-                ✕
-              </button>
-            )
-            : ''}
+          {Boolean(selectedGoods.length) && (
+            <button
+              type="button"
+              className="button-23 button-23--small"
+              onClick={this.clearSelected}
+            >
+              ✕
+            </button>
+          )}
         </div>
 
         <ul className="App__goods-list">
@@ -71,8 +66,7 @@ class App extends React.Component<{}, State> {
               <button
                 type="button"
                 className="button-23"
-                onClick={event => {
-                  event.preventDefault();
+                onClick={() => {
                   this.toggleGood(item);
                 }}
               >
