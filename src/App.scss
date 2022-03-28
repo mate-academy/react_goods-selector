@@ -14,7 +14,7 @@ body {
 
 .goods {
   border: 1px solid lightgrey;
-  min-width: 50%;
+  min-width: 300px;
   border-radius: 10px;
   box-shadow: 0 0 10px;
   background-color: lightgrey;
@@ -41,15 +41,13 @@ body {
 
 .checked {
   background-color: red;
-  display: none;
 }
 
-.checked::after {
-  content: "X";
+.checked:after {
+  content: "ed";
   color: black;
   background-color: red;
-  width: 20px;
-  height: 20px;
+
 }
 
 .good__name {
@@ -58,18 +56,21 @@ body {
   font-weight: bold;
 }
 
-.good__btn {
-  border: 1px solid #ccc;
-  border-radius: 10px;
-}
-
 h1 {
   display: flex;
   align-items: center;
+  max-width: 60%;
+}
+
+.good__btn {
+  border: 1px solid #ccc;
+  border-radius: 10px;
 }
 
 .btn-cancel {
   background-color: red;
   border-radius: 5px;
   box-shadow: 0 0 10px;
+  height: 24px;
+  width: 24px;
 }

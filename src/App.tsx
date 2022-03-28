@@ -16,29 +16,39 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  selectedGood: string;
+  selectedGoods: string[];
 };
 
 class App extends React.Component<{}, State> {
   state = {
-    selectedGood: '',
+    selectedGoods: [],
+  };
+
+  createBucket = (selectedGoods: string[]) => {
+    switch (selectedGoods.length) {
+      case 0:
+        return 'No selected goods';
+        break;
+      case 1:
+        return `${selectedGoods} is selected`;
+      default:
+        return `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods[selectedGoods.length - 1]} are selected`;
+    }
   };
 
   render() {
-    const { selectedGood } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App">
         <h1>
           Selected good: -&nbsp;
-          {selectedGood.length !== 0
-            ? `${selectedGood} is selected  `
-            : 'No goods selected  '}
+          {this.createBucket(selectedGoods)}
             &nbsp;
           <button
             className="btn-cancel"
             type="button"
-            onClick={() => this.setState({ selectedGood: '' })}
+            onClick={() => this.setState({ selectedGoods: [] })}
           >
             X
           </button>
@@ -58,12 +68,17 @@ class App extends React.Component<{}, State> {
                 className={classNames(
                   'good__btn',
                   {
-                    checked: selectedGood === good,
+                    checked: good === selectedGoods.find(item => item === good),
                   },
                 )}
-                onClick={() => this.setState({
-                  selectedGood: good,
-                })}
+                onClick={
+                  good === selectedGoods.find(item => item === good) ? () => this.setState(
+                    (state) => ({
+                      selectedGoods: [...state.selectedGoods.filter(item => item !== good)],
+                    }),
+                  ) : () => this.setState((state) => (
+                    { selectedGoods: [...state.selectedGoods, good] }))
+                }
               >
                 Select
               </button>
