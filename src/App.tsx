@@ -41,7 +41,7 @@ class App extends React.Component<{}, State> {
 
     return (
       <div className="App">
-        <h1>
+        <h1 className="App-title">
           Selected good: -&nbsp;
           {this.createBucket(selectedGoods)}
             &nbsp;
