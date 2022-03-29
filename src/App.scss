@@ -1,1 +1,82 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Josefin Sans", sans-serif;
+}
+
+body,
+h1,
+li,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  padding: 20px;
+  min-height: 100vh;
+  min-width: 780px;
+  background-color: #5c5c5c;
+
+  &__frame {
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 1024px;
+    min-height: 620px;
+    text-align: center;
+
+    background-color: #c2fff5;
+    border: 2px solid #000;
+    border-radius: 20px;
+    box-shadow: 10px 10px 8px #141414;
+  }
+
+  &__goods {
+    color: #501010;
+    min-height: 64px;
+  }
+
+  &__list {
+    margin: 20px auto;
+    width: 460px;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px;
+    margin-bottom: 8px;
+
+    background-color: #4affe1;
+    border: 1px solid transparent;
+    border-radius: 5px;
+
+    &--active {
+      color: #b40202;
+      background-color: #3ddabf;
+    }
+  }
+
+  &__button {
+    color: #c2fff5;
+    background-color: #b40202;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #d80202;
+      cursor: pointer;
+    }
+
+    &--x {
+      width: 50px;
+      height: 30px;
+      font-size: 1em;
+      border-radius: 50%;
+    }
+  }
+}
