@@ -103,8 +103,7 @@ export class App extends React.Component<{}, State> {
           ))}
         </ul>
 
-        {selectedGoods.length > 0
-          && (
+        {selectedGoods.length && (
             <Button
               className="App__clearButton"
               onClick={this.handleClearButtonClick}
