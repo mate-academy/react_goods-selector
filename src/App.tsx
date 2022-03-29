@@ -64,6 +64,7 @@ export class App extends React.Component<{}, State> {
     return (
       <div className="App">
         <h1 className="title">
+
           Selected good
           {selectedGoods.length > 1 && 's'}
           :
