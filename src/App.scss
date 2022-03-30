@@ -1,1 +1,72 @@
-// styles go here
+.body {
+  margin: 0;
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  height: 80px;
+}
+
+.clearingButton {
+  height: 44px;
+  width: 25vw;
+
+  background-color: orangered;
+  border-radius: 18px;
+  border-color: orangered;
+  color: azure;
+  font-size: 16px;
+  cursor: pointer;
+
+  transition: all, ease-in-out, 0.3s;
+
+  &:hover {
+    background-color: red;
+    border-color: orangered;
+  }
+}
+
+.goodsList {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  list-style: none;
+  font-size: 16px;
+
+  &__items {
+    width: 12vw;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__button {
+    width: 74px;
+    height: 28px;
+
+    background-color: grey;
+    border-radius: 10px;
+    color: azure;
+    cursor: pointer;
+
+    transition: all, ease-in-out, 0.3s;
+
+    &:hover {
+      background-color: greenyellow;
+    }
+  }
+}
