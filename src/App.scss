@@ -4,6 +4,7 @@
   border: 1px solid black;
   padding: 10px;
   background-color: rgb(159, 128, 247);
+
   &__item {
     display: flex;
     flex-direction: row;
@@ -14,7 +15,7 @@
     border-radius: 4px;
     background-color: rgb(198, 242, 253);
 
-    &_active {
+    &--active {
       background-color: rgb(42, 115, 250);
     }
   }
@@ -27,18 +28,18 @@
   border-radius: 4px;
   width: 70px;
 
-  &_hide {
+  &__hide {
     visibility: hidden;
   }
 
-  &_show {
+  &__show {
     display: inline-block;
     height: 20px;
     width: 20px;
     border-color: red;
   }
 
-  &_color-red {
+  &__color-red {
     border-color: red;
   }
 }

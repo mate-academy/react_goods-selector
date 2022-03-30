@@ -29,9 +29,9 @@ export class App extends React.Component<{}, State> {
     }),
   );
 
-  removeGood = (good: string) => this.setState(
+  removeGood = (selectedGood: string) => this.setState(
     (state) => ({
-      selectedGoods: state.selectedGoods.filter(el => el !== good),
+      selectedGoods: state.selectedGoods.filter(good => good !== selectedGood),
     }),
   );
 
@@ -40,20 +40,20 @@ export class App extends React.Component<{}, State> {
   });
 
   showSelectedRow = (selectedGoods: string[]) => {
-    const selected = [...selectedGoods];
+    const copiedGoods = [...selectedGoods];
 
-    switch (selected.length) {
+    switch (copiedGoods.length) {
       case 0:
         return ' No goods selected';
 
       case 1:
-        return ` ${selected[0]} are selected`;
+        return ` ${copiedGoods[0]} are selected`;
 
       default:
       {
-        const last = selected.pop();
+        const last = copiedGoods.pop();
 
-        return ` ${selected.join(', ')} and ${last} are selected`;
+        return ` ${copiedGoods.join(', ')} and ${last} are selected`;
       }
     }
   };
@@ -73,12 +73,10 @@ export class App extends React.Component<{}, State> {
             type="button"
             className={`button ${
               !selectedGoods.length
-                ? 'button_hide'
-                : 'button_show'
+                ? 'button__hide'
+                : 'button__show'
             }`}
-            onClick={
-              () => this.clearAll()
-            }
+            onClick={() => this.clearAll()}
           >
             X
           </button>
@@ -91,30 +89,20 @@ export class App extends React.Component<{}, State> {
               return (
                 <li
                   key={good}
-                  className={`list__item ${isSelected ? 'list__item_active' : ''}`}
+                  className={`list__item ${isSelected ? 'list__item--active' : ''}`}
                 >
                   {good}
-                  {
-                    isSelected
-                      ? (
-                        <button
-                          type="button"
-                          className="button button_color-red"
-                          onClick={() => this.removeGood(good)}
-                        >
-                          Remove
-                        </button>
-                      )
-                      : (
-                        <button
-                          type="button"
-                          className="button"
-                          onClick={() => this.selectGood(good)}
-                        >
-                          Add
-                        </button>
-                      )
-                  }
+                  <button
+                    type="button"
+                    className={`button ${isSelected ? 'button__color-red' : ''}`}
+                    onClick={(
+                      isSelected
+                        ? () => this.removeGood(good)
+                        : () => this.selectGood(good)
+                    )}
+                  >
+                    {isSelected ? 'Remove' : 'Select'}
+                  </button>
                 </li>
               );
             })
