@@ -26,18 +26,18 @@ class App extends React.Component<Props, State> {
     selectedGoods: [],
   };
 
-  select = (name: string) => {
+  selectGood = (name: string) => {
     this.setState((state) => {
       return { selectedGoods: [...state.selectedGoods, name] };
     });
   };
 
-  remove = (good: string) => this.setState((state) => {
+  removeGood = (good: string) => this.setState((state) => {
     const goods = state.selectedGoods;
 
-    goods.splice(goods.indexOf(good), 1);
+    const clearedGoods = goods.filter(item => item !== good);
 
-    return { selectedGoods: goods };
+    return { selectedGoods: clearedGoods };
   });
 
   clearSelection = () => {
@@ -61,6 +61,16 @@ class App extends React.Component<Props, State> {
 
   render() {
     const { selectedGoods } = this.state;
+    const toggleButtonName = (item: string) => (
+      selectedGoods.includes(item)
+        ? 'remove'
+        : 'add'
+    );
+    const toggleButton = (item: string) => (
+      selectedGoods.includes(item)
+        ? this.removeGood(item)
+        : this.selectGood(item)
+    );
 
     return (
       <div className="App">
@@ -97,31 +107,17 @@ class App extends React.Component<Props, State> {
               }`}
             >
               {good}
-              {
-                selectedGoods.includes(good)
-                  ? (
-                    <button
-                      type="button"
-                      className="button button--remove"
-                      onClick={() => {
-                        this.remove(good);
-                      }}
-                    >
-                      Remove
-                    </button>
-                  )
-                  : (
-                    <button
-                      type="button"
-                      className="button button--add"
-                      onClick={() => {
-                        this.select(good);
-                      }}
-                    >
-                      Add
-                    </button>
-                  )
-              }
+              <button
+                type="button"
+                className={
+                  `button button--${toggleButtonName(good)}`
+                }
+                onClick={() => {
+                  toggleButton(good);
+                }}
+              >
+                {toggleButtonName(good)}
+              </button>
             </li>
           ))}
         </ul>
