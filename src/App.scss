@@ -1,1 +1,89 @@
-// styles go here
+.App {
+  padding-left:100px;
+  font-family: sans-serif;
+
+  &__title {
+    margin: 0;
+    font-size: 28px;
+    color: #333;
+
+    span {
+      color: #f15b5b;
+    }
+  }
+
+  &__list {
+    display: block;
+    padding: 0;
+    list-style: none;
+    font-size: 18px;
+  }
+
+  &__item {
+    display: flex;
+  }
+
+  &__good {
+    margin: 0;
+    margin-bottom: 10px;
+    width: 100px;
+    padding: 10px;
+    color: #fff;
+    border-radius: 5px;
+    margin-right: 10px;
+    background-color: #7689f7;
+    transition: background-color 300ms;
+
+    &:hover {
+      background-color: #3a56f3;
+    }
+
+    &--active {
+      background-color: #faf768;
+      color: grey;
+
+      &:hover {
+        background-color: #f7f32e;
+      }
+
+    }
+  }
+
+  &__button {
+    font-size: 18px;
+    background-color: transparent;
+    color: #333;
+    border: none;
+    outline: none;
+    transition: transform 300ms;
+    cursor: pointer;
+
+    &:active {
+      transform: scale(1.08);
+    }
+
+    &-addIcon {
+      color: #777;
+    }
+
+    &-closeIcon {
+      color: #f15b5b;
+    }
+
+    &-checkIcon {
+      cursor: not-allowed;
+      color: #0cac76;
+    }
+  }
+
+  &__clearButton {
+    padding: 10px;
+    border: none;
+    font-size: 12px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    background-color: #f15b5b;
+    color: #fff;
+  }
+}
+
