@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import './GoodsList.scss';
 
 const goodsFromServer: string[] = [
   'dumplings',
@@ -64,7 +65,10 @@ export class App extends React.Component<{}, State> {
         </h1>
         <ul className="GoodsList">
           {goodsFromServer.map((good) => (
-            <li key={good} className="GoodsList__item">
+            <li
+              key={good}
+              className={`GoodsList__item ${includes(good) && 'GoodsList__item--selected'}`}
+            >
               <span>{good}</span>
               <button
                 type="button"
