@@ -1,1 +1,36 @@
-// styles go here
+.goods {
+  font-family: serif;
+  width: 400px;
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: max-content;
+    gap: 20px;
+    margin-left: 40px;
+  }
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    width: 300px;
+    padding-bottom: 5px;
+  }
+
+  &__item {
+    &--selected {
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid black;
+    }
+  }
+
+  &__button {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
