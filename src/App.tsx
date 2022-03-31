@@ -36,6 +36,14 @@ class App extends React.Component<{}, State> {
     }
   };
 
+  updateGoods = (good: string) => {
+    this.setState((prevState: State) => {
+      return prevState.selectedGoods.includes(good)
+        ? { selectedGoods: prevState.selectedGoods.filter(item => item !== good) }
+        : { selectedGoods: [...prevState.selectedGoods, good] };
+    });
+  };
+
   render() {
     const { selectedGoods } = this.state;
 
@@ -44,7 +52,6 @@ class App extends React.Component<{}, State> {
         <h1 className="App-title">
           Selected good: -&nbsp;
           {this.createBucket(selectedGoods)}
-            &nbsp;
           <button
             className="btn-cancel"
             type="button"
@@ -71,14 +78,7 @@ class App extends React.Component<{}, State> {
                     checked: good === selectedGoods.find(item => item === good),
                   },
                 )}
-                onClick={
-                  good === selectedGoods.find(item => item === good) ? () => this.setState(
-                    (state) => ({
-                      selectedGoods: [...state.selectedGoods.filter(item => item !== good)],
-                    }),
-                  ) : () => this.setState((state) => (
-                    { selectedGoods: [...state.selectedGoods, good] }))
-                }
+                onClick={() => this.updateGoods(good)}
               >
                 Select
               </button>
