@@ -24,36 +24,40 @@ export class App extends React.Component<{}, State> {
     selectedGoods: ['jam'],
   };
 
-  addHandler = (good: string) => {
+  addGood = (good: string) => {
     this.setState(({ selectedGoods }) => ({
       selectedGoods: [...selectedGoods, good],
     }));
   };
 
-  removeHandler = (good: string) => {
+  removeGood = (selectedGood: string) => {
     this.setState(({ selectedGoods }) => ({
-      selectedGoods: selectedGoods.filter((g) => g !== good),
+      selectedGoods: selectedGoods.filter((good) => good !== selectedGood),
     }));
   };
 
-  clearHandler = () => {
+  clear = () => {
     this.setState(() => ({
       selectedGoods: [],
     }));
   };
 
+  formatList = () => (
+    this.state.selectedGoods.length === 1
+      ? this.state.selectedGoods[0]
+      : (`${this.state.selectedGoods.slice(0, -1).join(', ')}
+        and ${this.state.selectedGoods.slice(-1)}`)
+  );
+
   render() {
     const { selectedGoods } = this.state;
-
-    const formattedList = selectedGoods.length === 1
-      ? selectedGoods[0]
-      : (`${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods.slice(-1)}`);
+    const formattedList = this.formatList();
 
     const includes = (good: string) => selectedGoods.includes(good);
-    const text = (good: string) => (includes(good) ? 'remove' : 'add');
-    const method = (good: string) => (includes(good)
-      ? this.removeHandler(good)
-      : this.addHandler(good)
+    const buttonText = (good: string) => (includes(good) ? 'remove' : 'add');
+    const buttonCallback = (good: string) => (includes(good)
+      ? this.removeGood(good)
+      : this.addGood(good)
     );
 
     return (
@@ -72,22 +76,21 @@ export class App extends React.Component<{}, State> {
               <span>{good}</span>
               <button
                 type="button"
-                className="GoodsList__item-button"
+                className="GoodsList__item-button button"
                 onClick={() => {
-                  method(good);
+                  buttonCallback(good);
                 }}
               >
-                {text(good)}
+                {buttonText(good)}
               </button>
             </li>
           ))}
         </ul>
-        {!!selectedGoods.length && (
+        {Boolean(selectedGoods.length) && (
           <button
             type="button"
-            onClick={() => {
-              this.clearHandler();
-            }}
+            className="button"
+            onClick={() => this.clear()}
           >
             clear
           </button>
