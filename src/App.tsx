@@ -114,7 +114,7 @@ class App extends React.Component<Props, State> {
               </li>
             ))}
           </ul>
-          {(selectedGoods !== goodsFromServer) && (
+          {(selectedGoods.length !== goodsFromServer.length) && (
             <div className="App__select-all-button--container">
               <button
                 type="button"
