@@ -1,1 +1,208 @@
-// styles go here
+@mixin onTablet {
+  @media (min-width: 640px) {
+    @content;
+  }
+}
+
+@font-face {
+  font-family: 'Montserrat', sans-serif;
+  src: url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap')
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat';
+}
+
+.App {
+  &__container {
+    background: linear-gradient(pink, lightcyan);
+  
+    height: 100vh;
+    width: 280px;
+    margin: 0 auto;
+
+    @include onTablet {
+      width: 640px;
+    }
+  }
+
+  &__header {
+    &-container {
+      margin: 0 auto;
+      padding: 8px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 148px;
+
+      font-size: 18px;
+
+      h1 {
+        font-size: 18px;
+        width: 180px;
+
+        @include onTablet {
+          width: 480px;
+        }
+      }
+    }
+    
+    &-button {
+      transition: .3s ease-in;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      &::before {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        content: '+';
+        
+        transform: rotate(45deg);
+        
+        height: 100%;
+        font-size: 24px;
+      }
+
+        @include onTablet {
+          &::before {
+            content: "Clear list";
+            transform: rotate(0);
+            font-size: 16px;
+          }
+
+          width: 96px;
+          border-radius: 24px;
+        }
+
+      height: 28px;
+      width: 28px;
+      border: none;
+      border-radius: 50%;
+
+      background-color: red;
+      color: white;
+      border: 2px solid #b73417;
+
+      transition: .3s ease-in;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    border-radius: 24px;
+    &--list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      padding: 4px 28px;
+      transition: .3s ease-in;
+
+      &_selected {
+        background: rgba(224, 255, 255, 0.5);
+      }
+    }
+
+    &--list-button {
+      position: relative;
+
+      &:hover {
+        transform: scale(1.1);
+        transition: .3s ease-in;
+      }
+
+      @include onTablet {
+        &::before {
+          content: "";
+        }
+
+        width: 96px;
+        border-radius: 24px;
+      }
+
+      font-size: 24px;
+
+      height: 28px;
+      width: 28px;
+
+      border-radius: 50%;
+
+      &::before {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        height: 100%;
+        content: '+';
+        font-size: 24px;
+        transition: .3s ease-in;
+      }
+
+      &_remove {
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #b73417;
+        transform: rotate(45deg);
+
+        @include onTablet {
+          transform: rotate(0);
+        }
+
+        background-color: red;
+        color: white;
+
+        &::before {
+          @include onTablet {
+            content: "Remove";
+            font-size: 16px;
+
+          }
+        }
+      }
+
+      &_add {
+
+        &::before {
+          @include onTablet {
+            content: "Add";
+          }
+
+          font-size: 16px;
+        }
+
+        border: 2px solid #229522;
+        background-color: lightgreen;
+      }
+    }
+  }
+
+  &__select-all-button {
+    margin: 24px auto 0;
+    border: 2px solid #229522;
+    background-color: lightgreen;
+    height: 28px;
+    width: 168px;
+    border-radius: 24px;
+    font-size: 16px;
+    
+    @include onTablet {
+      width: 186px;
+      font-size: 18px;
+    }
+
+    &--container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
