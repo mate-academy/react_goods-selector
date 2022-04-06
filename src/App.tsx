@@ -114,15 +114,17 @@ class App extends React.Component<Props, State> {
               </li>
             ))}
           </ul>
-          <div className="App__select-all-button--container">
-            <button
-              type="button"
-              className="App__select-all-button"
-              onClick={this.selectAllGoods}
-            >
-              Select all goods
-            </button>
-          </div>
+          {(selectedGoods !== goodsFromServer) && (
+            <div className="App__select-all-button--container">
+              <button
+                type="button"
+                className="App__select-all-button"
+                onClick={this.selectAllGoods}
+              >
+                Select all goods
+              </button>
+            </div>
+          )}
         </div>
       </div>
     );
