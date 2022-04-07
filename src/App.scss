@@ -53,10 +53,6 @@
     &-button {
       transition: .3s ease-in;
 
-      // &:hover {
-      //   transform: scale(1.1);
-      // }
-
       &::before {
         display: flex;
         align-items: center;
@@ -112,11 +108,6 @@
 
     &--list-button {
       position: relative;
-
-      // &:hover {
-      //   transform: scale(1.1);
-      //   transition: .3s ease-in;
-      // }
 
       @include onTablet {
         &::before {

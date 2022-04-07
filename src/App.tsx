@@ -24,7 +24,7 @@ class App extends React.Component<Props, State> {
     selectedGoods: ['Jam'],
   };
 
-  addGoodsToTitle = (goods: string[]) => {
+  getTitle = (goods: string[]) => {
     if (goods.length === 1) {
       return `${goods[0]} is selected`;
     }
@@ -67,7 +67,7 @@ class App extends React.Component<Props, State> {
             <h1>
               {
                 (selectedGoods.length > 0)
-                  ? this.addGoodsToTitle(selectedGoods)
+                  ? this.getTitle(selectedGoods)
                   : 'Your shopping list is empty. Pick an item'
               }
             </h1>
