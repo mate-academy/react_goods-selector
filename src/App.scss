@@ -1,1 +1,51 @@
-// styles go here
+.list {
+  list-style: none;
+  width: 200px;
+  border: 1px solid black;
+  padding: 10px;
+  background-color: rgb(159, 128, 247);
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 5px 0;
+    border: 1px solid;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: rgb(198, 242, 253);
+
+    &--active {
+      background-color: rgb(42, 115, 250);
+    }
+  }
+}
+
+.button {
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid green;
+  border-radius: 4px;
+  width: 70px;
+
+  &__hide {
+    visibility: hidden;
+  }
+
+  &__show {
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    border-color: red;
+  }
+
+  &__color-red {
+    border-color: red;
+  }
+}
+
+.title {
+  flex-direction: row;
+
+  vertical-align: center;
+}
