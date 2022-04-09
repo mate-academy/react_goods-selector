@@ -1,1 +1,108 @@
-// styles go here
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #d1c5abb2;
+  font-family: "Arial", "Helvetica", sans-serif;
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.goods {
+  background-color: #eee;
+  width: 600px;
+  padding: 40px;
+  box-shadow: 0 0 15px #d1c5ab,
+    0 0 45px #d1c5ab;
+  border-radius: 15px;
+  margin: 20px;
+
+  &__title-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 0 0 25px;
+    padding: 0 0 10px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  &__title {
+    color: #3b3737;
+    font-size: 40px;
+  }
+
+  &__remove {
+    flex-shrink: 0;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    line-height: 0;
+    font-size: 25px;
+    color: #f15555;
+    border: 1px solid#ccc;
+    border-radius: 5px;
+    margin: 6px 0 0 30px;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover {
+      color: #e92929;
+      background-color: #ccc;
+    }
+  }
+}
+
+.goods-list {
+  list-style: none;
+}
+
+.item {
+  color: #3b3737;
+  font-size: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+
+  &--selected &__text {
+    color: #999;
+  }
+
+  &:not(:last-child) {
+    margin: 0 0 15px;
+  }
+}
+
+.button {
+  cursor: pointer;
+  color: #3b3737;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  width: 90px;
+  padding: 7px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background-color: #d4cbcb;
+  transition: all 0.3s;
+
+  &:hover {
+    color: #eee;
+    background-color: #6f9e83;
+  }
+
+  &--selected {
+    background-color: #e96868;
+    color: #eee;
+
+    &:hover {
+      background-color: #ff4646;
+      color: #fafafa;
+    }
+  }
+}
