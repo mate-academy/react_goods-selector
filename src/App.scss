@@ -1,1 +1,31 @@
-// styles go here
+body {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+
+  &_clear {
+    border: 2px solid red;
+  }
+
+  &_add {
+    border: 2px solid green;
+  }
+}
+
+.goods {
+  &_list {
+    max-width: 500px;
+  }
+
+  &_item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &_active {
+      background-color: greenyellow;
+    }
+  }
+}
