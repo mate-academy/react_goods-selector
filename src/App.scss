@@ -1,1 +1,40 @@
-// styles go here
+.listOfGoods {
+  display: flex;
+  padding: auto;
+  align-items: center;
+  margin: auto;
+
+  .item {
+    margin: 20px;
+  }
+
+  .button {
+    background-color: rgb(151, 121, 185);
+    margin: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .button:hover {
+    background-color: pink;
+    cursor: pointer;
+  }
+
+  .active {
+    border: 2px solid rgb(151, 121, 185);
+    border-radius: 10px;
+    padding: 10px;
+    color: rgb(151, 121, 185);
+    background-color: rgb(247, 232, 247);
+  }
+}
+
+// .buttonX {
+//   display: none;
+// }
