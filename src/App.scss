@@ -1,1 +1,36 @@
-// styles go here
+.title {
+  display: flex;
+  position: relative;
+  margin: 15px;
+  
+}
+
+h1 {
+  margin: 0;
+  
+}
+
+.clearButton {
+  position: relative;
+  margin-left: 20px;
+}
+
+li {
+  list-style-type: none;
+  margin-bottom: 10px;
+}
+
+.listStyle {
+  width: 200px;
+  height: 100%;
+  font-size: 20px;
+  padding: 10px;
+}
+
+.selectButton {
+  margin-left: 10px;
+}
+
+.selected {
+  background-color: #32cd32;
+}
