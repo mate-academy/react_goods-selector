@@ -14,7 +14,7 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-class App extends React.Component {
+export class App extends React.Component {
   state = {
     selectedNo: 'No goods selected',
     noGoods: 'No goods selected',
@@ -133,4 +133,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+// export default App;
