@@ -21,7 +21,7 @@
   "devDependencies": {
     "@mate-academy/eslint-config-react": "*",
     "@mate-academy/eslint-config-react-typescript": "*",
-    "@mate-academy/scripts": "^1.2.1",
+    "@mate-academy/scripts": "^1.2.3",
     "@mate-academy/students-ts-config": "*",
     "@mate-academy/stylelint-config": "*",
     "@types/uuid": "^8.3.4",
