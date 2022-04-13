@@ -1,1 +1,20 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+.App {
+  &__product-item {
+    display: inline-block;
+    width: 5rem;
+    margin-right: 3rem;
+    border: 1px solid transparent;
+
+    &.active {
+      border-color: #080;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+  }
+}
