@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -16,16 +17,30 @@ const goodsFromServer: string[] = [
 
 export class App extends React.Component {
   state = {
-    selectedNo: 'No goods selected',
-    noGoods: 'No goods selected',
     selectedGood: '',
     selectedGoods: [],
   };
 
   render() {
     const {
-      selectedNo, selectedGood, selectedGoods, noGoods,
+      selectedGood, selectedGoods,
     } = this.state;
+
+    const message = () => {
+      if (selectedGood !== '') {
+        return `${selectedGood} is selected`;
+      }
+
+      if (selectedGoods.length === 1) {
+        return `${selectedGoods.join('')} is selected`;
+      }
+
+      if (selectedGoods.length > 1) {
+        return `${selectedGoods.join(',')} are selected`;
+      }
+
+      return 'No goods selected';
+    };
 
     return (
       <>
@@ -33,14 +48,14 @@ export class App extends React.Component {
           <h1 className="title">
             Selected good:
             <span className="red">
-              {selectedGood !== '' ? `${selectedGood} is selected` : `${selectedNo}`}
+              {message()}
             </span>
 
             <button
               type="button"
               className="button button__h1"
               onClick={() => {
-                this.setState({ selectedNo: '', selectedGood: '' });
+                this.setState({ selectedGood: '' });
               }}
             >
               X
@@ -49,17 +64,23 @@ export class App extends React.Component {
 
           <ul className="goods">
             {goodsFromServer.map(good => (
-              <li key={good} className={`good ${selectedGood !== good ? '' : 'good__active'}`}>
+              <li
+                key={good}
+                className={classNames(
+                  'good',
+                  {
+                    good__active: selectedGood === good,
+                  },
+                )}
+              >
                 {good}
 
                 <button
                   type="button"
                   className={`${selectedGood !== good ? 'button' : 'button__disable'}`}
-                  onClick={
-                    () => {
-                      this.setState({ selectedGood: good });
-                    }
-                  }
+                  onClick={() => {
+                    this.setState({ selectedGood: good });
+                  }}
                 >
                   Select
                 </button>
@@ -74,15 +95,13 @@ export class App extends React.Component {
           <h1 className="title">
             Selected good:
             <span className="red">
-              {selectedGoods.length > 0
-                ? `${selectedGoods.join(',')} ${selectedGoods.length > 1 ? 'are' : 'is'} selected`
-                : `${noGoods}`}
+              {message()}
             </span>
             <button
               type="button"
               className="button button__h1"
               onClick={() => {
-                this.setState({ selectedGoods: [], noGoods: '' });
+                this.setState({ selectedGoods: [] });
               }}
             >
               X
@@ -91,36 +110,48 @@ export class App extends React.Component {
           <ul className="goods">
             {goodsFromServer.map(good => (
               <div key={good} className="good__block">
-                <li className={`good ${selectedGoods.includes(good as never) ? 'good__active' : ''}`}>
+                <li className={classNames(
+                  'good',
+                  {
+                    good__active: selectedGoods.includes(good as never),
+                  },
+                )}
+                >
                   {good}
                 </li>
 
                 <button
                   type="button"
-                  className={`${selectedGoods.includes(good as never) ? 'button button__hidden' : 'button'}`}
-                  onClick={
-                    () => {
-                      this.setState(() => ({
-                        selectedGoods: [...selectedGoods, good],
-                      }));
-                    }
-                  }
+                  className={classNames(
+                    'button',
+                    {
+                      button__hidden: selectedGoods.includes(good as never),
+                    },
+                  )}
+                  onClick={() => {
+                    this.setState(() => ({
+                      selectedGoods: [...selectedGoods, good],
+                    }));
+                  }}
                 >
                   Add
                 </button>
 
                 <button
                   type="button"
-                  className={`${!selectedGoods.includes(good as never) ? 'button button__hidden' : 'button'}`}
-                  onClick={
-                    () => {
-                      this.setState(() => ({
-                        selectedGoods: selectedGoods.filter(
-                          (item) => item !== good,
-                        ),
-                      }));
-                    }
-                  }
+                  className={classNames(
+                    'button',
+                    {
+                      button__hidden: !selectedGoods.includes(good as never),
+                    },
+                  )}
+                  onClick={() => {
+                    this.setState(() => ({
+                      selectedGoods: selectedGoods.filter(
+                        (item) => item !== good,
+                      ),
+                    }));
+                  }}
                 >
                   Remove
                 </button>
@@ -132,5 +163,3 @@ export class App extends React.Component {
     );
   }
 }
-
-// export default App;
