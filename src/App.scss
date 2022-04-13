@@ -17,10 +17,6 @@
     color: white;
   }
 
-  .hidden {
-    display: none;
-  }
-
   .button:hover {
     background-color: pink;
     cursor: pointer;
@@ -33,4 +29,8 @@
     color: rgb(151, 121, 185);
     background-color: rgb(247, 232, 247);
   }
+}
+
+.hidden {
+  display: none;
 }
