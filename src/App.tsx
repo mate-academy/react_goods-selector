@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import './App.scss';
 
@@ -30,8 +31,10 @@ export class App extends React.Component<{}, State> {
       case 0:
         return 'No goods selected';
       case 1:
-        return `${selectedGoods.join(', ')} is selected`;
-      default: return `${selectedGoods.join(', ')} are selected`;
+        return `${selectedGoods[0]} is selected`;
+      default:
+        return `${selectedGoods.slice(0, -1).join(', ')}
+        and ${selectedGoods[selectedGoods.length - 1]} are selected`;
     }
   };
 
@@ -66,7 +69,10 @@ export class App extends React.Component<{}, State> {
             <div>
               <button
                 type="button"
-                className={`buttonX ${selectedGoods.length === 0 ? 'hidden' : ''}`}
+                className={classNames(
+                  'buttonX',
+                  { hidden: selectedGoods.length === 0 },
+                )}
                 onClick={this.clearSelect}
               >
                 X
@@ -81,14 +87,21 @@ export class App extends React.Component<{}, State> {
                 key={item}
                 className="listOfGoods item"
               >
-                <div className={`listOfGoods ${this.isSelectedItem(item) ? 'active' : ''}`}>
+                <div className={classNames(
+                  'listOfGoods',
+                  { active: this.isSelectedItem(item) },
+                )}
+                >
                   {item}
                 </div>
 
                 <div>
                   <button
                     type="button"
-                    className={`listOfGoods button ${this.isSelectedItem(item) ? 'hidden' : ''}`}
+                    className={classNames(
+                      'listOfGoods button',
+                      { hidden: this.isSelectedItem(item) },
+                    )}
                     onClick={() => {
                       this.addItem(item);
                     }}
@@ -100,7 +113,10 @@ export class App extends React.Component<{}, State> {
                 <div>
                   <button
                     type="button"
-                    className={`listOfGoods button ${this.isSelectedItem(item) ? '' : 'hidden'}`}
+                    className={classNames(
+                      'listOfGoods button',
+                      { hidden: !this.isSelectedItem(item) },
+                    )}
                     onClick={() => {
                       this.removeItem(item);
                     }}
