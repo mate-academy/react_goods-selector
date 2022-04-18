@@ -1,1 +1,109 @@
-// styles go here
+@mixin onTablet {
+  @media (min-width: 640px) {
+    @content;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background: lightblue;
+}
+
+.App {
+  &__container {
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  &__header {
+    &-container {
+      // padding: 0 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100px;
+
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+
+    &-button {
+      transition: 0.2s ease-in;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        opacity: 100%;
+      }
+
+      &::before {
+        width: 100px;
+        content: "Clear list";
+        font-size: 20px;
+      }
+
+      background-color: brown;
+      opacity: 60%;
+      border: 0;
+      color: white;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    border-radius: 20px;
+    &--list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      padding: 0 20px;
+      transition: 0.2s ease-in;
+
+      &_selected {
+        background: lightgreen;
+      }
+    }
+
+    &--list-button {
+      position: relative;
+      opacity: 60%;
+      border: 0;
+
+      &:hover {
+        opacity: 100%;
+        transition: 0.2s ease-in;
+      }
+      width: 96px;
+      height: 28px;
+
+      &::before {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        height: 100%;
+        content: "Remove";
+        font-size: 16px;
+        transition: 0.2s ease-in;
+      }
+
+      &_remove {
+        background-color: orange;
+        color: white;
+      }
+
+      &_add {
+
+        &::before {
+          content: "Add";
+        }
+      }
+    }
+  }
+}
