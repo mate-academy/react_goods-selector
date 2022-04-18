@@ -38,7 +38,7 @@ body {
       justify-content: center;
 
       &:hover {
-        opacity: 100%;
+        opacity: 1;
       }
 
       &::before {
@@ -48,7 +48,7 @@ body {
       }
 
       background-color: brown;
-      opacity: 60%;
+      opacity: 0.6;
       border: 0;
       color: white;
     }
@@ -72,11 +72,11 @@ body {
 
     &--list-button {
       position: relative;
-      opacity: 60%;
+      opacity: 0.6;
       border: 0;
 
       &:hover {
-        opacity: 100%;
+        opacity: 1;
         transition: 0.2s ease-in;
       }
       width: 96px;
