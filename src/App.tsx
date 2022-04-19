@@ -17,20 +17,13 @@ const goodsFromServer: string[] = [
 
 export class App extends React.Component {
   state = {
-    selectedGood: '',
     selectedGoods: [],
   };
 
   render() {
-    const {
-      selectedGood, selectedGoods,
-    } = this.state;
+    const { selectedGoods } = this.state;
 
     const message = () => {
-      if (selectedGood !== '') {
-        return `${selectedGood} is selected`;
-      }
-
       if (selectedGoods.length === 1) {
         return `${selectedGoods.join('')} is selected`;
       }
@@ -44,53 +37,6 @@ export class App extends React.Component {
 
     return (
       <>
-        <div className="App">
-          <h1 className="title">
-            Selected good:
-            <span className="red">
-              {message()}
-            </span>
-
-            <button
-              type="button"
-              className="button button__h1"
-              onClick={() => {
-                this.setState({ selectedGood: '' });
-              }}
-            >
-              X
-            </button>
-          </h1>
-
-          <ul className="goods">
-            {goodsFromServer.map(good => (
-              <li
-                key={good}
-                className={classNames(
-                  'good',
-                  {
-                    good__active: selectedGood === good,
-                  },
-                )}
-              >
-                {good}
-
-                <button
-                  type="button"
-                  className={`${selectedGood !== good ? 'button' : 'button__disable'}`}
-                  onClick={() => {
-                    this.setState({ selectedGood: good });
-                  }}
-                >
-                  Select
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>Advanced task</div>
-
         <div className="App">
           <h1 className="title">
             Selected good:
