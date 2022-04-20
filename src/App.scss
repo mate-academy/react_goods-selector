@@ -1,1 +1,32 @@
-// styles go here
+.goodContainer {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.goodName {
+  width: 200px;
+}
+
+.selected {
+  background-color: yellow;
+}
+
+.deleteSelection {
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  margin-left: 20px;
+  padding: 0;
+  font-size: 16px;
+  line-height: 16px;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+}
