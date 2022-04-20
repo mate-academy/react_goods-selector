@@ -14,6 +14,10 @@ const goodsFromServer = [
 describe('Page', () => {
   beforeEach(() => {
     cy.visit('/');
+    cy.contains('li', goodsFromServer[8])
+      .as('jamItem');
+    cy.contains('[type="button"]', 'Clear')
+      .as('clearBtn');
   });
 
   it('should have only original items on the list', () => {
@@ -22,48 +26,57 @@ describe('Page', () => {
   });
 
   it('should have selected Jam item by default', () => {
-    cy.getByDataCy('title')
-      .should('contain', `${goodsFromServer[8]} is selected`);
+    cy.contains('h1', `${goodsFromServer[8]} is selected`)
+      .should('exist');
   });
 
   it('should have a name of item on the each item in the list', () => {
     cy.getByDataCy('good')
-      .findByDataCy('good-name')
-      .should('contain', goodsFromServer[0]);
+      .contains(goodsFromServer[0])
+      .should('exist');
   });
 
-  it('should have a "Remove" button to select an item', () => {
-    cy.getByDataCy('good')
-      .findByDataCy('good-btn', 8)
+  it('should have a "Remove" button to unselect selected item', () => {
+    cy.get('@jamItem')
+      .contains('Remove')
       .click();
 
-    cy.getByDataCy('title')
-      .should('contain', 'No selected goods');
+    cy.contains('h1', 'No goods selected')
+      .should('exist');
   });
 
-  it('should have a "Select" button to unselect selected item', () => {
-    cy.getByDataCy('good')
-      .findByDataCy('good-btn', 8)
-      .dblclick();
+  it('should have a "Select" button to select item', () => {
+    cy.get('@jamItem')
+      .contains('Remove')
+      .click();
+    cy.get('@jamItem')
+      .contains('Select')
+      .click();
 
-    cy.getByDataCy('title')
-      .should('contain', `${goodsFromServer[8]} is selected`);
+    cy.contains('h1', `${goodsFromServer[8]} is selected`)
+      .should('exist');
+  });
+
+  it('shouldn\'t have a "Select" button on the selected item', () => {
+    cy.get('@jamItem')
+      .contains('Select')
+      .should('not.exist');
   });
 
   it('should have "Clear" button to remove selected elements', () => {
-    cy.getByDataCy('clear-btn')
+    cy.get('@clearBtn')
       .click();
 
-    cy.getByDataCy('title')
-      .should('contain', 'No selected goods');
+    cy.contains('h1', 'No goods selected')
+      .should('exist');
   });
 
   it('should not display "Clear" button if there is no selected good', () => {
-    cy.getByDataCy('good')
-      .findByDataCy('good-btn', 8)
+    cy.get('@jamItem')
+      .contains('Remove')
       .click();
 
-    cy.getByDataCy('clear-btn')
-      .should('not.visible');
+    cy.get('@clearBtn')
+      .should('not.exist');
   });
 });

@@ -12,7 +12,7 @@
 1. The selected good should be highlighted in the list (add CSS class with a background)
 1. Add a button `Select` next to each good in the list
 1. When you press the `Select` button the good becomes selected
-1. Don't show the button next to the selected good
+1. Don't show the `Select` button next to the selected good
 1. When the good is selected, the `Select` button should be displayed as `Remove`
 1. When you press the `Remove` button the good becomes unselected
 1. You can select another good by pressing its `Select` button
@@ -30,7 +30,3 @@
 ## REQUIREMENTS
 
 - `selectedGood` (`h1`) should have a `data-cy="title"` attribute
-- goods (`li`) should have a `data-cy="good"` attribute
-- a name of the good inside the `li` should have a `data-cy="good-name"` attribute
-- `Clear` button should have a `data-cy="clear-btn"` attribute
-- `Select`/`Remove` button on the good should have a `data-cy="good-btn"` attribute
