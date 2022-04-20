@@ -11,17 +11,24 @@ const goodsFromServer = [
   'Garlic',
 ];
 
+const buttons = {
+  clear: 'Clear',
+  remove: 'Remove',
+  select: 'Select'
+};
+
+Cypress.Commands.add('selectItemBtn', (btn) => {
+  cy.contains('li', goodsFromServer[8])
+    .contains(btn);
+});
+
 describe('Page', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.contains('li', goodsFromServer[8])
-      .as('jamItem');
-    cy.contains('[type="button"]', 'Clear')
-      .as('clearBtn');
   });
 
   it('should have only original items on the list', () => {
-    cy.getByDataCy('good')
+    cy.get('li')
       .should('have.length', goodsFromServer.length);
   });
 
@@ -31,40 +38,33 @@ describe('Page', () => {
   });
 
   it('should have a name of item on the each item in the list', () => {
-    cy.getByDataCy('good')
+    cy.get('li')
       .contains(goodsFromServer[0])
       .should('exist');
   });
 
   it('should have a "Remove" button to unselect selected item', () => {
-    cy.get('@jamItem')
-      .contains('Remove')
-      .click();
+    cy.selectItemBtn(buttons.remove).click();
 
     cy.contains('h1', 'No goods selected')
       .should('exist');
   });
 
   it('should have a "Select" button to select item', () => {
-    cy.get('@jamItem')
-      .contains('Remove')
-      .click();
-    cy.get('@jamItem')
-      .contains('Select')
-      .click();
+    cy.selectItemBtn(buttons.remove).click();
+    cy.selectItemBtn(buttons.select).click();
 
     cy.contains('h1', `${goodsFromServer[8]} is selected`)
       .should('exist');
   });
 
   it('shouldn\'t have a "Select" button on the selected item', () => {
-    cy.get('@jamItem')
-      .contains('Select')
+    cy.selectItemBtn(buttons.select)
       .should('not.exist');
   });
 
   it('should have "Clear" button to remove selected elements', () => {
-    cy.get('@clearBtn')
+    cy.contains('button', buttons.clear)
       .click();
 
     cy.contains('h1', 'No goods selected')
@@ -72,11 +72,10 @@ describe('Page', () => {
   });
 
   it('should not display "Clear" button if there is no selected good', () => {
-    cy.get('@jamItem')
-      .contains('Remove')
+    cy.selectItemBtn(buttons.remove)
       .click();
 
-    cy.get('@clearBtn')
+    cy.contains('button', buttons.clear)
       .should('not.exist');
   });
 });

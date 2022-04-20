@@ -26,7 +26,3 @@
     - `No goods selected`
     - `Jam is selected`
     - `Carrot, Jam and Eggs are selected`
-
-## REQUIREMENTS
-
-- `selectedGood` (`h1`) should have a `data-cy="title"` attribute
