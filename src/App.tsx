@@ -15,15 +15,19 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-export class App extends React.Component {
-  state = {
+type State = {
+  selectedGoods: string[]
+};
+
+export class App extends React.Component<{}, State> {
+  state: State = {
     selectedGoods: [],
   };
 
   render() {
     const { selectedGoods } = this.state;
 
-    const message = () => {
+    const selectGoods = () => {
       if (selectedGoods.length === 1) {
         return `${selectedGoods.join('')} is selected`;
       }
@@ -41,7 +45,7 @@ export class App extends React.Component {
           <h1 className="title">
             Selected good:
             <span className="red">
-              {message()}
+              {selectGoods()}
             </span>
             <button
               type="button"
@@ -59,7 +63,7 @@ export class App extends React.Component {
                 <li className={classNames(
                   'good',
                   {
-                    good__active: selectedGoods.includes(good as never),
+                    good__active: selectedGoods.includes(good),
                   },
                 )}
                 >
@@ -71,7 +75,7 @@ export class App extends React.Component {
                   className={classNames(
                     'button',
                     {
-                      button__hidden: selectedGoods.includes(good as never),
+                      button__hidden: selectedGoods.includes(good),
                     },
                   )}
                   onClick={() => {
