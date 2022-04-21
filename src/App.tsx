@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+
 import React from 'react';
 import './App.scss';
 
@@ -14,17 +16,22 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-class App extends React.Component {
+class App extends React.Component<{}, { selectedGoods: string[] }> {
   state = {
-    initialHeader: 'No goods selected',
-    // selectedGood: 'Jam',
+    selectedGoods: [],
   };
 
-  previousSelectedButton: HTMLElement | null
-  = document.querySelector('.buttonSelected');
+  showSelectedGoods = (goods: string[]) => {
+    if (goods.length === 0) {
+      return 'No goods selected';
+    }
 
-  previousSelectedGood: HTMLElement | null
-  = document.querySelector('.selected');
+    if (goods.length === 1) {
+      return ' is selected';
+    }
+
+    return ' are selected';
+  };
 
   render() {
     return (
@@ -35,80 +42,54 @@ class App extends React.Component {
               className="goodContainer"
               key={good}
             >
-              <div className="goodName">
+              <div className={this.state.selectedGoods
+                .find(currentGood => currentGood === good)
+                ? 'goodName selected' : 'goodName'}
+              >
                 {good}
               </div>
               <button
                 type="button"
-                onClick={(event) => {
-                  this.setState({
-                    // selectedGood: good,
-                    initialHeader: `Selected good is: - ${good}`,
-                  });
-                  const selectedButton = event.target as HTMLElement;
-                  const selectedElement
-                  = selectedButton.previousElementSibling as HTMLElement;
-
-                  const clearSelection
-                    = document.querySelector('.deleteSelection');
-
-                  if (clearSelection) {
-                    clearSelection.className = 'deleteSelection';
-                  }
-
-                  if (selectedElement) {
-                    selectedElement.className = 'goodName selected';
-                  }
-
-                  selectedButton.className = 'buttonSelected hidden';
-                  if (this.previousSelectedButton) {
-                    this.previousSelectedButton.className = '';
-                  }
-
-                  if (this.previousSelectedGood) {
-                    this.previousSelectedGood.className = 'goodName';
-                  }
-
-                  this.previousSelectedButton = selectedButton;
-
-                  if (selectedElement) {
-                    this.previousSelectedGood = selectedElement;
+                className={this.state.selectedGoods
+                  .find(currentGood => currentGood === good)
+                  ? 'remove' : 'add'}
+                onClick={() => {
+                  if (this.state.selectedGoods
+                    .find(currentGood => currentGood === good)) {
+                    this.setState((prevState) => ({
+                      selectedGoods:
+                      prevState.selectedGoods
+                        .filter(currentGood => currentGood !== good),
+                    }));
+                  } else {
+                    this.setState((prevState) => ({
+                      selectedGoods: [...prevState.selectedGoods,
+                        good],
+                    }));
                   }
                 }}
               >
-                Select
+                {this.state.selectedGoods
+                  .find(currentGood => currentGood === good) ? 'Remove' : 'Add'}
               </button>
             </div>
           </>
         ))}
         <div className="headerContainer">
           <h1>
-            {this.state.initialHeader}
+            {this.state.selectedGoods.slice(0, -1).join(', ')}
+            {this.state.selectedGoods.length > 1 && ' and '}
+            {this.state.selectedGoods[this.state.selectedGoods.length - 1]}
+            {this.showSelectedGoods(this.state.selectedGoods)}
           </h1>
           <button
             type="button"
-            className="deleteSelection hidden"
+            className={this.state.selectedGoods.length === 0
+              ? 'hidden' : 'deleteSelection'}
             onClick={() => {
               this.setState({
-                initialHeader: 'Selected good is: - ',
+                selectedGoods: [],
               });
-
-              const selectedButton = document.querySelector('.buttonSelected');
-              const goodSelected = document.querySelector('.selected');
-
-              if (selectedButton) {
-                selectedButton.className = '';
-              }
-
-              if (goodSelected) {
-                goodSelected.className = 'goodName';
-              }
-
-              const clearSelection = document.querySelector('.deleteSelection');
-
-              if (clearSelection) {
-                clearSelection.className = 'deleteSelection hidden';
-              }
             }}
           >
             x

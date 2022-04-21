@@ -7,6 +7,15 @@
   width: 200px;
 }
 
+button {
+  width: 100px;
+  background-color: rgb(68, 230, 68);
+}
+
+.remove {
+  background-color: pink;
+}
+
 .selected {
   background-color: yellow;
 }
@@ -17,6 +26,7 @@
   height: 20px;
   margin-left: 20px;
   padding: 0;
+  background-color: pink;
   font-size: 16px;
   line-height: 16px;
   text-align: center;
