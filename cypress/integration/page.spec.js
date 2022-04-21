@@ -1,4 +1,4 @@
-const goodsFromServer = [
+const goods = [
   'Dumplings',
   'Carrot',
   'Eggs',
@@ -17,10 +17,15 @@ const buttons = {
   select: 'Select'
 };
 
-Cypress.Commands.add('selectItemBtn', (btn) => {
-  cy.contains('li', goodsFromServer[8])
-    .contains(btn);
-});
+const page = {
+  getGoodButton(index, buttonSelector) {
+    return cy.contains('li', goods[index])
+      .contains(buttonSelector);
+  },
+  header() {
+    return cy.get('h1');
+  }
+};
 
 describe('Page', () => {
   beforeEach(() => {
@@ -29,37 +34,40 @@ describe('Page', () => {
 
   it('should have only original items on the list', () => {
     cy.get('li')
-      .should('have.length', goodsFromServer.length);
+      .should('have.length', goods.length);
   });
 
   it('should have selected Jam item by default', () => {
-    cy.contains('h1', `${goodsFromServer[8]} is selected`)
-      .should('exist');
+    page.header()
+      .should('contain', `${goods[8]} is selected`);
   });
 
   it('should have a name of item on the each item in the list', () => {
     cy.get('li')
-      .contains(goodsFromServer[0])
-      .should('exist');
+      .contains(goods[0])
+      .should('be.visible');
   });
 
   it('should have a "Remove" button to unselect selected item', () => {
-    cy.selectItemBtn(buttons.remove).click();
+    page.getGoodButton(8, buttons.remove) 
+      .click();
 
-    cy.contains('h1', 'No goods selected')
-      .should('exist');
+    page.header()
+      .should('contain', 'No goods selected');
   });
 
   it('should have a "Select" button to select item', () => {
-    cy.selectItemBtn(buttons.remove).click();
-    cy.selectItemBtn(buttons.select).click();
+    page.getGoodButton(8, buttons.remove) 
+      .click();
+    page.getGoodButton(8, buttons.select)
+      .click();
 
-    cy.contains('h1', `${goodsFromServer[8]} is selected`)
-      .should('exist');
+    page.header()
+      .should('contain', `${goods[8]} is selected`);
   });
 
   it('shouldn\'t have a "Select" button on the selected item', () => {
-    cy.selectItemBtn(buttons.select)
+    page.getGoodButton(8, buttons.select)
       .should('not.exist');
   });
 
@@ -67,12 +75,12 @@ describe('Page', () => {
     cy.contains('button', buttons.clear)
       .click();
 
-    cy.contains('h1', 'No goods selected')
-      .should('exist');
+    page.header()
+      .should('contain', 'No goods selected');
   });
 
   it('should not display "Clear" button if there is no selected good', () => {
-    cy.selectItemBtn(buttons.remove)
+    page.getGoodButton(8, buttons.remove)
       .click();
 
     cy.contains('button', buttons.clear)
