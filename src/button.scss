@@ -1,0 +1,23 @@
+.button {
+  width: 100px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: #ab7979;
+  border: 0;
+  outline: none;
+
+  &--remove {
+    background-color: #d86262;
+    box-shadow: 0 9px 18px rgba(244, 69, 69, 0.1)
+  }
+
+  &--add {
+    background-color: #6fc14b;
+    box-shadow: 0 9px 18px rgba(244, 69, 69, 0.1)
+  }
+
+  &--x {
+    width: 50px;
+    margin-left: 30px;
+  }
+}
