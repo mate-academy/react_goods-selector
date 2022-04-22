@@ -21,6 +21,20 @@ class App extends React.Component<{}, { selectedGoods: string[] }> {
     selectedGoods: [],
   };
 
+  makeGoodSelection = (good: string) => (
+    this.state.selectedGoods.find(currentGood => currentGood === good)
+      ? 'goodName selected' : 'goodName'
+  );
+
+  changeButtonType = (good: string) => (
+    this.state.selectedGoods.find(currentGood => currentGood === good)
+      ? 'remove' : 'add'
+  );
+
+  toggleButtonName = (good: string) => (this.state.selectedGoods
+    .find(currentGood => currentGood === good) ? 'Remove' : 'Add'
+  );
+
   showSelectedGoods = (goods: string[]) => {
     if (goods.length === 0) {
       return 'No goods selected';
@@ -33,6 +47,25 @@ class App extends React.Component<{}, { selectedGoods: string[] }> {
     return ' are selected';
   };
 
+  handleSelectButtonClick = (good: string) => {
+    if (this.state.selectedGoods
+      .find(currentGood => currentGood === good)) {
+      this.setState((prevState) => ({
+        selectedGoods:
+        prevState.selectedGoods
+          .filter(currentGood => currentGood !== good),
+      }));
+    } else {
+      this.setState((prevState) => ({
+        selectedGoods: [...prevState.selectedGoods,
+          good],
+      }));
+    }
+  };
+
+  changeClearButtonState = () => (this.state.selectedGoods.length === 0
+    ? 'hidden' : 'deleteSelection');
+
   render() {
     return (
       <div className="App">
@@ -42,35 +75,17 @@ class App extends React.Component<{}, { selectedGoods: string[] }> {
               className="goodContainer"
               key={good}
             >
-              <div className={this.state.selectedGoods
-                .find(currentGood => currentGood === good)
-                ? 'goodName selected' : 'goodName'}
+              <div
+                className={this.makeGoodSelection(good)}
               >
                 {good}
               </div>
               <button
                 type="button"
-                className={this.state.selectedGoods
-                  .find(currentGood => currentGood === good)
-                  ? 'remove' : 'add'}
-                onClick={() => {
-                  if (this.state.selectedGoods
-                    .find(currentGood => currentGood === good)) {
-                    this.setState((prevState) => ({
-                      selectedGoods:
-                      prevState.selectedGoods
-                        .filter(currentGood => currentGood !== good),
-                    }));
-                  } else {
-                    this.setState((prevState) => ({
-                      selectedGoods: [...prevState.selectedGoods,
-                        good],
-                    }));
-                  }
-                }}
+                className={this.changeButtonType(good)}
+                onClick={() => this.handleSelectButtonClick(good)}
               >
-                {this.state.selectedGoods
-                  .find(currentGood => currentGood === good) ? 'Remove' : 'Add'}
+                {this.toggleButtonName(good)}
               </button>
             </div>
           </>
@@ -84,8 +99,7 @@ class App extends React.Component<{}, { selectedGoods: string[] }> {
           </h1>
           <button
             type="button"
-            className={this.state.selectedGoods.length === 0
-              ? 'hidden' : 'deleteSelection'}
+            className={this.changeClearButtonState()}
             onClick={() => {
               this.setState({
                 selectedGoods: [],
