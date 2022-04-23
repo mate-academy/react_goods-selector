@@ -24,6 +24,24 @@ class App extends React.Component<{}, State> {
     selectedGoods: [],
   };
 
+  clearing = () => {
+    this.setState({ selectedGoods: [] });
+  };
+
+  adding = (good: string) => {
+    this.setState((state) => ({
+      selectedGoods: [...state.selectedGoods, good],
+    }));
+  };
+
+  removing = (good: string) => {
+    this.setState((state) => ({
+      selectedGoods: state.selectedGoods.filter(
+        (item) => item !== good,
+      ),
+    }));
+  };
+
   render() {
     const { selectedGoods } = this.state;
 
@@ -50,17 +68,15 @@ class App extends React.Component<{}, State> {
             <button
               type="button"
               className="button button__h1"
-              onClick={() => {
-                this.setState({ selectedGoods: [] });
-              }}
+              onClick={this.clearing}
             >
               X
             </button>
           </h1>
           <ul className="goods">
             {goodsFromServer.map(good => (
-              <div key={good} className="good__block">
-                <li className={classNames(
+              <li key={good} className="good__block">
+                <div className={classNames(
                   'good',
                   {
                     good__active: selectedGoods.includes(good),
@@ -68,7 +84,7 @@ class App extends React.Component<{}, State> {
                 )}
                 >
                   {good}
-                </li>
+                </div>
 
                 <button
                   type="button"
@@ -78,11 +94,7 @@ class App extends React.Component<{}, State> {
                       button__hidden: selectedGoods.includes(good),
                     },
                   )}
-                  onClick={() => {
-                    this.setState(() => ({
-                      selectedGoods: [...selectedGoods, good],
-                    }));
-                  }}
+                  onClick={() => this.adding(good)}
                 >
                   Add
                 </button>
@@ -95,17 +107,11 @@ class App extends React.Component<{}, State> {
                       button__hidden: !selectedGoods.includes(good as never),
                     },
                   )}
-                  onClick={() => {
-                    this.setState(() => ({
-                      selectedGoods: selectedGoods.filter(
-                        (item) => item !== good,
-                      ),
-                    }));
-                  }}
+                  onClick={() => this.removing(good)}
                 >
                   Remove
                 </button>
-              </div>
+              </li>
             ))}
           </ul>
         </div>
