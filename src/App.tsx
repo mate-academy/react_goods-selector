@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -15,52 +16,52 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  selectedGood: string[];
+  selectedGoods: string[];
 };
 
 class App extends React.Component <{}, State> {
   state = {
-    selectedGood: [goodsFromServer[8]],
+    selectedGoods: [] as string[],
   };
 
   showGoods = () => {
-    const { selectedGood } = this.state;
+    const { selectedGoods } = this.state;
 
-    switch (selectedGood.length) {
+    switch (selectedGoods.length) {
       case 0:
         return 'No goods selected';
       case 1:
-        return `${selectedGood} is selected`;
+        return `${selectedGoods} is selected`;
       case 2:
-        return `${selectedGood[0]} and ${selectedGood[1]} are selected`;
+        return `${selectedGoods[0]} and ${selectedGoods[1]} are selected`;
       default:
-        return `${selectedGood.slice(0, -1).join(', ')} and ${selectedGood[selectedGood.length - 1]} are selected`;
+        return `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods[selectedGoods.length - 1]} are selected`;
     }
   };
 
   addGoods = (product: string) => () => {
     this.setState((prevState) => ({
-      selectedGood: [...prevState.selectedGood, product],
+      selectedGoods: [...prevState.selectedGoods, product],
     }));
   };
 
   removeGoods = (product: string) => () => {
     this.setState((prevState) => ({
-      selectedGood: prevState.selectedGood.filter(i => i !== product),
+      selectedGoods: prevState.selectedGoods.filter(i => i !== product),
     }));
   };
 
   clearGoods = () => {
-    this.setState({ selectedGood: [] });
+    this.setState({ selectedGoods: [] });
   };
 
   render() {
-    const { selectedGood } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App">
         <h1 className="title">{this.showGoods()}</h1>
-        {selectedGood.length
+        {selectedGoods.length
           ? <button type="button" onClick={this.clearGoods}>Clear</button>
           : null}
         <ul>
@@ -68,11 +69,13 @@ class App extends React.Component <{}, State> {
             goodsFromServer.map(product => (
               <li
                 key={product}
-                className={selectedGood.includes(product) ? 'selected' : ''}
+                className={
+                  classNames({ selected: selectedGoods.includes(product) })
+                }
               >
                 { product }
                 {
-                  selectedGood.includes(product) ? (
+                  selectedGoods.includes(product) ? (
                     <button type="button" onClick={this.removeGoods(product)}>
                       Remove
                     </button>
