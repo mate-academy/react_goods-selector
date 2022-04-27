@@ -21,18 +21,20 @@ class App extends React.Component<{}, { selectedGoods: string[] }> {
     selectedGoods: [],
   };
 
-  makeGoodSelection = (good: string) => (
+  checkIsInList = (good: string) => (
     this.state.selectedGoods.find(currentGood => currentGood === good)
-      ? 'goodName selected' : 'goodName'
+  );
+
+  makeGoodSelection = (good: string) => (
+    this.checkIsInList(good) ? 'goodName selected' : 'goodName'
   );
 
   changeButtonType = (good: string) => (
-    this.state.selectedGoods.find(currentGood => currentGood === good)
-      ? 'remove' : 'add'
+    this.checkIsInList(good) ? 'remove' : 'add'
   );
 
-  toggleButtonName = (good: string) => (this.state.selectedGoods
-    .find(currentGood => currentGood === good) ? 'Remove' : 'Add'
+  toggleButtonName = (good: string) => (
+    this.checkIsInList(good) ? 'Remove' : 'Add'
   );
 
   showSelectedGoods = (goods: string[]) => {

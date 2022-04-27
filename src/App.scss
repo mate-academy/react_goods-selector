@@ -9,7 +9,12 @@
 
 button {
   width: 100px;
+  height: 30px;
   background-color: rgb(68, 230, 68);
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .remove {
