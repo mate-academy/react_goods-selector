@@ -65,6 +65,18 @@ class App extends React.Component<{}, { selectedGoods: string[] }> {
     }
   };
 
+  makeTitle = () => {
+    const { selectedGoods } = this.state;
+
+    const currentTitle = (selectedGoods.slice(0, -1).join(', ') || '')
+    + (selectedGoods.length > 1 ? ' and ' : '')
+    + (selectedGoods[selectedGoods.length - 1]
+      ? selectedGoods[selectedGoods.length - 1] : '')
+    + this.showSelectedGoods(selectedGoods);
+
+    return currentTitle;
+  };
+
   changeClearButtonState = () => (this.state.selectedGoods.length === 0
     ? 'hidden' : 'deleteSelection');
 
@@ -94,10 +106,7 @@ class App extends React.Component<{}, { selectedGoods: string[] }> {
         ))}
         <div className="headerContainer">
           <h1>
-            {this.state.selectedGoods.slice(0, -1).join(', ')}
-            {this.state.selectedGoods.length > 1 && ' and '}
-            {this.state.selectedGoods[this.state.selectedGoods.length - 1]}
-            {this.showSelectedGoods(this.state.selectedGoods)}
+            {this.makeTitle()}
           </h1>
           <button
             type="button"
