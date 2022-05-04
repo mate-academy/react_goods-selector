@@ -1,1 +1,80 @@
 // styles go here
+html {
+  background-color: yellowgreen;
+}
+
+.App {
+  padding: 0 50px;
+}
+
+.products {
+  text-align: center;
+  list-style: none;
+  font-size: 24px;
+
+  &__title {
+    text-align: center;
+    font-size: 35px;
+  }
+
+  &__close {
+    width: 40px;
+    height: 40px;
+    background-color: bisque;
+    border: 1px solid rgb(238, 144, 101);
+    font-size: 30px;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: black;
+      color: white;
+    }
+  }
+
+  &__goods {
+    display: grid;
+    grid-template-columns: 180px 180px;
+    justify-content: center;
+    list-style: none;
+    margin-top: 60px;
+    text-transform: uppercase;
+
+    &:not(:last-child) {
+      margin-bottom: 7px;
+    }
+  }
+
+  &__button {
+    width: 120px;
+    border-radius: 5px;
+    font-size: 20px;
+    background-color: bisque;
+    color: black(221, 172, 107);
+    border: 1px solid rgb(238, 144, 101);
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgb(238, 144, 101);
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 7px;
+    }
+  }
+}
+
+.active {
+  color: rgb(223, 251, 216);
+  font-weight: bold;
+
+  &__button {
+    background-color: rgba(43, 11, 0, 0.25);
+
+    &:hover {
+      background-color: rgba(43, 11, 0, 0.25);
+    }
+  }
+}
