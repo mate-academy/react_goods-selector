@@ -1,1 +1,69 @@
 // styles go here
+html {
+  font-family: Arial, sans-serif;
+  padding: 50px;
+}
+
+.App {
+  &__title {
+    font-size: 48px;
+    color: rgb(2, 44, 2);
+  }
+
+  &__list {
+    max-width: max-content;
+    list-style: none;
+  }
+
+  &__link {
+    display: flex;
+    justify-content: space-between;
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+
+  &__button {
+    color: green;
+    background-color: #fff;
+    border: 2px solid green;
+    border-radius: 5px;
+    outline: none;
+    margin-left: 30px;
+    width: 80px;
+    height: 35px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgb(189, 231, 189);
+    }
+  }
+}
+
+.buttonRemove {
+  cursor: pointer;
+  color: red;
+  border-color: red;
+
+  &:hover {
+    background-color: rgb(243, 217, 217);
+  }
+}
+
+.selected {
+  background-color: rgb(190, 236, 178);
+}
+
+.Clear__button {
+  width: 80px;
+  height: 35px;
+  margin-bottom: 30px;
+  border: 2px solid rgb(16, 16, 97);
+  border-radius: 5px;
+  text-transform: uppercase;
+  color: blue;
+  background-color: #fff;
+
+  &:hover {
+    background-color: rgb(164, 194, 211);
+  }
+}
