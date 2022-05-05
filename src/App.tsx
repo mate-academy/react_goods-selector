@@ -34,6 +34,17 @@ class App extends React.Component<{}, State> {
     }));
   };
 
+  removeSelectedGood = (good: string) => {
+    this.setState((state) => {
+      const selectedGoods = state.selectedGood;
+      const index = selectedGoods.indexOf(good);
+
+      selectedGoods.splice(index, 1);
+
+      return { selectedGood: selectedGoods };
+    });
+  };
+
   createTitle = () => {
     const { selectedGood } = this.state;
 
@@ -48,7 +59,7 @@ class App extends React.Component<{}, State> {
         return `${selectedGood.join(' and ')} are selected`;
 
       default:
-        return `${selectedGood.slice(0, -2).join(', ')}, ${selectedGood.slice(-2).join(' and ')} are selected`;
+        return `${selectedGood.slice(0, -1).join(', ')} and ${selectedGood[selectedGood.length - 1]} are selected`;
     }
   };
 
@@ -88,12 +99,15 @@ class App extends React.Component<{}, State> {
                       active__button: selectedGood.includes(good),
                     },
                   )}
-                  disabled={selectedGood.includes(good)}
                   onClick={() => {
-                    this.changeSelectedGood(good);
+                    if (selectedGood.includes(good)) {
+                      return this.removeSelectedGood(good);
+                    }
+
+                    return this.changeSelectedGood(good);
                   }}
                 >
-                  {selectedGood.includes(good) ? 'Selected' : 'Select'}
+                  {selectedGood.includes(good) ? 'Remove' : 'Select'}
                 </button>
                 <li
                   key={good}
