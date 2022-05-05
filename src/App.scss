@@ -1,1 +1,28 @@
-// styles go here
+.app {
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  &__selectedGood {
+    font-size: 25px;
+  }
+
+  &__listGoods {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__listItem {
+    display: flex;
+    justify-content: space-between;
+
+    &Selected {
+      background-color: #638b63;
+    }
+  }
+}
+
+.invisible {
+  display: none;
+}
