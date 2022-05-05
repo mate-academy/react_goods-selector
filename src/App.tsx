@@ -19,22 +19,21 @@ type State = {
 };
 
 // eslint-disable-next-line
-class App extends React.Component {
-  state: State = {
+class App extends React.Component<{}, State> {
+  state = {
     selectedGoods: ['Jam'],
   };
 
   switchGood = (goodName: string): void => {
-    const { selectedGoods } = this.state;
-    const goodIndex = selectedGoods.indexOf(goodName);
+    this.setState(({ selectedGoods }) => {
+      const newGoods = (selectedGoods.includes(goodName))
+        ? selectedGoods.filter((good) => good !== goodName)
+        : [...selectedGoods, goodName];
 
-    if (goodIndex !== -1) {
-      selectedGoods.splice(goodIndex, 1);
-    } else {
-      selectedGoods.push(goodName);
-    }
-
-    this.setState({ selectedGoods });
+      return {
+        selectedGoods: newGoods,
+      };
+    });
   };
 
   clearSelectedGoods = () => {
