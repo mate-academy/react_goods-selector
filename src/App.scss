@@ -1,1 +1,106 @@
-// styles go here
+@import "./vars";
+@import "./fonts";
+
+html {
+  font-size: 18px;
+  line-height: 100%;
+
+  font-family: "Nunito", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 100%;
+  color: $violet;
+}
+
+.GoodsList {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+
+    background-color: $paleViolet;
+
+    &:not(:last-child) {
+      margin-bottom: 4px;
+    }
+  }
+
+  &__selected {
+    background-color: $violet;
+  }
+
+  &__goodName {
+    padding: 4px;
+
+    color: $white;
+  }
+
+  &__button {
+    margin: 0 0 0 auto;
+    min-width: 100px;
+
+    font-size: 16px;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: inherit;
+
+    color: $white;
+
+    background-color: $violet;
+    border: none;
+  }
+
+  &__selectedButton {
+    background-color: $white;
+
+    color: $violet;
+
+    border: 1px solid $violet;
+  }
+}
+
+.Button {
+  padding: 4px;
+
+  font-size: 24px;
+  line-height: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  background-color: transparent;
+  color: $paleViolet;
+
+  border: none;
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid $paleViolet;
+
+  transition-property: color, background-color;
+  transition-duration: 0.3s;
+
+  &:hover {
+    color: $white;
+
+    background-color: $paleViolet;
+  }
+}
