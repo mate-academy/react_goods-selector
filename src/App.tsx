@@ -17,8 +17,17 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-export class App extends React.Component {
-  state = {
+type GoodsWithBoolIsSelected = {
+  goodName: string;
+  isSelected: boolean;
+};
+
+interface State {
+  goodsWithBoolIsSelected: Array<GoodsWithBoolIsSelected>
+}
+
+export class App extends React.Component<{}, State> {
+  state: State = {
     goodsWithBoolIsSelected: goodsFromServer.map(
       str => ({
         goodName: str,
