@@ -1,1 +1,94 @@
-// styles go here
+body,
+div,
+h1 {
+  margin: 0;
+}
+
+body {
+  font-family: "Lucida Sans",
+    "Lucida Sans Regular",
+    "Lucida Grande",
+    "Lucida Sans Unicode",
+    Geneva,
+    Verdana,
+    sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+
+  background-color: #f5dcf5;
+}
+
+.App {
+  width: 80%;
+  min-width: 300px;
+  margin: 200px auto;
+  padding: 40px 20px;
+
+  border-radius: 10px;
+  background-color: #dcf5f5;
+  list-style: none;
+
+  &__header {
+    text-align: center;
+    font-size: 14px;
+    line-height: 44px;
+    color: #1a1a07;
+  }
+
+  &__title {
+    margin-bottom: 20px;
+  }
+
+  &__button {
+    width: 100px;
+    height: 30px;
+
+    text-align: center;
+    font-family: "Lucida Sans",
+      "Lucida Sans Regular",
+      "Lucida Grande",
+      "Lucida Sans Unicode",
+      Geneva,
+      Verdana,
+      sans-serif;
+    font-size: 14px;
+
+    border: 2px transparent solid;
+    border-radius: 5px;
+
+    background-color: #f5dcdc;
+
+    transition: transform 0.3s background-color 0.3s;
+
+    &:hover {
+      transform: scale(1.2);
+      background-color: #f5dcf5;
+    }
+
+    &--clear {
+      background-color: #dcdcf5;
+    }
+
+    &--remove {
+      background-color: #dcdcf5;
+    }
+  }
+
+  &__list {
+    display: block;
+    list-style: none;
+  }
+
+  &__list-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    padding: 10px;
+
+    &--active {
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #f5dcdc;
+    }
+  }
+}
