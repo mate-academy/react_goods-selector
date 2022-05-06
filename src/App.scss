@@ -1,1 +1,108 @@
-// styles go here
+html {
+  background-image: url(./market.webp);
+  background-size: cover;
+
+  font-family: "Bangers", cursive;
+}
+
+body {
+  margin: 0;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.App {
+  background-image: url(./tablet.png);
+  background-size: cover;
+
+  width: 900px;
+  height: 550px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Title {
+  max-width: 400px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.ClearButton {
+  cursor: pointer;
+  font-size: 15px;
+  border: 1px solid black;
+  color: red;
+  transition: all 0.5s;
+
+  &:hover {
+    color: white;
+    background-color: red;
+  }
+}
+
+.GoodsList {
+  margin: 0;
+  padding: 0;
+  width: 125px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  list-style: none;
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+
+    border: 1px solid black;
+  }
+
+  &__selectedItem {
+    background-color: lightgreen;
+  }
+
+  &__itemName {
+    font-family: "DotGothic16", sans-serif;
+    font-size: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__button {
+    cursor: pointer;
+    width: 50px;
+    padding: 0;
+
+    font-size: 10px;
+    border: 1px solid black;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: lightgreen;
+    }
+  }
+
+  &__selectedButton {
+    background-color: red;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: red;
+    }
+  }
+}
