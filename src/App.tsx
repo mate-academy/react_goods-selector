@@ -30,13 +30,11 @@ class App extends React.Component<{}, State> {
   };
 
   removeGoods = (good: string) => {
-    this.setState(({ selectedGood }) => {
-      const index = selectedGood.indexOf(good);
-
-      selectedGood.splice(index, 1);
-
-      return { selectedGood };
-    });
+    this.setState(({ selectedGood }) => ({
+      selectedGood: selectedGood.filter((goods) => (
+        goods !== good
+      )),
+    }));
   };
 
   clearGoods = () => {
@@ -82,7 +80,7 @@ class App extends React.Component<{}, State> {
                     {isSelected ? 'Remove' : 'Select'}
                   </button>
                 </li>
-              )
+              );
             })
           }
         </ul>
