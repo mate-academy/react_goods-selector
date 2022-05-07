@@ -62,18 +62,14 @@ class App extends React.Component<{}, State> {
   };
 
   setTitle = (arr: string[]) => {
-    if (arr.length === 0) {
-      return 'No goods selected';
+    switch (arr.length) {
+      case 0:
+        return 'No goods selected';
+      case 1:
+        return `${arr[0]} is selected`;
+      default:
+        return `${arr.slice(0, -1).join(', ')} and ${arr[arr.length - 1]} arr selected`;
     }
-
-    if (arr.length === 1) {
-      return `${arr[0]} is selected`;
-    }
-
-    const tempTitle = arr.join(', ');
-    const lastIndex = tempTitle.lastIndexOf(',');
-
-    return `${tempTitle.slice(0, lastIndex)} and ${tempTitle.slice(lastIndex + 1)} is selected`;
   };
 
   render() {
