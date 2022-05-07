@@ -1,1 +1,49 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+.app {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  width: 300px;
+
+  &__list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+}
+
+.goods-line {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #89f7fe 0%, #66a6ff 100%);
+  padding: 5px 10px;
+
+  &__word {
+    font-size: 1.2rem;
+  }
+
+  &--selected {
+    background: linear-gradient(90deg, #f5f7fa 0%, #c3cfe2 100%);
+  }
+}
+
+.button {
+  width: 80px;
+
+  &--clear {
+    width: 100%;
+    height: 30px;
+  }
+
+  &--hide {
+    display: none;
+  }
+}
