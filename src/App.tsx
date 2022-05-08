@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -69,9 +70,14 @@ class App extends React.Component<{}, State> {
             {this.createTitle()}
           </div>
           <button
-            className="products-title__button"
+            className={
+              classNames(
+                {
+                  invisible: (selectedGood.length === 0),
+                },
+              )
+            }
             type="button"
-            disabled={selectedGood.length === 0}
             onClick={this.clearGood}
           >
             Clear basket
