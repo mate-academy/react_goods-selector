@@ -80,7 +80,7 @@ export class App extends React.Component<{}, State> {
     return (
       <div className="Page">
         <div className="App">
-          <h1>{this.getGoodsString()}</h1>
+          <h1 className="App__title">{this.getGoodsString()}</h1>
           {
             (selectedGoodsList.length > 0) && (
               <button
