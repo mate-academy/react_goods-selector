@@ -23,32 +23,6 @@ class App extends React.Component<{}, State> {
     selectedGoods: ['Jam'],
   };
 
-  selectedGood = this.state.selectedGoods[0];
-
-  componentDidMount() {
-    const highlighted = document.getElementById(this.selectedGood);
-
-    highlighted?.classList.add('goods__item--selected');
-  }
-
-  componentDidUpdate(_prevProps: {}, prevState: State) {
-    this.state.selectedGoods.forEach((good) => {
-      if (!prevState.selectedGoods.includes(good)) {
-        const elementToSetHighlight = document.getElementById(good);
-
-        elementToSetHighlight?.classList.add('goods__item--selected');
-      }
-    });
-
-    prevState.selectedGoods.forEach((good) => {
-      if (!this.state.selectedGoods.includes(good)) {
-        const elementToRemoveHighlight = document.getElementById(good);
-
-        elementToRemoveHighlight?.classList.remove('goods__item--selected');
-      }
-    });
-  }
-
   selectHandler = (good: string) => {
     this.setState((prevState) => {
       if (prevState.selectedGoods.includes(good)) {
@@ -100,7 +74,16 @@ class App extends React.Component<{}, State> {
         <ul className="goods">
           {
             goodsFromServer.map((good) => (
-              <li key={good} id={good} className="goods__item">
+              <li
+                key={good}
+                className={
+                  `goods__item ${
+                    selectedGoods.includes(good)
+                      ? 'goods__item--selected'
+                      : ''
+                  }`
+                }
+              >
                 <span>{good}</span>
                 {'\n'}
                 <button
