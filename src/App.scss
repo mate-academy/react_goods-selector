@@ -1,6 +1,14 @@
 .app {
   &__title {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     margin-left: 25px;
+  }
+
+  &__button {
+    width: fit-content;
+    margin-top: 10px;
   }
 }
 

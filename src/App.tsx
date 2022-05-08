@@ -43,6 +43,12 @@ class App extends React.Component<{}, State> {
     });
   };
 
+  unselectAll = () => {
+    this.setState({
+      selectedGoods: [],
+    });
+  };
+
   render() {
     const {
       selectedGoods,
@@ -70,8 +76,16 @@ class App extends React.Component<{}, State> {
     return (
       <div className="app">
         <h1 className="app__title">
-          {title}
+          <span>{title}</span>
+          <button
+            type="button"
+            className="app__button"
+            onClick={() => this.unselectAll()}
+          >
+            Clear
+          </button>
         </h1>
+
         <ul className="goods">
           {
             goodsFromServer.map((good) => (
@@ -88,7 +102,6 @@ class App extends React.Component<{}, State> {
                 {'\n'}
                 <button
                   type="button"
-                  className="goods__button"
                   onClick={() => this.selectHandler(good)}
                 >
                   {
