@@ -1,1 +1,49 @@
-// styles go here
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  min-height: 100hv;
+}
+
+.goods {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__title {
+    font-size: 30px;
+  }
+
+  &__list {
+    width: 200px;
+    list-style: none;
+
+    &:not(:last-child) {
+      margin-bottom: 4px;
+    }
+
+    &__item {
+      display: flex;
+      margin-bottom: 3px;
+      justify-content: space-between;
+      border: 1px solid black;
+      border-radius: 4px;
+    }
+  }
+  .isSelected {
+    background-color: rgb(109, 232, 109);
+  }
+
+  &__button {
+    border-radius: 6px;
+    transition-duration: 0.4s;
+
+    &:hover {
+      background-color: #4caf50; /* Green */
+      color: white;
+    }
+  }
+}
