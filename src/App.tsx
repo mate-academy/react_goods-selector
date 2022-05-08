@@ -105,6 +105,7 @@ class App extends React.Component<{}, State> {
                 {'\n'}
                 <button
                   type="button"
+                  className="goods__button"
                   onClick={() => this.selectHandler(good)}
                 >
                   {
