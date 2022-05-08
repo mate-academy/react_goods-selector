@@ -45,6 +45,7 @@
       inset 0 2px 1px rgba(255, 255, 255, 0.9),
       0 4px 4px rgba(29, 29, 12, 0.9);
     transition: 0.1s;
+    cursor: pointer;
 
     margin-left: 10px;
 
@@ -76,6 +77,14 @@
     }
   }
 
+  &__label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+
+  }
+
   &__list {
     display: flex;
     flex-direction: column;
@@ -86,9 +95,6 @@
     margin: 0 100px 100px;
 
     &-element {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       list-style-type: none;
 
       width: 35%;

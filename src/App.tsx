@@ -106,18 +106,20 @@ export class App extends React.Component<{}, State> {
                   : ''
               }`}
             >
-              {good}
-              <button
-                type="button"
-                className="Button"
-                onClick={
-                  selectedGoodsList.includes(good)
-                    ? () => this.removeGood(good)
-                    : () => this.selectGoods(good)
-                }
-              >
-                {selectedGoodsList.includes(good) ? '-' : '+'}
-              </button>
+              <label className="App__label">
+                <span>{good}</span>
+                <button
+                  type="button"
+                  className="Button"
+                  onClick={
+                    selectedGoodsList.includes(good)
+                      ? () => this.removeGood(good)
+                      : () => this.selectGoods(good)
+                  }
+                >
+                  {selectedGoodsList.includes(good) ? '-' : '+'}
+                </button>
+              </label>
             </li>
           ))}
         </ul>
