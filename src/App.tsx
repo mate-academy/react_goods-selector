@@ -16,65 +16,117 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  selectedGood: string,
+  selectedGoods: string[]
 };
 
 export class App extends React.Component<{}, State> {
   state: State = {
-    selectedGood: 'Jam',
+    selectedGoods: [],
   };
 
-  selectGood = (good: string) => {
-    this.setState({
-      selectedGood: good,
-    });
+  chooseGoodsHandler = (item: string) => {
+    const { selectedGoods } = this.state;
+
+    if (!(selectedGoods.includes(item))) {
+      this.setState(prevState => ({
+        selectedGoods: [...prevState.selectedGoods, item],
+      }));
+    }
   };
+
+  RemoveGoodsHandler = (item: string) => {
+    this.setState(prevState => ({
+      selectedGoods:
+       prevState.selectedGoods.filter(element => element !== item),
+    }));
+  };
+
+  resetSelectedGoods() {
+    this.setState({
+      selectedGoods: [],
+    });
+  }
+
+  showGoodsHandler() {
+    let SelectedValues = '';
+
+    switch (this.state.selectedGoods.length) {
+      case 1:
+        SelectedValues = `${this.state.selectedGoods} is selected`;
+        break;
+
+      case 2:
+        SelectedValues = `${this.state.selectedGoods[0]} and ${this.state.selectedGoods[1]} are selected`;
+        break;
+
+      case 3:
+        SelectedValues = `${this.state.selectedGoods[0]},${this.state.selectedGoods[1]}  and ${this.state.selectedGoods[2]} are selected`;
+        break;
+      case 0:
+        SelectedValues = 'No items selected';
+        break;
+
+      default:
+        SelectedValues = `${this.state.selectedGoods} are selected`;
+        break;
+    }
+
+    return SelectedValues;
+  }
 
   render() {
-    const { selectedGood } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App">
         <h1>
-          {selectedGood}
-          {' '}
-          selected
-        </h1>
-
-        <button
-          type="button"
-          className={classNames({
-            buttonVisibility: selectedGood === 'No goods',
-          })}
-          onClick={() => {
-            this.selectGood('No goods');
-          }}
-        >
-          X
-        </button>
-
-        <ul>
-          {goodsFromServer.map(good => (
-            <li key={good}>
-              <span className={classNames(
-                'good',
-                {
-                  selectedGood: selectedGood === good,
-                },
-              )}
-              >
-                {good}
-              </span>
-              {' '}
-
+          {this.showGoodsHandler()}
+          {selectedGoods.length > 0
+            ? (
               <button
                 type="button"
-                onClick={() => {
-                  this.selectGood(good);
-                }}
+                className="btn btn-danger"
+                onClick={() => (
+                  this.resetSelectedGoods()
+                )}
               >
-                Select
+                X
               </button>
+            )
+            : ('')}
+        </h1>
+        <ul>
+          {goodsFromServer.map((item: string) => (
+            <li
+              className={classNames(
+                'd-flex justify-content-between align-items-center',
+                {
+                  active: (this.state.selectedGoods.includes(item)),
+                },
+              )}
+              key={item}
+            >
+              {item}
+              <div>
+                <button
+                  type="button"
+                  className="addButton btn btn-success"
+                  onClick={() => {
+                    this.chooseGoodsHandler(item);
+                  }}
+                >
+                  Add
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={() => {
+                    this.RemoveGoodsHandler(item);
+                  }}
+                >
+                  Remove
+                </button>
+              </div>
             </li>
           ))}
         </ul>
