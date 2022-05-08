@@ -1,1 +1,25 @@
-// styles go here
+.app {
+  &__title {
+    margin-left: 25px;
+  }
+}
+
+.goods {
+  font-size: 1.2em;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+
+    width: 200px;
+    padding: 4px;
+
+    &--selected {
+      background-color: gainsboro;
+    }
+  }
+
+  &__button:hover {
+    cursor: pointer;
+  }
+}
