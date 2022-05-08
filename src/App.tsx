@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -77,11 +78,10 @@ class App extends React.Component<{}, State> {
               <li
                 key={good}
                 className={
-                  `goods__item ${
-                    selectedGoods.includes(good)
-                      ? 'goods__item--selected'
-                      : ''
-                  }`
+                  classNames(
+                    'goods__item',
+                    { 'goods__item--selected': selectedGoods.includes(good) },
+                  )
                 }
               >
                 <span>{good}</span>
