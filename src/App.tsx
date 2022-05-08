@@ -77,13 +77,16 @@ class App extends React.Component<{}, State> {
       <div className="app">
         <h1 className="app__title">
           <span>{title}</span>
-          <button
-            type="button"
-            className="app__button"
-            onClick={() => this.unselectAll()}
-          >
-            Clear
-          </button>
+          {selectedGoods.length > 0
+          && (
+            <button
+              type="button"
+              className="app__button"
+              onClick={() => this.unselectAll()}
+            >
+              Clear
+            </button>
+          )}
         </h1>
 
         <ul className="goods">
