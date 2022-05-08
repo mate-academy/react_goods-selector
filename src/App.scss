@@ -1,1 +1,64 @@
-// styles go here
+.App {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.red {
+  color: firebrick;
+}
+
+.title {
+  font-size: 36px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.goods {
+  list-style: none;
+}
+
+.good {
+  font-size: 24px;
+  font-weight: bold;
+  color: dodgerblue;
+  margin-bottom: 10px;
+  width: 300px;
+
+  display: flex;
+  justify-content: space-between;
+
+  &__active {
+    background-color: yellow;
+  }
+
+  &__block {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.button {
+  font-size: 18px;
+  font-weight: bold;
+  color: dodgerblue;
+  background-color: yellow;
+  border: none;
+  width: 100px;
+  border-radius: 5px;
+
+  cursor: pointer;
+  margin-right: 20px;
+
+  &__h1 {
+    width: 36px;
+    height: 36px;
+  }
+
+  &__disable {
+    display: none;
+  }
+
+  &__hidden {
+    visibility: hidden;
+  }
+}
