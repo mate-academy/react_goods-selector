@@ -1,1 +1,68 @@
-// styles go here
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+}
+
+body {
+  background-color: antiquewhite;
+}
+
+.app {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  &__title {
+    width: 500px;
+    text-align: center;
+    margin-right: 20px;
+  }
+
+  &__clear {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+
+    font-size: 20px;
+    font-weight: 500;
+    background-color: transparent;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &__list {
+    list-style-type: none;
+
+    &-item {
+      width: 300px;
+      height: 30px;
+
+      &-button {
+        background-color: transparent;
+        padding: 4px;
+        border-radius: 10px;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+
+    &-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 30px;
+      padding: 10px;
+    }
+  }
+}
+
+.active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
