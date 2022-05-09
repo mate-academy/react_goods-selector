@@ -57,30 +57,25 @@ class App extends React.Component<{}, State> {
             >
               {`${item}:`}
               <button
-                className="button"
+                className={
+                  this.state.good !== item
+                    ? 'button'
+                    : 'button button__clear'
+                }
                 type="button"
-                hidden={this.state.good === item}
-                onClick={() => {
+                onClick={this.state.good !== item ? () => {
                   this.setState({
                     good: item,
                     selectedGood: `${item} is selected`,
                   });
-                }}
-              >
-                Select
-              </button>
-              <button
-                className="button button__clear"
-                type="button"
-                hidden={this.state.good !== item}
-                onClick={() => {
+                } : () => {
                   this.setState({
                     good: '',
                     selectedGood: 'No goods selected',
                   });
                 }}
               >
-                Remove
+                {this.state.good !== item ? 'Select' : 'Remove'}
               </button>
             </li>
           ))}
