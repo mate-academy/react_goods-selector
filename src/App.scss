@@ -1,1 +1,60 @@
-// styles go here
+.app {
+  padding: 25px 50px 0;
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 25px;
+
+    &--gap {
+      height: 20px;
+    }
+  }
+
+  &__button {
+    width: 100px;
+    margin-left: 75px;
+    border: 1px solid black;
+    border-radius: 5px;
+
+    &--selected {
+      visibility: hidden;
+    }
+  }
+
+  &__list {
+    padding-left: 20px;
+  }
+
+  &__item {
+    display: flex;
+  }
+
+  &__item-good {
+    padding: 10px;
+    width: 130px;
+    border: 1px solid red;
+
+    &--selected {
+      background-color: rgba(4, 247, 247, 0.2);
+      border: 1px solid black;
+      color: red;
+      font-weight: bolder;
+    }
+  }
+
+  &__item-button {
+    width: 80px;
+    border: 1px solid black;
+    font-style: italic;
+    font-weight: bolder;
+
+    &--selected {
+      background-color: aquamarine;
+      color: rgb(181, 181, 54);
+      font-weight: normal;
+    }
+  }
+}
