@@ -1,1 +1,71 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS",
+    "Lucida Sans Unicode",
+    "Lucida Grande",
+    "Lucida Sans",
+    Arial,
+    sans-serif;
+}
+
+.goods {
+  margin: 30px auto 0;
+  width: 50%;
+  padding: 50px;
+  background-color: #fff;
+  box-shadow: -2px 0 5px 4px #c4c4c4;
+
+  &__title {
+    font-size: 24px;
+    position: relative;
+    padding-bottom: 10px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: #333;
+    }
+  }
+
+  &__button {
+    height: max-content;
+    outline: none;
+    background-color: rgb(187, 43, 7);
+    border-radius: 20px;
+    border: none;
+    padding: 10px 20px;
+    color: #fff;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color, color, border-color, 0.3s ease;
+
+    &:hover {
+      color: rgb(187, 43, 7);
+      background-color: #fff;
+      border: 1px solid rgb(187, 43, 7);
+    }
+
+    &--active {
+      color: rgb(187, 43, 7);
+      background-color: #fff;
+      border: 1px solid rgb(187, 43, 7);
+    }
+  }
+
+  &__list {
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+  }
+}
