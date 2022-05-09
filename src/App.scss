@@ -1,1 +1,24 @@
-// styles go here
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  font-size: 20px;
+  border-radius: 5px;
+  margin: 5px 0;
+}
+
+button {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.selected {
+  background-color: rgb(65, 50, 57);
+  color: azure;
+}
