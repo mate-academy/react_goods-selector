@@ -51,8 +51,6 @@ class App extends React.Component<{}, State> {
         break;
       case 1: titleDesc = `${selectedGoods} is selected`;
         break;
-      case 2: titleDesc = `${selectedGoods[0]} and ${selectedGoods[1]} are selected`;
-        break;
       default: titleDesc = `${selectedGoods.slice(0, lastIndex).join(', ')} and ${selectedGoods[lastIndex]} are selected`;
     }
 
