@@ -9,13 +9,17 @@
   align-items: center;
   text-align: center;
   gap: 10px;
-  width: 300px;
+  width: 400px;
 
   &__list {
-    width: 100%;
+    width: 300px;
     display: flex;
     flex-direction: column;
     gap: 1px;
+  }
+
+  &__header {
+    min-height: 150px;
   }
 }
 
@@ -39,7 +43,6 @@
   width: 80px;
 
   &--clear {
-    width: 100%;
     height: 30px;
   }
 

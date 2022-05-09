@@ -15,38 +15,25 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  title: string;
   selectedGoods: string[];
 };
 
 class App extends React.Component<{}, State> {
   state = {
-    title: 'No goods selected',
     selectedGoods: ['Jam'],
   };
 
-  componentDidMount() {
-    const { selectedGoods } = this.state;
-
-    this.setState({
-      title: this.setTitle(selectedGoods),
-    });
-  }
-
   removeAll = () => {
     this.setState({
-      title: this.setTitle([]),
       selectedGoods: [],
     });
   };
 
   addWord = (word: string) => {
     const { selectedGoods } = this.state;
-    const newSelectedGoods = [...selectedGoods, word];
 
     this.setState({
-      title: this.setTitle(newSelectedGoods),
-      selectedGoods: newSelectedGoods,
+      selectedGoods: [...selectedGoods, word],
     });
   };
 
@@ -56,7 +43,6 @@ class App extends React.Component<{}, State> {
 
     removedElem.splice(selectedGoods.indexOf(word), 1);
     this.setState({
-      title: this.setTitle(removedElem),
       selectedGoods: removedElem,
     });
   };
@@ -68,16 +54,16 @@ class App extends React.Component<{}, State> {
       case 1:
         return `${arr[0]} is selected`;
       default:
-        return `${arr.slice(0, -1).join(', ')} and ${arr[arr.length - 1]} arr selected`;
+        return `${arr.slice(0, -1).join(', ')} and ${arr[arr.length - 1]} are selected`;
     }
   };
 
   render() {
-    const { title, selectedGoods } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="app">
-        <h1>{title}</h1>
+        <h1 className="app__header">{this.setTitle(selectedGoods)}</h1>
 
         <div className="app__list">
           {
@@ -86,9 +72,7 @@ class App extends React.Component<{}, State> {
 
               return (
                 <div
-                  className={
-                    `goods-line ${isSelected && 'goods-line--selected'}`
-                  }
+                  className={`goods-line ${isSelected && 'goods-line--selected'}`}
                   key={word}
                 >
                   <span className="goods-line__word">
@@ -98,17 +82,11 @@ class App extends React.Component<{}, State> {
                   <button
                     className="button"
                     type="button"
-                    onClick={() => {
-                      return isSelected
-                        ? this.removeWord(word)
-                        : this.addWord(word);
-                    }}
+                    onClick={() => (
+                      isSelected ? this.removeWord(word) : this.addWord(word)
+                    )}
                   >
-                    {
-                      isSelected
-                        ? 'Remove'
-                        : 'Select'
-                    }
+                    {isSelected ? 'Remove' : 'Select'}
                   </button>
                 </div>
               );
