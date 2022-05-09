@@ -1,1 +1,83 @@
-// styles go here
+body,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+span,
+ul,
+li,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.goods {
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  min-width: 320px;
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #00f6a4;
+  border-radius: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+
+  &__list {
+    list-style-type: none;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    background-color: #00c986;
+    border-radius: 20px;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+
+    &--active {
+      background-color: azure;
+    }
+  }
+
+  &__span {
+    padding: 10px;
+  }
+
+  &__button {
+    width: 100px;
+
+    transition: hover 0.3s ease-in-out;
+  }
+
+  &__clear-button {
+    width: 200px;
+    margin: 20px auto;
+  }
+
+  &__title {
+    font-size: 18px;
+  }
+}
+
+.button {
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darkseagreen;
+    color: azure;
+  }
+}
