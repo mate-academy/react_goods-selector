@@ -1,1 +1,43 @@
-// styles go here
+.App {
+  padding: 0 20px;
+  max-width: 400px;
+
+  &__title {
+    background-color: wheat;
+    border-radius: 30%;
+    max-width: 300px;
+    padding: 20px;
+  }
+
+  &__clear--button {
+    width: 80px;
+    background-color: rgb(232, 108, 108);
+    padding: 10px;
+  }
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  width: 330px;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  font-size: 20px;
+  border-radius: 5px;
+  margin: 5px 0;
+}
+
+button {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.selected {
+  background-color: #999;
+  color: azure;
+  transform: scale(1.1);
+}
