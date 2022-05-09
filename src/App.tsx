@@ -14,12 +14,11 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-type Props = {};
 type State = {
   goodSelect: string[];
 };
 
-class App extends React.Component<Props, State> {
+class App extends React.Component<{}, State> {
   state = {
     goodSelect: ['Jam'],
   };
@@ -93,7 +92,9 @@ class App extends React.Component<Props, State> {
                 >
                   {goodActive ? 'Remove' : 'Selecet'}
                 </button>
-                <li className="App__item">{good}</li>
+                <li className="App__item" key={good}>
+                  {good}
+                </li>
               </div>
             );
           })}
