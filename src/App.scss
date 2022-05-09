@@ -1,1 +1,52 @@
-// styles go here
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrap {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+
+  &__value {
+    color: #000;
+  }
+
+  &__main {
+    display: flex;
+    justify-content: space-between;
+    background: #eaf1ca;
+    list-style-type: none;
+    margin-top: 2px;
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+  }
+
+}
+
+.button-clear {
+  background: #eaf1ca;
+  color: rgb(22, 20, 20);
+  font-size: 20px;
+  height: 40px;
+}
+
+.button-clear:hover,
+.button-clear:active {
+  cursor: pointer;
+}
+
+.button:hover {
+  cursor: pointer;
+}
