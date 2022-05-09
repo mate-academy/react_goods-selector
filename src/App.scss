@@ -1,1 +1,47 @@
-// styles go here
+.App {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.tittle {
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.button {
+  cursor: pointer;
+  width: 100px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: green;
+
+  &__clear {
+    background-color: red;
+  }
+}
+
+.goods {
+  width: 50vh;
+
+  &__list {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    &:not(:last-of-type) {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__selected {
+    background-color: yellowgreen;
+  }
+}
