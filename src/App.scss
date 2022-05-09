@@ -37,4 +37,8 @@ body {
   &-clear {
     font-size: 24px;
   }
+
+  &-hidden {
+    visibility: hidden;
+  }
 }
