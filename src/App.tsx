@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -69,44 +68,39 @@ class App extends React.Component<{}, State> {
           <div className="products-title__bascet">
             {this.createTitle()}
           </div>
-          <button
-            className={
-              classNames(
-                {
-                  invisible: (selectedGood.length === 0),
-                },
-              )
-            }
-            type="button"
-            onClick={this.clearGood}
-          >
-            Clear basket
-          </button>
+          {selectedGood.length
+            ? (
+              <button
+                type="button"
+                className="products-title__button"
+                onClick={this.clearGood}
+              >
+                Clear basket
+              </button>
+            )
+            : ''}
         </h1>
-
         <ul className="goods-list">
-          {goodsFromServer.map(good => (
-            <>
+          {goodsFromServer.map(good => {
+            const isSelected = selectedGood.includes(good);
+
+            return (
               <li key={good} className="goods-list__good">
                 <button
                   className={`goods-list__button ${
-                    selectedGood.includes(good)
+                    isSelected
                       ? 'goods-list__button-selected'
                       : ''
                   }`}
                   type="button"
-                  onClick={() => {
-                    if (selectedGood.includes(good)) {
-                      return this.removeGood(good);
-                    }
-
-                    return this.addGood(good);
-                  }}
+                  onClick={() => (isSelected
+                    ? this.removeGood(good)
+                    : this.addGood(good))}
                 >
-                  {selectedGood.includes(good) ? 'Remove' : 'Select'}
+                  {isSelected ? 'Remove' : 'Select'}
                 </button>
                 <div className={`goods-list__good ${
-                  selectedGood.includes(good)
+                  isSelected
                     ? 'goods-list__good-selected'
                     : ''
                 }`}
@@ -114,8 +108,8 @@ class App extends React.Component<{}, State> {
                   {good}
                 </div>
               </li>
-            </>
-          ))}
+            );
+          })}
         </ul>
       </div>
     );

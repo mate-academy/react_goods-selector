@@ -21,6 +21,8 @@ html {
 
   &__button {
     width: 10rem;
+    height: 2rem;
+    border-radius: 5px;
   }
 }
 
@@ -43,8 +45,4 @@ html {
       background-color: gold;
     }
   }
-}
-
-.invisible {
-  display: none;
 }
