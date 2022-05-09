@@ -1,1 +1,28 @@
-// styles go here
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(255, 235, 207);
+  width: 200px;
+  padding: 2px;
+  margin-bottom: 10px;
+}
+
+.selected {
+  background-color: yellow;
+}
+
+.clear-button-wrapper {
+  height: 20px;
+  margin-bottom: 10px;
+}
