@@ -1,1 +1,79 @@
-// styles go here
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(to top right, #0f9 0%, #06c 100%);
+  color: #fff;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 100vh;
+  border: 1px solid black;
+  padding: 20px;
+
+  &__title {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+
+  &__clearButton {
+    margin-bottom: 20px;
+    width: 80px;
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    color: #fff;
+    background-color: #903;
+    transition: 0.3s;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 7px #000;
+    }
+  }
+}
+
+.goods {
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+
+    list-style: none;
+    margin-bottom: 10px;
+  }
+
+  &__name {
+    font-size: 20px;
+  }
+
+  &__button {
+    width: 100px;
+    font-size: 16px;
+    padding: 5px;
+    border: 1px solid black;
+    color: #fff;
+    border-radius: 10px;
+    background: linear-gradient(to right, #f30 0%, #fc6 100%);
+    transition: 0.3s;
+
+    &:hover {
+      box-shadow: 0 0 7px #000;
+    }
+
+    &--selected {
+      background: linear-gradient(to right, #060 0%, #6fc 100%);
+    }
+  }
+}
