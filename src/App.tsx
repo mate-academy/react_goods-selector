@@ -30,21 +30,15 @@ class App extends React.Component<{}, State> {
   };
 
   addWord = (word: string) => {
-    const { selectedGoods } = this.state;
-
-    this.setState({
-      selectedGoods: [...selectedGoods, word],
-    });
+    this.setState((state) => ({
+      selectedGoods: [...state.selectedGoods, word],
+    }));
   };
 
   removeWord = (word: string) => {
-    const { selectedGoods } = this.state;
-    const removedElem = [...selectedGoods];
-
-    removedElem.splice(selectedGoods.indexOf(word), 1);
-    this.setState({
-      selectedGoods: removedElem,
-    });
+    this.setState((state) => ({
+      selectedGoods: state.selectedGoods.filter(item => item !== word),
+    }));
   };
 
   setTitle = (arr: string[]) => {
