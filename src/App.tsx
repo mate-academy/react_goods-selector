@@ -27,9 +27,11 @@ class App extends React.Component<{}, State> {
     const { selectedGoods } = this.state;
 
     if (selectedGoods.includes(item)) {
-      this.setState({ selectedGoods: selectedGoods.filter(e => e !== item) });
+      this.setState(prevState => (
+        { selectedGoods: prevState.selectedGoods.filter(e => e !== item) }));
     } else {
-      this.setState({ selectedGoods: [...selectedGoods, item] });
+      this.setState(() => (
+        { selectedGoods: [...selectedGoods, item] }));
     }
   };
 
