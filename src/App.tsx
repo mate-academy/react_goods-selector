@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -14,11 +14,115 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-const App: React.FC = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+type State = {
+  selectedGood: string[];
+};
+
+type Props = {
+};
+
+class App extends Component<Props, State> {
+
+  state = {
+    selectedGood: ['Jam'],
+  };
+
+  addGood = (name:string) => {
+    this.setState((state) => {
+      return {
+        ...state,
+        selectedGood: [...this.state.selectedGood, name],
+      };
+    });
+  };
+
+  removeGood = (name:string) => {
+    this.setState((state) => {
+      return {
+        ...state,
+        selectedGood: this.state.selectedGood.filter(elem => elem !== name),
+      };
+    });
+  };
+
+  clearAll = () => {
+    this.setState({
+      selectedGood: [],
+    });
+  };
+
+  selectAll = () => {
+    this.setState({
+      selectedGood: [...goodsFromServer],
+    });
+  };
+
+  render() {
+    let keyId = 0;
+    const { selectedGood } = this.state;
+    const text = selectedGood.length > 0
+      ? selectedGood.join(', ') + ' is selected'
+      : 'No goods selected';
+
+    return (
+      <div className="App">
+        <h1>
+          Selected good:
+          {text}
+        </h1>
+        <ul>
+          {goodsFromServer.map(good => {
+            const className = selectedGood.includes(good)
+              ? 'good__item selected'
+              : 'good__item not-selected';
+
+            return (
+              <li
+                key={keyId += 1}
+                className={className}
+              >
+                <span>{good}</span>
+                <button
+                  type="button"
+                  className="good__item_status cursor"
+                  onClick={
+                    selectedGood.includes(good)
+                      ? () => {
+                        this.removeGood(good);
+                      }
+                      : () => {
+                        this.addGood(good);
+                      }
+                  }
+                >
+                  { selectedGood.includes(good) ? 'Remove' : 'Select' }
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+
+        <div className="for__buttons">
+          {selectedGood.length > 0
+          && <button
+            type="button"
+            className="cursor"
+            onClick={this.clearAll}
+          >
+            Clear
+          </button>}
+
+          <button
+            type="button"
+            className="cursor"
+            onClick={this.selectAll}
+          >
+            Select All
+          </button>
+        </div>
+      </div>
+    );
+  }
+}
 
 export default App;
