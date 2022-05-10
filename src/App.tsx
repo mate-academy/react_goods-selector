@@ -49,11 +49,7 @@ class App extends React.Component<{}, State> {
     });
   };
 
-  render() {
-    const {
-      selectedGoods,
-    } = this.state;
-
+  getTitle = (selectedGoods: string[]) => {
     let title = '';
 
     switch (selectedGoods.length) {
@@ -73,16 +69,24 @@ class App extends React.Component<{}, State> {
       }
     }
 
+    return title;
+  };
+
+  render() {
+    const {
+      selectedGoods,
+    } = this.state;
+
     return (
       <div className="app">
         <h1 className="app__title">
-          <span>{title}</span>
+          <span>{this.getTitle(selectedGoods)}</span>
           {selectedGoods.length > 0
           && (
             <button
               type="button"
               className="app__button"
-              onClick={() => this.unselectAll()}
+              onClick={this.unselectAll}
             >
               Clear
             </button>
@@ -91,31 +95,35 @@ class App extends React.Component<{}, State> {
 
         <ul className="goods">
           {
-            goodsFromServer.map((good) => (
-              <li
-                key={good}
-                className={
-                  classNames(
-                    'goods__item',
-                    { 'goods__item--selected': selectedGoods.includes(good) },
-                  )
-                }
-              >
-                <span>{good}</span>
-                {'\n'}
-                <button
-                  type="button"
-                  className="goods__button"
-                  onClick={() => this.selectHandler(good)}
-                >
-                  {
-                    selectedGoods.includes(good)
-                      ? 'Remove'
-                      : 'Select'
+            goodsFromServer.map((good) => {
+              const isGoodIncludes = selectedGoods.includes(good);
+
+              return (
+                <li
+                  key={good}
+                  className={
+                    classNames(
+                      'goods__item',
+                      { 'goods__item--selected': isGoodIncludes },
+                    )
                   }
-                </button>
-              </li>
-            ))
+                >
+                  <span>{good}</span>
+                  {'\n'}
+                  <button
+                    type="button"
+                    className="goods__button"
+                    onClick={() => this.selectHandler(good)}
+                  >
+                    {
+                      isGoodIncludes
+                        ? 'Remove'
+                        : 'Select'
+                    }
+                  </button>
+                </li>
+              );
+            })
           }
         </ul>
       </div>
