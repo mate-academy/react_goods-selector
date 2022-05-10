@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+
 import classNames from 'classnames';
 
 const goodsFromServer: string[] = [
@@ -26,7 +27,7 @@ export class App extends React.Component<Props, State> {
     selectedGood: ['Jam'],
   };
 
-  arr = this.state.selectedGood;
+  goodsArr = this.state.selectedGood;
 
   addGood = (good: string) => {
     this.setState((state) => ({
@@ -44,23 +45,23 @@ export class App extends React.Component<Props, State> {
 
   cleanBin = () => this.setState({ selectedGood: [] });
 
-  textMaker = (arr: string[]) => {
-    if (arr.length === 1) {
-      return ` ${arr[0]} is selected.`;
+  textMaker = (goodsArr: string[]) => {
+    if (goodsArr.length === 1) {
+      return ` ${goodsArr[0]} is selected.`;
     }
 
-    if (arr.length === 2) {
-      return `${arr[0]} and ${arr[1]} are selected.`;
+    if (goodsArr.length === 2) {
+      return `${goodsArr[0]} and ${goodsArr[1]} are selected.`;
     }
 
-    if (arr.length > 2) {
-      let str = arr[0];
+    if (goodsArr.length > 2) {
+      let str = goodsArr[0];
 
-      for (let i = 1; i < arr.length - 1; i += 1) {
-        str += `, ${arr[i]}`;
+      for (let i = 1; i < goodsArr.length - 1; i += 1) {
+        str += `, ${goodsArr[i]}`;
       }
 
-      return `${str} and ${arr[arr.length - 1]} are selected.`;
+      return `${str} and ${goodsArr[goodsArr.length - 1]} are selected.`;
     }
 
     return 'No goods selected.';
@@ -87,7 +88,7 @@ export class App extends React.Component<Props, State> {
         <ul className="App__list">
           {goodsFromServer.map(good => {
             return (
-              <li key={good} className="App__good-box">
+              <li key={good} className="App__goodBox">
                 <span>{good}</span>
                 <button
                   onClick={
