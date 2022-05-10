@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -42,26 +43,19 @@ export class App extends React.Component<{}, State> {
   };
 
   title = () => {
-    let result = '';
     const { selectedGoods } = this.state;
 
     switch (selectedGoods.length) {
       case (0):
-        result += 'No goods selected';
-        break;
-      case (1):
-        result += `${selectedGoods[0]} is selected`;
-        break;
-      case (2):
-        result += `${selectedGoods.join(' and ')} are selected`;
-        break;
-      default:
-        result += `${selectedGoods.slice(0, -1).join(', ')}
-          and ${selectedGoods.slice(-1)} are selected`;
-        break;
-    }
+        return 'No goods selected';
 
-    return result;
+      case (1):
+        return `${selectedGoods[0]} is selected`;
+
+      default:
+        return `${selectedGoods.slice(0, -1).join(', ')}
+          and ${selectedGoods.slice(-1)} are selected`;
+    }
   };
 
   render() {
@@ -77,7 +71,7 @@ export class App extends React.Component<{}, State> {
               this.setState({ selectedGoods: [] });
             }}
           >
-            {this.state.selectedGoods.length > 0 ? 'Clear' : ''}
+            {this.state.selectedGoods.length > 0 && 'Clear'}
           </button>
         </div>
 
@@ -85,11 +79,12 @@ export class App extends React.Component<{}, State> {
           {goodsFromServer.map(item => (
             <li
               key={item}
-              className={`app__list-item ${
-                this.state.selectedGoods.includes(item)
-                  ? 'active'
-                  : ''
-              }`}
+              className={classNames(
+                'app__list-item',
+                {
+                  active: this.state.selectedGoods.includes(item),
+                },
+              )}
             >
               <label className="app__list-label">
                 <span className="app__list-item-name">{item}</span>
