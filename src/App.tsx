@@ -22,8 +22,8 @@ type State = {
 
 class App extends React.Component<{}, State> {
   state: State = {
-    good: `${goodsFromServer.find(x => x === 'Jam')}`,
-    selectedGood: `${goodsFromServer.find(x => x === 'Jam')} is selected`,
+    good: 'Jam',
+    selectedGood: 'Jam is selected',
   };
 
   clearGood = () => {
