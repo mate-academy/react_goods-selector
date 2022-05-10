@@ -67,15 +67,27 @@ class App extends React.Component<Props, State> {
     return (
       <div className="App">
         <h1>{title}</h1>
-        {/* eslint-disable-next-line */}
-        {selectedGoods.length && <button type="button" onClick={this.removeGood}>Clear</button>}
+        {selectedGoods.length && (
+          <button
+            type="button"
+            onClick={this.removeGood}
+            className="button"
+          >
+            Clear
+          </button>
+        )}
 
-        <ol>
+        <ol className="list">
           {goodsFromServer.map(good => (
-            <li key={good}>
+            <li key={good} className="list__item">
               {good}
-              {/* eslint-disable-next-line */}
-              <button type="button" className="button" onClick={() => {this.selectGood(good)}}>
+              <button
+                type="button"
+                className={`button button--${selectedGoods.includes(good)}`}
+                onClick={() => {
+                  this.selectGood(good);
+                }}
+              >
                 {
                   selectedGoods.includes(good)
                     ? 'Remove'
