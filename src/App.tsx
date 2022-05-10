@@ -107,7 +107,7 @@ class App extends React.Component<{}, State> {
           </ul>
 
           {this.state.selectedGoods.length > 0
-            ? (
+            && (
               <button
                 type="button"
                 className="clear-btn"
@@ -115,8 +115,7 @@ class App extends React.Component<{}, State> {
               >
                 Clear
               </button>
-            )
-            : null}
+            )}
 
         </div>
       </div>
