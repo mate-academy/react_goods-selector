@@ -1,1 +1,43 @@
-// styles go here
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+}
+
+.selected {
+  background-color: green;
+}
+
+.item__button {
+  background-color: #4caf50;
+  border-color: #4caf50;
+  border-radius: 12px;
+  font-size: 20px;
+}
+
+.item__button-selected {
+  background-color: #f44336;
+  border-radius: 12px;
+  font-size: 20px;
+}
+
+.clear-button-wrapper {
+  display: flex;
+  width: 500px;
+  justify-content: center;
+}
+
+.clear-button {
+  font-size: 26px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  padding: 0 20px;
+  background-color: yellow;
+}
