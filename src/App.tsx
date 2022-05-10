@@ -15,69 +15,100 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  item: string;
-  selectedGood: string;
+  selectedGoods: string[];
 };
 
 class App extends React.Component<{}, State> {
   state: State = {
-    item: 'Jam',
-    selectedGood: 'No goods selected',
+    selectedGoods: ['Jam'],
   };
 
-  componentDidMount() {
-    const { item } = this.state;
+  clearGoods = () => {
+    this.setState({
+      selectedGoods: [],
+    });
+  };
 
-    this.setState({ selectedGood: `${item} is selected` });
-  }
+  selectGood = (good: string) => {
+    this.setState((prevState) => {
+      if (prevState.selectedGoods.includes(good)) {
+        const newSelectedGoods = prevState.selectedGoods
+          .filter(item => item !== good);
+
+        return {
+          selectedGoods: newSelectedGoods,
+        };
+      }
+
+      const newSelectedGoods = [
+        ...prevState.selectedGoods,
+        good,
+      ];
+
+      return {
+        selectedGoods: newSelectedGoods,
+      };
+    });
+  };
 
   render() {
-    const { item, selectedGood } = this.state;
+    const { selectedGoods } = this.state;
+    let title = '';
+
+    switch (selectedGoods.length) {
+      case 0:
+        title = 'No goods selected';
+        break;
+
+      case 1:
+        title = `${selectedGoods[0]} is selected`;
+        break;
+
+      case 2:
+        title = `${selectedGoods[0]} and ${selectedGoods[1]} are selected`;
+        break;
+
+      default: {
+        const goodsWithoutLast = selectedGoods.slice(0, -1).join(',');
+        const lastGood = selectedGoods.slice(-1);
+
+        title = `${goodsWithoutLast} and ${lastGood} are selected`;
+        break;
+      }
+    }
 
     return (
       <div className="App">
         <h1 className="title">
-          {selectedGood}
+          {title}
         </h1>
-        <button
-          type="submit"
-          className="button button__clear"
-          hidden={!item}
-          onClick={() => {
-            this.setState({
-              item: '',
-              selectedGood: 'No goods selected',
-            });
-          }}
-        >
-          Clear
-        </button>
+        {selectedGoods.length > 0
+        && (
+          <button
+            type="submit"
+            className="button button__clear"
+            hidden={!selectedGoods}
+            onClick={this.clearGoods}
+          >
+            Clear
+          </button>
+        )}
         <ul className="goods">
           {goodsFromServer.map(good => (
             <>
               <li
                 key={good}
-                className={good === item ? 'good good__selected' : 'good'}
+                className={selectedGoods.includes(good)
+                  ? 'good good__selected'
+                  : 'good'}
               >
                 {good}
                 <button
                   type="submit"
                   className="button"
-                  onClick={() => {
-                    if (item === good) {
-                      this.setState({
-                        item: '',
-                        selectedGood: 'No goods selected',
-                      });
-                    } else {
-                      this.setState({
-                        item: good,
-                        selectedGood: `${good} is selected`,
-                      });
-                    }
-                  }}
+                  onClick={() => this.selectGood(good)}
                 >
-                  {good === item ? 'Remove' : 'Select'}
+                  {selectedGoods.includes(good) ? 'Remove' : 'Select'}
                 </button>
               </li>
             </>
