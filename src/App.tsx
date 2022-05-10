@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 
-const goodsFromServer = [
+const goodsFromServer: string[] = [
   'Dumplings',
   'Carrot',
   'Eggs',
@@ -15,13 +15,11 @@ const goodsFromServer = [
 ];
 
 type State = {
-  allGoods: string[],
   selectedGoods: string[],
 };
 
 class App extends React.Component<{}, State> {
   state = {
-    allGoods: goodsFromServer,
     selectedGoods: ['Jam'],
   };
 
@@ -41,24 +39,24 @@ class App extends React.Component<{}, State> {
     });
   };
 
-  render() {
-    const { allGoods, selectedGoods } = this.state;
-    let titleDesc = '';
-    const lastIndex = selectedGoods.length - 1;
-
-    switch (selectedGoods.length) {
-      case 0: titleDesc = 'No goods selected';
+  titleText = (selectedArr: string[]) => {
+    switch (selectedArr.length) {
+      case 0: return 'No goods selected';
         break;
-      case 1: titleDesc = `${selectedGoods} is selected`;
+      case 1: return `${selectedArr} is selected`;
         break;
-      default: titleDesc = `${selectedGoods.slice(0, lastIndex).join(', ')} and ${selectedGoods[lastIndex]} are selected`;
+      default: return `${selectedArr.slice(0, -1).join(', ')} and ${selectedArr[selectedArr.length - 1]} are selected`;
     }
+  };
+
+  render() {
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App">
-        <h1>{ titleDesc }</h1>
+        <h1>{ this.titleText(selectedGoods) }</h1>
         <div className="clear-button-wrapper">
-          {lastIndex + 1
+          {selectedGoods.length
             ? (
               <button
                 className="clear-button"
@@ -71,7 +69,7 @@ class App extends React.Component<{}, State> {
             : ''}
         </div>
         <ul>
-          {allGoods.map((good) => (
+          {goodsFromServer.map((good) => (
             <div
               className={selectedGoods.includes(good)
                 ? 'item  selected'
