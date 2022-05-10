@@ -33,7 +33,9 @@ export class App extends React.Component<{}, State> {
 
   removeGood = (item: string) => {
     this.setState((state: State) => {
-      state.selectedGoodsList.splice(state.selectedGoodsList.indexOf(item), 1);
+      const indexOfRemovedGood = state.selectedGoodsList.indexOf(item);
+
+      state.selectedGoodsList.splice(indexOfRemovedGood, 1);
 
       return { selectedGoodsList: state.selectedGoodsList };
     });
@@ -53,7 +55,7 @@ export class App extends React.Component<{}, State> {
       case (selectedGoodsList.length === 2):
         resultString = `${selectedGoodsList.join(' and ')} are selected`;
         break;
-      case (selectedGoodsList.length === 10):
+      case (selectedGoodsList.length === goodsFromServer.length):
         resultString = `${[selectedGoodsList.slice(0, -1).join(', '),
           selectedGoodsList.slice(-1),
         ].join(' and ')} are selected. Nothing else to choose`;
