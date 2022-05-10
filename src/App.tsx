@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -32,6 +33,13 @@ class App extends React.Component<{}, State> {
     });
   };
 
+  selectGood = (item: string) => {
+    this.setState({
+      good: item,
+      selectedGood: `${item} is selected`,
+    });
+  };
+
   render() {
     return (
 
@@ -51,30 +59,28 @@ class App extends React.Component<{}, State> {
           {goodsFromServer.map(item => (
             <li
               key={item}
-              className={
-                item === this.state.good
-                  ? 'goods__list goods__selected'
-                  : 'goods__list'
-              }
+              className={classNames(
+                'goods__list',
+                {
+                  goods__selected: item === this.state.good,
+                },
+              )}
             >
               {item}
               <button
-                className={
-                  this.state.good !== item
-                    ? 'button'
-                    : 'button button__clear'
-                }
+                className={classNames(
+                  'button',
+                  {
+                    button__clear: this.state.good === item,
+                  },
+                )}
                 type="button"
-                onClick={this.state.good !== item ? () => {
-                  this.setState({
-                    good: item,
-                    selectedGood: `${item} is selected`,
-                  });
-                } : () => {
-                  this.setState({
-                    good: '',
-                    selectedGood: 'No goods selected',
-                  });
+                onClick={() => {
+                  if (this.state.good !== item) {
+                    return this.selectGood(item);
+                  }
+
+                  return this.clearGood();
                 }}
               >
                 {this.state.good !== item ? 'Select' : 'Remove'}
