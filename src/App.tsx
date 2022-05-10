@@ -49,13 +49,15 @@ class App extends React.Component<{}, State> {
         </h1>
         <ul className="goods">
           {goodsFromServer.map(item => (
-            <li className={
-              item === this.state.good
-                ? 'goods__list goods__selected'
-                : 'goods__list'
-            }
+            <li
+              key={item}
+              className={
+                item === this.state.good
+                  ? 'goods__list goods__selected'
+                  : 'goods__list'
+              }
             >
-              {`${item}:`}
+              {item}
               <button
                 className={
                   this.state.good !== item
