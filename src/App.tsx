@@ -18,19 +18,19 @@ type State = {
   selectedGoods: string[];
 };
 
-export class App extends React.Component<{}, State> {
+class App extends React.Component<{}, State> {
   state = {
     selectedGoods: ['Jam'],
   };
 
-  addGoods = (item: string) => {
+  addOrRemoveGood = (item: string) => {
     this.setState(({ selectedGoods }) => {
-      const addedGoods = (selectedGoods.includes(item))
+      const chosenGoods = (selectedGoods.includes(item))
         ? selectedGoods.filter((el) => el !== item)
         : [...selectedGoods, item];
 
       return {
-        selectedGoods: addedGoods,
+        selectedGoods: chosenGoods,
       };
     });
   };
@@ -67,9 +67,7 @@ export class App extends React.Component<{}, State> {
             <button
               type="button"
               className="ClearButton"
-              onClick={() => {
-                this.clearSelectedGoods();
-              }}
+              onClick={this.clearSelectedGoods}
             >
               CLEAR
             </button>
@@ -77,40 +75,46 @@ export class App extends React.Component<{}, State> {
         </h1>
 
         <ul className="GoodsList">
-          {goodsFromServer.map((item) => (
-            <li
-              className={`GoodsList__item ${
-                selectedGoods.includes(item)
-                  ? 'GoodsList__selectedItem'
-                  : ''
-              }`}
-              key={item}
-            >
-              <span className="GoodsList__itemName">
-                {item}
-              </span>
+          {goodsFromServer.map((item) => {
+            const selectedGoodsIncludesItem = selectedGoods.includes(item);
 
-              <button
-                type="button"
-                className={`GoodsList__button ${
-                  selectedGoods.includes(item)
-                    ? 'GoodsList__selectedButton'
+            return (
+              <li
+                className={`GoodsList__item ${
+                  selectedGoodsIncludesItem
+                    ? 'GoodsList__selectedItem'
                     : ''
                 }`}
-                onClick={() => {
-                  this.addGoods(item);
-                }}
+                key={item}
               >
-                {
-                  (selectedGoods.includes(item))
-                    ? 'REMOVE'
-                    : 'SELECT'
-                }
-              </button>
-            </li>
-          ))}
+                <span className="GoodsList__itemName">
+                  {item}
+                </span>
+
+                <button
+                  type="button"
+                  className={`GoodsList__button ${
+                    selectedGoodsIncludesItem
+                      ? 'GoodsList__selectedButton'
+                      : ''
+                  }`}
+                  onClick={() => {
+                    this.addOrRemoveGood(item);
+                  }}
+                >
+                  {
+                    (selectedGoodsIncludesItem)
+                      ? 'REMOVE'
+                      : 'SELECT'
+                  }
+                </button>
+              </li>
+            );
+          })}
         </ul>
       </div>
     );
   }
 }
+
+export default App;
