@@ -26,13 +26,15 @@ class App extends React.Component<{}, State> {
   buttonClick = (item: string) => {
     const { selectedGoods } = this.state;
 
-    if (selectedGoods.includes(item)) {
-      this.setState(prevState => (
-        { selectedGoods: prevState.selectedGoods.filter(e => e !== item) }));
-    } else {
-      this.setState(() => (
-        { selectedGoods: [...selectedGoods, item] }));
-    }
+    this.setState(prevState => {
+      if (selectedGoods.includes(item)) {
+        return {
+          selectedGoods: prevState.selectedGoods.filter(e => e !== item),
+        };
+      }
+
+      return { selectedGoods: [...selectedGoods, item] };
+    });
   };
 
   buttonClear = () => {
