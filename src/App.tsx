@@ -26,33 +26,15 @@ class App extends React.Component<Props, State> {
   };
 
   addGoods = (item: string) => {
-    this.setState((prevState) => {
-      const result = [...prevState.selectedGoods, item];
-
-      return {
-        selectedGoods: result,
-      };
-    });
+    this.setState((prevState) => ({
+      selectedGoods: [...prevState.selectedGoods, item],
+    }));
   };
 
   removeGood = (item: string) => {
-    this.setState((prevState) => {
-      if (prevState.selectedGoods.length === 1) {
-        return {
-          selectedGoods: [],
-        };
-      }
-
-      const index = this.state.selectedGoods.indexOf(item);
-      const result = [
-        ...prevState.selectedGoods.splice(0, index),
-        ...prevState.selectedGoods.splice(index),
-      ];
-
-      return {
-        selectedGoods: result,
-      };
-    });
+    this.setState((prevState) => ({
+      selectedGoods: prevState.selectedGoods.filter(elem => elem !== item),
+    }));
   };
 
   resetSelected = () => {
