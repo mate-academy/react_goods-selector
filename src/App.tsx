@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -30,20 +31,10 @@ class App extends React.Component<{}, State> {
   };
 
   selectGood = (good: string) => {
-    this.setState((prevState) => {
-      if (prevState.selectedGoods.includes(good)) {
-        const newSelectedGoods = prevState.selectedGoods
-          .filter(item => item !== good);
-
-        return {
-          selectedGoods: newSelectedGoods,
-        };
-      }
-
-      const newSelectedGoods = [
-        ...prevState.selectedGoods,
-        good,
-      ];
+    this.setState(({ selectedGoods }) => {
+      const newSelectedGoods = selectedGoods.includes(good)
+        ? selectedGoods.filter(item => item !== good)
+        : [...selectedGoods, good];
 
       return {
         selectedGoods: newSelectedGoods,
@@ -73,7 +64,6 @@ class App extends React.Component<{}, State> {
         const lastGood = selectedGoods.slice(-1);
 
         title = `${goodsWithoutLast} and ${lastGood} are selected`;
-        break;
       }
     }
 
@@ -95,23 +85,21 @@ class App extends React.Component<{}, State> {
         )}
         <ul className="goods">
           {goodsFromServer.map(good => (
-            <>
-              <li
-                key={good}
-                className={selectedGoods.includes(good)
-                  ? 'good good__selected'
-                  : 'good'}
+            <li
+              key={good}
+              className={selectedGoods.includes(good)
+                ? classNames('good', 'good__selected')
+                : 'good'}
+            >
+              {good}
+              <button
+                type="submit"
+                className="button"
+                onClick={() => this.selectGood(good)}
               >
-                {good}
-                <button
-                  type="submit"
-                  className="button"
-                  onClick={() => this.selectGood(good)}
-                >
-                  {selectedGoods.includes(good) ? 'Remove' : 'Select'}
-                </button>
-              </li>
-            </>
+                {selectedGoods.includes(good) ? 'Remove' : 'Select'}
+              </button>
+            </li>
           ))}
         </ul>
       </div>
