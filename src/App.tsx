@@ -32,19 +32,12 @@ class App extends React.Component<{}, State> {
 
   selectGood = (good: string) => {
     this.setState(({ selectedGoods }) => {
-      const index = selectedGoods.indexOf(good);
-
-      if (index !== -1) {
-        return {
-          selectedGoods: [
-            ...selectedGoods.slice(0, index),
-            ...selectedGoods.slice(index + 1),
-          ],
-        };
-      }
+      const newSelectedGoods = selectedGoods.includes(good)
+        ? selectedGoods.filter(item => item !== good)
+        : [...selectedGoods, good];
 
       return {
-        selectedGoods: [...selectedGoods, good],
+        selectedGoods: newSelectedGoods,
       };
     });
   };
@@ -91,23 +84,27 @@ class App extends React.Component<{}, State> {
           </button>
         )}
         <ul className="goods">
-          {goodsFromServer.map(good => (
-            <li
-              key={good}
-              className={classNames('good', {
-                good__selected: selectedGoods.includes(good),
-              })}
-            >
-              {good}
-              <button
-                type="submit"
-                className="button"
-                onClick={() => this.selectGood(good)}
+          {goodsFromServer.map(good => {
+            const isIncludesGood = selectedGoods.includes(good);
+
+            return (
+              <li
+                key={good}
+                className={classNames('good', {
+                  good__selected: isIncludesGood,
+                })}
               >
-                {selectedGoods.includes(good) ? 'Remove' : 'Select'}
-              </button>
-            </li>
-          ))}
+                {good}
+                <button
+                  type="submit"
+                  className="button"
+                  onClick={() => this.selectGood(good)}
+                >
+                  {isIncludesGood ? 'Remove' : 'Select'}
+                </button>
+              </li>
+            );
+          })}
         </ul>
       </div>
     );
