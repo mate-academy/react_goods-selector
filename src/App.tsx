@@ -32,12 +32,19 @@ class App extends React.Component<{}, State> {
 
   selectGood = (good: string) => {
     this.setState(({ selectedGoods }) => {
-      const newSelectedGoods = selectedGoods.includes(good)
-        ? selectedGoods.filter(item => item !== good)
-        : [...selectedGoods, good];
+      const index = selectedGoods.indexOf(good);
+
+      if (index !== -1) {
+        return {
+          selectedGoods: [
+            ...selectedGoods.slice(0, index),
+            ...selectedGoods.slice(index + 1),
+          ],
+        };
+      }
 
       return {
-        selectedGoods: newSelectedGoods,
+        selectedGoods: [...selectedGoods, good],
       };
     });
   };
@@ -87,9 +94,9 @@ class App extends React.Component<{}, State> {
           {goodsFromServer.map(good => (
             <li
               key={good}
-              className={selectedGoods.includes(good)
-                ? classNames('good', 'good__selected')
-                : 'good'}
+              className={classNames('good', {
+                good__selected: selectedGoods.includes(good),
+              })}
             >
               {good}
               <button
