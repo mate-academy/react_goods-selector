@@ -64,63 +64,48 @@ class App extends React.Component<{}, State> {
 
           {
             (selectedGoods.length > 0) && (
-              <>
-                <button
-                  className="app__button"
-                  type="button"
-                  onClick={() => {
-                    this.clearGoods();
-                  }}
-                >
-                  Clear
-                </button>
-              </>
+              <button
+                className="app__button"
+                type="button"
+                onClick={this.clearGoods}
+              >
+                Clear
+              </button>
             )
           }
         </h1>
         <ul className="goodsList">
-          {goodsFromServer.map(good => (
-            <li
-              className={`goodsList__item ${
-                selectedGoods.includes(good)
-                  ? 'goodsList__selected'
-                  : ''
-              }`}
-              key={good}
-            >
-              <span className="goodsList__goods">
-                {good}
-              </span>
-              <button
-                type="button"
-                className={`goodsList__button ${
-                  selectedGoods.includes(good)
-                    ? 'goodsList__selectedButton'
-                    : ''
-                }`}
-                onClick={() => {
-                  this.switchGood(good);
-                }}
+          {goodsFromServer.map(good => {
+            const isSelected = selectedGoods.includes(good);
+
+            return (
+              <li
+                className="goodsList__item"
+                key={good}
               >
-                {
-                  selectedGoods.includes(good)
-                    ? 'Remove'
-                    : 'Select'
-                }
-              </button>
-            </li>
-          ))}
+                <span className="goodsList__goods">
+                  {good}
+                </span>
+                <button
+                  type="button"
+                  className="goodsList__button"
+                  onClick={() => {
+                    this.switchGood(good);
+                  }}
+                >
+                  {
+                    isSelected
+                      ? 'Remove'
+                      : 'Select'
+                  }
+                </button>
+              </li>
+            );
+          })}
         </ul>
       </div>
     );
   }
 }
-
-// const App: React.FC = () => (
-//   <div className="App">
-//     <h1>Selected good: -</h1>
-//     {goodsFromServer.length}
-//   </div>
-// );
 
 export default App;
