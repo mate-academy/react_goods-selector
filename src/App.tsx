@@ -18,7 +18,7 @@ type State = {
   selectedGoods: string[],
 };
 
-class App extends React.Component<{}, State> {
+export class App extends React.Component<{}, State> {
   state = {
     selectedGoods: ['Jam'],
   };
