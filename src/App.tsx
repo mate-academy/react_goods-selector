@@ -25,9 +25,9 @@ class App extends React.Component<{}, State> {
   };
 
   selectHandler = (good: string) => {
-    this.setState((prevState) => {
-      if (prevState.selectedGoods.includes(good)) {
-        const newGoods = prevState.selectedGoods
+    this.setState(({ selectedGoods }) => {
+      if (selectedGoods.includes(good)) {
+        const newGoods = selectedGoods
           .filter((item) => item !== good);
 
         return {
@@ -35,7 +35,7 @@ class App extends React.Component<{}, State> {
         };
       }
 
-      const newGoods = [...prevState.selectedGoods, good];
+      const newGoods = [...selectedGoods, good];
 
       return {
         selectedGoods: newGoods,
@@ -55,21 +55,23 @@ class App extends React.Component<{}, State> {
     switch (selectedGoods.length) {
       case 0:
         title = 'No goods selected';
-        break;
+
+        return title;
 
       case 1:
         title = `${selectedGoods[0]} is selected`;
-        break;
+
+        return title;
 
       default: {
         const strPart1 = selectedGoods.slice(0, -1).join(',\n');
         const strPart2 = selectedGoods.slice(-1);
 
         title = `${strPart1} and ${strPart2} are selected`;
+
+        return title;
       }
     }
-
-    return title;
   };
 
   render() {
@@ -77,20 +79,22 @@ class App extends React.Component<{}, State> {
       selectedGoods,
     } = this.state;
 
+    const clearBtnClass = classNames(
+      'app__button',
+      { 'app__button--hidden': selectedGoods.length === 0 },
+    );
+
     return (
       <div className="app">
         <h1 className="app__title">
           <span>{this.getTitle(selectedGoods)}</span>
-          {selectedGoods.length > 0
-          && (
-            <button
-              type="button"
-              className="app__button"
-              onClick={this.unselectAll}
-            >
-              Clear
-            </button>
-          )}
+          <button
+            type="button"
+            className={clearBtnClass}
+            onClick={this.unselectAll}
+          >
+            Clear
+          </button>
         </h1>
 
         <ul className="goods">
@@ -109,7 +113,7 @@ class App extends React.Component<{}, State> {
                   }
                 >
                   <span>{good}</span>
-                  {'\n'}
+                  {' '}
                   <button
                     type="button"
                     className="goods__button"
