@@ -36,20 +36,50 @@ export class App extends React.Component<{}, State> {
     ),
   };
 
+  getStringDescription = (goods: Array<string>): string => {
+    const start = goods.length ? '' : 'No goods';
+    const end = (goods.length > 2)
+      ? [
+        goods.slice(0, -1).join(', '),
+        goods.slice(-1),
+      ].join(' and ')
+      : goods.join(' and ');
+
+    return start + end;
+  };
+
+  selectGood = (name: string) => {
+    this.setState((prevState) => {
+      const clone = prevState.goodsWithBoolIsSelected.map(e => ({ ...e }));
+      const index = clone.findIndex(e => e.goodName === name);
+
+      clone[index].isSelected = !clone[index].isSelected;
+
+      return ({
+        goodsWithBoolIsSelected: clone,
+      });
+    });
+  };
+
+  clearSelected = () => {
+    this.setState((prevState) => {
+      const clone = prevState.goodsWithBoolIsSelected.map(e => ({ ...e }));
+
+      clone.forEach(good => {
+        good.isSelected = false;
+      });
+
+      return ({
+        goodsWithBoolIsSelected: clone,
+      });
+    });
+  };
+
   render() {
     const { goodsWithBoolIsSelected: goods } = this.state;
 
-    const selected = goods.filter(good => good.isSelected);
-    const headerText = selected.length === 0
-      ? 'No goods'
-      : (selected.map(e => e.goodName).reduce((prev, next, index, targArr) => {
-        return prev
-                  + (index === targArr.length - 1
-                    ? ' and ' : ', ')
-                  + next;
-      }))
-      + (selected.length === 1 ? ' is' : ' are')
-      + ' selected';
+    const selected = goods.filter(good => good.isSelected).map(e => e.goodName);
+    const headerText = this.getStringDescription(selected);
 
     return (
       <div className="app">
@@ -57,48 +87,38 @@ export class App extends React.Component<{}, State> {
           {headerText}
         </h1>
         <ul className="app__listGoods">
-          {goods.map(good => {
-            return (
-              <li
-                key={good.goodName}
-                className={
-                  classNames(
-                    'app__listItem',
-                    {
-                      app__listItemSelected: (good.isSelected),
-                    },
-                  )
-                }
+          {goods.map(good => (
+            <li
+              key={good.goodName}
+              className={
+                classNames(
+                  'app__listItem',
+                  {
+                    app__listItemSelected: (good.isSelected),
+                  },
+                )
+              }
+            >
+              {good.goodName}
+              <button
+                type="button"
+                onClick={() => this.selectGood(good.goodName)}
               >
-                {good.goodName}
-                <button
-                  type="button"
-                  onClick={() => {
-                    good.isSelected = !good.isSelected;
-                    this.forceUpdate();
-                  }}
-                >
-                  {good.isSelected ? 'Remove' : 'Select'}
-                </button>
-              </li>
-            );
-          })}
+                {good.isSelected ? 'Remove' : 'Select'}
+              </button>
+            </li>
+          ))}
         </ul>
         <button
           type="button"
           className={
             classNames(
               {
-                invisible: (!selected.length),
+                invisible: !selected.length,
               },
             )
           }
-          onClick={() => {
-            goods.forEach(good => {
-              good.isSelected = false;
-            });
-            this.forceUpdate();
-          }}
+          onClick={this.clearSelected}
         >
           Clear
         </button>
