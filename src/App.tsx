@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -68,8 +69,8 @@ class App extends React.Component<{}, State> {
           <div className="products-title__bascet">
             {this.createTitle()}
           </div>
-          {selectedGood.length
-            ? (
+          {!!selectedGood.length
+            && (
               <button
                 type="button"
                 className="products-title__button"
@@ -77,8 +78,7 @@ class App extends React.Component<{}, State> {
               >
                 Clear basket
               </button>
-            )
-            : ''}
+            )}
         </h1>
         <ul className="goods-list">
           {goodsFromServer.map(good => {
@@ -87,11 +87,12 @@ class App extends React.Component<{}, State> {
             return (
               <li key={good} className="goods-list__good">
                 <button
-                  className={`goods-list__button ${
-                    isSelected
-                      ? 'goods-list__button-selected'
-                      : ''
-                  }`}
+                  className={
+                    classNames(
+                      'goods-list__button',
+                      { 'goods-list__button-selected': isSelected },
+                    )
+                  }
                   type="button"
                   onClick={() => (isSelected
                     ? this.removeGood(good)
@@ -99,11 +100,13 @@ class App extends React.Component<{}, State> {
                 >
                   {isSelected ? 'Remove' : 'Select'}
                 </button>
-                <div className={`goods-list__good ${
-                  isSelected
-                    ? 'goods-list__good-selected'
-                    : ''
-                }`}
+                <div
+                  className={
+                    classNames(
+                      'goods-list__good',
+                      { 'goods-list__good-selected': isSelected },
+                    )
+                  }
                 >
                   {good}
                 </div>
