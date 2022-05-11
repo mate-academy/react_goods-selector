@@ -58,8 +58,8 @@ class App extends React.Component<{}, State> {
       <div className="App">
         <h1>{ this.titleText(selectedGoods) }</h1>
         <div className="clear-button-wrapper">
-          {selectedGoods.length
-            ? (
+          {Boolean(selectedGoods.length)
+            && (
               <button
                 className="clear-button"
                 type="button"
@@ -67,29 +67,32 @@ class App extends React.Component<{}, State> {
               >
                 clear
               </button>
-            )
-            : ''}
+            )}
         </div>
         <ul>
-          {goodsFromServer.map((good) => (
-            <div
-              className={selectedGoods.includes(good)
-                ? 'item  selected'
-                : 'item'}
-              key={good}
-            >
-              <li className="item__good">{good}</li>
-              <button
-                className="item__button"
-                type="button"
-                onClick={() => {
-                  this.buttonClick(good);
-                }}
+          {goodsFromServer.map((good) => {
+            const isInSelGoods = selectedGoods.includes(good);
+
+            return (
+              <div
+                className={isInSelGoods
+                  ? 'item  selected'
+                  : 'item'}
+                key={good}
               >
-                { selectedGoods.includes(good) ? 'Remove' : 'Select' }
-              </button>
-            </div>
-          ))}
+                <li className="item__good">{good}</li>
+                <button
+                  className="item__button"
+                  type="button"
+                  onClick={() => {
+                    this.buttonClick(good);
+                  }}
+                >
+                  { isInSelGoods ? 'Remove' : 'Select' }
+                </button>
+              </div>
+            );
+          })}
         </ul>
       </div>
     );
