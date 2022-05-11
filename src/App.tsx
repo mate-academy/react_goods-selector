@@ -66,52 +66,52 @@ class App extends React.Component<{}, State> {
 
           {
             (selectedGoods.length > 0) && (
-              <>
-                <button
-                  className="app__button"
-                  type="button"
-                  onClick={() => {
-                    this.clearGoods();
-                  }}
-                >
-                  Clear
-                </button>
-              </>
+              <button
+                className="app__button"
+                type="button"
+                onClick={this.clearGoods}
+              >
+                Clear
+              </button>
             )
           }
         </h1>
         <ul className="goodsList">
-          {goodsFromServer.map(good => (
-            <li
-              className={`goodsList__item ${
-                selectedGoods.includes(good)
-                  ? 'goodsList__selected'
-                  : ''
-              }`}
-              key={good}
-            >
-              <span className="goodsList__goods">
-                {good}
-              </span>
-              <button
-                type="button"
-                className={`goodsList__button ${
-                  selectedGoods.includes(good)
-                    ? 'goodsList__selectedButton'
+          {goodsFromServer.map(good => {
+            const isSelected = selectedGoods.includes(good);
+
+            return (
+              <li
+                className={`goodsList__item ${
+                  isSelected
+                    ? 'goodsList__selected'
                     : ''
                 }`}
-                onClick={() => {
-                  this.switchGood(good);
-                }}
+                key={good}
               >
-                {
-                  selectedGoods.includes(good)
-                    ? 'Remove'
-                    : 'Select'
-                }
-              </button>
-            </li>
-          ))}
+                <span className="goodsList__goods">
+                  {good}
+                </span>
+                <button
+                  type="button"
+                  className={`goodsList__button ${
+                    isSelected
+                      ? 'goodsList__selectedButton'
+                      : ''
+                  }`}
+                  onClick={() => {
+                    this.switchGood(good);
+                  }}
+                >
+                  {
+                    isSelected
+                      ? 'Remove'
+                      : 'Select'
+                  }
+                </button>
+              </li>
+            );
+          })}
         </ul>
       </div>
     );
