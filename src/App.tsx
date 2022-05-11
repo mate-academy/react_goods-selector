@@ -111,7 +111,6 @@ class App extends React.Component<{}, State> {
             })}
           </ul>
         </div>
-
       </div>
     );
   }
