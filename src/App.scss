@@ -1,1 +1,41 @@
-// styles go here
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+html {
+  font-family: "Poppins", sans-serif;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__title {
+    text-align: center;
+  }
+
+  &__ul {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+    list-style: none;
+  }
+}
+
+.good {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__name {
+    padding: 10px;
+  }
+  &__btn {
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+  }
+}
