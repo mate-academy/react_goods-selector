@@ -48,30 +48,21 @@ export class App extends React.Component<{}, State> {
   }
 
   showGoodsHandler() {
-    let SelectedValues = '';
+    const { selectedGoods } = this.state;
 
-    switch (this.state.selectedGoods.length) {
+    switch (selectedGoods.length) {
+      case 0:
+        return 'No goods selected';
+
       case 1:
-        SelectedValues = `${this.state.selectedGoods} is selected`;
-        break;
+        return `${selectedGoods[0]} is selected`;
 
       case 2:
-        SelectedValues = `${this.state.selectedGoods[0]} and ${this.state.selectedGoods[1]} are selected`;
-        break;
-
-      case 3:
-        SelectedValues = `${this.state.selectedGoods[0]},${this.state.selectedGoods[1]}  and ${this.state.selectedGoods[2]} are selected`;
-        break;
-      case 0:
-        SelectedValues = 'No items selected';
-        break;
+        return `${selectedGoods.join(' and ')} are selected`;
 
       default:
-        SelectedValues = `${this.state.selectedGoods} are selected`;
-        break;
+        return `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods[selectedGoods.length - 1]} are selected`;
     }
-
-    return SelectedValues;
   }
 
   render() {
@@ -79,27 +70,26 @@ export class App extends React.Component<{}, State> {
 
     return (
       <div className="App">
-        <h1>
+        <h1 className="App__title">
           {this.showGoodsHandler()}
           {selectedGoods.length > 0
-            ? (
+            && (
               <button
                 type="button"
-                className="btn btn-danger"
+                className="App__button-reset"
                 onClick={() => (
                   this.resetSelectedGoods()
                 )}
               >
                 X
               </button>
-            )
-            : ('')}
+            )}
         </h1>
-        <ul>
+        <ul className="App__list">
           {goodsFromServer.map((item: string) => (
             <li
               className={classNames(
-                'd-flex justify-content-between align-items-center',
+                'App__item',
                 {
                   active: (this.state.selectedGoods.includes(item)),
                 },
@@ -110,7 +100,7 @@ export class App extends React.Component<{}, State> {
               <div>
                 <button
                   type="button"
-                  className="addButton btn btn-success"
+                  className="App__button-choose"
                   onClick={() => {
                     this.chooseGoodsHandler(item);
                   }}
@@ -119,7 +109,7 @@ export class App extends React.Component<{}, State> {
                 </button>
                 <button
                   type="button"
-                  className="btn btn-danger"
+                  className="App__button-remove"
                   onClick={() => {
                     this.RemoveGoodsHandler(item);
                   }}
