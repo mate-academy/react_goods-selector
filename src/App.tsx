@@ -80,7 +80,7 @@ export class App extends React.Component<{}, State> {
             const goodsSelected = selectedGoods.includes(good);
 
             return (
-              <div className="good">
+              <div className={goodsSelected ? 'good' : 'good'} key={good}>
                 <li className="good__name">{good}</li>
                 <button
                   onClick={() => {
@@ -89,9 +89,7 @@ export class App extends React.Component<{}, State> {
                   className="good__btn"
                   type="button"
                 >
-                  { goodsSelected
-                    ? 'Remove'
-                    : 'Select'}
+                  { goodsSelected ? 'Remove' : 'Select'}
                 </button>
               </div>
             );
@@ -101,5 +99,3 @@ export class App extends React.Component<{}, State> {
     );
   }
 }
-
-export default App;
