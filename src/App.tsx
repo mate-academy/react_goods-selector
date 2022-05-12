@@ -47,13 +47,9 @@ class App extends React.Component<{}, State> {
   };
 
   selectRemove = (good: string) => {
-    this.setState(({ select }) => {
-      const value = select.indexOf(good);
-
-      select.splice(value, 1);
-
-      return { select };
-    });
+    this.setState(prevState => ({
+      select: prevState.select.filter(value => value !== good),
+    }));
   };
 
   render() {
@@ -64,9 +60,7 @@ class App extends React.Component<{}, State> {
         <div className="app">
           <header className="app__header">
             <h1 className="app__title">
-              Selected:
-              {' '}
-              {this.addText(select)}
+              {`Selected: ${this.addText(select)}`}
             </h1>
           </header>
           <ul className="app__list">
@@ -93,13 +87,17 @@ class App extends React.Component<{}, State> {
               );
             })}
           </ul>
-          <button
-            type="button"
-            className="button-clear"
-            onClick={this.clearSelect}
-          >
-            Clear
-          </button>
+          {
+            (select.length > 0) && (
+              <button
+                type="button"
+                className="button-clear"
+                onClick={this.clearSelect}
+              >
+                Clear
+              </button>
+            )
+          }
         </div>
       </div>
     );
