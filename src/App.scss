@@ -1,11 +1,18 @@
+body {
+  margin: 0;
+}
+
 .App {
-  padding: 0 20px;
-  max-width: 400px;
+  text-align: center;
+  width: 350px;
+  margin: 0 auto;
+  border-radius: 50% 50% 0% 0%;
+  background-color: rgb(190, 246, 254);
+  transition: all 0.5s;
 
   &__title {
-    background-color: wheat;
-    border-radius: 30%;
-    max-width: 300px;
+    background-color: rgb(216, 255, 228);
+    border-radius: 40%;
     padding: 20px;
   }
 
@@ -14,26 +21,26 @@
     background-color: rgb(232, 108, 108);
     padding: 10px;
   }
-}
 
-ul {
-  list-style: none;
-  padding: 0;
-}
+  &__list {
+    list-style: none;
+    padding: 0;
+  }
 
-li {
-  width: 330px;
-  display: flex;
-  justify-content: space-between;
-  padding: 5px;
-  font-size: 20px;
-  border-radius: 5px;
-  margin: 5px 0;
-}
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    font-size: 20px;
+    border-radius: 5px;
+    margin: 5px 0;
+  }
 
-button {
-  cursor: pointer;
-  font-weight: bold;
+  &__btn {
+    cursor: pointer;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
 }
 
 .selected {

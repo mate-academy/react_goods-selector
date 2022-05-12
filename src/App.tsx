@@ -40,9 +40,11 @@ class App extends React.Component <{}, State> {
   };
 
   addGoods = (el: string) => () => {
-    this.setState((prevState) => ({
-      selectedGoods: [...prevState.selectedGoods, el],
-    }));
+    if (!this.state.selectedGoods.includes(el)) {
+      this.setState((prevState) => ({
+        selectedGoods: [...prevState.selectedGoods, el],
+      }));
+    }
   };
 
   removeGoods = (el: string) => () => {
@@ -60,40 +62,59 @@ class App extends React.Component <{}, State> {
 
     return (
       <div className="App">
-        <h1 className="App__title">{this.showGoods()}</h1>
-        {selectedGoods.length
-          ? (
-            <button
-              type="button"
-              onClick={this.clearGoods}
-              className="App__clear--button"
-            >
-              Clear
-            </button>
-          )
-          : null}
-        <ul>
-          {
-            goodsFromServer.map(el => (
-              <li
-                key={el}
-                className={
-                  classNames({ selected: selectedGoods.includes(el) })
-                }
+        <div className="container">
+          <h1 className="App__title">{this.showGoods()}</h1>
+          <ul className="App__list">
+            {
+              goodsFromServer.map(el => (
+                <li
+                  key={el}
+                  className={
+                    classNames({ selected: selectedGoods.includes(el) })
+                  }
+                >
+                  <div className="App__item">
+                    { el }
+                    <div className="App__button--wrapper">
+                      {
+                        selectedGoods.includes(el)
+                          ? (
+                            <button
+                              type="button"
+                              className="App__btn"
+                              onClick={this.removeGoods(el)}
+                            >
+                              Remove
+                            </button>
+                          )
+                          : (
+                            <button
+                              type="button"
+                              className="App__btn"
+                              onClick={this.addGoods(el)}
+                            >
+                              Select
+                            </button>
+                          )
+                      }
+                    </div>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+          { selectedGoods.length
+            ? (
+              <button
+                type="button"
+                onClick={this.clearGoods}
+                className="App__clear--button"
               >
-                { el }
-                <div className="App__button--wrapper">
-                  <button type="button" onClick={this.addGoods(el)}>
-                    Select
-                  </button>
-                  <button type="button" onClick={this.removeGoods(el)}>
-                    Remove
-                  </button>
-                </div>
-              </li>
-            ))
-          }
-        </ul>
+                Clear
+              </button>
+            )
+            : null}
+        </div>
       </div>
     );
   }
