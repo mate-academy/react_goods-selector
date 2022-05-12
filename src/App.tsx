@@ -32,7 +32,7 @@ class App extends React.Component<Props, State> {
       const newState = [...prevState.selectedGood];
 
       if (prevState.selectedGood.includes(good)) {
-        newState.splice(newState.indexOf(good), 1);
+        newState.filter((thing) => good === thing);
       } else {
         newState.push(good);
       }
@@ -45,10 +45,7 @@ class App extends React.Component<Props, State> {
     return this.state.selectedGood;
   };
 
-  render() {
-    const {
-      selectedGood,
-    } = this.state;
+  choiceTitle = (selectedGood: string[]) => {
     let title = 'No goods selected';
 
     if (selectedGood.length === 0) {
@@ -66,10 +63,18 @@ class App extends React.Component<Props, State> {
       title = `${firstPart} and ${secondPart} are selected`;
     }
 
+    return title;
+  };
+
+  render() {
+    const {
+      selectedGood,
+    } = this.state;
+
     return (
       <div className="app">
         <h1 className="app__title">
-          {title}
+          {this.choiceTitle(selectedGood)}
           <div className="app__title--gap" />
           <button
             type="button"
@@ -89,34 +94,38 @@ class App extends React.Component<Props, State> {
           </button>
         </h1>
         <ul className="app__list">
-          {goodsFromServer.map((good) => (
-            <li className="app__item" key={good}>
-              <p
-                className={classNames(
-                  'app__item-good',
-                  {
-                    'app__item-good--selected': selectedGood.includes(good),
-                  },
-                )}
-              >
-                {good}
-              </p>
-              <button
-                type="button"
-                className={classNames(
-                  'app__item-button',
-                  {
-                    'app__item-button--selected': selectedGood.includes(good),
-                  },
-                )}
-                onClick={() => this.selectHandler(good)}
-              >
-                {selectedGood.includes(good)
-                  ? 'Remove'
-                  : 'Select'}
-              </button>
-            </li>
-          ))}
+          {goodsFromServer.map((good) => {
+            const conditionNames = selectedGood.includes(good);
+
+            return (
+              <li className="app__item" key={good}>
+                <p
+                  className={classNames(
+                    'app__item-good',
+                    {
+                      'app__item-good--selected': conditionNames,
+                    },
+                  )}
+                >
+                  {good}
+                </p>
+                <button
+                  type="button"
+                  className={classNames(
+                    'app__item-button',
+                    {
+                      'app__item-button--selected': conditionNames,
+                    },
+                  )}
+                  onClick={() => this.selectHandler(good)}
+                >
+                  {selectedGood.includes(good)
+                    ? 'Remove'
+                    : 'Select'}
+                </button>
+              </li>
+            );
+          })}
         </ul>
       </div>
     );
