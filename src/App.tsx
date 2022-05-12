@@ -16,7 +16,7 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  selectedGood: string;
+  selectedGood: string | null;
   goods: string[];
 };
 
@@ -31,10 +31,10 @@ export class App extends React.Component<{}, State> {
   };
 
   removeGood = () => {
-    this.setState({ selectedGood: '' });
+    this.setState({ selectedGood: null });
   };
 
-  selectGood = (good: string) => {
+  isSelectGood = (good: string) => {
     return this.state.selectedGood === good;
   };
 
@@ -47,20 +47,15 @@ export class App extends React.Component<{}, State> {
           {selectedGood
             ? `${selectedGood} is selected`
             : 'No goods selected'}
-          <button
-            type="button"
-            onClick={() => this.removeGood()}
-          >
-            X
-          </button>
         </h1>
 
         <ul>
           {goods.map(good => (
             <div className="goods__list">
               <li
+                key={good}
                 className={classNames('goods__item', {
-                  'goods__item--selected': this.selectGood(good),
+                  'goods__item--selected': this.isSelectGood(good),
                 })}
               >
                 {good}
@@ -70,12 +65,12 @@ export class App extends React.Component<{}, State> {
                 type="button"
                 className="goods__button"
                 onClick={() => (
-                  this.selectGood(good)
+                  this.isSelectGood(good)
                     ? this.removeGood()
                     : this.addGood(good)
                 )}
               >
-                {this.selectGood(good)
+                {this.isSelectGood(good)
                   ? 'Remove'
                   : 'Add'}
               </button>
