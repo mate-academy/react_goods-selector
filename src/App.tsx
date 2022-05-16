@@ -32,8 +32,6 @@ class App extends React.Component <{}, State> {
         return 'No goods selected';
       case 1:
         return `${selectedGoods} is selected`;
-      case 2:
-        return `${selectedGoods[0]} and ${selectedGoods[1]} are selected`;
       default:
         return `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods[selectedGoods.length - 1]} are selected`;
     }
@@ -66,54 +64,56 @@ class App extends React.Component <{}, State> {
           <h1 className="App__title">{this.showGoods()}</h1>
           <ul className="App__list">
             {
-              goodsFromServer.map(el => (
-                <li
-                  key={el}
-                  className={
-                    classNames({ selected: selectedGoods.includes(el) })
-                  }
-                >
-                  <div className="App__item">
-                    { el }
-                    <div className="App__button--wrapper">
-                      {
-                        selectedGoods.includes(el)
-                          ? (
-                            <button
-                              type="button"
-                              className="App__btn"
-                              onClick={this.removeGoods(el)}
-                            >
-                              Remove
-                            </button>
-                          )
-                          : (
-                            <button
-                              type="button"
-                              className="App__btn"
-                              onClick={this.addGoods(el)}
-                            >
-                              Select
-                            </button>
-                          )
-                      }
+              goodsFromServer.map(el => {
+                const isSelected = selectedGoods.includes(el);
+
+                return (
+                  <li
+                    key={el}
+                    className={
+                      classNames({ selected: isSelected })
+                    }
+                  >
+                    <div className="App__item">
+                      { el }
+                      <div className="App__button--wrapper">
+                        {
+                          isSelected
+                            ? (
+                              <button
+                                type="button"
+                                className="App__btn"
+                                onClick={this.removeGoods(el)}
+                              >
+                                Remove
+                              </button>
+                            )
+                            : (
+                              <button
+                                type="button"
+                                className="App__btn"
+                                onClick={this.addGoods(el)}
+                              >
+                                Select
+                              </button>
+                            )
+                        }
+                      </div>
                     </div>
-                  </div>
-                </li>
-              ))
+                  </li>
+                );
+              })
             }
           </ul>
-          { selectedGoods.length
-            ? (
-              <button
-                type="button"
-                onClick={this.clearGoods}
-                className="App__clear--button"
-              >
-                Clear
-              </button>
-            )
-            : null}
+          { Boolean(selectedGoods.length) && (
+            <button
+              type="button"
+              onClick={this.clearGoods}
+              className="App__clear--button"
+            >
+              Clear
+            </button>
+          )}
         </div>
       </div>
     );
