@@ -29,38 +29,41 @@ class App extends React.Component<{}, State> {
     const { selectedGoods } = this.state;
 
     this.setState({
-      title: this.setTitle(selectedGoods),
+      title: this.getTitle(selectedGoods),
     });
   }
 
   addWord = (word: string) => {
-    const { selectedGoods } = this.state;
-    const allSelectedGoods = [...selectedGoods, word];
+    this.setState((prevState) => {
+      const allSelectedGoods = [...prevState.selectedGoods, word];
 
-    this.setState({
-      title: this.setTitle(allSelectedGoods),
-      selectedGoods: allSelectedGoods,
+      return {
+        title: this.getTitle(allSelectedGoods),
+        selectedGoods: allSelectedGoods,
+      };
     });
   };
 
   removeWord = (word: string) => {
-    const { selectedGoods } = this.state;
-    const allSelectedGoods = selectedGoods.filter(el => el !== word);
+    this.setState((prevState) => {
+      const allSelectedGoods = prevState.selectedGoods
+        .filter(el => el !== word);
 
-    this.setState({
-      title: this.setTitle(allSelectedGoods),
-      selectedGoods: allSelectedGoods,
+      return {
+        title: this.getTitle(allSelectedGoods),
+        selectedGoods: allSelectedGoods,
+      };
     });
   };
 
   removeAll = () => {
     this.setState({
-      title: this.setTitle([]),
+      title: this.getTitle([]),
       selectedGoods: [],
     });
   };
 
-  setTitle = (array: string[]) => {
+  getTitle = (array: string[]) => {
     switch (array.length) {
       case 0:
         return 'No one product has been selected';
