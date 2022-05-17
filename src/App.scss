@@ -1,1 +1,39 @@
-// styles go here
+$borderColor: #946ed2;
+
+.App {
+  font-size: 20px;
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  
+    list-style-type: none;
+  }
+  
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 300px;
+  }
+
+  &__item-button {
+    width: 100px;
+    height: 50px;
+
+    background-color: $borderColor;
+
+    outline: none;
+    border: 1px solid transparent;
+    border-radius: 10px;
+
+    transition: 0.3s;
+  }
+
+  &__item-button:hover {
+    background-color: #fff;
+    border-color: $borderColor;
+  }
+}
+
