@@ -42,12 +42,14 @@ class App extends React.Component<{}, State> {
   getGoods = (): string => {
     const { selectedGoods } = this.state;
 
-    return (selectedGoods.length > 2)
-      ? [
-        selectedGoods.slice(0, -1).join(', '),
-        selectedGoods.slice(-1),
-      ].join('and')
-      : selectedGoods.join(' and ');
+    switch (selectedGoods.length) {
+      case 0:
+        return 'No goods';
+      case 1:
+        return `${selectedGoods[0]}`;
+      default:
+        return `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods.at(-1)}`;
+    }
   };
 
   render() {
@@ -56,11 +58,7 @@ class App extends React.Component<{}, State> {
     return (
       <div className="app">
         <h1 className="app__title">
-          {
-            (selectedGoods.length === 0)
-              ? 'No goods'
-              : this.getGoods()
-          }
+          {this.getGoods()}
 
           {
             (selectedGoods.length > 0) && (
