@@ -18,14 +18,17 @@
 12. You can select another good by pressing its `Select` button
 13. Add button `Clear` to the `h1` to clear the selection. (Set empty string `''`)
 14. The clear button should not be visible if there is no selected good
-15. Add some styles, you are frontend developer :)
-<br> (use [Bootstrap](https://getbootstrap.com) / [Bulma](https://bulma.io) / [MUI](https://mui.com) or another library)
-<br>min requirements: You need to center blocks and add background
 
 ## (* Optional) Advanced task
 1. Implement the ability to select `multiple goods` (use `selectedGoods` Array)
-1. Use functional `setState` described in [this video](https://youtu.be/zMe2Qq-ThpM)
-1. All the selected goods should be listed in the `h1`:
+2. Use functional `setState` described in [this video](https://youtu.be/zMe2Qq-ThpM)
+3. All the selected goods should be listed in the `h1`:
     - `No goods selected`
     - `Jam is selected`
     - `Carrot, Jam and Eggs are selected`
+4. Add some styles, you are frontend developer :) (use [Bulma](https://bulma.io) or another library)
+ - [Center elements](https://bulma.io/documentation/layout/level/)
+ - [Customize buttons](https://bulma.io/documentation/elements/button/)
+ - [Customize background](https://bulma.io/documentation/overview/colors/)
+ - [Add whatever you want](https://bulma.io/documentation/)
+
