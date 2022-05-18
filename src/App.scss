@@ -1,1 +1,56 @@
-// styles go here
+.App {
+  display: grid;
+  place-content: center;
+  background-color: darkslategray;
+  border-radius: 50%;
+  padding: 20px;
+
+  &__head {
+    color: antiquewhite;
+    width: 600px;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  &__item {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    color: azure;
+
+    font-size: 30px;
+  }
+}
+
+.button {
+  border-radius: 30%;
+  border: 2px solid darkblue;
+  background-color: burlywood;
+  color: black;
+  font-size: 15px;
+  cursor: pointer;
+  width: 300px;
+  height: 30px;
+  margin: auto;
+
+  &__item {
+    border-radius: 30%;
+    border: 2px solid darkblue;
+    background-color: burlywood;
+    color: black;
+    font-size: 15px;
+    cursor: pointer;
+    margin: auto;
+    width: 200px;
+    height: 30px;
+  }
+
+  &--hide {
+    display: none;
+  }
+}
