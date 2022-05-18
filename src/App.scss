@@ -1,1 +1,44 @@
-// styles go here
+body {
+  color: white;
+  background-color: rgb(53, 53, 53);
+  font-family: "Courier New", Courier, monospace;
+}
+
+.App {
+  margin: 0 auto;
+  width: 400px;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 20px;
+}
+
+.list {
+  padding: 0;
+  border: 2px solid white;
+  list-style: none;
+}
+
+.active {
+  background-color: rgb(116, 114, 114);
+}
+
+.button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  text-decoration: underline;
+
+  &-clear {
+    font-size: 24px;
+  }
+
+  &-hidden {
+    visibility: hidden;
+  }
+}
