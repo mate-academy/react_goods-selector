@@ -1,1 +1,72 @@
-// styles go here
+.App {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  padding: 10px;
+  width: 500px;
+  border: 5px solid black;
+  border-radius: 20px;
+  background-color: bisque;
+}
+
+.title {
+  padding: 10px;
+  text-align: center;
+  font-size: 25px;
+  color: blue;
+  border: 2px solid black;
+  border-radius: 20px;
+  background-color: aliceblue;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  font-size: 20px;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+    padding: 5px;
+    padding-left: 15px;
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: aliceblue;
+  }
+
+  &__item_selected {
+    background-color: orange;
+  }
+}
+
+.button {
+  cursor: pointer;
+  font-size: 18px;
+  width: 100px;
+  border: 1px solid black;
+  border-radius: 50px;
+  background-color: aqua;
+
+  &__selected {
+    background-color: orangered;
+  }
+}
+
+.clear_button {
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 18px;
+  height: 60px;
+  width: 60px;
+  border: 1px solid black;
+  border-radius: 50px;
+  background-color: red;
+}
