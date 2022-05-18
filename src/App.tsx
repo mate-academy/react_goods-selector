@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -80,7 +81,10 @@ export class App extends React.Component<{}, State> {
             const goodsSelected = selectedGoods.includes(good);
 
             return (
-              <div className={goodsSelected ? 'good' : 'good'} key={good}>
+              <div className={classNames(
+                'good',
+                {selected: goodsSelected}
+              )} key={good}>
                 <li className="good__name">{good}</li>
                 <button
                   onClick={() => {
