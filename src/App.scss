@@ -1,1 +1,68 @@
-// styles go here
+@font-face {
+  font-family: "Gotham";
+  src: url("./fonts/GothamPro.woff");
+  font-weight: 300;
+}
+
+html {
+  font-family: "Gotham", sans-serif;
+  margin: 0;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    text-align: center;
+  }
+
+  &__list {
+    width: 250px;
+    margin-bottom: 30px;
+  }
+}
+
+.good {
+  background-color: #f1e1a6;
+  border: 1px solid #f4bbbb;
+  display: flex;
+
+  &__word {
+    font-size: 20px;
+    padding: 4px 0 4px 10px;
+    width: 50%;
+  }
+
+  &__button {
+    width: 50%;
+    background-color: #c3e5ae;
+    border: none;
+  }
+
+  &--selected {
+    background-color: #97dbae;
+  }
+}
+
+.button {
+  padding: 5px 50px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f4bbbb;
+  box-sizing: border-box;
+
+  transition: 0.3s all;
+
+  &:hover {
+    background-color: #f3dede;
+    cursor: pointer;
+  }
+}
