@@ -24,7 +24,10 @@ $gaps: 20px;
   }
 
   &__selected-goods {
+    display: block;
+    padding: $gaps 0;
     font-size: 1.4rem;
+    font-weight: normal;
     color: $color-green;
   }
 }

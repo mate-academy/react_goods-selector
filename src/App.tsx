@@ -48,20 +48,22 @@ class App extends React.Component<{}, State> {
     }
 
     if (selectedGoodslist.length === 1) {
-      return selectedGoodslist[0];
+      return `${selectedGoodslist[0]} is selected`;
     }
 
-    return selectedGoodslist.map((good, index) => {
-      if (index === selectedGoodslist.length - 1) {
-        return good;
-      }
+    return `${selectedGoodslist
+      .map((good, index) => {
+        if (index === selectedGoodslist.length - 1) {
+          return good;
+        }
 
-      if (index === selectedGoodslist.length - 2) {
-        return `${good} and `;
-      }
+        if (index === selectedGoodslist.length - 2) {
+          return `${good} and `;
+        }
 
-      return `${good}, `;
-    }).join('');
+        return `${good}, `;
+      })
+      .join('')} are selected`;
   };
 
   buttonAddRemoveHandler = (isSelected: boolean, good: string) => {
@@ -80,8 +82,12 @@ class App extends React.Component<{}, State> {
         <section className="title">
           <h1 className="title__h1">
             Selected good:
+            <span
+              className="title__selected-goods"
+            >
+              {this.showSelectedGood()}
+            </span>
           </h1>
-          <p className="title__selected-goods">{this.showSelectedGood()}</p>
           {this.state.selectedGoodslist.length
             ? (
               <button
