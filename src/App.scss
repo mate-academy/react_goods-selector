@@ -1,1 +1,76 @@
-// styles go here
+$color-scarlet: #e25544;
+$color-green: #30b168;
+$gaps: 20px;
+
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+.App {
+  display: grid;
+  gap: $gaps;
+  padding: 40px;
+}
+
+.title {
+  display: grid;
+  gap: $gaps;
+
+  &__h1 {
+    font-size: 2rem;
+    color: $color-scarlet;
+  }
+
+  &__selected-goods {
+    font-size: 1.4rem;
+    color: $color-green;
+  }
+}
+
+.button {
+  display: inline-block;
+  width: 100px;
+  margin-left: $gaps;
+  padding: 5px;
+  font-size: 0.8rem;
+  color: #8d8d8d;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $color-scarlet;
+  }
+
+  &:active {
+    font-size: 0.78rem;
+    color: $color-scarlet;
+  }
+
+  &__clear {
+    display: block;
+    margin-left: 0;
+    color: #fff;
+    background-color: $color-green;
+  }
+}
+
+.goods-list {
+  display: grid;
+  gap: $gaps;
+  list-style: none;
+
+  &__item {
+    display: block;
+    padding: 10px 0;
+    font-size: 1.4rem;
+    border-bottom: 1px solid #e0e0e0;
+
+    &--selected {
+      color: $color-green;
+    }
+  }
+}
