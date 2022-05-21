@@ -1,1 +1,41 @@
-// styles go here
+.App {
+  font-family: "Courier New", Courier, monospace;
+  padding: 15px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 450px;
+  margin: auto;
+  background-color: rgb(255, 166, 133);
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.title {
+  text-align: center;
+  font-size: 24px;
+}
+
+.list {
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  min-width: 250px;
+  font-size: 18px;
+  background-color: rgb(255, 166, 100);
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+  }
+
+  &__button {
+    font-family: "Courier New", Courier, monospace;
+    border: 0 solid rgb(185, 185, 185);
+    border-radius: 5px;
+  }
+}
