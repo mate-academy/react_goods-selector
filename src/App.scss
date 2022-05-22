@@ -1,1 +1,27 @@
-// styles go here
+.list {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  font-size: 20px;
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &:not(:last-child) {
+      padding-bottom: 5px;
+    }
+  }
+}
+
+.button {
+  border-radius: 5px;
+  &--true {
+    border-color: red;
+  }
+
+  &--false {
+    border-color: green;
+  }
+}
