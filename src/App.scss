@@ -1,1 +1,45 @@
-// styles go here
+div,
+ul,
+ol,
+h1,
+h2,
+h3,
+h4 {
+  padding: 0;
+  margin: 0;
+}
+
+.App {
+  display: flex;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 0 auto;
+
+  &__title {
+    margin-bottom: 15px;
+    text-align: center;
+
+    &-clear {
+      margin-right: 10px;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: 180px 100px;
+
+  }
+
+  &__select {
+    margin-left: 10px;
+  }
+}
+
+.active {
+  background-color: rgb(255, 119, 119);
+}
