@@ -21,12 +21,8 @@ type State = {
 
 class App extends React.Component<{}, State> {
   state:State = {
-    selectedGoodslist: [],
+    selectedGoodslist: ['Jam'],
   };
-
-  componentDidMount() {
-    this.setState({ selectedGoodslist: ['Jam'] });
-  }
 
   addSelectedGood = (good: string) => {
     this.setState(({ selectedGoodslist }) => (
@@ -43,27 +39,16 @@ class App extends React.Component<{}, State> {
   showSelectedGood = () => {
     const { selectedGoodslist } = this.state;
 
-    if (!selectedGoodslist.length) {
-      return 'No goods selected';
+    switch (selectedGoodslist.length) {
+      case 0:
+        return 'No goods selected';
+      case 1:
+        return `${selectedGoodslist[0]} is selected`;
+      default:
+        return `${selectedGoodslist
+          .slice(0, -1)
+          .join(', ')} and ${selectedGoodslist[selectedGoodslist.length - 1]} are selected`;
     }
-
-    if (selectedGoodslist.length === 1) {
-      return `${selectedGoodslist[0]} is selected`;
-    }
-
-    return `${selectedGoodslist
-      .map((good, index) => {
-        if (index === selectedGoodslist.length - 1) {
-          return good;
-        }
-
-        if (index === selectedGoodslist.length - 2) {
-          return `${good} and `;
-        }
-
-        return `${good}, `;
-      })
-      .join('')} are selected`;
   };
 
   buttonAddRemoveHandler = (isSelected: boolean, good: string) => {
