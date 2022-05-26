@@ -1,1 +1,34 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.button {
+  width: 100px;
+
+  &__clear {
+    background-color: red;
+  }
+}
+
+.goods {
+  width: 50vh;
+
+  &__list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+  }
+
+  &__selected {
+    background-color: red;
+  }
+}
+
