@@ -1,1 +1,45 @@
 // styles go here
+body {
+  margin: 0;
+  background-color: #eee;
+}
+
+.title {
+  text-align: center;
+}
+
+.button {
+  &__clear {
+    display: block;
+    margin: 0 auto 50px;
+
+    width: 200px;
+    height: 50px;
+  }
+}
+
+.goods {
+  padding: 0;
+  margin: 0 50px;
+}
+
+.good {
+  display: flex;
+  justify-content: space-between;
+
+  transition: all 0.5s;
+
+  &:not(:last-of-type) {
+    margin-bottom: 10px;
+  }
+
+  &:hover {
+    background-color: gray;
+  }
+
+  &__selected {
+    display: flex;
+    justify-content: space-between;
+    background-color: greenyellow;
+  }
+}
