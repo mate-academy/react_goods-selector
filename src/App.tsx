@@ -51,7 +51,7 @@ class App extends React.Component <Props, State> {
 
   displayItem = (item: string) => {
     return (
-      <div
+      <li
         key={item}
         className={classNames(
           { selected: this.state.selectedGoods.includes(item) },
@@ -69,7 +69,7 @@ class App extends React.Component <Props, State> {
               : 'Select'
           }
         </button>
-      </div>
+      </li>
     );
   };
 
@@ -113,9 +113,11 @@ class App extends React.Component <Props, State> {
             Clear
           </button>
         </h1>
-        {goodsFromServer.map((good) => (
-          this.displayItem(good)
-        ))}
+        <ul>
+          {goodsFromServer.map((good) => (
+            this.displayItem(good)
+          ))}
+        </ul>
       </div>
     );
   }
