@@ -77,48 +77,41 @@ class App extends React.Component <Props, State> {
     this.setState({ selectedGoods: [] });
   };
 
+  headerHandler = () => {
+    const goods = this.state.selectedGoods;
+
+    if (goods.length === 0) {
+      return 'No goods selected';
+    }
+
+    if (goods.length === 1) {
+      return (`${goods} is selected`);
+    }
+
+    return (`${this.displayGoods(goods)} are selected`);
+  };
+
   render() {
     const goods = this.state.selectedGoods;
 
     return (
       <div className="App">
         <h1>
-          {
-            goods.length === 0
-            && <>No goods selected</>
-          }
-          {
-            goods.length === 1
-            && (
-              <>
-                {goods}
-                &#160;is selected
-              </>
-            )
-          }
-          {
-            goods.length > 1
-            && (
-              <>
-                {this.displayGoods(goods)}
-                &#160;are selected
-              </>
-            )
-          }
+          {this.headerHandler()}
         </h1>
         {
           goods.length !== 0
-          && (
-            <>
-              <br />
+            ? (
               <button
                 type="button"
                 onClick={this.clearList}
               >
                 Clear
               </button>
-            </>
-          )
+            )
+            : (
+              <br />
+            )
         }
         <ul>
           {goodsFromServer.map((good) => (
