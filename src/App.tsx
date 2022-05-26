@@ -91,8 +91,8 @@ class App extends React.Component <Props, State> {
             goods.length === 1
             && (
               <>
-                Selected good:&#160;
                 {goods}
+                &#160;is selected
               </>
             )
           }
@@ -100,18 +100,25 @@ class App extends React.Component <Props, State> {
             goods.length > 1
             && (
               <>
-                Selected goods:&#160;
                 {this.displayGoods(goods)}
+                &#160;are selected
               </>
             )
           }
-          <br />
-          <button
-            type="button"
-            onClick={this.clearList}
-          >
-            Clear
-          </button>
+          {
+            goods.length !== 0
+            && (
+              <>
+                <br />
+                <button
+                  type="button"
+                  onClick={this.clearList}
+                >
+                  Clear
+                </button>
+              </>
+            )
+          }
         </h1>
         <ul>
           {goodsFromServer.map((good) => (
