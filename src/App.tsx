@@ -37,16 +37,11 @@ class App extends React.Component <Props, State> {
   basketTransfer = (item: string) => {
     const basket = this.state.selectedGoods;
 
-    if (basket.includes(item)) {
-      this.setState((prevState) => ({
-        selectedGoods:
-          prevState.selectedGoods.filter((good) => (good !== item)),
-      }));
-    } else {
-      this.setState((prevState) => ({
-        selectedGoods: [...prevState.selectedGoods, item],
-      }));
-    }
+    this.setState((prevState) => ({
+      selectedGoods: basket.includes(item)
+        ? prevState.selectedGoods.filter((good) => (good !== item))
+        : [...prevState.selectedGoods, item],
+    }));
   };
 
   displayItem = (item: string) => {
