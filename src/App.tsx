@@ -105,21 +105,21 @@ class App extends React.Component <Props, State> {
               </>
             )
           }
-          {
-            goods.length !== 0
-            && (
-              <>
-                <br />
-                <button
-                  type="button"
-                  onClick={this.clearList}
-                >
-                  Clear
-                </button>
-              </>
-            )
-          }
         </h1>
+        {
+          goods.length !== 0
+          && (
+            <>
+              <br />
+              <button
+                type="button"
+                onClick={this.clearList}
+              >
+                Clear
+              </button>
+            </>
+          )
+        }
         <ul>
           {goodsFromServer.map((good) => (
             this.displayItem(good)
