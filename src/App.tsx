@@ -52,17 +52,12 @@ class App extends React.Component <Props, State> {
           { selected: this.state.selectedGoods.includes(item) },
         )}
       >
-        {item}
-        &#160;&#160;
+        {`${item}  `}
         <button
           type="button"
           onClick={() => (this.basketTransfer(item))}
         >
-          {
-            this.state.selectedGoods.includes(item)
-              ? 'Remove'
-              : 'Select'
-          }
+          {this.state.selectedGoods.includes(item) ? 'Remove' : 'Select'}
         </button>
       </li>
     );
@@ -80,10 +75,10 @@ class App extends React.Component <Props, State> {
     }
 
     if (goods.length === 1) {
-      return (`${goods} is selected`);
+      return `${goods} is selected`;
     }
 
-    return (`${this.displayGoods(goods)} are selected`);
+    return `${this.displayGoods(goods)} are selected`;
   };
 
   render() {
@@ -104,9 +99,7 @@ class App extends React.Component <Props, State> {
                 Clear
               </button>
             )
-            : (
-              <br />
-            )
+            : <br />
         }
         <ul>
           {goodsFromServer.map((good) => (
