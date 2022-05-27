@@ -52,19 +52,7 @@ class App extends React.Component<{}, State> {
       return `${selectedGood} is selected`;
     }
 
-    const listOfGoods = [...selectedGood].map((item, index) => {
-      if (selectedGood.length - 2 > index) {
-        return `${item}, `;
-      }
-
-      if (selectedGood.length - 2 === index) {
-        return `${item} and `;
-      }
-
-      return item;
-    });
-
-    return `${listOfGoods.join('')} are selected`;
+    return `${selectedGood.slice(0, -1).join(', ')} and ${selectedGood[selectedGood.length - 1]} are selected`;
   };
 
   render() {
