@@ -1,1 +1,11 @@
-// styles go here
+.goods {
+  &__item {
+    list-style: none;
+    font-size: 16px;
+    width: 300px;
+    padding: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
