@@ -46,7 +46,7 @@ class App extends React.Component<{}, State> {
           Selected good:
           {currentGoods.length === 0 && 'No goods selected'}
           {currentGoods.length === 1 && `${currentGoods[0]} is selected`}
-          {currentGoods.length === 2 && `${currentGoods[0]} and ${currentGoods[1]} is selected`}
+          {currentGoods.length === 2 && `${currentGoods[0]} and ${currentGoods[1]} are selected`}
           {currentGoods.length > 2 && `${this.state.currentGoods
             .slice(0, -1)
             .join(', ')} and ${currentGoods[currentGoods.length - 1]} are selected`}
