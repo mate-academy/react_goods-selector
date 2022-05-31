@@ -15,7 +15,7 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  currentGoods: string[];
+  currentGoods: string[] | string;
 };
 
 class App extends React.Component<{}, State> {
@@ -55,7 +55,7 @@ class App extends React.Component<{}, State> {
         <button
           type="button"
           onClick={() => {
-            this.setState({ currentGoods: [''] });
+            this.setState({ currentGoods: '' });
           }}
         >
           reset
