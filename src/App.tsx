@@ -70,7 +70,7 @@ class App extends React.Component {
             ))}
           </ul>
         </div>
-        {((this.state.selectedGood) || (this.state.selectedGood !== '')
+        {((this.state.selectedGood)
           ? (
             <button
               type="button"
@@ -80,6 +80,7 @@ class App extends React.Component {
             >
               CLEAR
             </button>
+
           )
           : '')}
       </div>
@@ -88,3 +89,7 @@ class App extends React.Component {
 }
 
 export default App;
+
+/*
+
+*/
