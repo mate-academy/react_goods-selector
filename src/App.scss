@@ -1,1 +1,17 @@
 // styles go here
+.goods {
+  width: 20%;
+  &__list {
+
+    &-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &-text-selected {
+        font-weight: bold;
+        color: red;
+      }
+    }
+  }
+}
