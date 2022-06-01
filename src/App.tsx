@@ -24,13 +24,16 @@ class App extends React.Component<{}, State> {
   };
 
   selectGood = (good: string) => {
-    this.state.selectedGood.includes(good)
-      ? this.setState((state) => ({
-        selectedGood: state.selectedGood.filter(foddie => foddie !== good),
-      }))
-      : this.setState((state) => ({
-        selectedGood: [...state.selectedGood, good],
+    const { selectedGood } = this.state;
+
+    if (selectedGood.includes(good)) {
+      this.setState(prevState => ({
+        selectedGood: prevState.selectedGood
+          .filter(gooddie => gooddie !== good),
       }));
+    } else {
+      this.setState({ selectedGood: [...selectedGood, good] });
+    }
   };
 
   switchCase = (param: string[] | []) => {
