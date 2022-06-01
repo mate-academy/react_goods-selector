@@ -14,17 +14,21 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-class App extends React.Component {
-  state = {
-    selectedGood: 'Jam',
+type State = {
+  selectedGoods : string[];
+};
+
+class App extends React.Component<{}, State> {
+  state: State = {
+    selectedGoods: ['Jam'],
   };
 
   render() {
     return (
       <div className="App">
         <h1>
-          {(this.state.selectedGood)
-            ? `${this.state.selectedGood} is selected`
+          {((this.state.selectedGoods) && (this.state.selectedGoods.length > 0))
+            ? `${this.state.selectedGoods} is selected`
             : 'No goods selected'}
         </h1>
         <div className="goods">
@@ -33,7 +37,7 @@ class App extends React.Component {
               <li
                 className="goods__list-item"
               >
-                {(el === this.state.selectedGood)
+                {(this.state.selectedGoods.find(element => element === el))
                   ? (
                     <>
                       <p className="goods__list-item-text-selected">
@@ -43,7 +47,17 @@ class App extends React.Component {
                         className="goods__list-button"
                         type="button"
                         onClick={() => {
-                          this.setState({ selectedGood: false });
+                          this.setState(
+                            (prevState) => {
+                              const modifiedGoods = prevState.selectedGoods;
+
+                              const findGood = modifiedGoods.indexOf(el);
+
+                              modifiedGoods.splice(findGood, 1);
+
+                              return { selectedGoods: modifiedGoods };
+                            },
+                          );
                         }}
                       >
                         remove
@@ -59,7 +73,15 @@ class App extends React.Component {
                         className="goods__list-button"
                         type="button"
                         onClick={() => {
-                          this.setState({ selectedGood: el });
+                          this.setState(
+                            (prevState) => {
+                              const modifiedGoods = prevState.selectedGoods;
+
+                              modifiedGoods.push(el);
+
+                              return { selectedGoods: modifiedGoods };
+                            },
+                          );
                         }}
                       >
                         choose me
@@ -70,12 +92,12 @@ class App extends React.Component {
             ))}
           </ul>
         </div>
-        {((this.state.selectedGood)
+        {((this.state.selectedGoods)
           ? (
             <button
               type="button"
               onClick={() => {
-                this.setState({ selectedGood: '' });
+                this.setState({ selectedGoods: [] });
               }}
             >
               CLEAR
