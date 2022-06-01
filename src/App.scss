@@ -1,1 +1,21 @@
-// styles go here
+body {
+  padding: 20px;
+}
+
+.list {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.ul_wrapper {
+  max-width: 300px;
+}
+
+.h1_wrapper {
+  min-height: 100px;
+}
+
+.active {
+  background-color: #00acdc;
+}
