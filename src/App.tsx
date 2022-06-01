@@ -24,6 +24,24 @@ class App extends React.Component<{}, State> {
     currentGoods: ['Jam'],
   };
 
+  printGoods = (goods: string[]) => {
+    if (goods.length === 0) {
+      return 'No goods selected';
+    }
+
+    if (goods.length === 1) {
+      return `${goods[0]} is selected`;
+    }
+
+    if (goods.length === 2) {
+      return `${goods.join(' and ')} are selected`;
+    }
+
+    return `${goods
+      .slice(0, -1)
+      .join(', ')} and ${goods[goods.length - 1]} are selected`;
+  };
+
   selectOrRemove(inputGood: string) {
     const newArrayOfGoods = [...this.state.currentGoods];
 
@@ -65,12 +83,7 @@ class App extends React.Component<{}, State> {
             )}
           </h1>
           <h2 className="goods__list">
-            {currentGoods.length === 0 && 'No goods selected'}
-            {currentGoods.length === 1 && `${currentGoods[0]} is selected`}
-            {currentGoods.length === 2 && `${currentGoods.join(' and ')} are selected`}
-            {currentGoods.length > 2 && `${currentGoods
-              .slice(0, -1)
-              .join(', ')} and ${currentGoods[currentGoods.length - 1]} are selected`}
+            {this.printGoods(currentGoods)}
           </h2>
         </div>
 
