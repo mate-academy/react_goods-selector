@@ -18,6 +18,32 @@ type State = {
   selectedGoods : string[];
 };
 
+function showHeading(goodsArray : string[]) {
+  if (goodsArray.length === 0) {
+    return ('No goods selected');
+  }
+
+  if (goodsArray.length === 1) {
+    return (`${goodsArray} is selected`);
+  }
+
+  let newHeading = '';
+
+  if (goodsArray.length > 1) {
+    for (let i = 0; i <= goodsArray.length - 2; i += 1) {
+      if ((i + 2) !== goodsArray.length) {
+        newHeading += `${goodsArray[i]}, `;
+      } else {
+        newHeading += `${goodsArray[i]} and ${goodsArray[i + 1]}`;
+      }
+    }
+
+    newHeading += ' are selected';
+  }
+
+  return newHeading;
+}
+
 class App extends React.Component<{}, State> {
   state: State = {
     selectedGoods: ['Jam'],
@@ -27,15 +53,14 @@ class App extends React.Component<{}, State> {
     return (
       <div className="App">
         <h1>
-          {((this.state.selectedGoods) && (this.state.selectedGoods.length > 0))
-            ? `${this.state.selectedGoods} is selected`
-            : 'No goods selected'}
+          { showHeading(this.state.selectedGoods) }
         </h1>
         <div className="goods">
           <ul className="goods__list">
             {goodsFromServer.map(el => (
               <li
                 className="goods__list-item"
+                key={el}
               >
                 {(this.state.selectedGoods.find(element => element === el))
                   ? (
@@ -92,7 +117,7 @@ class App extends React.Component<{}, State> {
             ))}
           </ul>
         </div>
-        {((this.state.selectedGoods)
+        {((this.state.selectedGoods.length > 0)
           ? (
             <button
               type="button"
@@ -111,7 +136,3 @@ class App extends React.Component<{}, State> {
 }
 
 export default App;
-
-/*
-
-*/
