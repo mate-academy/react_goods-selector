@@ -16,25 +16,25 @@ const goodsFromServer: string[] = [
 
 type State = {
   selectedGood : string[];
-  checked2: string[];
 };
 
 class App extends React.Component<{}, State> {
   state = {
     selectedGood: ['Jam'],
-    checked2: [],
   };
 
   renderGoods = (goods: string[]): string => {
     if (goods.length > 1) {
-      return `${goods.slice(0, goods.length - 1).join(', ')}
-      and ${goods[goods.length - 1]}`;
+      const string = goods.slice(0, goods.length - 1).join(', ');
+      const endOfstring = goods[goods.length - 1];
+
+      return `${string} and ${endOfstring} is selected`;
     }
 
-    return goods[0];
+    return `${goods[0]} is selected`;
   };
 
-  changeItem = (item: string) => {
+  changeList = (item: string) => {
     const { selectedGood } = this.state;
 
     if (selectedGood.includes(item)) {
@@ -47,7 +47,7 @@ class App extends React.Component<{}, State> {
   };
 
   render() {
-    const { selectedGood, checked2 } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <div className="container-sm">
@@ -56,36 +56,20 @@ class App extends React.Component<{}, State> {
             ? 'No goods selected'
             : this.renderGoods(selectedGood)}
         </h1>
-        <ul className="list-group">
+        <ul className="list-group list d-flex justify-content-between">
           {goodsFromServer.map(item => (
             <li
               key={goodsFromServer.indexOf(item)}
-              className={`list-group-item row d-flex align-items-center fw-bold ${selectedGood.includes(item) && 'active'} `}
+              className={`list-group-item row d-flex align-items-center justify-content-between fw-bold ${selectedGood.includes(item) && 'active'} `}
             >
               <p className="col-2 align-self-end">{item}</p>
               <button
                 type="button"
-                onClick={() => this.changeItem(item)}
+                onClick={() => this.changeList(item)}
                 className={`btn btn-${!selectedGood.includes(item) ? 'primary' : 'danger'} btn-sm m-2 col-2 fw-bold`}
               >
                 {selectedGood.includes(item) ? 'Remove' : 'Select'}
               </button>
-              { !selectedGood.includes(item)
-              && (
-                <div className="checkbox col-auto">
-                  <input
-                    type="checkbox"
-                    id={item}
-                    value={item}
-                    onChange={() => (
-                      this.setState({ checked2: [...checked2, item] }))}
-                    className="me-2"
-                  />
-                  <label htmlFor={item}>
-                    Chose
-                  </label>
-                </div>
-              )}
             </li>
           ))}
         </ul>
@@ -95,14 +79,6 @@ class App extends React.Component<{}, State> {
           onClick={() => this.setState({ selectedGood: [] })}
         >
           Clear
-        </button>
-        <button
-          className="btn btn-success my-3 fw-bold"
-          type="button"
-          onClick={() => (
-            this.setState({ selectedGood: [...selectedGood, ...checked2] }))}
-        >
-          Add checked
         </button>
       </div>
     );
