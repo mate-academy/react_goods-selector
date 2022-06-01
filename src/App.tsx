@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 
-const goodsFromServer = [
+const goodsArray = [
   'Dumplings',
   'Carrot',
   'Eggs',
@@ -13,6 +13,13 @@ const goodsFromServer = [
   'Jam',
   'Garlic',
 ];
+
+const goodsFromServer = goodsArray.map((item, index) => ({
+  id: index + 1,
+  good: `${item}`,
+}));
+
+// console.log(goodsFromServer);
 
 export interface State {
   selectedGood: string[];
@@ -86,33 +93,32 @@ export class App extends React.Component <{}, State> {
           </div>
 
           <ul className="box notification">
-            {goodsFromServer.map((good) => {
+            {goodsFromServer.map((item) => {
               return (
-                <div className="box">
-                  <li key={good}>
-                    <span className="title is-5">{good}</span>
-                    {' '}
-                    <button
-                      className={selectedGood.includes(good)
-                        ? 'button is-danger ml-5 is-pulled-right'
-                        : 'button is-primary ml-5 is-pulled-right'}
-                      type="button"
-                      onClick={() => {
-                        if (selectedGood.includes(good)) {
-                          return this.removeGood(good);
-                        }
+                <li className="box" key={item.id}>
+                  <span className="title is-5">{item.good}</span>
+                  {' '}
+                  <button
+                    className={selectedGood.includes(item.good)
+                      ? 'button is-danger ml-5 is-pulled-right'
+                      : 'button is-primary ml-5 is-pulled-right'}
+                    type="button"
+                    onClick={() => {
+                      if (selectedGood.includes(item.good)) {
+                        return this.removeGood(item.good);
+                      }
 
-                        return this.selectGood(good);
-                      }}
-                    >
-                      <span className="title is-5">
-                        {selectedGood.includes(good)
-                          ? 'Remove'
-                          : 'Select'}
-                      </span>
-                    </button>
-                  </li>
-                </div>
+                      return this.selectGood(item.good);
+                    }}
+                  >
+                    <span className="title is-5">
+                      {selectedGood.includes(item.good)
+                        ? 'Remove'
+                        : 'Select'}
+                    </span>
+                  </button>
+                </li>
+
               );
             })}
           </ul>
