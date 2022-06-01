@@ -37,52 +37,41 @@ class App extends React.Component<{}, State> {
               : 'No goods selected'}
           </h1>
 
-          {selectedGood !== ''
-            ? (
-              <button
-                type="button"
-                className="clear-btn list_btn"
-                onClick={() => {
-                  this.setState({ selectedGood: '' });
-                }}
-              >
-                Clear
-              </button>
-            )
-            : ''}
-
+          {selectedGood !== '' && (
+            <button
+              type="button"
+              className="clear-btn list_btn"
+              onClick={() => {
+                this.setState({ selectedGood: '' });
+              }}
+            >
+              Clear
+            </button>
+          )}
           <ul className="list">
             {goodsFromServer.map(good => (
               <React.Fragment key={good}>
-                {selectedGood === good
-                  ? (
-                    <li className="list_item list_item--active">
-                      {good}
-                      <button
-                        type="button"
-                        className="list_btn list_btn--remove"
-                        onClick={() => {
-                          this.setState({ selectedGood: '' });
-                        }}
-                      >
-                        Remove
-                      </button>
-                    </li>
-                  )
-                  : (
-                    <li className="list_item">
-                      {good}
-                      <button
-                        type="button"
-                        className="list_btn"
-                        onClick={() => {
-                          this.setState({ selectedGood: good });
-                        }}
-                      >
-                        Select
-                      </button>
-                    </li>
-                  )}
+                <li className={selectedGood === good
+                  ? 'list_item list_item--active'
+                  : 'list_item'}
+                >
+                  {good}
+                  <button
+                    type="button"
+                    className="list_btn list_btn--remove"
+                    onClick={() => {
+                      this.setState({
+                        selectedGood: selectedGood === good
+                          ? ''
+                          : good,
+                      });
+                    }}
+                  >
+                    {selectedGood === good
+                      ? 'Remove'
+                      : 'Select'}
+                  </button>
+                </li>
               </React.Fragment>
             ))}
           </ul>
