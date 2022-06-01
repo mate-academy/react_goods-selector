@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -23,7 +24,7 @@ class App extends React.Component<{}, State> {
     currentGoods: ['Jam'],
   };
 
-  selectAndRemove(inputGood: string) {
+  selectOrRemove(inputGood: string) {
     const newArrayOfGoods = [...this.state.currentGoods];
 
     if (newArrayOfGoods.includes(inputGood)) {
@@ -37,59 +38,76 @@ class App extends React.Component<{}, State> {
     return newArrayOfGoods;
   }
 
+  checkSelected(inputGood: string) {
+    return this.state.currentGoods.includes(inputGood);
+  }
+
   render() {
     const { currentGoods } = this.state;
 
     return (
       <div className="App">
-        <h1>
-          Selected good:
-          {currentGoods.length === 0 && 'No goods selected'}
-          {currentGoods.length === 1 && `${currentGoods[0]} is selected`}
-          {currentGoods.length === 2 && `${currentGoods.join(' and ')} are selected`}
-          {currentGoods.length > 2 && `${currentGoods
-            .slice(0, -1)
-            .join(', ')} and ${currentGoods[currentGoods.length - 1]} are selected`}
-        </h1>
-
-        {currentGoods.length !== 0 && (
-          <button
-            type="button"
-            onClick={() => {
-              this.setState(() => ({
-                currentGoods: [],
-              }));
-            }}
-          >
-            Clear
-          </button>
-        )}
-
-        <ul>
-          {goodsFromServer.map(good => (
-            <li
-              key={good}
-              className={currentGoods.includes(good) ? 'selected' : ''}
-
-            >
-              {good}
+        <div className="goods">
+          <h1 className="goods__title">
+            Selected good:
+            {currentGoods.length !== 0 && (
               <button
+                className="goods__clear btn btn-danger"
                 type="button"
                 onClick={() => {
                   this.setState(() => ({
-                    currentGoods: this.selectAndRemove(good),
+                    currentGoods: [],
                   }));
                 }}
               >
-                {currentGoods.includes(good)
+                Clear
+              </button>
+            )}
+          </h1>
+          <h2 className="goods__list">
+            {currentGoods.length === 0 && 'No goods selected'}
+            {currentGoods.length === 1 && `${currentGoods[0]} is selected`}
+            {currentGoods.length === 2 && `${currentGoods.join(' and ')} are selected`}
+            {currentGoods.length > 2 && `${currentGoods
+              .slice(0, -1)
+              .join(', ')} and ${currentGoods[currentGoods.length - 1]} are selected`}
+          </h2>
+        </div>
+
+        <ul className="selects">
+          {goodsFromServer.map(good => (
+            <li
+              key={good}
+              className={classNames(
+                'selects__item',
+                { selected: this.checkSelected(good) },
+              )}
+            >
+              {good}
+
+              <button
+                className={classNames(
+                  'btn',
+                  'selects__button',
+                  {
+                    'btn-success': !this.checkSelected(good),
+                    'btn-danger': this.checkSelected(good),
+                  },
+                )}
+                type="button"
+                onClick={() => {
+                  this.setState(() => ({
+                    currentGoods: this.selectOrRemove(good),
+                  }));
+                }}
+              >
+                {this.checkSelected(good)
                   ? 'Remove'
                   : 'Select'}
               </button>
             </li>
           ))}
         </ul>
-
-        {goodsFromServer.length}
       </div>
     );
   }
