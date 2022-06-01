@@ -1,1 +1,31 @@
-// styles go here
+.clear-btn {
+  margin-left: 157px;
+}
+
+.list_btn {
+  width: 75px;
+}
+
+.list_btn--remove {
+  background-color: rgb(221, 146, 131);
+  border-color: rgb(240, 37, 37);
+}
+
+.list {
+  margin-top: 20px;
+  min-width: 400px;
+}
+
+.list_item {
+  margin-bottom: 10px;
+  padding-left: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 200px;
+  background-color: rgb(135, 195, 229);
+}
+
+.list_item--active {
+  background-color: rgb(163, 228, 163);
+}
