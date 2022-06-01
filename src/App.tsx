@@ -15,7 +15,7 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  currentGoods: string[] | string;
+  currentGoods: string[];
 };
 
 class App extends React.Component<{}, State> {
@@ -24,17 +24,17 @@ class App extends React.Component<{}, State> {
   };
 
   selectAndRemove(inputGood: string) {
-    const newArray = [...this.state.currentGoods];
+    const newArrayOfGoods = [...this.state.currentGoods];
 
-    if (newArray.includes(inputGood)) {
-      const index = newArray.indexOf(inputGood);
+    if (newArrayOfGoods.includes(inputGood)) {
+      const indexToDelete = newArrayOfGoods.indexOf(inputGood);
 
-      newArray.splice(index, 1);
+      newArrayOfGoods.splice(indexToDelete, 1);
     } else {
-      newArray.push(inputGood);
+      newArrayOfGoods.push(inputGood);
     }
 
-    return newArray;
+    return newArrayOfGoods;
   }
 
   render() {
@@ -46,32 +46,42 @@ class App extends React.Component<{}, State> {
           Selected good:
           {currentGoods.length === 0 && 'No goods selected'}
           {currentGoods.length === 1 && `${currentGoods[0]} is selected`}
-          {currentGoods.length === 2 && `${currentGoods[0]} and ${currentGoods[1]} are selected`}
-          {currentGoods.length > 2 && `${this.state.currentGoods
+          {currentGoods.length === 2 && `${currentGoods.join(' and ')} are selected`}
+          {currentGoods.length > 2 && `${currentGoods
             .slice(0, -1)
             .join(', ')} and ${currentGoods[currentGoods.length - 1]} are selected`}
         </h1>
 
-        <button
-          type="button"
-          onClick={() => {
-            this.setState({ currentGoods: '' });
-          }}
-        >
-          reset
-        </button>
+        {currentGoods.length !== 0 && (
+          <button
+            type="button"
+            onClick={() => {
+              this.setState(() => ({
+                currentGoods: [],
+              }));
+            }}
+          >
+            Clear
+          </button>
+        )}
 
         <ul>
           {goodsFromServer.map(good => (
-            <li>
+            <li
+              key={good}
+              className={currentGoods.includes(good) ? 'selected' : ''}
+
+            >
               {good}
               <button
                 type="button"
                 onClick={() => {
-                  this.setState({ currentGoods: this.selectAndRemove(good) });
+                  this.setState(() => ({
+                    currentGoods: this.selectAndRemove(good),
+                  }));
                 }}
               >
-                {this.state.currentGoods.includes(good)
+                {currentGoods.includes(good)
                   ? 'Remove'
                   : 'Select'}
               </button>
