@@ -26,61 +26,35 @@ class App extends React.Component<{}, State> {
   addActiveClass = 'list_item--active';
 
   render() {
+    const { selectedGood } = this.state;
+
     return (
       <>
         <div className="App">
           <h1>
-            {this.state.selectedGood
-              ? (`Selected good: - ${this.state.selectedGood}`)
+            {selectedGood
+              ? (`Selected good: - ${selectedGood}`)
               : 'No goods selected'}
           </h1>
 
-          <button
-            type="button"
-            className="clear-btn list_btn"
-            onClick={() => {
-              this.setState({ selectedGood: '' });
-            }}
-          >
-            Clear
-          </button>
-
-          {/* <ul className="list">
-            {goodsFromServer.map(good => (
-              <li className="list_item" key={good}>
-                {good}
-
-                {this.state.selectedGood === good
-                  ? (
-                    <button
-                      type="button"
-                      className="list_btn list_btn--remove"
-                      onClick={() => {
-                        this.setState({ selectedGood: '' });
-                      }}
-                    >
-                      Remove
-                    </button>
-                  )
-                  : (
-                    <button
-                      type="button"
-                      className="list_btn"
-                      onClick={() => {
-                        this.setState({ selectedGood: good });
-                      }}
-                    >
-                      Select
-                    </button>
-                  )}
-              </li>
-            ))}
-          </ul> */}
+          {selectedGood !== ''
+            ? (
+              <button
+                type="button"
+                className="clear-btn list_btn"
+                onClick={() => {
+                  this.setState({ selectedGood: '' });
+                }}
+              >
+                Clear
+              </button>
+            )
+            : ''}
 
           <ul className="list">
             {goodsFromServer.map(good => (
               <React.Fragment key={good}>
-                {this.state.selectedGood === good
+                {selectedGood === good
                   ? (
                     <li className="list_item list_item--active">
                       {good}
