@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -15,15 +16,37 @@ const goodsFromServer: string[] = [
 ];
 
 interface State {
-  selectedGood: string,
+  selectedGood: string[],
 }
 
 class App extends React.Component<{}, State> {
   state = {
-    selectedGood: 'Jam',
+    selectedGood: ['Jam'],
   };
 
-  addActiveClass = 'list_item--active';
+  goodsToogler = (good: string): string[] => {
+    const resultArr = [...this.state.selectedGood];
+
+    if (resultArr.includes(good)) {
+      return resultArr.filter(el => el !== good);
+    }
+
+    resultArr.push(good);
+
+    return resultArr;
+  };
+
+  printCorrectTitle = (arg: string[]): string => {
+    if (arg.length === 0) {
+      return 'No goods selected';
+    }
+
+    if (arg.length === 1) {
+      return `${arg} is selected`;
+    }
+
+    return `${arg.slice(0, -1).join(', ')} and ${arg[arg.length - 1]} are selected`;
+  };
 
   render() {
     const { selectedGood } = this.state;
@@ -32,17 +55,15 @@ class App extends React.Component<{}, State> {
       <>
         <div className="App">
           <h1>
-            {selectedGood
-              ? (`Selected good: - ${selectedGood}`)
-              : 'No goods selected'}
+            {this.printCorrectTitle(selectedGood)}
           </h1>
 
-          {selectedGood !== '' && (
+          {selectedGood.length > 0 && (
             <button
               type="button"
               className="clear-btn list_btn"
               onClick={() => {
-                this.setState({ selectedGood: '' });
+                this.setState({ selectedGood: [] });
               }}
             >
               Clear
@@ -51,23 +72,20 @@ class App extends React.Component<{}, State> {
           <ul className="list">
             {goodsFromServer.map(good => (
               <React.Fragment key={good}>
-                <li className={selectedGood === good
-                  ? 'list_item list_item--active'
-                  : 'list_item'}
+                <li className={classNames(
+                  'list_item',
+                  { 'list_item--active': selectedGood.includes(good) },
+                )}
                 >
                   {good}
                   <button
                     type="button"
                     className="list_btn list_btn--remove"
                     onClick={() => {
-                      this.setState({
-                        selectedGood: selectedGood === good
-                          ? ''
-                          : good,
-                      });
+                      this.setState({ selectedGood: this.goodsToogler(good) });
                     }}
                   >
-                    {selectedGood === good
+                    {selectedGood.includes(good)
                       ? 'Remove'
                       : 'Select'}
                   </button>
