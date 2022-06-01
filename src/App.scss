@@ -1,1 +1,48 @@
-// styles go here
+html {
+  background-image: url(https://thumbs.dreamstime.com/z/shopping-trolley-blue-background-background-business-shop-online-shopping-trolley-blue-background-108444881.jpg);
+  box-sizing: border-box;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.products-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &__basket {
+    font-size: 60px;
+  }
+
+  &__button {
+    width: 10rem;
+    height: 2rem;
+    border-radius: 5px;
+  }
+}
+
+.goods-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+
+  &__good {
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+  }
+
+  &__button {
+    width: 5rem;
+    background-color: greenyellow;
+
+    &-selected {
+      background-color: gold;
+    }
+  }
+}
