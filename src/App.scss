@@ -1,1 +1,39 @@
 // styles go here
+body {
+  padding-left: 200px;
+  margin: 30px;
+  box-sizing: border-box;
+}
+
+.good {
+
+  &__subtitle {
+    width: 700px;
+  }
+
+  &__button-block {
+    display: block;
+  }
+
+  &__list {
+    padding: 20px;
+    width: 420px;
+    position: absolute;
+    right: 30px;
+    top: 0;
+    border: 3px solid skyblue;
+    border-radius: 20px;
+    background-color: rgba(124, 179, 201, 0.5);
+
+  }
+
+  &__item {
+    list-style: none;
+    font-size: 29px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+  }
+}
