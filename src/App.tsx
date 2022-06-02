@@ -20,6 +20,7 @@ class App extends React.Component {
     // eslint-disable-next-line react/no-unused-state
     status: 'No goods selected',
     selected: 'selected',
+    buttonTxt: 'Select',
   };
 
   componentDidMount() {
@@ -28,7 +29,11 @@ class App extends React.Component {
 
   selectItem = (good: string) => {
     // eslint-disable-next-line react/no-unused-state
-    this.setState({ status: `${good} is selected`, className: 'good good--selected' });
+    this.setState({ status: `${good} is selected` });
+  };
+
+  removeItem = () => {
+    this.setState({ status: 'No goods selected' });
   };
 
   render() {
@@ -36,6 +41,7 @@ class App extends React.Component {
       <div className="App">
         <ul>
           {
+            // eslint-disable-next-line no-return-assign
             goodsFromServer.map(good => (
               <>
                 <li
@@ -48,10 +54,15 @@ class App extends React.Component {
                     {good}
                   </span>
                   <button onClick={() => {
-                    this.selectItem(good);
+                    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+                    !this.state.status.includes(good)
+                      ? this.selectItem(good)
+                      : this.removeItem();
                   }}
                   >
-                    Select
+                    {this.state.status.includes(good)
+                      ? this.state.buttonTxt = 'Remove'
+                      : this.state.buttonTxt = 'Select'}
                   </button>
                 </li>
               </>
