@@ -41,18 +41,19 @@ class App extends React.Component<Props, State> {
   };
 
   stateToggler = (product: string) => {
-    // eslint-disable-next-line react/no-access-state-in-setstate
-    const stateGoodsCopy = this.state.selectedGoods.slice();
+    this.setState((prevState) => {
+      const stateGoodsCopy = prevState.selectedGoods.slice();
 
-    if (stateGoodsCopy.includes(product)) {
-      const index = stateGoodsCopy.indexOf(product);
+      if (stateGoodsCopy.includes(product)) {
+        const index = stateGoodsCopy.indexOf(product);
 
-      stateGoodsCopy.splice(index, 1);
-    } else {
-      stateGoodsCopy.push(product);
-    }
+        stateGoodsCopy.splice(index, 1);
+      } else {
+        stateGoodsCopy.push(product);
+      }
 
-    this.setState({ selectedGoods: stateGoodsCopy });
+      return { selectedGoods: stateGoodsCopy };
+    });
   };
 
   render() {
