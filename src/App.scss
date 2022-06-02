@@ -1,1 +1,15 @@
-// styles go here
+.good {
+  width: 90px;
+  display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.selected {
+  width: 90px;
+  display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  color: white;
+  background-color: green;
+}
