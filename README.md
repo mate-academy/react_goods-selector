@@ -31,4 +31,3 @@
  - [Customize buttons](https://bulma.io/documentation/elements/button/)
  - [Customize background](https://bulma.io/documentation/overview/colors/)
  - [Add whatever you want](https://bulma.io/documentation/)
-
