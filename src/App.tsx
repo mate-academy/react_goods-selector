@@ -41,6 +41,7 @@ class App extends React.Component<Props, State> {
   };
 
   stateToggler = (product: string) => {
+    // eslint-disable-next-line react/no-access-state-in-setstate
     const stateGoodsCopy = this.state.selectedGoods.slice();
 
     if (stateGoodsCopy.includes(product)) {
