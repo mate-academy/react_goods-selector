@@ -1,1 +1,13 @@
-// styles go here
+.App {
+  background-image: url(./images/goods.jpg);
+  background-size: cover;
+}
+
+.item {
+  height: 75px;
+}
+
+.list {
+  width: 550px;
+  margin: auto;
+}
