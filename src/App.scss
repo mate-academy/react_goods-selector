@@ -1,1 +1,24 @@
 // styles go here
+.display {
+  display: flex;
+  justify-content: space-between;
+  width: 350px;
+
+  &__title {
+    padding-left: 40px;
+  }
+}
+
+#Dumplings,
+#Carrot,
+#Eggs,
+#Ice-cream,
+#Apple,
+#Bread,
+#Fish,
+#Honey,
+#Jam,
+#Garlic {
+  width: max-content;
+  background-color: green;
+}
