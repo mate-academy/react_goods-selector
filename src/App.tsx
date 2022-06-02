@@ -59,7 +59,11 @@ class App extends React.Component<{}, State> {
           <ul className="goods__list">
             {goodsFromServer.map(el => (
               <li
-                className="goods__list-item"
+                className={
+                  (this.state.selectedGoods.includes(el)
+                    ? 'goods__list-item-text-selected goods__list-item'
+                    : 'goods__list-item')
+                }
                 key={el}
               >
                 {el}
