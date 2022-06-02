@@ -65,7 +65,7 @@ class App extends React.Component<{}, State> {
 
     return (
       <div className="App">
-        <div className="list box card">
+        <div className="App__list box card">
           <h1
             className="notification is-info title is-5
           is-flex is-justify-content-space-between"
@@ -92,7 +92,7 @@ class App extends React.Component<{}, State> {
               return (
                 <div
                   key={good}
-                  className="item box mb-1"
+                  className="App__item box mb-1"
                 >
                   <li className="is-flex is-justify-content-space-between">
                     <h3 className={classNames(

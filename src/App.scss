@@ -1,13 +1,13 @@
 .App {
   background-image: url(./images/goods.jpg);
   background-size: cover;
-}
 
-.item {
-  height: 75px;
-}
+  &__item {
+    height: 75px;
+  }
 
-.list {
-  width: 550px;
-  margin: auto;
+  &__list {
+    width: 550px;
+    margin: auto;
+  }
 }
