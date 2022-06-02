@@ -1,1 +1,24 @@
-// styles go here
+body {
+  margin: 0;
+}
+
+li {
+  list-style: none;
+  padding-left: 20px;
+}
+
+h1 {
+  padding-left: 20px;
+}
+
+.active {
+  padding-left: 10px;
+
+  &__selected {
+    color: antiquewhite;
+  }
+}
+
+.nonVisible {
+  display: none;
+}
