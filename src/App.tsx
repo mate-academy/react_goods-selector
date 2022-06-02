@@ -47,17 +47,18 @@ class App extends React.Component<{}, State> {
   };
 
   selectedGoodChanger = (good: string) => {
-    const checkedGoods = [...this.state.selectedGoods];
+    const { selectedGoods } = this.state;
+    const checkedGoods = [...selectedGoods];
 
     if (checkedGoods.includes(good)) {
       const index = checkedGoods.indexOf(good);
 
       checkedGoods.splice(index, 1);
-      this.setState({ selectedGoods: checkedGoods });
     } else {
       checkedGoods.push(good);
-      this.setState({ selectedGoods: checkedGoods });
     }
+
+    this.setState({ selectedGoods: checkedGoods });
   };
 
   render() {
