@@ -15,6 +15,10 @@ h1 {
   padding-left: 10px;
 
   &__selected {
-    color:antiquewhite;
+    color: antiquewhite;
   }
+}
+
+.nonVisible {
+  display: none;
 }

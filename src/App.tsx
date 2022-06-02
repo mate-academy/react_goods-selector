@@ -70,7 +70,10 @@ class App extends React.Component<{}, State> {
           <p className="subtitle is-2">{this.checkGoods(selectedGood)}</p>
           <button
             type="button"
-            className="button is-danger is-light"
+            className={classNames(
+              'button is-danger is-light',
+              { nonVisible: selectedGood.length === 0 },
+            )}
             onClick={this.clearGoods}
           >
             Clear
