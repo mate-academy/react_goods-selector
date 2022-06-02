@@ -1,1 +1,77 @@
-// styles go here
+h1,
+li,
+p {
+  margin: 0;
+  list-style: none;
+}
+
+.App {
+  display: flex;
+  justify-content: space-between;
+
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 10px;
+
+  box-sizing: border-box;
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 400px;
+    padding: 10px;
+  }
+
+  &__text {
+    height: 250px;
+
+    font-size: 20px;
+    font-weight: 100;
+  }
+
+  &__list {
+    width: 100%;
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  &__card {
+    height: 120px;
+
+    border: 1px solid rgb(175, 170, 170);
+    border-radius: 10px;
+    padding: 10px;
+
+    text-align: center;
+    font-weight: 400;
+
+    &-select {
+      border: 2px solid rgb(10, 216, 92);
+    }
+  }
+
+  &__button {
+    position: relative;
+    top: 30px;
+  }
+
+  &__button--reset-off {
+    display: none;
+  }
+}
+
+.btn {
+  width: 80%;
+}
+
+.btn-danger {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+}
