@@ -26,16 +26,14 @@ class App extends React.Component<{}, State> {
 
   handleClick = (good: string) => {
     if (this.state.selectedGood.includes(good)) {
-      this.setState({
-        // eslint-disable-next-line react/no-access-state-in-setstate
-        selectedGood: this.state.selectedGood
+      this.setState((state) => ({
+        selectedGood: state.selectedGood
           .filter(el => el !== good),
-      });
+      }));
     } else {
-      this.setState({
-        // eslint-disable-next-line react/no-access-state-in-setstate
-        selectedGood: [...this.state.selectedGood, good],
-      });
+      this.setState((state) => ({
+        selectedGood: [...state.selectedGood, good],
+      }));
       // eslint-disable-next-line no-console
       console.log(this.state.selectedGood);
     }
