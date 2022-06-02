@@ -62,7 +62,63 @@ class App extends React.Component<{}, State> {
                 className="goods__list-item"
                 key={el}
               >
-                {(this.state.selectedGoods.find(element => element === el))
+                {el}
+                <button
+                  type="button"
+                  onClick={() => {
+                    return (this.state.selectedGoods.includes(el))
+                      ? this.setState(
+                        (prevState) => {
+                          const modifiedGoods = prevState.selectedGoods;
+
+                          const findGood = modifiedGoods.indexOf(el);
+
+                          modifiedGoods.splice(findGood, 1);
+
+                          return { selectedGoods: modifiedGoods };
+                        },
+                      )
+                      : this.setState(
+                        (prevState) => {
+                          const modifiedGoods = prevState.selectedGoods;
+
+                          modifiedGoods.push(el);
+
+                          return { selectedGoods: modifiedGoods };
+                        },
+                      );
+                  }}
+                >
+                  { (this.state.selectedGoods.includes(el))
+                    ? 'remove'
+                    : 'add' }
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {((this.state.selectedGoods.length > 0)
+          ? (
+            <button
+              type="button"
+              onClick={() => {
+                this.setState({ selectedGoods: [] });
+              }}
+            >
+              CLEAR
+            </button>
+
+          )
+          : '')}
+      </div>
+    );
+  }
+}
+
+export default App;
+
+/*
+{(this.state.selectedGoods.find(element => element === el))
                   ? (
                     <>
                       <p className="goods__list-item-text-selected">
@@ -113,26 +169,4 @@ class App extends React.Component<{}, State> {
                       </button>
                     </>
                   )}
-              </li>
-            ))}
-          </ul>
-        </div>
-        {((this.state.selectedGoods.length > 0)
-          ? (
-            <button
-              type="button"
-              onClick={() => {
-                this.setState({ selectedGoods: [] });
-              }}
-            >
-              CLEAR
-            </button>
-
-          )
-          : '')}
-      </div>
-    );
-  }
-}
-
-export default App;
+*/
