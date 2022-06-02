@@ -1,1 +1,44 @@
-// styles go here
+.App {
+  background-color: antiquewhite;
+  height: 100vh;
+  text-align: center;
+  padding: 10px;
+
+  &__title {
+    display: inline-block;
+    margin: 0 10px 20px 0;
+    padding: 10px;
+  }
+
+  &__clearButton {
+    display: inline-block;
+
+    &--hide {
+      display: none;
+    }
+  }
+
+  &__list-item {
+    display: inline-block;
+    margin-right: 0 10px 10px 0;
+    padding: 10px;
+
+    &--selected {
+      background-color: goldenrod;
+    }
+  }
+
+  &__button {
+    &--selected {
+      display: none;
+    }
+  }
+
+  &__remove-button {
+    display: none;
+
+    &--active {
+      display: inline-block;
+    }
+  }
+}
