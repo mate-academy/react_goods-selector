@@ -1,1 +1,100 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__title {
+    padding: 10px;
+    text-align: center;
+    border: solid 2px green;
+    border-radius: 15px;
+    font-size: 20px;
+  }
+  .list {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0 0 20px;
+    &__name {
+      margin: 0;
+    }
+    &__item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 300px;
+      font-size: 30px;
+    }
+  }
+  &__button {
+    appearance: none;
+    backface-visibility: hidden;
+    border-radius: 8px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Inter, -apple-system, system-ui, "Segoe UI", Helvetica;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: normal;
+    line-height: 1.5;
+    outline: none;
+    overflow: hidden;
+    padding: 13px 20px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transform: translate3d(0, 0, 0);
+    transition: all 0.3s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: top;
+    white-space: nowrap;
+
+    &:hover {
+      opacity: 1;
+      transform: translateY(0);
+      transition-duration: 0.35s;
+    }
+    &:active {
+      opacity: 1;
+      transform: translateY(0);
+      transition-duration: 0.35s;
+    }
+
+    &--select {
+      background-color: #27ae60;
+      box-shadow: rgba(39, 174, 96, 0.15) 0 4px 9px;
+      &:hover {
+        background-color: #1e8449;
+        box-shadow: rgba(39, 174, 96, 0.2) 0 6px 12px;
+      }
+      &:active {
+        background-color: #1e8449;
+        box-shadow: rgba(39, 174, 96, 0.2) 0 6px 12px;
+      }
+    }
+
+    &--remove {
+      background-color: #f00;
+      box-shadow: #a52a2a;
+
+      &:hover {
+        background-color: #8b0000;
+        box-shadow: #a52a2a;
+      }
+      &:active {
+        background-color: #8b0000;
+        box-shadow: #a52a2a;
+      }
+    }
+  }
+
+  &__button--close {
+    background-color: #0000e5;
+    width: 300px;
+  }
+}
