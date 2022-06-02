@@ -66,7 +66,8 @@ class App extends React.Component<{}, State> {
     return (
       <div className="App">
         <div className="list box card">
-          <h1 className="notification is-info title is-5
+          <h1
+            className="notification is-info title is-5
           is-flex is-justify-content-space-between"
           >
             {this.listOfGoodsWritter()}
@@ -85,40 +86,44 @@ class App extends React.Component<{}, State> {
 
           </h1>
           <ul>
-            {goodsFromServer.map(good => (
-              <div
-                key={good}
-                className="item box mb-1"
-              >
-                <li className="is-flex is-justify-content-space-between">
-                  <h3 className={classNames(
-                    'title',
-                    {
-                      'is-3 has-text-black': this.classChecker(good),
-                      'is-4 has-text-grey': !this.classChecker(good),
-                    },
-                  )}
-                  >
-                    {good}
-                  </h3>
+            {goodsFromServer.map(good => {
+              const checked = this.classChecker(good);
 
-                  <button
-                    type="button"
-                    className={classNames(
-                      'button',
+              return (
+                <div
+                  key={good}
+                  className="item box mb-1"
+                >
+                  <li className="is-flex is-justify-content-space-between">
+                    <h3 className={classNames(
+                      'title',
                       {
-                        'is-danger': this.classChecker(good),
-                        'is-success': !this.classChecker(good),
+                        'is-3 has-text-black': checked,
+                        'is-4 has-text-grey': !checked,
                       },
                     )}
-                    onClick={() => this.selectedGoodChanger(good)}
-                  >
-                    {selectedGoods.includes(good) ? 'remove' : 'select'}
-                  </button>
+                    >
+                      {good}
+                    </h3>
 
-                </li>
-              </div>
-            ))}
+                    <button
+                      type="button"
+                      className={classNames(
+                        'button',
+                        {
+                          'is-danger': checked,
+                          'is-success': !checked,
+                        },
+                      )}
+                      onClick={() => this.selectedGoodChanger(good)}
+                    >
+                      {selectedGoods.includes(good) ? 'remove' : 'select'}
+                    </button>
+
+                  </li>
+                </div>
+              );
+            })}
           </ul>
         </div>
 
