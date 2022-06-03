@@ -79,7 +79,7 @@ class App extends React.Component<{}, State> {
         <ul className="good__list">
           {
             goodsFromServer.map(good => (
-              <li key={good} className={`good__item good--${good}`}>
+              <li key={good} className={`good__item good__${good.split(' ').join('-').toLowerCase()}`}>
                 {good}
                 <button
                   type="button"
@@ -102,23 +102,12 @@ class App extends React.Component<{}, State> {
           }
           <a
             href="#top"
-            className={
-              classNames(
-                'good__clear', {
-                  'is-invisible': currentGoods.length === 0,
-                },
-              )
-            }
+            onClick={this.clear}
+            className={classNames('good__clear button is-danger', {
+              'is-invisible': currentGoods.length === 0,
+            })}
           >
-            <button
-              type="button"
-              onClick={this.clear}
-              className={classNames('good__button-clear button is-danger', {
-                'is-invisible': currentGoods.length === 0,
-              })}
-            >
-              Clear
-            </button>
+            Clear
           </a>
         </ul>
       </div>
