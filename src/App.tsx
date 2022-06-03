@@ -13,19 +13,24 @@ const goodsFromServer: string[] = [
   'Honey',
   'Jam',
   'Garlic',
+  'Beer',
+  'Vodka',
 ];
 
 type State = {
   currentGoods: string[];
+  counter: number;
 };
 
 class App extends React.Component<{}, State> {
   state = {
     currentGoods: ['Jam'],
+    counter: 1,
   };
 
   clear = () => {
     this.setState({ currentGoods: [] });
+    this.setState({ counter: 0 });
   };
 
   checkGoods = (includeGood: string) => {
@@ -38,15 +43,17 @@ class App extends React.Component<{}, State> {
 
     if (newGood.includes(good)) {
       newGood.splice(newGood.indexOf(good), 1);
+      this.state.counter -= 1;
     } else {
       newGood.push(good);
+      this.state.counter += 1;
     }
 
     return this.setState({ currentGoods: newGood });
   };
 
   printGoods = () => {
-    const newGood = [...this.state.currentGoods];
+    const newGood = this.state.currentGoods;
     const lastElem = newGood.slice(-1, newGood.length);
 
     if (newGood.length > 1) {
@@ -57,52 +64,51 @@ class App extends React.Component<{}, State> {
   };
 
   render() {
-    const { currentGoods } = this.state;
+    const { currentGoods, counter } = this.state;
 
     return (
       <div className="good content is-medium">
-        <button
-          type="button"
-          onClick={this.clear}
-          className={classNames('goood__clear button is-danger', {
-            'is-invisible': currentGoods.length === 0,
-          })}
-        >
-          Clear
-        </button>
-        <h1 className="good__title">Selected good: </h1>
-        <h2 className="good__subtitle">
+        <h2 className="good__title">{`Selected good: ${counter}`}</h2>
+        <h3 className="good__subtitle">
           {currentGoods.length === 0 ? (
             <>
               No goods selected
             </>
           ) : <>{this.printGoods()}</>}
-        </h2>
+        </h3>
         <ul className="good__list">
           {
             goodsFromServer.map(good => (
-              <>
-                <li key={good} className="good__item">
-                  {good}
-                  <button
-                    type="button"
-                    onClick={() => {
-                      this.selectAndRemove(good);
-                    }}
-                    className={classNames(
-                      this.checkGoods(good) ? (
-                        'button is-danger is-rounded'
-                      ) : 'button is-primary is-rounded',
-                    )}
-                  >
-                    {this.checkGoods(good) ? (
-                      <>Remove</>
-                    ) : <>Select</>}
-                  </button>
-                </li>
-              </>
+              <li key={good} className={`good__item good--${good}`}>
+                {good}
+                <button
+                  type="button"
+                  onClick={() => {
+                    this.selectAndRemove(good);
+                  }}
+                  className={classNames(
+                    'is-rounded',
+                    this.checkGoods(good) ? (
+                      'button is-danger'
+                    ) : 'button is-primary',
+                  )}
+                >
+                  {this.checkGoods(good) ? (
+                    <>Remove</>
+                  ) : <>Select</>}
+                </button>
+              </li>
             ))
           }
+          <button
+            type="button"
+            onClick={this.clear}
+            className={classNames('good__clear button is-danger', {
+              'is-invisible': currentGoods.length === 0,
+            })}
+          >
+            Clear
+          </button>
         </ul>
       </div>
     );
