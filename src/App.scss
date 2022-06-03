@@ -18,7 +18,7 @@ body {
   &__list {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 6px;
     padding: 20px;
     width: 420px;
     position: absolute;
@@ -32,7 +32,7 @@ body {
 
   &__item {
     list-style: none;
-    font-size: 29px;
+    font-size: 20px;
     position: relative;
     display: flex;
     flex-direction: row;
