@@ -45,6 +45,13 @@
 
   &__good {
     display: block;
+    padding: 5px;
+    border-radius: 5px;
+
+    &-active {
+      background-color: #f38124;
+      font-weight: 500;
+    }
   }
 }
 

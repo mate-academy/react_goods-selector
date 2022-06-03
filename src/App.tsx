@@ -95,7 +95,16 @@ class App extends React.Component<{}, State> {
         <ul className="App__list">
           {goodsFromServer.map((good) => (
             <li key={good} className="listItem">
-              <span className="listItem__good">{good}</span>
+              <span
+                className={classNames('listItem__good', {
+                  // eslint-disable-next-line max-len
+                  'listItem__good-active': selectedGoods.find(
+                    (item) => item === good,
+                  ),
+                })}
+              >
+                {good}
+              </span>
               &emsp;
               <button
                 type="button"
