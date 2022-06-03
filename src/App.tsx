@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import cn from 'classnames';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -75,7 +76,12 @@ class App extends React.Component<{}, State> {
 
           <button
             type="button"
-            className="App__button"
+            className={cn(
+              'App__button',
+              {
+                'App__button--hide': this.state.selectedGoods.length === 0,
+              },
+            )}
             onClick={this.clearSelectedGoods}
           >
             Clear
