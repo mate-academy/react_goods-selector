@@ -26,7 +26,6 @@ class App extends React.Component<{}, State> {
 
   render() {
     const { selectedGood } = this.state;
-    // const classNames = require('classnames');
 
     return (
       <div className="App">
@@ -63,17 +62,16 @@ class App extends React.Component<{}, State> {
               <button
                 type="button"
                 id={product}
-                key={product + 2}
                 className={classNames(
                   'App__button button is-light',
                   {
                     'App__button--selected is-hidden': selectedGood === product,
                   },
                 )}
-                onClick={(event) => {
+                onClick={() => {
                   this.setState(
                     {
-                      selectedGood: event.currentTarget.id,
+                      selectedGood: product,
                     },
                   );
                 }}
