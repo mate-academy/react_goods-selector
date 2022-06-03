@@ -1,1 +1,16 @@
 // styles go here
+.App {
+  height: 100vh;
+  background-color: #c3e7ff;
+
+  &__title {
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 100px;
+  }
+}
