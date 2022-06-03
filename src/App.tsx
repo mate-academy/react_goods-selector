@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.scss';
-import cn from 'classnames';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -67,30 +66,28 @@ class App extends React.Component<{}, State> {
   };
 
   render() {
+    const { selectedGoods } = this.state;
+
     return (
       <div className="App">
         <div className="App__header">
           <h1 className="App__title">
-            {this.createTitle(this.state.selectedGoods)}
+            {this.createTitle(selectedGoods)}
           </h1>
-
-          <button
-            type="button"
-            className={cn(
-              'App__button',
-              {
-                'App__button--hide': this.state.selectedGoods.length === 0,
-              },
-            )}
-            onClick={this.clearSelectedGoods}
-          >
-            Clear
-          </button>
+          {selectedGoods.length > 0 && (
+            <button
+              type="button"
+              className="App__button"
+              onClick={this.clearSelectedGoods}
+            >
+              Clear
+            </button>
+          )}
         </div>
 
         <ul className="App__goods-list">
           {goodsFromServer.map(good => {
-            const isSelected = this.state.selectedGoods.includes(good);
+            const isSelected = selectedGoods.includes(good);
             const buttonText = isSelected ? 'Remove' : 'Select';
 
             return (
