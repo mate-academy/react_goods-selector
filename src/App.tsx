@@ -37,7 +37,28 @@ const showGood = (value:string[]) => {
 
 class App extends React.Component<{}, State> {
   state = {
-    selectedGood: ['Jem'],
+    selectedGood: ['Jam'],
+  };
+
+  addGoods = (item: string) => {
+    this.setState((prev) => {
+      const newSelectedGoods = prev.selectedGood;
+
+      newSelectedGoods.push(item);
+
+      return { selectedGood: newSelectedGoods };
+    });
+  };
+
+  removeGoods = (item:string) => {
+    this.setState((prev) => {
+      const newSelectedGoods = prev.selectedGood;
+      const indexOfGood = newSelectedGoods.indexOf(item);
+
+      newSelectedGoods.splice(indexOfGood, 1);
+
+      return { selectedGood: newSelectedGoods };
+    });
   };
 
   render() {
@@ -66,43 +87,24 @@ class App extends React.Component<{}, State> {
           {goodsFromServer.map(item => (
             <div key={item}>
               <p>{item}</p>
-              {(selectedGood.find(elem => elem === item))
-                ? (
-                  <button
-                    className="button is-danger is-small"
-                    type="button"
-                    onClick={() => {
-                      this.setState((prev) => {
-                        const newSelectedGoods = prev.selectedGood;
 
-                        const indexOfGood = newSelectedGoods.indexOf(item);
-
-                        newSelectedGoods.splice(indexOfGood, 1);
-
-                        return { selectedGood: newSelectedGoods };
-                      });
-                    }}
-                  >
-                    Remove
-                  </button>
-                )
-                : (
-                  <button
-                    className="button is-success is-small"
-                    type="button"
-                    onClick={() => {
-                      this.setState((prev) => {
-                        const newSelectedGoods = prev.selectedGood;
-
-                        newSelectedGoods.push(item);
-
-                        return { selectedGood: newSelectedGoods };
-                      });
-                    }}
-                  >
-                    Select
-                  </button>
-                )}
+              <button
+                className={(selectedGood.find(elem => elem === item))
+                  ? 'button is-danger is-small'
+                  : 'button is-success is-small'}
+                type="button"
+                onClick={() => {
+                  return (selectedGood.find(elem => elem === item))
+                    ? this.removeGoods(item)
+                    : this.addGoods(item);
+                }}
+              >
+                {
+                  (selectedGood.find(elem => elem === item))
+                    ? 'Remove'
+                    : 'Select'
+                }
+              </button>
             </div>
           ))}
         </div>
