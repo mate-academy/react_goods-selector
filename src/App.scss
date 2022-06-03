@@ -1,1 +1,81 @@
-// styles go here
+body {
+  margin: 0;
+  padding: 0;
+
+  background-color: burlywood;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom: 20px;
+
+  &__name {
+    color: rgb(55, 50, 50);
+  }
+
+  &__btn {
+    padding: 10px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(229, 156, 61);
+    border: 2px solid rgb(229, 156, 61);
+    border-radius: 8px;
+    cursor: pointer;
+  }
+}
+
+.goods-list {
+  padding: 20px 30px;
+  list-style: none;
+  background-color: white;
+  opacity: 0.6;
+
+  &__item {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    font-size: 18px;
+
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border: 2px solid burlywood;
+
+    &:last-of-type {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__btn {
+    margin-left: 20px;
+    width: 60px;
+
+    font-size: 16px;
+
+    border-radius: 8px;
+    border-color: transparent;
+    background-color: burlywood;
+    cursor: pointer;
+
+    &:hover {
+      color: burlywood;
+      border: 2px solid burlywood;
+      background-color: transparent;
+    }
+  }
+}
