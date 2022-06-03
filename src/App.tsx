@@ -24,12 +24,20 @@ class App extends React.Component<{}, State> {
   };
 
   render() {
+    const { selectedGood } = this.state;
+
     return (
       <div className="App">
-        <h1 className="App__title">{this.state.selectedGood.length > 1 ? `${this.state.selectedGood} is selected` : 'No goods selected'}</h1>
+        <h1 className="App__title">
+          {
+            selectedGood.length > 1
+              ? `${this.state.selectedGood} is selected`
+              : 'No goods selected'
+          }
+        </h1>
         <button
           type="button"
-          className={`App__clearButton button is-light ${this.state.selectedGood === '' ? 'App__clearButton--hide is-hidden' : ''}`}
+          className={`App__clearButton button is-light ${selectedGood === '' ? 'App__clearButton--hide is-hidden' : ''}`}
           onClick={() => {
             this.setState({ selectedGood: '' });
           }}
@@ -40,7 +48,7 @@ class App extends React.Component<{}, State> {
           {goodsFromServer.map((product) => (
             <div key={product}>
               <li
-                className={`App__list-item ${this.state.selectedGood === product ? 'App__list-item--selected' : ''}`}
+                className={`App__list-item ${selectedGood === product ? 'App__list-item--selected' : ''}`}
               >
                 {product}
               </li>
@@ -48,7 +56,7 @@ class App extends React.Component<{}, State> {
                 type="button"
                 id={product}
                 key={product + 2}
-                className={`App__button button is-light ${this.state.selectedGood === product ? 'App__button--selected is-hidden' : ''}`}
+                className={`App__button button is-light ${selectedGood === product ? 'App__button--selected is-hidden' : ''}`}
                 onClick={(event) => {
                   this.setState(
                     {
@@ -61,7 +69,7 @@ class App extends React.Component<{}, State> {
               </button>
               <button
                 type="button"
-                className={`button is-light App__remove-button ${this.state.selectedGood === product ? 'App__remove-button--active' : 'is-hidden'}`}
+                className={`button is-light App__remove-button ${selectedGood === product ? 'App__remove-button--active' : 'is-hidden'}`}
                 onClick={() => {
                   this.setState(
                     {
