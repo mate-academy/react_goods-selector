@@ -1,1 +1,76 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: #344e41;
+  background-color: #ccd5ae;
+  margin: 10px;
+  padding: 10px;
+  box-shadow: 0.5px 0.5px 5px #344e41;
+  border-radius: 3px;
+
+  &__header {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 600;
+  }
+
+  &__underheader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__list {
+    font-size: 1.3rem;
+    font-weight: 400;
+  }
+}
+
+.listItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+
+  &__good {
+    display: block;
+    padding: 5px;
+    border-radius: 5px;
+
+    &-active {
+      background-color: #f38124;
+      font-weight: 500;
+    }
+  }
+}
+
+.button {
+  padding: 5px;
+  border-radius: 5px;
+  border: 0.5px solid #344e41;
+  box-shadow: inset 0.5px 0.5px 2px #344e41;
+  font-size: 18px;
+  font-weight: 300;
+  color: #344e41;
+  background-color: #ccd5ae;
+
+  &:hover {
+    box-shadow: 0.5px 0.5px 5px #344e41;
+    border-radius: 7px;
+  }
+
+  &-active {
+    background-color: #f38124;
+  }
+}
