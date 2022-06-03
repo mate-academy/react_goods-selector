@@ -100,7 +100,16 @@ class App extends React.Component<{}, State> {
               </li>
             ))
           }
-          <a href="#top" className="good__clear">
+          <a
+            href="#top"
+            className={
+              classNames(
+                'good__clear', {
+                  'is-invisible': currentGoods.length === 0,
+                },
+              )
+            }
+          >
             <button
               type="button"
               onClick={this.clear}
