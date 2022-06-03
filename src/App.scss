@@ -1,1 +1,42 @@
-// styles go here
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #dce1e3;
+  color: #004e7c;
+}
+
+.App {
+  margin-top: 30px;
+  margin-left: 60px;
+}
+
+.mainTitle {
+  &__wrapperQuantityAndBtn {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+  }
+}
+
+.productsList {
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+  }
+
+  button {
+    width: 80px;
+    height: 30px;
+    color: #dce1e3;
+    border: 1px solid #004e7c;
+  }
+
+  &__button--remove {
+    background-color: #b73225;
+  }
+
+  &__button--select {
+    background-color: #1a9740;
+  }
+}
