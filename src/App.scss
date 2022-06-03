@@ -1,1 +1,32 @@
-// styles go here
+.title {
+  margin-top: 20px;
+}
+
+.display {
+  width: 500px;
+  padding: 15px;
+
+  border: 2px solid grey;
+}
+
+.list {
+  display: flex;
+  justify-content: space-between;
+  line-height: 44px;
+
+  &__active {
+    background-color: #0f990f;
+  }
+}
+
+.button {
+  border-radius: 0;
+  width: 150px;
+  padding-left: 40px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  &__select {
+    background-color: rgb(111, 111, 111);
+  }
+}
