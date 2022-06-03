@@ -67,7 +67,7 @@ class App extends React.Component<{}, State> {
     const { currentGoods, counter } = this.state;
 
     return (
-      <div className="good content is-medium">
+      <div className="good content is-medium" itemID="top">
         <h2 className="good__title">{`Selected good: ${counter}`}</h2>
         <h3 className="good__subtitle">
           {currentGoods.length === 0 ? (
@@ -87,7 +87,7 @@ class App extends React.Component<{}, State> {
                     this.selectAndRemove(good);
                   }}
                   className={classNames(
-                    'is-rounded',
+                    'good__buttons is-rounded',
                     this.checkGoods(good) ? (
                       'button is-danger'
                     ) : 'button is-primary',
@@ -100,15 +100,17 @@ class App extends React.Component<{}, State> {
               </li>
             ))
           }
-          <button
-            type="button"
-            onClick={this.clear}
-            className={classNames('good__clear button is-danger', {
-              'is-invisible': currentGoods.length === 0,
-            })}
-          >
-            Clear
-          </button>
+          <a href="#top" className="good__clear">
+            <button
+              type="button"
+              onClick={this.clear}
+              className={classNames('good__button-clear button is-danger', {
+                'is-invisible': currentGoods.length === 0,
+              })}
+            >
+              Clear
+            </button>
+          </a>
         </ul>
       </div>
     );

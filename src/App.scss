@@ -7,6 +7,17 @@ body {
 
 .good {
 
+  &__buttons {
+    width: 100px;
+  }
+
+  &__clear {
+    width: 100%;
+  }
+  &__button-clear {
+    width: 100%;
+  }
+
   &__subtitle {
     width: 700px;
   }
@@ -18,7 +29,6 @@ body {
   &__list {
     display: flex;
     flex-direction: column;
-    gap: 6px;
     padding: 20px;
     width: 420px;
     position: absolute;
@@ -31,6 +41,7 @@ body {
   }
 
   &__item {
+    margin: 4px;
     list-style: none;
     font-size: 20px;
     position: relative;
