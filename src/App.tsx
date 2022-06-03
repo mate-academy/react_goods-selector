@@ -32,7 +32,7 @@ class App extends React.Component<{}, State> {
     return 'Select';
   };
 
-  render(): React.ReactNode {
+  render() {
     return (
       <div className="content">
         <h1 className="content__title">
@@ -53,14 +53,14 @@ class App extends React.Component<{}, State> {
             </button>
           )
           : ''}
-        <ul className="">
+        <ul className="list">
           {goodsFromServer.map(good => (
             <React.Fragment key={good}>
               <div className="content__item">
                 <li
                   className={(good === this.state.selectedGood)
-                    ? 'isSelected'
-                    : ''}
+                    ? 'list__item list__item--isSelected'
+                    : 'list__item'}
                 >
                   {good}
                 </li>

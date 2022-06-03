@@ -3,17 +3,6 @@ html {
   font-family: Cambria, Georgia, serif;
 }
 
-ul {
-  padding: 0;
-}
-
-li {
-  display: inline;
-  list-style: none;
-  font-size: 24px;
-  padding: 18px;
-}
-
 .content {
   padding: 20px;
   width: 320px;
@@ -30,13 +19,23 @@ li {
     display: flex;
     justify-content: space-between;
     margin: 10px 0;
-    // border: 1px solid black;
   }
 }
 
-.isSelected {
-  background-color: yellowgreen;
-  border-radius: 20px;
+.list {
+  padding: 0;
+
+  &__item {
+    display: inline;
+    list-style: none;
+    font-size: 24px;
+    padding: 18px;
+    border-radius: 20px;
+
+    &--isSelected {
+      background-color: yellowgreen;
+    }
+  }
 }
 
 .button {
