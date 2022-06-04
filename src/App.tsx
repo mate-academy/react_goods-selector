@@ -20,10 +20,13 @@ class App extends React.Component {
     // eslint-disable-next-line react/no-unused-state
     status: 'No goods selected',
     selected: 'selected',
-    buttonTxt: 'Select',
+    // eslint-disable-next-line react/no-unused-state
+    selectedGoods: [],
   };
 
   componentDidMount() {
+    // eslint-disable-next-line react/no-access-state-in-setstate
+    // this.setState({ selectedGoods: this.state.selectedGoods.push('Jam') });
     this.setState({ status: 'Jam is selected' });
   }
 
@@ -42,10 +45,11 @@ class App extends React.Component {
         <ul>
           {
             // eslint-disable-next-line no-return-assign
-            goodsFromServer.map(good => (
+            goodsFromServer.map((good, index) => (
               <>
                 <li
-                  key={good}
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={index}
                 >
                   <span
                     className={this.state.status.includes(good)
@@ -61,8 +65,8 @@ class App extends React.Component {
                   }}
                   >
                     {this.state.status.includes(good)
-                      ? this.state.buttonTxt = 'Remove'
-                      : this.state.buttonTxt = 'Select'}
+                      ? 'Remove'
+                      : 'Select'}
                   </button>
                 </li>
               </>
