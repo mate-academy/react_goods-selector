@@ -70,14 +70,16 @@ class App extends React.Component {
           }
         </ul>
         <div>
-          <button
-            type="button"
-            onClick={() => {
-              this.setState({ status: 'No goods selected' });
-            }}
-          >
-            Clear
-          </button>
+          {this.state.status !== 'No goods selected' && (
+            <button
+              type="button"
+              onClick={() => {
+                this.setState({ status: 'No goods selected' });
+              }}
+            >
+              Clear
+            </button>
+          )}
         </div>
         <h1>{this.state.status}</h1>
       </div>
