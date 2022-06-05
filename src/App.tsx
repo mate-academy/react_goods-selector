@@ -32,23 +32,23 @@ class App extends React.Component<{}, State> {
       <div className="App">
         <h1 className="level-width title is-4">{selectedGoods}</h1>
         <ul>
-          {goodsFromServer.map(good => {
+          {goodsFromServer.map(goods => {
             return (
               <div>
-                <li key={good}>{good}</li>
+                <li key={goods}>{goods}</li>
 
                 <button
                   type="button"
                   onClick={() => {
-                    return !selectedGoods.split(' ').includes(good)
-                      ? this.setState({ selectedGoods: `${good} is selected` })
+                    return !selectedGoods.split(' ').includes(goods)
+                      ? this.setState({ selectedGoods: `${goods} is selected` })
                       : this.setState({ selectedGoods: 'No goods selected' });
                   }}
-                  className={selectedGoods === `${good} is selected`
+                  className={selectedGoods === `${goods} is selected`
                     ? 'button is-danger'
                     : 'button is-success'}
                 >
-                  { selectedGoods === `${good} is selected`
+                  { selectedGoods === `${goods} is selected`
                     ? 'remove'
                     : 'select'}
                 </button>
