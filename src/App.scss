@@ -1,1 +1,15 @@
-// styles go here
+.app {
+  &__conteiner {
+    display: flex;
+    margin: 5px;
+    gap: 10px;
+
+  }
+
+  &__listItem {
+    color: blue;
+    &--selected {
+      background-color: yellow;
+    }
+  }
+}
