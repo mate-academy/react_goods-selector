@@ -71,10 +71,8 @@ class App extends React.Component<{}, State> {
         <h2 className="good__title">{`Selected good: ${counter}`}</h2>
         <h3 className="good__subtitle">
           {currentGoods.length === 0 ? (
-            <>
-              No goods selected
-            </>
-          ) : <>{this.printGoods()}</>}
+            ' No goods selected'
+          ) : this.printGoods()}
         </h3>
         <ul className="good__list">
           {
@@ -94,8 +92,8 @@ class App extends React.Component<{}, State> {
                   )}
                 >
                   {this.checkGoods(good) ? (
-                    <>Remove</>
-                  ) : <>Select</>}
+                    'Remove'
+                  ) : 'Select'}
                 </button>
               </li>
             ))
