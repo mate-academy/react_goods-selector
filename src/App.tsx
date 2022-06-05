@@ -88,10 +88,11 @@ class App extends React.Component<{}, State> {
                 className="goods-list__btn"
                 type="button"
                 onClick={() => {
-                  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-                  selectedGoods.includes(good)
-                    ? this.deleteGood(good)
-                    : this.addGood(good);
+                  if (selectedGoods.includes(good)) {
+                    return this.deleteGood(good);
+                  }
+
+                  return this.addGood(good);
                 }}
               >
                 {selectedGoods.includes(good)
