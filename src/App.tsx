@@ -15,12 +15,12 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-interface State {
+type State = {
   selectedGoods: string[],
-}
+};
 
 class App extends React.Component<{}, State> {
-  state = {
+  state: State = {
     selectedGoods: ['Jam'],
   };
 
@@ -40,13 +40,13 @@ class App extends React.Component<{}, State> {
     }
   };
 
-  messageLine = (list: string[] | []) => {
+  messageLine = (list: string[]) => {
     if (list.length === 0) {
       return 'No goods selected';
     }
 
     if (list.length === 1) {
-      return `${list.join(', ')} is selected`;
+      return `${list[0]} is selected`;
     }
 
     const result = list.join(', ');
@@ -59,7 +59,7 @@ class App extends React.Component<{}, State> {
     this.setState({ selectedGoods: [] });
   };
 
-  render(): React.ReactNode {
+  render() {
     const { selectedGoods } = this.state;
 
     const selectedOrNot = (checkItem: string): boolean => {
@@ -86,36 +86,35 @@ class App extends React.Component<{}, State> {
           </button>
         </div>
         <ul
-          className="
-          columns
-          "
+          className="columns"
         >
           {goodsFromServer.map(good => {
+            const selectCheker: boolean = selectedOrNot(good);
+
             return (
               <div key={good} className="column block">
                 <li
-                  // eslint-disable-next-line max-len
                   className={cn(
                     'is-medium',
-                    { 'has-background-success-light': selectedOrNot(good) },
+                    { 'has-background-success-light': selectCheker },
                   )}
                 >
                   {good}
                 </li>
                 <button
                   type="button"
-                  onClick={(event) => event.target && this.buttonAction(good)}
+                  onClick={() => this.buttonAction(good)}
                   className={
                     cn(
                       'button',
                       'is-light',
                       'is-fullwidth',
-                      { 'is-primary': selectedOrNot(good) },
-                      { 'is-danger': !selectedOrNot(good) },
+                      { 'is-primary': selectCheker },
+                      { 'is-danger': !selectCheker },
                     )
                   }
                 >
-                  {selectedOrNot(good)
+                  {selectCheker
                     ? 'Remove' : 'Select'}
                 </button>
               </div>
