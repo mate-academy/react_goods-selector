@@ -1,4 +1,4 @@
-/* eslint-disable react/button-has-type */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import React from 'react';
 import './App.scss';
 
@@ -18,50 +18,48 @@ const goodsFromServer: string[] = [
 type State = {
   status: string;
   selected: string;
+  selectedGoods: string[]
 };
 
 class App extends React.Component<{}, State> {
+  theGoods: string[] = this.state.selectedGoods;
+
   state = {
-    // eslint-disable-next-line react/no-unused-state
-    status: 'No goods selected',
+    selectedGoods: ['Jam'],
+    status: `${this.theGoods} is selected`,
     selected: 'selected',
-    // eslint-disable-next-line react/no-unused-state
   };
 
-  selectedGoods = ['Jam'];
-
-  componentDidMount() {
-    // eslint-disable-next-line react/no-access-state-in-setstate
-    this.setState({ status: `${this.selectedGoods} is selected` });
-  }
-
   selectItem = (good: string) => {
-    // eslint-disable-next-line react/no-unused-state
-    this.selectedGoods.push(good);
-    switch (this.selectedGoods.length) {
+    this.state.selectedGoods.push(good);
+    const theGoods = this.state.selectedGoods;
+
+    switch (this.state.selectedGoods.length) {
       case 0: this.setState({ status: 'No goods selected' });
         break;
-      case 1: this.setState({ status: `${this.selectedGoods.join(', ')} is selected` });
+      case 1: this.setState({ status: `${theGoods.join(', ')} is selected` });
         break;
-      default: this.setState({ status: `${this.selectedGoods.join(', ')} are selected` });
+      default: this.setState({ status: `${theGoods.join(', ')} are selected` });
     }
   };
 
   removeItem = (good: string) => {
-    this.selectedGoods = this.selectedGoods.filter(
-      (selectedGood) => selectedGood !== good,
+    const theGoods = this.state.selectedGoods;
+
+    this.state.selectedGoods = this.state.selectedGoods.filter(
+      (selectedGood: string) => selectedGood !== good,
     );
-    switch (this.selectedGoods.length) {
+    switch (this.state.selectedGoods.length) {
       case 0: this.setState({ status: 'No goods selected' });
         break;
-      case 1: this.setState({ status: `${this.selectedGoods.join(', ')} is selected` });
+      case 1: this.setState({ status: `${theGoods.join(', ')} is selected` });
         break;
-      default: this.setState({ status: `${this.selectedGoods.join(', ')} are selected` });
+      default: this.setState({ status: `${theGoods.join(', ')} are selected` });
     }
   };
 
   clear = () => {
-    this.selectedGoods = [];
+    this.state.selectedGoods = [];
     this.setState({ status: 'No goods selected' });
   };
 
@@ -70,32 +68,29 @@ class App extends React.Component<{}, State> {
       <div className="App">
         <ul>
           {
-            // eslint-disable-next-line no-return-assign
-            goodsFromServer.map((good, index) => (
-              <>
-                <li
-                  // eslint-disable-next-line react/no-array-index-key
-                  key={index}
+            goodsFromServer.map((good) => (
+              <li
+                key={good}
+              >
+                <span
+                  className={this.state.status.includes(good)
+                    ? this.state.selected : 'good'}
                 >
-                  <span
-                    className={this.state.status.includes(good)
-                      ? this.state.selected : 'good'}
-                  >
-                    {good}
-                  </span>
-                  <button onClick={() => {
-                    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+                  {good}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
                     !this.state.status.includes(good)
                       ? this.selectItem(good)
                       : this.removeItem(good);
                   }}
-                  >
-                    {this.state.status.includes(good)
-                      ? 'Remove'
-                      : 'Select'}
-                  </button>
-                </li>
-              </>
+                >
+                  {this.state.status.includes(good)
+                    ? 'Remove'
+                    : 'Select'}
+                </button>
+              </li>
             ))
           }
         </ul>
@@ -103,9 +98,7 @@ class App extends React.Component<{}, State> {
           {this.state.status !== 'No goods selected' && (
             <button
               type="button"
-              onClick={() => {
-                this.clear();
-              }}
+              onClick={this.clear}
             >
               Clear
             </button>
