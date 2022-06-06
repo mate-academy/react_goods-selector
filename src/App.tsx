@@ -52,7 +52,7 @@ class App extends React.Component<{}, State> {
         return `${items[0]} and ${items[1]} are selected`;
       default:
         return (`${items.slice(0, -1).join(',')}`
-          + `and ${items.slice(-1)} are selected`);
+          + ` and ${items.slice(-1)} are selected`);
     }
   };
 
