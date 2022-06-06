@@ -1,1 +1,67 @@
 // styles go here
+.App {
+  font-family: Georgia, "Times New Roman", Times, serif;
+
+  height: 100vh;
+  background-color: #7209b7;
+  margin: 0;
+
+  &__title {
+    display: inline-block;
+    max-height: 100px;
+    margin: 0;
+    padding: 20px;
+    color: #f72585;
+  }
+
+  &__clear-button {
+    height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(
+      -45deg, #9925ea, #338aff, #9925ea
+    );
+    background-size: 400%;
+    background-position: 90% 0;
+    color: #fff;
+    transition: background-position 0.8s;
+
+    &:hover {
+      background-position: 185% 50%;
+    }
+  }
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__inner {
+    display: flex;
+    gap: 11px;
+  }
+
+  &__item {
+    display: inline-block;
+
+    color: #fff;
+  }
+
+  &__select-button {
+    height: 2rem;
+    padding: 0 2rem;
+    border-radius: 0.38rem;
+    background-color: #4503dc;
+    color: #fff;
+    box-shadow: 0 0.4rem 0 0 #3700b8;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+
+    &:active {
+      transform: translateY(0.3rem);
+      box-shadow: 0 0.2rem 0 0 #3700b8;
+    }
+
+  }
+}
