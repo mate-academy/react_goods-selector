@@ -1,4 +1,5 @@
 import React from 'react';
+// import cn from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -58,19 +59,27 @@ class App extends React.Component<{}, State> {
   render(): React.ReactNode {
     return (
       <div className="App">
-        <h1>{`Selected good: ${this.createMessage()}`}</h1>
+        <h1 className="title is-3">
+          {`Selected good: ${this.createMessage()}`}
+        </h1>
+
         <ul>
           {goodsFromServer.map((good: string) => {
             const isSelected = this.state.items.includes(good);
             const buttonText = isSelected ? 'Remove' : 'Select';
 
             return (
-              <li key={good}>
-                {good}
+              <li key={good} className="columns">
+                <span
+                  className={`column is-one-quarter ${isSelected ? 'has-background-info' : ''}`}
+                >
+                  {good}
+                </span>
 
                 <button
                   type="button"
                   onClick={() => this.buttonSelection(isSelected, good)}
+                  className={`column is-one-quarter button ${isSelected ? 'is-danger' : 'is-success'}`}
                 >
                   {buttonText}
                 </button>
@@ -79,14 +88,18 @@ class App extends React.Component<{}, State> {
           })}
         </ul>
 
-        <button
-          type="button"
-          onClick={() => {
-            this.setState({ items: [] });
-          }}
-        >
-          Clear goods!
-        </button>
+        {!!this.state.items.length && (
+          <button
+            type="button"
+            onClick={() => {
+              this.setState({ items: [] });
+            }}
+            className="button is-danger"
+          >
+            Clear goods!
+          </button>
+        )}
+
       </div>
     );
   }
