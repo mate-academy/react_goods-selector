@@ -29,8 +29,7 @@ class App extends React.Component<{}, State> {
   };
 
   clear = () => {
-    this.setState({ currentGoods: [] });
-    this.setState({ counter: 0 });
+    this.setState({ currentGoods: [], counter: 0 });
   };
 
   checkGoods = (includeGood: string) => {
@@ -43,10 +42,14 @@ class App extends React.Component<{}, State> {
 
     if (newGood.includes(good)) {
       newGood.splice(newGood.indexOf(good), 1);
-      this.state.counter -= 1;
+      this.setState(state => ({
+        counter: state.counter - 1,
+      }));
     } else {
       newGood.push(good);
-      this.state.counter += 1;
+      this.setState(state => ({
+        counter: state.counter + 1,
+      }));
     }
 
     return this.setState({ currentGoods: newGood });
