@@ -1,1 +1,65 @@
-// styles go here
+@import "node_modules/bulma/sass/utilities/initial-variables.sass";
+
+* {
+  box-sizing: border-box;
+  background: $black-ter;
+}
+
+body {
+  margin: 0;
+}
+
+.App {
+  height: 100vh;
+  font-size: 35px;
+  color: $white-bis;
+
+  &__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__title {
+    display: block;
+    font-size: 35px;
+    font-weight: bold;
+    color: $white;
+  }
+
+  &__button {
+    background-color: $turquoise !important;
+    color: $white !important;
+    font-weight: bold;
+    width: 75px;
+    transition: background-color 0.3s ease-in-out;
+
+    &--hidden {
+      display: none !important;
+    }
+
+    &--selected {
+      background-color: $red !important;
+    }
+  }
+
+  &__goods {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 35px;
+
+    &-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      transition: color 0.3s ease-in-out;
+
+      &--selected {
+        color: $turquoise;
+      }
+    }
+  }
+}
