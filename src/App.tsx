@@ -44,10 +44,6 @@ export class App extends React.Component<{}, State> {
     const { selectedGood }: { selectedGood: string[] } = this.state;
 
     if (selectedGood.includes(product)) {
-      // const index = selectedGood.indexOf(product);
-
-      // ARRAY WITHOUT REMOVED ELEMENT
-
       this.setState((state) => ({
         selectedGood: state.selectedGood.filter((prod: string) => (
           prod !== product
@@ -65,9 +61,14 @@ export class App extends React.Component<{}, State> {
 
     return (
       <div className="App">
-        <h1>{this.goodsInCourt(selectedGood)}</h1>
+        <h1 className="App__title">
+          {this.goodsInCourt(selectedGood)}
+        </h1>
         <button
           type="button"
+          className="
+          App__clear-button
+          "
           onClick={() => {
             this.setState({
               selectedGood: [],
@@ -76,12 +77,15 @@ export class App extends React.Component<{}, State> {
         >
           Clear
         </button>
-        <ul>
+        <ul className="list">
           {goodsFromServer.map(good => (
-            <>
-              <li>{good}</li>
+            <div className="list__inner">
+              <li className="list__item">{good}</li>
               <button
                 type="button"
+                className="
+                list__select-button
+                "
                 onClick={() => {
                   this.chooseProducts(good);
                 }}
@@ -90,7 +94,7 @@ export class App extends React.Component<{}, State> {
                   ? 'Remove'
                   : 'Select'}
               </button>
-            </>
+            </div>
           ))}
         </ul>
       </div>
