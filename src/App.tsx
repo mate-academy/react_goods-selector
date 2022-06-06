@@ -1,3 +1,5 @@
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import React from 'react';
 import './App.scss';
@@ -22,39 +24,44 @@ type State = {
 };
 
 class App extends React.Component<{}, State> {
-  theGoods: string[] = this.state.selectedGoods;
-
-  state = {
+  state: State = {
     selectedGoods: ['Jam'],
-    status: `${this.theGoods} is selected`,
+    status: 'Jam is selected',
     selected: 'selected',
   };
 
   selectItem = (good: string) => {
-    this.state.selectedGoods.push(good);
-    const theGoods = this.state.selectedGoods;
+    this.setState(state => ({
+      selectedGoods: [
+        ...state.selectedGoods,
+        good,
+      ],
+    }));
 
-    switch (this.state.selectedGoods.length) {
+    const selectedGoods = [
+      ...this.state.selectedGoods,
+      good,
+    ];
+
+    switch (selectedGoods.length) {
       case 0: this.setState({ status: 'No goods selected' });
         break;
-      case 1: this.setState({ status: `${theGoods.join(', ')} is selected` });
+      case 1: this.setState({ status: `${selectedGoods.join(', ')} is selected` });
         break;
-      default: this.setState({ status: `${theGoods.join(', ')} are selected` });
+      default: this.setState({ status: `${selectedGoods.join(', ')} are selected` });
     }
   };
 
   removeItem = (good: string) => {
-    const theGoods = this.state.selectedGoods;
-
-    this.state.selectedGoods = this.state.selectedGoods.filter(
+    this.state.selectedGoods = [...this.state.selectedGoods].filter(
       (selectedGood: string) => selectedGood !== good,
     );
     switch (this.state.selectedGoods.length) {
       case 0: this.setState({ status: 'No goods selected' });
         break;
-      case 1: this.setState({ status: `${theGoods.join(', ')} is selected` });
+      case 1: this.setState({ status: `${this.state.selectedGoods.join(', ')} is selected` });
         break;
-      default: this.setState({ status: `${theGoods.join(', ')} are selected` });
+      default: this.setState({ status: `${this.state.selectedGoods.join(', ')} are selected` });
     }
   };
 
@@ -73,7 +80,7 @@ class App extends React.Component<{}, State> {
                 key={good}
               >
                 <span
-                  className={this.state.status.includes(good)
+                  className={this.state.selectedGoods.includes(good)
                     ? this.state.selected : 'good'}
                 >
                   {good}
@@ -81,12 +88,12 @@ class App extends React.Component<{}, State> {
                 <button
                   type="button"
                   onClick={() => {
-                    !this.state.status.includes(good)
+                    !this.state.selectedGoods.includes(good)
                       ? this.selectItem(good)
                       : this.removeItem(good);
                   }}
                 >
-                  {this.state.status.includes(good)
+                  {this.state.selectedGoods.includes(good)
                     ? 'Remove'
                     : 'Select'}
                 </button>
