@@ -24,23 +24,15 @@ class App extends React.Component<{}, State> {
   };
 
   setSelectedGoods = (good: string) => {
-    const { selectedGoods } = this.state;
-
     this.setState(((prevState: State) => {
-      if (selectedGoods.includes(good)) {
-        return {
-          selectedGoods: prevState.selectedGoods
-            .filter(prevGood => prevGood !== good),
-        };
-      }
-
       return { selectedGoods: [...prevState.selectedGoods, good] };
     }));
   };
 
-  clearSelectedGood = (good: string) => {
+  removeSelectedGood = (good: string) => {
     this.setState((prevState => ({
-      selectedGoods: [...prevState.selectedGoods].filter(e => e !== good),
+      selectedGoods: prevState.selectedGoods.filter(remaining => (
+        remaining !== good)),
     }
     )));
   };
@@ -113,7 +105,7 @@ class App extends React.Component<{}, State> {
                   className="button is-info is-medium"
                   onClick={() => {
                     return isSelected
-                      ? this.clearSelectedGood(good)
+                      ? this.removeSelectedGood(good)
                       : this.setSelectedGoods(good);
                   }}
                 >
