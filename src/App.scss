@@ -1,1 +1,42 @@
-// styles go here
+.app {
+  &__title {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 25px;
+    margin-bottom: 25px;
+  }
+
+  &__button {
+    width: fit-content;
+    margin-top: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &--hidden {
+      visibility: hidden;
+    }
+  }
+}
+
+.goods {
+  font-size: 1.2em;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+
+    width: 200px;
+    padding: 4px;
+
+    &--selected {
+      background-color: gainsboro;
+    }
+  }
+
+  &__button:hover {
+    cursor: pointer;
+  }
+}
