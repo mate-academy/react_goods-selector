@@ -39,11 +39,10 @@ class App extends React.Component<{}, State> {
   };
 
   clearSelectedGood = (good: string) => {
-    this.setState((prevState => {
-      return {
+    this.setState((prevState => ({
         selectedGoods: [...prevState.selectedGoods].filter(e => e !== good),
-      };
-    }));
+      }
+    )));
   };
 
   clearSelectedGoods = () => {
