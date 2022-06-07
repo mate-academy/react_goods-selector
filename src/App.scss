@@ -1,1 +1,24 @@
-// styles go here
+.list__item {
+  font-family: sans-serif;
+  display: inline-block;
+  margin: 5px;
+  width: 100px;
+  text-align: center;
+  transition: border 0.2s;
+  border: 2px solid transparent;
+}
+
+.header {
+  display: inline-block;
+  width: 350px;
+  text-align: center;
+}
+
+.selected {
+  border: 2px solid greenyellow;
+  border-radius: 3px;
+}
+
+.hidden {
+  display: none;
+}
