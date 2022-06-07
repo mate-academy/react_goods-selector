@@ -51,7 +51,7 @@ class App extends React.Component<{}, State> {
       case 2:
         return `${items[0]} and ${items[1]} are selected`;
       default:
-        return (`${items.slice(0, -1).join(',')}`
+        return (`${items.slice(0, -1).join(', ')}`
           + ` and ${items.slice(-1)} are selected`);
     }
   };
@@ -59,47 +59,48 @@ class App extends React.Component<{}, State> {
   render(): React.ReactNode {
     return (
       <div className="App">
-        <h1 className="title is-3">
-          {`Selected good: ${this.createMessage()}`}
-        </h1>
+        <div className="my-container">
+          <h1 className="title is-3">
+            {`Selected good: ${this.createMessage()}`}
+          </h1>
 
-        <ul>
-          {goodsFromServer.map((good: string) => {
-            const isSelected = this.state.items.includes(good);
-            const buttonText = isSelected ? 'Remove' : 'Select';
+          <ul>
+            {goodsFromServer.map((good: string) => {
+              const isSelected = this.state.items.includes(good);
+              const buttonText = isSelected ? 'Remove' : 'Select';
 
-            return (
-              <li key={good} className="columns">
-                <span
-                  className={`column is-one-quarter ${isSelected ? 'has-background-info' : ''}`}
-                >
-                  {good}
-                </span>
+              return (
+                <li key={good} className="columns">
+                  <span
+                    className={`column is-one-quarter ${isSelected ? 'has-background-info' : ''}`}
+                  >
+                    {good}
+                  </span>
 
-                <button
-                  type="button"
-                  onClick={() => this.buttonSelection(isSelected, good)}
-                  className={`column is-one-quarter button ${isSelected ? 'is-danger' : 'is-success'}`}
-                >
-                  {buttonText}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+                  <button
+                    type="button"
+                    onClick={() => this.buttonSelection(isSelected, good)}
+                    className={`column is-one-quarter button ${isSelected ? 'is-danger' : 'is-success'}`}
+                  >
+                    {buttonText}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
 
-        {!!this.state.items.length && (
-          <button
-            type="button"
-            onClick={() => {
-              this.setState({ items: [] });
-            }}
-            className="button is-danger"
-          >
-            Clear goods!
-          </button>
-        )}
-
+          {!!this.state.items.length && (
+            <button
+              type="button"
+              onClick={() => {
+                this.setState({ items: [] });
+              }}
+              className="button is-danger"
+            >
+              Clear goods!
+            </button>
+          )}
+        </div>
       </div>
     );
   }
