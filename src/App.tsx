@@ -40,8 +40,8 @@ class App extends React.Component<{}, State> {
 
   clearSelectedGood = (good: string) => {
     this.setState((prevState => ({
-        selectedGoods: [...prevState.selectedGoods].filter(e => e !== good),
-      }
+      selectedGoods: [...prevState.selectedGoods].filter(e => e !== good),
+    }
     )));
   };
 
@@ -68,15 +68,24 @@ class App extends React.Component<{}, State> {
     const { selectedGoods } = this.state;
 
     return (
-      <div className="App">
-        <div className="App__header">
-          <h1 className="App__title">
+      <div className="App
+        box
+        has-background-dark
+        px-6
+        py-6"
+      >
+        <div className="is-flex is-justify-content-space-between">
+          <h1 className="title
+            is-2
+            has-text-white
+            has-text-weight-bold"
+          >
             {this.createTitle(selectedGoods)}
           </h1>
           {selectedGoods.length > 0 && (
             <button
               type="button"
-              className="App__button"
+              className="button is-danger is-medium"
               onClick={this.clearSelectedGoods}
             >
               Clear
@@ -84,7 +93,7 @@ class App extends React.Component<{}, State> {
           )}
         </div>
 
-        <ul className="App__goods-list">
+        <ul className="mt-5">
           {goodsFromServer.map(good => {
             const isSelected = selectedGoods.includes(good);
             const buttonText = isSelected ? 'Remove' : 'Select';
@@ -92,12 +101,16 @@ class App extends React.Component<{}, State> {
             return (
               <li
                 key={good}
-                className="App__goods-list-item"
+                className="is-flex
+                  is-justify-content-space-between
+                  has-text-white
+                  my-4
+                  is-size-3"
               >
                 <span>{good}</span>
                 <button
                   type="button"
-                  className="App__button"
+                  className="button is-info is-medium"
                   onClick={() => {
                     return isSelected
                       ? this.clearSelectedGood(good)
