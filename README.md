@@ -1,9 +1,11 @@
 # React Goods selector
-- Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_goods-selector/)
+
+- Replace `<your_account>` with your Github username in the [DEMO LINK](https://AndriySimyachenko.github.io/react_goods-selector/)
 - Follow the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline)
 - Use [React TypeScript cheat sheet](https://mate-academy.github.io/fe-program/js/extra/react-typescript)
 
 ## Task
+
 1. You are given an array of goods
 2. Display them as a list inside the `App` (**DON'T** create additional components)
 3. Add `h1` initially saying `No goods selected`
@@ -19,16 +21,17 @@
 13. Add button `Clear` to the `h1` to clear the selection. (Set empty string `''`)
 14. The clear button should not be visible if there is no selected good
 
-## (* Optional) Advanced task
+## (\* Optional) Advanced task
+
 1. Implement the ability to select `multiple goods` (use `selectedGoods` Array)
 2. Use functional `setState` described in [this video](https://youtu.be/zMe2Qq-ThpM)
 3. All the selected goods should be listed in the `h1`:
-    - `No goods selected`
-    - `Jam is selected`
-    - `Carrot, Jam and Eggs are selected`
+   - `No goods selected`
+   - `Jam is selected`
+   - `Carrot, Jam and Eggs are selected`
 4. Add some styles, you are frontend developer :) (use [Bulma](https://bulma.io) or another library)
- - [Center elements](https://bulma.io/documentation/layout/level/)
- - [Customize buttons](https://bulma.io/documentation/elements/button/)
- - [Customize background](https://bulma.io/documentation/overview/colors/)
- - [Add whatever you want](https://bulma.io/documentation/)
 
+- [Center elements](https://bulma.io/documentation/layout/level/)
+- [Customize buttons](https://bulma.io/documentation/elements/button/)
+- [Customize background](https://bulma.io/documentation/overview/colors/)
+- [Add whatever you want](https://bulma.io/documentation/)

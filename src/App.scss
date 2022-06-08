@@ -1,1 +1,51 @@
 // styles go here
+body {
+  font-family: "Gill Sans", sans-serif;
+  font-size: 30px;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  &__title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: normal;
+    font-family: inherit;
+    background-color: #4fe9cfac;
+    border-radius: 12px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 24px;
+    list-style: none;
+    margin: 0, 12px;
+  }
+
+  &__item {
+    display: flex;
+    width: 400px;
+    margin-bottom: 12px;
+    font-size: 20px;
+    justify-content: space-between;
+  }
+}
+
+.button {
+  background-color: #4fe9cfac;
+  border-radius: 8px;
+}
+
+.button-clear {
+  margin: 15px auto 0;
+  width: 400px;
+  background-color: #4fe9cfac;
+  height: 40px;
+  border-radius: 8px;
+}
