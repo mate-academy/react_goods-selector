@@ -72,7 +72,7 @@ class App extends React.Component<{}, State> {
         {selectedGood
           ? (
             <h1 className="header">
-              {`${selectedGood} is selected`}
+              {`You selected ${selectedGood}`}
             </h1>
           )
           : <h1 className="header">No goods selected</h1>}
