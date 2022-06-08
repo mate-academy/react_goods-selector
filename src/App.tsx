@@ -14,11 +14,54 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-const App: React.FC = () => (
-  <div className="App">
-    <h1>Selected good: -</h1>
-    {goodsFromServer.length}
-  </div>
-);
+interface State {
+  selectedGoods: string[];
+}
 
-export default App;
+export class App extends React.Component<{}, State> {
+  state = {
+    selectedGoods: ['Jam'],
+  };
+
+  render() {
+    const { selectedGoods } = this.state;
+
+    return (
+      <div className="App box">
+        <h1>
+          {selectedGoods.join(', ')}
+          {' '}
+          is selected
+          {' '}
+
+          <button type="button">
+            Clear
+          </button>
+        </h1>
+        {goodsFromServer.length}
+        <hr />
+        <br />
+        <ul>
+          {
+            goodsFromServer.map(item => (
+              <>
+                <label className="ListItem">
+                  <li>{item}</li>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      selectedGoods.push(item);
+                      this.setState({ selectedGoods });
+                    }}
+                  >
+                    Select
+                  </button>
+                </label>
+              </>
+            ))
+          }
+        </ul>
+      </div>
+    );
+  }
+}
