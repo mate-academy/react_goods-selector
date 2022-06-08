@@ -37,10 +37,14 @@ export class App extends React.Component<{}, State> {
       case length === 0:
         return selectedGoodsMessage;
       case length === 1:
-        selectedGoodsMessage = goods.toString().concat(' is selected');
+        selectedGoodsMessage = goods
+          .toString()
+          .concat(' is selected');
         break;
       case length === 2:
-        selectedGoodsMessage = goods.join(' and ').concat(' are selected');
+        selectedGoodsMessage = goods
+          .join(' and ')
+          .concat(' are selected');
         break;
       case length >= 3:
         lastIndexOfComma = selectedGoodsString.lastIndexOf(',');
@@ -64,10 +68,6 @@ export class App extends React.Component<{}, State> {
     }
 
     return goodsList;
-  };
-
-  updateState = (outputMessage: string) => {
-    this.setState({ message: outputMessage });
   };
 
   render() {
@@ -94,12 +94,17 @@ export class App extends React.Component<{}, State> {
         </h1>
         <hr />
         <br />
-        <ul>
+        <ul className="list-group">
           {
             goodsFromServer.map(item => (
               <>
                 <label className="ListItem">
-                  <li key={item}>{item}</li>
+                  <li
+                    className="list-group-item"
+                    key={item}
+                  >
+                    {item}
+                  </li>
                   <button
                     type="button"
                     onClick={() => {
