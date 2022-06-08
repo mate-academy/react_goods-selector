@@ -1,1 +1,55 @@
-// styles go here
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.App {
+  font-size: 20px;
+  display: grid;
+  text-align: center;
+  grid-template-columns: 1fr;
+  text-transform: uppercase;
+  font-family: "Bebas Neue", cursive;
+
+}
+
+.header {
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+.list {
+  list-style: none;
+  padding-left: 0;
+  background-color: yellow;
+  &__item {
+    border: 2px solid transparent;
+    &--selected {
+      background-color: rgb(27, 245, 27);
+      border-color: black;
+      transition: background-color 500ms;
+    }
+  }
+  margin: 0 40%;
+}
+
+.button {
+  text-transform: uppercase;
+  padding: 5px;
+  border: none;
+  &__good {
+    background-color: rgb(152, 137, 165);
+  }
+  &__header {
+    opacity: 0;
+    background-color: red;
+    margin-bottom: 5px;
+    &--clear {
+      opacity: 1;
+    }
+  }
+
+}
