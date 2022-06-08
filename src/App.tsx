@@ -99,32 +99,32 @@ export class App extends React.Component<{}, State> {
         <ul className="list-group">
           {
             goodsFromServer.map(item => (
-              <>
-                <label className="ListItem list-group-item">
-                  <li
-                    className="list-group-item"
-                    key={item}
-                  >
-                    {item}
-                  </li>
-                  <button
-                    className="btn btn-primary"
-                    type="button"
-                    onClick={() => {
-                      this.setState({
-                        selectedGoods: this.updateSelectedGoods(
-                          selectedGoods, item,
-                        ),
-                      });
-                      this.setState({
-                        message: this.createMessage(selectedGoods),
-                      });
-                    }}
-                  >
-                    Select
-                  </button>
-                </label>
-              </>
+              <label
+                className="ListItem list-group-item"
+                key={item}
+              >
+                <li
+                  className="list-group-item"
+                >
+                  {item}
+                </li>
+                <button
+                  className="btn btn-primary"
+                  type="button"
+                  onClick={() => {
+                    this.setState({
+                      selectedGoods: this.updateSelectedGoods(
+                        selectedGoods, item,
+                      ),
+                    });
+                    this.setState({
+                      message: this.createMessage(selectedGoods),
+                    });
+                  }}
+                >
+                  Select
+                </button>
+              </label>
             ))
           }
         </ul>
