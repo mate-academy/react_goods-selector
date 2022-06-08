@@ -22,7 +22,52 @@ interface State {
 export class App extends React.Component<{}, State> {
   state = {
     selectedGoods: ['Jam'],
-    message: 'is selected',
+    message: 'Jam is selected',
+  };
+
+  createMessage = (
+    goods: string[],
+  ) => {
+    let selectedGoodsMessage = 'No goods are selected';
+    const selectedGoodsString = goods.join(', ');
+    let lastIndexOfComma: number;
+    const { length } = goods;
+
+    switch (length >= 0) {
+      case length === 0:
+        return selectedGoodsMessage;
+      case length === 1:
+        selectedGoodsMessage = goods.toString().concat(' is selected');
+        break;
+      case length === 2:
+        selectedGoodsMessage = goods.join(' and ').concat(' are selected');
+        break;
+      case length >= 3:
+        lastIndexOfComma = selectedGoodsString.lastIndexOf(',');
+
+        selectedGoodsMessage = `${selectedGoodsString
+          .substring(0, lastIndexOfComma)} and
+          ${selectedGoodsString
+    .substring(lastIndexOfComma + 1)} are selected`;
+        break;
+
+      default:
+        return 'No goods selected';
+    }
+
+    return selectedGoodsMessage;
+  };
+
+  updateSelectedGoods = (goodsList: string[], item: string) => {
+    if (!goodsList.includes(item)) {
+      goodsList.push(item);
+    }
+
+    return goodsList;
+  };
+
+  updateState = (outputMessage: string) => {
+    this.setState({ message: outputMessage });
   };
 
   render() {
@@ -31,18 +76,16 @@ export class App extends React.Component<{}, State> {
     return (
       <div className="App box">
         <h1>
-          {selectedGoods.join(', ')}
-          {' '}
-          {message}
-          {' '}
+          {
+            message
+          }
 
           <button
             type="button"
             onClick={() => {
               selectedGoods.length = 0;
               this.setState({
-                selectedGoods,
-                message: 'No goods are selected',
+                message: this.createMessage(selectedGoods),
               });
             }}
           >
@@ -56,17 +99,18 @@ export class App extends React.Component<{}, State> {
             goodsFromServer.map(item => (
               <>
                 <label className="ListItem">
-                  <li>{item}</li>
+                  <li key={item}>{item}</li>
                   <button
                     type="button"
                     onClick={() => {
-                      if (!selectedGoods.includes(item)) {
-                        selectedGoods.push(item);
-                        this.setState({
-                          selectedGoods,
-                          message: 'are selected',
-                        });
-                      }
+                      this.setState({
+                        selectedGoods: this.updateSelectedGoods(
+                          selectedGoods, item,
+                        ),
+                      });
+                      this.setState({
+                        message: this.createMessage(selectedGoods),
+                      });
                     }}
                   >
                     Select
