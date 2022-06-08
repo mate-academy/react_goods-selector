@@ -34,7 +34,13 @@ export class App extends React.Component<{}, State> {
           is selected
           {' '}
 
-          <button type="button">
+          <button
+            type="button"
+            onClick={() => {
+              selectedGoods.length = 0;
+              this.setState({ selectedGoods });
+            }}
+          >
             Clear
           </button>
         </h1>
@@ -50,8 +56,10 @@ export class App extends React.Component<{}, State> {
                   <button
                     type="button"
                     onClick={() => {
-                      selectedGoods.push(item);
-                      this.setState({ selectedGoods });
+                      if (!selectedGoods.includes(item)) {
+                        selectedGoods.push(item);
+                        this.setState({ selectedGoods });
+                      }
                     }}
                   >
                     Select
