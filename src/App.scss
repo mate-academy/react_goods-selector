@@ -1,1 +1,13 @@
-// styles go here
+.list {
+  &__item {
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__active {
+    background-color: blueviolet;
+  }
+  &__button {
+    margin-left: 10px;
+  }
+}
