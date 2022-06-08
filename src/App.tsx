@@ -16,35 +16,39 @@ const goodsFromServer: string[] = [
 
 interface State {
   selectedGoods: string[];
+  message: string;
 }
 
 export class App extends React.Component<{}, State> {
   state = {
     selectedGoods: ['Jam'],
+    message: 'is selected',
   };
 
   render() {
-    const { selectedGoods } = this.state;
+    const { selectedGoods, message } = this.state;
 
     return (
       <div className="App box">
         <h1>
           {selectedGoods.join(', ')}
           {' '}
-          is selected
+          {message}
           {' '}
 
           <button
             type="button"
             onClick={() => {
               selectedGoods.length = 0;
-              this.setState({ selectedGoods });
+              this.setState({
+                selectedGoods,
+                message: 'No goods are selected',
+              });
             }}
           >
             Clear
           </button>
         </h1>
-        {goodsFromServer.length}
         <hr />
         <br />
         <ul>
@@ -58,7 +62,10 @@ export class App extends React.Component<{}, State> {
                     onClick={() => {
                       if (!selectedGoods.includes(item)) {
                         selectedGoods.push(item);
-                        this.setState({ selectedGoods });
+                        this.setState({
+                          selectedGoods,
+                          message: 'are selected',
+                        });
                       }
                     }}
                   >
