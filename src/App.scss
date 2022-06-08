@@ -1,9 +1,9 @@
 
-.App{
+.App {
   width: 300px;
   background-color: beige;
   border-radius: 10px;
-  margin: 50px 50px;
+  margin: 50px;
   text-align: right;
   font-family: fantasy;
 }
@@ -11,15 +11,12 @@
 .item {
   padding: 10px;
   &-active {
-    background-color:white;
+    background-color: white;
     border-radius: 15px;
   }
 }
 
-.button{
+.button {
   margin: 5px;
   justify-content: center;
-  ;
 }
-
-

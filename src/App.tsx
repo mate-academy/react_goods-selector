@@ -45,7 +45,7 @@ class App extends React.Component<{}, { selectedGood: string }> {
             is selected
             <button
               type="button"
-              onClick={() => this.onClear()}
+              onClick={this.onClear}
               className="button is-primary is-outlined"
             >
               Clear
@@ -54,9 +54,11 @@ class App extends React.Component<{}, { selectedGood: string }> {
         )}
         <ul>
           {goodsFromServer.map(item => (
-            <li className={
-              this.state.selectedGood === item ? 'item-active' : 'item'
-            }
+            <li
+              key={item}
+              className={
+                this.state.selectedGood === item ? 'item-active' : 'item'
+              }
             >
               {item}
               <button
@@ -68,7 +70,7 @@ class App extends React.Component<{}, { selectedGood: string }> {
               </button>
               <button
                 type="button"
-                onClick={() => this.onClear()}
+                onClick={this.onClear}
                 className="button is-danger"
               >
                 Remove
