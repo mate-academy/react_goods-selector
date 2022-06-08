@@ -74,13 +74,13 @@ export class App extends React.Component<{}, State> {
     const { selectedGoods, message } = this.state;
 
     return (
-      <div className="App box">
+      <div className="App container">
         <h1>
-          {
-            message
-          }
+          {message}
+          {'  '}
 
           <button
+            className="btn btn-warning"
             type="button"
             onClick={() => {
               selectedGoods.length = 0;
@@ -98,7 +98,7 @@ export class App extends React.Component<{}, State> {
           {
             goodsFromServer.map(item => (
               <>
-                <label className="ListItem">
+                <label className="ListItem list-group-item">
                   <li
                     className="list-group-item"
                     key={item}
@@ -106,6 +106,7 @@ export class App extends React.Component<{}, State> {
                     {item}
                   </li>
                   <button
+                    className="btn btn-primary"
                     type="button"
                     onClick={() => {
                       this.setState({
@@ -118,7 +119,7 @@ export class App extends React.Component<{}, State> {
                       });
                     }}
                   >
-                    Select
+                    <span className="badge badge-primary">Select</span>
                   </button>
                 </label>
               </>
