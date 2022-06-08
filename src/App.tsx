@@ -28,7 +28,7 @@ export class App extends React.Component<{}, State> {
   createMessage = (
     goods: string[],
   ) => {
-    let selectedGoodsMessage = 'No goods are selected';
+    let selectedGoodsMessage = 'No goods selected';
     const selectedGoodsString = goods.join(', ');
     let lastIndexOfComma: number;
     const { length } = goods;
@@ -65,6 +65,8 @@ export class App extends React.Component<{}, State> {
   updateSelectedGoods = (goodsList: string[], item: string) => {
     if (!goodsList.includes(item)) {
       goodsList.push(item);
+    } else {
+      goodsList.splice(goodsList.indexOf(item), 1);
     }
 
     return goodsList;
@@ -119,7 +121,7 @@ export class App extends React.Component<{}, State> {
                       });
                     }}
                   >
-                    <span className="badge badge-primary">Select</span>
+                    Select
                   </button>
                 </label>
               </>
