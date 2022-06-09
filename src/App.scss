@@ -1,1 +1,91 @@
-// styles go here
+body,
+html {
+  margin: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.Goods-container {
+  background-color: #315f70;
+  color: #5ec2a9;
+  width: 600px;
+  padding: 15px;
+  margin: 15px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 4px solid #174b5e;
+  border-radius: 15px;
+
+}
+
+.Selected {
+  width: 100%;
+  text-align: center;
+
+  &__header {
+    margin: 0 0 16px;
+  }
+
+  &__goods {
+    height: 50px;
+    display: block;
+    margin: 0 0 16px;
+  }
+}
+
+.list {
+  list-style: none;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 0 16px;
+  padding: 10px;
+  border: 4px solid #174b5e;
+  border-radius: 15px;
+
+  &__item {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    margin-bottom: 8px;
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+}
+
+.Button {
+  width: 80px;
+  border: none;
+  background: none;
+  color: #5ec2a9;
+  border-color: #174b5e;
+  font-size: 16px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.none {
+  visibility: hidden;
+}
+
+.Button:hover {
+  box-sizing: border-box;
+  outline: 1px solid #174b5e;
+  border-radius: 10px;
+}
+
+.Active {
+  text-shadow: 0 0 5px orange;
+}
+
+.Active::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 0.1px;
+  background-color: #174b5e;
+  position: absolute;
+  bottom: -2px;
+}
