@@ -1,1 +1,19 @@
 // styles go here
+ul,
+li {
+  list-style-type: none;
+}
+
+.list-item {
+  padding-left: 20px;
+}
+.list-message {
+  display: flex;
+}
+
+.goods-container {
+
+  display: flex;
+  justify-content: space-between;
+  width: 25%;
+}
