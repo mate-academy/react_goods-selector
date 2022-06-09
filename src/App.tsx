@@ -50,6 +50,8 @@ export class App extends React.Component<{}, State> {
     this.setState((prevState) => ({
       selectedGoods: [...prevState.selectedGoods, item],
     }));
+
+    this.state.isActive = false;
   };
 
   removeGood = (item: string) => {
@@ -61,6 +63,12 @@ export class App extends React.Component<{}, State> {
   clear = () => {
     this.setState({ selectedGoods: [] });
     this.state.isActive = true;
+  };
+
+  hideClearButton = () => {
+    if (this.state.selectedGoods.length <= 1) {
+      this.state.isActive = true;
+    }
   };
 
   render() {
@@ -132,6 +140,7 @@ export class App extends React.Component<{}, State> {
                       border: 0,
                     }}
                     onClick={() => {
+                      this.hideClearButton();
                       handleClick();
                       this.createMessage(this.state.selectedGoods);
                     }}
