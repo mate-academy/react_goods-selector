@@ -18,86 +18,53 @@ export type ButtonColor = 'red' | 'green';
 
 interface State {
   selectedGoods: string[];
-  message: string;
   isActive:boolean;
-  isSelect: boolean;
-  color: string;
 }
 
 export class App extends React.Component<{}, State> {
   state = {
     selectedGoods: ['Jam'],
-    message: 'Jam is selected',
     isActive: false,
-    isSelect: true,
-    color: 'green',
   };
 
   createMessage = (
     goods: string[],
   ) => {
-    let selectedGoodsMessage = 'No goods selected';
-    const selectedGoodsString = goods.join(', ');
-    let lastIndexOfComma: number;
     const { length } = goods;
 
-    switch (length >= 0) {
-      case length === 0:
-        this.state.isActive = true;
-        this.state.color = 'green';
-
-        return selectedGoodsMessage;
-      case length === 1:
-        selectedGoodsMessage = goods
-          .toString()
-          .concat(' is selected');
-        this.state.isActive = false;
-        break;
-      case length === 2:
-        selectedGoodsMessage = goods
-          .join(' and ')
-          .concat(' are selected');
-        this.state.isActive = false;
-        break;
-      case length >= 3:
-        lastIndexOfComma = selectedGoodsString.lastIndexOf(',');
-
-        selectedGoodsMessage = `${selectedGoodsString
-          .substring(0, lastIndexOfComma)} and
-          ${selectedGoodsString
-    .substring(lastIndexOfComma + 1)} are selected`;
-        this.state.isActive = false;
-        break;
-
+    switch (length) {
+      case 0:
+        return 'No items selected';
+      case 1:
+        return `${goods[0]} is selected`;
+      case 2:
+        return `${goods.join(' and ')} are selected`;
       default:
-        return 'No goods selected';
+        return `${goods.slice(0, -1).join(', ')} and ${
+          goods[length - 1]
+        } are selected`;
     }
-
-    return selectedGoodsMessage;
   };
 
-  updateSelectedGoods = (goodsList: string[], item: string) => {
-    if (!goodsList.includes(item)) {
-      goodsList.push(item);
-      this.state.isSelect = false;
-      this.state.color = 'red';
-    } else {
-      goodsList.splice(goodsList.indexOf(item), 1);
-      this.state.isSelect = true;
-      this.state.color = 'green';
-    }
+  addGood = (item: string) => {
+    this.setState((prevState) => ({
+      selectedGoods: [...prevState.selectedGoods, item],
+    }));
+  };
 
-    return goodsList;
+  removeGood = (item: string) => {
+    this.setState((prevState) => ({
+      selectedGoods: prevState.selectedGoods.filter((good) => good !== item),
+    }));
+  };
+
+  clear = () => {
+    this.setState({ selectedGoods: [] });
+    this.state.isActive = true;
   };
 
   render() {
-    const {
-      selectedGoods,
-      message,
-      isActive,
-      isSelect,
-      color,
-    } = this.state;
+    const { selectedGoods, isActive } = this.state;
 
     const showOrHideButton = isActive
       ? null
@@ -106,24 +73,17 @@ export class App extends React.Component<{}, State> {
           className="btn btn-warning"
           type="button"
           onClick={() => {
-            selectedGoods.length = 0;
-            this.setState({
-              message: this.createMessage(selectedGoods),
-            });
+            this.clear();
           }}
         >
           Clear
         </button>
       );
 
-    const showSelectOrRemoveBtn = isSelect
-      ? 'Select'
-      : 'Remove';
-
     return (
       <div className="App container">
         <h1>
-          {message}
+          {this.createMessage(this.state.selectedGoods)}
           {'  '}
 
           {showOrHideButton}
@@ -132,35 +92,55 @@ export class App extends React.Component<{}, State> {
         <br />
         <ul className="list-group">
           {
-            goodsFromServer.map(item => (
-              <label
-                className="ListItem list-group-item"
-                key={item}
-              >
-                <li
-                  className="list-group-item"
+            goodsFromServer.map(item => {
+              const buttonText = selectedGoods.includes(item)
+                ? 'Remove'
+                : 'Select';
+
+              const handleClick = () => {
+                // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+                selectedGoods.includes(item)
+                  ? this.removeGood(item)
+                  : this.addGood(item);
+              };
+
+              const changeButtonColor = (goodItem: string) => {
+                let color = 'red';
+
+                if (!this.state.selectedGoods.includes(goodItem)) {
+                  color = 'green';
+                }
+
+                return color;
+              };
+
+              return (
+                <label
+                  className="ListItem list-group-item"
+                  key={item}
                 >
-                  {item}
-                </li>
-                <button
-                  className="btn"
-                  type="button"
-                  style={{ backgroundColor: color }}
-                  onClick={() => {
-                    this.setState({
-                      selectedGoods: this.updateSelectedGoods(
-                        selectedGoods, item,
-                      ),
-                    });
-                    this.setState({
-                      message: this.createMessage(selectedGoods),
-                    });
-                  }}
-                >
-                  {showSelectOrRemoveBtn}
-                </button>
-              </label>
-            ))
+                  <li
+                    className="list-group-item"
+                  >
+                    {item}
+                  </li>
+                  <button
+                    className="btn btn-success"
+                    type="button"
+                    style={{
+                      backgroundColor: changeButtonColor(item),
+                      border: 0,
+                    }}
+                    onClick={() => {
+                      handleClick();
+                      this.createMessage(this.state.selectedGoods);
+                    }}
+                  >
+                    {buttonText}
+                  </button>
+                </label>
+              );
+            })
           }
         </ul>
       </div>
