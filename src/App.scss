@@ -4,6 +4,11 @@
   margin-bottom: 10px;
 }
 
+.list-group-item:hover {
+  background-color: #9fff80;
+  cursor: pointer;
+}
+
 body {
   font-size: 16px;
 }

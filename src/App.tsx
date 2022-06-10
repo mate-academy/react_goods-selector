@@ -134,12 +134,12 @@ export class App extends React.Component<{}, State> {
                 <label
                   className="ListItem list-group-item"
                   key={item}
-                  style={{
-                    backgroundColor: changeListBackground(item),
-                  }}
                 >
                   <li
                     className="list-group-item"
+                    style={{
+                      backgroundColor: changeListBackground(item),
+                    }}
                   >
                     {item}
                   </li>
