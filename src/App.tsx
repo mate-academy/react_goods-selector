@@ -14,8 +14,6 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-export type ButtonColor = 'red' | 'green';
-
 interface State {
   selectedGoods: string[];
   isActive:boolean;
@@ -122,10 +120,23 @@ export class App extends React.Component<{}, State> {
                 return color;
               };
 
+              const changeListBackground = (goodItem: string) => {
+                let color = '#ff8080';
+
+                if (!this.state.selectedGoods.includes(goodItem)) {
+                  color = '#9fff80';
+                }
+
+                return color;
+              };
+
               return (
                 <label
                   className="ListItem list-group-item"
                   key={item}
+                  style={{
+                    backgroundColor: changeListBackground(item),
+                  }}
                 >
                   <li
                     className="list-group-item"
