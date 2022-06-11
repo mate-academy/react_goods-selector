@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
 
 const goodsFromServer: string[] = [
   'Dumplings',
@@ -53,6 +54,13 @@ class App extends React.Component<{}, State> {
   );
 
   render() {
+    const noGoodsSelected: boolean = this.state.selectedGood.length === 0;
+    const clearButtonClasses = classNames(
+      {
+        clearButtonHidden: noGoodsSelected,
+      },
+    );
+
     return (
       <div className="App">
         <div>
@@ -62,6 +70,7 @@ class App extends React.Component<{}, State> {
 
             <button
               type="button"
+              className={clearButtonClasses}
               onClick={this.clearGoods}
             >
               Clear
@@ -83,7 +92,9 @@ class App extends React.Component<{}, State> {
 
             return (
               <div className="goods-container">
-                <li key={good}>{good}</li>
+                <li key={good}>
+                  {good}
+                </li>
                 <button
                   type="button"
                   onClick={handleClick}
