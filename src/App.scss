@@ -1,24 +1,20 @@
-.list__item {
-  font-family: sans-serif;
-  display: inline-block;
-  margin: 5px;
-  width: 100px;
-  text-align: center;
-  transition: border 0.2s;
-  border: 2px solid transparent;
+ul,
+li {
+  list-style-type: none;
 }
 
-.header {
-  display: inline-block;
-  width: 350px;
-  text-align: center;
+.goods-container {
+
+  margin: 25px;
+
+  font-size: 20px;
+
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
 }
 
-.selected {
-  border: 2px solid greenyellow;
-  border-radius: 3px;
-}
-
-.hidden {
-  display: none;
+.title {
+  margin-left: 50px;
+  font-size: 35px;
 }

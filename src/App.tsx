@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -16,61 +15,80 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  selectedGood: string,
+  selectedGood: string[],
 };
 
 class App extends React.Component<{}, State> {
   state: State = {
-    selectedGood: 'Jam',
+    selectedGood: ['Jam'],
   };
 
-  clickHandler(good: string) {
-    this.setState({ selectedGood: good });
-  }
+  addSelectedGood = (good: string) => {
+    this.setState((prevState) => (
+      { selectedGood: [...prevState.selectedGood, good] }
+    ));
+  };
+
+  removeSelectedGood = (good: string) => {
+    this.setState((prevState) => ({
+      selectedGood: prevState.selectedGood.filter((item) => item !== good),
+    }));
+  };
+
+  createMessage = (goods: string[]) => {
+    switch (goods.length) {
+      case 0:
+        return 'No goods selected';
+      case 1:
+        return `${goods[0]} is selected`;
+      case 2:
+        return `${goods.join(' and ')} are selected`;
+      default:
+        return `${goods.slice(0, -1).join(', ')} and ${goods[goods.length - 1]} are selected`;
+    }
+  };
+
+  clearGoods = () => (
+    this.setState({ selectedGood: [] })
+  );
 
   render() {
-    const { selectedGood } = this.state;
-
     return (
       <div className="App">
-        {selectedGood
-          ? (
-            <>
-              <h1 className="header">{`${selectedGood} is selected`}</h1>
+        <div>
+          <h1 className="title">
+            {this.createMessage(this.state.selectedGood)}
+            { ' ' }
 
-              <button
-                type="button"
-                className="ui button mini"
-                onClick={() => this.clickHandler('')}
-              >
-                Clear
-              </button>
-            </>
-          )
-          : <h1 className="header">No goods selected</h1>}
+            <button
+              type="button"
+              onClick={this.clearGoods}
+            >
+              Clear
+            </button>
+          </h1>
+        </div>
+
         <ul>
-          {goodsFromServer.map(good => {
-            const isSelected = this.state.selectedGood.includes(good);
-            const buttonSelect = isSelected ? 'Remove' : 'Select';
+          {goodsFromServer.map((good) => {
+            const buttonText = this.state.selectedGood.includes(good)
+              ? 'Remove'
+              : 'Select';
+
+            const handleClick = () => (
+              this.state.selectedGood.includes(good)
+                ? this.removeSelectedGood(good)
+                : this.addSelectedGood(good)
+            );
 
             return (
-              <div className="ui container" key={good}>
-                <li
-                  className={classNames(
-                    'list__item',
-                    {
-                      selected: selectedGood === good,
-                    },
-                  )}
-                >
-                  {good}
-                </li>
-
+              <div className="goods-container">
+                <li key={good}>{good}</li>
                 <button
                   type="button"
-                  onClick={() => this.clickHandler(good)}
+                  onClick={handleClick}
                 >
-                  {buttonSelect}
+                  {buttonText}
                 </button>
               </div>
             );
