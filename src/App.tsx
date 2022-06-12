@@ -69,6 +69,7 @@ class App extends React.Component<{}, State> {
           <button
             type="button"
             className="select__clearBtn"
+            onClick={this.clearSelectedGoods}
           >
             clear
           </button>
