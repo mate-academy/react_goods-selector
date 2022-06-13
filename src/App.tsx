@@ -15,87 +15,120 @@ const goodsFromServer: string[] = [
 ];
 
 interface State {
-  goodItem: string;
-  isGoodSelected: boolean;
+  selectedGood: string[];
+  h1Content: string;
+  isListLoaded: boolean;
 }
 
 class App extends React.Component<{}, State> {
   state = {
-    goodItem: 'No goods selected',
-    isGoodSelected: false,
+    h1Content: 'No goods selected',
+    selectedGood: ['Jam'],
+    isListLoaded: false,
+  };
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        h1Content: '',
+        isListLoaded: true,
+      });
+    }, 3000);
+  }
+
+  selectGoodFromList = (good: string) => {
+    this.setState(prevState => ({
+      selectedGood: [...prevState.selectedGood, good],
+    }));
+  };
+
+  removeGoodFromList = (good: string) => {
+    this.setState(prevState => ({
+      selectedGood: prevState
+        .selectedGood
+        .filter(goodItem => goodItem !== good),
+    }));
+  };
+
+  createH1Content = () => {
+    const goods = this.state.selectedGood;
+
+    if (goods.length > 2) {
+      return `${goods.slice(0, -1).join(', ')} and ${goods[goods.length - 1]} are selected`;
+    }
+
+    if (goods.length === 2) {
+      return `${goods[0]} and ${goods[1]} are selected`;
+    }
+
+    if (goods.length === 1) {
+      return `${goods[0]} is selected`;
+    }
+
+    return 'No goods selected';
   };
 
   render() {
-    const { goodItem, isGoodSelected } = this.state;
-
-    const h1Content = isGoodSelected
-      ? `${goodItem} is selected`
-      : `Selected good: - ${goodItem}`;
-
-    let id = 0;
+    const { selectedGood, h1Content, isListLoaded } = this.state;
 
     return (
       <div className="App">
-        <h1>
-          {goodItem && h1Content}
-
-          <br />
-
+        <h1>{h1Content || this.createH1Content()}</h1>
+        {goodsFromServer.length}
+        {Boolean(selectedGood.length) && (
           <button
             type="button"
             onClick={() => {
               this.setState({
-                goodItem: '',
-                isGoodSelected: false,
+                selectedGood: [],
               });
             }}
           >
             Clear
           </button>
-        </h1>
-        {goodsFromServer.length}
+        )}
 
-        <ul className="list_of_goods">
-          {goodsFromServer.map(item => {
-            id += 1;
-
-            return (
-              <li
-                className={goodItem === item ? 'good is-active' : 'good'}
-                key={id}
-              >
-                {item}
-                {goodItem === item
-                  ? (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        this.setState({
-                          goodItem: 'No goods selected',
-                          isGoodSelected: false,
-                        });
-                      }}
+        {
+          isListLoaded
+            ? (
+              <ul className="list_of_goods">
+                {goodsFromServer.map(item => {
+                  return (
+                    <li
+                      className={selectedGood.includes(item)
+                        ? 'good is-active'
+                        : 'good'}
+                      key={item}
                     >
-                      Remove
-                    </button>
-                  )
-                  : (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        this.setState({
-                          goodItem: item,
-                          isGoodSelected: true,
-                        });
-                      }}
-                    >
-                      Select
-                    </button>
-                  )}
-              </li>
-            );
-          })}
-        </ul>
+                      {item}
+                      {selectedGood.includes(item)
+                        ? (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              this.removeGoodFromList(item);
+                            }}
+                          >
+                            Remove
+                          </button>
+                        )
+                        : (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              this.selectGoodFromList(item);
+                            }}
+                          >
+                            Select
+                          </button>
+                        )}
+                    </li>
+                  );
+                })}
+              </ul>
+            )
+            : 'Loading...'
+        }
       </div>
     );
   }
