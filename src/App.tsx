@@ -53,19 +53,16 @@ class App extends React.Component<{}, State> {
   createH1Content = () => {
     const goods = this.state.selectedGood;
 
-    if (goods.length > 2) {
-      return `${goods.slice(0, -1).join(', ')} and ${goods[goods.length - 1]} are selected`;
+    switch (goods.length) {
+      case 0:
+        return 'No goods selected';
+      case 1:
+        return `${goods[0]} is selected`;
+      case 2:
+        return `${goods[0]} and ${goods[1]} are selected`;
+      default:
+        return `${goods.slice(0, -1).join(', ')} and ${goods[goods.length - 1]} are selected`;
     }
-
-    if (goods.length === 2) {
-      return `${goods[0]} and ${goods[1]} are selected`;
-    }
-
-    if (goods.length === 1) {
-      return `${goods[0]} is selected`;
-    }
-
-    return 'No goods selected';
   };
 
   render() {
