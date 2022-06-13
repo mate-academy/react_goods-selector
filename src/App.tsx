@@ -15,48 +15,79 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-class App extends React.Component {
+type State = {
+  selectedGood: string[],
+};
+
+class App extends React.Component<{}, State> {
   state = {
-    selectedGood: 'Jam',
-    isClicked: false,
+    selectedGood: ['Jam'],
   };
 
   onSelected = (item: string) => {
-    this.setState({
-      isClicked: true,
-      selectedGood: item,
+    this.setState((prevState) => ({
+      selectedGood: [...prevState.selectedGood, item],
+    }));
+  };
+
+  removeSelected = (item: string) => {
+    this.setState((prevState) => {
+      const items = [...prevState.selectedGood];
+
+      items.splice(items.indexOf(item), 1);
+
+      return ({
+        selectedGood: items,
+      });
     });
   };
 
-  removeSelected = () => {
-    this.setState({
-      isClicked: false,
-      selectedGood: 'No goods selected',
-    });
+  removeAll = () => {
+    this.setState({ selectedGood: [] });
   };
 
   render() {
-    const { selectedGood, isClicked } = this.state;
+    const { selectedGood } = this.state;
+    const elToHeader = [...selectedGood];
+    const lastEl = elToHeader.splice(-2);
+    let header;
+
+    switch (selectedGood.length) {
+      case 0:
+        header = 'No goods selected';
+
+        break;
+
+      case 1:
+        header = `${selectedGood[0]} is selected`;
+
+        break;
+
+      case 2:
+        header = `${selectedGood[0]} and ${selectedGood[1]}  is selected`;
+        break;
+
+      default:
+        header = `${elToHeader.join(', ')}, ${lastEl.join(' and ')} is selected`;
+    }
 
     return (
       <div className="App">
         <h1>
-          {!isClicked
-            ? 'No goods selected'
-            : (
-              <>
-                {selectedGood}
-                {' '}
-                is selected
-                <button
-                  type="button"
-                  className="list__button"
-                  onClick={() => this.removeSelected()}
-                >
-                  Clear
-                </button>
-              </>
+          <>
+            {header}
+            {' '}
+            {selectedGood.length > 0
+            && (
+              <button
+                type="button"
+                className="list__button"
+                onClick={() => this.removeAll()}
+              >
+                Clear
+              </button>
             )}
+          </>
         </h1>
         <ul>
           {goodsFromServer.map(item => (
@@ -64,16 +95,16 @@ class App extends React.Component {
               key={item}
               className={
                 classNames('list__item',
-                  { list__active: item === selectedGood && isClicked })
+                  { list__active: selectedGood.includes(item) })
               }
             >
               {item}
-              {item === selectedGood && isClicked
+              {selectedGood.includes(item)
                 ? (
                   <button
                     type="button"
                     className="list__button"
-                    onClick={() => this.removeSelected()}
+                    onClick={() => this.removeSelected(item)}
                   >
                     Remove
                   </button>
