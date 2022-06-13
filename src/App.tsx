@@ -61,7 +61,7 @@ class App extends React.Component<{}, State> {
     return (
       <div className="App">
         <div>
-          <h1>
+          <h1 className="selectedGood">
             {`Selected good: ${this.createMessage()}`}
           </h1>
 
@@ -87,7 +87,7 @@ class App extends React.Component<{}, State> {
             })}
           </ul>
 
-          {!!this.state.items.length && (
+          {this.state.items.length && (
             <button
               type="button"
               onClick={() => {
