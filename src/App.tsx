@@ -56,23 +56,31 @@ class App extends React.Component<{}, State> {
 
   render() {
     return (
-      <div className="App">
+      <div className="container">
         <h1 className="title">
           {this.createMessage()}
         </h1>
 
-        <ul className="list">
+        <ul>
           {goodsFromServer.map((good) => {
             const isSelected = this.state.items.includes(good);
             const textButton = isSelected ? 'Remove' : 'Select';
 
             return (
-              <li key={good} className={`list__item ${isSelected ? 'selected' : ''}`}>
-                {good}
+              <li key={good} className="columns">
+                <span
+                  className={`column is-one-fifth ${isSelected
+                    ? 'has-text-primary'
+                    : ''}`}
+                >
+                  {good}
+                </span>
                 <button
                   type="button"
                   onClick={() => this.buttonSelection(isSelected, good)}
-                  className={`button ${isSelected ? 'button-remove' : 'button-selected'}`}
+                  className={`column is-one-fifth button ${isSelected
+                    ? 'is-danger is-outlined'
+                    : 'is-success is-outlined'}`}
                 >
                   {textButton}
                 </button>
@@ -87,7 +95,7 @@ class App extends React.Component<{}, State> {
             onClick={() => {
               this.setState({ items: [] });
             }}
-            className="button button-clear"
+            className="mt-3 button is-dark is-outlined"
           >
             Clear goods!
           </button>
