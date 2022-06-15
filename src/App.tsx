@@ -1,5 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -35,12 +36,7 @@ class App extends React.Component<{}, State> {
       return;
     }
 
-    if (!selected.includes(good)) {
-      const selectedCopy = [...selected];
-
-      selectedCopy.push(good);
-      this.setState({ selected: selectedCopy });
-    }
+    this.setState((prevState) => ({ selected: [...prevState.selected, good] }));
   };
 
   removeAll = () => {
@@ -60,43 +56,38 @@ class App extends React.Component<{}, State> {
             <button
               type="button"
               className="button is-small is-danger"
-              onClick={() => this.removeAll()}
+              onClick={this.removeAll}
             >
               Clear all
             </button>
           )}
         </h1>
         <ul className="column">
-          {goodsFromServer.map(good => {
-            return (
-              <li
-                key={good}
-                className={
-                  `level
-                  ${selected.includes(good)
-                ? 'has-background-success'
-                : ''}`
-                }
+          {goodsFromServer.map(good => (
+            <li
+              key={good}
+              className={classNames(
+                'level',
+                { 'has-background-success': selected.includes(good) },
+              )}
+            >
+              {good}
+              <button
+                type="button"
+                onClick={() => this.changeSelectedState(good)}
+                className={classNames(
+                  'button is-small', {
+                    'is-warning': selected.includes(good),
+                    'is-info': !selected.includes(good),
+                  },
+                )}
               >
-                {good}
-                <button
-                  type="button"
-                  onClick={() => this.changeSelectedState(good)}
-                  className={
-                    `button
-                    is-small
-                  ${selected.includes(good)
-                ? 'is-warning'
-                : 'is-info'}`
-                  }
-                >
-                  {this.state.selected.includes(good)
-                    ? 'Remove'
-                    : 'Select'}
-                </button>
-              </li>
-            );
-          })}
+                {this.state.selected.includes(good)
+                  ? 'Remove'
+                  : 'Select'}
+              </button>
+            </li>
+          ))}
         </ul>
       </div>
     );
@@ -104,3 +95,9 @@ class App extends React.Component<{}, State> {
 }
 
 export default App;
+
+// `button
+//                     is-small
+//                   ${selected.includes(good)
+//               ? 'is-warning'
+//               : 'is-info'}`
