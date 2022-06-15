@@ -26,11 +26,9 @@ class App extends React.Component<{}, State> {
 
   buttonAction = (good: string): void => {
     if (!this.state.selectedGoods.includes(good)) {
-      this.setState((state) => {
-        state.selectedGoods.push(good);
-
-        return { selectedGoods: state.selectedGoods };
-      });
+      this.setState((state) => ({
+        selectedGoods: [...state.selectedGoods, good],
+      }));
     } else {
       this.setState((state) => {
         const newList = state.selectedGoods.filter(item => item !== good);
