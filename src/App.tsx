@@ -24,9 +24,9 @@ class App extends React.Component<{}, State> {
   };
 
   setSelectedGoods = (goods: string) => {
-    this.setState(((prevstate: State) => {
-      return { selectedGoods: [...prevstate.selectedGoods, goods] };
-    }));
+    this.setState(((prevState: State) => (
+      { selectedGoods: [...prevState.selectedGoods, goods] }
+    )));
   };
 
   removeSelectedGood = (good: string) => {
@@ -78,7 +78,14 @@ class App extends React.Component<{}, State> {
         <ul className="select__items">
           {goodsFromServer.map(good => {
             const isSelected = selectedGoods.includes(good);
-            const buttonText = isSelected ? 'Remove' : 'Select';
+            const buttonText = isSelected
+              ? 'Remove'
+              : 'Select';
+            const handleClick = () => (
+              this.state.selectedGoods.includes(good)
+                ? this.removeSelectedGood(good)
+                : this.setSelectedGoods(good)
+            );
 
             return (
               <li
@@ -89,11 +96,7 @@ class App extends React.Component<{}, State> {
                 <button
                   type="button"
                   className="select__btn"
-                  onClick={() => {
-                    return isSelected
-                      ? this.removeSelectedGood(good)
-                      : this.setSelectedGoods(good);
-                  }}
+                  onClick={handleClick}
                 >
                   {buttonText}
                 </button>
