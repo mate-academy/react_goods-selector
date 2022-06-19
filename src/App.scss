@@ -1,1 +1,29 @@
-// styles go here
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.select {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(109, 172, 227);
+
+  &__content {
+    width: 100%;
+    color: black;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+    margin: 15px;
+    background-color: aquamarine;
+  }
+
+  &__btn {
+    background-color: aquamarine;
+  }
+}
