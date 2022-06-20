@@ -24,17 +24,25 @@ class App extends React.Component<{}, State> {
   };
 
   selectGoods = (good: string) => {
-    this.setState(((prevState: State) => {
-      return { selectedGoods: [...prevState.selectedGoods, good] };
-    }));
+    this.setState(((prevState: State) => ({
+      selectedGoods: [...prevState.selectedGoods, good],
+    })));
   };
 
   removeGoods = (good: string) => {
-    this.setState((prevState => ({
+    this.setState(((prevState: State) => ({
       selectedGoods: prevState.selectedGoods.filter(restOfgoods => (
         restOfgoods !== good)),
     }
     )));
+  };
+
+  selectOrRemove = (good: string) => {
+    const isSelected = this.state.selectedGoods.includes(good);
+
+    return isSelected
+      ? this.removeGoods(good)
+      : this.selectGoods(good);
   };
 
   clearSelectedGoods = () => {
@@ -80,11 +88,7 @@ class App extends React.Component<{}, State> {
                 <span>{good}</span>
                 <button
                   type="button"
-                  onClick={() => {
-                    return isSelected
-                      ? this.removeGoods(good)
-                      : this.selectGoods(good);
-                  }}
+                  onClick={() => this.selectOrRemove(good)}
                 >
                   {btnText}
                 </button>
