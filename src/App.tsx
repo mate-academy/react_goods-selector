@@ -14,6 +14,26 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
+const changeButtonColor = (selectedGoods: string[], goodItem: string) => {
+  let color = 'green';
+
+  if (selectedGoods.includes(goodItem)) {
+    color = 'red';
+  }
+
+  return color;
+};
+
+const changeListBackground = (selectedGoods: string[], goodItem: string) => {
+  let color = '#9fff80';
+
+  if (selectedGoods.includes(goodItem)) {
+    color = '#ff8080';
+  }
+
+  return color;
+};
+
 interface State {
   selectedGoods: string[];
   isActive:boolean;
@@ -22,7 +42,7 @@ interface State {
 export class App extends React.Component<{}, State> {
   state = {
     selectedGoods: ['Jam'],
-    isActive: false,
+    isActive: true,
   };
 
   createMessage = (
@@ -49,7 +69,7 @@ export class App extends React.Component<{}, State> {
       selectedGoods: [...prevState.selectedGoods, item],
     }));
 
-    this.state.isActive = false;
+    this.state.isActive = true;
   };
 
   removeGood = (item: string) => {
@@ -60,39 +80,36 @@ export class App extends React.Component<{}, State> {
 
   clear = () => {
     this.setState({ selectedGoods: [] });
-    this.state.isActive = true;
+    this.state.isActive = false;
   };
 
   hideClearButton = () => {
     if (this.state.selectedGoods.length <= 1) {
-      this.state.isActive = true;
+      this.state.isActive = false;
     }
   };
 
   render() {
     const { selectedGoods, isActive } = this.state;
 
-    const showOrHideButton = isActive
-      ? null
-      : (
-        <button
-          className="btn btn-warning"
-          type="button"
-          onClick={() => {
-            this.clear();
-          }}
-        >
-          Clear
-        </button>
-      );
-
     return (
       <div className="App container">
         <h1>
-          {this.createMessage(this.state.selectedGoods)}
-          {'  '}
-
-          {showOrHideButton}
+          {`${this.createMessage(this.state.selectedGoods)} `}
+          {
+            isActive
+              && (
+                <button
+                  className="btn btn-warning"
+                  type="button"
+                  onClick={() => {
+                    this.clear();
+                  }}
+                >
+                  Clear
+                </button>
+              )
+          }
         </h1>
         <hr />
         <br />
@@ -103,31 +120,13 @@ export class App extends React.Component<{}, State> {
                 ? 'Remove'
                 : 'Select';
 
-              const handleClick = () => {
+              const addOrRemoveItem = () => {
                 // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-                selectedGoods.includes(item)
-                  ? this.removeGood(item)
-                  : this.addGood(item);
-              };
-
-              const changeButtonColor = (goodItem: string) => {
-                let color = 'red';
-
-                if (!this.state.selectedGoods.includes(goodItem)) {
-                  color = 'green';
+                if (selectedGoods.includes(item)) {
+                  this.removeGood(item);
+                } else {
+                  this.addGood(item);
                 }
-
-                return color;
-              };
-
-              const changeListBackground = (goodItem: string) => {
-                let color = '#ff8080';
-
-                if (!this.state.selectedGoods.includes(goodItem)) {
-                  color = '#9fff80';
-                }
-
-                return color;
               };
 
               return (
@@ -138,7 +137,9 @@ export class App extends React.Component<{}, State> {
                   <li
                     className="list-group-item"
                     style={{
-                      backgroundColor: changeListBackground(item),
+                      backgroundColor: changeListBackground(
+                        selectedGoods, item,
+                      ),
                     }}
                   >
                     {item}
@@ -147,12 +148,12 @@ export class App extends React.Component<{}, State> {
                     className="btn btn-success"
                     type="button"
                     style={{
-                      backgroundColor: changeButtonColor(item),
+                      backgroundColor: changeButtonColor(selectedGoods, item),
                       border: 0,
                     }}
                     onClick={() => {
                       this.hideClearButton();
-                      handleClick();
+                      addOrRemoveItem();
                       this.createMessage(this.state.selectedGoods);
                     }}
                   >
