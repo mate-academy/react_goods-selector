@@ -22,27 +22,24 @@ type Props = {
 };
 
 class App extends Component<Props, State> {
-
   state = {
     selectedGood: ['Jam'],
   };
 
   addGood = (name:string) => {
-    this.setState((state) => {
-      return {
-        ...state,
-        selectedGood: [...this.state.selectedGood, name],
-      };
-    });
+    this.setState((state) => ({
+      ...state,
+      // eslint-disable-next-line
+      selectedGood: [...this.state.selectedGood, name],
+    }));
   };
 
   removeGood = (name:string) => {
-    this.setState((state) => {
-      return {
-        ...state,
-        selectedGood: this.state.selectedGood.filter(elem => elem !== name),
-      };
-    });
+    this.setState((state) => ({
+      ...state,
+      // eslint-disable-next-line
+      selectedGood: this.state.selectedGood.filter(elem => elem !== name),
+    }));
   };
 
   clearAll = () => {
@@ -58,9 +55,9 @@ class App extends Component<Props, State> {
   };
 
   render() {
-    let keyId = 0;
     const { selectedGood } = this.state;
     const text = selectedGood.length > 0
+      // eslint-disable-next-line
       ? selectedGood.join(', ') + ' is selected'
       : 'No goods selected';
 
@@ -78,7 +75,7 @@ class App extends Component<Props, State> {
 
             return (
               <li
-                key={keyId += 1}
+                key={good}
                 className={className}
               >
                 <span>{good}</span>
@@ -104,13 +101,15 @@ class App extends Component<Props, State> {
 
         <div className="for__buttons">
           {selectedGood.length > 0
-          && <button
-            type="button"
-            className="cursor"
-            onClick={this.clearAll}
-          >
-            Clear
-          </button>}
+          && (
+            <button
+              type="button"
+              className="cursor"
+              onClick={this.clearAll}
+            >
+              Clear
+            </button>
+          )}
 
           <button
             type="button"
