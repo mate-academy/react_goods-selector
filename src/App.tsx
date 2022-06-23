@@ -52,7 +52,7 @@ export class App extends React.Component<{}, State> {
 
     switch (length) {
       case 0:
-        return 'No goods selected';
+        return 'No goods are selected';
       case 1:
         return `${goods[0]} is selected`;
       case 2:
