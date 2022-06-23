@@ -48,7 +48,7 @@ class App extends React.Component<{}, State> {
       return `Selected goods: ${selectedGood}`;
     }
 
-    return `Selected goods: ${selectedGood.slice(0, -1)} and ${selectedGood.slice(-1)}`;
+    return `Selected goods: ${selectedGood.slice(0, -1).join(', ')} and ${selectedGood.slice(-1)}`;
   };
 
   render() {
