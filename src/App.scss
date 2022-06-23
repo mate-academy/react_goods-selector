@@ -1,1 +1,46 @@
-// styles go here
+.App {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &__button{
+    font-size: 10px;
+  }
+
+  &__title {
+    text-align: center;
+    font-size: 20px;
+    color: rgb(106, 106, 255);
+  }
+
+  &__reset {
+    margin-top: 10px;
+    width: 160px;
+    height: 40px;
+  }
+
+  &__good{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 30px;
+    width: 160px;
+
+    color: rgb(129, 129, 129);
+    list-style-type: none;
+
+    &--isactive{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      height: 30px;
+      width: 160px;
+      font-weight: 700;
+      color: rgba(158, 255, 202, 0.788);
+      list-style-type: none;
+    }
+  }
+}
