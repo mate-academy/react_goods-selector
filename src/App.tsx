@@ -41,6 +41,16 @@ class App extends React.Component<{}, State> {
     this.setState({ selectedGood: [] });
   };
 
+  setHeading = () => {
+    const { selectedGood } = this.state;
+
+    if (selectedGood.length === 1) {
+      return `Selected goods: ${selectedGood}`;
+    }
+
+    return `Selected goods: ${selectedGood.slice(0, -1)} and ${selectedGood.slice(-1)}`;
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -48,12 +58,12 @@ class App extends React.Component<{}, State> {
       <div className="container">
         <h1 className="title">
           {selectedGood.length > 0
-            ? `Selected goods: ${selectedGood.join(', ')}`
+            ? this.setHeading()
             : 'No selected goods'}
           {selectedGood.length > 0 && (
             <button
               type="button"
-              className="button"
+              className="button is-right"
               onClick={this.clearGoods}
             >
               Clear all
