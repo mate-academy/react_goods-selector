@@ -1,1 +1,34 @@
 // styles go here
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.good__item {
+  width: 500px;
+  margin: 0 auto 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.for__buttons {
+  display: flex;
+  width: 200px;
+  justify-content: space-between;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.selected {
+  background-color: red;
+}
+
+.not-selected {
+  background-color: blue;
+}
+
+
