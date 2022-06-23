@@ -1,1 +1,11 @@
-// styles go here
+.ListItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 28px;
+}
+
+.list-group-item:hover {
+  background-color: #9fff80;
+  cursor: pointer;
+}
