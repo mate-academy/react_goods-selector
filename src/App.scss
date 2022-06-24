@@ -1,1 +1,14 @@
-// styles go here
+.list {
+  
+  &__item {
+    margin-bottom: 10px;
+
+    &-pink {
+      background-color: rgb(190, 147, 154);
+    }
+  }
+
+  &__button {
+    margin-left: 20px;
+  }
+}
