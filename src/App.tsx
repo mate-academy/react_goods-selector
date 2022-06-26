@@ -40,6 +40,25 @@ class App extends React.Component<{}, State> {
     this.setState({ selectedGoods: [] })
   );
 
+  messageType = (goods: string[]) => {
+    const { length } = goods;
+
+    switch (length) {
+      case 0:
+        return 'No goods selected';
+
+      case 1:
+        return `${goods[0]} is selected`;
+
+      case 2:
+        return `${goods.join(' and ')} are selected`;
+
+      default:
+        return `${goods.slice(0, -1).join(', ')} and
+        ${goods[length - 1]} are selected`;
+    }
+  };
+
   render() {
     const { selectedGoods } = this.state;
 
@@ -47,7 +66,7 @@ class App extends React.Component<{}, State> {
       <div className="App">
         <div className="list-item">
           <h1>
-            {this.state.selectedGoods}
+            {this.messageType(this.state.selectedGoods)}
             {' '}
 
             <button
