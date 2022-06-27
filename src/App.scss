@@ -1,1 +1,181 @@
-// styles go here
+.Page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-family: "Gill Sans", "Gill Sans MT", sans-serif;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: rgb(63, 63, 26);
+  background-color: rgb(169, 169, 169);
+
+}
+
+.App {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  height: 150px;
+
+  margin: 0 10px;
+
+  &__title {
+    max-width: 900px;
+  }
+
+  &__button {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    z-index: 1;
+    width: 3em;
+    height: 2em;
+    line-height: 0.8em;
+
+    font-size: 100%;
+    font-weight: 700;
+    border-radius: 20%;
+    background: rgb(144, 142, 105)
+      linear-gradient(rgb(185, 181, 151),
+      rgb(144, 142, 105));
+    text-shadow: 1px 1px rgba(255, 255, 255, 0.3);
+    box-shadow: inset 0 -2px 1px rgba(29, 29, 12, 0.5),
+      inset 0 2px 1px rgba(255, 255, 255, 0.9),
+      0 4px 4px rgba(29, 29, 12, 0.9);
+    transition: 0.1s;
+    cursor: pointer;
+
+    margin-left: 10px;
+
+    &:after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: 12%;
+      left: 12%;
+      right: 12%;
+      bottom: 12%;
+      border-radius: 100%;
+
+      background: rgb(242, 203, 20)
+        linear-gradient(rgb(242, 203, 20),
+        rgb(255, 182, 7));
+      box-shadow: inset 0 2px 1px rgba(29, 29, 12, 0.5),
+        inset 0 -2px 1px rgba(255, 255, 255, 0.3);
+    }
+
+    &:hover {
+      box-shadow: 0 0 10px rgba(139, 139, 58, 0.3),
+        0 0 6px rgba(255, 255, 0, 0.4),
+        0 0 10px rgba(255, 255, 0, 0.3);
+
+      text-shadow: 0 0 10px rgba(255, 255, 0, 0.3),
+        0 0 6px rgba(255, 255, 0, 0.4),
+        0 0 10px rgba(255, 255, 0, 0.3);
+    }
+  }
+
+  &__label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 700px;
+
+    margin: 0 100px 100px;
+
+    &-element {
+      list-style-type: none;
+
+      width: 35%;
+      font-size: 14px;
+      border-radius: 10px;
+
+      box-shadow: 0 0 10px rgba(61, 61, 29, 0.3),
+        0 0 6px rgba(65, 65, 1, 0.4),
+        0 0 10px rgba(73, 73, 1, 0.3);
+
+      padding: 5px 25px;
+      margin: 5px 0;
+
+      &:hover {
+        box-shadow: 0 0 6px rgba(139, 139, 58, 0.3),
+          0 0 4px rgba(255, 255, 0, 0.4),
+          0 0 6px rgba(255, 255, 0, 0.3);
+
+        text-shadow: 0 0 10px rgba(255, 255, 0, 0.3),
+          0 0 6px rgba(255, 255, 0, 0.4),
+          0 0 10px rgba(255, 255, 0, 0.3);
+      }
+    }
+
+  }
+}
+
+.isActiv {
+  box-shadow: 0 0 10px rgba(139, 139, 58, 0.3);
+  text-shadow: 0 0 10px rgba(255, 255, 0, 0.3),
+    0 0 6px rgba(255, 255, 0, 0.4),
+    0 0 10px rgba(255, 255, 0, 0.3);
+}
+
+.Button {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  width: 1.3em;
+  height: 1.3em;
+  line-height: 1.1em;
+
+  font-size: 200%;
+  font-weight: 700;
+  color: rgba(29, 29, 12, 1);
+  text-shadow: 1px 1px rgba(255, 255, 255, 0.3);
+  border-radius: 20%;
+
+  background: rgb(144, 142, 105)
+    linear-gradient(rgb(185, 181, 151), rgb(144, 142, 105));
+  box-shadow: inset 0 -2px 1px rgba(29, 29, 12, 0.5),
+    inset 0 2px 1px rgba(255, 255, 255, 0.9),
+    0 4px 4px rgba(29, 29, 12, 0.9);
+  transition: 0.1s;
+  cursor: pointer;
+
+  &:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 12%;
+    left: 12%;
+    right: 12%;
+    bottom: 12%;
+    border-radius: 100%;
+    background: rgb(242, 203, 20)
+      linear-gradient(rgb(242, 203, 20),
+      rgb(255, 182, 7));
+    box-shadow: inset 0 2px 1px rgba(0, 0, 0, 0.5),
+      inset 0 -2px 1px rgba(255, 255, 255, 0.3);
+  }
+
+  &:hover {
+    box-shadow: 0 0 10px rgba(139, 139, 58, 0.3),
+      0 0 6px rgba(255, 255, 0, 0.4),
+      0 0 10px rgba(255, 255, 0, 0.3);
+
+    text-shadow: 0 0 10px rgba(255, 255, 0, 0.3),
+      0 0 6px rgba(255, 255, 0, 0.4),
+      0 0 10px rgba(255, 255, 0, 0.3);
+  }
+}
