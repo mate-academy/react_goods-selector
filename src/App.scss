@@ -1,1 +1,24 @@
-// styles go here
+.App {
+  width: 650px;
+  margin: 0 auto;
+}
+
+.goods-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 0;
+  
+  &_item {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.clearButton {
+  margin-left: 15px;
+}
+
+.hidden {
+  display: none;
+}
