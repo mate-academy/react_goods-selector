@@ -1,1 +1,17 @@
-// styles go here
+.container {
+  width: 500px;
+}
+
+.list-group {
+  margin-bottom: 15px;
+}
+
+.list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.selectedGood {
+  background-color: rgba(85, 226, 104, 0.5);
+}
