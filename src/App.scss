@@ -1,1 +1,16 @@
-// styles go here
+.list {
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 480px;
+
+    &--selected {
+      background-color: hsl(171, 100%, 41%);
+    }
+  }
+}
+
+.list__item--selected > .product {
+  color: white;
+}
