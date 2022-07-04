@@ -25,7 +25,11 @@ class App extends React.Component {
   };
 
   select = (item: string) => {
-    this.setState({ selectedGoods: item });
+    if (this.state.selectedGoods.includes(item)) {
+      this.setState({ selectedGoods: '' });
+    } else {
+      this.setState({ selectedGoods: item });
+    }
   };
 
   render() {
