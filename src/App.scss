@@ -2,10 +2,15 @@
   display: flex;
   justify-content: center;
 
+  &__title {
+    text-align: center;
+  }
+
   &__container {
     display: flex;
     flex-direction: column;
     width: 80vw;
+    min-width: 300px;
     align-items: center;
     background-color: gold;
     border: 2px solid goldenrod;

@@ -14,38 +14,60 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-class App extends React.Component {
+interface State {
+  selectedGoods: string[],
+}
+
+class App extends React.Component<{}, State> {
   state = {
     selectedGoods: ['Jam'],
-    defaultStatus: 'No goods selected',
   };
 
   clear = () => {
-    this.setState({ selectedGoods: '' });
+    this.setState({ selectedGoods: [] });
   };
 
-  select = (item: string) => {
-    if (this.state.selectedGoods.includes(item)) {
-      this.setState({ selectedGoods: '' });
+  select = (good: string) => {
+    if (!this.state.selectedGoods.includes(good)) {
+      this.setState((current) => ({
+        selectedGoods: [...current.selectedGoods, good],
+      }));
     } else {
-      this.setState({ selectedGoods: item });
+      this.setState((current) => (
+        { selectedGoods: current.selectedGoods.filter(item => item !== good) }
+      ));
+    }
+  };
+
+  massage = () => {
+    const { selectedGoods } = this.state;
+
+    switch (selectedGoods.length) {
+      case 0:
+        return 'No goods selected';
+
+      case 1:
+        return `${selectedGoods[0]} is selected`;
+
+      case 2:
+        return `${selectedGoods[0]} and ${selectedGoods[1]} are selected`;
+
+      default:
+        return `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods.slice(-1)} are selected`;
     }
   };
 
   render() {
-    const { selectedGoods, defaultStatus } = this.state;
+    const { selectedGoods } = this.state;
     const hiddenButton = selectedGoods.length > 0
       ? null
       : 'App__button--hidden';
-    const titleContent = selectedGoods.length > 0
-      ? `${selectedGoods} is selected`
-      : defaultStatus;
 
     return (
       <div className="App">
         <div className="App__container">
           <h1 className="App__title">
-            {titleContent}
+            {this.massage()}
           </h1>
           <button
             type="button"
