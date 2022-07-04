@@ -1,1 +1,55 @@
-// styles go here
+.App {
+  display: flex;
+  justify-content: center;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    align-items: center;
+    background-color: gold;
+    border: 2px solid goldenrod;
+    border-radius: 40px;
+  }
+  &__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    list-style: none;
+    width: 90%;
+  }
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 20px;
+    color: dimgray;
+    padding: 10px;
+
+    &--selected {
+      background-color: aqua;
+      border-radius: 10px;
+    }
+  }
+
+  &__button {
+    padding: 5px 10px;
+    width: 100px;
+    border-radius: 10px;
+    background-color: #e2de99;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:active {
+      transform: scale(0.9);
+      transition: 0.3s;
+    }
+
+    &--hidden {
+      visibility: hidden;
+      transition: 0s;
+    }
+  }
+}
