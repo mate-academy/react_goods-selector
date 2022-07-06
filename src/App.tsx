@@ -30,16 +30,20 @@ class App extends React.Component<{}, State> {
   };
 
   removeGood = (good: string) => {
-    this.setState((prevState) => (
-      {
-        selecedGoods: prevState.selecedGoods
-          .filter(remaining => remaining !== good),
-      }
-    ));
+    this.setState((prevState) => ({
+      selecedGoods: prevState.selecedGoods
+        .filter(remaining => remaining !== good),
+    }));
+  };
+
+  clear = () => {
+    this.setState({ selecedGoods: [] });
   };
 
   buttonAction = (isSelected: boolean, good: string) => {
-    return isSelected ? this.removeGood(good) : this.selectGood(good);
+    return isSelected
+      ? this.removeGood(good)
+      : this.selectGood(good);
   };
 
   createMessage = () => {
@@ -93,9 +97,7 @@ class App extends React.Component<{}, State> {
         {!!this.state.selecedGoods.length && (
           <button
             type="button"
-            onClick={() => {
-              this.setState({ selecedGoods: [] });
-            }}
+            onClick={() => this.clear()}
             className="btn btn-secondary"
           >
             Clear selected goods
