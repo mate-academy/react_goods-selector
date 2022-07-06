@@ -28,18 +28,7 @@ function createTitle(products: string[]): string {
     return ` ${products[0]} is selected`;
   }
 
-  let str = ' ';
-
-  for (let i = 0; i < products.length; i += 1) {
-    str += products[i];
-    if (i !== products.length - 2 && i !== products.length - 1) {
-      str += ', ';
-    } else if (i !== products.length - 1) {
-      str += ' and ';
-    }
-  }
-
-  return `${str} are selected`;
+  return `${products.slice(0, -1).join(', ')} and ${products.slice(-1)} are selected`;
 }
 
 class App extends React.Component<{}, State> {
@@ -64,13 +53,14 @@ class App extends React.Component<{}, State> {
   };
 
   render() {
+    const { selectedGoods } = this.state;
+
     return (
       <div className="App container">
         <h1 className="title">
           Selected good:
-          {
-            createTitle(this.state.selectedGoods)
-          }
+
+          {createTitle(selectedGoods)}
         </h1>
         <ul className="goods__list columns is-multiline">
           {goodsFromServer.map(product => (
@@ -78,7 +68,7 @@ class App extends React.Component<{}, State> {
               className={classNames(
                 'column',
                 {
-                  active: this.state.selectedGoods.includes(product),
+                  active: selectedGoods.includes(product),
                 },
               )}
               key={product}
@@ -87,7 +77,7 @@ class App extends React.Component<{}, State> {
                 {product}
               </h2>
               {
-                !this.state.selectedGoods.includes(product)
+                !selectedGoods.includes(product)
                   ? (
                     <button
                       className="goods__btn-add button is-success is-small"
