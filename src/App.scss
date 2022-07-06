@@ -1,14 +1,22 @@
+.list-container {
+  width: 666px;
+  margin: 0 auto;
+}
+
 .list {
   &__item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 480px;
 
     &--selected {
       background-color: hsl(171, 100%, 41%);
     }
   }
+}
+
+.selected-products {
+  height: 180px;
 }
 
 .list__item--selected > .product {

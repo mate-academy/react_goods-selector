@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 import './App.scss';
 
@@ -11,15 +12,7 @@ function makeStringOfProducts(array: string[]): string {
     return `${array[0]} is selected`;
   }
 
-  let string = '';
-
-  for (let i = 0; i < array.length - 1; i += 1) {
-    if (i > 0) {
-      string += ', ';
-    }
-
-    string += array[i];
-  }
+  let string = array.slice(0, array.length - 1).join(', ');
 
   string += ` and  ${array[array.length - 1]}`;
 
@@ -59,17 +52,9 @@ class App extends React.Component<Props, State> {
   };
 
   removeProduct = (product: string) => {
-    this.setState((prevState) => {
-      const { selectedProducts } = prevState;
-      const index = selectedProducts.indexOf(product);
-      const newProducts = selectedProducts
-        .slice(0, index)
-        .concat(selectedProducts.slice(index + 1));
-
-      return ({
-        selectedProducts: [...newProducts],
-      });
-    });
+    this.setState(({ selectedProducts }) => ({
+      selectedProducts: selectedProducts.filter(current => current !== product),
+    }));
   };
 
   clearProducts = () => {
@@ -81,12 +66,15 @@ class App extends React.Component<Props, State> {
 
     return (
       <div className="App">
-        <div className="list container box">
-          <ul>
+        <div className="list-container box">
+          <ul className="list">
             {listOfProducts.map((product) => (
               <li
                 key={product}
-                className={`list__item ${selectedProducts.includes(product) ? 'list__item--selected' : ''}`}
+                className={classNames({
+                  list__item: true,
+                  'list__item--selected': selectedProducts.includes(product),
+                })}
               >
                 <p className="product is-size-2">
                   {product}
@@ -95,7 +83,7 @@ class App extends React.Component<Props, State> {
                 {selectedProducts.includes(product)
                   ? (
                     <button
-                      className="button is-primary is-medium"
+                      className="button is-danger is-medium"
                       type="button"
                       onClick={() => this.removeProduct(product)}
                     >
@@ -115,7 +103,7 @@ class App extends React.Component<Props, State> {
             ))}
           </ul>
 
-          <h1 className="is-size-2">
+          <h1 className="selected-products is-size-2">
             {makeStringOfProducts(selectedProducts)}
           </h1>
 
@@ -123,7 +111,7 @@ class App extends React.Component<Props, State> {
             <button
               className="button is-primary is-medium is-fullwidth"
               type="button"
-              onClick={() => this.clearProducts()}
+              onClick={this.clearProducts}
             >
               Clear
             </button>
