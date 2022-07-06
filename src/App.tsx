@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import './App.scss';
 
@@ -39,7 +40,7 @@ class App extends React.Component<{}, State> {
     }
   };
 
-  massage = () => {
+  message = () => {
     const { selectedGoods } = this.state;
 
     switch (selectedGoods.length) {
@@ -59,19 +60,18 @@ class App extends React.Component<{}, State> {
 
   render() {
     const { selectedGoods } = this.state;
-    const hiddenButton = selectedGoods.length > 0
-      ? null
-      : 'App__button--hidden';
 
     return (
       <div className="App">
         <div className="App__container">
           <h1 className="App__title">
-            {this.massage()}
+            {this.message()}
           </h1>
           <button
             type="button"
-            className={`App__button ${hiddenButton}`}
+            className={classNames('App__button', {
+              'App__button--hidden': selectedGoods.length === 0,
+            })}
             onClick={this.clear}
           >
             clear
@@ -80,9 +80,9 @@ class App extends React.Component<{}, State> {
             {goodsFromServer.map((good) => (
               <li
                 key={good}
-                className={`App__item ${selectedGoods.includes(good)
-                  ? 'App__item--selected'
-                  : null}`}
+                className={classNames('App__item', {
+                  'App__item--selected': selectedGoods.includes(good),
+                })}
               >
                 {good}
                 <button
