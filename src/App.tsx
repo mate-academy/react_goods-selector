@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -60,7 +61,7 @@ class App extends React.Component<{}, State> {
         return `${selecedGoods[0]} and ${selecedGoods[1]} are selected`;
 
       default:
-        return `${selecedGoods.slice(0, -1).join(', ')} and ${selecedGoods.slice(-1).join('')} are selected`;
+        return `${selecedGoods.slice(0, -1).join(', ')} and ${selecedGoods[selecedGoods.length - 1]} are selected`;
     }
   };
 
@@ -77,7 +78,15 @@ class App extends React.Component<{}, State> {
             const buttonText = isSelected ? 'Remove' : 'Select';
 
             return (
-              <li key={good} className={`list-group-item ${isSelected ? 'selectedGood' : ''}`}>
+              <li
+                key={good}
+                className={classNames(
+                  'list-group-item',
+                  {
+                    selectedGood: isSelected,
+                  },
+                )}
+              >
                 <span>
                   {good}
                 </span>
@@ -85,7 +94,15 @@ class App extends React.Component<{}, State> {
                 <button
                   type="button"
                   onClick={() => this.buttonAction(isSelected, good)}
-                  className={`${isSelected ? 'btn btn-danger' : 'btn btn-success'}`}
+                  className={classNames(
+                    'btn',
+                    {
+                      'btn-danger': isSelected,
+                    },
+                    {
+                      'btn-success': !isSelected,
+                    },
+                  )}
                 >
                   {buttonText}
                 </button>
@@ -94,7 +111,7 @@ class App extends React.Component<{}, State> {
           })}
         </ul>
 
-        {!!this.state.selecedGoods.length && (
+        {this.state.selecedGoods.length > 0 && (
           <button
             type="button"
             onClick={() => this.clear()}
