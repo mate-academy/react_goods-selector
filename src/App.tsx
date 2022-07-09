@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import './App.scss';
 
@@ -36,20 +37,33 @@ class App extends React.Component<{}, State> {
     } and ${this.state.selectedGoods.slice(-1)} are selected`;
   }
 
+  selectHandler(good: string) {
+    return this.setState(state => ({
+      selectedGoods: (!state.selectedGoods.includes(good))
+        ? [...state.selectedGoods, good]
+        : [...state.selectedGoods
+          .filter(selected => (selected !== good))],
+    }));
+  }
+
+  clearHandler() {
+    return this.setState({ selectedGoods: [] });
+  }
+
   render() {
     return (
-      <div className="
-        container
-        is-max-desktop
-        is-flex
-        is-flex-direction-column
-        is-align-items-center
-        notification
-        is-light
-      "
+      <div className={classNames(
+        'container',
+        'is-max-desktop',
+        'is-flex',
+        'is-flex-direction-column',
+        'is-align-items-center',
+        'notification',
+        'is-light',
+      )}
       >
         <progress
-          className="progress is-info"
+          className={classNames('progress', 'is-info')}
           value={this.state.selectedGoods.length}
           max={goodsFromServer.length}
         />
@@ -57,51 +71,47 @@ class App extends React.Component<{}, State> {
         <h1 className="title is-3 has-text-centered">{this.getGoodsTitle()}</h1>
 
         <ul>
-          {goodsFromServer.map(good => (
-            <li
-              className={`
-                box
-                is-flex
-                is-justify-content-space-between
-                is-align-items-center
-                mb-3
-                ${this.state.selectedGoods.includes(good) && 'has-background-primary'}
-              `}
-              key={good}
-            >
-              {good}
+          {goodsFromServer.map(good => {
+            const isGoodSelected = this.state.selectedGoods.includes(good);
 
-              <button
-                type="button"
-                className={`
-                button
-                ml-6
-                ${this.state.selectedGoods.includes(good) ? 'is-danger' : 'is-success'}
-                `}
-                onClick={() => {
-                  this.setState(state => ({
-                    selectedGoods: (!state.selectedGoods.includes(good))
-                      ? [...state.selectedGoods, good]
-                      : [...state.selectedGoods
-                        .filter(selected => (selected !== good))],
-                  }));
-                }}
+            return (
+              <li
+                className={classNames(
+                  'box',
+                  'is-flex',
+                  'is-justify-content-space-between',
+                  'is-align-items-center',
+                  'mb-3',
+                  { 'has-background-primary': isGoodSelected },
+                )}
+                key={good}
               >
-                {this.state.selectedGoods.includes(good)
-                  ? 'Remove'
-                  : 'Select'}
-              </button>
-            </li>
-          ))}
+                {good}
+
+                <button
+                  type="button"
+                  className={classNames(
+                    'button',
+                    'ml-6',
+                    { 'is-danger': isGoodSelected },
+                    { 'is-success': !isGoodSelected },
+                  )}
+                  onClick={() => this.selectHandler(good)}
+                >
+                  {isGoodSelected
+                    ? 'Remove'
+                    : 'Select'}
+                </button>
+              </li>
+            );
+          })}
         </ul>
 
         {this.state.selectedGoods.length > 0 && (
           <button
             type="button"
             className="button is-warning"
-            onClick={() => {
-              this.setState({ selectedGoods: [] });
-            }}
+            onClick={() => this.clearHandler()}
           >
             Clear
           </button>
