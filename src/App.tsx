@@ -27,7 +27,8 @@ class App extends React.Component<{}, State> {
   clickHandler = (good: string, selectedGoods: string[]): void => {
     if (selectedGoods.includes(good)) {
       this.setState((state: State): State => ({
-        selectedGoods: state.selectedGoods.filter(g => g !== good),
+        selectedGoods: state.selectedGoods
+          .filter(selectedGood => selectedGood !== good),
       }));
     } else {
       this.setState((state: State): State => ({
@@ -38,15 +39,16 @@ class App extends React.Component<{}, State> {
 
   render() {
     const { selectedGoods } = this.state;
+    const selectedLength = selectedGoods.length;
 
     return (
       <div className="App section">
         <h1 className="title is-2">
-          {!selectedGoods.length && 'No goods selected'}
-          {selectedGoods.length === 1 && `${selectedGoods} is selected`}
-          {selectedGoods.length > 1 && `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods.slice(-1)} are selected`}
+          {!selectedLength && 'No goods selected'}
+          {selectedLength === 1 && `${selectedGoods} is selected`}
+          {selectedLength > 1 && `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods.slice(-1)} are selected`}
 
-          {selectedGoods.length > 0 && (
+          {selectedLength > 0 && (
             <button
               type="button"
               className="button is-danger is-light ml-5"
