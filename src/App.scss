@@ -1,1 +1,8 @@
-// styles go here
+.App {
+  margin: auto;
+  max-width: 800px;
+}
+
+.selected {
+  background-color: hsl(126, 100%, 83%);
+}
