@@ -1,1 +1,81 @@
 // styles go here
+body {
+  margin: 0 auto;
+}
+
+.goods {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-color: rgb(121, 121, 121);
+
+  &__title {
+    color: white;
+    margin: 5px;
+    transition: all 0.3s;
+  }
+
+  &__item {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    height: 50px;
+    margin: 10px;
+    padding: 20px;
+
+    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: bold;
+
+    list-style: none;
+    background-color: rgb(152, 152, 152);
+    border-radius: 10px;
+    border: 2px solid lightblue;
+
+    box-shadow: 0 10px 5px rgb(29, 29, 29);
+    text-shadow: 0 2px 2px white, 0 -2px 2px rgb(48, 48, 48);
+  }
+
+  &__button {
+    box-sizing: border-box;
+    padding: 10px;
+    width: 250px;
+
+    background-color: rgb(200, 247, 129);
+    border: 2px solid lightgreen;
+    border-radius: 10px;
+    box-shadow: 0 8px 5px rgb(29, 29, 29);
+    transform: translateY(-10%);
+    transition: 0.5s ease;
+    cursor: pointer;
+
+    &:active {
+      color: white;
+      transform: scaleY(0.2);
+    }
+
+    &--remove {
+      background-color: rgb(162, 41, 55);
+      border: 2px solid rgb(239, 97, 175);
+      color: white;
+    }
+
+    &--clear {
+      margin-bottom: 20px;
+      width: 60%;
+      border-radius: 3%;
+
+      text-transform: uppercase;
+      font-weight: bold;
+      background-color: rgb(237, 248, 21);
+      border: 2px solid rgb(172, 138, 0);
+
+      &:active {
+        width: 0;
+      }
+    }
+  }
+}
