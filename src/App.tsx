@@ -39,7 +39,6 @@ class App extends React.Component<{}, State> {
   addGood = (good: string) => {
     this.setState(prevState => ({
       selectedGoods: [...prevState.selectedGoods, good],
-      isVisible: false,
     }));
   };
 
@@ -47,7 +46,6 @@ class App extends React.Component<{}, State> {
     this.setState((prevState) => ({
       selectedGoods: prevState.selectedGoods
         .filter((prevGood) => (prevGood !== good)),
-      isVisible: true,
     }));
   };
 
