@@ -1,1 +1,33 @@
-// styles go here
+.App {
+  padding: 30px;
+}
+
+.selected {
+  width: 700px;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+
+  &__list {
+    font-size: 30px;
+  }
+}
+
+.list {
+  width: 700px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  margin-bottom: 5px;
+
+  border: 2px solid rgb(162, 127, 187);
+  border-radius: 10px;
+
+  font-size: 20px;
+}
+
+.color {
+  transition: 0.4s;
+  background-color: rgb(226, 203, 243);
+}
