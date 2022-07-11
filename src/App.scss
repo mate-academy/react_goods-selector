@@ -1,1 +1,8 @@
-// styles go here
+.goods {
+  &__item {
+    width: max-content;
+    &--selected {
+      background-color: rgb(179, 102, 102);
+    }
+  }
+}
