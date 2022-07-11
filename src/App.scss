@@ -1,1 +1,32 @@
-// styles go here
+@import url("https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css");
+
+.content {
+  &__title {
+    display: flex;
+    justify-content: min-content;
+    margin: 10px;
+    width: 760px;
+    gap: 10px;
+  }
+
+  &__goods {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+  }
+}
+
+.line {
+  display: flex;
+
+  justify-content: space-between;
+  gap: 5px;
+  width: 600px;
+  border: 1px solid #000;
+  padding: 5px;
+
+  &__item {
+    align-self: center;
+    padding-left: 5px;
+  }
+}
