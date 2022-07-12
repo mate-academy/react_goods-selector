@@ -14,29 +14,6 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-// const App: React.FC = () => (
-//   <div className="App">
-//     <h1>Selected good: No goods selected</h1>
-//     {goodsFromServer.length}
-//     <ul>
-//       {goodsFromServer.map(good => (
-//         <li>
-//           {good}
-//           {' '}
-//           <button
-//             type="button"
-//             // onClick={}
-//           >
-//             Select
-//           </button>
-//         </li>
-//       ))}
-//     </ul>
-//   </div>
-// );
-
-// export default App;
-
 type State = {
   selectedGood: string,
 };
