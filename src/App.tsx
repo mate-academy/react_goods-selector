@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import './App.scss';
 
 const goodsFromServer: string[] = [
@@ -38,6 +38,16 @@ class App extends React.Component<{}, State> {
   render() {
     const { selectedGood } = this.state;
 
+    const liStyle:CSSProperties = {
+      color: 'blue',
+      fontSize: '23px',
+    };
+
+    const liStyleSelect:CSSProperties = {
+      color: 'yellowgreen',
+      fontSize: '23px',
+    };
+
     return (
       <div className="App">
         {selectedGood.length === 0
@@ -66,6 +76,7 @@ class App extends React.Component<{}, State> {
             <ul>
               <li
                 key={good + Math.random()}
+                style={selectGood === good ? liStyleSelect : liStyle}
               >
                 {good}
                 <button
