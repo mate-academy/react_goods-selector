@@ -1,1 +1,57 @@
-// styles go here
+* {
+  font-family: "Arial", sans-serif;
+}
+
+.goods {
+  width: 300px;
+  font-size: 20px;
+  list-style: none;
+}
+
+.good {
+  padding-left: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  background-color: beige;
+  transition: background-color 1s;
+
+  &__on {
+    background-color: rgb(218, 218, 150);
+  }
+
+  &__btn {
+    border-radius: 5px;
+    margin-right: 10px;
+    height: 40px;
+    background-color: rgb(188, 240, 195);
+    cursor: pointer;
+    transition: background-color 1s;
+
+    &:hover {
+      background-color: rgb(34, 151, 63);
+    }
+
+    &--on {
+      background-color: rgb(34, 151, 63);
+    }
+  }
+}
+
+.clear__btn {
+  height: 50px;
+  width: 100px;
+  background-color: rgb(201, 121, 121);
+  cursor: pointer;
+  border-radius: 3px;
+  box-shadow: 5px 5px 5px rgb(238, 179, 179);
+
+  &:hover {
+    background-color: rgb(199, 65, 65);
+  }
+}
