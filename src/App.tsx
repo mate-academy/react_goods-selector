@@ -35,7 +35,7 @@ export class App extends React.Component<{}, State> {
     selectedGoods: ['Jam'],
   };
 
-  setGood = (good: string) => {
+  addGood = (good: string) => {
     this.setState((state) => ({
       selectedGoods: [...state.selectedGoods, good],
     }));
@@ -58,7 +58,7 @@ export class App extends React.Component<{}, State> {
     return (
       <div className="good">
         <h1 className="good__title">
-          { setTitle(selectedGoods) }
+          {setTitle(selectedGoods)}
         </h1>
         <button
           type="button"
@@ -81,7 +81,7 @@ export class App extends React.Component<{}, State> {
                     type="button"
                     className="good__element-button button is-dark"
                     onClick={() => {
-                      this.setGood(good);
+                      this.addGood(good);
                     }}
                   >
                     Select
