@@ -10,11 +10,9 @@ html {
   }
 }
 
-.Good {
-  display: flex;
-  gap: 10px;
+.selectedGood {
+  max-width: max-content;
+  margin: 5px;
 
-  &--active {
-    background-color: #ff0;
-  }
+  background-color: silver;
 }
