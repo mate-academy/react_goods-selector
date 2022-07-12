@@ -1,1 +1,27 @@
-// styles go here
+.content {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    margin: 12px 0 0 32px;
+    width: 800px;
+    height: 80px;
+  }
+}
+
+.list {
+  width: 800px;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    border: 2px solid royalblue;
+    border-radius: 25px;
+  }
+
+  &__item {
+    margin-left: 14px;
+    list-style: none;
+  }
+}
