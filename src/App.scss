@@ -1,1 +1,22 @@
-// styles go here
+.usual {
+  transition: all 0.6s;
+  width: 10%;
+  background-color: gray;
+  color: white;
+}
+
+.selected {
+  transition: all 0.6s;
+  width: 15%;
+  background-color: pink;
+}
+
+.usualButton {
+  transition: all 1.2s;
+  background-color: rgb(228, 222, 222);
+}
+
+.selectedButton {
+  transition: all 0.3s;
+  background-color: gray;
+}
