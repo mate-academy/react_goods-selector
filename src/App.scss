@@ -1,1 +1,25 @@
-// styles go here
+@import "../node_modules/bulma/bulma.sass";
+
+.app {
+  margin: 30px;
+}
+
+.goods {
+  font-size: 24px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid transparent;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    margin-bottom: 10px;
+    &--selected {
+      background-color: lightcoral;
+    }
+  }
+}
+
+.button {
+  margin-left: 10px;
+}
