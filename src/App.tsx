@@ -24,12 +24,11 @@ const createMessage = (selectArray: string[]): string => {
     return `${selectArray[0]} is selected`;
   }
 
-  return `${selectArray.slice(0, -1).join(',')} and ${selectArray.slice(-1)} are selected`;
+  return `${selectArray.slice(0, -1).join(', ')} and ${selectArray.slice(-1)} are selected`;
 };
 
 type State = {
   selectedGoods: string[],
-  // addOrDelete: boolean,
 };
 
 class App extends React.Component<{}, State> {
@@ -96,13 +95,15 @@ class App extends React.Component<{}, State> {
           })}
         </ul>
 
-        <button
-          onClick={this.clear}
-          type="button"
-          className="App__clear-button"
-        >
-          Clear
-        </button>
+        {selectedGoods.length > 0 && (
+          <button
+            onClick={this.clear}
+            type="button"
+            className="App__clear-button"
+          >
+            Clear
+          </button>
+        )}
       </div>
     );
   }
