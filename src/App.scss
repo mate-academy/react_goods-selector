@@ -1,1 +1,40 @@
-// styles go here
+.content {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px auto 0;
+    width: 800px;
+    height: 80px;
+  }
+  & ul {
+    margin-left: 0;
+  }
+
+  & p:not(:last-child) {
+    margin-bottom: 0;
+  }
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 14px;
+
+  &__tittle {
+    max-width: 80%;
+  }
+}
+
+.list {
+  &__tittle {
+    display: flex;
+    margin-left: 14px;
+    margin-bottom: 0;
+    align-items: center;
+
+  }
+}
+
+.button {
+  width: 100px;
+}
