@@ -1,1 +1,68 @@
 // styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+  }
+
+  &__clearButton {
+    height: 40px;
+    width: 80px;
+    border-radius: 20px;
+    border: none;
+    background-color: orange;
+  }
+
+  &__list {
+    padding: 0;
+    margin: 0;
+  }
+
+  &__listItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 300px;
+    height: 30px;
+    border: solid black 2px;
+    border-radius: 20px;
+
+    margin: 10px;
+    padding-left: 10px;
+
+    &Button {
+      height: 100%;
+      border-radius: 20px;
+      border: none;
+
+      &--toSelect {
+        background-color: lightgreen;
+      }
+
+      &--toRemove {
+        background-color: lightcoral;
+      }
+    }
+
+    &--selected {
+      background-color: bisque;
+    }
+  }
+
+  .selected {
+    background-color: yellow;
+  }
+
+  .button--clear {
+    display: block;
+  }
+}
