@@ -1,1 +1,12 @@
-// styles go here
+.App {
+  display: grid;
+  margin-left: 20px;
+}
+
+ul li {
+  margin: 10px;
+
+  button {
+    margin-left: 10px ;
+  }
+}
