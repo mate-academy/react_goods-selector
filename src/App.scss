@@ -68,26 +68,16 @@ body {
 
     transition: all 1.5s;
 
-    &:hover {
-      background-color: #278e92;
-      border-color: #278e92;
-    }
-
     cursor: pointer;
+
+    &:hover {
+      background-color: #16676a;
+      border-color: #16676a;
+    }
   }
 
   &__container-button {
     display: flex;
     gap: 20px;
-  }
-
-  &__button--remove {
-    background-color: #fb7756;
-    border-color: #fb7756;
-
-    &:hover {
-      background-color: #e74645;
-      border-color: #e74645;
-    }
   }
 }

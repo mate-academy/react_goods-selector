@@ -29,6 +29,7 @@ const createMessage = (selectArray: string[]): string => {
 
 type State = {
   selectedGoods: string[],
+  // addOrDelete: boolean,
 };
 
 class App extends React.Component<{}, State> {
@@ -49,6 +50,12 @@ class App extends React.Component<{}, State> {
     }));
   };
 
+  actionButton = (isSelected: boolean, good: string) => {
+    return isSelected
+      ? this.removeGood(good)
+      : this.addGood(good);
+  };
+
   clear = () => {
     this.setState({ selectedGoods: [] });
   };
@@ -65,31 +72,28 @@ class App extends React.Component<{}, State> {
         </h1>
 
         <ul className="App__names">
-          {goodsFromServer.map((good) => (
-            <div className="App__card">
-              <li className="App__card-name" key={good}>
-                {good}
-              </li>
+          {goodsFromServer.map((good) => {
+            const isSelected = selectedGoods.includes(good);
+            const textForButton = isSelected ? 'Remove' : 'Select';
 
-              <div className="App__container-button">
-                <button
-                  className="App__button"
-                  onClick={() => this.addGood(good)}
-                  type="button"
-                >
-                  Select
-                </button>
+            return (
+              <div className="App__card">
+                <li className="App__card-name" key={good}>
+                  {good}
+                </li>
 
-                <button
-                  className="App__button App__button--remove"
-                  onClick={() => this.removeGood(good)}
-                  type="button"
-                >
-                  Remove
-                </button>
+                <div className="App__container-button">
+                  <button
+                    className="App__button"
+                    onClick={() => this.actionButton(isSelected, good)}
+                    type="button"
+                  >
+                    {textForButton}
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </ul>
 
         <button
