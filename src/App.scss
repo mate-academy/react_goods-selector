@@ -1,1 +1,32 @@
-// styles go here
+.title {
+  display: inline-block;
+}
+
+.title-button {
+  margin-top: -20px;
+  margin-left: 5px;
+  opacity: 0.9;
+}
+
+.list {
+  list-style: none;
+
+  &__item {
+    margin-bottom: 5px;
+  }
+  &__phrase {
+    background-color: #fff;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    width: 100px;
+
+    &--active {
+      font-size: 1.05em;
+    }
+  }
+
+  &__button {
+    margin-left: 15px;
+  }
+}
