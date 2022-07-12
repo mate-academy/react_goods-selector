@@ -1,89 +1,102 @@
-const goods = [
-  'Dumplings',
-  'Carrot',
-  'Eggs',
-  'Ice cream',
-  'Apple',
-  'Bread',
-  'Fish',
-  'Honey',
-  'Jam',
-  'Garlic',
-];
-
-const buttons = {
-  clear: 'Clear',
-  remove: 'Remove',
-  select: 'Select'
-};
+import goods from '../../src/goods.js'
 
 const page = {
-  getGoodButton(index, buttonSelector) {
-    return cy.contains('li', goods[index])
-      .contains(buttonSelector);
-  },
-  header() {
-    return cy.get('h1');
-  }
-};
+  title: () => cy.get('.App__title'),
+  clearButton: () => cy.get('.App__clear'),
+  goodAtIndex: (index) => cy.get('.Good').eq(index),
+  goodWithText: (text) => cy.get('.Good').contains(text),
+}
 
 describe('Page', () => {
   beforeEach(() => {
     cy.visit('/');
   });
 
-  it('should have only original items on the list', () => {
-    cy.get('li')
+  it('should have a list with one item per a good', () => {
+    cy.get('.Good')
       .should('have.length', goods.length);
+
+    page.goodAtIndex(5)
+      .should('contain', goods[5]);
+
+    page.goodAtIndex(8)
+      .should('contain', goods[8]);
   });
 
-  it('should have selected Jam item by default', () => {
-    page.header()
-      .should('contain', `${goods[8]} is selected`);
+  it('should have a title with Jam selected by default', () => {
+    page.title()
+      .should('have.text', `Jam is selected`);
   });
 
-  it('should have a name of item on the each item in the list', () => {
-    cy.get('li')
-      .contains(goods[0])
-      .should('be.visible');
+  it('should have a selected item with a "Good--active" class', () => {
+    page.goodWithText('Jam')
+      .should('have.class', 'Good--active');
+  })
+
+  it('should have the "Clear" button when an item is selected', () => {
+    page.clearButton()
+      .should('have.text', 'Clear');
   });
 
-  it('should have a "Remove" button to unselect selected item', () => {
-    page.getGoodButton(8, buttons.remove) 
-      .click();
+  it('should remove selection on "Clear" click', () => {
+    page.clearButton().click()
 
-    page.header()
-      .should('contain', 'No goods selected');
+    page.title()
+      .should('have.text', 'No goods selected');
   });
 
-  it('should have a "Select" button to select item', () => {
-    page.getGoodButton(8, buttons.remove) 
-      .click();
-    page.getGoodButton(8, buttons.select)
-      .click();
+  it('should not show the "Clear" button if there is no selected good', () => {
+    page.clearButton().click()
 
-    page.header()
-      .should('contain', `${goods[8]} is selected`);
-  });
-
-  it('shouldn\'t have a "Select" button on the selected item', () => {
-    page.getGoodButton(8, buttons.select)
+    page.clearButton()
       .should('not.exist');
   });
 
-  it('should have "Clear" button to remove selected elements', () => {
-    cy.contains('button', buttons.clear)
-      .click();
-
-    page.header()
-      .should('contain', 'No goods selected');
+  it('should have a "Select" button next to a not selected item', () => {
+    page.goodAtIndex(3)
+      .find('.Good__select')
+      .should('have.text', 'Select')
   });
 
-  it('should not display "Clear" button if there is no selected good', () => {
-    page.getGoodButton(8, buttons.remove)
+  it('should allow to select a good with its "Select" button', () => {
+    page.goodAtIndex(3)
+      .find('.Good__select')
+      .click()
+
+    page.goodAtIndex(3)
+      .should('have.class', 'Good--active');
+
+    page.title()
+      .should('have.text', `${goods[3]} is selected`)
+  });
+
+  it('should not have a "Select" button next to a selected item', () => {
+    page.goodWithText('Jam')
+      .find('.Good__select')
+      .should('not.exist');
+  });
+
+  it('should have a "Remove" button next to a selected item', () => {
+    page.goodWithText('Jam')
+      .find('.Good__remove')
+      .should('have.text', 'Remove')
+  });
+
+  it('should unselect an item with its "Remove" button', () => {
+    page.goodWithText('Jam')
+      .find('.Good__remove')
       .click();
 
-    cy.contains('button', buttons.clear)
+    page.goodWithText('Jam')
+      .should('not.have.class', 'Good--active');
+
+    page.title()
+      .should('have.text', 'No goods selected');
+  })
+
+  it('should not have a "Remove" button next to a not selected item', () => {
+    page.goodAtIndex(3)
+      .find('.Good__remove')
       .should('not.exist');
   });
 });
