@@ -43,12 +43,13 @@ export class App extends Component<{}, State> {
     const { selectedGood } = this.state;
 
     return (
-      <div className="App">
+      <div className="app">
         <h1 className="goods">
           {`Selected good: ${this.getTitle()}`}
           {' '}
           {selectedGood && (
             <button
+              className="button is-success is-light"
               type="button"
               onClick={() => this.setState({ selectedGood: '' })}
             >
@@ -56,13 +57,12 @@ export class App extends Component<{}, State> {
             </button>
           )}
         </h1>
-        {goodsFromServer.length}
         <ul className="goods__list">
           {goodsFromServer.map(good => (
-            <li className={`goods__item ${good === selectedGood ? 'goods__item--selected' : ''}`}>
+            <li className={`goods__item ${good === selectedGood ? 'goods__item--selected' : ''} `} key={good}>
               {good}
-              {' '}
               <button
+                className="button is-success is-light"
                 type="button"
                 onClick={() => this.onClick(good)}
               >
