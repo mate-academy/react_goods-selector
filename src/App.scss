@@ -1,1 +1,32 @@
 // styles go here
+.goodsSelector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  width: 800px;
+  border: 1px sold black;
+}
+
+.listOfGoods__item {
+  width: 300px;
+  line-height: 40px;
+  display: flex;
+  padding-left: 15px;
+  justify-content: space-between;
+  border-radius: 5px;
+  
+  &--active {
+    background-color: aqua;
+  }
+
+  &:hover {
+    background-color: cadetblue;
+  }
+}
+
+.subtitle {
+  width: 400px;
+  word-wrap: normal;
+  text-align: center;
+}
