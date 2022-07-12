@@ -1,1 +1,65 @@
-// styles go here
+body {
+  margin: 0;
+  background-color: #555;
+}
+
+.App {
+  width: 800px;
+  margin: 50px auto;
+  padding: 20px 60px;
+  display: flex;
+  justify-content: center;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #ddd;
+}
+
+.btn {
+  background-color: #000;
+  color: #aaa;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: #555;
+  }
+
+  &:active {
+    background-color: #fff;
+  }
+}
+
+.title {
+  margin: 0 0 20px;
+  display: flex;
+}
+
+.selectedGoods__list {
+  margin: 0;
+  list-style: none;
+}
+
+.selectedGoods__item {
+  color: darkslategrey;
+  border-bottom: 2px solid darkslategrey;
+}
+
+.clear-btn {
+  width: 90px;
+  height: 36px;
+  align-self: center;
+}
+
+.goods__list {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.goods__item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 26px;
+}
