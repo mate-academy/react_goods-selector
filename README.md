@@ -1,9 +1,5 @@
 # React Goods selector
-- Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_goods-selector/)
-- Follow the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline)
-- Use [React TypeScript cheat sheet](https://mate-academy.github.io/fe-program/js/extra/react-typescript)
 
-## Task
 1. You are given an array of goods
 2. Display them as a list inside the `App` (**DON'T** create additional components)
 3. Add `h1` initially saying `No goods selected`
@@ -20,8 +16,9 @@
 14. The clear button should not be visible if there is no selected good
 
 ## (* Optional) Advanced task
+
 1. Implement the ability to select `multiple goods` (use `selectedGoods` Array)
-2. Use functional `setState` described in [this video](https://youtu.be/zMe2Qq-ThpM)
+2. Use functional `setState` described in the next lesson **Functional setState**
 3. All the selected goods should be listed in the `h1`:
     - `No goods selected`
     - `Jam is selected`
@@ -32,3 +29,7 @@
  - [Customize background](https://bulma.io/documentation/overview/colors/)
  - [Add whatever you want](https://bulma.io/documentation/)
 
+## Instructions
+- Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_goods-selector/)
+- Follow the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline)
+- Use [React TypeScript cheat sheet](https://mate-academy.github.io/fe-program/js/extra/react-typescript)
