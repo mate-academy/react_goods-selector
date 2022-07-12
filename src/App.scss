@@ -1,1 +1,53 @@
-// styles go here
+$productButtonHight: 50px;
+$mainWidth: 50%;
+$buttonWidth: 20%;
+
+.basket {
+  width: $mainWidth;
+  display: flex;
+  justify-content: space-between;
+
+  &__button {
+    background-color: burlywood;
+
+    &--empty {
+      display: none;
+    }
+  }
+}
+
+.goods {
+  display: flex;
+  flex-direction: column;
+  gap: calc(#{$productButtonHight} / 2);
+}
+
+.good {
+  width: $mainWidth;
+  height: $productButtonHight;
+  padding: calc(#{$productButtonHight} / 10);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 90%;
+  font-weight: 700;
+  color: dimgray;
+
+  &__button {
+    width: $buttonWidth;
+    background-color: darkseagreen;
+
+    &--selected {
+      background-color: indianred;
+      border-style: double;
+    }
+  }
+}
+
+.button {
+  width: $buttonWidth;
+  padding: 5px;
+  border: 0;
+  border-radius: 10px;
+}
