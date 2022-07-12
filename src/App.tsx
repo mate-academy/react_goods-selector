@@ -4,16 +4,12 @@ import './App.scss';
 import goodsFromServer from './goods';
 
 type State = {
-  selectedGood: string,
+  selectedGood: string[],
 };
 
 export class App extends React.Component<{}, State> {
   state: Readonly<State> = {
-    selectedGood: 'Nothing',
-  };
-
-  select = (selected: string) => {
-    this.setState({ selectedGood: selected });
+    selectedGood: ['Jam'],
   };
 
   render(): React.ReactNode {
@@ -21,23 +17,50 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="App">
-        <header className="App__header">
-          <h1 className="App__title">
-            {selectedGood}
-            {' is selected'}
-          </h1>
-        </header>
-
-        <ul>
-          {goodsFromServer.map(good => (
-            <li className="liItem">
-              {good}
-
+        <h1>
+          {!selectedGood.length
+            ? 'No goods selected'
+            : `${selectedGood}
+            ${' '}
+            is selected`}
+          {selectedGood.length
+            ? (
               <button
                 type="button"
-                onClick={() => this.select(good)}
+                onClick={() => (
+                  this.setState({ selectedGood: [] })
+                )}
               >
-                Select
+                Clear
+              </button>
+            )
+            : null}
+        </h1>
+
+        <ul>
+          {goodsFromServer.map((good: string) => (
+            <li
+              key={good}
+              className={`${selectedGood.includes(good)
+                ? 'selectedGood'
+                : ''
+              }`}
+            >
+              {good}
+              {' '}
+              <button
+                type="button"
+                onClick={() => {
+                  this.setState({
+                    selectedGood: selectedGood.includes(good)
+                      ? selectedGood.filter((select: string) => select !== good)
+                      : [...selectedGood, good],
+                  });
+                }}
+              >
+                {selectedGood.includes(good)
+                  ? 'Remove'
+                  : 'Select'}
               </button>
             </li>
           ))}
