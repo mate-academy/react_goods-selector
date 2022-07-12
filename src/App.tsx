@@ -57,8 +57,7 @@ class App extends Component<{}, State> {
                 className={classNames({
                   listOfGoods__item: true,
                   'listOfGoods__item--active': selectedGoods.includes(good),
-                  })
-                }
+                })}
               >
                 <span className="good">
                   {good}
@@ -70,9 +69,9 @@ class App extends Component<{}, State> {
                       type="button"
                       onClick={() => this.removeGood(good)}
                     >
-                    Remove
+                      Remove
                     </button>
-                    )
+                  )
                   : (
                     <button
                       className="button is-primary"
@@ -81,7 +80,7 @@ class App extends Component<{}, State> {
                     >
                       Select
                     </button>
-                    )}
+                  )}
               </li>
             ))}
           </ul>
