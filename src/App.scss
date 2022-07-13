@@ -1,20 +1,32 @@
+@import "../node_modules/bulma/bulma.sass";
+
 html {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
-.App {
-  &__header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+.good {
+  border: 1px solid black;
+  display: flex;
+  width: 400px;
+  justify-content: space-between;
+  border-radius: 10px;
+  margin: 5px;
+
+  &__button {
+    margin: 10px;
+  }
+
+  &--selected {
+    background-color: bisque;
   }
 }
 
-.Good {
-  display: flex;
-  gap: 10px;
+.title {
+  text-align: center;
+  margin: 20px 0;
+}
 
-  &--active {
-    background-color: #ff0;
-  }
+.level {
+  display: flex;
+  flex-direction: column;
 }
