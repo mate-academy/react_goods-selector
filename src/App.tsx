@@ -1,51 +1,106 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
 
-// import goodsFromServer from './goods';
+import goodsFromServer from './goods';
 
-export const App: React.FC = () => {
-  return (
-    <main className="App">
-      <header className="App__header">
-        <h1 className="App__title">
-          Jam is selected
+interface State {
+  selectedGoods: string[],
+}
+
+class App extends React.Component<{}, State> {
+  state = {
+    selectedGoods: ['Jam'],
+  };
+
+  removeGood = (good: string) => {
+    this.setState(state => (
+      { selectedGoods: state.selectedGoods.filter(elem => elem !== good) }
+    ));
+  };
+
+  addGood = (good: string) => {
+    this.setState(state => (
+      { selectedGoods: [...state.selectedGoods, good] }
+    ));
+  };
+
+  clear = () => {
+    this.setState({ selectedGoods: [] });
+  };
+
+  render() {
+    const { selectedGoods } = this.state;
+
+    const titleRender = () => {
+      switch (selectedGoods.length) {
+        case 0:
+          return 'No goods selected';
+
+        case 1:
+          return `${selectedGoods} is selected`;
+
+        default:
+          return `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods[selectedGoods.length - 1]} are selected`;
+      }
+    };
+
+    return (
+      <div className="level">
+        <h1 className="title">
+          {titleRender()}
         </h1>
+        {selectedGoods.length > 0 && (
+          <button
+            type="button"
+            onClick={() => this.clear()}
+            className={classNames(
+              'level-item',
+              'button is-danger',
+            )}
+          >
+            Clear selected goods
+          </button>
+        )}
+        <ul className="level">
+          {goodsFromServer.map(good => (
+            <li
+              key={good}
+              className={classNames(
+                'good',
+                'level-item',
+                'has-text-centered',
+                {
+                  'good--selected': selectedGoods.includes(good),
+                },
+              )}
+            >
+              {good}
+              <div className="good__button">
+                {selectedGoods.includes(good) ? (
+                  <button
+                    type="button"
+                    className="button is-link"
+                    onClick={() => this.removeGood(good)}
+                  >
+                    Remove
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="button is-primary"
+                    onClick={() => this.addGood(good)}
+                  >
+                    Select
+                  </button>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}
 
-        <button
-          type="button"
-          className="App__clear"
-        >
-          Clear
-        </button>
-      </header>
-
-      <ul>
-        <li className="Good">Dumplings</li>
-        <li className="Good">Carrot</li>
-        <li className="Good">Eggs</li>
-        <li className="Good">Ice cream</li>
-        <li className="Good">Apple</li>
-        <li className="Good">Bread</li>
-        <li className="Good">Fish</li>
-        <li className="Good">Honey</li>
-        <li className="Good Good--active">Jam</li>
-        <li className="Good">Garlic</li>
-      </ul>
-
-      {/* Put required buttons into each Good */}
-      <button
-        type="button"
-        className="Good__remove"
-      >
-        Remove
-      </button>
-
-      <button
-        type="button"
-        className="Good__select"
-      >
-        Select
-      </button>
-    </main>
-  );
-};
+export default App;
