@@ -15,53 +15,51 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  selectedItem: string[],
+  selectedItems: string[],
 };
 
 class App extends React.Component<{}, State> {
   state = {
-    selectedItem: ['Jam'],
+    selectedItems: ['Jam'],
   };
 
   changeGoodsList = (item: string) => {
-    const { selectedItem } = this.state;
+    const { selectedItems } = this.state;
 
-    if (selectedItem.includes(item)) {
-      selectedItem.splice(selectedItem.indexOf(item), 1);
-    } else {
-      selectedItem.push(item);
-    }
-
-    this.setState({ selectedItem });
+    this.setState({
+      selectedItems: selectedItems.includes(item)
+        ? selectedItems.filter(selected => selected !== item)
+        : [...selectedItems, item],
+    });
   };
 
   setHeader = () => {
-    const { selectedItem } = this.state;
+    const { selectedItems } = this.state;
 
-    if (!selectedItem.length) {
+    if (!selectedItems.length) {
       return 'No selected goods';
     }
 
-    if (selectedItem.length === 1) {
-      return `${selectedItem} is selected`;
+    if (selectedItems.length === 1) {
+      return `${selectedItems} is selected`;
     }
 
-    return selectedItem.slice().join(', ');
+    return selectedItems.slice().join(', ');
   };
 
   removeAll = () => {
-    this.setState({ selectedItem: [] });
+    this.setState({ selectedItems: [] });
   };
 
   render() {
-    const { selectedItem } = this.state;
+    const { selectedItems } = this.state;
 
     return (
       <div className="App">
         <h1>
           {this.setHeader()}
           <button
-            className={`clearButton ${selectedItem.length === 0 ? 'hidden' : ''}`}
+            className={`clearButton ${selectedItems.length === 0 ? 'hidden' : ''}`}
             type="button"
             onClick={this.removeAll}
           >
@@ -73,7 +71,7 @@ class App extends React.Component<{}, State> {
             <li
               key={item}
               className={`goods-list_item goods-list_item--${
-                selectedItem.includes(item) ? 'selected' : ''
+                selectedItems.includes(item) ? 'selected' : ''
               }`}
             >
               {item}
@@ -84,7 +82,7 @@ class App extends React.Component<{}, State> {
                   this.changeGoodsList(item);
                 }}
               >
-                {selectedItem.includes(item) ? 'Remove' : 'Add'}
+                {selectedItems.includes(item) ? 'Remove' : 'Add'}
               </button>
             </li>
           ))}
