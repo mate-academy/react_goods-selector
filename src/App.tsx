@@ -20,12 +20,12 @@ export class App extends Component {
             is selected
           </h1>
 
-          {selectedGood !== 'No goods' && (
+          {selectedGood !== 'No good' && (
             <button
               type="button"
               onClick={() => {
                 this.setState({
-                  selectedGood: 'No goods',
+                  selectedGood: 'No good',
                 });
               }}
               className="App__clear"
@@ -60,7 +60,7 @@ export class App extends Component {
                       type="button"
                       onClick={() => {
                         this.setState({
-                          selectedGood: 'No goods',
+                          selectedGood: 'No good',
                         });
                       }}
                       className="Good__remove"
