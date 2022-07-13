@@ -1,20 +1,38 @@
 html {
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 .App {
-  &__header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-}
-
-.Good {
   display: flex;
+  flex-direction: column;
+  background-color: rgb(238, 245, 241);
+  width: 320px;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 10px;
+  padding: 40px 20px;
   gap: 10px;
 
-  &--active {
-    background-color: #ff0;
+  &__title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-weight: 400;
+  }
+
+  &__element {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__clear {
+    &--hidden {
+      visibility: hidden;
+    }
   }
 }
