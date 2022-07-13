@@ -1,1 +1,32 @@
 // styles go here
+
+.App {
+  max-width: 600px;
+  margin: 0 auto;
+
+  &__title {
+    font-size: 10px;
+    text-align: center;
+  }
+}
+
+.goods {
+  list-style-type: none;
+  padding: 0;
+
+  &__button {
+    width: 100px;
+  }
+
+  &__good {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    background-color: aliceblue;
+    border: 1px solid transparent;
+
+    &--selected {
+      border: 1px solid cadetblue;
+    }
+  }
+}
