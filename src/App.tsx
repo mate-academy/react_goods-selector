@@ -3,7 +3,11 @@ import { Component } from 'react';
 import './App.scss';
 import goodsFromServer from './goods';
 
-export class App extends Component {
+type State = {
+  selectedGood: string,
+};
+
+export class App extends Component<{}, State> {
   state = {
     selectedGood: 'Jam',
   };
