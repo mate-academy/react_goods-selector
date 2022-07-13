@@ -1,20 +1,27 @@
-html {
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-}
-
-.App {
-  &__header {
+.content {
+  &__container {
     display: flex;
-    align-items: center;
-    gap: 20px;
+    justify-content: space-between;
+    margin: 20px 0 0 30px;
+    height: 60px;
+    width: 1000px;
   }
 }
 
-.Good {
-  display: flex;
-  gap: 10px;
+.list {
+  width: 1000px;
 
-  &--active {
-    background-color: #ff0;
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    border-radius: 25px;
+    border: 1px solid pink;
+  }
+
+  &__item {
+    list-style: none;
+    margin-left: 25px;
   }
 }
