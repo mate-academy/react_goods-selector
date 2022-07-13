@@ -75,8 +75,7 @@ class App extends Component<{}, State> {
                     >
                       Select
                     </button>
-                  )
-                  : (
+                  ) : (
                     <button
                       className="App__list-button"
                       type="button"
