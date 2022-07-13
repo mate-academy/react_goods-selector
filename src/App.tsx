@@ -16,24 +16,24 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  status: string,
+  selectedGood: string,
 };
 
 class App extends Component<{}, State> {
   state = {
-    status: 'Jam',
+    selectedGood: 'Jam',
   };
 
   render() {
-    const { status } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <div className="App">
         <h1 className="App__header">
-          {status !== ''
+          {selectedGood !== ''
             ? (
               <>
-                {status}
+                {selectedGood}
                 {' '}
                 is selected
 
@@ -41,7 +41,7 @@ class App extends Component<{}, State> {
                   className="App__header-button"
                   type="button"
                   onClick={() => {
-                    this.setState({ status: '' });
+                    this.setState({ selectedGood: '' });
                   }}
                 >
                   Clear
@@ -59,18 +59,18 @@ class App extends Component<{}, State> {
                 className={classNames(
                   'App__list-item',
                   {
-                    'App__list-item--active': status === good,
+                    'App__list-item--active': selectedGood === good,
                   },
                 )}
               >
                 {good}
-                {status !== good
+                {selectedGood !== good
                   ? (
                     <button
                       className="App__list-button"
                       type="button"
                       onClick={() => {
-                        this.setState({ status: good });
+                        this.setState({ selectedGood: good });
                       }}
                     >
                       Select
@@ -80,7 +80,7 @@ class App extends Component<{}, State> {
                       className="App__list-button"
                       type="button"
                       onClick={() => {
-                        this.setState({ status: '' });
+                        this.setState({ selectedGood: '' });
                       }}
                     >
                       Remove
