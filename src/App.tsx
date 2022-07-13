@@ -16,19 +16,15 @@ const goodsFromServer: string[] = [
 ];
 
 type State = {
-  goods: string[],
   selectedGoods: string[],
 };
 
 export class App extends React.Component <{}, State> {
   state: Readonly<State> = {
-    goods: goodsFromServer,
-    selectedGoods: [goodsFromServer[goodsFromServer.findIndex(good => {
-      return good === 'Jam';
-    })]],
+    selectedGoods: ['Jam'],
   };
 
-  saveGoods = (good:string) => {
+  modifySelectedGoods = (good:string) => {
     const { selectedGoods } = this.state;
 
     if (selectedGoods.includes(good)) {
@@ -57,14 +53,14 @@ export class App extends React.Component <{}, State> {
   };
 
   render(): React.ReactNode {
-    const { goods, selectedGoods } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App card card-content">
         <h1 className="card-header-title">
           {`Selected good: - ${this.renderListofGoods(selectedGoods)}`}
         </h1>
-        {goods.map(good => {
+        {goodsFromServer.map(good => {
           const isSelected = selectedGoods.includes(good);
 
           return (
@@ -88,7 +84,7 @@ export class App extends React.Component <{}, State> {
                   },
                 )}
                 type="button"
-                onClick={() => this.saveGoods(good)}
+                onClick={() => this.modifySelectedGoods(good)}
               >
                 {isSelected ? 'Rremove' : 'Select'}
 
