@@ -1,1 +1,20 @@
-// styles go here
+@import "../node_modules/bulma/bulma.sass";
+
+.good {
+  display: inline-block;
+  border-radius: 10px;
+  margin: 0 5px;
+
+  &__button {
+    margin: 10px 0;
+  }
+
+  &--selected {
+    background-color: lemonchiffon;
+  }
+}
+
+.title {
+  text-align: center;
+  margin: 20px 0;
+}
