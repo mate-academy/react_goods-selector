@@ -6,7 +6,7 @@ You are given an array of goods. Render them as a list with the ability to selec
 1. Save a `selectedGood` in the `App` (`Jam` is the default value).
 1. Show the name of the selected good in the `App__title` in the `Jam is selected` format.
 1. The selected good should be highlighted in the list (add a `Good--active` CSS class).
-1. Add a `Clear` button next to the title to clear the selection (set and empty string `''`).
+1. Add a `Clear` button next to the title to clear the selection (set an empty string `''`).
 1. The `Clear` button should be visible only if some good is selected.
 1. When there is no selected good, the title should show `No goods selected`.
 1. Add a `Select` button next to each good in the list. When you press it, the good becomes selected (only one good can be selected at a time).
