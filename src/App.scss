@@ -1,1 +1,48 @@
-// styles go here
+.App {
+  width: 700px;
+  background-color: rgb(103, 156, 132);
+
+  &__header {
+    padding: 50px;
+    font-size: 50px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__header-button {
+    font-size: 30px;
+    width: 100px;
+    border-radius: 5px;
+  }
+
+  &__list {
+    padding: 50px;
+    display: flex;
+    flex-direction: column ;
+    gap: 20px;
+    list-style: none;
+  }
+
+  &__list-item {
+    font-size: 30px;
+    display: flex;
+    justify-content: space-between;
+
+    &--active {
+      background-color: chartreuse;
+    }
+
+    &:hover {
+      background-color: rgb(103, 119, 156);
+    }
+  }
+
+  &__list-button {
+    width: 100px;
+    font-size: 20px;
+
+    &:hover {
+      background-color: rgb(220, 214, 30);
+    }
+  }
+}
