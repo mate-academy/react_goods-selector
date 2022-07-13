@@ -1,1 +1,46 @@
-// styles go here
+.App {
+  text-align: center;
+  background-color: rgb(248, 225, 225);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+
+  &__product {
+    display: flex;
+    justify-content: space-between;
+    width: 340px;
+    margin-bottom: 20px;
+    padding: 5px;
+    border: 1mm ridge rgba(71, 37, 241, 0.6);
+    border-radius: 10px;
+  }
+}
+
+.button {
+  width: 80px;
+  height: 20px;
+  background-color: rgb(237, 224, 224);
+  border: 2px solid rgba(71, 37, 241, 0.6);
+  border-radius: 5px;
+
+  &__clear {
+    width: 240px;
+    height: 40px;
+    background-color: rgb(241, 177, 177);
+    color: white;
+    border-radius: 5px;
+    margin-bottom: 40px;
+
+    transition: transform 0.5s;
+
+    &:hover {
+      transform: scale(1.2);
+      background-color: rgb(240, 136, 136);
+    }
+  }
+}
