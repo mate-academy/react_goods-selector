@@ -55,6 +55,7 @@ class App extends Component<{}, State> {
           {goodsFromServer.map(good => (
             <>
               <li
+                key={good}
                 className={classNames(
                   'App__list-item',
                   {
