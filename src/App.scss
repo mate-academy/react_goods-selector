@@ -1,5 +1,6 @@
 html {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 18px;
 }
 
 .App {
@@ -8,13 +9,82 @@ html {
     align-items: center;
     gap: 20px;
   }
+
+  &__title {
+    color: #564ec0;
+  }
+
+  &__list {
+    width: 50%;
+    background-color: #040222;
+  }
 }
 
-.Good {
-  display: flex;
-  gap: 10px;
+.product {
+  &__element {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
 
-  &--active {
-    background-color: #ff0;
+    line-height: 24px;
+
+    background-color: #564ec0;
+  }
+
+  &__item {
+    color: antiquewhite;
+  }
+}
+
+.button {
+  margin-right: 50%;
+  width: 65px;
+
+  &-add {
+    color: #c1d3c9;
+    background-color: #1f8a11;
+    border: 1px solid #1f8a11;
+
+    &:hover {
+      background-color: #155417;
+      border: 1px solid #155417;
+    }
+
+    &:active {
+      background-color: #32ed3f;
+      border: 1px solid #32ed3f;
+    }
+  }
+
+  &-remove {
+    color: #c1d3c9;
+    background-color: #aa4d30;
+    border: 1px solid #aa4d30;
+
+    &:hover {
+      background-color: #59290d;
+      border: 1px solid #59290d;
+    }
+
+    &:active {
+      background-color: #e67b3e;
+      border: 1px solid #e67b3e;
+    }
+  }
+
+  &-clear {
+    color: #c1d3c9;
+    background-color: #850505;
+    border: 1px solid #850505;
+
+    &:hover {
+      background-color: #520606;
+      border: 1px solid #520606;
+    }
+
+    &:active {
+      background-color: #f62020;
+      border: 1px solid #f62020;
+    }
   }
 }
