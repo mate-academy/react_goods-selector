@@ -13,6 +13,21 @@ class App extends Component<{}, State> {
     selectedGoods: ['Jam'],
   };
 
+  clear = () => {
+    this.setState({ selectedGoods: [] });
+  };
+
+  handelGood = (good: string) => {
+    const { selectedGoods } = this.state;
+
+    this.setState({
+      selectedGoods: selectedGoods.includes(good)
+        // eslint-disable-next-line max-len
+        ? selectedGoods.filter((select: string) => select !== good)
+        : [...selectedGoods, good],
+    });
+  };
+
   render() {
     const { selectedGoods } = this.state;
 
@@ -30,9 +45,7 @@ class App extends Component<{}, State> {
               <button
                 type="button"
                 className="button is-rounded is-danger"
-                onClick={() => {
-                  this.setState({ selectedGoods: [] });
-                }}
+                onClick={this.clear}
               >
                 Clear
               </button>
@@ -54,14 +67,7 @@ class App extends Component<{}, State> {
                     : 'button is-danger',
                 )}
                 type="button"
-                onClick={() => {
-                  this.setState({
-                    selectedGoods: selectedGoods.includes(good)
-                      // eslint-disable-next-line max-len
-                      ? selectedGoods.filter((select: string) => select !== good)
-                      : [...selectedGoods, good],
-                  });
-                }}
+                onClick={() => this.handelGood(good)}
               >
                 {selectedGoods.includes(good)
                   ? 'Remove'
