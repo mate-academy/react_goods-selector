@@ -57,13 +57,26 @@ class App extends Component<{}, State> {
         <header className="App__header">
           <h1 className="App__title">{this.getGoodsTitle()}</h1>
 
-          <button
-            type="button"
-            onClick={() => this.clear()}
-            className="App__clear"
-          >
-            Clear
-          </button>
+          {selectedGoods.length !== 0
+            ? (
+              <button
+                type="button"
+                onClick={() => this.clear()}
+                className="App__clear"
+              >
+                Clear
+              </button>
+            )
+            : (
+              <button
+                hidden
+                type="button"
+                onClick={() => this.clear()}
+                className="App__clear"
+              >
+                Clear
+              </button>
+            )}
         </header>
 
         <ul>
