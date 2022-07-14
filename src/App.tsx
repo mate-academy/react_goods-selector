@@ -2,19 +2,6 @@ import React from 'react';
 import classNames from 'classnames';
 import './App.scss';
 
-const goodsFromServer: string[] = [
-  'Dumplings',
-  'Carrot',
-  'Eggs',
-  'Ice cream',
-  'Apple',
-  'Bread',
-  'Fish',
-  'Honey',
-  'Jam',
-  'Garlic',
-];
-
 type State = {
   selectedGoods: string[],
 };
