@@ -1,51 +1,123 @@
-import React from 'react';
+import classNames from 'classnames';
+import { Component } from 'react';
 import './App.scss';
 
-// import goodsFromServer from './goods';
+import goodsFromServer from './goods';
 
-export const App: React.FC = () => {
-  return (
-    <main className="App">
-      <header className="App__header">
-        <h1 className="App__title">
-          Jam is selected
-        </h1>
-
-        <button
-          type="button"
-          className="App__clear"
-        >
-          Clear
-        </button>
-      </header>
-
-      <ul>
-        <li className="Good">Dumplings</li>
-        <li className="Good">Carrot</li>
-        <li className="Good">Eggs</li>
-        <li className="Good">Ice cream</li>
-        <li className="Good">Apple</li>
-        <li className="Good">Bread</li>
-        <li className="Good">Fish</li>
-        <li className="Good">Honey</li>
-        <li className="Good Good--active">Jam</li>
-        <li className="Good">Garlic</li>
-      </ul>
-
-      {/* Put required buttons into each Good */}
-      <button
-        type="button"
-        className="Good__remove"
-      >
-        Remove
-      </button>
-
-      <button
-        type="button"
-        className="Good__select"
-      >
-        Select
-      </button>
-    </main>
-  );
+type State = {
+  selectedGoods: string[],
 };
+
+export class App extends Component<{}, State> {
+  state: State = {
+    selectedGoods: ['Jam'],
+  };
+
+  clearSelectedGoods = () => {
+    this.setState({ selectedGoods: ['No goods selected'] });
+  };
+
+  selectGood = (good: string) => {
+    const { selectedGoods } = this.state;
+
+    this.setState(
+      selectedGoods[0] !== 'No goods selected'
+        ? { selectedGoods: [...selectedGoods, good] }
+        : { selectedGoods: [good] },
+    );
+  };
+
+  removeGood = (good: string) => {
+    const { selectedGoods } = this.state;
+
+    this.setState(
+      selectedGoods.length > 1
+        ? {
+          selectedGoods: [
+            ...selectedGoods.filter(currentGood => currentGood !== good),
+          ],
+        }
+        : { selectedGoods: ['No goods selected'] },
+    );
+  };
+
+  render() {
+    const { selectedGoods } = this.state;
+
+    return (
+      <main className="App">
+        <header className="App__header">
+          {selectedGoods[0] !== 'No goods selected'
+          && selectedGoods.length > 0
+            ? (
+              <>
+                <h1
+                  className="App__title"
+                >
+                  {selectedGoods.join(', ')}
+                  {' '}
+                  {selectedGoods.length === 1
+                    ? 'is selected'
+                    : 'are selected'}
+                </h1>
+
+                <button
+                  type="button"
+                  className="App__clear"
+                  onClick={this.clearSelectedGoods}
+                >
+                  Clear
+                </button>
+              </>
+            )
+            : (
+              <h1 className="App__title">
+                No goods selected
+              </h1>
+            )}
+        </header>
+
+        <ul className="Good-list">
+          {goodsFromServer.map(good => (
+            <div className="Good-container">
+              <li
+                className={classNames(
+                  'Good',
+                  {
+                    'Good--active': selectedGoods.includes(good),
+                  },
+                )}
+              >
+                {good}
+              </li>
+
+              {!selectedGoods.includes(good)
+                ? (
+                  <button
+                    type="button"
+                    className="Good__select"
+                    onClick={() => {
+                      this.selectGood(good);
+                    }}
+                  >
+                    Select
+                  </button>
+                )
+                : (
+                  <button
+                    type="button"
+                    className="Good__remove"
+                    onClick={() => {
+                      this.removeGood(good);
+                    }}
+                  >
+                    Remove
+                  </button>
+                )}
+            </div>
+          ))}
+        </ul>
+      </main>
+    );
+  }
+}
