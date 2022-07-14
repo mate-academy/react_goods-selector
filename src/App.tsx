@@ -51,6 +51,12 @@ export class App extends React.Component<{}, State> {
     }));
   };
 
+  clearSelectedGoods = () => {
+    this.setState({
+      selectedGoods: [],
+    });
+  };
+
   render() {
     const { selectedGoods } = this.state;
 
@@ -59,12 +65,27 @@ export class App extends React.Component<{}, State> {
     };
 
     return (
-      <div className="goods">
+      <div className="box has-text-centered">
         <h1
           className="subtitle has-text-centered is-size-3 mt-3"
         >
           { this.setTitle() }
         </h1>
+
+        {(this.state.selectedGoods.length !== 0) && (
+          <button
+            type="button"
+            className="button is-responsive"
+            onClick={() => {
+              this.setState(() => {
+                this.clearSelectedGoods();
+              });
+            }}
+          >
+            Clear List
+          </button>
+        )}
+
         <div className="list box">
           {goodsFromServer.map(good => (
             <div
