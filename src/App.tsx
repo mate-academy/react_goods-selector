@@ -1,51 +1,86 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
-// import goodsFromServer from './goods';
+import goodsFromServer from './goods';
 
-export const App: React.FC = () => {
-  return (
-    <main className="App">
-      <header className="App__header">
-        <h1 className="App__title">
-          Jam is selected
-        </h1>
-
-        <button
-          type="button"
-          className="App__clear"
-        >
-          Clear
-        </button>
-      </header>
-
-      <ul>
-        <li className="Good">Dumplings</li>
-        <li className="Good">Carrot</li>
-        <li className="Good">Eggs</li>
-        <li className="Good">Ice cream</li>
-        <li className="Good">Apple</li>
-        <li className="Good">Bread</li>
-        <li className="Good">Fish</li>
-        <li className="Good">Honey</li>
-        <li className="Good Good--active">Jam</li>
-        <li className="Good">Garlic</li>
-      </ul>
-
-      {/* Put required buttons into each Good */}
-      <button
-        type="button"
-        className="Good__remove"
-      >
-        Remove
-      </button>
-
-      <button
-        type="button"
-        className="Good__select"
-      >
-        Select
-      </button>
-    </main>
-  );
+type State = {
+  selectedGoods: string[],
 };
+
+export class App extends React.Component<{}, State> {
+  state: State = {
+    selectedGoods: ['Jam'],
+  };
+
+  addGood = (good: string) => {
+    this.setState((prevState) => (
+      { selectedGoods: [...prevState.selectedGoods, good] }
+    ));
+  };
+
+  removeGood = (good: string) => {
+    this.setState((prevState) => (
+      { selectedGoods: prevState.selectedGoods.filter(goods => goods !== good) }
+    ));
+  };
+
+  buttonHandler = (good: string) => {
+    if (this.state.selectedGoods.includes(good)) {
+      return this.removeGood(good);
+    }
+
+    return this.addGood(good);
+  };
+
+  render() {
+    const { selectedGoods } = this.state;
+
+    return (
+      <main className="App">
+        <header className="App__header">
+          <h1 className="App__title">
+            {selectedGoods.length > 0
+              ? `Selected: ${selectedGoods.join(', ')}`
+              : 'Nothing is selected'}
+          </h1>
+
+          <button
+            type="button"
+            className="App__button"
+            onClick={() => {
+              this.setState({ selectedGoods: [] });
+            }}
+          >
+            Clear
+          </button>
+
+        </header>
+
+        <ul className="Goods">
+          {goodsFromServer.map(good => (
+            <li
+              className={classNames(
+                'Goods__item',
+                {
+                  'Goods__item--selected': selectedGoods.includes(good),
+                },
+              )}
+              key={good}
+            >
+              <div className="Good__name">{good}</div>
+
+              <button
+                type="button"
+                className="'Goods__button'"
+                onClick={() => this.buttonHandler(good)}
+              >
+                {!selectedGoods.includes(good) ? 'Select' : 'Remove'}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </main>
+    );
+  }
+}

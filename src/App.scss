@@ -3,18 +3,52 @@ html {
 }
 
 .App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   &__header {
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px 10px 0;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
+    width: 500px;
+    border: 1px solid black;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 16px;
+  }
+
+  &__button {
+    margin-bottom: 10px;
   }
 }
 
-.Good {
+.Goods {
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  padding: 5px 10px;
+  width: 500px;
+  list-style: disc;
+  border: 1px solid black;
+  gap: 5px;
 
-  &--active {
-    background-color: #ff0;
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    list-style: disc;
+
+    &--selected {
+      border: 1px dashed black;
+      background-color: rgb(243, 239, 239);
+    }
+  }
+
+  &__name {
+    margin: 5px;
   }
 }
