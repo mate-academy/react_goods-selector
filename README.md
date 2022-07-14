@@ -1,5 +1,7 @@
 # React Goods Selector
 
+> [React + Typescript cheat sheet](https://mate-academy.github.io/fe-program/js/extra/react-typescript)
+
 You are given an array of goods. Render them as a list with the ability to select one and change the selection.
 
 1. Write everything inside the `App` (**don't** create additional components).
