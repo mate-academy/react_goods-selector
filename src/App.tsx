@@ -1,51 +1,134 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
-// import goodsFromServer from './goods';
+type State = {
+  selectedGoods: string[],
+};
 
-export const App: React.FC = () => {
-  return (
-    <main className="App">
-      <header className="App__header">
-        <h1 className="App__title">
-          Jam is selected
+const goodsFromServer = [
+  'Dumplings',
+  'Carrot',
+  'Eggs',
+  'Ice cream',
+  'Apple',
+  'Bread',
+  'Fish',
+  'Honey',
+  'Jam',
+  'Garlic',
+];
+
+export class App extends React.Component<{}, State> {
+  state: Readonly<State> = {
+    selectedGoods: ['Jam'],
+  };
+
+  setTitle() {
+    switch (this.state.selectedGoods.length) {
+      case 0:
+        return 'No goods selected';
+      case 1:
+        return `${this.state.selectedGoods} is selected`;
+      default:
+        return `${this.state.selectedGoods.slice(0, -1).join(', ')} and ${this.state.selectedGoods.slice(-1)} are selected`;
+    }
+  }
+
+  addGood = (good: string) => {
+    this.setState(state => ({
+      selectedGoods: [
+        ...state.selectedGoods,
+        good,
+      ],
+    }));
+  };
+
+  removeGood = (good: string) => {
+    this.setState(state => ({
+      selectedGoods: state.selectedGoods
+        .filter(selectedGood => selectedGood !== good),
+    }));
+  };
+
+  clearSelectedGoods = () => {
+    this.setState({
+      selectedGoods: [],
+    });
+  };
+
+  render() {
+    const { selectedGoods } = this.state;
+
+    const isGoodSelected = (good: string): boolean => {
+      return selectedGoods.includes(good);
+    };
+
+    return (
+      <div className="box has-text-centered">
+        <h1
+          className="subtitle has-text-centered is-size-3 mt-3"
+        >
+          {this.setTitle()}
         </h1>
 
-        <button
-          type="button"
-          className="App__clear"
-        >
-          Clear
-        </button>
-      </header>
+        {(this.state.selectedGoods.length !== 0) && (
+          <button
+            type="button"
+            className="button is-responsive"
+            onClick={() => {
+              this.setState(() => {
+                this.clearSelectedGoods();
+              });
+            }}
+          >
+            Clear List
+          </button>
+        )}
 
-      <ul>
-        <li className="Good">Dumplings</li>
-        <li className="Good">Carrot</li>
-        <li className="Good">Eggs</li>
-        <li className="Good">Ice cream</li>
-        <li className="Good">Apple</li>
-        <li className="Good">Bread</li>
-        <li className="Good">Fish</li>
-        <li className="Good">Honey</li>
-        <li className="Good Good--active">Jam</li>
-        <li className="Good">Garlic</li>
-      </ul>
+        <div className="list box">
+          {goodsFromServer.map(good => (
+            <div
+              key={good}
+              className={classNames(
+                'item',
+                {
+                  'has-background-grey-lighter': !isGoodSelected(good),
+                  'has-background-success': isGoodSelected(good),
+                },
+              )}
+            >
+              <div>
+                {good.toLocaleUpperCase()}
+              </div>
 
-      {/* Put required buttons into each Good */}
-      <button
-        type="button"
-        className="Good__remove"
-      >
-        Remove
-      </button>
+              <button
+                type="button"
+                className={classNames(
+                  'button',
+                  'is-focused',
+                  {
+                    'is-danger': isGoodSelected(good),
+                  },
+                )}
+                onClick={() => {
+                  if (!isGoodSelected(good)) {
+                    this.addGood(good);
+                  }
 
-      <button
-        type="button"
-        className="Good__select"
-      >
-        Select
-      </button>
-    </main>
-  );
-};
+                  if (isGoodSelected(good)) {
+                    this.removeGood(good);
+                  }
+                }}
+              >
+                {!selectedGoods.includes(good)
+                  ? 'CLICK TO SELECT'
+                  : 'CLICK TO REMOVE'}
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+}
