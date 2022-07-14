@@ -1,20 +1,62 @@
 html {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 16px;
 }
 
 .App {
+  margin: 0 auto;
+  max-width: 500px;
+  background-color: rgb(227, 239, 209);
+  padding: 20px 0;
+  border-radius: 30px;
+
   &__header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+    text-align: center;
+    padding: 10px;
+  }
+
+  &__clear {
+    width: 200px;
+    height: 40px;
+
+    font-size: 18px;
+    color: white;
+
+    border: transparent;
+    border-radius: 10px;
+    background-color: rgb(95, 235, 225);
+
+    cursor: pointer;
   }
 }
 
 .Good {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
 
-  &--active {
-    background-color: #ff0;
+  margin-bottom: 10px;
+  font-weight: 600;
+
+  &__button {
+    width: 100px;
+    height: 40px;
+    margin-right: 40px;
+
+    border: 1px transparent;
+    border-radius: 10px;
+
+    color: white;
+    font-size: 16px;
+
+    cursor: pointer;
+
+    &--selected {
+      background-color: rgb(255, 166, 58);
+    }
+
+    &--unselected {
+      background-color: rgb(177, 220, 117);
+    }
   }
 }
