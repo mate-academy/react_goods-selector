@@ -36,20 +36,20 @@ class App extends Component<{}, State> {
     return `${this.state.selectedGoods.slice(0, -1).join(', ')} and ${this.state.selectedGoods.slice(-1)} are selected`;
   }
 
-  addedGoods = (good: string) => {
+  addGoods = (good: string) => {
     this.setState((prevState) => ({
       selectedGoods: [...prevState.selectedGoods, good],
     }));
   };
 
-  removedGoods = (good: string) => {
+  removeGoods = (good: string) => {
     this.setState((prevState) => ({
       selectedGoods: prevState.selectedGoods
         .filter(prevGood => prevGood !== good),
     }));
   };
 
-  clearedBin = () => {
+  cleareBin = () => {
     this.setState({ selectedGoods: [] });
   };
 
@@ -68,7 +68,7 @@ class App extends Component<{}, State> {
             <button
               className="button is-white"
               type="button"
-              onClick={this.clearedBin}
+              onClick={this.cleareBin}
             >
               Clear
             </button>
@@ -86,7 +86,7 @@ class App extends Component<{}, State> {
                         className="button is-small is-success is-light"
                         type="button"
                         onClick={() => {
-                          this.addedGoods(good);
+                          this.addGoods(good);
                         }}
                       >
                         Select
@@ -97,7 +97,7 @@ class App extends Component<{}, State> {
                         className="button is-small is-danger is-light"
                         type="button"
                         onClick={() => {
-                          this.removedGoods(good);
+                          this.removeGoods(good);
                         }}
                       >
                         Remove
