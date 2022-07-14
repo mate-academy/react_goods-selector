@@ -6,6 +6,19 @@ type State = {
   selectedGoods: string[],
 };
 
+const goodsFromServer = [
+  'Dumplings',
+  'Carrot',
+  'Eggs',
+  'Ice cream',
+  'Apple',
+  'Bread',
+  'Fish',
+  'Honey',
+  'Jam',
+  'Garlic',
+];
+
 export class App extends React.Component<{}, State> {
   state: Readonly<State> = {
     selectedGoods: ['Jam'],
@@ -56,7 +69,7 @@ export class App extends React.Component<{}, State> {
         <h1
           className="subtitle has-text-centered is-size-3 mt-3"
         >
-          { this.setTitle() }
+          {this.setTitle()}
         </h1>
 
         {(this.state.selectedGoods.length !== 0) && (
