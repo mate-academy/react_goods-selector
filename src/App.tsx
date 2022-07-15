@@ -9,7 +9,7 @@ type State = {
 
 class App extends React.Component<{}, State> {
   state = {
-    selectedGoods: ['Carrot'],
+    selectedGoods: ['Jam'],
   };
 
   addProduct = (product: string) => {
@@ -19,13 +19,9 @@ class App extends React.Component<{}, State> {
   };
 
   removeProduct = (product: string) => {
-    const productIndex = this.state.selectedGoods
-      .findIndex(good => good === product);
-
     this.setState((state) => ({
       selectedGoods:
-        [...state.selectedGoods.slice(0, productIndex),
-          ...state.selectedGoods.slice(productIndex + 1)],
+        [...state.selectedGoods.filter(good => good !== product)],
     }));
   };
 
