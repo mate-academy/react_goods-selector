@@ -1,20 +1,78 @@
+@mixin button-transition {
+  transition-property: background-color;
+  transition-duration: .2s;
+  transition-timing-function: linear;
+}
+
 html {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
 .App {
-  &__header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+  padding: 0 50px;
+
+  &__title {
+    font-size: 28px;
   }
-}
 
-.Good {
-  display: flex;
-  gap: 10px;
+  &__goods {
+    padding: 0;
+    list-style: none;
+  }
 
-  &--active {
-    background-color: #ff0;
+  &__product {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 300px;
+    margin-bottom: 10px;
+    padding-left: 15px;
+    border: 1px solid #000;
+    border-radius: 10px;
+  }
+
+
+
+  &__button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 40px;
+
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+
+    background-color: #1e6dff;
+    border-radius: 8px;
+
+    @include button-transition;
+    border: 1px solid #000;
+
+    cursor: pointer;
+  }
+
+  &__button:hover {
+    background-color: #0411c9;
+  }
+
+  &__button--clear {
+    background-color: #ff4848;
+    @include button-transition;
+  }
+
+  &__button--clear:hover {
+    background-color: #ff1e1e;
+  }
+
+  &__button--active {
+    background-color: #006905;
+    @include button-transition;
+  }
+
+  &__button--active:hover {
+    background-color: #003a03;
   }
 }
