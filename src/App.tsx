@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import './App.scss';
 
@@ -19,17 +20,30 @@ class App extends React.Component {
     selectedGood: ['Jam'],
   };
 
+  getSelectedGoodsTitle() {
+    return !this.state.selectedGood.length
+      ? 'No goods selected'
+      : `${this.state.selectedGood}
+      ${' '}
+      ${this.state.selectedGood.length > 1
+    ? 'are'
+    : 'is'}
+      selected`;
+  }
+
+  addGood(good: string) {
+    return this.state.selectedGood.includes(good)
+      ? this.state.selectedGood.filter((select: string) => select !== good)
+      : [...this.state.selectedGood, good];
+  }
+
   render() {
     const { selectedGood } = this.state;
 
     return (
       <div className="App">
         <h1>
-          {!selectedGood.length
-            ? 'No goods selected'
-            : `${selectedGood}
-            ${' '}
-            is selected`}
+          {this.getSelectedGoodsTitle()}
           {selectedGood.length
             ? (
               <button
@@ -47,10 +61,9 @@ class App extends React.Component {
           {goodsFromServer.map((good: string) => (
             <li
               key={good}
-              className={`${selectedGood.includes(good)
-                ? 'selectedGood'
-                : ''
-              }`}
+              className={classNames({
+                selectedGood: selectedGood.includes(good),
+              })}
             >
               {good}
               {' '}
@@ -58,9 +71,7 @@ class App extends React.Component {
                 type="button"
                 onClick={() => {
                   this.setState({
-                    selectedGood: selectedGood.includes(good)
-                      ? selectedGood.filter((select: string) => select !== good)
-                      : [...selectedGood, good],
+                    selectedGood: this.addGood(good),
                   });
                 }}
               >
