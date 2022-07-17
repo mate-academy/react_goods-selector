@@ -59,8 +59,7 @@ export class App extends React.Component<{}, State> {
                 }
                 onClick={() => {
                   this.setState({
-                    selectedGood: this.state.selectedGood
-                      += good,
+                    selectedGood: good,
                   });
                 }}
               >
