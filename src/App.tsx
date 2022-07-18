@@ -22,9 +22,7 @@ export class App extends React.Component<{}, State> {
     });
   };
 
-  isGoodSelected = (good: string) => {
-    return this.state.selectedGood.includes(good);
-  };
+  isGoodSelected = (good: string) => this.state.selectedGood.includes(good);
 
   render() {
     const { selectedGood } = this.state;
@@ -50,32 +48,36 @@ export class App extends React.Component<{}, State> {
         </header>
 
         <ul>
-          {goodsFromServer.map(good => (
-            <li
-              key={good}
-              className={classNames('good',
-                { 'good--active': this.isGoodSelected(good) })}
-            >
-              {good}
-              <button
-                type="button"
-                className={classNames('good__select',
-                  { 'good__select--active': !this.isGoodSelected(good) })}
-                onClick={() => this.selectGood(good)}
-              >
-                Select
-              </button>
+          {goodsFromServer.map(good => {
+            const isGoodSelected = this.isGoodSelected(good);
 
-              <button
-                type="button"
-                className={classNames('good__remove',
-                  { 'good__remove--active': this.isGoodSelected(good) })}
-                onClick={this.clear}
+            return (
+              <li
+                key={good}
+                className={classNames('good',
+                  { 'good--active': isGoodSelected })}
               >
-                Remove
-              </button>
-            </li>
-          ))}
+                {good}
+                <button
+                  type="button"
+                  className={classNames('good__select',
+                    { 'good__select--active': !isGoodSelected })}
+                  onClick={() => this.selectGood(good)}
+                >
+                  Select
+                </button>
+
+                <button
+                  type="button"
+                  className={classNames('good__remove',
+                    { 'good__remove--active': isGoodSelected })}
+                  onClick={this.clear}
+                >
+                  Remove
+                </button>
+              </li>
+            );
+          })}
         </ul>
       </main>
     );
