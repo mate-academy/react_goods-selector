@@ -8,13 +8,40 @@ html {
     align-items: center;
     gap: 20px;
   }
+
+  &__clear {
+    display: none;
+
+    &--active {
+      display: inline-block;
+    }
+  }
 }
 
-.Good {
+.good {
   display: flex;
   gap: 10px;
 
   &--active {
-    background-color: #ff0;
+    display: flex;
+    gap: 10px;
+    background-color: greenyellow;
   }
+
+  &__select {
+    display: none;
+
+    &--active {
+      display: inline-block;
+    }
+  }
+
+  &__remove {
+    display: none;
+
+    &--active {
+      display: inline-block;
+    }
+  }
+
 }
