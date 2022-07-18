@@ -4,28 +4,26 @@ import './App.scss';
 import goodsFromServer from './goods';
 
 type State = {
-  goods: string[],
+  // goods: string[],
   selectedGood: string,
 };
 
 export class App extends Component<{}, State> {
   state = {
-    goods: [],
+    // goods: [],
     selectedGood: goodsFromServer[8],
   };
 
-  componentDidMount() {
-    this.setState({ goods: goodsFromServer });
-  }
-
   render() {
-    const { goods, selectedGood } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <main className="App">
         <header className="App__header">
           <h1 className="App__title">
-            {selectedGood.length > 0 ? `${selectedGood} is selected` : 'No goods selected'}
+            {selectedGood.length > 0
+              ? `${selectedGood} is selected`
+              : 'No goods selected'}
           </h1>
           {selectedGood.length > 0
           && (
@@ -42,37 +40,41 @@ export class App extends Component<{}, State> {
         </header>
 
         <ul>
-          {goods.map(good => (
-            <li
-              className={good === selectedGood ? 'Good Good--active' : 'Good'}
-            >
-              {selectedGood !== good
-                && (
-                  <button
-                    type="button"
-                    className="Good__select"
-                    onClick={() => {
-                      this.setState({ selectedGood: good });
-                    }}
-                  >
-                    Select
-                  </button>
-                )}
-              {selectedGood === good
-                && (
-                  <button
-                    type="button"
-                    className="Good__remove"
-                    onClick={() => {
-                      this.setState({ selectedGood: '' });
-                    }}
-                  >
-                    Remove
-                  </button>
-                )}
-              {good}
-            </li>
-          ))}
+          {goodsFromServer.map(good => {
+            const isSelected = selectedGood === good;
+
+            return (
+              <li
+                className={isSelected ? 'Good Good--active' : 'Good'}
+              >
+                {!isSelected
+                  && (
+                    <button
+                      type="button"
+                      className="Good__select"
+                      onClick={() => {
+                        this.setState({ selectedGood: good });
+                      }}
+                    >
+                      Select
+                    </button>
+                  )}
+                {isSelected
+                  && (
+                    <button
+                      type="button"
+                      className="Good__remove"
+                      onClick={() => {
+                        this.setState({ selectedGood: '' });
+                      }}
+                    >
+                      Remove
+                    </button>
+                  )}
+                {good}
+              </li>
+            );
+          })}
         </ul>
       </main>
     );
