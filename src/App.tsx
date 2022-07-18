@@ -1,10 +1,5 @@
-/* eslint-disable react/no-access-state-in-setstate */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable no-param-reassign */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable no-console */
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 import goodsFromServer from './goods';
 
@@ -17,25 +12,38 @@ export class App extends React.Component<{}, State> {
     selectedGood: '',
   };
 
+  clear = () => {
+    this.setState({ selectedGood: '' });
+  };
+
+  selectGood = (good: string) => {
+    this.setState({
+      selectedGood: good,
+    });
+  };
+
+  isGoodSelected = (good: string) => {
+    return this.state.selectedGood.includes(good);
+  };
+
   render() {
+    const { selectedGood } = this.state;
+
     return (
       <main className="App">
         <header className="App__header">
           <h1 className="App__title">
 
-            {this.state.selectedGood
-              ? `${this.state.selectedGood} is selected`
+            {selectedGood
+              ? `${selectedGood} is selected`
               : 'No goods selected'}
           </h1>
 
           <button
             type="button"
-            className={this.state.selectedGood === ''
-              ? 'App__clear'
-              : 'App__clear--visible'}
-            onClick={() => {
-              this.setState({ selectedGood: '' });
-            }}
+            className={classNames('App__clear',
+              { 'App__clear--active': selectedGood })}
+            onClick={this.clear}
           >
             Clear
           </button>
@@ -43,39 +51,26 @@ export class App extends React.Component<{}, State> {
 
         <ul>
           {goodsFromServer.map(good => (
-            <li className={
-              this.state.selectedGood.includes(good)
-                ? 'Good--active'
-                : 'Good'
-            }
+            <li
+              key={good}
+              className={classNames('good',
+                { 'good--active': this.isGoodSelected(good) })}
             >
               {good}
               <button
                 type="button"
-                className={
-                  this.state.selectedGood.includes(good)
-                    ? 'Good__select'
-                    : 'Good__select--visible'
-                }
-                onClick={() => {
-                  this.setState({
-                    selectedGood: good,
-                  });
-                }}
+                className={classNames('good__select',
+                  { 'good__select--active': !this.isGoodSelected(good) })}
+                onClick={() => this.selectGood(good)}
               >
                 Select
               </button>
 
               <button
                 type="button"
-                className={
-                  this.state.selectedGood.includes(good)
-                    ? 'Good__remove--visible'
-                    : 'Good__remove'
-                }
-                onClick={() => {
-                  this.setState({ selectedGood: '' });
-                }}
+                className={classNames('good__remove',
+                  { 'good__remove--active': this.isGoodSelected(good) })}
+                onClick={this.clear}
               >
                 Remove
               </button>

@@ -12,13 +12,13 @@ html {
   &__clear {
     display: none;
 
-    &--visible {
+    &--active {
       display: inline-block;
     }
   }
 }
 
-.Good {
+.good {
   display: flex;
   gap: 10px;
 
@@ -31,7 +31,7 @@ html {
   &__select {
     display: none;
 
-    &--visible {
+    &--active {
       display: inline-block;
     }
   }
@@ -39,7 +39,7 @@ html {
   &__remove {
     display: none;
 
-    &--visible {
+    &--active {
       display: inline-block;
     }
   }
