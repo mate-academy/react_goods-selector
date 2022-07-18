@@ -20,6 +20,12 @@ class App extends React.Component {
     selectedGood: ['Jam'],
   };
 
+  handler(good: string) {
+    return this.state.selectedGood.includes(good)
+      ? this.state.selectedGood.filter((select: string) => select !== good)
+      : [...this.state.selectedGood, good];
+  }
+
   getSelectedGoodsTitle() {
     return !this.state.selectedGood.length
       ? 'No goods selected'
@@ -29,12 +35,6 @@ class App extends React.Component {
     ? 'are'
     : 'is'}
       selected`;
-  }
-
-  addGood(good: string) {
-    return this.state.selectedGood.includes(good)
-      ? this.state.selectedGood.filter((select: string) => select !== good)
-      : [...this.state.selectedGood, good];
   }
 
   render() {
