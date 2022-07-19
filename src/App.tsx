@@ -43,7 +43,9 @@ const App: React.FC = () => {
       <ul className="App__list">
         {productsgoodsFromServer.map((product) => {
           return (
-            <li key={product} className={selectedGoods.includes(` ${product}`) ? 'App__item--active' : 'App__item'}>
+            <li
+              key={product}
+              className={selectedGoods.includes(` ${product}`) ? 'App__item--active' : 'App__item'}>
               <span className="App__span">
                 {product}
               </span>
