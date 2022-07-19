@@ -1,4 +1,6 @@
 import React from 'react';
+import classNames from 'classnames';
+
 import './App.scss';
 
 import goodsFromServer from './goods';
@@ -13,19 +15,11 @@ export class App extends React.Component<{}, State> {
   };
 
   handlerClear = () => {
-    document.querySelector('.Good--active')?.classList.remove('Good--active');
     this.setState({ selectedGood: '' });
   };
 
-  handlerRemove = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.currentTarget.parentElement?.classList.remove('Good--active');
+  handlerRemove = () => {
     this.setState({ selectedGood: '' });
-  };
-
-  select = (event: React.MouseEvent<HTMLButtonElement>, good: string) => {
-    document.querySelector('.Good--active')?.classList.remove('Good--active');
-    event.currentTarget.parentElement?.classList.add('Good--active');
-    this.setState({ selectedGood: good });
   };
 
   render() {
@@ -51,7 +45,11 @@ export class App extends React.Component<{}, State> {
 
         <ul>
           {goodsFromServer.map(good => (
-            <li className="Good">
+            <li className={classNames(
+              'Good',
+              { 'Good--active': this.state.selectedGood === good },
+            )}
+            >
               {good}
               {this.state.selectedGood === good && (
                 <button
@@ -67,8 +65,8 @@ export class App extends React.Component<{}, State> {
                 <button
                   type="button"
                   className="Good__select"
-                  onClick={(event) => {
-                    this.select(event, good);
+                  onClick={() => {
+                    this.setState({ selectedGood: good });
                   }}
                 >
                   Select
