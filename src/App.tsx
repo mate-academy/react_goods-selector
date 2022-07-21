@@ -44,18 +44,16 @@ class App extends React.Component {
       <div className="App">
         <h1>
           {this.getSelectedGoodsTitle()}
-          {selectedGood.length
-            ? (
-              <button
-                type="button"
-                onClick={() => (
-                  this.setState({ selectedGood: [] })
-                )}
-              >
-                Clear
-              </button>
-            )
-            : null}
+          {selectedGood.length !== 0 && (
+            <button
+              type="button"
+              onClick={() => (
+                this.setState({ selectedGood: [] })
+              )}
+            >
+              Clear
+            </button>
+          )}
         </h1>
         <ul>
           {goodsFromServer.map((good: string) => (
