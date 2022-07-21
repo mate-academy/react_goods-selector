@@ -15,23 +15,43 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
-class App extends React.Component {
+type State = {
+  selectedGoods: string[],
+};
+
+class App extends React.Component<{}, State> {
   state = {
     goods: goodsFromServer,
     selectedGoods: ['Jam'],
   };
 
+  createTitle = (goods: string[]) => {
+    return goods.length > 0
+      ? `${goods.join(', ')} ${goods.length === 1
+        ? 'is'
+        : 'are'} selected`
+      : 'No goods selected';
+  };
+
+  changeButton = (good: string) => {
+    this.setState(state => ({
+      selectedGoods: state.selectedGoods.includes(good)
+        ? state.selectedGoods.filter(x => x !== good)
+        : [...state.selectedGoods, good],
+    }));
+  };
+
   render() {
     const { goods } = this.state;
-    let { selectedGoods } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <div className="App">
-        <h1>{selectedGoods.length > 0 ? `${selectedGoods.join(', ')} ${selectedGoods.length === 1 ? 'is' : 'are'} selected` : 'No goods selected'}</h1>
+        <h1>{this.createTitle(selectedGoods)}</h1>
         {(selectedGoods.length > 0 && (
           <button
             type="button"
-            className="button button-1"
+            className="button buttonOne"
             onClick={() => {
               this.setState(() => {
                 return {
@@ -49,26 +69,14 @@ class App extends React.Component {
             <li
               key={good}
               className={
-                classNames('li', { active: selectedGoods.includes(good) })
+                classNames('list', { active: selectedGoods.includes(good) })
               }
             >
               {good}
               <button
                 type="button"
                 className="button"
-                onClick={(event) => {
-                  if (event.currentTarget.textContent === 'Remove') {
-                    selectedGoods = selectedGoods.filter(x => x !== good);
-                  } else {
-                    selectedGoods.push(good);
-                  }
-
-                  this.setState(() => {
-                    return {
-                      selectedGoods,
-                    };
-                  });
-                }}
+                onClick={() => this.changeButton(good)}
               >
                 { selectedGoods.includes(good) ? 'Remove' : 'Select' }
               </button>
