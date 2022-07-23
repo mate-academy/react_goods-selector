@@ -3,18 +3,63 @@ html {
 }
 
 .App {
+  &__title {
+    margin: 0 auto;
+    width: fit-content;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
   &__header {
     display: flex;
     align-items: center;
     gap: 20px;
+    margin: 0 auto;
+    width: fit-content;
+  }
+
+  &__list {
+    margin: 0 auto;
+    width: fit-content;
   }
 }
 
 .Good {
   display: flex;
+  // width: 50%;
+  // margin: 0 auto;
   gap: 10px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 10px;
+
+  &__select {
+    min-width: 70px;
+    background: rgb(20, 233, 20);
+    border: 1px solid green;
+    border-radius: 5px;
+  }
+
+  &__remove {
+    min-width: 70px;
+    background: rgb(232, 87, 43);
+    border: 1px solid red;
+    border-radius: 5px;
+  }
 
   &--active {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    margin-bottom: 20px;
     background-color: #ff0;
+    padding: 10px;
+    border-radius: 10px;
   }
 }
