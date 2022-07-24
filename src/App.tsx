@@ -3,12 +3,28 @@ import './App.scss';
 import goods from './goods';
 
 type State = {
-  word:string;
+  word:string[];
 };
 
 export class App extends Component<{}, State> {
   state: Readonly<State> = {
-    word: 'Jam',
+    word: ['Jam'],
+  };
+
+  clearHandler = () => {
+    this.setState({ word: [] });
+  };
+
+  selectHandler = (el: string) => {
+    this.setState(state => (
+      { word: [...state.word, el] }
+    ));
+  };
+
+  removeHandler = (el: string) => {
+    this.setState(state => (
+      { word: [...state.word.filter(element => element !== el)] }
+    ));
   };
 
   render() {
@@ -20,14 +36,12 @@ export class App extends Component<{}, State> {
           { word.length > 0 ? (
             <>
               <h1 className="App__title">
-                {`${word} is selected`}
+                {`${word.join(', ')} is selected`}
               </h1>
               <button
                 type="button"
                 className="App__clear App__button"
-                onClick={() => {
-                  this.setState({ word: '' });
-                }}
+                onClick={this.clearHandler}
               >
                 Clear
               </button>
@@ -42,15 +56,15 @@ export class App extends Component<{}, State> {
           {
             goods.map(el => {
               return (
-                <li className={`Good ${word === el && 'Good--active'}`}>
+                <li className={`Good ${word.includes(el) && 'Good--active'}`}>
                   {el}
-                  { word !== el
+                  { !word.includes(el)
                     ? (
                       <button
                         type="button"
                         className="App__select App__button"
                         onClick={() => {
-                          this.setState({ word: el });
+                          this.selectHandler(el);
                         }}
                       >
                         Select
@@ -60,7 +74,7 @@ export class App extends Component<{}, State> {
                         type="button"
                         className="App__remove App__button"
                         onClick={() => {
-                          this.setState({ word: '' });
+                          this.removeHandler(el);
                         }}
                       >
                         Remove
