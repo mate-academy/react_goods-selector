@@ -1,51 +1,77 @@
-import React from 'react';
+import { Component } from 'react';
 import './App.scss';
+import goods from './goods';
 
-// import goodsFromServer from './goods';
-
-export const App: React.FC = () => {
-  return (
-    <main className="App">
-      <header className="App__header">
-        <h1 className="App__title">
-          Jam is selected
-        </h1>
-
-        <button
-          type="button"
-          className="App__clear"
-        >
-          Clear
-        </button>
-      </header>
-
-      <ul>
-        <li className="Good">Dumplings</li>
-        <li className="Good">Carrot</li>
-        <li className="Good">Eggs</li>
-        <li className="Good">Ice cream</li>
-        <li className="Good">Apple</li>
-        <li className="Good">Bread</li>
-        <li className="Good">Fish</li>
-        <li className="Good">Honey</li>
-        <li className="Good Good--active">Jam</li>
-        <li className="Good">Garlic</li>
-      </ul>
-
-      {/* Put required buttons into each Good */}
-      <button
-        type="button"
-        className="Good__remove"
-      >
-        Remove
-      </button>
-
-      <button
-        type="button"
-        className="Good__select"
-      >
-        Select
-      </button>
-    </main>
-  );
+type State = {
+  word:string;
 };
+
+export class App extends Component<{}, State> {
+  state: Readonly<State> = {
+    word: 'Jam',
+  };
+
+  render() {
+    const { word } = this.state;
+
+    return (
+      <main className="App App__position">
+        <header className="App__header">
+          { word.length > 0 ? (
+            <>
+              <h1 className="App__title">
+                {`${word} is selected`}
+              </h1>
+              <button
+                type="button"
+                className="App__clear App__button"
+                onClick={() => {
+                  this.setState({ word: '' });
+                }}
+              >
+                Clear
+              </button>
+            </>
+          ) : (
+            <h1 className="App__title">
+              No goods selected
+            </h1>
+          )}
+        </header>
+        <ul className="App__ul">
+          {
+            goods.map(el => {
+              return (
+                <li className={`Good ${word === el && 'Good--active'}`}>
+                  {el}
+                  { word !== el
+                    ? (
+                      <button
+                        type="button"
+                        className="App__select App__button"
+                        onClick={() => {
+                          this.setState({ word: el });
+                        }}
+                      >
+                        Select
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        className="App__remove App__button"
+                        onClick={() => {
+                          this.setState({ word: '' });
+                        }}
+                      >
+                        Remove
+                      </button>
+                    )}
+                </li>
+              );
+            })
+          }
+        </ul>
+      </main>
+    );
+  }
+}
