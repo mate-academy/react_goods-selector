@@ -1,20 +1,30 @@
-html {
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+@import '../node_modules/bulma/bulma.sass';
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+  margin: 0 15px;
 }
 
 .App {
-  &__header {
+  background-color: #363636;
+  min-height: 100vh;
+  color: #fff;
+
+  & .title {
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 20px;
+    color: #fff;
   }
-}
 
-.Good {
-  display: flex;
-  gap: 10px;
+  & li {
+    transition: color 0.3s ease;
 
-  &--active {
-    background-color: #ff0;
+    &.active {
+      color: #48c78e;
+    }
   }
 }
