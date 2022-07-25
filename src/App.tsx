@@ -21,25 +21,24 @@ export class App extends React.Component<{}, State> {
           <h1 className="App__title">
             {`${selectedGood} is selected`}
           </h1>
-
-          <button
-            type="button"
-            className="App__clear"
-            onClick={() => {
-              this.setState({
-                selectedGood: 'No goods selected',
-              });
-            }}
-          >
-            Clear
-          </button>
         </header>
+
+        <button
+          type="button"
+          className="App__clear"
+          onClick={() => {
+            this.setState({
+              selectedGood: 'No goods selected',
+            });
+          }}
+        >
+          Clear
+        </button>
 
         <ul>
           {goodsFromServer.map(good => (
-            <div className="App__goods">
+            <div key={good} className="App__goods">
               <li
-                key="good"
                 className={classNames(
                   'Good',
                   {
@@ -56,6 +55,11 @@ export class App extends React.Component<{}, State> {
                     <button
                       type="button"
                       className="Good__remove"
+                      onClick={() => {
+                        this.setState({
+                          selectedGood: 'No goods selected',
+                        });
+                      }}
                     >
                       Remove
                     </button>
