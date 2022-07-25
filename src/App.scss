@@ -8,6 +8,12 @@ html {
     align-items: center;
     gap: 20px;
   }
+
+  &__goods {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
 }
 
 .Good {

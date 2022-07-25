@@ -1,51 +1,87 @@
+import classNames from 'classnames';
 import React from 'react';
 import './App.scss';
+import goodsFromServer from './goods';
 
-// import goodsFromServer from './goods';
+type State = {
+  selectedGood: string;
+};
 
-export const App: React.FC = () => {
-  return (
-    <main className="App">
-      <header className="App__header">
-        <h1 className="App__title">
-          Jam is selected
-        </h1>
+export class App extends React.Component<{}, State> {
+  state: Readonly<State> = {
+    selectedGood: 'Jam',
+  };
+
+  render() {
+    const { selectedGood } = this.state;
+
+    return (
+      <main className="App">
+        <header className="App__header">
+          <h1 className="App__title">
+            {`${selectedGood} is selected`}
+          </h1>
+        </header>
 
         <button
           type="button"
           className="App__clear"
+          onClick={() => {
+            this.setState({
+              selectedGood: 'No goods selected',
+            });
+          }}
         >
           Clear
         </button>
-      </header>
 
-      <ul>
-        <li className="Good">Dumplings</li>
-        <li className="Good">Carrot</li>
-        <li className="Good">Eggs</li>
-        <li className="Good">Ice cream</li>
-        <li className="Good">Apple</li>
-        <li className="Good">Bread</li>
-        <li className="Good">Fish</li>
-        <li className="Good">Honey</li>
-        <li className="Good Good--active">Jam</li>
-        <li className="Good">Garlic</li>
-      </ul>
+        <ul>
+          {goodsFromServer.map(good => (
+            <div key={good} className="App__goods">
+              <li
+                className={classNames(
+                  'Good',
+                  {
+                    'Good--active': selectedGood === good,
+                  },
+                )}
+              >
+                {good}
+              </li>
 
-      {/* Put required buttons into each Good */}
-      <button
-        type="button"
-        className="Good__remove"
-      >
-        Remove
-      </button>
-
-      <button
-        type="button"
-        className="Good__select"
-      >
-        Select
-      </button>
-    </main>
-  );
-};
+              {
+                selectedGood === good
+                  ? (
+                    <button
+                      type="button"
+                      className="Good__remove"
+                      onClick={() => {
+                        this.setState({
+                          selectedGood: 'No goods selected',
+                        });
+                      }}
+                    >
+                      Remove
+                    </button>
+                  )
+                  : (
+                    <button
+                      type="button"
+                      className="Good__select"
+                      onClick={() => {
+                        this.setState({
+                          selectedGood: good,
+                        });
+                      }}
+                    >
+                      Select
+                    </button>
+                  )
+              }
+            </div>
+          ))}
+        </ul>
+      </main>
+    );
+  }
+}
