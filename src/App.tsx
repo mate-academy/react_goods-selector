@@ -56,7 +56,10 @@ export class App extends Component<{}, State> {
           {
             goods.map(el => {
               return (
-                <li className={`Good ${word.includes(el) && 'Good--active'}`}>
+                <li
+                  className={`Good ${word.includes(el) && 'Good--active'}`}
+                  key={el}
+                >
                   {el}
                   { !word.includes(el)
                     ? (
