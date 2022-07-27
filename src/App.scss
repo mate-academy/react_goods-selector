@@ -12,9 +12,17 @@ html {
 
 .Good {
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
+
+  margin-bottom: 10px;
+  width: 500px;
 
   &--active {
     background-color: #ff0;
+  }
+
+  &__select {
+    display: inline-block;
+    padding-right: 10px;
   }
 }
