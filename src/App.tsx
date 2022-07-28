@@ -1,3 +1,5 @@
+// import { String } from 'cypress/types/lodash';
+import classNames from 'classnames';
 import { Component } from 'react';
 import './App.scss';
 
@@ -14,14 +16,7 @@ export class App extends Component<{}, State> {
 
   goods = goodsFromServer;
 
-  handleClick = (el: string, event:React.MouseEvent<HTMLButtonElement>) => {
-    const element = event.currentTarget.parentElement;
-
-    this.removeActive();
-    if (element) {
-      element.className = 'Good--active';
-    }
-
+  handleClick = (el: string) => {
     this.setState({ selectedGood: el || '' });
   };
 
@@ -73,7 +68,10 @@ export class App extends Component<{}, State> {
         <ul className="App__list">
           {this.goods.map(el => (
             <li
-              className="Good"
+              className={classNames(
+                'Good',
+                { 'Good--active': this.state.selectedGood === el },
+              )}
               key={el}
             >
               {el}
@@ -93,8 +91,8 @@ export class App extends Component<{}, State> {
                   <button
                     type="button"
                     className="Good__select"
-                    onClick={(e) => {
-                      this.handleClick(el, e);
+                    onClick={() => {
+                      this.handleClick(el);
                     }}
                   >
                     Select
