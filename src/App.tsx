@@ -14,24 +14,30 @@ const goodsFromServer: string[] = [
   'Garlic',
 ];
 
+interface State {
+  select: string[],
+}
+
 class App extends React.Component {
-  state = {
+  state: State = {
     select: ['Jam'],
   };
 
   selected(good: string) {
-    this.setState({
-      // eslint-disable-next-line react/no-access-state-in-setstate
-      select: [...this.state.select, good],
+    this.setState((prevState: State) => {
+      return {
+        select: [...prevState.select, good],
+      };
     });
   }
 
   remove(good: string) {
-    this.setState({
-      // eslint-disable-next-line react/no-access-state-in-setstate
-      select: this.state.select.filter((el) => {
-        return el !== good;
-      }),
+    this.setState((prevState: State) => {
+      return {
+        select: prevState.select.filter((el) => {
+          return el !== good;
+        }),
+      };
     });
   }
 
