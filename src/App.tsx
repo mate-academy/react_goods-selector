@@ -17,8 +17,8 @@ export class App extends Component<{}, State> {
     const { selectedGood } = this.state;
 
     return (
-      <main className="App">
-        <header className="App__header">
+      <main className="App panel is-primary">
+        <header className="App__header panel-heading">
           <h1 className="App__title">
             {selectedGood
               ? `${selectedGood} is selected`
@@ -28,7 +28,7 @@ export class App extends Component<{}, State> {
           {selectedGood && (
             <button
               type="button"
-              className="App__clear"
+              className="App__clear button is-danger"
               onClick={() => {
                 this.setState({ selectedGood: '' });
               }}
@@ -53,7 +53,7 @@ export class App extends Component<{}, State> {
                 ? (
                   <button
                     type="button"
-                    className="Good__remove"
+                    className="Good__remove button is-danger"
                     onClick={() => {
                       this.setState({ selectedGood: '' });
                     }}
@@ -64,7 +64,7 @@ export class App extends Component<{}, State> {
                 : (
                   <button
                     type="button"
-                    className="Good__select"
+                    className="Good__select button is-success"
                     onClick={() => {
                       this.setState({ selectedGood: good });
                     }}

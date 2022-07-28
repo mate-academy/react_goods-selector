@@ -3,18 +3,22 @@ html {
 }
 
 .App {
+  width: 30vw;
+  margin: 0 auto;
+
   &__header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 20px;
   }
 }
 
 .Good {
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
+  padding: 15px;
 
   &--active {
-    background-color: #ff0;
+    background-color: deepskyblue;
   }
 }
