@@ -5,33 +5,53 @@ import './App.scss';
 import goodsFromServer from './goods';
 
 type State = {
-  selectedGood: string;
+  selectedGoods: string[];
 };
 
 export class App extends Component<{}, State> {
-  state: Readonly<State> = {
-    selectedGood: 'Jam',
+  state = {
+    selectedGoods: ['Jam'],
+  };
+
+  clearSelected = () => this.setState({ selectedGoods: [] });
+
+  removeGood = (good: string) => {
+    this.setState((prevState) => (
+      { selectedGoods: prevState.selectedGoods.filter(el => el !== good) }
+    ));
+  };
+
+  addGood = (good: string) => {
+    this.setState((prevState) => (
+      { selectedGoods: [...prevState.selectedGoods, good] }
+    ));
   };
 
   render() {
-    const { selectedGood } = this.state;
+    const { selectedGoods } = this.state;
+    const selectedCount = selectedGoods.length;
+    let selectedInfo = 'No goods selected';
+
+    if (selectedCount === 1) {
+      selectedInfo = `${selectedGoods} is selected`;
+    }
+
+    if (selectedCount > 1) {
+      selectedInfo = `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods[selectedCount - 1]} are selected`;
+    }
 
     return (
       <main className="App panel is-primary">
         <header className="App__header panel-heading">
           <h1 className="App__title">
-            {selectedGood
-              ? `${selectedGood} is selected`
-              : 'No goods selected'}
+            {selectedInfo}
           </h1>
 
-          {selectedGood && (
+          {selectedGoods.length && (
             <button
               type="button"
               className="App__clear button is-danger"
-              onClick={() => {
-                this.setState({ selectedGood: '' });
-              }}
+              onClick={this.clearSelected}
             >
               Clear
             </button>
@@ -44,19 +64,17 @@ export class App extends Component<{}, State> {
               key={good}
               className={classNames(
                 'Good',
-                { 'Good--active': good === selectedGood },
+                { 'Good--active': selectedGoods.includes(good) },
               )}
             >
               {good}
 
-              {good === selectedGood
+              {selectedGoods.includes(good)
                 ? (
                   <button
                     type="button"
                     className="Good__remove button is-danger"
-                    onClick={() => {
-                      this.setState({ selectedGood: '' });
-                    }}
+                    onClick={() => this.removeGood(good)}
                   >
                     Remove
                   </button>
@@ -65,9 +83,7 @@ export class App extends Component<{}, State> {
                   <button
                     type="button"
                     className="Good__select button is-success"
-                    onClick={() => {
-                      this.setState({ selectedGood: good });
-                    }}
+                    onClick={() => this.addGood(good)}
                   >
                     Select
                   </button>
