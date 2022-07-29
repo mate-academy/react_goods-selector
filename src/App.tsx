@@ -43,6 +43,9 @@ class App extends React.Component {
 
   render() {
     const { select } = this.state;
+    const arraySelected = `${select
+      .slice(0, select.length - 1)
+      .join(', ')} and ${select[select.length - 1]} are selected`;
 
     return (
       <div className="App">
@@ -51,7 +54,15 @@ class App extends React.Component {
             <h1 className="Selected__header">
               {select.length ? 'Selected good' : 'No goods selected'}
             </h1>
-            <h2 className="Selected__goods">{select.join(', ')}</h2>
+            <h2 className="Selected__goods">
+              {
+                select.length !== 0 && (
+                  select.length > 1
+                    ? arraySelected
+                    : `${select.join(', ')} is selected`
+                )
+              }
+            </h2>
           </div>
           <ul className="Goods-container__list list">
             {goodsFromServer.map((good) => {
