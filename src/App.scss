@@ -6,13 +6,18 @@ html {
   &__header {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 20px;
   }
 }
 
 .Good {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
   gap: 10px;
+  font-size: 1.5rem;
 
   &--active {
     background-color: #ff0;
