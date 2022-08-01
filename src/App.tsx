@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import classNames from 'classnames';
+import { v4 as uuid } from 'uuid';
 import './App.scss';
 import './Goods.scss';
 
@@ -16,81 +17,92 @@ export class App extends Component<{}, State> {
 
   clearSelected = () => this.setState({ selectedGoods: [] });
 
-  removeGood = (good: string) => {
-    this.setState((prevState) => (
-      { selectedGoods: prevState.selectedGoods.filter(el => el !== good) }
+  removeGood = (selectedGood: string) => {
+    this.setState((state) => (
+      {
+        selectedGoods: state.selectedGoods
+          .filter(good => good !== selectedGood),
+      }
     ));
   };
 
-  addGood = (good: string) => {
+  addGood = (selectedGood: string) => {
     this.setState((prevState) => (
-      { selectedGoods: [...prevState.selectedGoods, good] }
+      { selectedGoods: [...prevState.selectedGoods, selectedGood] }
     ));
+  };
+
+  formatTitle = (selectedGoods: string[]) => {
+    const selectedCount = selectedGoods.length;
+
+    switch (selectedCount) {
+      case 0:
+        return 'No goods selected';
+      case 1:
+        return `${selectedGoods} is selected`;
+      default:
+        return `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods[selectedCount - 1]} are selected`;
+    }
   };
 
   render() {
     const { selectedGoods } = this.state;
-    const selectedCount = selectedGoods.length;
-    let selectedInfo = 'No goods selected';
-
-    if (selectedCount === 1) {
-      selectedInfo = `${selectedGoods} is selected`;
-    }
-
-    if (selectedCount > 1) {
-      selectedInfo = `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods[selectedCount - 1]} are selected`;
-    }
 
     return (
       <main className="App panel is-primary">
         <header className="App__header panel-heading">
           <h1 className="App__title">
-            {selectedInfo}
+            {this.formatTitle(selectedGoods)}
           </h1>
 
-          {selectedGoods.length && (
-            <button
-              type="button"
-              className="App__clear button is-danger"
-              onClick={this.clearSelected}
-            >
-              Clear
-            </button>
-          )}
+          {selectedGoods.length
+            ? (
+              <button
+                type="button"
+                className="App__clear button is-danger"
+                onClick={this.clearSelected}
+              >
+                Clear
+              </button>
+            ) : ''}
         </header>
 
         <ul>
-          {goodsFromServer.map(good => (
-            <li
-              key={good}
-              className={classNames(
-                'Good',
-                { 'Good--active': selectedGoods.includes(good) },
-              )}
-            >
-              {good}
+          {goodsFromServer.map(good => {
+            const isActive = selectedGoods.includes(good);
 
-              {selectedGoods.includes(good)
-                ? (
-                  <button
-                    type="button"
-                    className="Good__remove button is-danger"
-                    onClick={() => this.removeGood(good)}
-                  >
-                    Remove
-                  </button>
-                )
-                : (
-                  <button
-                    type="button"
-                    className="Good__select button is-success"
-                    onClick={() => this.addGood(good)}
-                  >
-                    Select
-                  </button>
+            return (
+              <li
+                key={uuid()}
+                className={classNames(
+                  'Good',
+                  { 'Good--active': isActive },
                 )}
-            </li>
-          ))}
+              >
+                {good}
+
+                {isActive
+                  ? (
+                    <button
+                      type="button"
+                      className="Good__remove button is-danger"
+                      onClick={() => this.removeGood(good)}
+                    >
+                      Remove
+                    </button>
+                  )
+                  : (
+                    <button
+                      type="button"
+                      className="Good__select button is-success"
+                      onClick={() => this.addGood(good)}
+                    >
+                      Select
+                    </button>
+                  )}
+              </li>
+            );
+          })}
         </ul>
       </main>
     );
