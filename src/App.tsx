@@ -6,6 +6,11 @@ import './Goods.scss';
 
 import goodsFromServer from './goods';
 
+const preparedGoods = goodsFromServer.map(good => ({
+  good,
+  id: uuid(),
+}));
+
 type State = {
   selectedGoods: string[];
 };
@@ -68,12 +73,12 @@ export class App extends Component<{}, State> {
         </header>
 
         <ul>
-          {goodsFromServer.map(good => {
+          {preparedGoods.map(({ good, id }) => {
             const isActive = selectedGoods.includes(good);
 
             return (
               <li
-                key={uuid()}
+                key={id}
                 className={classNames(
                   'Good',
                   { 'Good--active': isActive },
