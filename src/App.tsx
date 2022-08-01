@@ -5,21 +5,18 @@ import './App.scss';
 
 import goodsFromServer from './goods';
 
-const uniqueKeys: string[] = [];
-
-for (let i = 0; i < goodsFromServer.length; i += 1) {
-  uniqueKeys[i] = uuidv4();
-}
+const goods = goodsFromServer.map(good => ({
+  id: uuidv4(),
+  name: good,
+}));
 
 type State = {
   selectedGoods: string[];
-  title: string;
 };
 
 export class App extends React.Component<{}, State> {
   state: Readonly<State> = {
     selectedGoods: ['Jam'],
-    title: '',
   };
 
   componentDidMount() {
@@ -30,50 +27,48 @@ export class App extends React.Component<{}, State> {
     const { selectedGoods } = this.state;
     const { length } = selectedGoods;
 
-    if (length === 0) {
-      this.setState({ title: 'No goods selected' });
-    }
-
-    if (length === 1) {
-      this.setState({ title: `${selectedGoods[0]} is selected` });
-    }
-
-    if (length > 1) {
-      this.setState({ title: `${selectedGoods.slice(0, length - 1).join(', ')} and ${selectedGoods[length - 1]} are selected` });
+    switch (length) {
+      case 0:
+        return 'No goods selected';
+      case 1:
+        return `${selectedGoods[0]} is selected`;
+      default:
+        return `${selectedGoods.slice(0, length - 1).join(', ')} and ${selectedGoods[length - 1]}`;
     }
   };
 
-  handlingRemove = (good: string, goods: string[]) => {
-    this.setState(
-      { selectedGoods: goods.filter(item => item !== good) },
-      this.setTitle,
-    );
+  handlingRemove = (good: string) => {
+    this.setState((prevState) => ({
+      selectedGoods: prevState.selectedGoods.filter(item => item !== good),
+    }));
   };
 
-  handlingSelect = (good: string, goods: string[]) => {
-    this.setState({ selectedGoods: [...goods, good] }, this.setTitle);
+  handlingSelect = (good: string) => {
+    this.setState((prevState) => ({
+      selectedGoods: [...prevState.selectedGoods, good],
+    }));
   };
 
   handlingClear = () => {
-    this.setState({ selectedGoods: [] }, this.setTitle);
+    this.setState({ selectedGoods: [] });
   };
 
   render() {
-    const { selectedGoods, title } = this.state;
+    const { selectedGoods } = this.state;
     const { length } = selectedGoods;
 
     return (
       <main className="App is-light">
         <header className="App__header">
           <h1 className="App__title">
-            {title}
+            {this.setTitle()}
           </h1>
 
           {length
             ? (
               <button
                 type="button"
-                className="App__clear button is-dark"
+                className="App__clear button is-danger"
                 onClick={this.handlingClear}
               >
                 Clear
@@ -83,43 +78,43 @@ export class App extends React.Component<{}, State> {
         </header>
 
         <ul className="Goods">
-          {goodsFromServer.map((good, index) => (
-            <li
-              key={uniqueKeys[index]}
-              className={classNames(
-                'Good level-item',
-                {
-                  'Good--active': selectedGoods.includes(good),
-                },
-              )}
-            >
-              <h1>{good}</h1>
+          {goods.map(({ id, name }) => {
+            const isSelected = selectedGoods.includes(name);
 
-              {selectedGoods.includes(good)
-                ? (
-                  <button
-                    type="button"
-                    className="Good__remove button is-dark"
-                    onClick={() => {
-                      this.handlingRemove(good, selectedGoods);
-                    }}
-                  >
-                    Remove
-                  </button>
-                )
-                : (
-                  <button
-                    type="button"
-                    className="Good__select button is-dark"
-                    onClick={() => {
-                      this.handlingSelect(good, selectedGoods);
-                    }}
-                  >
-                    Select
-                  </button>
+            return (
+              <li
+                key={id}
+                className={classNames(
+                  'Good level-item',
+                  {
+                    'Good--active': isSelected,
+                  },
                 )}
-            </li>
-          ))}
+              >
+                <h1>{name}</h1>
+
+                {isSelected
+                  ? (
+                    <button
+                      type="button"
+                      className="Good__remove button is-danger"
+                      onClick={() => this.handlingRemove(name)}
+                    >
+                      Remove
+                    </button>
+                  )
+                  : (
+                    <button
+                      type="button"
+                      className="Good__select button is-dark"
+                      onClick={() => this.handlingSelect(name)}
+                    >
+                      Select
+                    </button>
+                  )}
+              </li>
+            );
+          })}
         </ul>
       </main>
     );
