@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import classNames from 'classnames';
 import './App.scss';
+import './Goods.scss';
 
 import goodsFromServer from './goods';
 

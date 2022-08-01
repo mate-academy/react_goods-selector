@@ -12,13 +12,3 @@ html {
     align-items: center;
   }
 }
-
-.Good {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px;
-
-  &--active {
-    background-color: deepskyblue;
-  }
-}
