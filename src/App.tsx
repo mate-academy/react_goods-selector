@@ -19,10 +19,6 @@ export class App extends React.Component<{}, State> {
     selectedGoods: ['Jam'],
   };
 
-  componentDidMount() {
-    this.setTitle();
-  }
-
   setTitle = () => {
     const { selectedGoods } = this.state;
     const { length } = selectedGoods;
