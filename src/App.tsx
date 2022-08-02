@@ -23,7 +23,14 @@ export class App extends Component<{}, State> {
           {this.state.selectedGoods.length > 0 && (
             <button
               type="button"
-              className="App__clear"
+              className="
+                App__clear
+                button
+                is-dark
+                is-small
+                is-rounded
+                is-outlined
+              "
               onClick={() => {
                 this.setState({ selectedGoods: [] });
               }}
@@ -36,13 +43,20 @@ export class App extends Component<{}, State> {
         <ul>
           {goodsFromServer.map(good => {
             return (
-              <li className={`Good ${this.state.selectedGoods.includes(good) ? 'Good--active' : ''}`}>
+              <li className={`Good ${this.state.selectedGoods.includes(good) ? 'Good--active' : ''}`} key={good}>
                 {good}
 
                 {this.state.selectedGoods.includes(good) && (
                   <button
                     type="button"
-                    className="Good__remove"
+                    className="
+                      Good__remove
+                      button
+                      is-dark
+                      is-small
+                      is-rounded
+                      is-outlined
+                    "
                     onClick={() => {
                       this.setState(state => {
                         return {
@@ -59,7 +73,14 @@ export class App extends Component<{}, State> {
                 {!this.state.selectedGoods.includes(good) && (
                   <button
                     type="button"
-                    className="Good__select"
+                    className="
+                      Good__select
+                      button
+                      is-dark
+                      is-small
+                      is-rounded
+                      is-outlined
+                    "
                     onClick={() => {
                       this.setState(state => {
                         return {
