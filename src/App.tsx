@@ -40,15 +40,19 @@ export class App extends React.Component<{}, State> {
             {this.titleDescription(selectedGoods)}
           </h1>
 
-          <button
-            type="button"
-            className="App__clear"
-            onClick={() => {
-              this.setState({ selectedGoods: [] });
-            }}
-          >
-            Clear
-          </button>
+          {selectedGoods.length
+            ? (
+              <button
+                type="button"
+                className="App__clear"
+                onClick={() => {
+                  this.setState({ selectedGoods: [] });
+                }}
+              >
+                Clear
+              </button>
+            )
+            : ''}
         </header>
 
         <ul className="App__list">
