@@ -13,20 +13,40 @@ export class App extends React.Component<{}, State> {
     selectedGoods: ['Jam'],
   };
 
-  removeEl = (list: string[], good: string) => {
-    return list.filter((el: string) => el !== good);
+  addSelected = (good: string) => {
+    const { selectedGoods } = this.state;
+
+    this.setState(
+      { selectedGoods: [...selectedGoods, good] },
+    );
   };
 
-  titleDescription = (list: string[]) => {
-    switch (list.length) {
+  removeSelected = (good: string) => {
+    const { selectedGoods } = this.state;
+
+    this.setState(
+      { selectedGoods: selectedGoods.filter((el: string) => el !== good) },
+    );
+  };
+
+  clearSelectedList = () => {
+    this.setState({ selectedGoods: [] });
+  };
+
+  pickTitleDescription = () => {
+    const { selectedGoods } = this.state;
+    const listLength = selectedGoods.length;
+
+    switch (listLength) {
       case 0:
         return 'No goods selected';
 
       case 1:
-        return `${list[0]} is selected`;
+        return `${selectedGoods[0]} is selected`;
 
       default:
-        return `${list.slice(0, -1).join(', ')} and ${list[list.length - 1]} are selected`;
+        return `${selectedGoods.slice(0, -1).join(', ')} and ${
+          selectedGoods[listLength - 1]} are selected`;
     }
   };
 
@@ -37,7 +57,7 @@ export class App extends React.Component<{}, State> {
       <main className="App">
         <header className="App__header">
           <h1 className="App__title">
-            {this.titleDescription(selectedGoods)}
+            {this.pickTitleDescription()}
           </h1>
 
           {selectedGoods.length
@@ -45,9 +65,7 @@ export class App extends React.Component<{}, State> {
               <button
                 type="button"
                 className="App__clear"
-                onClick={() => {
-                  this.setState({ selectedGoods: [] });
-                }}
+                onClick={() => this.clearSelectedList()}
               >
                 Clear
               </button>
@@ -71,11 +89,7 @@ export class App extends React.Component<{}, State> {
                     <button
                       type="button"
                       className="Good__remove"
-                      onClick={() => {
-                        this.setState(
-                          { selectedGoods: this.removeEl(selectedGoods, good) },
-                        );
-                      }}
+                      onClick={() => this.removeSelected(good)}
                     >
                       Remove
                     </button>
@@ -84,11 +98,7 @@ export class App extends React.Component<{}, State> {
                     <button
                       type="button"
                       className="Good__select"
-                      onClick={() => {
-                        this.setState(
-                          { selectedGoods: [...selectedGoods, good] },
-                        );
-                      }}
+                      onClick={() => this.addSelected(good)}
                     >
                       Select
                     </button>
