@@ -23,6 +23,14 @@ class App extends React.Component {
     select: ['Jam'],
   };
 
+  handlerButton = (good: string) => {
+    if (this.state.select.includes(good)) {
+      this.remove(good);
+    } else {
+      this.selected(good);
+    }
+  };
+
   selected(good: string) {
     this.setState((prevState: State) => {
       return {
@@ -76,13 +84,7 @@ class App extends React.Component {
                   <button
                     className="Button"
                     type="button"
-                    onClick={() => {
-                      if (select.includes(good)) {
-                        this.remove(good);
-                      } else {
-                        this.selected(good);
-                      }
-                    }}
+                    onClick={() => this.handlerButton(good)}
                   >
                     {select.includes(good) ? 'Remove' : 'Select'}
                   </button>
