@@ -9,12 +9,8 @@ type State = {
 
 export class App extends Component<{}, State> {
   state = {
-    selectedGood: [],
+    selectedGood: ['Jam'],
   };
-
-  componentDidMount() {
-    this.setState({ selectedGood: ['Jam'] });
-  }
 
   selectGood = (key: string) => {
     this.setState((prevState) => (
@@ -23,7 +19,6 @@ export class App extends Component<{}, State> {
   };
 
   removeGood = (key: string) => {
-    // @ts-ignore
     const index = this.state.selectedGood.indexOf(key);
     const copyState = [...this.state.selectedGood];
 
@@ -36,7 +31,7 @@ export class App extends Component<{}, State> {
     this.setState({ selectedGood: [] });
   };
 
-  getGoodsList = (goods: State[]) => {
+  getGoodsList = (goods: string[]) => {
     return goods.reduce((resultStr, good, i, array) => {
       if (i === array.length - 1 && array.length > 1) {
         return `${resultStr.slice(0, resultStr.length - 1)} and ${good}`;
@@ -47,7 +42,7 @@ export class App extends Component<{}, State> {
       }
 
       return `${resultStr} ${good}`;
-    }, '');
+    }, '').trim();
   };
 
   render() {
@@ -60,18 +55,19 @@ export class App extends Component<{}, State> {
               : 'No goods selected'}
           </h1>
 
-          <button
-            type="button"
-            className="App__clear"
-            onClick={this.clearGoods}
-          >
-            Clear
-          </button>
+          {this.state.selectedGood[0] && (
+            <button
+              type="button"
+              className="App__clear"
+              onClick={this.clearGoods}
+            >
+              Clear
+            </button>
+          )}
         </header>
 
         <ul>
           {goodsFromServer.map(good => {
-            // @ts-ignore
             if (this.state.selectedGood.includes(good)) {
               return (
                 <li key={good} className="Good Good--active">
