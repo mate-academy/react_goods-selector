@@ -47,60 +47,62 @@ export class App extends Component<{}, State> {
 
   render() {
     return (
-      <main className="App">
-        <header className="App__header">
-          <h1 className="App__title">
-            {this.state.selectedGood.length
-              ? `${this.getGoodsList(this.state.selectedGood)} is selected`
-              : 'No goods selected'}
-          </h1>
+      <main className="container">
+        <div className="App">
+          <header className="App__header">
+            <h1 className="App__title">
+              {this.state.selectedGood.length
+                ? `${this.getGoodsList(this.state.selectedGood)} is selected`
+                : 'No goods selected'}
+            </h1>
 
-          {this.state.selectedGood[0] && (
-            <button
-              type="button"
-              className="App__clear"
-              onClick={this.clearGoods}
-            >
-              Clear
-            </button>
-          )}
-        </header>
+            {this.state.selectedGood[0] && (
+              <button
+                type="button"
+                className="button button__remove"
+                onClick={this.clearGoods}
+              >
+                Clear
+              </button>
+            )}
+          </header>
 
-        <ul>
-          {goodsFromServer.map(good => {
-            if (this.state.selectedGood.includes(good)) {
+          <ul className="list">
+            {goodsFromServer.map(good => {
+              if (this.state.selectedGood.includes(good)) {
+                return (
+                  <li key={good} className="Good Good--active">
+                    {good}
+                    <button
+                      type="button"
+                      className="button button__selected"
+                      onClick={() => {
+                        this.removeGood(good);
+                      }}
+                    >
+                      Remove
+                    </button>
+                  </li>
+                );
+              }
+
               return (
-                <li key={good} className="Good Good--active">
+                <li key={good} className="Good control">
                   {good}
                   <button
                     type="button"
-                    className="Good__remove"
+                    className="button button__unselected"
                     onClick={() => {
-                      this.removeGood(good);
+                      this.selectGood(good);
                     }}
                   >
-                    Remove
+                    Select
                   </button>
                 </li>
               );
-            }
-
-            return (
-              <li key={good} className="Good">
-                {good}
-                <button
-                  type="button"
-                  className="Good__select"
-                  onClick={() => {
-                    this.selectGood(good);
-                  }}
-                >
-                  Select
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+            })}
+          </ul>
+        </div>
       </main>
     );
   }
