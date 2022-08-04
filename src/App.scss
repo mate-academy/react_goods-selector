@@ -3,18 +3,30 @@ html {
 }
 
 .App {
+  margin: 0 auto;
+  padding-top: 10px;
+  width: 500px;
   &__header {
+    min-height: 50px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: 20px;
   }
 }
 
+.Goods {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
 .Good {
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
 
   &--active {
-    background-color: #ff0;
+    background-color: #ffe08a;
+    border-radius: 4px;
   }
 }
