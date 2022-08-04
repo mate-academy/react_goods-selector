@@ -68,13 +68,15 @@ export class App extends Component<{}, State> {
           )}
         </header>
 
-        <ul className="">
+        <ul>
           {goodsFromServer.map(good => (
-            <li className={classNames(
-              'Good',
-              'panel-block',
-              { 'Good--active': selectedGood.includes(good) },
-            )}
+            <li
+              key={good}
+              className={classNames(
+                'Good',
+                'panel-block',
+                { 'Good--active': selectedGood.includes(good) },
+              )}
             >
               {good}
               {!selectedGood.includes(good) ? (
