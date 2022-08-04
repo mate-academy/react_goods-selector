@@ -1,51 +1,111 @@
-import React from 'react';
+import { Component } from 'react';
 import './App.scss';
 
-// import goodsFromServer from './goods';
+import goodsFromServer from './goods';
 
-export const App: React.FC = () => {
-  return (
-    <main className="App">
-      <header className="App__header">
-        <h1 className="App__title">
-          Jam is selected
-        </h1>
-
-        <button
-          type="button"
-          className="App__clear"
-        >
-          Clear
-        </button>
-      </header>
-
-      <ul>
-        <li className="Good">Dumplings</li>
-        <li className="Good">Carrot</li>
-        <li className="Good">Eggs</li>
-        <li className="Good">Ice cream</li>
-        <li className="Good">Apple</li>
-        <li className="Good">Bread</li>
-        <li className="Good">Fish</li>
-        <li className="Good">Honey</li>
-        <li className="Good Good--active">Jam</li>
-        <li className="Good">Garlic</li>
-      </ul>
-
-      {/* Put required buttons into each Good */}
-      <button
-        type="button"
-        className="Good__remove"
-      >
-        Remove
-      </button>
-
-      <button
-        type="button"
-        className="Good__select"
-      >
-        Select
-      </button>
-    </main>
-  );
+type State = {
+  selectedGood: string[],
 };
+
+export class App extends Component<{}, State> {
+  state = {
+    selectedGood: [],
+  };
+
+  componentDidMount() {
+    this.setState({ selectedGood: ['Jam'] });
+  }
+
+  selectGood = (key: string) => {
+    this.setState((prevState) => (
+      { selectedGood: [...prevState.selectedGood, key] }
+    ));
+  };
+
+  removeGood = (key: string) => {
+    // @ts-ignore
+    const index = this.state.selectedGood.indexOf(key);
+    const copyState = [...this.state.selectedGood];
+
+    copyState.splice(index, 1);
+
+    this.setState({ selectedGood: [...copyState] });
+  };
+
+  clearGoods = () => {
+    this.setState({ selectedGood: [] });
+  };
+
+  getGoodsList = (goods: State[]) => {
+    return goods.reduce((resultStr, good, i, array) => {
+      if (i === array.length - 1 && array.length > 1) {
+        return `${resultStr.slice(0, resultStr.length - 1)} and ${good}`;
+      }
+
+      if (array.length > 1) {
+        return `${resultStr} ${good},`;
+      }
+
+      return `${resultStr} ${good}`;
+    }, '');
+  };
+
+  render() {
+    return (
+      <main className="App">
+        <header className="App__header">
+          <h1 className="App__title">
+            {this.state.selectedGood.length
+              ? `${this.getGoodsList(this.state.selectedGood)} is selected`
+              : 'No goods selected'}
+          </h1>
+
+          <button
+            type="button"
+            className="App__clear"
+            onClick={this.clearGoods}
+          >
+            Clear
+          </button>
+        </header>
+
+        <ul>
+          {goodsFromServer.map(good => {
+            // @ts-ignore
+            if (this.state.selectedGood.includes(good)) {
+              return (
+                <li key={good} className="Good Good--active">
+                  {good}
+                  <button
+                    type="button"
+                    className="Good__remove"
+                    onClick={() => {
+                      this.removeGood(good);
+                    }}
+                  >
+                    Remove
+                  </button>
+                </li>
+              );
+            }
+
+            return (
+              <li key={good} className="Good">
+                {good}
+                <button
+                  type="button"
+                  className="Good__select"
+                  onClick={() => {
+                    this.selectGood(good);
+                  }}
+                >
+                  Select
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </main>
+    );
+  }
+}
