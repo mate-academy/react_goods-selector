@@ -4,31 +4,31 @@ import './App.scss';
 import goodsFromServer from './goods';
 
 type State = {
-  selectedGood: string[],
+  selectedGoods: string[],
 };
 
 export class App extends Component<{}, State> {
   state = {
-    selectedGood: ['Jam'],
+    selectedGoods: ['Jam'],
   };
 
   selectGood = (key: string) => {
     this.setState((prevState) => (
-      { selectedGood: [...prevState.selectedGood, key] }
+      { selectedGoods: [...prevState.selectedGoods, key] }
     ));
   };
 
   removeGood = (key: string) => {
-    const index = this.state.selectedGood.indexOf(key);
-    const copyState = [...this.state.selectedGood];
+    const index = this.state.selectedGoods.indexOf(key);
+    const copyState = [...this.state.selectedGoods];
 
     copyState.splice(index, 1);
 
-    this.setState({ selectedGood: [...copyState] });
+    this.setState({ selectedGoods: [...copyState] });
   };
 
   clearGoods = () => {
-    this.setState({ selectedGood: [] });
+    this.setState({ selectedGoods: [] });
   };
 
   getGoodsList = (goods: string[]) => {
@@ -51,12 +51,12 @@ export class App extends Component<{}, State> {
         <div className="App">
           <header className="App__header">
             <h1 className="App__title">
-              {this.state.selectedGood.length
-                ? `${this.getGoodsList(this.state.selectedGood)} is selected`
+              {this.state.selectedGoods.length
+                ? `${this.getGoodsList(this.state.selectedGoods)} is selected`
                 : 'No goods selected'}
             </h1>
 
-            {this.state.selectedGood[0] && (
+            {this.state.selectedGoods[0] && (
               <button
                 type="button"
                 className="button button__remove"
@@ -69,7 +69,7 @@ export class App extends Component<{}, State> {
 
           <ul className="list">
             {goodsFromServer.map(good => {
-              if (this.state.selectedGood.includes(good)) {
+              if (this.state.selectedGoods.includes(good)) {
                 return (
                   <li key={good} className="Good Good--active">
                     {good}
