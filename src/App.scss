@@ -3,18 +3,31 @@ html {
 }
 
 .App {
+  width: 60vw;
+  margin: auto;
+
   &__header {
     display: flex;
     align-items: center;
-    gap: 20px;
+    justify-content: space-between;
+    gap: 10px;
+
+    height: 7rem;
+  }
+
+  &__title {
+    margin-bottom: 0 !important;
+    // I added important because without it margin appears
+    // and disappers accordingly to clear-button appering or disappering
   }
 }
 
 .Good {
   display: flex;
+  justify-content: space-between;
   gap: 10px;
 
   &--active {
-    background-color: #ff0;
+    background-color: hsl(0, 0%, 71%);
   }
 }
