@@ -2,19 +2,84 @@ html {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
+ul {
+  margin: 0;
+  padding: 0;
+
+  & > * {
+    margin-bottom: 5px;
+  }
+}
+
 .App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 10px;
+  border: 2px solid black;
+
+  background-color: #364156;
+  border-radius: 10px;
+  color: white;
+
   &__header {
     display: flex;
     align-items: center;
     gap: 20px;
   }
+
+  &__clear {
+    background-color: #011638;
+
+    &:hover {
+      background-color: #04172f;
+    }
+  }
 }
 
 .Good {
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
 
-  &--active {
-    background-color: #ff0;
+  padding: 5px;
+
+  gap: 10px;
+  height: 30px;
+
+  font-weight: 700;
+  border-radius: 5px;
+
+  &-active {
+    background-color: #fbb13c;
   }
+
+  &__select {
+    background-color: #d81159;
+
+    &:hover {
+      background-color: #791335;
+    }
+  }
+
+  &__remove {
+    background-color: #f67ba8;
+
+    &:hover {
+      background-color: #791335;
+    }
+  }
+}
+
+.AppButton {
+  width: 100px;
+  height: 30px;
+
+  border-radius: 5px;
+  color: #fff;
+
+  border: none;
+  cursor: pointer;
 }
