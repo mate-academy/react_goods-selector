@@ -1,51 +1,92 @@
-import React from 'react';
+// import { fromNode } from 'cypress/types/bluebird';
+import { Component } from 'react';
+// import { render } from 'react-dom';
 import './App.scss';
+import uniqid from 'uniqid';
+import 'bulma/css/bulma.min.css';
 
-// import goodsFromServer from './goods';
+import classNames from 'classnames';
+import goodsFromServer from './goods';
 
-export const App: React.FC = () => {
-  return (
-    <main className="App">
-      <header className="App__header">
-        <h1 className="App__title">
-          Jam is selected
-        </h1>
-
-        <button
-          type="button"
-          className="App__clear"
-        >
-          Clear
-        </button>
-      </header>
-
-      <ul>
-        <li className="Good">Dumplings</li>
-        <li className="Good">Carrot</li>
-        <li className="Good">Eggs</li>
-        <li className="Good">Ice cream</li>
-        <li className="Good">Apple</li>
-        <li className="Good">Bread</li>
-        <li className="Good">Fish</li>
-        <li className="Good">Honey</li>
-        <li className="Good Good--active">Jam</li>
-        <li className="Good">Garlic</li>
-      </ul>
-
-      {/* Put required buttons into each Good */}
-      <button
-        type="button"
-        className="Good__remove"
-      >
-        Remove
-      </button>
-
-      <button
-        type="button"
-        className="Good__select"
-      >
-        Select
-      </button>
-    </main>
-  );
+type State = {
+  selectedGood: string;
 };
+
+export class App extends Component<{}, State> {
+  state: Readonly<State> = {
+    selectedGood: 'Jam',
+  };
+
+  goods: string[] = [...goodsFromServer];
+
+  render() {
+    return (
+      <main className="App">
+        <header className="App__header">
+          <h1 className="App__title">
+            { this.state.selectedGood
+              ? `${this.state.selectedGood} is selected`
+              : 'No goods selected'}
+          </h1>
+          {this.state.selectedGood && (
+            <button
+              type="button"
+              className="App__clear button is-danger is-light"
+              onClick={() => {
+                this.setState({
+                  selectedGood: '',
+                });
+              }}
+            >
+              Clear
+            </button>
+          )}
+        </header>
+
+        <ul className="content">
+          {this.goods.map(good => (
+            <li
+              key={uniqid()}
+              // className="Good"
+              className={classNames(
+                'Good',
+                'level',
+                { 'Good--active': this.state.selectedGood === good },
+              )}
+            >
+              {good}
+              { good === this.state.selectedGood
+                ? (
+                  <button
+                    type="button"
+                    className="Good__remove button is-warning is-light"
+                    onClick={() => {
+                      this.setState({
+                        selectedGood: '',
+                      });
+                    }}
+                  >
+                    Remove
+                  </button>
+                )
+                : (
+                  <button
+                    type="button"
+                    className="Good__select button is-success is-light"
+                    onClick={() => {
+                      this.setState({
+                        selectedGood: good,
+                      });
+                    }}
+                  >
+                    Select
+                  </button>
+                )}
+
+            </li>
+          ))}
+        </ul>
+      </main>
+    );
+  }
+}
