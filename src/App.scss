@@ -13,8 +13,9 @@ html {
 .Good {
   display: flex;
   gap: 10px;
+  width: 100px;
 
   &--active {
-    background-color: #ff0;
+    background-color: rgb(119, 255, 0);
   }
 }
