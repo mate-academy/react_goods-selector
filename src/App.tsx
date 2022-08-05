@@ -1,51 +1,100 @@
-import React from 'react';
+import { Component } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import classNames from 'classnames';
 import './App.scss';
 
-// import goodsFromServer from './goods';
+import goodsFromServer from './goods';
 
-export const App: React.FC = () => {
-  return (
-    <main className="App">
-      <header className="App__header">
-        <h1 className="App__title">
-          Jam is selected
-        </h1>
+const goods = goodsFromServer.map(good => ({
+  id: uuidv4(),
+  name: good,
+}));
 
-        <button
-          type="button"
-          className="App__clear"
-        >
-          Clear
-        </button>
-      </header>
-
-      <ul>
-        <li className="Good">Dumplings</li>
-        <li className="Good">Carrot</li>
-        <li className="Good">Eggs</li>
-        <li className="Good">Ice cream</li>
-        <li className="Good">Apple</li>
-        <li className="Good">Bread</li>
-        <li className="Good">Fish</li>
-        <li className="Good">Honey</li>
-        <li className="Good Good--active">Jam</li>
-        <li className="Good">Garlic</li>
-      </ul>
-
-      {/* Put required buttons into each Good */}
-      <button
-        type="button"
-        className="Good__remove"
-      >
-        Remove
-      </button>
-
-      <button
-        type="button"
-        className="Good__select"
-      >
-        Select
-      </button>
-    </main>
-  );
+type State = {
+  selected: string[];
 };
+
+export class App extends Component<{}, State> {
+  state: Readonly<State> = {
+    selected: ['Jam', 'Apple', 'Garlic'],
+  };
+
+  selectGood = (good:string) => {
+    this.setState(prevState => ({ selected: [...prevState.selected, good] }));
+  };
+
+  removeSelect = (good:string) => {
+    this.setState(prevState => (
+      { selected: prevState.selected.filter(el => el !== good) }));
+  };
+
+  render() {
+    const { selected } = this.state;
+    const title = selected.length
+      ? (`${selected.length > 1
+        ? `${selected.slice(0, -1).join(', ')} and ${selected.at(-1)} are`
+        : `${selected[0]} is`}`)
+        + ' selected'
+      : 'No goods selected';
+
+    return (
+      <main className="App panel is-info">
+        <header className="App__header panel-heading">
+          <h1 className="App__title">
+            {title}
+          </h1>
+
+          {selected.length
+            ? (
+              <button
+                type="button"
+                className="App__clear button is-danger"
+                onClick={() => this.setState({ selected: [] })}
+              >
+                Clear
+              </button>
+            )
+            : ''}
+        </header>
+
+        <ul className="has-background-info-light has-text-dark">
+          {goods.map(({ id, name }) => {
+            const isSelected = selected.includes(name);
+
+            return (
+              <li
+                key={id}
+                className={classNames(
+                  'Good',
+                  { 'Good--active': isSelected },
+                )}
+              >
+                {name}
+
+                {isSelected
+                  ? (
+                    <button
+                      type="button"
+                      className="Good__remove button is-danger is-outlined"
+                      onClick={() => this.removeSelect(name)}
+                    >
+                      Remove
+                    </button>
+                  )
+                  : (
+                    <button
+                      type="button"
+                      className="Good__select button is-info is-outlined "
+                      onClick={() => this.selectGood(name)}
+                    >
+                      Select
+                    </button>
+                  )}
+              </li>
+            );
+          })}
+        </ul>
+      </main>
+    );
+  }
+}
