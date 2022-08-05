@@ -1,18 +1,27 @@
 html {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  padding: 10px;
 }
 
 .App {
+  width: 40%;
+  margin: auto;
+
   &__header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
+    padding: 10px 30px;
   }
 }
 
 .Good {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 10px;
+  padding: 10px 20px;
 
   &--active {
     background-color: #ff0;
