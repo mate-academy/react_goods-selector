@@ -14,8 +14,8 @@ export class App extends Component<{}, State> {
 
   render() {
     return (
-      <main className="App">
-        <header className="App__header">
+      <main className="App container">
+        <header className="App__header mt-4 mb-4">
           <h1 className="App__title">
             {this.state.selectedGood
               ? `${this.state.selectedGood} is selected`
@@ -25,7 +25,7 @@ export class App extends Component<{}, State> {
           {this.state.selectedGood && (
             <button
               type="button"
-              className="App__clear"
+              className="App__clear button is-danger"
               onClick={() => this.setState({
                 selectedGood: '',
               })}
@@ -35,20 +35,24 @@ export class App extends Component<{}, State> {
           )}
         </header>
 
-        <ul>
+        <ul className="notification is-link">
           {goodsFromServer.map(product => (
             <li
-              className={`Good ${product === this.state.selectedGood
+              className={`pt-1 pb-1 columns Good ${product === this.state.selectedGood
                 ? 'Good--active'
                 : ''}`}
               key={product}
             >
-              {product}
+              <span
+                className="column is-half"
+              >
+                {product}
+              </span>
               {product === this.state.selectedGood
                 ? (
                   <button
                     type="button"
-                    className="Good__remove"
+                    className="Good__remove button is-danger"
                     onClick={() => this.setState({
                       selectedGood: '',
                     })}
@@ -59,7 +63,7 @@ export class App extends Component<{}, State> {
                 : (
                   <button
                     type="button"
-                    className="Good__select"
+                    className="Good__select button is-success"
                     onClick={() => this.setState({
                       selectedGood: product,
                     })}
