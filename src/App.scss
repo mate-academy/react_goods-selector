@@ -3,18 +3,32 @@ html {
 }
 
 .App {
+  border-radius: 50px;
+  background-color: rgba(202, 230, 219, 0.8);
+  width: 60%;
+  padding: 20px 40px;
+  margin: 0 auto;
+
   &__header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
+    padding: 5px 20px;
+    font-style: italic;
   }
 }
 
 .Good {
   display: flex;
   gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 20px;
+  border: 2px solid rgb(255, 255, 255);
+  font-size: 20px;
 
   &--active {
-    background-color: #ff0;
+    background-color: rgba(255, 255, 0, 0.7);
   }
 }
