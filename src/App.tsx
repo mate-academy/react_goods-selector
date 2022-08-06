@@ -1,33 +1,73 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import './App.scss';
 
 import goodsFromServer from './goods';
 
+type Product = string;
+
 type State = {
-  selectedGood: string,
+  selectedGood: Product,
+  selectedGoods: Product[],
 };
 
 export class App extends Component<{}, State> {
   state: Readonly<State> = {
     selectedGood: 'Jam',
+    selectedGoods: ['Jam'],
+  };
+
+  onMouseClickRemove = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const clickedButton = event.currentTarget;
+    const parentLi = clickedButton.closest('li');
+
+    parentLi?.classList.remove('Good--active');
+    const text = parentLi?.childNodes[0].nodeValue;
+
+    if (text) {
+      this.state.selectedGoods.forEach((item, i) => {
+        if (item === text) {
+          this.state.selectedGoods.splice(i, 1);
+        }
+      });
+    }
+
+    this.setState({
+      selectedGood: '',
+    });
   };
 
   render() {
+    const { selectedGood, selectedGoods } = this.state;
+    let goodsToShow = '';
+    const slicedWord = selectedGoods.slice(0, -1).join(', ');
+    const word = `${slicedWord} and ${selectedGoods[selectedGoods.length - 1]}`;
+
+    if (selectedGoods.length === 1) {
+      goodsToShow += selectedGoods[0];
+    } else if (selectedGoods.length === 2) {
+      goodsToShow += `${selectedGoods[0]} and ${selectedGoods[1]}`;
+    } else {
+      goodsToShow += word;
+    }
+
     return (
       <main className="App container">
         <header className="App__header mt-4 mb-4">
           <h1 className="App__title">
-            {this.state.selectedGood
-              ? `${this.state.selectedGood} is selected`
-              : 'No goods selected'}
+            {selectedGoods.length === 0
+              ? 'No goods selected'
+              : `${goodsToShow} ${selectedGoods.length === 1
+                ? 'is'
+                : 'are'} selected`}
           </h1>
 
-          {this.state.selectedGood && (
+          {(selectedGoods.length > 0) && (
             <button
               type="button"
               className="App__clear button is-danger"
               onClick={() => this.setState({
                 selectedGood: '',
+                selectedGoods: [],
               })}
             >
               Clear
@@ -38,24 +78,18 @@ export class App extends Component<{}, State> {
         <ul className="notification is-link">
           {goodsFromServer.map(product => (
             <li
-              className={`pt-1 pb-1 columns Good ${product === this.state.selectedGood
+              className={`pt-1 pb-1 Good ${(product === selectedGood) || (selectedGoods.includes(product))
                 ? 'Good--active'
                 : ''}`}
               key={product}
             >
-              <span
-                className="column is-half"
-              >
-                {product}
-              </span>
-              {product === this.state.selectedGood
+              {product}
+              {selectedGoods.includes(product)
                 ? (
                   <button
                     type="button"
                     className="Good__remove button is-danger"
-                    onClick={() => this.setState({
-                      selectedGood: '',
-                    })}
+                    onClick={this.onMouseClickRemove}
                   >
                     Remove
                   </button>
@@ -64,9 +98,12 @@ export class App extends Component<{}, State> {
                   <button
                     type="button"
                     className="Good__select button is-success"
-                    onClick={() => this.setState({
-                      selectedGood: product,
-                    })}
+                    onClick={() => {
+                      selectedGoods.push(product);
+                      this.setState({
+                        selectedGood: product,
+                      });
+                    }}
                   >
                     Select
                   </button>
