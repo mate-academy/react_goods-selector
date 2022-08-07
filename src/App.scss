@@ -3,6 +3,10 @@ html {
 }
 
 .App {
+
+  max-width: 400px;
+  margin: 0 auto;
+
   &__header {
     display: flex;
     align-items: center;
@@ -18,4 +22,9 @@ html {
     background-color: hsl(48, 100%, 67%);
     color: hsl(204, 86%, 53%);
   }
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
 }

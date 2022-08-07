@@ -51,7 +51,7 @@ export class App extends Component<{}, State> {
     }
 
     return (
-      <main className="App container">
+      <main className="App">
         <header className="App__header mt-4 mb-4">
           <h1 className="App__title">
             {selectedGoods.length === 0
