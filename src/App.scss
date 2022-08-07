@@ -33,11 +33,6 @@ html {
     margin: 20px auto;
   }
 
-  &__list-item-text {
-    display: flex;
-    align-items: center;
-  }
-
   &__title {
     font-size: 24px;
     font-weight: 700;
@@ -52,6 +47,7 @@ html {
   border-radius: 10px;
 
   justify-content: space-between;
+  align-items: center;
 
   &--active {
     background-color: #6f2cce;

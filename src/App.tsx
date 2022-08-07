@@ -61,9 +61,7 @@ export class App extends React.Component<{}, State> {
                       { 'Good--active': isSelected },
                     )}
                   >
-                    <span className="App__list-item-text">
-                      {good}
-                    </span>
+                    {good}
 
                     { isSelected
                       ? (
