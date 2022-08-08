@@ -3,6 +3,8 @@ html {
 }
 
 .App {
+  width: 400px;
+  margin: 50px auto;
   &__header {
     display: flex;
     align-items: center;
@@ -17,4 +19,17 @@ html {
   &--active {
     background-color: #ff0;
   }
+}
+
+.list {
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+  }
+}
+
+.button {
+  align-content: center;
 }
