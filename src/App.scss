@@ -15,6 +15,8 @@ html {
   gap: 10px;
 
   &--active {
-    background-color: #ff0;
+    background-color: red;
+    border-radius: 15px;
+    padding: 5px;
   }
 }

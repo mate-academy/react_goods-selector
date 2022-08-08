@@ -13,7 +13,7 @@ You are given an array of goods. Render them as a list with the ability to selec
 1. When there is no selected good, the title should show `No goods selected`.
 1. Add a `Select` button next to each good in the list. When you press it, the good becomes selected (only one good can be selected at a time).
 1. Don't show the `Select` button next to the selected good.
-1. Add a `Remove` button next to the selected good in the list. When you press it, the good becomes not selected.
+1. Add a `Remove` button next to the selected good in the list. When you press it, the good becomes not selected. // Where button should be located?
 
 ## Advanced task (optional)
 

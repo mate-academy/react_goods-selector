@@ -1,4 +1,6 @@
-export default [
+// import { v4 as uuidv4 } from 'uuid';
+
+const goodsFromServer = [
   'Dumplings',
   'Carrot',
   'Eggs',
@@ -10,3 +12,5 @@ export default [
   'Jam',
   'Garlic',
 ];
+
+export default goodsFromServer;
