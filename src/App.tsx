@@ -1,51 +1,84 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
+import goodsFromServer from './goods';
 
-// import goodsFromServer from './goods';
+interface State {
+  selectedGood: string;
+}
 
-export const App: React.FC = () => {
-  return (
-    <main className="App">
-      <header className="App__header">
-        <h1 className="App__title">
-          Jam is selected
-        </h1>
+export class App extends React.Component<{}, State> {
+  state: Readonly<State> = {
+    selectedGood: 'Jam',
+  };
 
-        <button
-          type="button"
-          className="App__clear"
-        >
-          Clear
-        </button>
-      </header>
+  highlightSelected = (good: string) => {
+    const { selectedGood } = this.state;
 
-      <ul>
-        <li className="Good">Dumplings</li>
-        <li className="Good">Carrot</li>
-        <li className="Good">Eggs</li>
-        <li className="Good">Ice cream</li>
-        <li className="Good">Apple</li>
-        <li className="Good">Bread</li>
-        <li className="Good">Fish</li>
-        <li className="Good">Honey</li>
-        <li className="Good Good--active">Jam</li>
-        <li className="Good">Garlic</li>
-      </ul>
+    return classNames(
+      'Good',
+      { 'Good--active': selectedGood === good },
+    );
+  };
 
-      {/* Put required buttons into each Good */}
-      <button
-        type="button"
-        className="Good__remove"
-      >
-        Remove
-      </button>
+  render() {
+    const { selectedGood } = this.state;
 
-      <button
-        type="button"
-        className="Good__select"
-      >
-        Select
-      </button>
-    </main>
-  );
-};
+    return (
+      <main className="App">
+        <header className="App__header">
+          <h1 className="App__title">
+            {selectedGood
+              ? (`${selectedGood} is selected`)
+              : 'No goods selected'}
+          </h1>
+          {selectedGood
+            && (
+              <button
+                type="button"
+                className="App__clear"
+                onClick={() => {
+                  this.setState({ selectedGood: '' });
+                }}
+              >
+                Clear
+              </button>
+            )}
+        </header>
+
+        <ul>
+          {goodsFromServer.map(good => (
+            <li className={this.highlightSelected(good)}>
+              {good}
+              { selectedGood === good
+                ? (
+                  <button
+                    type="button"
+                    className="Good__remove"
+                    onClick={() => {
+                      if (selectedGood === good) {
+                        this.setState({ selectedGood: '' });
+                      }
+                    }}
+                  >
+                    Remove
+                  </button>
+                )
+                : (
+                  <button
+                    type="button"
+                    className="Good__select"
+                    onClick={() => {
+                      this.setState({ selectedGood: good });
+                    }}
+                  >
+                    Select
+                  </button>
+                )}
+            </li>
+          ))}
+        </ul>
+      </main>
+    );
+  }
+}
