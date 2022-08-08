@@ -3,12 +3,28 @@ html {
 }
 
 .App {
+
+    width:  500px;
+    margin: 0 auto;
+
   &__header {
     display: flex;
     align-items: center;
     gap: 20px;
   }
+  &__list {
+
+  }
+
+  &__list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
 }
+
+
 
 .Good {
   display: flex;
