@@ -1,11 +1,9 @@
-// import { fromNode } from 'cypress/types/bluebird';
 import { Component } from 'react';
-// import { render } from 'react-dom';
 import './App.scss';
 import uniqid from 'uniqid';
 import 'bulma/css/bulma.min.css';
 
-import classNames from 'classnames';
+import cn from 'classnames';
 import goodsFromServer from './goods';
 
 type State = {
@@ -28,11 +26,11 @@ export class App extends Component<{}, State> {
   removeItem = (good: string) => (
     this.setState((prevState) => {
       const { selectedGood } = prevState;
-      const indexFinde = selectedGood
+      const selectedIndex = selectedGood
         .findIndex(item => item === good);
 
-      if (indexFinde !== -1) {
-        selectedGood.splice(indexFinde, 1);
+      if (selectedIndex !== -1) {
+        selectedGood.splice(selectedIndex, 1);
       }
 
       return {
@@ -50,7 +48,7 @@ export class App extends Component<{}, State> {
   setHeader = (): string => {
     const lengthSelected = this.state.selectedGood.length;
 
-    if (!(lengthSelected)) {
+    if (!lengthSelected) {
       return 'No goods selected';
     }
 
@@ -65,7 +63,7 @@ export class App extends Component<{}, State> {
     return `${selectedWithoutLastElement.join(', ')} and ${lastSelected} are selected`;
   };
 
-  addeItem = (good: string): void => {
+  addItem = (good: string): void => {
     if (this.state.isSelectedDefault) {
       this.clearState();
       this.setState(() => {
@@ -91,7 +89,7 @@ export class App extends Component<{}, State> {
           <h1 className="App__title">
             { this.setHeader() }
           </h1>
-          {!!(this.state.selectedGood.length) && (
+          {Boolean(this.state.selectedGood.length) && (
             <button
               type="button"
               className="App__clear button is-danger is-light"
@@ -106,7 +104,7 @@ export class App extends Component<{}, State> {
           {this.goods.map(good => (
             <li
               key={uniqid()}
-              className={classNames(
+              className={cn(
                 'Good',
                 'level',
                 { 'Good--active': this.isActive(good) },
@@ -130,7 +128,7 @@ export class App extends Component<{}, State> {
                     type="button"
                     className="Good__select button is-success is-light"
                     onClick={() => {
-                      this.addeItem(good);
+                      this.addItem(good);
                     }}
                   >
                     Select
