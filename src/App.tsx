@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import { v4 as uuidv4 } from 'uuid';
 import './App.scss';
 
 import goodsFromServer from './goods';
@@ -55,7 +56,7 @@ export class App extends React.Component<{}, State> {
 
                 return (
                   <li
-                    key={good}
+                    key={uuidv4()}
                     className={classNames(
                       'Good has-text-warning-light',
                       { 'Good--active': isSelected },
