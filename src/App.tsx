@@ -1,4 +1,5 @@
 import React from 'react';
+import { uuid } from 'uuidv4';
 import './App.scss';
 import classNames from 'classnames';
 import goodsFromServer from './goods';
@@ -48,7 +49,10 @@ export class App extends React.Component<{}, State> {
 
         <ul>
           {goodsFromServer.map(good => (
-            <li className={this.highlightSelected(good)}>
+            <li
+              className={this.highlightSelected(good)}
+              key={uuid()}
+            >
               {good}
               { selectedGood === good
                 ? (
