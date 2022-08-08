@@ -9,43 +9,39 @@ import goodsFromServer from './goods';
 type State = {
   selectedGood: string[];
   isSelectedDefault: boolean;
+  goods: string[];
 };
 
 export class App extends Component<{}, State> {
   state: Readonly<State> = {
     selectedGood: ['Jam'],
     isSelectedDefault: true,
+    goods: [...goodsFromServer],
   };
-
-  goods: string[] = [...goodsFromServer];
 
   isActive = (good: string) => {
-    return !!(this.state.selectedGood.find(item => item === good));
+    return (this.state.selectedGood.includes(good));
   };
 
-  removeItem = (good: string) => (
+  unselectGoodHandler = (good: string) => (
     this.setState((prevState) => {
       const { selectedGood } = prevState;
       const selectedIndex = selectedGood
-        .findIndex(item => item === good);
-
-      if (selectedIndex !== -1) {
-        selectedGood.splice(selectedIndex, 1);
-      }
+        .filter(item => item !== good);
 
       return {
-        selectedGood: [...selectedGood],
+        selectedGood: [...selectedIndex],
       };
     })
   );
 
-  clearState = () => {
+  clearSelectedGoods = () => {
     this.setState({
       selectedGood: [],
     });
   };
 
-  setHeader = (): string => {
+  getHeaderTitle = (): string => {
     const lengthSelected = this.state.selectedGood.length;
 
     if (!lengthSelected) {
@@ -65,7 +61,7 @@ export class App extends Component<{}, State> {
 
   addItem = (good: string): void => {
     if (this.state.isSelectedDefault) {
-      this.clearState();
+      this.clearSelectedGoods();
       this.setState(() => {
         return {
           isSelectedDefault: false,
@@ -83,17 +79,19 @@ export class App extends Component<{}, State> {
   };
 
   render() {
+    const { selectedGood } = this.state;
+
     return (
       <main className="App">
         <header className="App__header">
           <h1 className="App__title">
-            { this.setHeader() }
+            { this.getHeaderTitle() }
           </h1>
-          {Boolean(this.state.selectedGood.length) && (
+          {(selectedGood.length > 0) && (
             <button
               type="button"
               className="App__clear button is-danger is-light"
-              onClick={() => this.clearState()}
+              onClick={() => this.clearSelectedGoods()}
             >
               Clear
             </button>
@@ -101,7 +99,7 @@ export class App extends Component<{}, State> {
         </header>
 
         <ul className="content">
-          {this.goods.map(good => (
+          {this.state.goods.map(good => (
             <li
               key={uniqid()}
               className={cn(
@@ -117,7 +115,7 @@ export class App extends Component<{}, State> {
                     type="button"
                     className="Good__remove button is-warning is-light"
                     onClick={() => {
-                      this.removeItem(good);
+                      this.unselectGoodHandler(good);
                     }}
                   >
                     Remove
