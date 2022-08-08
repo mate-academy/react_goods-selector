@@ -14,17 +14,19 @@ export class App extends React.Component<{}, State> {
   };
 
   render() {
+    const { selected } = this.state;
+
     return (
       <main className="App">
         <header className="App__header">
           <h1 className="App__title">
 
-            {this.state.selected.length
-              ? `${this.state.selected} ${this.state.selected.length > 1 ? 'are' : 'is'} selected`
+            {selected.length
+              ? `${selected} ${selected.length > 1 ? 'are' : 'is'} selected`
               : 'No goods selected'}
           </h1>
 
-          {this.state.selected.length > 0 && (
+          {selected.length > 0 && (
             <button
               type="button"
               className="App__clear button"
@@ -42,23 +44,22 @@ export class App extends React.Component<{}, State> {
             <li
               className={classNames(
                 'Good',
-                { 'Good--active': this.state.selected.includes(good) },
+                { 'Good--active': selected.includes(good) },
               )}
               key={good}
             >
               {good}
 
-              {this.state.selected.includes(good)
+              {selected.includes(good)
                 ? (
                   <button
                     type="button"
                     className="Good__remove button"
                     key={good}
                     onClick={() => {
-                      this.state.selected.splice(this.state.selected
+                      selected.splice(selected
                         .indexOf(good), 1);
-                      // eslint-disable-next-line react/no-access-state-in-setstate
-                      this.setState({ selected: this.state.selected });
+                      this.setState({ selected });
                     }}
                   >
                     Remove
@@ -71,9 +72,8 @@ export class App extends React.Component<{}, State> {
                     className="Good__select button"
                     key={good}
                     onClick={() => {
-                      this.state.selected.push(good);
-                      // eslint-disable-next-line react/no-access-state-in-setstate
-                      this.setState({ selected: this.state.selected });
+                      selected.push(good);
+                      this.setState({ selected });
                     }}
                   >
                     Select
