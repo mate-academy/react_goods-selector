@@ -2,19 +2,52 @@ html {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
+iframe {
+  display: none;
+}
+
 .App {
   &__header {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 20px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 300px;
+    padding: 0;
   }
 }
 
 .Good {
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
+  padding: 5px;
 
   &--active {
     background-color: #ff0;
   }
+
+  &__select {
+    transition: background-color 0.3s linear, border 0.3s linear;
+
+    background-color: #6edc7c;
+    border: 2px solid green;
+  }
+
+  &__remove {
+    transition: background-color 0.3s linear, border 0.3s linear;
+
+    background-color: #e85024;
+    border: 2px solid brown;
+
+  }
+}
+
+.button {
+  border-radius: 10px;
 }
