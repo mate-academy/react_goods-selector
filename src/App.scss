@@ -10,6 +10,15 @@ html {
   }
 }
 
+.Goods {
+  width: 400px;
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
 .Good {
   display: flex;
   gap: 10px;
