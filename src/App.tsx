@@ -22,6 +22,14 @@ export class App extends React.Component<{}, State> {
     );
   };
 
+  removeSelectedGood() {
+    this.setState({ selectedGood: '' });
+  }
+
+  addSelectedGood(good: string) {
+    this.setState({ selectedGood: good });
+  }
+
   render() {
     const { selectedGood } = this.state;
 
@@ -38,9 +46,7 @@ export class App extends React.Component<{}, State> {
               <button
                 type="button"
                 className="App__clear"
-                onClick={() => {
-                  this.setState({ selectedGood: '' });
-                }}
+                onClick={this.removeSelectedGood}
               >
                 Clear
               </button>
@@ -59,11 +65,7 @@ export class App extends React.Component<{}, State> {
                   <button
                     type="button"
                     className="Good__remove"
-                    onClick={() => {
-                      if (selectedGood === good) {
-                        this.setState({ selectedGood: '' });
-                      }
-                    }}
+                    onClick={this.removeSelectedGood}
                   >
                     Remove
                   </button>
@@ -72,9 +74,7 @@ export class App extends React.Component<{}, State> {
                   <button
                     type="button"
                     className="Good__select"
-                    onClick={() => {
-                      this.setState({ selectedGood: good });
-                    }}
+                    onClick={() => this.addSelectedGood}
                   >
                     Select
                   </button>
