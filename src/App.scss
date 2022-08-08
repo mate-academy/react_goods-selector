@@ -2,19 +2,57 @@ html {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
+* {
+  margin: 0;
+}
+
 .App {
+  background-color: rgb(255, 227, 194);
+  width: 100vw;
+  padding: 5px 0;
   &__header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
+    min-height: 100px;
+    margin-left: 20px;
+    padding: 15px;
+  }
+
+  &__clear {
+    background-color: #c00;
+    border-radius: 5px;
   }
 }
 
 .Good {
   display: flex;
+  justify-content: space-between;
   gap: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 5px;
+  background-color: rgb(255, 210, 194);
 
   &--active {
-    background-color: #ff0;
+    background-color: rgb(255, 213, 0);
+    font-weight: bold;
   }
+
+  &__select {
+    background-color: green;
+    border-radius: 5px;
+  }
+
+  &__remove {
+    background-color: #c00;
+    border-radius: 5px;
+  }
+}
+
+button {
+  width: 10vw;
+  min-width: max-content;
 }

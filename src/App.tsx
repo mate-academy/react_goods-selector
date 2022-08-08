@@ -1,51 +1,101 @@
-import React from 'react';
+import { Component } from 'react';
 import './App.scss';
+import classNames from 'classnames';
 
-// import goodsFromServer from './goods';
+import goodsFromServer from './goods';
 
-export const App: React.FC = () => {
-  return (
-    <main className="App">
-      <header className="App__header">
-        <h1 className="App__title">
-          Jam is selected
-        </h1>
-
-        <button
-          type="button"
-          className="App__clear"
-        >
-          Clear
-        </button>
-      </header>
-
-      <ul>
-        <li className="Good">Dumplings</li>
-        <li className="Good">Carrot</li>
-        <li className="Good">Eggs</li>
-        <li className="Good">Ice cream</li>
-        <li className="Good">Apple</li>
-        <li className="Good">Bread</li>
-        <li className="Good">Fish</li>
-        <li className="Good">Honey</li>
-        <li className="Good Good--active">Jam</li>
-        <li className="Good">Garlic</li>
-      </ul>
-
-      {/* Put required buttons into each Good */}
-      <button
-        type="button"
-        className="Good__remove"
-      >
-        Remove
-      </button>
-
-      <button
-        type="button"
-        className="Good__select"
-      >
-        Select
-      </button>
-    </main>
-  );
+type State = {
+  selectedGoods: string[],
 };
+
+export class App extends Component<{}, State> {
+  state: Readonly<State> = {
+    selectedGoods: ['Jam'],
+  };
+
+  render() {
+    const { selectedGoods } = this.state;
+    let title = '';
+
+    switch (selectedGoods.length) {
+      case 0:
+        title = 'No goods selected';
+        break;
+      case 1:
+        title = `${selectedGoods[0]} selected`;
+        break;
+      case 2:
+        title = `${selectedGoods[0]} and ${selectedGoods[1]} are selected`;
+        break;
+      default:
+        title = `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods[selectedGoods.length - 1]} are selected`;
+    }
+
+    return (
+      <main className="App">
+        <header className="App__header">
+          <h1 className="App__title">
+            {title}
+          </h1>
+
+          {selectedGoods.length > 0
+            ? (
+              <button
+                type="button"
+                className="App__clear"
+                onClick={() => this.setState({ selectedGoods: [] })}
+              >
+                Clear
+              </button>
+            )
+            : ''}
+        </header>
+
+        <ul>
+          {goodsFromServer.map(good => (
+            <li
+              className={
+                classNames(
+                  'Good',
+                  { 'Good--active': selectedGoods.includes(good) },
+                )
+              }
+              key={good}
+            >
+              <p>
+                {good}
+              </p>
+
+              {selectedGoods.includes(good)
+                ? (
+                  <button
+                    type="button"
+                    className="Good__remove"
+                    onClick={() => (
+                      this.setState({
+                        selectedGoods: [...selectedGoods]
+                          .filter(el => el !== good),
+                      })
+                    )}
+                  >
+                    Remove
+                  </button>
+                )
+                : (
+                  <button
+                    type="button"
+                    className="Good__select"
+                    onClick={() => (
+                      this.setState({ selectedGoods: [...selectedGoods, good] })
+                    )}
+                  >
+                    Select
+                  </button>
+                )}
+            </li>
+          ))}
+        </ul>
+      </main>
+    );
+  }
+}
