@@ -5,7 +5,7 @@ import './App.scss';
 import goodsFromServer from './goods';
 
 type State = {
-  selectedGood: string | null,
+  selectedGood: string,
 };
 
 export class App extends React.Component<{}, State> {
@@ -36,7 +36,7 @@ export class App extends React.Component<{}, State> {
           {selectedGood && (
             <button
               type="button"
-              className="App__clear"
+              className="App__clear btn btn-danger btn-sm"
               onClick={this.removeGood}
             >
               Clear
@@ -60,7 +60,7 @@ export class App extends React.Component<{}, State> {
                 ? (
                   <button
                     type="button"
-                    className="Good__remove"
+                    className="Good__remove btn btn-warning btn-sm"
                     onClick={this.removeGood}
                   >
                     Remove
@@ -69,7 +69,7 @@ export class App extends React.Component<{}, State> {
                 : (
                   <button
                     type="button"
-                    className="Good__select"
+                    className="Good__select btn btn-success btn-sm"
                     onClick={() => {
                       this.addGood(good);
                     }}
