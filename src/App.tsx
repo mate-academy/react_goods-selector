@@ -27,34 +27,33 @@ export class App extends Component<{}, State> {
   };
 
   remove = (good: string) => {
-    this.setState(state => {
-      const newState = [...state.selectedGood];
+    this.setState(state => (
+      { selectedGood: state.selectedGood.filter(oldGood => oldGood !== good) }
+    ));
+  };
 
-      newState.splice(state.selectedGood.indexOf(good), 1);
+  createTitle = (flag: number, selectedGood: string[]) => {
+    if (flag === 1) {
+      return `${selectedGood[0]} is selected`;
+    }
 
-      return { selectedGood: newState };
-    });
+    if (flag > 1) {
+      return `${selectedGood.slice(0, flag - 1).join(', ')} `
+        + `and ${selectedGood[flag - 1]} is selected`;
+    }
+
+    return 'No goods selected';
   };
 
   render() {
     const { selectedGood } = this.state;
     const flag = selectedGood.length;
-    let title = 'No goods selected';
-
-    if (flag === 1) {
-      title = `${selectedGood[0]} is selected`;
-    }
-
-    if (flag > 1) {
-      title = `${selectedGood.slice(0, flag - 1).join(', ')} `
-        + `and ${selectedGood[flag - 1]} is selected`;
-    }
 
     return (
       <main className="App panel">
         <header className="App__header panel-heading">
           <h1 className="App__title title">
-            {title}
+            {this.createTitle(flag, selectedGood)}
           </h1>
 
           {flag > 0 && (
