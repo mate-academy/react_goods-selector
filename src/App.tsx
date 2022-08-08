@@ -1,5 +1,6 @@
 import React from 'react';
 // import { v4 as uuidv4 } from 'uuid';
+
 import classNames from 'classnames';
 import './App.scss';
 
@@ -27,64 +28,63 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="App">
-        <header className="App__header">
-          <h1 className="App__title">
-            {selectedGood
-              ? `${selectedGood} is selected`
-              : 'No goods selected'}
-          </h1>
+        <div className="App__container">
+          <header className="App__header">
+            <h1 className="App__title">
+              {selectedGood
+                ? `${selectedGood} is selected`
+                : 'No goods selected'}
+            </h1>
 
-          {selectedGood && (
-            <button
-              type="button"
-              className="App__clear"
-              onClick={this.GoodsToRemove}
-            >
-              Clear
-            </button>
-          )}
-        </header>
-
-        <ul className="App__list">
-          {goodsFromServer.map(good => {
-            const isSelectedGood = selectedGood === good;
-
-            return (
-              <li
-                key={good}
-                className={classNames(
-                  'Good App__list-item',
-                  { 'Good--active': isSelectedGood },
-                )}
+            {selectedGood && (
+              <button
+                type="button"
+                className="Good__btn button is-danger"
+                onClick={this.GoodsToRemove}
               >
+                Clear
+              </button>
+            )}
+          </header>
 
-                {good}
+          <ul className="App__list">
+            {goodsFromServer.map(good => {
+              const isSelectedGood = selectedGood === good;
 
-                { isSelectedGood
-                  ? (
-                    <button
-                      type="button"
-                      className="Good__remove"
-                      onClick={this.GoodsToRemove}
-                    >
-                      Remove
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      className="Good__select"
-                      onClick={() => this.isSelected(good)}
-                    >
-                      Select
-                    </button>
+              return (
+                <li
+                  key={good}
+                  className={classNames(
+                    'Good App__list-item',
+                    { 'Good--active': isSelectedGood },
                   )}
-              </li>
-            );
-          })}
-        </ul>
+                >
 
-        {/* Put required buttons into each Good */}
+                  {good}
 
+                  { isSelectedGood
+                    ? (
+                      <button
+                        type="button"
+                        className="Good__btn button is-danger"
+                        onClick={this.GoodsToRemove}
+                      >
+                        Remove
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        className="Good__btn button is-primary"
+                        onClick={() => this.isSelected(good)}
+                      >
+                        Select
+                      </button>
+                    )}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </main>
     );
   }
