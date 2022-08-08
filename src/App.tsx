@@ -1,51 +1,115 @@
+import classNames from 'classnames';
 import React from 'react';
 import './App.scss';
 
-// import goodsFromServer from './goods';
+import goodsFromServer from './goods';
 
-export const App: React.FC = () => {
-  return (
-    <main className="App">
-      <header className="App__header">
-        <h1 className="App__title">
-          Jam is selected
-        </h1>
-
-        <button
-          type="button"
-          className="App__clear"
-        >
-          Clear
-        </button>
-      </header>
-
-      <ul>
-        <li className="Good">Dumplings</li>
-        <li className="Good">Carrot</li>
-        <li className="Good">Eggs</li>
-        <li className="Good">Ice cream</li>
-        <li className="Good">Apple</li>
-        <li className="Good">Bread</li>
-        <li className="Good">Fish</li>
-        <li className="Good">Honey</li>
-        <li className="Good Good--active">Jam</li>
-        <li className="Good">Garlic</li>
-      </ul>
-
-      {/* Put required buttons into each Good */}
-      <button
-        type="button"
-        className="Good__remove"
-      >
-        Remove
-      </button>
-
-      <button
-        type="button"
-        className="Good__select"
-      >
-        Select
-      </button>
-    </main>
-  );
+type State = {
+  selectedGood: string[],
 };
+
+export class App extends React.Component<{}, State> {
+  state: Readonly<State> = {
+    selectedGood: ['Jam'],
+  };
+
+  selectGood = (good: string) => {
+    this.setState((prevState) => ({
+      selectedGood: [...prevState.selectedGood, good],
+    }));
+  };
+
+  removeGood = (good: string) => {
+    this.setState((prevState) => ({
+      selectedGood: [...prevState.selectedGood]
+        .filter(selectedGood => good !== selectedGood),
+    }));
+  };
+
+  clear = () => {
+    this.setState({ selectedGood: [] });
+  };
+
+  makeListInTitle = (goods: string[] | []) => {
+    switch (true) {
+      case !goods.length:
+        return 'No goods selected';
+
+      case goods.length === 1:
+        return `${goods[0]} is selected`;
+
+      case goods.length > 1:
+        return `${goods.slice(0, -1).join(', ')} and ${goods.slice(-1)} are selected`;
+
+      default:
+        return '';
+    }
+  };
+
+  render() {
+    const { selectedGood } = this.state;
+
+    return (
+      <main className="App">
+        <header className="App__header">
+          <h1 className="App__title title">
+            {this.makeListInTitle(selectedGood)}
+          </h1>
+
+          {
+            selectedGood.length
+              ? (
+                <button
+                  type="button"
+                  className="App__clear button is-info is-light is-rounded"
+                  onClick={() => this.clear()}
+                >
+                  Clear
+                </button>
+              )
+              : ''
+          }
+        </header>
+
+        <ul>
+          {goodsFromServer.map(good => (
+            <li
+              key={good}
+              className={classNames(
+                'Good',
+                {
+                  'Good--active': selectedGood.includes(good),
+                },
+              )}
+            >
+              {good}
+
+              {selectedGood.includes(good)
+                ? (
+                  <button
+                    type="button"
+                    className="button is-danger"
+                    onClick={() => {
+                      this.removeGood(good);
+                    }}
+                  >
+                    Remove
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="button is-success"
+                    onClick={() => {
+                      this.selectGood(good);
+                    }}
+                  >
+                    Select
+                  </button>
+                )}
+            </li>
+          ))}
+        </ul>
+      </main>
+    );
+  }
+}
