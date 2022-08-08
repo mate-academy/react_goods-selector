@@ -3,8 +3,15 @@ html {
 }
 
 .App {
+  margin: 0 auto;
+  padding: 20px;
+
+  width: 500px;
+  border: 1px solid #000;
+
   &__header {
     display: flex;
+    justify-content: space-around;
     align-items: center;
     gap: 20px;
   }
@@ -12,9 +19,17 @@ html {
 
 .Good {
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
+
+  margin: 0 auto;
+  margin-bottom: 10px;
+  width: 200px;
 
   &--active {
-    background-color: #ff0;
+    font-weight: bold;
+    background-color: darkorange;
+
+    border: 1px solid transparent;
+    line-height: 24px;
   }
 }
