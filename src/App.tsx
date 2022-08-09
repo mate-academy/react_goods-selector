@@ -20,9 +20,9 @@ export class App extends React.Component <{}, State> {
       <main className="App">
         <header className="App__header">
           <h1 className="App__title title">
-            {`${selectedGoods.length === 0
+            { selectedGoods.length === 0
               ? 'No goods selected'
-              : selectedGoods} is selected`}
+              : `${selectedGoods} is selected`}
           </h1>
 
           {selectedGoods.length > 0 && (
