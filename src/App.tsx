@@ -23,18 +23,18 @@ export class App extends React.Component<{}, State> {
           </h1>
           {
             this.state.selectedGood !== 'No good'
-              ? (
-                <button
-                  type="button"
-                  className="App__clear"
-                  onClick={() => {
-                    this.setState({ selectedGood: 'No good' });
-                  }}
-                >
-                  Clear
-                </button>
-              )
-              : ''
+            && (
+              <button
+                type="button"
+                className="App__clear"
+                onClick={() => {
+                  this.setState({ selectedGood: 'No good' });
+                }}
+              >
+                Clear
+              </button>
+            )
+
           }
         </header>
 
