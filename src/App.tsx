@@ -45,7 +45,7 @@ export class App extends React.Component <{}, State> {
           )}
         </header>
 
-        <ul>
+        <ul className="container">
           {goodsFromServer.map(good => (
             <li className={classNames(
               'Good',
