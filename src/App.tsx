@@ -5,92 +5,121 @@ import './App.scss';
 import goodsFromServer from './goods';
 
 type State = {
-  selectedGood: string;
+  selectedGoods: string[];
+  goods: string[];
 };
 
 export class App extends Component<{}, State> {
   state = {
-    selectedGood: 'Jam',
+    selectedGoods: ['Jam'],
+    goods: goodsFromServer,
   };
 
+  getHeaderTitle() {
+    const { selectedGoods } = this.state;
+
+    if (!selectedGoods.length) {
+      return 'No goods selected';
+    }
+
+    if (selectedGoods.length === 1) {
+      return `${selectedGoods} is selected`;
+    }
+
+    const lastIndex = selectedGoods.length - 1;
+    const firstPart = selectedGoods.slice(0, -1);
+    const joined = `${firstPart.join(', ')} and ${selectedGoods[lastIndex]}`;
+
+    return `${joined} are selected`;
+  }
+
+  clear = () => {
+    this.setState({
+      selectedGoods: [],
+    });
+  };
+
+  isSelected(goodName: string) {
+    const { selectedGoods } = this.state;
+
+    return selectedGoods.includes(goodName);
+  }
+
+  selectGood(good: string) {
+    const { selectedGoods } = this.state;
+
+    this.setState({ selectedGoods: [...selectedGoods, good] });
+  }
+
+  unselectGood(good: string) {
+    const { selectedGoods } = this.state;
+    const newGoods = selectedGoods.filter(el => el !== good);
+
+    this.setState({ selectedGoods: newGoods });
+  }
+
+  selectToggle(goodName: string) {
+    if (this.isSelected(goodName)) {
+      this.unselectGood(goodName);
+
+      return;
+    }
+
+    this.selectGood(goodName);
+  }
+
   render() {
-    const { selectedGood } = this.state;
+    const { goods } = this.state;
 
     return (
       <main className="App">
         <header className="App__header">
           <h1 className="App__title">
-            {selectedGood
-              ? `${selectedGood} is selected`
-              : 'No goods selected'}
+            {this.getHeaderTitle()}
           </h1>
 
-          {selectedGood !== ''
-            ? (
-              <button
-                type="button"
-                className="App__clear"
-                onClick={() => {
-                  this.setState({
-                    selectedGood: '',
-                  });
-                }}
-              >
-                Clear
-              </button>
-            )
-            : null}
+          <button
+            type="button"
+            className="App__clear controlBtn"
+            onClick={this.clear}
+          >
+            Clear
+          </button>
         </header>
 
         <ul>
-          {goodsFromServer.map(good => {
+          {goods.map(good => {
+            const isSelected = this.isSelected(good);
+
             return (
-              <li
-                key={good}
-                className={classNames(
-                  'Good',
-                  {
-                    'Good--active': selectedGood === good,
-                  },
-                )}
-              >
-                {good}
-                {selectedGood === good
-                  ? (
-                    <button
-                      type="button"
-                      className="Good__remove"
-                      onClick={() => {
-                        this.setState({
-                          selectedGood: '',
-                        });
-                      }}
-                    >
-                      Remove
-                    </button>
-                  )
+              <li key={good}>
+                <div className={classNames('Good', {
+                  'Good--active': isSelected,
+                })}
+                >
+                  {good}
 
-                  : (
-                    <button
-                      type="button"
-                      className="Good__select"
-                      onClick={() => {
-                        this.setState({
-                          selectedGood: good,
-                        });
-                      }}
-                    >
-                      Select
-                    </button>
-                  )}
-
+                  <button
+                    type="button"
+                    className={classNames(
+                      'controlBtn',
+                      {
+                        'controlBtn--success': !isSelected,
+                        'controlBtn--error': isSelected,
+                      },
+                    )}
+                    onClick={() => this.selectToggle(good)}
+                  >
+                    {(isSelected
+                      ? 'Remove'
+                      : 'Select'
+                    )}
+                  </button>
+                </div>
               </li>
             );
           })}
         </ul>
-
-        {/* Put required buttons into each Good */}
-
       </main>
     );
   }
