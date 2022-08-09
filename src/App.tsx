@@ -43,7 +43,7 @@ export class App extends React.Component<{}, State> {
       return `${selectedGoods[0]} is selected`;
     }
 
-    return `${selectedGoods.slice(0, -1).join(',')} and ${selectedGoods[selectedGoods.length - 1]} are selected`;
+    return `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods[selectedGoods.length - 1]} are selected`;
   };
 
   render() {
