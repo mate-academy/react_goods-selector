@@ -42,7 +42,7 @@ export class App extends React.Component<{}, State> {
             <button
               type="button"
               className="App__clear button is-danger"
-              onClick={() => this.removeGood()}
+              onClick={this.removeGood}
             >
               Clear
             </button>
@@ -66,7 +66,7 @@ export class App extends React.Component<{}, State> {
                   <button
                     type="button"
                     className="Good__remove button is-danger"
-                    onClick={() => this.removeGood()}
+                    onClick={this.removeGood}
                   >
                     Remove
                   </button>
