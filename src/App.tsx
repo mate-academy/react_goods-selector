@@ -15,9 +15,10 @@ export class App extends Component<{}, State> {
     selectedWord: ['Jam'],
   };
 
-  handler = (item: string) => {
+  elementSelect = (item: string) => {
     const { selectedWord } = this.state;
-    const selectedWordClick = selectedWord.filter(el => el !== item);
+    const selectedWordClick = selectedWord
+      .filter(filterElement => filterElement !== item);
 
     this.setState(() => ({
       selectedWord: (selectedWord.includes(item)
@@ -68,7 +69,7 @@ export class App extends Component<{}, State> {
                 className={classNames('Good__select button is-info', {
                   'Good--active is-danger': selectedWord.includes(item),
                 })}
-                onClick={() => this.handler(item)}
+                onClick={() => this.elementSelect(item)}
               >
                 {selectedWord.includes(item)
                   ? 'Remove'

@@ -22,14 +22,14 @@ html {
 }
 
 .list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
   &__item {
     display: flex;
     justify-content: space-between;
-    align-self: center;
+    align-items: center;
+    width: 100%;
   }
-}
-
-.button {
-  align-content: center;
 }
