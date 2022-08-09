@@ -38,19 +38,17 @@ export class App extends Component<{}, State> {
           <h1 className="App__title">
             {getTitle()}
           </h1>
-          <button
-            type="button"
-            className={
-              classNames('App__clear',
-                { App__hide: this.state.selectedGood.length === 0 })
-            }
-            // className="App__clear"
-            onClick={() => {
-              this.setState({ selectedGood: [] });
-            }}
-          >
-            Clear
-          </button>
+          {selectedGood.length > 0 && (
+            <button
+              type="button"
+              className="App__clear"
+              onClick={() => {
+                this.setState({ selectedGood: [] });
+              }}
+            >
+              Clear
+            </button>
+          )}
         </header>
 
         <ul>
@@ -63,39 +61,34 @@ export class App extends Component<{}, State> {
               key={el}
             >
               {el}
-              <button
-                type="button"
-                className="Good__remove"
-                onClick={() => {
-                  selectedGood.splice(selectedGood.indexOf(el), 1);
-                  this.setState({
-                    selectedGood,
-                  });
-                }}
-                hidden={!this.state.selectedGood.includes(el)}
-              >
-                Remove
-              </button>
-
-              <button
-                type="button"
-                className={
-                  classNames('Good__select',
-                    {
-                      'Good__select-hide':
-                      this.state.selectedGood.includes(el),
-                    })
-                }
-                // className="Good__select"
-                onClick={() => {
-                  selectedGood.push(el);
-                  this.setState({
-                    selectedGood,
-                  });
-                }}
-              >
-                Select
-              </button>
+              {selectedGood.includes(el) && (
+                <button
+                  type="button"
+                  className="Good__remove"
+                  onClick={() => {
+                    selectedGood.splice(selectedGood.indexOf(el), 1);
+                    this.setState({
+                      selectedGood,
+                    });
+                  }}
+                >
+                  Remove
+                </button>
+              )}
+              {!selectedGood.includes(el) && (
+                <button
+                  type="button"
+                  className="Good__select"
+                  onClick={() => {
+                    selectedGood.push(el);
+                    this.setState({
+                      selectedGood,
+                    });
+                  }}
+                >
+                  Select
+                </button>
+              )}
             </li>
           ))}
         </ul>
