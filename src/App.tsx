@@ -1,51 +1,123 @@
 import React from 'react';
+import cn from 'classnames';
 import './App.scss';
 
-// import goodsFromServer from './goods';
+import goodsFromServer from './goods';
 
-export const App: React.FC = () => {
-  return (
-    <main className="App">
-      <header className="App__header">
-        <h1 className="App__title">
-          Jam is selected
-        </h1>
+interface State {
+  selectedGoods: string[],
+  goods: string[],
+}
 
-        <button
-          type="button"
-          className="App__clear"
-        >
-          Clear
-        </button>
-      </header>
+export class App extends React.Component<{}, State> {
+  state = {
+    selectedGoods: ['Jam'],
+    goods: goodsFromServer,
+  };
 
-      <ul>
-        <li className="Good">Dumplings</li>
-        <li className="Good">Carrot</li>
-        <li className="Good">Eggs</li>
-        <li className="Good">Ice cream</li>
-        <li className="Good">Apple</li>
-        <li className="Good">Bread</li>
-        <li className="Good">Fish</li>
-        <li className="Good">Honey</li>
-        <li className="Good Good--active">Jam</li>
-        <li className="Good">Garlic</li>
-      </ul>
+  getTitle() {
+    const { selectedGoods } = this.state;
 
-      {/* Put required buttons into each Good */}
-      <button
-        type="button"
-        className="Good__remove"
-      >
-        Remove
-      </button>
+    if (!selectedGoods.length) {
+      return 'No goods selected';
+    }
 
-      <button
-        type="button"
-        className="Good__select"
-      >
-        Select
-      </button>
-    </main>
-  );
-};
+    if (selectedGoods.length === 1) {
+      return `${selectedGoods} is selected`;
+    }
+
+    const lastIndex = selectedGoods.length - 1;
+    const firstPart = selectedGoods.slice(0, -1);
+    const joined = `${firstPart.join(', ')} and ${selectedGoods[lastIndex]}`;
+
+    return `${joined} are selected`;
+  }
+
+  clear = () => {
+    this.setState({
+      selectedGoods: [],
+    });
+  };
+
+  isSelected(goodName: string) {
+    const { selectedGoods } = this.state;
+
+    return selectedGoods.includes(goodName);
+  }
+
+  selectGood(good: string) {
+    const { selectedGoods } = this.state;
+
+    this.setState({ selectedGoods: [...selectedGoods, good] });
+  }
+
+  unselectGood(good: string) {
+    const { selectedGoods } = this.state;
+
+    const newGoods = selectedGoods.filter(el => el !== good);
+
+    this.setState({ selectedGoods: newGoods });
+  }
+
+  selectToggle(goodName: string) {
+    if (this.isSelected(goodName)) {
+      this.unselectGood(goodName);
+
+      return;
+    }
+
+    this.selectGood(goodName);
+  }
+
+  render(): React.ReactNode {
+    const { goods } = this.state;
+
+    return (
+      <main className="App">
+        <header className="App__header">
+          <h1 className="App__title">
+            {this.getTitle()}
+          </h1>
+
+          <button
+            type="button"
+            className="App__clear"
+            onClick={this.clear}
+          >
+            Clear
+          </button>
+        </header>
+
+        <ul>
+          {goods.map(good => {
+            const isSelected = this.isSelected(good);
+
+            return (
+              <li key={good}>
+                <div>
+                  {good}
+                  <button
+                    type="button"
+                    className={cn(
+                      'controlBtn',
+                      {
+                        'btn--success': !isSelected,
+                        'btn--error': isSelected,
+                      },
+                    )}
+                    onClick={() => this.selectToggle(good)}
+                  >
+                    {(isSelected
+                      ? 'Remove'
+                      : 'Select'
+                    )}
+                  </button>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </main>
+    );
+  }
+}
