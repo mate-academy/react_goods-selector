@@ -1,51 +1,89 @@
 import React from 'react';
 import './App.scss';
+import classNames from 'classnames';
+import goodsFromServer from './goods';
 
-// import goodsFromServer from './goods';
+type Good = string;
 
-export const App: React.FC = () => {
-  return (
-    <main className="App">
-      <header className="App__header">
-        <h1 className="App__title">
-          Jam is selected
-        </h1>
-
-        <button
-          type="button"
-          className="App__clear"
-        >
-          Clear
-        </button>
-      </header>
-
-      <ul>
-        <li className="Good">Dumplings</li>
-        <li className="Good">Carrot</li>
-        <li className="Good">Eggs</li>
-        <li className="Good">Ice cream</li>
-        <li className="Good">Apple</li>
-        <li className="Good">Bread</li>
-        <li className="Good">Fish</li>
-        <li className="Good">Honey</li>
-        <li className="Good Good--active">Jam</li>
-        <li className="Good">Garlic</li>
-      </ul>
-
-      {/* Put required buttons into each Good */}
-      <button
-        type="button"
-        className="Good__remove"
-      >
-        Remove
-      </button>
-
-      <button
-        type="button"
-        className="Good__select"
-      >
-        Select
-      </button>
-    </main>
-  );
+type State = {
+  selectedItem: Good;
 };
+
+export class App extends React.Component<{}, State> {
+  state = {
+    selectedItem: 'Jam',
+  };
+
+  selectGood = (item: Good) => {
+    this.setState({ selectedItem: item });
+  };
+
+  removeGood = () => {
+    this.setState({ selectedItem: '' });
+  };
+
+  isSelected = (item: Good) => {
+    return this.state.selectedItem === item;
+  };
+
+  render() {
+    const { selectedItem } = this.state;
+
+    return (
+      <main className="App panel is-primary">
+        <header className="App__header panel-heading">
+          <h1 className="App__title">
+            {selectedItem
+              ? `${selectedItem} is selected`
+              : 'No goods selected'}
+          </h1>
+
+          {selectedItem && (
+            <button
+              type="button"
+              className="App__clear button is-danger"
+              onClick={() => this.removeGood()}
+            >
+              Clear
+            </button>
+          )}
+        </header>
+
+        <ul>
+          {goodsFromServer.map(good => (
+            <li
+              className={classNames(
+                'Good',
+                {
+                  'Good--active': selectedItem === good,
+                },
+              )}
+              key={good}
+            >
+              {good}
+              {this.isSelected(good)
+                ? (
+                  <button
+                    type="button"
+                    className="Good__remove button is-danger"
+                    onClick={() => this.removeGood()}
+                  >
+                    Remove
+                  </button>
+                )
+                : (
+                  <button
+                    type="button"
+                    className="Good__select button is-primary"
+                    onClick={() => this.selectGood(good)}
+                  >
+                    Select
+                  </button>
+                )}
+            </li>
+          ))}
+        </ul>
+      </main>
+    );
+  }
+}
