@@ -66,7 +66,7 @@ export class App extends Component<{}, State> {
           <h1 className="App__title">
             { this.getHeaderTitle() }
           </h1>
-          {(selectedGood.length > 0) && (
+          {selectedGood.length > 0 && (
             <button
               type="button"
               className="App__clear button is-danger is-light"
