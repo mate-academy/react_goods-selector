@@ -1,74 +1,75 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
+import classNames from 'classnames';
+
 import './App.scss';
 
 import goodsFromServer from './goods';
 
-type Product = string;
+type Good = string;
 
 type State = {
-  selectedGood: Product,
-  selectedGoods: Product[],
+  selectedGoods: Good[],
 };
 
 export class App extends Component<{}, State> {
   state: Readonly<State> = {
-    selectedGood: 'Jam',
     selectedGoods: ['Jam'],
   };
 
-  onMouseClickRemove = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const clickedButton = event.currentTarget;
-    const parentLi = clickedButton.closest('li');
+  isSelected = (searchGood: Good) => {
+    return this.state.selectedGoods.includes(searchGood);
+  };
 
-    parentLi?.classList.remove('Good--active');
-    const text = parentLi?.childNodes[0].nodeValue;
+  removeSelectedGood = (
+    good: Good,
+  ) => {
+    this.setState((state) => ({
+      selectedGoods: state.selectedGoods.filter(product => product !== good),
+    }));
+  };
 
-    if (text) {
-      this.state.selectedGoods.forEach((item, i) => {
-        if (item === text) {
-          this.state.selectedGoods.splice(i, 1);
-        }
-      });
+  cleareSelectedGoods = () => this.setState({
+    selectedGoods: [],
+  });
+
+  addSelectedGood = (product: Good) => {
+    this.setState((state) => ({
+      selectedGoods: [...state.selectedGoods, product],
+    }));
+  };
+
+  getTitle = () => {
+    const { selectedGoods } = this.state;
+
+    switch (selectedGoods.length) {
+      case 0:
+        return 'No goods selected';
+      case 1:
+        return `${selectedGoods[0]} is selected`;
+
+      case 2:
+        return `${selectedGoods[0]} and ${selectedGoods[1]} are selected`;
+
+      default:
+        return `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods[selectedGoods.length - 1]} are selected`;
     }
-
-    this.setState({
-      selectedGood: '',
-    });
   };
 
   render() {
-    const { selectedGood, selectedGoods } = this.state;
-    let goodsToShow = '';
-    const slicedWord = selectedGoods.slice(0, -1).join(', ');
-    const word = `${slicedWord} and ${selectedGoods[selectedGoods.length - 1]}`;
-
-    if (selectedGoods.length === 1) {
-      goodsToShow += selectedGoods[0];
-    } else if (selectedGoods.length === 2) {
-      goodsToShow += `${selectedGoods[0]} and ${selectedGoods[1]}`;
-    } else {
-      goodsToShow += word;
-    }
+    const { selectedGoods } = this.state;
 
     return (
       <main className="App">
         <header className="App__header mt-4 mb-4">
           <h1 className="App__title">
-            {selectedGoods.length === 0
-              ? 'No goods selected'
-              : `${goodsToShow} ${selectedGoods.length === 1
-                ? 'is'
-                : 'are'} selected`}
+            {this.getTitle()}
           </h1>
 
-          {(selectedGoods.length > 0) && (
+          {selectedGoods.length > 0 && (
             <button
               type="button"
               className="App__clear button is-danger"
-              onClick={() => this.setState({
-                selectedGood: '',
-                selectedGoods: [],
-              })}
+              onClick={this.cleareSelectedGoods}
             >
               Clear
             </button>
@@ -76,20 +77,27 @@ export class App extends Component<{}, State> {
         </header>
 
         <ul className="notification is-link">
-          {goodsFromServer.map(product => (
+          {goodsFromServer.map(good => (
             <li
-              className={`pt-1 pb-1 Good ${(product === selectedGood) || (selectedGoods.includes(product))
-                ? 'Good--active'
-                : ''}`}
-              key={product}
+              className={
+                classNames(
+                  'pt-1',
+                  'pb-1',
+                  'Good',
+                  { 'Good--active': this.isSelected(good) },
+                )
+              }
+              key={good}
             >
-              {product}
-              {selectedGoods.includes(product)
+              <p>
+                {good}
+              </p>
+              {this.isSelected(good)
                 ? (
                   <button
                     type="button"
                     className="Good__remove button is-danger"
-                    onClick={this.onMouseClickRemove}
+                    onClick={() => (this.removeSelectedGood(good))}
                   >
                     Remove
                   </button>
@@ -98,12 +106,7 @@ export class App extends Component<{}, State> {
                   <button
                     type="button"
                     className="Good__select button is-success"
-                    onClick={() => {
-                      selectedGoods.push(product);
-                      this.setState({
-                        selectedGood: product,
-                      });
-                    }}
+                    onClick={() => this.addSelectedGood(good)}
                   >
                     Select
                   </button>
