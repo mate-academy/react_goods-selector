@@ -1,20 +1,36 @@
 html {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
+*{
+  box-sizing: border-box;
+}
 
+ul {
+  padding-right: 40px;
+}
 .App {
+  margin: 0 auto;
+  max-width: 600px;
+  background-color: #52307c;
   &__header {
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 20px;
+    background-color: #3c1361;
+    color: #fff;
+    padding: 20px;
   }
 }
 
 .Good {
   display: flex;
+  justify-content: space-between;
   gap: 10px;
+  color: #fff;
+  padding: 10px;
 
   &--active {
-    background-color: #ff0;
+    background-color: #a000c8;
   }
 }
