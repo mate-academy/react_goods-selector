@@ -15,11 +15,11 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  isSelected = (selectedGood : string) => {
+  selectGood = (selectedGood: string) => {
     this.setState({ selectedGood });
   };
 
-  GoodsToRemove = () => {
+  unselectGood = () => {
     this.setState({ selectedGood: '' });
   };
 
@@ -40,7 +40,7 @@ export class App extends React.Component<{}, State> {
               <button
                 type="button"
                 className="Good__btn button is-danger"
-                onClick={this.GoodsToRemove}
+                onClick={this.unselectGood}
               >
                 Clear
               </button>
@@ -62,12 +62,12 @@ export class App extends React.Component<{}, State> {
 
                   {good}
 
-                  { isSelectedGood
+                  {isSelectedGood
                     ? (
                       <button
                         type="button"
                         className="Good__btn button is-danger"
-                        onClick={this.GoodsToRemove}
+                        onClick={this.unselectGood}
                       >
                         Remove
                       </button>
@@ -75,7 +75,7 @@ export class App extends React.Component<{}, State> {
                       <button
                         type="button"
                         className="Good__btn button is-primary"
-                        onClick={() => this.isSelected(good)}
+                        onClick={() => this.selectGood(good)}
                       >
                         Select
                       </button>
