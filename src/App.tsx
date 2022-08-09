@@ -18,16 +18,12 @@ export class App extends Component<{}, State> {
     const order = selectedGoods.reduce((prev, selectedGood, i, arr) => {
       let str = '';
 
-      if (arr.length > 1) {
-        if (i === 0) {
-          str += selectedGood;
-        } else if (i !== arr.length - 1 && i !== 0) {
-          str += `, ${selectedGood}`;
-        } else {
-          str += ` and ${selectedGood}`;
-        }
+      if (i === 0) {
+        str += selectedGood;
+      } else if (i !== arr.length - 1) {
+        str += `, ${selectedGood}`;
       } else {
-        return arr[0];
+        str += ` and ${selectedGood}`;
       }
 
       return prev + str;
