@@ -2,8 +2,13 @@ html {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
+body {
+  max-width: 600px;
+}
+
 .App {
   &__header {
+    margin-left: 40px;
     display: flex;
     align-items: center;
     gap: 20px;
@@ -12,7 +17,7 @@ html {
 
 .Good {
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
 
   &--active {
     background-color: #ff0;
