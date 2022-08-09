@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import className from 'classnames';
 
 import goodsFromServer from './goods';
 
@@ -54,53 +55,53 @@ export class App extends React.Component<{}, State> {
             {this.getTitle()}
           </h1>
 
-          {selectedGood.length
-            ? (
-              <button
-                type="button"
-                className="App__clear button is-warning"
-                onClick={this.clearList}
-              >
-                Clear
-              </button>
-            )
-            : null}
+          {selectedGood.length > 0 && (
+            <button
+              type="button"
+              className="App__clear button is-warning"
+              onClick={this.clearList}
+            >
+              Clear
+            </button>
+          )}
         </header>
 
         <ul>
           {
-            goodsFromServer.map(good => (
-              // eslint-disable-next-line max-len
-              <li
-                key={good}
-                className={selectedGood.includes(good)
-                  ? 'Good Good--active'
-                  : 'Good'}
-              >
-                {good}
-                {
-                  !selectedGood.includes(good)
-                    ? (
-                      <button
-                        type="button"
-                        className="Good__select button is-success"
-                        onClick={() => this.selectGood(good)}
-                      >
-                        Select
-                      </button>
-                    )
-                    : (
-                      <button
-                        type="button"
-                        className="Good__remove button is-danger"
-                        onClick={() => this.removeGood(good)}
-                      >
-                        Remove
-                      </button>
-                    )
-                }
-              </li>
-            ))
+            goodsFromServer.map(good => {
+              const isSelected = selectedGood.includes(good);
+
+              return (
+                <li
+                  key={good}
+                  // eslint-disable-next-line max-len
+                  className={className('good', { 'good--active': isSelected })}
+                >
+                  {good}
+                  {
+                    !isSelected
+                      ? (
+                        <button
+                          type="button"
+                          className="Good__select button is-success"
+                          onClick={() => this.selectGood(good)}
+                        >
+                          Select
+                        </button>
+                      )
+                      : (
+                        <button
+                          type="button"
+                          className="Good__remove button is-danger"
+                          onClick={() => this.removeGood(good)}
+                        >
+                          Remove
+                        </button>
+                      )
+                  }
+                </li>
+              );
+            })
           }
         </ul>
       </main>
