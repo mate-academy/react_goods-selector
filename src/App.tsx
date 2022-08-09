@@ -84,7 +84,7 @@ export class App extends React.Component<{}, State> {
             <h1 className="App__title title is-5 font-extrabold mb-50">
               {this.renderSelectedGoods(selectedGoods)}
             </h1>
-            {selectedGoods?.length ? (
+            {selectedGoods.length && (
               <button
                 onClick={this.handleClear}
                 type="button"
@@ -93,8 +93,6 @@ export class App extends React.Component<{}, State> {
               >
                 Clear
               </button>
-            ) : (
-              ''
             )}
           </header>
 
@@ -111,25 +109,27 @@ export class App extends React.Component<{}, State> {
                 >
                   {name}
 
-                  {isSelected ? (
-                    <button
-                      type="button"
-                      // eslint-disable-next-line max-len
-                      className="Good__remove button text-base p-1 border-2 rounded hover:text-black"
-                      onClick={() => this.handleRemove(name)}
-                    >
-                      Remove
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      // eslint-disable-next-line max-len
-                      className="Good__select button text-base p-1 border-2 rounded hover:text-amber-600"
-                      onClick={() => this.handleSelect(name)}
-                    >
-                      Select
-                    </button>
-                  )}
+                  {isSelected
+                    ? (
+                      <button
+                        type="button"
+                        // eslint-disable-next-line max-len
+                        className="Good__remove button text-base p-1 border-2 rounded hover:text-black"
+                        onClick={() => this.handleRemove(name)}
+                      >
+                        Remove
+                      </button>
+                    )
+                    : (
+                      <button
+                        type="button"
+                        // eslint-disable-next-line max-len
+                        className="Good__select button text-base p-1 border-2 rounded hover:text-amber-600"
+                        onClick={() => this.handleSelect(name)}
+                      >
+                        Select
+                      </button>
+                    )}
                 </li>
               );
             })}
