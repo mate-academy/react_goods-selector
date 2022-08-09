@@ -22,7 +22,10 @@ export class App extends React.Component <{}, State> {
           <h1 className="App__title title">
             { selectedGoods.length === 0
               ? 'No goods selected'
-              : `${selectedGoods} is selected`}
+              : (`${selectedGoods.join(', ')} ${selectedGoods.length === 1
+                ? 'is'
+                : 'are'
+              } selected`)}
           </h1>
 
           {selectedGoods.length > 0 && (
@@ -60,19 +63,19 @@ export class App extends React.Component <{}, State> {
                   ? 'remove is-danger is-outlined'
                   : 'select is-success'}
                   button is-small`}
-                onClick={() => {
-                  if (selectedGoods.includes(good)) {
-                    selectedGoods.splice(selectedGoods.indexOf(good), 1);
-                    this.setState({
-                      selectedGoods,
-                    });
-                  } else {
-                    selectedGoods.push(good);
-                    this.setState({
-                      selectedGoods,
-                    });
-                  }
-                }}
+                onClick={() => (
+                  selectedGoods.includes(good)
+                    ? (selectedGoods.splice(selectedGoods.indexOf(good), 1)
+                      && this.setState({
+                        selectedGoods,
+                      })
+                    )
+                    : (selectedGoods.push(good)
+                        && this.setState({
+                          selectedGoods,
+                        })
+                    )
+                )}
               >
                 {selectedGoods.includes(good) ? 'Remove' : 'Select'}
 
