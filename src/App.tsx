@@ -8,31 +8,23 @@ import goodsFromServer from './goods';
 
 type State = {
   selectedGood: string[];
-  isSelectedDefault: boolean;
   goods: string[];
 };
 
 export class App extends Component<{}, State> {
   state: Readonly<State> = {
     selectedGood: ['Jam'],
-    isSelectedDefault: true,
     goods: [...goodsFromServer],
   };
 
   isActive = (good: string) => {
-    return (this.state.selectedGood.includes(good));
+    return this.state.selectedGood.includes(good);
   };
 
   unselectGoodHandler = (good: string) => (
-    this.setState((prevState) => {
-      const { selectedGood } = prevState;
-      const selectedIndex = selectedGood
-        .filter(item => item !== good);
-
-      return {
-        selectedGood: [...selectedIndex],
-      };
-    })
+    this.setState(({ selectedGood }) => ({
+      selectedGood: selectedGood.filter(el => el !== good),
+    }))
   );
 
   clearSelectedGoods = () => {
@@ -59,23 +51,10 @@ export class App extends Component<{}, State> {
     return `${selectedWithoutLastElement.join(', ')} and ${lastSelected} are selected`;
   };
 
-  addItem = (good: string): void => {
-    if (this.state.isSelectedDefault) {
-      this.clearSelectedGoods();
-      this.setState(() => {
-        return {
-          isSelectedDefault: false,
-        };
-      });
-    }
-
-    this.setState((prevState) => {
-      const { selectedGood } = prevState;
-
-      return {
-        selectedGood: [...selectedGood, good],
-      };
-    });
+  selectGoodHandler = (good: string): void => {
+    this.setState(({ selectedGood }) => ({
+      selectedGood: [...selectedGood, good],
+    }));
   };
 
   render() {
@@ -99,42 +78,46 @@ export class App extends Component<{}, State> {
         </header>
 
         <ul className="content">
-          {this.state.goods.map(good => (
-            <li
-              key={uniqid()}
-              className={cn(
-                'Good',
-                'level',
-                { 'Good--active': this.isActive(good) },
-              )}
-            >
-              {good}
-              { this.isActive(good)
-                ? (
-                  <button
-                    type="button"
-                    className="Good__remove button is-warning is-light"
-                    onClick={() => {
-                      this.unselectGoodHandler(good);
-                    }}
-                  >
-                    Remove
-                  </button>
-                )
-                : (
-                  <button
-                    type="button"
-                    className="Good__select button is-success is-light"
-                    onClick={() => {
-                      this.addItem(good);
-                    }}
-                  >
-                    Select
-                  </button>
-                )}
+          {this.state.goods.map(good => {
+            const isActive = this.isActive(good);
 
-            </li>
-          ))}
+            return (
+              <li
+                key={uniqid()}
+                className={cn(
+                  'Good',
+                  'level',
+                  { 'good--active': isActive },
+                )}
+              >
+                {good}
+                { isActive
+                  ? (
+                    <button
+                      type="button"
+                      className="good__remove button is-warning is-light"
+                      onClick={() => {
+                        this.unselectGoodHandler(good);
+                      }}
+                    >
+                      Remove
+                    </button>
+                  )
+                  : (
+                    <button
+                      type="button"
+                      className="good__select button is-success is-light"
+                      onClick={() => {
+                        this.selectGoodHandler(good);
+                      }}
+                    >
+                      Select
+                    </button>
+                  )}
+
+              </li>
+            );
+          })}
         </ul>
       </main>
     );
