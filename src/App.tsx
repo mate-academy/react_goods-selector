@@ -2,6 +2,10 @@ import { Component, ReactNode } from 'react';
 import './App.scss';
 import { v4 as uuidv4 } from 'uuid';
 import classNames from 'classnames';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 import goodsFromServer from './goods';
 
 interface State {
@@ -29,70 +33,72 @@ export class App extends Component {
     const { selectedGood } = this.state;
 
     return (
-      <main className="App">
-        <header className="App__header">
-          <h1 className="App__title">
-            {
-              selectedGood.length
-                ? `${selectedGood} is selected`
-                : 'No goods selected'
-            }
-          </h1>
+      <>
 
-          { selectedGood && (
-            <button
-              type="button"
-              className="App__clear"
-              onClick={this.removeGood}
-            >
-              Clear
-            </button>
-          )}
-        </header>
+        <main className="App">
+          <div className="container">
+            <header className="App__header">
+              <h1 className="App__title">
+                {
+                  selectedGood.length
+                    ? `${selectedGood} is selected`
+                    : 'No goods selected'
+                }
+              </h1>
 
-        <ul className="Goods">
-          {goodsFromServer.map(good => {
-            const isSelectedGood = selectedGood === good;
+              { selectedGood && (
+                <Button
+                  type="button"
+                  className="App__clear"
+                  onClick={this.removeGood}
+                  variant="outlined"
+                >
+                  Clear
+                </Button>
+              )}
+            </header>
+          </div>
 
-            return (
-              <div
-                className={classNames(
-                  'Goods__row',
-                  { 'Good--active': isSelectedGood },
-                )}
-                key={uuidv4()}
-              >
-                <li className="Good">
-                  {good}
-                </li>
+          <List
+            sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
+          >
+            {goodsFromServer.map(good => {
+              const isSelectedGood = selectedGood === good;
 
-                <div>
-                  {isSelectedGood && (
-                    <button
-                      type="button"
-                      className="Good__remove"
-                      onClick={this.removeGood}
-                    >
-                      Remove
-                    </button>
+              return (
+                <ListItem
+                  key={uuidv4()}
+                  className={classNames(
+                    { 'Good--active': isSelectedGood },
                   )}
+                >
+                  <ListItemText primary={good} />
+                  {isSelectedGood
+                    ? (
+                      <Button
+                        type="button"
+                        onClick={this.removeGood}
+                        variant="outlined"
+                      >
+                        Remove
+                      </Button>
+                    )
 
-                  {!isSelectedGood && (
-                    <button
-                      type="button"
-                      className="Good__select"
-                      onClick={() => this.chooseGood(good)}
-                    >
-                      Select
-                    </button>
-                  )}
-
-                </div>
-              </div>
-            );
-          })}
-        </ul>
-      </main>
+                    : (
+                      <Button
+                        type="button"
+                        onClick={() => this.chooseGood(good)}
+                        variant="outlined"
+                      >
+                        Select
+                      </Button>
+                    )}
+                </ListItem>
+              );
+            })}
+          </List>
+        </main>
+      </>
     );
   }
 }
