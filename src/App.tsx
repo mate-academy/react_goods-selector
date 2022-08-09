@@ -12,7 +12,7 @@ type State = {
 export class App extends React.Component<{}, State> {
   state = {
     goods: [...goodsFromServer],
-    selectedGoods: ['Jam'],
+    selectedGoods: ['Jam', 'Ice cream', 'Apple'],
   };
 
   handleSelect = (good: string) => {
@@ -81,7 +81,7 @@ export class App extends React.Component<{}, State> {
           {(selectedGoods.length > 0) && (
             <button
               type="button"
-              className="App__clear"
+              className="App__button App__button--clear"
               onClick={() => this.setState({ selectedGoods: [] })}
             >
               Clear
@@ -89,7 +89,7 @@ export class App extends React.Component<{}, State> {
           )}
         </header>
 
-        <ul>
+        <ul className="list">
           {goods.map(good => (
             <li
               className={
@@ -103,7 +103,7 @@ export class App extends React.Component<{}, State> {
               {!selectedGoods.includes(good) && (
                 <button
                   type="button"
-                  className="Good__select"
+                  className="Good__button Good__button--select"
                   onClick={() => this.handleSelect(good)}
                 >
                   Select
@@ -113,7 +113,7 @@ export class App extends React.Component<{}, State> {
               {selectedGoods.includes(good) && (
                 <button
                   type="button"
-                  className="Good__remove"
+                  className="Good__button Good__button--remove"
                   onClick={() => this.handleRemove(good)}
                 >
                   Remove
