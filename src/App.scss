@@ -1,6 +1,7 @@
 html {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
+
 .App {
   height: 100vh;
   &__wrapper {
@@ -32,6 +33,7 @@ html {
     height: 60px;
   }
 }
+
 .Good {
   display: flex;
   gap: 10px;
