@@ -3,18 +3,56 @@ html {
 }
 
 .App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+
+  min-width: 500px;
+
+  background-color: hsl(0, 0%, 96%);
+
   &__header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 20px;
+
+    min-width: 500px;
+    margin-bottom: 30px;
   }
+
+  &__title {
+    margin-bottom: 0;
+    font-weight: 700;
+    font-size: 30px;
+    text-transform: uppercase;
+  }
+}
+
+.block {
+  min-width: 500px;
+}
+
+.button {
+  min-width: 100px;
 }
 
 .Good {
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #ffc;
+  }
 
   &--active {
     background-color: #ff0;
+
+    &:hover {
+      background-color: #ff0;
+    }
   }
 }

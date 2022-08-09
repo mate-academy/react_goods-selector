@@ -1,51 +1,93 @@
 import React from 'react';
+import 'bulma/css/bulma.min.css';
 import './App.scss';
+import { v4 as uuidv4 } from 'uuid';
+import classNames from 'classnames';
 
-// import goodsFromServer from './goods';
+import goodsFromServer from './goods';
 
-export const App: React.FC = () => {
-  return (
-    <main className="App">
-      <header className="App__header">
-        <h1 className="App__title">
-          Jam is selected
-        </h1>
+interface State {
+  selectedGood: string;
+}
 
-        <button
-          type="button"
-          className="App__clear"
-        >
-          Clear
-        </button>
-      </header>
+export class App extends React.Component<{}, State> {
+  state = {
+    selectedGood: 'Jam',
+  };
 
-      <ul>
-        <li className="Good">Dumplings</li>
-        <li className="Good">Carrot</li>
-        <li className="Good">Eggs</li>
-        <li className="Good">Ice cream</li>
-        <li className="Good">Apple</li>
-        <li className="Good">Bread</li>
-        <li className="Good">Fish</li>
-        <li className="Good">Honey</li>
-        <li className="Good Good--active">Jam</li>
-        <li className="Good">Garlic</li>
-      </ul>
+  handleSelectClear = () => {
+    this.setState({ selectedGood: '' });
+  };
 
-      {/* Put required buttons into each Good */}
-      <button
-        type="button"
-        className="Good__remove"
-      >
-        Remove
-      </button>
+  handleSelectGood = (good: string) => {
+    this.setState({
+      selectedGood: good,
+    });
+  };
 
-      <button
-        type="button"
-        className="Good__select"
-      >
-        Select
-      </button>
-    </main>
-  );
-};
+  render() {
+    const { selectedGood } = this.state;
+
+    return (
+      <main className="App">
+        <header className="App__header">
+          <h1 className="App__title">
+            {
+              selectedGood
+                ? `${selectedGood} is selected`
+                : 'No goods selected'
+            }
+          </h1>
+
+          {selectedGood && (
+            <button
+              type="button"
+              className="button App__clear"
+              onClick={this.handleSelectClear}
+            >
+              Clear
+            </button>
+          )}
+        </header>
+
+        <ul className="block">
+          {goodsFromServer.map(good => {
+            const isSelectedGood = good === selectedGood;
+
+            return (
+              <li
+                key={uuidv4()}
+                className={classNames(
+                  'box subtitle is-4 Good',
+                  { 'Good--active': isSelectedGood },
+                )}
+              >
+                {good}
+
+                {isSelectedGood && (
+                  <button
+                    type="button"
+                    className="button Good__remove"
+                    onClick={this.handleSelectClear}
+                  >
+                    Remove
+                  </button>
+                )}
+
+                {isSelectedGood || (
+                  <button
+                    type="button"
+                    className="button Good__select"
+                    onClick={() => this.handleSelectGood(good)}
+                  >
+                    Select
+                  </button>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </main>
+    );
+  }
+}
