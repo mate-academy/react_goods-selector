@@ -1,6 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
+import { Button } from 'react-bootstrap';
+
 import './App.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Good } from './types/Good';
 
@@ -81,22 +84,20 @@ export class App extends React.Component<{}, State> {
           </h1>
 
           {Boolean(selectedGoods.length) && (
-            <button
+            <Button
+              variant="danger"
               type="button"
               className={classNames(
                 'App__clear',
-                {
-                  'Display--none': !selectedGoods.length,
-                },
               )}
               onClick={() => this.setState({ selectedGoods: [] })}
             >
               Clear
-            </button>
+            </Button>
           )}
         </header>
 
-        <ul>
+        <ul className="Good-list">
           {goods.map(good => (
             <li
               key={good.name}
@@ -109,34 +110,24 @@ export class App extends React.Component<{}, State> {
             >
               {good.name}
 
-              {!selectedGoods.includes(good.name) && (
-                <button
+              {selectedGoods.includes(good.name) ? (
+                <Button
+                  variant="warning"
                   type="button"
-                  className={classNames(
-                    'Good__select',
-                    {
-                      'Display--none': selectedGoods.includes(good.name),
-                    },
-                  )}
-                  onClick={() => this.handleSelect(good.name)}
-                >
-                  Select
-                </button>
-              )}
-
-              {selectedGoods.includes(good.name) && (
-                <button
-                  type="button"
-                  className={classNames(
-                    'Good__remove',
-                    {
-                      'Display--none': !selectedGoods.includes(good.name),
-                    },
-                  )}
+                  className="Good__remove Good__button"
                   onClick={() => this.handleRemove(good.name)}
                 >
                   Remove
-                </button>
+                </Button>
+              ) : (
+                <Button
+                  variant="warning"
+                  type="button"
+                  className="Good__select Good__button"
+                  onClick={() => this.handleSelect(good.name)}
+                >
+                  Select
+                </Button>
               )}
             </li>
           ))}
