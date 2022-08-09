@@ -1,51 +1,84 @@
-import React from 'react';
+import classNames from 'classnames';
+import React, { Component } from 'react';
 import './App.scss';
+import 'bulma/css/bulma.min.css';
+// import { Button } from 'react-bulma-components';
 
-// import goodsFromServer from './goods';
+import goodsFromServer from './goods';
 
-export const App: React.FC = () => {
-  return (
-    <main className="App">
-      <header className="App__header">
-        <h1 className="App__title">
-          Jam is selected
-        </h1>
-
-        <button
-          type="button"
-          className="App__clear"
-        >
-          Clear
-        </button>
-      </header>
-
-      <ul>
-        <li className="Good">Dumplings</li>
-        <li className="Good">Carrot</li>
-        <li className="Good">Eggs</li>
-        <li className="Good">Ice cream</li>
-        <li className="Good">Apple</li>
-        <li className="Good">Bread</li>
-        <li className="Good">Fish</li>
-        <li className="Good">Honey</li>
-        <li className="Good Good--active">Jam</li>
-        <li className="Good">Garlic</li>
-      </ul>
-
-      {/* Put required buttons into each Good */}
-      <button
-        type="button"
-        className="Good__remove"
-      >
-        Remove
-      </button>
-
-      <button
-        type="button"
-        className="Good__select"
-      >
-        Select
-      </button>
-    </main>
-  );
+type State = {
+  selectedWord: string[],
 };
+
+export class App extends Component<{}, State> {
+  state: Readonly<State> = {
+    selectedWord: ['Jam'],
+  };
+
+  elementSelect = (item: string) => {
+    const { selectedWord } = this.state;
+    const selectedWordClick = selectedWord
+      .filter(filterElement => filterElement !== item);
+
+    this.setState(() => ({
+      selectedWord: (selectedWord.includes(item)
+        ? selectedWordClick
+        : [...selectedWord, item]),
+    }));
+  };
+
+  render(): React.ReactNode {
+    const { selectedWord } = this.state;
+
+    return (
+      <main className="App">
+        <header className="App__header">
+          <button
+            type="button"
+            className="App__clear button"
+            onClick={() => {
+              this.setState({
+                selectedWord: [],
+              });
+            }}
+          >
+            Clear
+          </button>
+
+          {
+            selectedWord.length
+              ? (
+                <h1 className="App__title">
+                  {`${selectedWord.join(', ')
+                    .replace(/,(?=[^,]*$)/, ' and')} is selected`}
+                </h1>
+              )
+              : <h1 className="App__title">No goods selected</h1>
+          }
+        </header>
+
+        <ul className="list">
+          {goodsFromServer.map((item) => (
+            <li
+              key={item}
+              className="list__item"
+            >
+              {item}
+              <button
+                type="button"
+                className={classNames('Good__select button is-info', {
+                  'Good--active is-danger': selectedWord.includes(item),
+                })}
+                onClick={() => this.elementSelect(item)}
+              >
+                {selectedWord.includes(item)
+                  ? 'Remove'
+                  : 'Select'}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </main>
+    );
+  }
+}

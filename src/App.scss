@@ -3,6 +3,8 @@ html {
 }
 
 .App {
+  width: 400px;
+  margin: 50px auto;
   &__header {
     display: flex;
     align-items: center;
@@ -16,5 +18,18 @@ html {
 
   &--active {
     background-color: #ff0;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
   }
 }
