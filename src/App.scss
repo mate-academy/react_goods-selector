@@ -8,6 +8,15 @@ html {
     align-items: center;
     gap: 20px;
   }
+
+  &__clear {
+    background-color: rgb(52, 161, 234);
+    border-radius: 5px;
+    margin: 3px 30px;
+    width: 100px;
+    height: 30px;
+    border-color: rgb(171, 207, 242);
+  }
 }
 
 .Good {
@@ -16,5 +25,28 @@ html {
 
   &--active {
     background-color: #ff0;
+
   }
+}
+
+li {
+  cursor: pointer;
+}
+
+.btn--success {
+  background-color: rgb(84, 253, 84);
+  border-radius: 5px;
+  border-color: rgb(175, 240, 132);
+  margin: 3px 30px;
+  width: 100px;
+  height: 30px;
+}
+
+.btn--error{
+  background-color: rgb(252, 116, 5);
+  border-radius: 5px;
+  border-color: rgb(245, 149, 23);
+  margin: 3px 30px;
+  width: 100px;
+  height: 30px;
 }
