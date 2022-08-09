@@ -5,16 +5,30 @@ html {
 .App {
   &__header {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     gap: 20px;
   }
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .Good {
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 5px;
+  width: 300px;
+  gap: 20px;
 
   &--active {
-    background-color: #ff0;
+    background-color: lightgray;
   }
 }
