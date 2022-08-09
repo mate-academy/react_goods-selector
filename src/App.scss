@@ -8,6 +8,15 @@ html {
     align-items: center;
     gap: 20px;
   }
+
+  &__clear {
+    background-color: lightgray;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: lightpink;
+    }
+  }
 }
 
 .Good {
@@ -17,4 +26,34 @@ html {
   &--active {
     background-color: #ff0;
   }
+}
+
+li {
+  padding: 20px;
+}
+
+.controlBtn {
+  margin-left: 15px;
+
+  transition: background-color 0.5s;
+
+  width: 80px;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.btn--success {
+  background-color: green;
+}
+
+.btn--error {
+  background-color: red;
+}
+
+iframe {
+  display: none;
+}
+
+button {
+  cursor: pointer;
 }
