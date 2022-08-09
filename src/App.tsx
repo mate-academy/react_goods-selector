@@ -1,51 +1,86 @@
+import classNames from 'classnames';
 import React from 'react';
 import './App.scss';
+import goodsFromServer from './goods';
+import 'bulma/css/bulma.min.css';
 
-// import goodsFromServer from './goods';
+interface State {
+  selectedGoods: string[],
+}
 
-export const App: React.FC = () => {
-  return (
-    <main className="App">
-      <header className="App__header">
-        <h1 className="App__title">
-          Jam is selected
-        </h1>
+export class App extends React.Component <{}, State> {
+  state = {
+    selectedGoods: ['Jam'],
+  };
 
-        <button
-          type="button"
-          className="App__clear"
-        >
-          Clear
-        </button>
-      </header>
+  render() {
+    const { selectedGoods } = this.state;
 
-      <ul>
-        <li className="Good">Dumplings</li>
-        <li className="Good">Carrot</li>
-        <li className="Good">Eggs</li>
-        <li className="Good">Ice cream</li>
-        <li className="Good">Apple</li>
-        <li className="Good">Bread</li>
-        <li className="Good">Fish</li>
-        <li className="Good">Honey</li>
-        <li className="Good Good--active">Jam</li>
-        <li className="Good">Garlic</li>
-      </ul>
+    return (
+      <main className="App">
+        <header className="App__header">
+          <h1 className="App__title title">
+            {`${selectedGoods.length === 0
+              ? 'No goods selected'
+              : selectedGoods} is selected`}
+          </h1>
 
-      {/* Put required buttons into each Good */}
-      <button
-        type="button"
-        className="Good__remove"
-      >
-        Remove
-      </button>
+          {selectedGoods.length > 0 && (
+            <button
+              type="button"
+              className="
+                App__clear
+                button
+                is-small"
+              onClick={() => {
+                this.setState({ selectedGoods: [] });
+              }}
+            >
 
-      <button
-        type="button"
-        className="Good__select"
-      >
-        Select
-      </button>
-    </main>
-  );
-};
+              Clear
+            </button>
+          )}
+        </header>
+
+        <ul>
+          {goodsFromServer.map(good => (
+            <li className={classNames(
+              'Good',
+              selectedGoods.includes(good)
+                ? 'Good--active'
+                : '',
+            )}
+            >
+
+              {good}
+
+              <button
+                type="button"
+                className={`Good__${selectedGoods.includes(good)
+                  ? 'remove is-danger is-outlined'
+                  : 'select is-success'}
+                  button is-small`}
+                onClick={() => {
+                  if (selectedGoods.includes(good)) {
+                    selectedGoods.splice(selectedGoods.indexOf(good), 1);
+                    this.setState({
+                      selectedGoods,
+                    });
+                  } else {
+                    selectedGoods.push(good);
+                    this.setState({
+                      selectedGoods,
+                    });
+                  }
+                }}
+              >
+                {selectedGoods.includes(good) ? 'Remove' : 'Select'}
+
+              </button>
+            </li>
+          ))}
+        </ul>
+      </main>
+    );
+  }
+}
