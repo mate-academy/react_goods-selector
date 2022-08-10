@@ -2,19 +2,51 @@ html {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
+body {
+  max-width: 500px;
+
+  margin: 0 auto;
+  padding: 50px;
+
+  background-color: #90caf9;
+}
+
 .App {
+  border-radius: 15px;
+  background-color: #e3f2fd;
+
   &__header {
     display: flex;
     align-items: center;
-    gap: 20px;
+    justify-content: center;
+    gap: 50px;
+  }
+
+  &__title{
+    &--selected{
+      color:#ab47bc,
+    }
   }
 }
 
 .Good {
-  display: flex;
-  gap: 10px;
+  font-size: 1.2rem;
+  font-weight: 500;
 
   &--active {
-    background-color: #ff0;
+    font-size: 1.5rem;
+    color: #ab47bc;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+
+  &__item {
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
   }
 }
