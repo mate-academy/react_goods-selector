@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import './App.scss';
+import Button from '@mui/material/Button';
 
 import goodsFromServer from './goods';
 
@@ -31,26 +32,29 @@ export class App extends React.Component<{}, State > {
         <header className="App__header">
           <h1 className="App__title">
             { selectedGood
-              ? `${selectedGood} is selected`
+            // eslint-disable-next-line
+              ? <span><span className="App__title--selected">{selectedGood}</span> is selected</span>
               : 'No goods selected'}
           </h1>
 
           {selectedGood
             && (
-              <button
+              <Button
                 type="button"
                 className="App__clear"
                 onClick={this.resetSelectedGood}
+                variant="outlined"
+                color="error"
               >
                 Clear
-              </button>
+              </Button>
             )}
         </header>
 
-        <ul>
+        <ul className="list">
           {goods.map(good => (
             <li
-              className={classNames('Good', {
+              className={classNames('Good list__item', {
                 'Good--active': selectedGood === good,
               })}
               key={good}
@@ -59,28 +63,32 @@ export class App extends React.Component<{}, State > {
 
               {selectedGood === good
               && (
-                <button
+                <Button
                   type="button"
                   className="Good__remove"
                   onClick={() => {
                     this.selectGood('');
                   }}
+                  variant="outlined"
+                  color="secondary"
                 >
                   Remove
-                </button>
+                </Button>
               )}
 
               { selectedGood !== good
                 && (
-                  <button
+                  <Button
                     type="button"
                     className="Good__select"
                     onClick={() => {
                       this.selectGood(good);
                     }}
+                    variant="outlined"
+                    color="success"
                   >
                     Select
-                  </button>
+                  </Button>
                 )}
             </li>
           ))}
