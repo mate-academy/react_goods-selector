@@ -13,6 +13,28 @@ export class App extends Component<{}, State> {
     selectedGood: ['Jam'],
   };
 
+  clear = () => {
+    this.setState({ selectedGood: [] });
+  };
+
+  remove = (el: string) => {
+    const filtered
+      = this.state.selectedGood.filter(item => item !== el);
+
+    this.setState(() => ({
+      selectedGood: [...filtered],
+    }));
+  };
+
+  select = (el: string) => {
+    this.setState(state => ({
+      selectedGood: [
+        ...state.selectedGood,
+        el,
+      ],
+    }));
+  };
+
   render(): React.ReactNode {
     const { selectedGood } = this.state;
 
@@ -42,9 +64,7 @@ export class App extends Component<{}, State> {
             <button
               type="button"
               className="App__clear"
-              onClick={() => {
-                this.setState({ selectedGood: [] });
-              }}
+              onClick={this.clear}
             >
               Clear
             </button>
@@ -66,10 +86,7 @@ export class App extends Component<{}, State> {
                   type="button"
                   className="Good__remove"
                   onClick={() => {
-                    selectedGood.splice(selectedGood.indexOf(el), 1);
-                    this.setState({
-                      selectedGood,
-                    });
+                    this.remove(el);
                   }}
                 >
                   Remove
@@ -80,10 +97,7 @@ export class App extends Component<{}, State> {
                   type="button"
                   className="Good__select"
                   onClick={() => {
-                    selectedGood.push(el);
-                    this.setState({
-                      selectedGood,
-                    });
+                    this.select(el);
                   }}
                 >
                   Select
