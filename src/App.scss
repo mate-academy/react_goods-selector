@@ -6,7 +6,8 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;;
+  align-items: center;
+
   &__header {
     display: flex;
     align-items: center;
@@ -39,7 +40,6 @@ html {
     }
   }
 
-
   &--active {
     background-color: rgba(255, 247, 64, 0.68);
   }
@@ -55,10 +55,10 @@ html {
   cursor: pointer;
 
   &:hover {
-    background-color: rgba(232, 166, 246, 0.69)
+    background-color: rgba(232, 166, 246, 0.69);
   }
 }
 
 .btn--error {
-  background-color: rgba(232, 166, 246, 0.69)
+  background-color: rgba(232, 166, 246, 0.69);
 }
