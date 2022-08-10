@@ -20,9 +20,7 @@ export class App extends Component<{}, State> {
     return this.state.selectedGoods.includes(searchGood);
   };
 
-  removeSelectedGood = (
-    good: Good,
-  ) => {
+  removeSelectedGood = (good: Good) => {
     this.setState((state) => ({
       selectedGoods: state.selectedGoods.filter(product => product !== good),
     }));
