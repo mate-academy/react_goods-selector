@@ -3,6 +3,10 @@ html {
 }
 
 .App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;;
   &__header {
     display: flex;
     align-items: center;
@@ -12,9 +16,49 @@ html {
 
 .Good {
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  gap: 150px;
+  margin-bottom: 15px;
+
+  &__clear {
+    padding: 5px;
+    width: 100px;
+    background-color: rgba(255, 83, 64, 0.88);
+    color: #fff;
+    border: none;
+
+    &:hover {
+      color: black;
+      background-color: #fff;
+    }
+
+    &--unvisible {
+      display: none;
+    }
+  }
+
 
   &--active {
-    background-color: #ff0;
+    background-color: rgba(255, 247, 64, 0.68);
   }
+}
+
+.controlBtn {
+  padding: 5px;
+  width: 100px;
+  background-color: rgba(56, 97, 246, 0.69);
+  color: #fff;
+  transition: background-color 0.3s;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(232, 166, 246, 0.69)
+  }
+}
+
+.btn--error {
+  background-color: rgba(232, 166, 246, 0.69)
 }
