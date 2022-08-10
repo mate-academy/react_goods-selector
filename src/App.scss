@@ -1,20 +1,36 @@
 html {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  
 }
 
 .App {
+  width: 60%;
+  margin: 0 auto;
   &__header {
     display: flex;
     align-items: center;
     gap: 20px;
+    margin-bottom: 30px;
+  }
+  &__title {
+    font-size: 20px;
+  }
+  &__hide {
+    display: none;
   }
 }
 
 .Good {
   display: flex;
-  gap: 10px;
+  gap: 30px;
+  margin-bottom: 20px;
+  color: #000;
 
   &--active {
-    background-color: #ff0;
+    background-color: #999;
+  }
+
+  &__select-hide {
+    display: none;
   }
 }
