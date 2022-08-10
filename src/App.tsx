@@ -52,13 +52,10 @@ export class App extends React.Component<{}, State> {
   }
 
   selectToggle(goodName: string) {
-    if (this.isSelected(goodName)) {
-      this.unselectGood(goodName);
-
-      return;
-    }
-
-    this.selectGood(goodName);
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    this.isSelected(goodName)
+      ? this.unselectGood(goodName)
+      : this.selectGood(goodName);
   }
 
   clear() {
