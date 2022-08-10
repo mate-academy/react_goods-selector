@@ -1,37 +1,59 @@
-import classNames from 'classnames';
+import cn from 'classnames';
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import './App.scss';
 
 import goodsFromServer from './goods';
 
 type State = {
-  selected: string[];
+  selectedGoods: string[];
 };
 
 export class App extends React.Component<{}, State> {
   state: State = {
-    selected: ['Jam'],
+    selectedGoods: ['Jam'],
   };
 
+  select(selectedItem: string) {
+    this.setState((prevState) => ({
+      selectedGoods:
+      [...prevState.selectedGoods,
+        selectedItem],
+    }));
+  }
+
+  remove(itemToRemove: string) {
+    this.setState((prevState) => ({
+      selectedGoods: prevState.selectedGoods
+        .filter(good => itemToRemove !== good),
+    }));
+  }
+
+  clear() {
+    this.setState({
+      selectedGoods: [],
+    });
+  }
+
   render() {
-    const { selected } = this.state;
+    const { selectedGoods } = this.state;
 
     return (
       <main className="App">
         <header className="App__header">
           <h1 className="App__title">
 
-            {selected.length
-              ? `${selected} ${selected.length > 1 ? 'are' : 'is'} selected`
+            {selectedGoods.length
+              ? `${selectedGoods} ${selectedGoods.length > 1 ? 'are' : 'is'} selected`
               : 'No goods selected'}
           </h1>
 
-          {selected.length > 0 && (
+          {selectedGoods.length > 0 && (
             <button
               type="button"
               className="App__clear button"
               onClick={() => {
-                this.setState({ selected: [] });
+                this.clear();
               }}
             >
               Clear
@@ -40,47 +62,48 @@ export class App extends React.Component<{}, State> {
         </header>
 
         <ul className="App__list">
-          {goodsFromServer.map(good => (
-            <li
-              className={classNames(
-                'Good',
-                { 'Good--active': selected.includes(good) },
-              )}
-              key={good}
-            >
-              {good}
+          {goodsFromServer.map((good) => {
+            const isIncluded = selectedGoods.includes(good);
 
-              {selected.includes(good)
-                ? (
-                  <button
-                    type="button"
-                    className="Good__remove button"
-                    key={good}
-                    onClick={() => {
-                      selected.splice(selected
-                        .indexOf(good), 1);
-                      this.setState({ selected });
-                    }}
-                  >
-                    Remove
-                  </button>
-                )
-
-                : (
-                  <button
-                    type="button"
-                    className="Good__select button"
-                    key={good}
-                    onClick={() => {
-                      selected.push(good);
-                      this.setState({ selected });
-                    }}
-                  >
-                    Select
-                  </button>
+            return (
+              <li
+                className={cn(
+                  'Good',
+                  { 'Good--active': isIncluded },
                 )}
-            </li>
-          ))}
+                key={uuidv4()}
+              >
+                {good}
+
+                {isIncluded
+                  ? (
+                    <button
+                      type="button"
+                      className="Good__remove button"
+                      key={good}
+                      onClick={() => {
+                        this.remove(good);
+                      }}
+                    >
+                      Remove
+                    </button>
+                  )
+
+                  : (
+                    <button
+                      type="button"
+                      className="Good__select button"
+                      key={good}
+                      onClick={() => {
+                        this.select(good);
+                      }}
+                    >
+                      Select
+                    </button>
+                  )}
+              </li>
+            );
+          })}
         </ul>
       </main>
     );
