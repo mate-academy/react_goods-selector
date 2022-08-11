@@ -52,6 +52,7 @@ export class App extends React.Component<{}, State> {
     switch (true) {
       case selectedGoods.length === 0:
         return 'No goods selected';
+
       case selectedGoods.length === 1:
         return `${selectedGoods[0]} is selected`;
 
@@ -77,7 +78,7 @@ export class App extends React.Component<{}, State> {
           {(selectedGoods.length > 0) && (
             <button
               type="button"
-              className="App__button App__button--clear App__Clear"
+              className="App__button App__button--clear App__clear"
               onClick={() => this.setState({ selectedGoods: [] })}
             >
               Clear
