@@ -3,6 +3,7 @@ import React from 'react';
 import './App.scss';
 import 'bulma/css/bulma.min.css';
 
+import classNames from 'classnames';
 import goodsFromServer from './goods';
 
 type State = {
@@ -14,17 +15,42 @@ export class App extends React.Component<{}, State> {
     selectedGoods: ['Jam'],
   };
 
+  setTitle = () => {
+    const { selectedGoods } = this.state;
+    const { length } = selectedGoods;
+
+    switch (length) {
+      case 0:
+        return 'No goods selected';
+      case 1:
+        return `${selectedGoods[0]} is selected`;
+      case 2:
+        return `${selectedGoods.join(',')} are selected`;
+      default:
+        return `${selectedGoods.slice(0, length - 1).join(', ')} and ${selectedGoods[length - 1]} are selected`;
+    }
+  };
+
+  handlingRemove = (good: string) => {
+    this.setState((el) => ({
+      selectedGoods: el.selectedGoods.filter(item => item !== good),
+    }));
+  };
+
+  handlingSelect = (good: string) => {
+    this.setState((el) => ({
+      selectedGoods: [...el.selectedGoods, good],
+    }));
+  };
+
   render() {
     const { selectedGoods } = this.state;
 
     return (
       <main className="App">
         <header className="App__header block breadcrumb is-centered">
-          <h1 className="App__title">
-            {!selectedGoods.length && 'No goods selected'}
-            {selectedGoods.length === 1 && `${selectedGoods[0]} is selected`}
-            {selectedGoods.length === 2 && `${selectedGoods.join(', ')} are selected`}
-            {selectedGoods.length > 2 && `${selectedGoods.slice(0, -1).join(', ')} and ${selectedGoods[selectedGoods.length - 1]} are selected`}
+          <h1 className="App__title hero">
+            {this.setTitle()}
           </h1>
 
           {selectedGoods.length > 0 && (
@@ -42,40 +68,33 @@ export class App extends React.Component<{}, State> {
 
         <ul className="GoodsList">
           {goodsFromServer.map(good => {
+            const isSelected = selectedGoods.includes(good);
+
             return (
               <li
                 key={good}
-                className={
-                  !selectedGoods.includes(good)
-                    ? 'Good block'
-                    : 'Good--active block'
-                }
+                className={classNames(
+                  'Good block',
+                  { 'Good--active block': isSelected },
+                )}
               >
                 {good}
-                {selectedGoods.includes(good) ? (
-                  <button
-                    type="button"
-                    className="Good--delete button is-danger is-rounded"
-                    onClick={() => {
-                      this.setState({
-                        selectedGoods: this.state.selectedGoods
-                          .filter(el => el !== good),
-                      });
-                    }}
-                  >
-                    Delete
-                  </button>
-                )
 
+                {isSelected
+                  ? (
+                    <button
+                      type="button"
+                      className="Good__remove button is-danger is-rounded"
+                      onClick={() => this.handlingRemove(good)}
+                    >
+                      Delete
+                    </button>
+                  )
                   : (
                     <button
                       type="button"
-                      className="Good--select button is-success is-rounded"
-                      onClick={() => {
-                        this.setState({
-                          selectedGoods: [...selectedGoods, good],
-                        });
-                      }}
+                      className="Good__select button is-success is-rounded"
+                      onClick={() => this.handlingSelect(good)}
                     >
                       Select
                     </button>
