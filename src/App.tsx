@@ -13,6 +13,24 @@ export class App extends React.Component<{}, State> {
     selectedGoods: ['Jam'],
   };
 
+  getTitle = (): string => {
+    const lengthOfSelected = this.state.selectedGoods.length;
+
+    if (!lengthOfSelected) {
+      return 'No goods selected';
+    }
+
+    if (lengthOfSelected === 1) {
+      return `${this.state.selectedGoods[0]} is selected`;
+    }
+
+    const selectedWithoutLast = [...this.state.selectedGoods];
+
+    const lastSelected = selectedWithoutLast.pop();
+
+    return `${selectedWithoutLast.join(', ')} and ${lastSelected} are selected`;
+  };
+
   render() {
     const { selectedGoods } = this.state;
 
@@ -20,9 +38,7 @@ export class App extends React.Component<{}, State> {
       <main className="App table">
         <header className="App__header">
           <h1 className="App__title">
-            {selectedGoods.length
-              ? `${selectedGoods.join(', ')} is selected`
-              : 'No goods selected'}
+            { this.getTitle() }
           </h1>
 
           {selectedGoods.length > 0 && (
@@ -53,47 +69,48 @@ export class App extends React.Component<{}, State> {
               >
                 {good}
 
-                {selectedGoods.includes(good) && (
-                  <button
-                    type="button"
-                    className="
-                      Good__remove
-                      button
-                      is-danger
-                    "
-                    onClick={() => {
-                      this.setState(state => {
-                        return {
-                          selectedGoods: state.selectedGoods
-                            .filter(currentGood => currentGood !== good),
-                        };
-                      });
-                    }}
-                  >
-                    Remove
-                  </button>
-                )}
+                {selectedGoods.includes(good)
+                  ? (
+                    <button
+                      type="button"
+                      className="
+                        Good__remove
+                        button
+                        is-danger
+                      "
+                      onClick={() => {
+                        this.setState(state => {
+                          return {
+                            selectedGoods: state.selectedGoods
+                              .filter(currentGood => currentGood !== good),
+                          };
+                        });
+                      }}
+                    >
+                      Remove
+                    </button>
+                  )
 
-                {!selectedGoods.includes(good) && (
-                  <button
-                    type="button"
-                    className="
-                      Good__select
-                      button
-                      is-success
-                    "
-                    onClick={() => {
-                      this.setState(state => {
-                        return {
-                          selectedGoods: state.selectedGoods
-                            .concat([good]),
-                        };
-                      });
-                    }}
-                  >
-                    Select
-                  </button>
-                )}
+                  : (
+                    <button
+                      type="button"
+                      className="
+                        Good__select
+                        button
+                        is-success
+                      "
+                      onClick={() => {
+                        this.setState(state => {
+                          return {
+                            selectedGoods: state.selectedGoods
+                              .concat([good]),
+                          };
+                        });
+                      }}
+                    >
+                      Select
+                    </button>
+                  )}
               </li>
             );
           })}
