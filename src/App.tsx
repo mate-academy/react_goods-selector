@@ -12,7 +12,7 @@ type State = {
 export class App extends React.Component<{}, State> {
   state = {
     goods: [...goodsFromServer],
-    selectedGoods: ['Jam', 'Ice cream', 'Apple'],
+    selectedGoods: ['Jam'],
   };
 
   handleSelect = (good: string) => {
@@ -55,14 +55,10 @@ export class App extends React.Component<{}, State> {
       case selectedGoods.length === 1:
         return `${selectedGoods[0]} is selected`;
 
-      case selectedGoods.length === 2:
-        return `${selectedGoods[0]} and ${selectedGoods[1]} are selected`;
-
-      case selectedGoods.length === 3:
-        return `${selectedGoods[0]}, ${selectedGoods[1]} and ${selectedGoods[2]} are selected`;
-
-      case selectedGoods.length > 3:
-        return `${selectedGoods[0]}, ${selectedGoods[1]} and others are selected`;
+      case selectedGoods.length > 1:
+        return `${selectedGoods
+          .slice(0, selectedGoods.length - 1)
+          .join(', ')} and ${selectedGoods[selectedGoods.length - 1]}`;
 
       default:
         throw new Error('getSelectedGoods() failed');
@@ -81,7 +77,7 @@ export class App extends React.Component<{}, State> {
           {(selectedGoods.length > 0) && (
             <button
               type="button"
-              className="App__button App__button--clear"
+              className="App__button App__button--clear App__Clear"
               onClick={() => this.setState({ selectedGoods: [] })}
             >
               Clear
@@ -103,7 +99,7 @@ export class App extends React.Component<{}, State> {
               {!selectedGoods.includes(good) && (
                 <button
                   type="button"
-                  className="Good__button Good__button--select"
+                  className="Good__button Good__button--select Good__select"
                   onClick={() => this.handleSelect(good)}
                 >
                   Select
@@ -113,7 +109,7 @@ export class App extends React.Component<{}, State> {
               {selectedGoods.includes(good) && (
                 <button
                   type="button"
-                  className="Good__button Good__button--remove"
+                  className="Good__button Good__button--remove Good__remove"
                   onClick={() => this.handleRemove(good)}
                 >
                   Remove
