@@ -1,6 +1,6 @@
 import React from 'react';
-import classNames from 'classnames';
-import { Button } from 'react-bootstrap';
+import cn from 'classnames';
+import { Button, Spinner } from 'react-bootstrap';
 
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -10,7 +10,10 @@ import { Good } from './types/Good';
 import goodsFromServer from './goods';
 
 function takeGoodsFromServer(goods: string[]): Good[] {
-  return goods.map((el: string) => ({ name: el }));
+  return goods.map((el: string, i) => ({
+    name: el,
+    id: i,
+  }));
 }
 
 interface State {
@@ -19,37 +22,38 @@ interface State {
 }
 
 export class App extends React.Component<{}, State> {
-  state = {
-    goods: takeGoodsFromServer(goodsFromServer),
+  state: State = {
+    goods: [],
     selectedGoods: ['Jam'],
   };
 
+  componentDidMount() {
+    setTimeout(
+      () => this.setState({ goods: takeGoodsFromServer(goodsFromServer) }),
+      1000,
+    );
+  }
+
   handleRemove = (name: string): void => {
     this.setState((prevState) => {
-      const previousGood = [...prevState.selectedGoods];
-      const index = previousGood.indexOf(name);
+      const goods = [...prevState.selectedGoods]
+        .filter(good => good !== name);
 
-      if (index !== -1) {
-        previousGood.splice(index, 1);
-      }
-
-      return { selectedGoods: previousGood };
+      return { selectedGoods: goods };
     });
   };
 
   handleSelect = (name: string): void => {
-    this.setState((prevState) => {
-      const previousSelectedGoods = [...prevState.selectedGoods];
-
-      if (!previousSelectedGoods.includes(name)) {
-        previousSelectedGoods.push(name);
-      }
-
-      return { selectedGoods: previousSelectedGoods };
-    });
+    this.setState((prevState) => ({
+      selectedGoods: [...prevState.selectedGoods, name],
+    }));
   };
 
-  getSelectedGoods = (selected: string[]): string => {
+  handleClear = () => {
+    this.setState({ selectedGoods: [] });
+  };
+
+  getTitle = (selected: string[]): string => {
     switch (true) {
       case selected.length > 3:
         return `${selected[0]}, ${selected[1]} and ${selected.length - 2} others are selected`;
@@ -76,21 +80,33 @@ export class App extends React.Component<{}, State> {
   render() {
     const { goods, selectedGoods } = this.state;
 
+    if (!goods.length) {
+      return (
+        <>
+          <main className="App">
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          </main>
+        </>
+      );
+    }
+
     return (
       <main className="App">
         <header className="App__header">
           <h1 className="App__title">
-            {this.getSelectedGoods(selectedGoods)}
+            {this.getTitle(selectedGoods)}
           </h1>
 
           {Boolean(selectedGoods.length) && (
             <Button
               variant="danger"
               type="button"
-              className={classNames(
+              className={cn(
                 'App__clear',
               )}
-              onClick={() => this.setState({ selectedGoods: [] })}
+              onClick={() => this.handleClear()}
             >
               Clear
             </Button>
@@ -98,39 +114,43 @@ export class App extends React.Component<{}, State> {
         </header>
 
         <ul className="Good-list">
-          {goods.map(good => (
-            <li
-              key={good.name}
-              className={classNames(
-                'Good',
-                {
-                  'Good--active': selectedGoods.includes(good.name),
-                },
-              )}
-            >
-              {good.name}
+          {goods.map(good => {
+            const isActiveGood = selectedGoods.includes(good.name);
 
-              {selectedGoods.includes(good.name) ? (
-                <Button
-                  variant="warning"
-                  type="button"
-                  className="Good__remove Good__button"
-                  onClick={() => this.handleRemove(good.name)}
-                >
-                  Remove
-                </Button>
-              ) : (
-                <Button
-                  variant="warning"
-                  type="button"
-                  className="Good__select Good__button"
-                  onClick={() => this.handleSelect(good.name)}
-                >
-                  Select
-                </Button>
-              )}
-            </li>
-          ))}
+            return (
+              <li
+                key={good.id}
+                className={cn(
+                  'Good',
+                  {
+                    'Good--active': isActiveGood,
+                  },
+                )}
+              >
+                {good.name}
+
+                {isActiveGood ? (
+                  <Button
+                    variant="warning"
+                    type="button"
+                    className="Good__remove Good__button"
+                    onClick={() => this.handleRemove(good.name)}
+                  >
+                    Remove
+                  </Button>
+                ) : (
+                  <Button
+                    variant="warning"
+                    type="button"
+                    className="Good__select Good__button"
+                    onClick={() => this.handleSelect(good.name)}
+                  >
+                    Select
+                  </Button>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </main>
     );
