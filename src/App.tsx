@@ -45,7 +45,7 @@ export class App extends React.Component<{}, State> {
             && (
               <button
                 type="button"
-                className="App__clear"
+                className="App__clear button"
                 onClick={this.removeSelectedGood}
               >
                 Clear
@@ -64,7 +64,7 @@ export class App extends React.Component<{}, State> {
                 ? (
                   <button
                     type="button"
-                    className="Good__remove"
+                    className="Good__remove button"
                     onClick={this.removeSelectedGood}
                   >
                     Remove
@@ -73,7 +73,7 @@ export class App extends React.Component<{}, State> {
                 : (
                   <button
                     type="button"
-                    className="Good__select"
+                    className="Good__select button"
                     onClick={() => this.addSelectedGood(good)}
                   >
                     Select
