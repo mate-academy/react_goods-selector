@@ -3,18 +3,87 @@ html {
 }
 
 .App {
+  
+  margin: 0 auto;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  
   &__header {
+    width: 400px;
+    // height: 60px;
+
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 20px;
+
+    font-size: 26px;
+
+    border-radius: 20px;
+    // background: rgb(34,178,195);
+    background: linear-gradient(0deg, rgba(34,178,195,1) 0%,
+    rgba(45,228,253,0.69) 100%);
   }
+
+  &__title {
+    display: flex;
+
+    text-align: center;
+  }
+
+  &__button {
+    position: relative;
+    right: 5px;
+    height: 30px;
+
+    font-weight: 500;
+
+    background-color: rgba(255, 240, 108, 0.77);
+    border: 1.5px solid rgb(0, 63, 235);
+    border-radius: 5px;
+  }
+
+}
+
+.list {
+  width: 350px;
+  margin: 0;
+  padding: 10px 0 0;
+  
+  border-radius: 10px;
+  // background: rgb(89,201,232);
+  background: radial-gradient(circle, rgba(89,201,232,0.97) 44%,
+  rgba(63,140,251,1) 95%);
 }
 
 .Good {
+  margin-bottom: 10px;
+  padding: 0 10px;
+
   display: flex;
+  justify-content: space-between;
   gap: 10px;
 
+  font-weight: 500;
+
+  &__button {
+    border: 1.5px solid rgb(0, 63, 235);
+    border-radius: 5px;
+    background-color: none;
+
+    &--select {
+      background-color: rgba(64, 255, 64, 0.56);
+    }
+
+    &--remove {
+      background-color: rgba(255, 64, 96, 0.77);
+    }
+  }
+
   &--active {
-    background-color: #ff0;
+    background-color: rgb(78, 228, 255);
   }
 }
