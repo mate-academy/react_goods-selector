@@ -1,10 +1,13 @@
 html {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --c-main: rgb(201, 220, 242);
+  --c-darker: rgb(114, 143, 175);
+  --c-shadow: rgb(72, 106, 140);
 }
 
 body {
   margin: 0;
-  background-color: rgb(201, 220, 242);
+  background-color: var(--c-main);
 }
 
 iframe {
@@ -23,7 +26,7 @@ ul {
   margin: 20px auto;
   background-color: white;
   border-radius: 20px;
-  box-shadow: 5px 5px 5px rgb(114, 143, 175);
+  box-shadow: 5px 5px 5px var(--c-darker);
   &__header {
     display: flex;
     align-items: center;
@@ -40,7 +43,7 @@ ul {
   align-items: center;
 
   &--active {
-    background-color: rgb(201, 220, 242);
+    background-color: var(--c-main);
   }
 }
 
@@ -49,18 +52,18 @@ ul {
   width: 80px;
   text-transform: uppercase;
   font-weight: bold;
-  color: rgb(89, 124, 160);
+  color: var(--c-shadow);
   background-color: white;
-  border: 2px solid rgb(114, 143, 175);
+  border: 2px solid var(--c-darker);
   border-radius: 10px;
   transition: color 0.5s, background-color 0.5s, border 0.5s;
 
   &:hover {
-    background-color: rgb(114, 143, 175);
+    background-color: var(--c-darker);
     color: white;
   }
 
   &:active {
-    background-color: rgb(72, 106, 140);
+    background-color: var(--c-shadow);
   }
 }
