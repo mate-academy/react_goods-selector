@@ -3,18 +3,23 @@ html {
 }
 
 .App {
+  margin: 0 auto;
+  width: 30vw;
+
   &__header {
     display: flex;
     align-items: center;
-    gap: 20px;
+    justify-content: space-between;
+    padding: 20px 0 10px;
   }
 }
 
 .Good {
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
+  padding: 10px;
 
   &--active {
-    background-color: #ff0;
+    background-color: hsl(171, 100%, 41%);
   }
 }
