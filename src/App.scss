@@ -13,8 +13,14 @@ html {
 .Good {
   display: flex;
   gap: 10px;
+  justify-content: space-between;
+  margin-bottom: 5px;
 
   &--active {
     background-color: #ff0;
   }
+}
+
+.List {
+  width: 200px;
 }
