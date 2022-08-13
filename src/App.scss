@@ -3,18 +3,72 @@ html {
 }
 
 .App {
-  &__header {
+  height: 100vh;
+  &__wrapper {
+    margin: 0;
+    padding: 20px;
+    border-radius: 10px;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 20px;
+  }
+  &__header {
+    margin-bottom: 10px;
+  }
+  &__list {
+    width: 300px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+  }
+
+  &__title {
+    font-size: 24px;
+    margin: 0;
+    font-weight: 700;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__clear {
+
+    &--active {
+      display: none;
+    }
   }
 }
 
 .Good {
   display: flex;
-  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 10px;
+
+  justify-content: space-between;
+  align-items: center;
+  transition: 1s;
+
+  &__select {
+
+    &--active {
+      display: none;
+    }
+  }
+
+  &__remove {
+
+    &--active {
+      display: none;
+    }
+  }
 
   &--active {
-    background-color: #ff0;
+    background-color: #7fffd4;
   }
 }
