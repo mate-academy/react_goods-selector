@@ -1,20 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+//local variables
+$backgr:rgba(156, 156, 156, 0.3);
+$backgrButton:rgba(205, 205, 205, 0.5);
+
 html {
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-family: "Roboto", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  color: white;
 }
 
 .App {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(36deg, rgba(136,16,48,1) 0%,
+  rgba(106,14,124,1) 35%, rgba(30,173,201,1) 100%);
+  border-radius: 30px;
+  padding: 20px;
+
+  &__position {
+    margin: 100px auto;
+  }
+
   &__header {
     display: flex;
     align-items: center;
     gap: 20px;
+    background: $backgr;
+    padding: 0 20px;
+    border-radius: 10px;
+    min-width: 60%;
+  }
+
+  &__button {
+    display: flex;
+    outline: none;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: 1px solid $backgrButton;
+    border-radius: 6px;
+    height: 30px;
+    color: rgb(243, 243, 243);
+    transition: all 0.4s ease-in-out;
+    font-size: 16px;
+
+    &:hover,
+    &:focus {
+      background: rgb(255, 200, 0);
+      color: rgba(0, 0, 0, 0.75);
+      border: 1px solid rgb(255, 200, 0);
+      cursor: pointer;
+    }
+  }
+
+  &__remove {
+    transition: all 0.4s ease-in-out;
+
+    &:hover,
+    &:focus {
+      background: rgb(255, 0, 51);
+      color: black;
+      border: 1px solid rgb(255, 0, 51);
+    }
+  }
+
+  &__select {
+    transition: all 0.4s ease-in-out;
+
+    &:hover,
+    &:focus {
+      background: rgb(46, 213, 143);
+      color: black;
+      border: 1px solid rgb(46, 213, 143);
+    }
+  }
+
+  &__ul {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
   }
 }
 
 .Good {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  background: $backgr;
+  border: 1px solid $backgr;
+  border-radius: 4px;
+  justify-content: space-between;
+  min-width: 300px;
+  padding: 4px 20px;
 
   &--active {
-    background-color: #ff0;
+    background-color: rgba(255, 255, 0, 0.4);
   }
 }
