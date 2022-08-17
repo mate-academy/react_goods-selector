@@ -3,18 +3,45 @@ html {
 }
 
 .App {
+  margin: 0 auto;
+  padding: 20px;
+
   &__header {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 20px;
+  }
+
+  &__title {
+    font-size: 30px;
+  }
+
+  &__clear {
+    width: 300px;
   }
 }
 
 .Good {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 5px 10px;;
   gap: 10px;
+  max-width: 300px;
 
   &--active {
-    background-color: #ff0;
+    background-color: hsl(171, 100%, 93%);
+    border-radius: 50px;
+  }
+
+  &__select {
+    width: 100px;
+  }
+
+  &__remove {
+    width: 100px;
   }
 }
