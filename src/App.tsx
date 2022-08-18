@@ -1,51 +1,85 @@
-import React from 'react';
+import { Component } from 'react';
+import classNames from 'classnames';
+
+import Icon from './img/icon.svg';
 import './App.scss';
 
-// import goodsFromServer from './goods';
+import goodsFromServer from './goods';
 
-export const App: React.FC = () => {
-  return (
-    <main className="App">
-      <header className="App__header">
-        <h1 className="App__title">
-          Jam is selected
-        </h1>
-
-        <button
-          type="button"
-          className="App__clear"
-        >
-          Clear
-        </button>
-      </header>
-
-      <ul>
-        <li className="Good">Dumplings</li>
-        <li className="Good">Carrot</li>
-        <li className="Good">Eggs</li>
-        <li className="Good">Ice cream</li>
-        <li className="Good">Apple</li>
-        <li className="Good">Bread</li>
-        <li className="Good">Fish</li>
-        <li className="Good">Honey</li>
-        <li className="Good Good--active">Jam</li>
-        <li className="Good">Garlic</li>
-      </ul>
-
-      {/* Put required buttons into each Good */}
-      <button
-        type="button"
-        className="Good__remove"
-      >
-        Remove
-      </button>
-
-      <button
-        type="button"
-        className="Good__select"
-      >
-        Select
-      </button>
-    </main>
-  );
+type State = {
+  selectedGoods:string;
 };
+
+export class App extends Component<{}, State> {
+  state: Readonly<State> = {
+    selectedGoods: 'Jam',
+  };
+
+  selectHandler = (good: string) => {
+    this.setState({ selectedGoods: good });
+  };
+
+  clearHandler = () => {
+    this.setState({ selectedGoods: '' });
+  };
+
+  render() {
+    const { selectedGoods } = this.state;
+
+    return (
+      <main className="App">
+        <header className="App__header">
+          <h1 className="App__title title is-2">
+            {selectedGoods
+              ? `${selectedGoods} is selected`
+              : 'No goods selected'}
+          </h1>
+          {selectedGoods && (
+            <button
+              type="button"
+              className="App__clear button is-warning is-light is-medium"
+              onClick={this.clearHandler}
+            >
+              Clear
+            </button>
+          )}
+        </header>
+        <ul className="Goods__list box">
+          {goodsFromServer.map((good) => {
+            const isSelected = good === selectedGoods;
+
+            return (
+              <li
+                key={good}
+                className={classNames('Goods__item Good box', {
+                  'Good--active': isSelected,
+                })}
+              >
+                <img src={Icon} alt="icon" className="image is-24x24" />
+                {good}
+                {!isSelected && (
+                  <button
+                    type="button"
+                    className="Good__select button is-success is-light"
+                    onClick={() => this.selectHandler(good)}
+                  >
+                    Select
+                  </button>
+                )}
+                {isSelected && (
+                  <button
+                    type="button"
+                    className="Good__remove button is-danger is-light"
+                    onClick={this.clearHandler}
+                  >
+                    Remove
+                  </button>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </main>
+    );
+  }
+}
