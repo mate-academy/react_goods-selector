@@ -3,18 +3,33 @@ html {
 }
 
 .App {
+  background: linear-gradient(blue 50%, yellow 50%);
+
   &__header {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 20px;
+    font-size: 30px;
+    font-weight: 500;
   }
 }
 
 .Good {
   display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 500px;
+  align-items: center;
   gap: 10px;
+  font-size: 20px;
+  text-shadow: #fff 1px 1px 0,
+    #fff -1px -1px 0,
+    #fff -1px 1px 0,
+    #fff 1px -1px 0;
 
   &--active {
-    background-color: #ff0;
+    background-color: rgba(238, 8, 8, 0.2);
+    border-radius: 5%;
   }
 }
