@@ -15,14 +15,15 @@ export class App extends Component<{}, State> {
 
   render() {
     const { selectedGood } = this.state;
+    const isSelectedGood = selectedGood
+      ? `${selectedGood} is selected`
+      : 'No goods selected';
 
     return (
       <main className="App">
         <header className="App__header">
           <h1 className="App__title">
-            {`${selectedGood
-              ? `${selectedGood} 'is selected'`
-              : 'No goods selected'}`}
+            {isSelectedGood}
           </h1>
 
           <button
@@ -48,9 +49,7 @@ export class App extends Component<{}, State> {
               key={good}
               className={classNames(
                 'Good',
-                {
-                  'Good--active': good === selectedGood,
-                },
+                { 'Good--active': good === selectedGood },
               )}
             >
               {good}
@@ -58,9 +57,7 @@ export class App extends Component<{}, State> {
                 type="button"
                 className={classNames(
                   'Good', 'button', 'Good__remove',
-                  {
-                    button__hidden: good !== selectedGood,
-                  },
+                  { button__hidden: good !== selectedGood },
                 )}
                 onClick={() => {
                   this.setState({ selectedGood: '' });
