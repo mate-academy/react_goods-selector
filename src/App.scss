@@ -3,18 +3,78 @@ html {
 }
 
 .App {
+  border: 1px solid black;
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
+  background-color: lightblue;
+  border-radius: 20px;
+
+  &__clear {
+    background-color: lightcoral;
+    transition-duration: 0.3s;
+    border: 1px solid transparent;
+    color: white;
+  }
+
   &__header {
     display: flex;
     align-items: center;
     gap: 20px;
+    font-size: 13px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    min-width: 300px;
+    padding: 0;
+  }
+}
+
+.button {
+  width: 70px;
+  height: 30px;
+  border-radius: 20px;
+  border: 1px solid;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: greenyellow;
+    transition-duration: 0.3s;
   }
 }
 
 .Good {
   display: flex;
-  gap: 10px;
+  flex-direction: row;
+  justify-content: space-between;
+  line-height: 30px;
+  padding: 0 10px;
+  cursor: pointer;
 
   &--active {
     background-color: #ff0;
   }
+
+  &__remove {
+    &:hover {
+      background-color: red;
+      transition-duration: 0.3s;
+      border: 1px solid transparent;
+      color: white;
+    }
+  }
+}
+
+.button__hidden {
+  display: none;
 }
