@@ -10,6 +10,18 @@ export class App extends React.Component {
     selectedGood: 'Jam',
   };
 
+  handler = (nameButton: string, good?: string) => {
+    if (nameButton === 'Clear' || nameButton === 'Remove') {
+      this.setState({
+        selectedGood: '',
+      });
+    } else {
+      this.setState({
+        selectedGood: good,
+      });
+    }
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -26,9 +38,7 @@ export class App extends React.Component {
               type="button"
               className="App__clear button is-info"
               onClick={() => {
-                this.setState({
-                  selectedGood: '',
-                });
+                this.handler('Clear');
               }}
             >
               Clear
@@ -52,9 +62,7 @@ export class App extends React.Component {
                     type="button"
                     className="Good__select button is-light"
                     onClick={() => {
-                      this.setState({
-                        selectedGood: good,
-                      });
+                      this.handler('Select', good);
                     }}
                   >
                     Select
@@ -66,9 +74,7 @@ export class App extends React.Component {
                     type="button"
                     className="Good__remove button is-danger"
                     onClick={() => {
-                      this.setState({
-                        selectedGood: '',
-                      });
+                      this.handler('Remove');
                     }}
                   >
                     Remove
