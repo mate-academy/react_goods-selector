@@ -7,7 +7,10 @@
   "license": "GPL-3.0",
   "dependencies": {
     "@cypress/react": "^5.12.4",
-    "bulma": "^0.9.3",
+    "@mdi/font": "^7.0.96",
+    "@mdi/js": "^7.0.96",
+    "@mdi/react": "^1.6.1",
+    "bulma": "^0.9.4",
     "classnames": "^2.3.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
