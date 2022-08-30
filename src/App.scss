@@ -1,5 +1,6 @@
 html {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  background-color: rgba(220, 220, 220, 0.304);
 }
 
 .App {
@@ -13,8 +14,23 @@ html {
 .Good {
   display: flex;
   gap: 10px;
+  background-color: white;
+
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+  width: 300px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+
+  &__select {
+    display: block;
+    // right: 0;
+  }
+
 
   &--active {
     background-color: #ff0;
   }
 }
+
+
