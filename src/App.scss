@@ -1,6 +1,11 @@
 html {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   background-color: rgba(220, 220, 220, 0.304);
+  padding-bottom: 50px;
+}
+
+ul {
+  padding: 0;
 }
 
 .App {
@@ -9,27 +14,64 @@ html {
     align-items: center;
     gap: 20px;
   }
+
+  &__title {
+    margin: 0 auto;
+    color: black;
+    text-shadow: 2px 2px 4px rgb(158, 219, 219);
+  }
+
+  &__clear {
+    display: block;
+    margin: 0 auto;
+    padding: 15px 40px;
+    border-style: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgba(246, 225, 152, 0.924);
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: rgba(248, 210, 73, 0.924);
+    }
+  }
 }
 
 .Good {
   display: flex;
   gap: 10px;
   background-color: white;
+  margin: 0 auto;
 
   padding: 20px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
   width: 300px;
   margin-bottom: 10px;
   border-radius: 5px;
+  justify-content: space-between;
+  align-items: center;
 
   &__select {
     display: block;
-    // right: 0;
+    padding: 10px 20px;
+    border-style: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(134, 220, 220);
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: rgba(46, 178, 178, 0.869);
+    }
   }
 
 
   &--active {
     background-color: #ff0;
+  }
+
+  &__remove {
+    display: none;
   }
 }
 

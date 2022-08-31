@@ -23,6 +23,18 @@ export class App extends React.Component<{}, State> {
     this.setState({ selectedGood: '' });
   };
 
+  addClass = (event) => {
+    if (event.target.matches('.Good__select')) {
+      return;
+    }
+
+    event.target.closest('.Good').add.classList('.Good--active');
+  };
+
+  // toggler = (event) => {
+  //   event.currentTarget.classList.toggle('Good--active');
+  // };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -41,20 +53,12 @@ export class App extends React.Component<{}, State> {
             No goods selected`} */}
           </h1>
 
-          <button
-            type="button"
-            className="App__clear"
-            onClick={this.clearGood}
-          >
-            Clear
-          </button>
         </header>
 
         <ul>
           {goodsFromServer.map(good => (
             <li
               className="Good"
-              // type="button"
               key={good}
             >
               {good}
@@ -65,17 +69,18 @@ export class App extends React.Component<{}, State> {
                 onClick={() => {
                   this.setState({
                     selectedGood: good,
-                    // event.classList.add('.Good--active')
+                    // event.classList.toggle('Good--active')
                   });
                 }}
               >
                 Select
               </button>
+
               <button
                 type="button"
                 className="Good__remove"
                 onClick={() => {
-                  // event.classList.remove('.Good--active');
+                  // event.classList.remove('Good--active');
                 }}
               >
                 Remove
@@ -83,6 +88,14 @@ export class App extends React.Component<{}, State> {
             </li>
           ))}
         </ul>
+
+        <button
+          type="button"
+          className="App__clear"
+          onClick={this.clearGood}
+        >
+          Clear
+        </button>
       </main>
     );
   }
