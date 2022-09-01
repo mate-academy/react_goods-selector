@@ -6,15 +6,25 @@ html {
   &__header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
+    padding: 25px 20px;
+    border-radius: 12px;
+    width: 500px;
+    background-color: green;
   }
 }
 
 .Good {
+  width: 500px;
+  padding: 5px 15px 5px 0;
   display: flex;
   gap: 10px;
+  justify-content: space-between;
+  box-sizing: border-box;
 
   &--active {
     background-color: #ff0;
+    font-weight: bold;
   }
 }
