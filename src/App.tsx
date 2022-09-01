@@ -1,51 +1,85 @@
 import React from 'react';
+import 'bulma/css/bulma.css';
 import './App.scss';
 
-// import goodsFromServer from './goods';
+export const goods = [
+  'Dumplings',
+  'Carrot',
+  'Eggs',
+  'Ice cream',
+  'Apple',
+  'Bread',
+  'Fish',
+  'Honey',
+  'Jam',
+  'Garlic',
+];
 
-export const App: React.FC = () => {
-  return (
-    <main className="App">
-      <header className="App__header">
-        <h1 className="App__title">
-          Jam is selected
-        </h1>
+export const App: React.FC = () => (
+  <main className="section container">
+    <h1 className="title">No goods selected</h1>
 
-        <button
-          type="button"
-          className="App__clear"
-        >
-          Clear
-        </button>
-      </header>
+    <h1 className="title is-flex is-align-items-center">
+      Jam is selected
 
-      <ul>
-        <li className="Good">Dumplings</li>
-        <li className="Good">Carrot</li>
-        <li className="Good">Eggs</li>
-        <li className="Good">Ice cream</li>
-        <li className="Good">Apple</li>
-        <li className="Good">Bread</li>
-        <li className="Good">Fish</li>
-        <li className="Good">Honey</li>
-        <li className="Good Good--active">Jam</li>
-        <li className="Good">Garlic</li>
-      </ul>
-
-      {/* Put required buttons into each Good */}
+      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
       <button
+        data-cy="ClearButton"
         type="button"
-        className="Good__remove"
-      >
-        Remove
-      </button>
+        className="delete ml-3"
+      />
+    </h1>
 
-      <button
-        type="button"
-        className="Good__select"
-      >
-        Select
-      </button>
-    </main>
-  );
-};
+    <table className="table">
+      <tbody>
+        <tr data-cy="Good">
+          <td>
+            <button
+              data-cy="AddButton"
+              type="button"
+              className="button"
+            >
+              +
+            </button>
+          </td>
+
+          <td data-cy="GoodTitle" className="is-vcentered">
+            Dumplings
+          </td>
+        </tr>
+
+        <tr data-cy="Good" className="has-background-success-light">
+          <td>
+            <button
+              data-cy="RemoveButton"
+              type="button"
+              className="button is-info"
+            >
+              -
+            </button>
+          </td>
+
+          <td data-cy="GoodTitle" className="is-vcentered">
+            Jam
+          </td>
+        </tr>
+
+        <tr data-cy="Good">
+          <td>
+            <button
+              data-cy="AddButton"
+              type="button"
+              className="button"
+            >
+              +
+            </button>
+          </td>
+
+          <td data-cy="GoodTitle" className="is-vcentered">
+            Garlic
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+);
