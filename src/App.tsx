@@ -8,23 +8,24 @@ type Goods = {
   id?: number,
 };
 
-const goodswithid = (FromServer: string[]) => {
-  const newarr: Goods[] = [];
+// eslint-disable-next-line @typescript-eslint/no-shadow
+const goodsWithId = (goodsFromServer: string[]) => {
+  const goodsWithIdArray: Goods[] = [];
 
   // eslint-disable-next-line array-callback-return
-  FromServer.map((good: string, index: number) => {
-    const obj: Goods = {};
+  goodsFromServer.map((good: string, index: number) => {
+    const GoodObj: Goods = {};
 
-    obj.name = good;
-    obj.id = index;
+    GoodObj.name = good;
+    GoodObj.id = index;
 
-    newarr.push(obj);
+    goodsWithIdArray.push(GoodObj);
   });
 
-  return newarr;
+  return goodsWithIdArray;
 };
 
-const newgoods = goodswithid(goodsFromServer);
+const newgoods = goodsWithId(goodsFromServer);
 
 export class App extends React.Component {
   state = {
@@ -40,7 +41,7 @@ export class App extends React.Component {
             {this.state.selectedName ? (
               `${this.state.selectedName} is selected`
             ) : (
-              'No good is selected'
+              'No goods selected'
             )}
           </h1>
 
