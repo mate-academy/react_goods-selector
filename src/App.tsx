@@ -64,8 +64,7 @@ export class App extends React.Component<{}, State> {
                 className={classNames('Good__remove btn',
                   {
                     show: good === selectedGood,
-                  },
-                )}
+                  })}
                 onClick={this.clearGood}
               >
                 Remove
