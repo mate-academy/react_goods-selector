@@ -1,11 +1,9 @@
 html {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  // background-color: rgba(220, 220, 220, 0.304);
-  // background-color: #8be8cba1;
-  background-image: linear-gradient(326deg, #a4508b 0%, #5f0a87 74%);
+  background: rgb(188,196,234);
+  background: radial-gradient(circle, rgba(188,196,234,1) 21%, rgba(200,230,241,1) 93%);
   padding-bottom: 20px;
-  color:  #5f0a87;
-  backdrop-filter:blur(5px);
+  color:  black;
 }
 
 ul {
@@ -21,9 +19,7 @@ ul {
 
   &__title {
     margin: 0 auto;
-    color: white;
-    // text-shadow: 2px 2px 4px rgb(158, 219, 219);
-    // color: white;
+    color: #2445a5;
   }
 
   &__clear {
@@ -33,12 +29,11 @@ ul {
     border-style: none;
     border-radius: 5px;
     cursor: pointer;
-    // background-color: rgba(246, 225, 152, 0.924);
-    background-color: #ECDDAD;
+    background-color: #F1AF51;
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: rgba(248, 210, 73, 0.924);
+      background-color: #eda239;
     }
   }
 }
@@ -46,12 +41,16 @@ ul {
 .Good {
   display: flex;
   gap: 10px;
-  background-color: white;
+
+  background-color: rgba(255, 255, 255, .45);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, .25);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
+  backdrop-filter: blur(10px);
+
   margin: 0 auto;
   padding: 10px;
-  // box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
-  // box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
-  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 12px;
   width: 300px;
   margin-bottom: 10px;
   border-radius: 5px;
@@ -61,25 +60,21 @@ ul {
   &__select {
     display: block;
     color: white;
-    // background-color: rgb(134, 220, 220);
-    // background-color: #8BE8CB;
-    background-color: #5f0a87;;
+    background-color: #557BEC;
+
 
     &:hover {
-      background-color: #64a993;
+      background-color: #3563eb;
     }
   }
 
-
   &--active {
-    // background-color: rgba(158, 230, 230, 0.5);
-    // background-color: rgba(232, 122, 195, 0.487);
-    background-color: #e7e3e3c7;
+    background-color: white;
   }
 
   &__remove {
     display: none;
-    background-color: #E56B6F;
+    background-color: #ed6d3e;
 
     &:hover {
       background-color: #ac4f52;
@@ -102,5 +97,3 @@ ul {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-
-
