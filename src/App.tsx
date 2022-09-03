@@ -1,38 +1,29 @@
-// import { add, words } from 'cypress/types/lodash';
+// import classNames from 'classnames';
 import React from 'react';
+import classNames from 'classnames';
 import './App.scss';
 
 import goodsFromServer from './goods';
 
 type State = {
   selectedGood: string,
-  // className: boolean,
 };
-
-// type Props = {
-//   goods: goodsFromServer;
-// };
 
 export class App extends React.Component<{}, State> {
   state = {
     selectedGood: 'Jam',
-    // className: false,
   };
 
   clearGood = () => {
     this.setState({ selectedGood: '' });
   };
 
-  addClass = (event) => {
-    if (event.target.matches('.Good__select')) {
-      return;
-    }
+  // addClass = (event) => {
+  //   if (event.target.matches('.Good__select')) {
+  //     return;
+  //   }
 
-    event.target.closest('.Good').add.classList('.Good--active');
-  };
-
-  // toggler = (event) => {
-  //   event.currentTarget.classList.toggle('Good--active');
+  //   event.target.closest('.Good').add.classList('.Good--active');
   // };
 
   render() {
@@ -42,15 +33,15 @@ export class App extends React.Component<{}, State> {
       <main className="App">
         <header className="App__header">
           <h1 className="App__title">
-            {selectedGood}
-            is selected
+            {`${selectedGood}
+            is selected`}
 
             {/* {selectedGood}
             ?
             {`${selectedGood}
-            is selected
+            is selected`}
             :
-            No goods selected`} */}
+            No goods selected */}
           </h1>
 
         </header>
@@ -58,18 +49,27 @@ export class App extends React.Component<{}, State> {
         <ul>
           {goodsFromServer.map(good => (
             <li
-              className="Good"
               key={good}
+              className={classNames('Good',
+                {
+                  'Good--active': good === selectedGood,
+                },
+              )}
             >
               {good}
 
               <button
                 type="button"
-                className="Good__select"
+                // className="Good__select"
+                className={classNames('Good__select btn',
+                  {
+                    hide: good === selectedGood,
+                  },
+                )}
                 onClick={() => {
                   this.setState({
                     selectedGood: good,
-                    // event.classList.toggle('Good--active')
+
                   });
                 }}
               >
@@ -78,10 +78,13 @@ export class App extends React.Component<{}, State> {
 
               <button
                 type="button"
-                className="Good__remove"
-                onClick={() => {
-                  // event.classList.remove('Good--active');
-                }}
+                // className="Good__remove"
+                className={classNames('Good__remove btn',
+                  {
+                    show: good === selectedGood,
+                  },
+                )}
+                onClick={this.clearGood}
               >
                 Remove
               </button>
@@ -103,3 +106,16 @@ export class App extends React.Component<{}, State> {
 
 /* {selectedGood ? {selectedGood} 'is selected'
             : 'No goods selected' } */
+
+// ======
+// removeClass = (event) => {
+//   if (event.target.matches('.Good__select')) {
+//     return;
+//   }
+
+//   event.target.closest('.Good').remove.classList('.Good--active');
+// };
+// ==========
+// toggler = (event) => {
+//   event.currentTarget.classList.toggle('Good--active');
+// };
