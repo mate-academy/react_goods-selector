@@ -3,9 +3,9 @@ html {
   // background-color: rgba(220, 220, 220, 0.304);
   // background-color: #8be8cba1;
   background-image: linear-gradient(326deg, #a4508b 0%, #5f0a87 74%);
-  padding-bottom: 50px;
+  padding-bottom: 20px;
   color:  #5f0a87;
-  // backdrop-filter:
+  backdrop-filter:blur(5px);
 }
 
 ul {
@@ -29,7 +29,7 @@ ul {
   &__clear {
     display: block;
     margin: 0 auto;
-    padding: 15px 40px;
+    padding: 10px 40px;
     border-style: none;
     border-radius: 5px;
     cursor: pointer;
@@ -48,8 +48,7 @@ ul {
   gap: 10px;
   background-color: white;
   margin: 0 auto;
-
-  padding: 20px;
+  padding: 10px;
   // box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
   // box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
   box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
