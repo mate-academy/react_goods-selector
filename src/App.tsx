@@ -24,8 +24,6 @@ export class App extends React.Component<{}, State> {
       <main className="App">
         <header className="App__header">
           <h1 className="App__title">
-            {/* {`${selectedGood}
-            is selected`} */}
 
             {selectedGood
               ? `${selectedGood} is selected`
