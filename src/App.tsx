@@ -41,8 +41,7 @@ export class App extends React.Component<{}, State> {
               className={classNames('Good',
                 {
                   'Good--active': good === selectedGood,
-                },
-              )}
+                })}
             >
               {good}
 
@@ -51,8 +50,7 @@ export class App extends React.Component<{}, State> {
                 className={classNames('Good__select btn',
                   {
                     hide: good === selectedGood,
-                  },
-                )}
+                  })}
                 onClick={() => {
                   this.setState({
                     selectedGood: good,
