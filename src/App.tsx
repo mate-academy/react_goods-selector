@@ -1,4 +1,3 @@
-// import classNames from 'classnames';
 import React from 'react';
 import classNames from 'classnames';
 import './App.scss';
@@ -18,14 +17,6 @@ export class App extends React.Component<{}, State> {
     this.setState({ selectedGood: '' });
   };
 
-  // addClass = (event) => {
-  //   if (event.target.matches('.Good__select')) {
-  //     return;
-  //   }
-
-  //   event.target.closest('.Good').add.classList('.Good--active');
-  // };
-
   render() {
     const { selectedGood } = this.state;
 
@@ -33,15 +24,12 @@ export class App extends React.Component<{}, State> {
       <main className="App">
         <header className="App__header">
           <h1 className="App__title">
-            {`${selectedGood}
-            is selected`}
+            {/* {`${selectedGood}
+            is selected`} */}
 
-            {/* {selectedGood}
-            ?
-            {`${selectedGood}
-            is selected`}
-            :
-            No goods selected */}
+            {selectedGood
+              ? `${selectedGood} is selected`
+              : 'No goods selected' }
           </h1>
 
         </header>
@@ -60,7 +48,6 @@ export class App extends React.Component<{}, State> {
 
               <button
                 type="button"
-                // className="Good__select"
                 className={classNames('Good__select btn',
                   {
                     hide: good === selectedGood,
@@ -78,7 +65,6 @@ export class App extends React.Component<{}, State> {
 
               <button
                 type="button"
-                // className="Good__remove"
                 className={classNames('Good__remove btn',
                   {
                     show: good === selectedGood,
@@ -103,19 +89,3 @@ export class App extends React.Component<{}, State> {
     );
   }
 }
-
-/* {selectedGood ? {selectedGood} 'is selected'
-            : 'No goods selected' } */
-
-// ======
-// removeClass = (event) => {
-//   if (event.target.matches('.Good__select')) {
-//     return;
-//   }
-
-//   event.target.closest('.Good').remove.classList('.Good--active');
-// };
-// ==========
-// toggler = (event) => {
-//   event.currentTarget.classList.toggle('Good--active');
-// };
