@@ -32,27 +32,45 @@ export class App extends Component<{}, State> {
         <h1 className="title is-flex is-align-items-center">
           {pressedGood.length > 0 ? `${pressedGood} is selected` : 'No goods selected'}
 
-          {/*  eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-          <button
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-            onClick={() => this.setState({ pressedGood: '' })}
-          />
+          {pressedGood.length > 0
+            && (
+              /*  eslint-disable-next-line jsx-a11y/control-has-associated-label */
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={() => this.setState({ pressedGood: '' })}
+              />
+            )}
         </h1>
 
         <table className="table">
           <tbody>
             {goods.map(good => (
-              <tr data-cy="Good">
+              <tr
+                data-cy="Good"
+                className={(
+                  pressedGood === good
+                    ? 'has-background-success-light'
+                    : ''
+                )}
+              >
                 <td>
                   <button
-                    data-cy="AddButton"
+                    data-cy={(
+                      pressedGood === good
+                        ? 'RemoveButton'
+                        : 'AddButton'
+                    )}
                     type="button"
-                    className="button"
+                    className={(
+                      pressedGood === good
+                        ? 'button is-info'
+                        : 'button'
+                    )}
                     onClick={() => this.setState({ pressedGood: good })}
                   >
-                    +
+                    {pressedGood === good ? '-' : '+'}
                   </button>
                 </td>
 
