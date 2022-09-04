@@ -21,24 +21,23 @@ type State = {
 
 export class App extends Component<{}, State> {
   state = {
-    pressedGood: '',
+    pressedGood: 'Jam',
   };
 
   render() {
-    const { pressedGood = 'Jam' } = this.state;
+    const { pressedGood } = this.state;
 
     return (
       <main className="section container">
-        <h1 className="title">No goods selected</h1>
-
         <h1 className="title is-flex is-align-items-center">
-          {`${pressedGood} is selected`}
+          {pressedGood.length > 0 ? `${pressedGood} is selected` : 'No goods selected'}
 
           {/*  eslint-disable-next-line jsx-a11y/control-has-associated-label */}
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
+            onClick={() => this.setState({ pressedGood: '' })}
           />
         </h1>
 
@@ -51,6 +50,7 @@ export class App extends Component<{}, State> {
                     data-cy="AddButton"
                     type="button"
                     className="button"
+                    onClick={() => this.setState({ pressedGood: good })}
                   >
                     +
                   </button>
