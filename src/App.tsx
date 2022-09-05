@@ -68,7 +68,9 @@ export class App extends Component<{}, State> {
                         ? 'button is-info'
                         : 'button'
                     )}
-                    onClick={() => this.setState({ pressedGood: good })}
+                    onClick={() => (this.state.pressedGood === good
+                      ? this.setState({ pressedGood: '' })
+                      : this.setState({ pressedGood: good }))}
                   >
                     {pressedGood === good ? '-' : '+'}
                   </button>
