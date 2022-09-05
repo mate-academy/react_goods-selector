@@ -9,7 +9,7 @@ type State = {
 
 export class App extends React.Component<{}, State> {
   state: Readonly<State> = {
-    selectedGood: '',
+    selectedGood: 'No goods selected',
   };
 
   render(): React.ReactNode {
@@ -68,7 +68,7 @@ export class App extends React.Component<{}, State> {
                     className="Good__remove"
                     onClick={() => {
                       this.setState({
-                        selectedGood: '',
+                        selectedGood: 'No goods selected',
                       });
                     }}
                   >
