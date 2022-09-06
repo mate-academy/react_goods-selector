@@ -35,7 +35,7 @@ export class App extends React.Component<{}, State> {
             : (
               <h1 className="title is-flex is-align-items-center">
                 {`${selectedGood} is selected`}
-                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+
                 <button
                   data-cy="ClearButton"
                   type="button"
@@ -43,7 +43,9 @@ export class App extends React.Component<{}, State> {
                   onClick={() => this.setState(
                     { selectedGood: '' },
                   )}
-                />
+                >
+                  Clear
+                </button>
               </h1>
             )
         }
