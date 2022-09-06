@@ -43,9 +43,9 @@ export class App extends Component<Props, State> {
 
           {
             selectedGood && (
-              // eslint-disable-next-line jsx-a11y/control-has-associated-label
               <button
                 data-cy="ClearButton"
+                aria-label="Clear"
                 type="button"
                 className="delete ml-3"
                 onClick={() => this.setState({ selectedGood: '' })}
