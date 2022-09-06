@@ -30,7 +30,7 @@ export class App extends React.Component<{}, State> {
               className="App__clear"
               onClick={() => {
                 this.setState({
-                  selectedGood: '',
+                  selectedGood: 'No goods selected',
                 });
               }}
             >
