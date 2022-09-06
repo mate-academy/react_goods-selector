@@ -34,13 +34,15 @@ export class App extends Component<{}, State> {
 
           {pressedGood.length > 0
             && (
-              /*  eslint-disable-next-line jsx-a11y/control-has-associated-label */
+
               <button
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
                 onClick={() => this.setState({ pressedGood: '' })}
-              />
+              >
+                Clear
+              </button>
             )}
         </h1>
 
