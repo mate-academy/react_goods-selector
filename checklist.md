@@ -33,7 +33,7 @@ handleClick = () => {};
 return (
   <button 
     type="button"
-    onClick={() => {}}
+    onClick={handleClick}
   >
    Click me
 </button>
