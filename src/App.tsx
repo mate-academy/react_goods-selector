@@ -65,28 +65,29 @@ export class App extends React.Component<{}, State> {
                 })}
               >
                 {good}
-                {isSelectedGood && (
-                  <Button
-                    variant="outlined"
-                    sx={{ width: 90, color: '#6A718F' }}
-                    type="button"
-                    className="button Good__remove"
-                    onClick={this.handleSelectClear}
-                  >
-                    Remove
-                  </Button>
-                )}
-                {isSelectedGood || (
-                  <Button
-                    variant="outlined"
-                    sx={{ width: 90, color: '#6A718F' }}
-                    type="button"
-                    className="button Good__select"
-                    onClick={() => this.handleSelectGood(good)}
-                  >
-                    Select
-                  </Button>
-                )}
+                {isSelectedGood
+                  ? (
+                    <Button
+                      variant="outlined"
+                      sx={{ width: 90, color: '#6A718F' }}
+                      type="button"
+                      className="button Good__remove"
+                      onClick={this.handleSelectClear}
+                    >
+                      Remove
+                    </Button>
+                  )
+                  : (
+                    <Button
+                      variant="outlined"
+                      sx={{ width: 90, color: '#6A718F' }}
+                      type="button"
+                      className="button Good__select"
+                      onClick={() => this.handleSelectGood(good)}
+                    >
+                      Select
+                    </Button>
+                  )}
               </ListItem>
             );
           })}
