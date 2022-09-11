@@ -30,7 +30,7 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        {selectedGood.length === 0
+        {selectedGood
           ? <h1 className="title">No goods selected</h1>
           : (
             <h1 className="title is-flex is-align-items-center">
@@ -84,7 +84,7 @@ export class App extends React.Component<{}, State> {
                     )}
                 </td>
 
-                <td data-cy="GoodTitle" className="is-vcentered">
+                <td key={good} data-cy="GoodTitle" className="is-vcentered">
                   {good}
                 </td>
               </tr>
