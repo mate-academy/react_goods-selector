@@ -1,6 +1,7 @@
-import React from 'react';
+import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -15,71 +16,83 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+type State = {
+  selectedGoods: string;
+};
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+export default class App extends Component<{}, State> {
+  state: Readonly<State> = {
+    selectedGoods: 'Jam',
+  };
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+  render() {
+    const { selectedGoods } = this.state;
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
+    return (
+      <main className="section container">
+        <h1 className={classNames(
+          'title', { 'is-flex is-align-items-center': selectedGoods },
+        )}
+        >
+          {selectedGoods.length > 0
+            ? `${selectedGoods} is selected`
+            : 'No goods selected'}
+          {selectedGoods && (
             <button
-              data-cy="AddButton"
+              data-cy="ClearButton"
               type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+              className="delete ml-3"
+              aria-label="Clear"
+              onClick={() => {
+                this.setState({ selectedGoods: '' });
+              }}
+            />
+          )}
+        </h1>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+        <table className="table">
+          <tbody>
+            {goods.map((good) => (
+              <tr
+                data-cy="Good"
+                className={
+                  selectedGoods === good
+                    ? 'has-background-success-light'
+                    : ''
+                }
+              >
+                <td>
+                  <button
+                    type="button"
+                    data-cy={
+                      selectedGoods === good
+                        ? 'RemoveButton'
+                        : 'AddButton'
+                    }
+                    className={classNames(
+                      'button', { 'is-info': selectedGoods },
+                    )}
+                    onClick={() => {
+                      if (selectedGoods === good) {
+                        this.setState({ selectedGoods: '' });
+                      }
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
-
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+                      this.setState({ selectedGoods: good });
+                    }}
+                  >
+                    {selectedGoods === good
+                      ? '-'
+                      : '+'}
+                  </button>
+                </td>
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </main>
+    );
+  }
+}
