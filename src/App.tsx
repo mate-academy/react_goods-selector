@@ -16,51 +16,49 @@ export const goods = [
 ];
 
 type State = {
-  selected: string;
-  id: number
+  selectedGood: string;
 };
 
 export class App extends React.Component<{}, State> {
   state: Readonly<State> = {
-    selected: 'No goods selected',
-    id: -1,
+    selectedGood: 'Jam',
   };
 
   render() {
-    const { selected, id } = this.state;
+    const { selectedGood } = this.state;
+    const clickHandler = () => {
+      this.setState({
+        selectedGood: '',
+      });
+    };
 
     return (
       <main className="section container">
 
         <h1 className="title is-flex is-align-items-center">
-          {selected}
+          {selectedGood
+            ? `${selectedGood} is selected`
+            : 'No goods selected'}
           <button
             aria-label="Clear"
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => {
-              this.setState({
-                selected: 'No goods selected',
-                id: -1,
-              });
-            }}
+            onClick={clickHandler}
           />
         </h1>
 
         <table className="table">
           <tbody>
-            {goods.map((product, index) => {
+            {goods.map(good => {
               const handleClick = () => {
-                if (id === index) {
+                if (selectedGood === good) {
                   this.setState({
-                    selected: 'No goods selected',
-                    id: -1,
+                    selectedGood: '',
                   });
                 } else {
                   this.setState({
-                    selected: `${product} is selected`,
-                    id: index,
+                    selectedGood: good,
                   });
                 }
               };
@@ -68,9 +66,9 @@ export class App extends React.Component<{}, State> {
               return (
                 <tr
                   data-cy="Good"
-                  key={product}
+                  key={good}
                   className={
-                    (id === index)
+                    (selectedGood === good)
                       ? 'has-background-success-light'
                       : ''
                   }
@@ -79,15 +77,17 @@ export class App extends React.Component<{}, State> {
                     <button
                       data-cy="RemoveButton"
                       type="button"
-                      className={index === id ? 'button is-info' : 'button'}
+                      className={selectedGood === good
+                        ? 'button is-info'
+                        : 'button'}
                       onClick={handleClick}
                     >
-                      {index === id ? '-' : '+'}
+                      {selectedGood === good ? '-' : '+'}
                     </button>
                   </td>
 
                   <td data-cy="GoodTitle" className="is-vcentered">
-                    {product}
+                    {good}
                   </td>
                 </tr>
               );
