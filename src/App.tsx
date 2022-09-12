@@ -34,9 +34,8 @@ export class App extends React.Component<{}, State> {
 
         <h1 className="title is-flex is-align-items-center">
           {selected}
-
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
           <button
+            aria-label="Clear"
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
@@ -67,7 +66,15 @@ export class App extends React.Component<{}, State> {
               };
 
               return (
-                <tr data-cy="Good" className="has-background-success-light">
+                <tr
+                  data-cy="Good"
+                  key={product}
+                  className={
+                    (id === index)
+                      ? 'has-background-success-light'
+                      : ''
+                  }
+                >
                   <td>
                     <button
                       data-cy="RemoveButton"
