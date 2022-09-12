@@ -70,7 +70,7 @@ export default class App extends Component<{}, State> {
                         : 'AddButton'
                     }
                     className={classNames(
-                      'button', { 'is-info': selectedGoods },
+                      'button', { 'is-info': selectedGoods === good },
                     )}
                     onClick={() => {
                       if (selectedGoods === good) {
