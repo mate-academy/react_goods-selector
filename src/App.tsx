@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
@@ -30,12 +31,12 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        {selectedGood
+        {!selectedGood
           ? <h1 className="title">No goods selected</h1>
           : (
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+
               <button
                 data-cy="ClearButton"
                 type="button"
@@ -52,6 +53,7 @@ export class App extends React.Component<{}, State> {
             {goods.map(good => (
               <tr
                 data-cy="Good"
+                key={good}
                 className={classNames({
                   'has-background-success-ligh': selectedGood === good,
                 })}
@@ -84,7 +86,7 @@ export class App extends React.Component<{}, State> {
                     )}
                 </td>
 
-                <td key={good} data-cy="GoodTitle" className="is-vcentered">
+                <td data-cy="GoodTitle" className="is-vcentered">
                   {good}
                 </td>
               </tr>
