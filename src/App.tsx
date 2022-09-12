@@ -25,6 +25,16 @@ export default class App extends Component<{}, State> {
     selectedGoods: 'Jam',
   };
 
+  resetSelector = () => {
+    this.setState({ selectedGoods: '' });
+  };
+
+  resetButton = (good: string, selectedGoods: string) => (
+    selectedGoods === good
+      ? this.setState({ selectedGoods: '' })
+      : this.setState({ selectedGoods: good })
+  );
+
   render() {
     const { selectedGoods } = this.state;
 
@@ -34,7 +44,7 @@ export default class App extends Component<{}, State> {
           'title', { 'is-flex is-align-items-center': selectedGoods },
         )}
         >
-          {selectedGoods.length > 0
+          {selectedGoods.length
             ? `${selectedGoods} is selected`
             : 'No goods selected'}
           {selectedGoods && (
@@ -43,9 +53,7 @@ export default class App extends Component<{}, State> {
               type="button"
               className="delete ml-3"
               aria-label="Clear"
-              onClick={() => {
-                this.setState({ selectedGoods: '' });
-              }}
+              onClick={this.resetSelector}
             />
           )}
         </h1>
@@ -54,12 +62,13 @@ export default class App extends Component<{}, State> {
           <tbody>
             {goods.map((good) => (
               <tr
+                key={good}
                 data-cy="Good"
-                className={
-                  selectedGoods === good
-                    ? 'has-background-success-light'
-                    : ''
-                }
+                className={classNames(
+                  '', {
+                    'has-background-success-light': selectedGoods === good,
+                  },
+                )}
               >
                 <td>
                   <button
@@ -73,12 +82,9 @@ export default class App extends Component<{}, State> {
                       'button', { 'is-info': selectedGoods === good },
                     )}
                     onClick={() => {
-                      if (selectedGoods === good) {
-                        this.setState({ selectedGoods: '' });
-                      } else if (selectedGoods !== good) {
-                        this.setState({ selectedGoods: good });
-                      }
+                      this.resetButton(good, selectedGoods);
                     }}
+
                   >
                     {selectedGoods === good
                       ? '-'
