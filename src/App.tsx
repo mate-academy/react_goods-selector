@@ -64,7 +64,11 @@ export const App: React.FC = () => {
                     },
                   )}
                 >
-                  +
+                  {
+                    selectedGood === good
+                      ? '-'
+                      : '+'
+                  }
                 </button>
               </td>
 
