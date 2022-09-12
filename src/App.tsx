@@ -58,10 +58,7 @@ export class App extends React.Component< Props, State> {
         {(activeGood === true)
           ? (
             <h1 className="title is-flex is-align-items-center">
-              `
-              {selectedGood}
-              {' '}
-              is selected`
+              {`${selectedGood} is selected`}
               <button
                 aria-label="button"
                 data-cy="ClearButton"
@@ -107,9 +104,7 @@ export class App extends React.Component< Props, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={() => {
-                          this.handleClickClear();
-                        }}
+                        onClick={this.handleClickClear}
                       >
                         -
                       </button>
