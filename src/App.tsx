@@ -28,7 +28,7 @@ type Props = {
 export class App extends React.Component< Props, State> {
   state: Readonly<State> = {
     selectedGood: 'Jam',
-    activeGood: false,
+    activeGood: true,
   };
 
   indexGood = goods.indexOf('Jam');
@@ -55,27 +55,28 @@ export class App extends React.Component< Props, State> {
 
     return (
       <main className="section container">
-        {(activeGood === true) && (
-          <h1 className="title is-flex is-align-items-center">
-            `
-            {selectedGood}
-            {' '}
-            is selected`
+        {(activeGood === true)
+          ? (
+            <h1 className="title is-flex is-align-items-center">
+              `
+              {selectedGood}
+              {' '}
+              is selected`
+              <button
+                aria-label="button"
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.handleClickClear}
+              />
+            </h1>
+          )
+          : (
+            <h1 className="title">
+              No goods selected
+            </h1>
+          )}
 
-            <button
-              aria-label="button"
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={this.handleClickClear}
-            />
-          </h1>
-        )}
-        {(activeGood === false) && (
-          <h1 className="title">
-            No goods selected
-          </h1>
-        )}
         <table className="table">
           <tbody>
             {this.props.goods.map(good => (
@@ -87,30 +88,33 @@ export class App extends React.Component< Props, State> {
                 })}
               >
                 <td>
-                  {(this.indexGood !== this.props.goods.indexOf(good)) && (
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      className="button"
-                      onClick={() => {
-                        this.handleClick(good);
-                      }}
-                    >
-                      +
-                    </button>
-                  )}
-                  {(this.indexGood === this.props.goods.indexOf(good)) && (
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                      onClick={() => {
-                        this.handleClickClear();
-                      }}
-                    >
-                      -
-                    </button>
-                  )}
+                  {(this.indexGood !== this.props.goods.indexOf(good))
+                    ? (
+                      <button
+                        data-cy="AddButton"
+                        type="button"
+                        className="button"
+                        onClick={() => {
+                          this.handleClick(good);
+                        }}
+                      >
+                        +
+                      </button>
+                    )
+
+                    : (
+                      <button
+                        data-cy="RemoveButton"
+                        type="button"
+                        className="button is-info"
+                        onClick={() => {
+                          this.handleClickClear();
+                        }}
+                      >
+                        -
+                      </button>
+                    )}
+
                 </td>
                 <td
                   data-cy="GoodTitle"
@@ -127,7 +131,3 @@ export class App extends React.Component< Props, State> {
     );
   }
 }
-function selectedGood(selectedGood: any) {
-  throw new Error('Function not implemented.');
-}
-
