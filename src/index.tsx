@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
-import { App } from './App';
+import { App, goods } from './App';
 
 ReactDOM.render(
-  <App />,
+  <App goods={goods} />,
   document.getElementById('root'),
 );
