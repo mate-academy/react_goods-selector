@@ -75,9 +75,9 @@ export default class App extends Component<{}, State> {
                     onClick={() => {
                       if (selectedGoods === good) {
                         this.setState({ selectedGoods: '' });
+                      } else if (selectedGoods !== good) {
+                        this.setState({ selectedGoods: good });
                       }
-
-                      this.setState({ selectedGoods: good });
                     }}
                   >
                     {selectedGoods === good
