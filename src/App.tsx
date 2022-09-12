@@ -51,42 +51,40 @@ export class App extends React.Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {
-              goods.map((product, index) => {
-                const handleClick = () => {
-                  if (id === index) {
-                    this.setState({
-                      selected: 'No goods selected',
-                      id: -1,
-                    });
-                  } else {
-                    this.setState({
-                      selected: `${product} is selected`,
-                      id: index,
-                    });
-                  }
-                };
+            {goods.map((product, index) => {
+              const handleClick = () => {
+                if (id === index) {
+                  this.setState({
+                    selected: 'No goods selected',
+                    id: -1,
+                  });
+                } else {
+                  this.setState({
+                    selected: `${product} is selected`,
+                    id: index,
+                  });
+                }
+              };
 
-                return (
-                  <tr data-cy="Good" className="has-background-success-light">
-                    <td>
-                      <button
-                        data-cy="RemoveButton"
-                        type="button"
-                        className={index === id ? 'button is-info' : 'button'}
-                        onClick={handleClick}
-                      >
-                        {index === id ? '-' : '+'}
-                      </button>
-                    </td>
+              return (
+                <tr data-cy="Good" className="has-background-success-light">
+                  <td>
+                    <button
+                      data-cy="RemoveButton"
+                      type="button"
+                      className={index === id ? 'button is-info' : 'button'}
+                      onClick={handleClick}
+                    >
+                      {index === id ? '-' : '+'}
+                    </button>
+                  </td>
 
-                    <td data-cy="GoodTitle" className="is-vcentered">
-                      {product}
-                    </td>
-                  </tr>
-                );
-              })
-            }
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {product}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </main>
