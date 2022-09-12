@@ -1,5 +1,5 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import { Component } from 'react';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -25,6 +25,10 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  clearSelected = () => {
+    this.setState({ selectedGood: '' });
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -36,8 +40,9 @@ export class App extends Component<{}, State> {
             <button
               data-cy="ClearButton"
               type="button"
+              aria-label="button"
               className="delete ml-3"
-              onClick={() => this.setState({ selectedGood: '' })}
+              onClick={this.clearSelected}
             />
           )}
         </h1>
@@ -46,12 +51,13 @@ export class App extends Component<{}, State> {
           <tbody>
             {goods.map(good => (
               <tr
+                key={good}
                 data-cy="Good"
-                className={
-                  selectedGood === good
-                    ? 'has-background-success-light'
-                    : ''
-                }
+                className={classNames(
+                  {
+                    'has-background-success-light': selectedGood === good,
+                  },
+                )}
               >
                 <td>
                   <button
@@ -61,11 +67,14 @@ export class App extends Component<{}, State> {
                         : 'AddButton'
                     }
                     type="button"
-                    className={`button ${selectedGood === good
-                      ? 'is-info'
-                      : ''}`}
+                    className={classNames(
+                      'button',
+                      {
+                        'is-info': selectedGood === good,
+                      },
+                    )}
                     onClick={() => (this.state.selectedGood === good
-                      ? this.setState({ selectedGood: '' })
+                      ? this.clearSelected
                       : this.setState({ selectedGood: good }))}
                   >
                     {selectedGood === good ? '-' : '+'}
