@@ -1,6 +1,8 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -24,6 +26,10 @@ export class App extends React.Component<{}, State> {
     selectedItem: 'Jam',
   };
 
+  clearSelection = () => {
+    this.setState({ selectedItem: '' });
+  };
+
   render() {
     const { selectedItem } = this.state;
 
@@ -31,20 +37,19 @@ export class App extends React.Component<{}, State> {
       <main className="section container">
 
         <h1 className="title is-flex is-align-items-center">
-          { selectedItem.length > 0
-            ? `${selectedItem} is selected`
-            : 'No goods selected' }
+          {
+            selectedItem.length
+              ? `${selectedItem} is selected`
+              : 'No goods selected'
+          }
 
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
           {selectedItem && (
             <button
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
               aria-label="clear"
-              onClick={() => {
-                this.setState({ selectedItem: '' });
-              }}
+              onClick={this.clearSelection}
             />
           )}
         </h1>
@@ -54,10 +59,13 @@ export class App extends React.Component<{}, State> {
 
             {goods.map((good) => (
               <tr
+                key={good}
                 data-cy="Good"
-                className={selectedItem === good
-                  ? 'has-background-success-light'
-                  : ''}
+                className={classNames(
+                  {
+                    'has-background-success-light': selectedItem === good,
+                  },
+                )}
               >
                 <td>
                   <button
@@ -65,9 +73,12 @@ export class App extends React.Component<{}, State> {
                       ? 'RemoveButton'
                       : 'AddButton'}
                     type="button"
-                    className={selectedItem === good
-                      ? 'button is-info'
-                      : 'button'}
+                    className={classNames(
+                      'button',
+                      {
+                        'is-info': selectedItem === good,
+                      },
+                    )}
                     onClick={() => {
                       this.setState(selectedItem !== good
                         ? { selectedItem: good }
