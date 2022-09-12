@@ -24,7 +24,7 @@ export const App: React.FC = () => {
   return (
     <main className="section container">
       {!selectedGood ? (
-        <h1 className="title has-text-warning">No goods selected</h1>
+        <h1 className="title has-text-info">No goods selected</h1>
       ) : (
         <h1 className="title is-flex is-align-items-center has-text-light">
           {`${selectedGood} is selected`}
@@ -53,23 +53,25 @@ export const App: React.FC = () => {
               )}
             >
               <td>
-                <button
-                  data-cy="AddButton"
-                  type="button"
-                  onClick={() => setSelectedGood(good)}
-                  className={classNames(
-                    'button',
-                    {
-                      'is-warning': selectedGood === good,
-                    },
-                  )}
-                >
-                  {
-                    selectedGood === good
-                      ? '-'
-                      : '+'
-                  }
-                </button>
+                {selectedGood === good ? (
+                  <button
+                    data-cy="RemoveButton"
+                    type="button"
+                    onClick={() => setSelectedGood('')}
+                    className="button is-info"
+                  >
+                    -
+                  </button>
+                ) : (
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    onClick={() => setSelectedGood(good)}
+                    className="button"
+                  >
+                    +
+                  </button>
+                )}
               </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
