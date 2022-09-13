@@ -25,16 +25,6 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  resetSelector = () => {
-    this.setState({ selectedGood: '' });
-  };
-
-  resetButton = (good: string, selectedGood: string) => (
-    selectedGood === good
-      ? this.setState({ selectedGood: '' })
-      : this.setState({ selectedGood: good })
-  );
-
   render() {
     const { selectedGood } = this.state;
 
