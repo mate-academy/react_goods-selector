@@ -16,12 +16,15 @@ export const goods = [
   'Garlic',
 ];
 
-type Good = string;
+type State = {
+  selectedGood: string;
+};
 
 export const App: React.FC = () => {
-  const [selectedGood, setSelectedGood] = useState<Good>('Jam');
+  const [selectedGood, setSelectedGood]
+    = useState<State['selectedGood']>('Jam');
 
-  const addGood = (good: Good) => {
+  const addGood = (good: State['selectedGood']) => {
     setSelectedGood(good);
   };
 
@@ -64,25 +67,31 @@ export const App: React.FC = () => {
                 )}
               >
                 <td>
-                  {isSelected ? (
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      onClick={removeGood}
-                      className="button is-info"
-                    >
-                      -
-                    </button>
-                  ) : (
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      onClick={() => addGood(good)}
-                      className="button"
-                    >
-                      +
-                    </button>
-                  )}
+                  <button
+                    data-cy={
+                      isSelected
+                        ? 'RemoveButton'
+                        : 'AddButton'
+                    }
+                    type="button"
+                    onClick={
+                      isSelected
+                        ? removeGood
+                        : () => addGood(good)
+                    }
+                    className={classNames(
+                      'button',
+                      {
+                        'is-info': isSelected,
+                      },
+                    )}
+                  >
+                    {
+                      isSelected
+                        ? '-'
+                        : '+'
+                    }
+                  </button>
                 </td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
