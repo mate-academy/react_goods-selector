@@ -18,7 +18,7 @@ export const goods: Good[] = [
 ];
 
 type State = {
-  selectedGood: Good | null;
+  selectedGood: Good;
 };
 
 export class App extends React.Component<{}, State> {
@@ -27,7 +27,7 @@ export class App extends React.Component<{}, State> {
   };
 
   removeSelection = () => {
-    this.setState({ selectedGood: null });
+    this.setState({ selectedGood: '' });
   };
 
   addSelection = (good: Good) => {
@@ -40,15 +40,15 @@ export class App extends React.Component<{}, State> {
     return (
       <main className="section container">
         <h1 className={
-          !selectedGood
+          !selectedGood.length
             ? 'title'
             : 'title is-flex is-align-items-center'
         }
         >
-          {!selectedGood
+          {!selectedGood.length
             ? 'No goods selected'
             : (
-              <h1 className="title is-flex is-align-items-center">
+              <>
                 {`${selectedGood} is selected`}
 
                 {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
@@ -58,7 +58,7 @@ export class App extends React.Component<{}, State> {
                   className="delete ml-3"
                   onClick={this.removeSelection}
                 />
-              </h1>
+              </>
             )}
         </h1>
 
