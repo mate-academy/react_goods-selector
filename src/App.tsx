@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -39,22 +40,20 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        {
-          selectedGood.length === 0
-            ? <h1 className="title">No goods selected</h1>
-            : (
-              <h1 className="title is-flex is-align-items-center">
-                {`${selectedGood} is selected`}
-                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-                <button
-                  data-cy="ClearButton"
-                  type="button"
-                  className="delete ml-3"
-                  onClick={this.handleReset}
-                />
-              </h1>
-            )
-        }
+        {!selectedGood
+          ? <h1 className="title">No goods selected</h1>
+          : (
+            <h1 className="title is-flex is-align-items-center">
+              {`${selectedGood} is selected`}
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.handleReset}
+              />
+            </h1>
+          )}
 
         <table className="table">
           <tbody>
@@ -62,9 +61,10 @@ export class App extends React.Component<{}, State> {
               <tr
                 data-cy="Good"
                 className={
-                  selectedGood === good
-                    ? 'has-background-success-light'
-                    : ''
+                  classNames(
+                    '',
+                    { 'has-background-success-light': selectedGood === good },
+                  )
                 }
               >
                 <td>
@@ -76,9 +76,10 @@ export class App extends React.Component<{}, State> {
                     }
                     type="button"
                     className={
-                      selectedGood !== good
-                        ? 'button'
-                        : 'button is-info'
+                      classNames(
+                        'button',
+                        { 'is-info': selectedGood === good },
+                      )
                     }
                     onClick={() => (this.handleClick(good))}
                   >
