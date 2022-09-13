@@ -28,8 +28,12 @@ export class App extends Component<{}, State> {
   render() {
     const { selectedGood } = this.state;
 
-    const handleClick = () => {
+    const clearClick = () => {
       this.setState({ selectedGood: '' });
+    };
+
+    const selectClick = (good: string) => {
+      this.setState({ selectedGood: good });
     };
 
     return (
@@ -45,7 +49,7 @@ export class App extends Component<{}, State> {
               aria-label="Clear"
               type="button"
               className="delete ml-3"
-              onClick={handleClick}
+              onClick={clearClick}
             />
           )}
 
@@ -54,9 +58,12 @@ export class App extends Component<{}, State> {
           {goods.map((good) => (
             <tr
               data-cy="Good"
+              key={good}
               className={
-                classNames('',
-                  { 'has-background-success-light': good === selectedGood })}
+                classNames(
+                  { 'has-background-success-light': good === selectedGood },
+                )
+              }
             >
               <td>
                 <button
@@ -72,8 +79,8 @@ export class App extends Component<{}, State> {
                   }
                   onClick={() => (
                     good === selectedGood
-                      ? this.setState({ selectedGood: '' })
-                      : this.setState({ selectedGood: good })
+                      ? this.setState(clearClick)
+                      : this.setState(() => selectClick(good))
                   )}
                 >
                   {selectedGood === good
