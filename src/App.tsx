@@ -31,7 +31,7 @@ export class App extends React.Component<{}, State> {
 
   handleAddGoods = (good: string) => (
     this.state.selectedGood === good
-      ? this.setState({ selectedGood: '' })
+      ? this.handleClearButton()
       : this.setState({ selectedGood: good })
   );
 
@@ -67,7 +67,9 @@ export class App extends React.Component<{}, State> {
                 key={good}
                 data-cy="Good"
                 className={classNames(
-                  { 'has-background-success-light': selectedGood === good },
+                  {
+                    'has-background-success-light': selectedGood === good,
+                  },
                 )}
               >
                 <td>
@@ -78,11 +80,12 @@ export class App extends React.Component<{}, State> {
                         : 'AddButton'
                     }
                     type="button"
-                    className={
-                      selectedGood === good
-                        ? 'button is-info'
-                        : 'button'
-                    }
+                    className={classNames(
+                      'button',
+                      {
+                        'button is-info': selectedGood === good,
+                      },
+                    )}
                     onClick={() => {
                       this.handleAddGoods(good);
                     }}
