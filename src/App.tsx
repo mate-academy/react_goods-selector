@@ -69,7 +69,7 @@ export class App extends Component<{}, State> {
                   data-cy="Good"
                   className={
                     classNames(
-                      '', {
+                      {
                         'has-background-success-light': targetGood,
                       },
                     )
