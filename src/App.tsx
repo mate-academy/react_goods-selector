@@ -19,37 +19,41 @@ export const goods = [
 
 type State = {
   selectedGood: string,
-  ClearButton: boolean
 };
 
 export class App extends Component<{}, State> {
   state: Readonly<State> = {
     selectedGood: 'Jam',
-    ClearButton: true,
+  };
+
+  isSelected = (good: string) => {
+    this.setState({ selectedGood: good });
+  };
+
+  deleteGood = () => {
+    this.setState({ selectedGood: '' });
   };
 
   render() {
-    const { selectedGood, ClearButton } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <main className="section container">
 
-        { ClearButton ? (
-          <h1 className="title is-flex is-align-items-center">
-            {`${selectedGood} is selected`}
-
-            <button
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={() => {
-                this.setState({ ClearButton: false });
-              }}
-            />
-          </h1>
-        ) : (
-          <h1 className="title">No goods selected</h1>
-        )}
+        {selectedGood
+          ? (
+            <h1 className="title is-flex is-align-items-center">
+              {`${selectedGood} is selected`}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.deleteGood}
+              />
+            </h1>
+          ) : (
+            <h1 className="title">No goods selected</h1>
+          )}
 
         <table className="table">
           <tbody>
@@ -57,33 +61,39 @@ export class App extends Component<{}, State> {
               <tr
                 key={good}
                 data-cy="Good"
-                className={selectedGood === good && ClearButton
-                  ? 'has-background-success-light'
-                  : ''}
+                className={classNames({
+                  'has-background-success-light': selectedGood === good,
+                })}
               >
-                <td>
-                  <button
-                    data-cy={selectedGood === good && ClearButton
-                      ? 'RemoveButton'
-                      : 'AddButton'}
-                    type="button"
-                    className={classNames('button',
-                      { 'is-info': selectedGood === good && ClearButton })}
-                    onClick={() => {
-                      this.setState({ selectedGood: good });
-                      this.setState({ ClearButton: true });
-                    }}
-                  >
-                    {selectedGood === good && ClearButton ? '-' : '+'}
-                  </button>
-                </td>
+                {selectedGood === good ? (
+                  <td>
+                    <button
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
+                      onClick={this.deleteGood}
+                    >
+                      -
+                    </button>
+                  </td>
+                ) : (
+                  <td>
+                    <button
+                      data-cy="AddButton"
+                      type="button"
+                      className="button"
+                      onClick={() => this.isSelected(good)}
+                    >
+                      +
+                    </button>
+                  </td>
+                )}
 
                 <td data-cy="GoodTitle" className="is-vcentered">
                   {good}
                 </td>
               </tr>
             ))}
-
           </tbody>
         </table>
       </main>
