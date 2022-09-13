@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -26,11 +27,14 @@ export class App extends Component<{}, State> {
 
   render() {
     const { pressedGood } = this.state;
+    const handleClear = () => this.setState({ pressedGood: '' });
 
     return (
       <main className="section container">
         <h1 className="title is-flex is-align-items-center">
-          {pressedGood.length > 0 ? `${pressedGood} is selected` : 'No goods selected'}
+          {pressedGood.length
+            ? `${pressedGood} is selected`
+            : 'No goods selected'}
 
           {pressedGood.length > 0
             && (
@@ -39,7 +43,7 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => this.setState({ pressedGood: '' })}
+                onClick={handleClear}
               >
                 Clear
               </button>
@@ -50,12 +54,11 @@ export class App extends Component<{}, State> {
           <tbody>
             {goods.map(good => (
               <tr
+                key={good}
                 data-cy="Good"
-                className={(
-                  pressedGood === good
-                    ? 'has-background-success-light'
-                    : ''
-                )}
+                className={classNames({
+                  'has-background-success-light': pressedGood !== good,
+                })}
               >
                 <td>
                   <button
@@ -65,10 +68,9 @@ export class App extends Component<{}, State> {
                         : 'AddButton'
                     )}
                     type="button"
-                    className={(
-                      pressedGood === good
-                        ? 'button is-info'
-                        : 'button'
+                    className={classNames(
+                      'button',
+                      { 'is-info': pressedGood === good },
                     )}
                     onClick={() => (this.state.pressedGood === good
                       ? this.setState({ pressedGood: '' })
