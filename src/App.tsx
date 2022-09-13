@@ -17,21 +17,28 @@ export const goods = [
 
 type State = {
   selectedGood: string,
-  className: string,
   blueLight: string,
 };
 
 export class App extends React.Component<{}, State> {
   state: Readonly<State> = {
     selectedGood: 'Jam',
-    className: 'has-background-success-light',
     blueLight: 'is-info',
   };
+
+  handleReset = () => {
+    this.setState({ selectedGood: '' });
+  };
+
+  handleClick = (good: string) => (
+    this.state.selectedGood === good
+      ? this.setState({ selectedGood: '' })
+      : this.setState({ selectedGood: good })
+  );
 
   render() {
     const {
       selectedGood,
-      className,
       blueLight,
     } = this.state;
 
@@ -48,9 +55,7 @@ export class App extends React.Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => this.setState(
-                  { selectedGood: '' },
-                )}
+                onClick={this.handleReset}
               />
             </h1>
           )}
@@ -59,10 +64,11 @@ export class App extends React.Component<{}, State> {
           <tbody>
             {goods.map(good => (
               <tr
+                key={good}
                 data-cy="Good"
                 className={
                   selectedGood === good
-                    ? className
+                    ? 'has-background-success-light'
                     : ''
                 }
               >
@@ -81,15 +87,7 @@ export class App extends React.Component<{}, State> {
                           : ''
                       }`
                     }
-                    onClick={() => (
-                      selectedGood === good
-                        ? this.setState({ selectedGood: '' })
-                        : this.setState({
-                          selectedGood: good,
-                          className: 'has-background-success-light',
-                          blueLight: 'is-info',
-                        })
-                    )}
+                    onClick={() => (this.handleClick(good))}
                   >
                     {selectedGood === good ? '-' : '+'}
                   </button>
