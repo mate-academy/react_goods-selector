@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
+import classNames from 'classnames';
 import './App.scss';
 
 export const goods = [
@@ -34,6 +35,13 @@ export class App extends React.Component<{}, State> {
     this.setState({
       selectedGood: good,
     });
+  };
+
+  selectFunction = (isSelected: boolean, good: string) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    isSelected
+      ? this.clearGood()
+      : this.setGood(good);
   };
 
   render(): React.ReactNode {
@@ -73,14 +81,13 @@ export class App extends React.Component<{}, State> {
                   <td>
                     <button
                       onClick={() => {
-                        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-                        !isSelected
-                          ? this.setGood(good)
-                          : this.clearGood();
+                        this.selectFunction(isSelected, good);
                       }}
                       data-cy={`${isSelected ? 'RemoveButton' : 'AddButton'}`}
                       type="button"
-                      className={`button ${isSelected ? 'is-info' : ''}`}
+                      className={classNames('button', {
+                        'is-info': isSelected,
+                      })}
                     >
                       {isSelected ? '-' : '+'}
                     </button>
@@ -97,5 +104,3 @@ export class App extends React.Component<{}, State> {
     );
   }
 }
-
-// has-background-success-light
