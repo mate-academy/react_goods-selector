@@ -18,7 +18,6 @@ export const goods = [
 
 type State = {
   selectedGood: string;
-  activeGood: boolean;
 };
 
 type Props = {
@@ -28,35 +27,34 @@ type Props = {
 export class App extends React.Component< Props, State> {
   state: Readonly<State> = {
     selectedGood: 'Jam',
-    activeGood: true,
   };
 
-  indexGood = goods.indexOf('Jam');
-
   handleClick = (good: string) => {
-    this.indexGood = this.props.goods.indexOf(good);
     this.setState({
       selectedGood: good,
-      activeGood: true,
     });
   };
 
   handleClickClear = () => {
-    this.indexGood = -1;
     this.setState({
       selectedGood: '',
-      activeGood: false,
     });
   };
 
   render() {
     // eslint-disable-next-line @typescript-eslint/no-shadow
-    const { selectedGood, activeGood } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <main className="section container">
-        {(activeGood === true)
+        {(selectedGood.length === 0)
           ? (
+            <h1 className="title">
+              No goods selected
+            </h1>
+          )
+
+          : (
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
               <button
@@ -67,11 +65,6 @@ export class App extends React.Component< Props, State> {
                 onClick={this.handleClickClear}
               />
             </h1>
-          )
-          : (
-            <h1 className="title">
-              No goods selected
-            </h1>
           )}
 
         <table className="table">
@@ -81,11 +74,11 @@ export class App extends React.Component< Props, State> {
                 data-cy="Good"
                 className={classNames({
                   'has-background-success-light':
-                    this.props.goods.indexOf(good) === this.indexGood,
+                    good === selectedGood,
                 })}
               >
                 <td>
-                  {(this.indexGood !== this.props.goods.indexOf(good))
+                  {(good !== selectedGood)
                     ? (
                       <button
                         data-cy="AddButton"
