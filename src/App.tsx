@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -20,18 +21,8 @@ type State = {
 };
 
 export class App extends Component<{}, State> {
-  state = {
+  state: State = {
     selectedGood: 'Jam',
-  };
-
-  className = 'has-background-success-light';
-
-  selectedItem = (item: string) => {
-    this.setState({ selectedGood: item });
-  };
-
-  clearItem = () => {
-    this.setState({ selectedGood: '' });
   };
 
   render() {
@@ -39,9 +30,17 @@ export class App extends Component<{}, State> {
       selectedGood,
     } = this.state;
 
+    const selectedItem = (event: React.MouseEvent<HTMLButtonElement>) => (
+      selectedGood === event.currentTarget.id
+        ? this.setState({ selectedGood: '' })
+        : this.setState({ selectedGood: event.currentTarget.id }));
+
+    const clearItem = () => {
+      this.setState({ selectedGood: '' });
+    };
+
     return (
       <main className="section container">
-
         {
           selectedGood === ''
             ? <h1 className="title">No goods selected</h1>
@@ -50,13 +49,15 @@ export class App extends Component<{}, State> {
                 {selectedGood}
                 {' '}
                 is selected
-                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+
                 <button
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={this.clearItem}
-                />
+                  onClick={clearItem}
+                >
+                  Clear
+                </button>
               </h1>
             )
         }
@@ -68,37 +69,32 @@ export class App extends Component<{}, State> {
                 <tr
                   data-cy="Good"
                   key={item}
-                  className={
-                    selectedGood === item
-                      ? this.className
-                      : ''
-                  }
-                >
-                  {selectedGood === item ? (
-                    <td>
-                      <button
-                        data-cy="RemoveButton"
-                        type="button"
-                        className="button is-info"
-                        onClick={this.clearItem}
-                      >
-                        -
-                      </button>
-                    </td>
-                  ) : (
-                    <td>
-                      <button
-                        data-cy="AddButton"
-                        type="button"
-                        className="button"
-                        onClick={() => {
-                          this.selectedItem(item);
-                        }}
-                      >
-                        +
-                      </button>
-                    </td>
+                  className={classNames(
+                    { 'has-background-success-light': selectedGood === item },
                   )}
+                >
+                  <td>
+                    <button
+                      id={item}
+                      data-cy={(
+                        selectedGood === item
+                          ? 'RemoveButton'
+                          : 'AddButton'
+                      )}
+                      type="button"
+                      className={classNames(
+                        'button',
+                        { 'is-info': selectedGood === item },
+                      )}
+                      onClick={selectedItem}
+                    >
+                      {
+                        selectedGood === item
+                          ? '-'
+                          : '+'
+                      }
+                    </button>
+                  </td>
 
                   <td data-cy="GoodTitle" className="is-vcentered">
                     {item}
