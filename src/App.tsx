@@ -74,7 +74,7 @@ export class App extends Component<{}, State> {
                       },
                     )}
                     onClick={() => (this.state.selectedGood === good
-                      ? this.clearSelected
+                      ? this.clearSelected()
                       : this.setState({ selectedGood: good }))}
                   >
                     {selectedGood === good ? '-' : '+'}
