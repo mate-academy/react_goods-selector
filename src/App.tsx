@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -24,6 +25,18 @@ export class App extends React.Component<{}, State> {
   state: Readonly<State> = {
     selectedGood: 'Jam',
   };
+
+  selectedUser(good: string) {
+    const { selectedGood } = this.state;
+
+    if (!selectedGood.length) {
+      this.setState({ selectedGood: good });
+    } else if (selectedGood !== good) {
+      this.setState({ selectedGood: good });
+    } else {
+      this.setState({ selectedGood: '' });
+    }
+  }
 
   render() {
     const { selectedGood } = this.state;
@@ -77,12 +90,13 @@ export class App extends React.Component<{}, State> {
                     }
                     type="button"
                     className={
-                      selectedGood === good
-                        ? 'button is-info'
-                        : 'button'
+                      classNames(
+                        'button',
+                        { 'is-info': selectedGood === good },
+                      )
                     }
                     onClick={() => {
-                      this.setState({ selectedGood: good });
+                      this.selectedUser(good);
                     }}
                   >
                     {
