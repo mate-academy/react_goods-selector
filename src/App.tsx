@@ -73,6 +73,7 @@ export class App extends Component<{}, State> {
                 >
                   <td>
                     <button
+                      id={good}
                       data-cy={
                         selectedGood === good
                           ? 'RemoveButton'
