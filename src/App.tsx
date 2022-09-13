@@ -17,7 +17,7 @@ export const goods: string[] = [
 ];
 
 type State = {
-  selectedGood: string | null;
+  selectedGood: string;
 };
 
 export class App extends Component<{}, State> {
@@ -32,7 +32,7 @@ export class App extends Component<{}, State> {
       this.setState({ selectedGood: '' });
     };
 
-    const removeGood = (good: string) => (
+    const removeOrSelectGood = (good: string) => (
       selectedGood === good
         ? this.setState({ selectedGood: '' })
         : this.setState({ selectedGood: good })
@@ -59,37 +59,43 @@ export class App extends Component<{}, State> {
         }
 
         <table className="table">
-          {goods.map(good => {
-            return (
-              <tbody>
+          <tbody>
+            {goods.map(good => {
+              const targetGood = selectedGood === good;
+
+              return (
                 <tr
                   key={good}
                   data-cy="Good"
-                  className={classNames(
-                    '', {
-                      'has-background-success-light': selectedGood === good,
-                    },
-                  )}
+                  className={
+                    classNames(
+                      '', {
+                        'has-background-success-light': targetGood,
+                      },
+                    )
+                  }
                 >
                   <td>
                     <button
                       id={good}
                       data-cy={
-                        selectedGood === good
+                        targetGood
                           ? 'RemoveButton'
                           : 'AddButton'
                       }
                       type="button"
-                      className={classNames(
-                        'button',
-                        { 'is-info': selectedGood === good },
-                      )}
+                      className={
+                        classNames(
+                          'button',
+                          { 'is-info': targetGood },
+                        )
+                      }
                       onClick={() => {
-                        removeGood(good);
+                        removeOrSelectGood(good);
                       }}
                     >
                       {
-                        selectedGood === good
+                        targetGood
                           ? '-'
                           : '+'
                       }
@@ -100,9 +106,9 @@ export class App extends Component<{}, State> {
                     {good}
                   </td>
                 </tr>
-              </tbody>
-            );
-          })}
+              );
+            })}
+          </tbody>
         </table>
       </main>
     );
