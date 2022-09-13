@@ -39,12 +39,7 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        <h1 className={
-          !selectedGood.length
-            ? 'title'
-            : 'title is-flex is-align-items-center'
-        }
-        >
+        <h1 className="title is-flex is-align-items-center">
           {!selectedGood.length
             ? 'No goods selected'
             : (
@@ -67,9 +62,11 @@ export class App extends React.Component<{}, State> {
             {goods.map(good => (
               <tr
                 data-cy="Good"
-                className={good === selectedGood
-                  ? 'has-background-success-light'
-                  : ''}
+                className={
+                  classNames(
+                    { 'has-background-success-light': good === selectedGood },
+                  )
+                }
                 key={Math.random()}
               >
                 <td>
