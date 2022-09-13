@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -43,8 +44,8 @@ export class App extends React.Component<{}, State> {
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
 
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
+                aria-label="Remove"
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
@@ -60,11 +61,11 @@ export class App extends React.Component<{}, State> {
                 key={good}
                 data-cy="Good"
                 className={
-                  selectedGood === good
-                    ? ('has-background-success-light')
-                    : ('')
+                  classNames('',
+                    { 'has-background-success-light': selectedGood === good })
                 }
               >
+
                 <td>
                   {selectedGood === good
                     ? (
