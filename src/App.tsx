@@ -45,9 +45,10 @@ export class App extends React.Component<{}, State> {
       <main className="section container">
         <h1
           className={
-            selectedGood.length > 0
-              ? 'title is-flex is-align-items-center'
-              : 'title'
+            classNames(
+              'title',
+              { 'is-flex is-align-items-center': selectedGood.length > 0 },
+            )
           }
         >
           {
@@ -75,10 +76,12 @@ export class App extends React.Component<{}, State> {
             {goods.map((good) => (
               <tr
                 data-cy="Good"
+                key={good}
                 className={
-                  selectedGood === good
-                    ? 'has-background-success-light'
-                    : ''
+                  classNames(
+                    '',
+                    { 'has-background-success-light': selectedGood === good },
+                  )
                 }
               >
                 <td>
