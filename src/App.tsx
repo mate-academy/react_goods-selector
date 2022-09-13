@@ -67,7 +67,9 @@ export class App extends Component<{}, State> {
               >
                 <td key={element}>
                   <button
-                    data-cy="AddButton"
+                    data-cy={(curentSelector !== element)
+                      ? 'AddButton'
+                      : 'RemoveButton'}
                     type="button"
                     className={
                       (curentSelector !== element)
