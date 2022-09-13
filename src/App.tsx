@@ -74,7 +74,7 @@ export class App extends Component<{}, State> {
                   <td>
                     <button
                       data-cy={
-                        selectedGood === good
+                        RightTarget
                           ? 'RemoveButton'
                           : 'AddButton'
                       }
