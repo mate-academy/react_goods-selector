@@ -40,13 +40,14 @@ export const App: React.FC = () => {
         <h1 className="title is-flex is-align-items-center has-text-light">
           {`${selectedGood} is selected`}
 
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
           <button
             data-cy="ClearButton"
             type="button"
             className="delete is-medium ml-3"
             onClick={removeGood}
-          />
+          >
+            Clear
+          </button>
         </h1>
       )}
 
