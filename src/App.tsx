@@ -17,7 +17,7 @@ export const goods = [
 ];
 
 type State = {
-  pressedGood: string,
+  pressedGood: string | null,
 };
 
 export class App extends Component<{}, State> {
@@ -28,6 +28,11 @@ export class App extends Component<{}, State> {
   render() {
     const { pressedGood } = this.state;
     const handleClear = () => this.setState({ pressedGood: '' });
+    // eslint-disable-next-line max-len
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => (
+      pressedGood === event.currentTarget.id
+        ? this.setState({ pressedGood: '' })
+        : this.setState({ pressedGood: event.currentTarget.id }));
 
     return (
       <main className="section container">
@@ -57,11 +62,12 @@ export class App extends Component<{}, State> {
                 key={good}
                 data-cy="Good"
                 className={classNames({
-                  'has-background-success-light': pressedGood !== good,
+                  'has-background-success-light': pressedGood === good,
                 })}
               >
                 <td>
                   <button
+                    id={good}
                     data-cy={(
                       pressedGood === good
                         ? 'RemoveButton'
@@ -72,9 +78,7 @@ export class App extends Component<{}, State> {
                       'button',
                       { 'is-info': pressedGood === good },
                     )}
-                    onClick={() => (this.state.pressedGood === good
-                      ? this.setState({ pressedGood: '' })
-                      : this.setState({ pressedGood: good }))}
+                    onClick={handleClick}
                   >
                     {pressedGood === good ? '-' : '+'}
                   </button>
