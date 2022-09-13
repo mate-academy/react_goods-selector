@@ -17,14 +17,14 @@ export const goods = [
 
 type State = {
   selectedGood: string,
-  className: string,
 };
 
 export class App extends Component<{}, State> {
   state = {
     selectedGood: 'Jam',
-    className: 'has-background-success-light',
   };
+
+  className = 'has-background-success-light';
 
   selectedItem = (item: string) => {
     this.setState({ selectedGood: item });
@@ -37,7 +37,6 @@ export class App extends Component<{}, State> {
   render() {
     const {
       selectedGood,
-      className,
     } = this.state;
 
     return (
@@ -71,37 +70,35 @@ export class App extends Component<{}, State> {
                   key={item}
                   className={
                     selectedGood === item
-                      ? className
+                      ? this.className
                       : ''
                   }
                 >
-                  {selectedGood === item
-                    ? (
-                      <td>
-                        <button
-                          data-cy="RemoveButton"
-                          type="button"
-                          className="button is-info"
-                          onClick={this.clearItem}
-                        >
-                          -
-                        </button>
-                      </td>
-                    )
-                    : (
-                      <td>
-                        <button
-                          data-cy="AddButton"
-                          type="button"
-                          className="button"
-                          onClick={() => {
-                            this.selectedItem(item);
-                          }}
-                        >
-                          +
-                        </button>
-                      </td>
-                    )}
+                  {selectedGood === item ? (
+                    <td>
+                      <button
+                        data-cy="RemoveButton"
+                        type="button"
+                        className="button is-info"
+                        onClick={this.clearItem}
+                      >
+                        -
+                      </button>
+                    </td>
+                  ) : (
+                    <td>
+                      <button
+                        data-cy="AddButton"
+                        type="button"
+                        className="button"
+                        onClick={() => {
+                          this.selectedItem(item);
+                        }}
+                      >
+                        +
+                      </button>
+                    </td>
+                  )}
 
                   <td data-cy="GoodTitle" className="is-vcentered">
                     {item}
