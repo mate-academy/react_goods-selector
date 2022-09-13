@@ -69,12 +69,16 @@ export class App extends React.Component<{}, State> {
                 <td>
                   <button
                     data-cy={
-                      classNames({ RemoveButton: selectedGood === good },
-                        { AddButton: selectedGood !== good })
+                      classNames(
+                        { RemoveButton: selectedGood === good },
+                        { AddButton: selectedGood !== good },
+                      )
                     }
                     type="button"
-                    className={classNames('button',
-                      { 'is-info': selectedGood === good })}
+                    className={classNames(
+                      'button',
+                      { 'is-info': selectedGood === good },
+                    )}
                     onClick={selectedGood === good
                       ? this.clearSelection
                       : () => {
