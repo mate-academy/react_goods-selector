@@ -16,18 +16,22 @@ export const goods = [
   'Garlic',
 ];
 
+type Props = {};
+
 type State = {
   selectedGood: string;
 };
 
-export class App extends Component<{}, State> {
+export class App extends Component<Props, State> {
   state: Readonly<State> = {
     selectedGood: 'Jam',
   };
 
-  selectedGoods = (good: string) => {
-    this.setState({ selectedGood: good });
-  };
+  selectedGoods = (good: string) => (
+    this.state.selectedGood === good
+      ? this.setState({ selectedGood: '' })
+      : this.setState({ selectedGood: good })
+  );
 
   removeSelectedGoods = () => {
     this.setState({ selectedGood: '' });
@@ -65,8 +69,9 @@ export class App extends Component<{}, State> {
                 <tr
                   key={good}
                   data-cy="Good"
-                  className={classNames('',
-                    { 'has-background-success-light': isSelected })}
+                  className={classNames(
+                    { 'has-background-success-light': isSelected },
+                  )}
                 >
                   <td>
                     <button
@@ -81,13 +86,7 @@ export class App extends Component<{}, State> {
                           ? 'button is-info'
                           : 'button'
                       }
-                      onClick={
-                        isSelected
-                          ? this.removeSelectedGoods
-                          : () => {
-                            this.selectedGoods(good);
-                          }
-                      }
+                      onClick={() => this.selectedGoods(good)}
                     >
                       {
                         isSelected
@@ -96,6 +95,7 @@ export class App extends Component<{}, State> {
                       }
                     </button>
                   </td>
+
                   <td data-cy="GoodTitle" className="is-vcentered">
                     {good}
                   </td>
