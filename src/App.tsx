@@ -63,6 +63,7 @@ export class App extends React.Component<{}, State> {
                 className={good === selectedGood
                   ? 'has-background-success-light'
                   : ''}
+                key={Math.random()}
               >
                 <td>
                   {selectedGood !== good
