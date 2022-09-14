@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -24,6 +25,14 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  selectGood = (good: string) => {
+    this.setState({ selectedGood: good });
+  };
+
+  removeGood = () => {
+    this.setState({ selectedGood: '' });
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -41,9 +50,7 @@ export class App extends Component<{}, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={() => (
-                    this.setState({ selectedGood: '' })
-                  )}
+                  onClick={this.removeGood}
                 />
               </h1>
             )
@@ -62,18 +69,21 @@ export class App extends Component<{}, State> {
               >
                 <td>
                   <button
-                    data-cy="AddButton"
-                    type="button"
-                    className={
+                    data-cy={
                       selectedGood === good
-                        ? 'button is-info'
-                        : 'button'
+                        ? 'RemoveButton'
+                        : 'AddButton'
                     }
-                    onClick={() => (
-                      selectedGood === good
-                        ? this.setState({ selectedGood: '' })
-                        : this.setState({ selectedGood: good })
+                    type="button"
+                    className={classNames(
+                      'button',
+                      { 'button is-info': selectedGood === good },
                     )}
+                    onClick={
+                      selectedGood === good
+                        ? this.removeGood
+                        : () => this.selectGood(good)
+                    }
                   >
                     {
                       selectedGood === good
