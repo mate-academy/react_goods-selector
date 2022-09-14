@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
@@ -36,8 +35,8 @@ export class App extends React.Component<{}, State> {
           : (
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
-
               <button
+                aria-label="clear"
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
