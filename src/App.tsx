@@ -30,7 +30,11 @@ export class App extends React.Component<{}, State> {
   };
 
   selectHandler = (good: string) => {
-    this.setState({ selectedGood: good });
+    if (this.state.selectedGood === good) {
+      this.clearHandler();
+    } else {
+      this.setState({ selectedGood: good });
+    }
   };
 
   render() {
@@ -72,13 +76,9 @@ export class App extends React.Component<{}, State> {
                       'button',
                       { 'is-info': selectedGood === good },
                     )}
-                    onClick={selectedGood === good
-                      ? () => {
-                        this.clearHandler();
-                      }
-                      : () => {
-                        this.selectHandler(good);
-                      }}
+                    onClick={() => {
+                      this.selectHandler(good);
+                    }}
                   >
                     {selectedGood === good ? '-' : '+'}
                   </button>
