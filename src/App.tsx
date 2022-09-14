@@ -20,10 +20,6 @@ type State = {
   selectedGood: string;
 };
 
-// type Props = {
-//   goods: string[];
-// };
-
 export class App extends React.Component< {}, State> {
   state: Readonly<State> = {
     selectedGood: 'Jam',
@@ -107,7 +103,6 @@ export class App extends React.Component< {}, State> {
                 </td>
                 <td
                   data-cy="GoodTitle"
-                  key={good}
                   className="is-vcentered"
                 >
                   {good}

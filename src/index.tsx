@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import { App, goods } from './App';
+import { App } from './App';
 
 ReactDOM.render(
   <App />,
