@@ -25,18 +25,18 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  clearTitle = () => {
+    this.setState({ selectedGood: '' });
+  };
+
+  removeOrSelectGood = (good: string) => (
+    this.state.selectedGood === good
+      ? this.setState({ selectedGood: '' })
+      : this.setState({ selectedGood: good })
+  );
+
   render() {
     const { selectedGood } = this.state;
-
-    const clearTitle = () => {
-      this.setState({ selectedGood: '' });
-    };
-
-    const removeOrSelectGood = (good: string) => (
-      selectedGood === good
-        ? this.setState({ selectedGood: '' })
-        : this.setState({ selectedGood: good })
-    );
 
     return (
       <main className="section container">
@@ -51,7 +51,7 @@ export class App extends Component<{}, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={clearTitle}
+                  onClick={this.clearTitle}
                 />
               </h1>
             )
@@ -91,7 +91,7 @@ export class App extends Component<{}, State> {
                         )
                       }
                       onClick={() => {
-                        removeOrSelectGood(good);
+                        this.removeOrSelectGood(good);
                       }}
                     >
                       {
