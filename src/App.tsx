@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -15,22 +16,25 @@ export const goods = [
   'Garlic',
 ];
 
-interface Props{
-  goodsList: string[];
-}
-
 interface State {
   selectedGood: string;
 }
 
-export class App extends Component<Props, State> {
+export class App extends Component<{}, State> {
   state = {
     selectedGood: 'Jam',
   };
 
+  handleClear = () => this.setState({ selectedGood: '' });
+
+  handleSelect = (good: string) => (
+    this.state.selectedGood === good
+      ? this.setState({ selectedGood: '' })
+      : this.setState({ selectedGood: good })
+  );
+
   render() {
     const { selectedGood } = this.state;
-    const { goodsList } = this.props;
 
     return (
       <main className="section container">
@@ -44,7 +48,7 @@ export class App extends Component<Props, State> {
                 aria-label="Clear"
                 type="button"
                 className="delete ml-3"
-                onClick={() => this.setState({ selectedGood: '' })}
+                onClick={this.handleClear}
               />
             </h1>
           )
@@ -52,15 +56,13 @@ export class App extends Component<Props, State> {
 
         <table className="table">
           <tbody>
-            {goodsList.map(good => (
+            {goods.map(good => (
               <tr
                 data-cy="Good"
                 key={good}
-                className={
-                  (selectedGood === good)
-                    ? 'has-background-success-light'
-                    : ''
-                }
+                className={classNames(
+                  { 'has-background-success-light': selectedGood === good },
+                )}
               >
                 <td>
                   <button
@@ -70,16 +72,9 @@ export class App extends Component<Props, State> {
                         : 'AddButton'
                     }
                     type="button"
-                    className={
-                      (selectedGood === good)
-                        ? 'button is-info'
-                        : 'button'
-                    }
-                    onClick={() => (
-                      selectedGood === good
-                        ? this.setState({ selectedGood: '' })
-                        : this.setState({ selectedGood: good })
-                    )}
+                    className={classNames('button',
+                      { 'is-info': selectedGood === good })}
+                    onClick={() => this.handleSelect(good)}
                   >
                     {selectedGood === good ? '-' : '+'}
                   </button>
