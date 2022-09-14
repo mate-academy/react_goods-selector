@@ -37,6 +37,13 @@ export class App extends Component<{}, State> {
     });
   };
 
+  selectButton = (isSelected: boolean, good: string) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    isSelected
+      ? this.clearGood()
+      : this.setGood(good);
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -78,10 +85,7 @@ export class App extends Component<{}, State> {
                   <td>
                     <button
                       onClick={() => {
-                        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-                        !isSelected
-                          ? this.setGood(good)
-                          : this.clearGood();
+                        this.selectButton(isSelected, good);
                       }}
                       data-cy={`${isSelected ? 'RemoveButton' : 'AddButton'}`}
                       type="button"
