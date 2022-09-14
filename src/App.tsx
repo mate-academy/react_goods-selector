@@ -20,11 +20,11 @@ type State = {
   selectedGood: string;
 };
 
-type Props = {
-  goods: string[];
-};
+// type Props = {
+//   goods: string[];
+// };
 
-export class App extends React.Component< Props, State> {
+export class App extends React.Component< {}, State> {
   state: Readonly<State> = {
     selectedGood: 'Jam',
   };
@@ -69,9 +69,10 @@ export class App extends React.Component< Props, State> {
 
         <table className="table">
           <tbody>
-            {this.props.goods.map(good => (
+            {goods.map(good => (
               <tr
                 data-cy="Good"
+                key={good}
                 className={classNames({
                   'has-background-success-light':
                     good === selectedGood,
