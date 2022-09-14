@@ -21,12 +21,14 @@ type State = {
   selectedGood: string;
 };
 
-export class App extends React.Component<{}, State> {
+type Props = {};
+
+export class App extends React.Component<Props, State> {
   state: Readonly<State> = {
     selectedGood: 'Jam',
   };
 
-  isSelected = (good: string) => {
+  handleIsSelected = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
@@ -90,7 +92,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="AddButton"
                           type="button"
                           className="button"
-                          onClick={() => this.isSelected(good)}
+                          onClick={() => this.handleIsSelected(good)}
                         >
                           +
                         </button>
