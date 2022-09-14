@@ -60,9 +60,9 @@ export class App extends React.Component<{}, State> {
             {goods.map(good => (
               <tr
                 data-cy="Good"
+                key={good}
                 className={
                   classNames(
-                    '',
                     { 'has-background-success-light': selectedGood === good },
                   )
                 }
