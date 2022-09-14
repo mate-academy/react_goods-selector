@@ -68,7 +68,9 @@ export class App extends React.Component <{}, State> {
                     <td>
                       <button
                         id={good}
-                        data-cy="AddButton"
+                        data-cy={selectedGood === good
+                          ? 'RemoveButton'
+                          : 'AddButton'}
                         type="button"
                         className={classNames(
                           'button',
