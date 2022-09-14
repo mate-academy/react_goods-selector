@@ -26,7 +26,11 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  selectedUser(good: string) {
+  clearSelectedGood = () => {
+    this.setState({ selectedGood: '' });
+  };
+
+  selectGood(good: string) {
     const { selectedGood } = this.state;
 
     if (!selectedGood.length) {
@@ -64,9 +68,7 @@ export class App extends React.Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  this.setState({ selectedGood: '' });
-                }}
+                onClick={this.clearSelectedGood}
               />
             )}
         </h1>
@@ -77,12 +79,12 @@ export class App extends React.Component<{}, State> {
               <tr
                 data-cy="Good"
                 key={good}
-                className={
-                  classNames(
-                    '',
-                    { 'has-background-success-light': selectedGood === good },
-                  )
-                }
+                className={classNames(
+                  '',
+                  {
+                    'has-background-success-light': selectedGood === good,
+                  },
+                )}
               >
                 <td>
                   <button
@@ -92,14 +94,12 @@ export class App extends React.Component<{}, State> {
                         : 'AddButton'
                     }
                     type="button"
-                    className={
-                      classNames(
-                        'button',
-                        { 'is-info': selectedGood === good },
-                      )
-                    }
+                    className={classNames(
+                      'button',
+                      { 'is-info': selectedGood === good },
+                    )}
                     onClick={() => {
-                      this.selectedUser(good);
+                      this.selectGood(good);
                     }}
                   >
                     {
