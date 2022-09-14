@@ -62,11 +62,11 @@ export class App extends React.Component<{}, State> {
             {goods.map(good => (
               <tr
                 data-cy="Good"
-                className={
-                  classNames(
-                    { 'has-background-success-light': good === selectedGood },
-                  )
-                }
+                className={classNames(
+                    { 
+                      'has-background-success-light': good === selectedGood 
+                    },
+                  )}
                 key={Math.random()}
               >
                 <td>
