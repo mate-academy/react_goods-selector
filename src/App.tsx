@@ -71,7 +71,9 @@ export class App extends Component {
               >
                 <td>
                   <button
-                    data-cy="AddButton"
+                    data-cy={selectedGood === good
+                      ? 'RemoveButton'
+                      : 'AddButton'}
                     type="button"
                     className={classNames(
                       'button',
