@@ -28,6 +28,10 @@ export class App extends Component<{}, State> {
   render() {
     const { selectedGood } = this.state;
 
+    const handleClick = () => {
+      this.setState({ selectedGood: '' });
+    };
+
     const removeOrSelectGood = (good: string) => (
       selectedGood === good
         ? this.setState({ selectedGood: '' })
@@ -48,7 +52,7 @@ export class App extends Component<{}, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={() => this.setState({ selectedGood: '' })}
+                  onClick={handleClick}
                 />
               </h1>
             )
