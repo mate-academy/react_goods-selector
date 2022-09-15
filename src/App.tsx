@@ -57,6 +57,7 @@ export class App extends React.Component<{}, State> {
             {goods.map((good) => (
               <tr
                 data-cy="Good"
+                key={good}
                 className={classNames(
                   '', {
                     'has-background-success-light': selectedGood === good,
@@ -65,7 +66,6 @@ export class App extends React.Component<{}, State> {
               >
                 <td>
                   <button
-                    key={good}
                     data-cy={
                       (selectedGood === good)
                         ? 'RemoveButton'
@@ -73,7 +73,8 @@ export class App extends React.Component<{}, State> {
                     }
                     type="button"
                     className={classNames(
-                      'button', {
+                      'button',
+                      {
                         'is-info': selectedGood === good,
                       },
                     )}
