@@ -27,11 +27,11 @@ export class App extends Component<Props, State> {
     selectedGood: 'Jam',
   };
 
-  goodSelected = (item: string) => {
+  selecteGood = (item: string) => {
     this.setState({ selectedGood: item });
   };
 
-  goodClear = () => {
+  clrearGood = () => {
     this.setState({ selectedGood: '' });
   };
 
@@ -52,7 +52,7 @@ export class App extends Component<Props, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={this.goodClear}
+                  onClick={this.clrearGood}
                 />
               </h1>
             )
@@ -80,7 +80,7 @@ export class App extends Component<Props, State> {
                             data-cy="RemoveButton"
                             type="button"
                             className="button is-info"
-                            onClick={this.goodClear}
+                            onClick={this.clrearGood}
                           >
                             -
                           </button>
@@ -93,7 +93,7 @@ export class App extends Component<Props, State> {
                             type="button"
                             className="button"
                             onClick={() => {
-                              this.goodSelected(good);
+                              this.selecteGood(good);
                             }}
                           >
                             +
