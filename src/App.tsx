@@ -2,6 +2,7 @@
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { Component } from 'react';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -20,9 +21,15 @@ type State = {
   selectedGood: string;
 };
 
-export class App extends Component {
+export class App extends Component<{}, State> {
   state: Readonly<State> = {
     selectedGood: 'Jam',
+  };
+
+  handleClickRemove = () => {
+    this.setState({
+      selectedGood: '',
+    });
   };
 
   render() {
@@ -41,11 +48,7 @@ export class App extends Component {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => {
-                this.setState({
-                  selectedGood: '',
-                });
-              }}
+              onClick={this.handleClickRemove}
             />
           )}
         </h1>
@@ -54,10 +57,11 @@ export class App extends Component {
           <tbody>
             {goods.map(good => (
               <tr
+                key={good}
                 data-cy="Good"
-                className={good === selectedGood
-                  ? 'has-background-success-light'
-                  : ''}
+                className={classNames('', {
+                  'has-background-success-light': good === selectedGood,
+                })}
               >
                 <td>
                   {selectedGood === good
@@ -66,11 +70,7 @@ export class App extends Component {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={() => {
-                          this.setState({
-                            selectedGood: '',
-                          });
-                        }}
+                        onClick={this.handleClickRemove}
                       >
                         -
                       </button>
