@@ -25,9 +25,11 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  selectGood = (good: string) => {
-    this.setState({ selectedGood: good });
-  };
+  selectGood = (good: string) => (
+    this.state.selectedGood === good
+      ? this.setState({ selectedGood: '' })
+      : this.setState({ selectedGood: good })
+  );
 
   removeGood = () => {
     this.setState({ selectedGood: '' });
@@ -61,11 +63,9 @@ export class App extends Component<{}, State> {
             {goods.map((good) => (
               <tr
                 data-cy="Good"
-                className={
-                  selectedGood === good
-                    ? 'has-background-success-light'
-                    : ''
-                }
+                className={classNames(
+                  { 'has-background-success-light': selectedGood === good },
+                )}
               >
                 <td>
                   <button
@@ -79,11 +79,7 @@ export class App extends Component<{}, State> {
                       'button',
                       { 'button is-info': selectedGood === good },
                     )}
-                    onClick={
-                      selectedGood === good
-                        ? this.removeGood
-                        : () => this.selectGood(good)
-                    }
+                    onClick={() => this.selectGood(good)}
                   >
                     {
                       selectedGood === good
