@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -28,19 +29,15 @@ export class App extends Component<Props, State> {
     selectedGood: 'Jam',
   };
 
-  /*
-  function handleClick() {
-    selectedGoods === goods
-        ? this.state.selectedGoods({ selectedGood: '' })
-        : this.state.selectedGoods({ selectedGood: goods});
-  };
-  */
-
   handleClick = (good: string) => (
     this.state.selectedGood === good
       ? this.setState({ selectedGood: '' })
       : this.setState({ selectedGood: good })
   );
+
+  clearState = () => {
+    this.setState({ selectedGood: '' });
+  };
 
   render() {
     const { selectedGood } = this.state;
@@ -58,7 +55,7 @@ export class App extends Component<Props, State> {
                 aria-label="Clear"
                 type="button"
                 className="delete ml-3"
-                onClick={() => this.setState({ selectedGood: '' })}
+                onClick={this.clearState}
               />
             </h1>
           )
@@ -70,11 +67,9 @@ export class App extends Component<Props, State> {
               <tr
                 data-cy="Good"
                 key={good}
-                className={
-                  (selectedGood === good)
-                    ? 'has-background-success-light'
-                    : ''
-                }
+                className={classNames({
+                  'has-background-success-light': selectedGood === good,
+                })}
               >
                 <td>
                   <button
