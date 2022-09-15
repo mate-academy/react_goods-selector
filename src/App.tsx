@@ -26,12 +26,16 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  handleClick = () => {
+    this.setState({ selectedGood: '' });
+  };
+
+  selectGood = (good: string) => {
+    this.setState({ selectedGood: good });
+  };
+
   render() {
     const { selectedGood } = this.state;
-
-    const handleClick = () => {
-      this.setState({ selectedGood: '' });
-    };
 
     return (
       <main className="section container">
@@ -45,7 +49,7 @@ export class App extends Component<{}, State> {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={handleClick}
+              onClick={this.handleClick}
             >
               Сancel
             </button>
@@ -54,6 +58,7 @@ export class App extends Component<{}, State> {
         <table className="table">
           {goods.map((good) => (
             <tr
+              key={good}
               data-cy="Good"
               className={
                 classNames('',
@@ -70,15 +75,15 @@ export class App extends Component<{}, State> {
                       : 'AddButton'
                   }
                   type="button"
-                  className={
-                    classNames('button',
-                      { 'button is-info': selectedGood === good })
-                  }
-                  onClick={() => (
-                    selectedGood === good
-                      ? this.setState({ selectedGood: '' })
-                      : this.setState({ selectedGood: good })
+                  className={classNames(
+                    'button',
+                    { 'button is-info': selectedGood === good },
                   )}
+                  onClick={selectedGood === good
+                    ? this.handleClick
+                    : () => {
+                      this.selectGood(good);
+                    }}
                 >
                   {selectedGood === good ? '-' : '+'}
                 </button>
