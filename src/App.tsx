@@ -25,11 +25,11 @@ export class App extends Component {
     selectedGood: 'Jam',
   };
 
-  noGoodsSelected = () => {
+  handlerUnselectGood = () => {
     this.setState({ selectedGood: '' });
   };
 
-  goodIsSelected = (good: string) => {
+  handlerSelect = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
@@ -48,7 +48,7 @@ export class App extends Component {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.noGoodsSelected}
+                onClick={this.handlerUnselectGood}
               />
             </h1>
           )}
@@ -70,7 +70,7 @@ export class App extends Component {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={this.noGoodsSelected}
+                        onClick={this.handlerUnselectGood}
                       >
                         -
                       </button>
@@ -80,7 +80,7 @@ export class App extends Component {
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={() => this.goodIsSelected(good)}
+                        onClick={() => this.handlerSelect(good)}
                       >
                         +
                       </button>
