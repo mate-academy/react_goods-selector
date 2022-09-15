@@ -31,7 +31,7 @@ export class App extends React.Component<{}, State> {
 
   selectGoods = (good: string) => (
     this.state.selectedGood === good
-      ? this.setState({ selectedGood: '' })
+      ? this.clearGoods()
       : this.setState({ selectedGood: good })
   );
 
@@ -40,7 +40,7 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        {selectedGood.length === 0
+        {!selectedGood.length
           ? <h1 className="title">No goods selected</h1>
           : (
             <h1 className="title is-flex is-align-items-center">
