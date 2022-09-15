@@ -26,7 +26,7 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  isSelected = (good: string) => {
+  selectGood = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
@@ -86,7 +86,7 @@ export class App extends React.Component<{}, State> {
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={() => this.isSelected(good)}
+                        onClick={() => this.selectGood(good)}
                       >
                         +
                       </button>
