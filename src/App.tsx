@@ -76,9 +76,8 @@ export class App extends Component<{}, State> {
                   data-cy="Good"
                   key={good}
                   className={classNames(
-                    '',
                     {
-                      'has-background-success-light': isSelected === true,
+                      'has-background-success-light': isSelected,
                     },
                   )}
                 >
