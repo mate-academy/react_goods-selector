@@ -25,10 +25,14 @@ export class App extends React.Component <{}, State> {
     selectedGood: 'Jam',
   };
 
-  handler = (good: string) => (
+  handlerSelect = (good: string) => (
     this.state.selectedGood === good
       ? this.setState({ selectedGood: '' })
       : this.setState({ selectedGood: good })
+  );
+
+  handlerClear = () => (
+    this.setState({ selectedGood: '' })
   );
 
   render() {
@@ -46,7 +50,7 @@ export class App extends React.Component <{}, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={() => this.setState({ selectedGood: '' })}
+                  onClick={this.handlerClear}
                 >
                   <></>
                 </button>
@@ -82,7 +86,7 @@ export class App extends React.Component <{}, State> {
                           },
                         )}
                         onClick={() => {
-                          this.handler(good);
+                          this.handlerSelect(good);
                         }}
                       >
                         {selectedGood === good
