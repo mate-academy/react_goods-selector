@@ -25,9 +25,11 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  selectedElement = (element: string) => {
-    this.setState({ selectedGood: element });
-  };
+  changeElement = (element: string) => (
+    element === this.state.selectedGood
+      ? this.setState({ selectedGood: '' })
+      : this.setState({ selectedGood: element })
+  );
 
   removedElement = () => {
     this.setState({ selectedGood: '' });
@@ -56,9 +58,7 @@ export class App extends React.Component<{}, State> {
                 type="button"
                 aria-label="ClearButton"
                 className="delete ml-3"
-                onClick={() => this.setState(
-                  this.removedElement,
-                )}
+                onClick={this.removedElement}
               />
             </h1>
           )}
@@ -67,10 +67,12 @@ export class App extends React.Component<{}, State> {
           <tbody>
             {goods.map(element => (
               <tr
+                key={element}
                 data-cy="Good"
-                className={selectedGood === element
-                  ? 'has-background-success-light'
-                  : ''}
+                className={classNames(
+                  '',
+                  { 'has-background-success-light': selectedGood === element },
+                )}
               >
                 <td>
                   <button
@@ -78,14 +80,11 @@ export class App extends React.Component<{}, State> {
                       ? 'RemoveButton'
                       : 'AddButton'}
                     type="button"
-                    className={
-                      classNames('button',
-                        { 'is-info': selectedGood === element })
-                    }
-                    onClick={() => (
-                      selectedGood === element
-                        ? this.removedElement()
-                        : this.selectedElement(element)
+                    className={classNames(
+                      'button',
+                      { 'is-info': selectedGood === element },
+                    )}
+                    onClick={() => (this.changeElement(element)
                     )}
                   >
                     {selectedGood === element
