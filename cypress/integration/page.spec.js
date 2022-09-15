@@ -1,4 +1,4 @@
-const page = {
+  const page = {
   title: () => cy.get('h1.title'),
   clearButton: () => cy.byDataCy('ClearButton'),
   goods: () => cy.byDataCy('Good'),

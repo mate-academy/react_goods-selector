@@ -20,20 +20,18 @@ export type Props = {};
 
 export type State = {
   selectedGood: string;
-  // className: string,
 };
 
 export class App extends Component<Props, State> {
   state: Readonly<State> = {
     selectedGood: 'Jam',
-    // className: 'has-background-success-light',
   };
 
-  selectedGood = (item: string) => {
+  goodSelected = (item: string) => {
     this.setState({ selectedGood: item });
   };
 
-  clearGood = () => {
+  goodClear = () => {
     this.setState({ selectedGood: '' });
   };
 
@@ -54,7 +52,7 @@ export class App extends Component<Props, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={this.clearGood}
+                  onClick={this.goodClear}
                 />
               </h1>
             )
@@ -82,7 +80,7 @@ export class App extends Component<Props, State> {
                             data-cy="RemoveButton"
                             type="button"
                             className="button is-info"
-                            onClick={this.clearGood}
+                            onClick={this.goodClear}
                           >
                             -
                           </button>
@@ -95,7 +93,7 @@ export class App extends Component<Props, State> {
                             type="button"
                             className="button"
                             onClick={() => {
-                              this.selectedGood(good);
+                              this.goodSelected(good);
                             }}
                           >
                             +
