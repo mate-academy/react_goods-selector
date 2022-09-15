@@ -24,6 +24,14 @@ export class App extends Component {
     selectedGood: 'Jam is',
   };
 
+  handleClearButton = () => {
+    this.setState({ selectedGood: 'No goods' });
+  };
+
+  handleAddGood = (add: string) => {
+    this.setState({ selectedGood: `${add} is` });
+  };
+
   render() {
     return (
       <main className="section container">
@@ -36,9 +44,7 @@ export class App extends Component {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => {
-                this.setState({ selectedGood: 'No goods' });
-              }}
+              onClick={this.handleClearButton}
             />
           )}
         </h1>
@@ -48,15 +54,17 @@ export class App extends Component {
             {goods.map(good => (
               this.state.selectedGood === `${good} is`
                 ? (
-                  <tr data-cy="Good" className="has-background-success-light">
+                  <tr
+                    data-cy="Good"
+                    className="has-background-success-light"
+                    key={good}
+                  >
                     <td>
                       <button
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={() => {
-                          this.setState({ selectedGood: 'No goods' });
-                        }}
+                        onClick={this.handleClearButton}
                       >
                         -
                       </button>
@@ -68,15 +76,13 @@ export class App extends Component {
                   </tr>
                 )
                 : (
-                  <tr data-cy="Good">
+                  <tr data-cy="Good" key={good}>
                     <td>
                       <button
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={() => {
-                          this.setState({ selectedGood: `${good} is` });
-                        }}
+                        onClick={() => this.handleAddGood(good)}
                       >
                         +
                       </button>
