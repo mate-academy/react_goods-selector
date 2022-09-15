@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -24,6 +25,14 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  selectedElement = (element: string) => {
+    this.setState({ selectedGood: element });
+  };
+
+  removedElement = () => {
+    this.setState({ selectedGood: '' });
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -39,16 +48,16 @@ export class App extends React.Component<{}, State> {
 
           : (
             <h1 className="title is-flex is-align-items-center">
-              {selectedGood
-                ? `${selectedGood} is selected`
-                : ''}
+
+              {`${selectedGood} is selected`}
+
               <button
                 data-cy="ClearButton"
                 type="button"
                 aria-label="ClearButton"
                 className="delete ml-3"
                 onClick={() => this.setState(
-                  { selectedGood: '' },
+                  this.removedElement,
                 )}
               />
             </h1>
@@ -69,13 +78,14 @@ export class App extends React.Component<{}, State> {
                       ? 'RemoveButton'
                       : 'AddButton'}
                     type="button"
-                    className={selectedGood === element
-                      ? 'button is-info'
-                      : 'button'}
+                    className={
+                      classNames('button',
+                        { 'is-info': selectedGood === element })
+                    }
                     onClick={() => (
                       selectedGood === element
-                        ? this.setState({ selectedGood: '' })
-                        : this.setState({ selectedGood: element })
+                        ? this.removedElement()
+                        : this.selectedElement(element)
                     )}
                   >
                     {selectedGood === element
