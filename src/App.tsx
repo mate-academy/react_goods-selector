@@ -25,11 +25,11 @@ export class App extends Component {
     selectedGood: 'Jam',
   };
 
-  noSelectedGood = () => {
+  noGoodsSelected = () => {
     this.setState({ selectedGood: '' });
   };
 
-  isSelectedGood = (good: string) => {
+  goodIsSelected = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
@@ -48,7 +48,7 @@ export class App extends Component {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.noSelectedGood}
+                onClick={this.noGoodsSelected}
               />
             </h1>
           )}
@@ -59,9 +59,9 @@ export class App extends Component {
               <tr
                 data-cy="Good"
                 key={good}
-                className={classNames(selectedGood !== good
-                  ? ''
-                  : 'has-background-success-light')}
+                className={classNames({
+                  'has-background-success-light': selectedGood === good,
+                })}
               >
                 <td>
                   {selectedGood === good
@@ -70,7 +70,7 @@ export class App extends Component {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={this.noSelectedGood}
+                        onClick={this.noGoodsSelected}
                       >
                         -
                       </button>
@@ -80,7 +80,7 @@ export class App extends Component {
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={() => this.isSelectedGood(good)}
+                        onClick={() => this.goodIsSelected(good)}
                       >
                         +
                       </button>
