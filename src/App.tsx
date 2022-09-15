@@ -56,21 +56,6 @@ export class App extends React.Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {/* <tr data-cy="Good">
-              <td>
-                <button
-                  data-cy="AddButton"
-                  type="button"
-                  className="button"
-                >
-                  +
-                </button>
-              </td>
-
-              <td data-cy="GoodTitle" className="is-vcentered">
-                Dumplings
-              </td>
-            </tr> */}
             {goods.map((good) => (
               <tr
                 data-cy="Good"
