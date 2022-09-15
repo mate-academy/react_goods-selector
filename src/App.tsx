@@ -28,6 +28,20 @@ export class App extends Component<Props, State> {
     selectedGood: 'Jam',
   };
 
+  /*
+  function handleClick() {
+    selectedGoods === goods
+        ? this.state.selectedGoods({ selectedGood: '' })
+        : this.state.selectedGoods({ selectedGood: goods});
+  };
+  */
+
+  handleClick = (good: string) => (
+    this.state.selectedGood === good
+      ? this.setState({ selectedGood: '' })
+      : this.setState({ selectedGood: good })
+  );
+
   render() {
     const { selectedGood } = this.state;
     const { goodsList } = this.props;
@@ -75,11 +89,7 @@ export class App extends Component<Props, State> {
                         ? 'button is-info'
                         : 'button'
                     }
-                    onClick={() => (
-                      selectedGood === good
-                        ? this.setState({ selectedGood: '' })
-                        : this.setState({ selectedGood: good })
-                    )}
+                    onClick={() => this.handleClick(good)}
                   >
                     {selectedGood === good ? '-' : '+'}
                   </button>
