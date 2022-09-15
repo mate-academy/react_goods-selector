@@ -1,4 +1,4 @@
-import { Component, ReactNode } from 'react';
+import React, { Component, ReactNode } from 'react';
 import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
@@ -25,6 +25,16 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  clearButton = () => {
+    this.setState({ selectedGood: '' });
+  };
+
+  addButton = (event: React.MouseEvent<HTMLButtonElement>) => (
+    this.state.selectedGood === event.currentTarget.id
+      ? this.setState({ selectedGood: '' })
+      : this.setState({ selectedGood: event.currentTarget.id })
+  );
+
   render(): ReactNode {
     const { selectedGood } = this.state;
 
@@ -40,9 +50,7 @@ export class App extends Component<{}, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={() => {
-                    this.setState({ selectedGood: '' });
-                  }}
+                  onClick={this.clearButton}
                 />
               </h1>
             )
@@ -66,9 +74,7 @@ export class App extends Component<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={() => {
-                          this.setState({ selectedGood: '' });
-                        }}
+                        onClick={this.clearButton}
                       >
                         -
                       </button>
@@ -78,9 +84,8 @@ export class App extends Component<{}, State> {
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={() => {
-                          this.setState({ selectedGood: good });
-                        }}
+                        onClick={this.addButton}
+                        id={good}
                       >
                         +
                       </button>
