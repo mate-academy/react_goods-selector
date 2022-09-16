@@ -18,13 +18,11 @@ export const goods = [
 
 interface State {
   selectedGood: string;
-  clearBtn: boolean;
 }
 
 export class App extends Component<{}, State> {
   state = {
     selectedGood: 'Jam',
-    clearBtn: true,
   };
 
   handleClick = (prop: string) => {
@@ -32,20 +30,24 @@ export class App extends Component<{}, State> {
     this.state.selectedGood === prop
       ? this.setState({
         selectedGood: '',
-        clearBtn: false,
       })
       : this.setState({
         selectedGood: prop,
-        clearBtn: true,
       });
   };
 
+  clearSelectedGood = () => {
+    this.setState({
+      selectedGood: '',
+    });
+  };
+
   render() {
-    const { selectedGood, clearBtn } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <main className="section container">
-        {clearBtn
+        {selectedGood !== ''
           ? (
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
@@ -54,12 +56,7 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  this.setState({
-                    clearBtn: false,
-                    selectedGood: '',
-                  });
-                }}
+                onClick={() => this.clearSelectedGood()}
               />
             </h1>
           )
@@ -71,15 +68,19 @@ export class App extends Component<{}, State> {
               <tr
                 key={good}
                 data-cy="Good"
-                className={classNames(
-                  { 'has-background-success-light': good === selectedGood },
-                )}
+                className={classNames({
+                  'has-background-success-light': good === selectedGood,
+                })}
               >
                 <td>
                   <button
                     data-cy="AddButton"
                     type="button"
-                    className="button"
+                    // className="button is-info"
+                    className={classNames(
+                      'button',
+                      { 'is-info': good === selectedGood },
+                    )}
                     onClick={() => this.handleClick(good)}
                   >
                     {good === selectedGood
