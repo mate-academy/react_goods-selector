@@ -19,26 +19,26 @@ type State = {
   selectedGood: string,
 };
 
-export class App extends Component {
+export class App extends Component<{}, State> {
   state: Readonly<State> = {
-    selectedGood: 'Jam is',
+    selectedGood: 'Jam',
   };
 
   handleClearButton = () => {
-    this.setState({ selectedGood: 'No goods' });
+    this.setState({ selectedGood: '' });
   };
 
   handleAddGood = (add: string) => {
-    this.setState({ selectedGood: `${add} is` });
+    this.setState({ selectedGood: add });
   };
 
   render() {
     return (
       <main className="section container">
         <h1 className="title is-flex is-align-items-center">
-          {`${this.state.selectedGood} selected`}
+          {this.state.selectedGood === '' ? 'No goods selected' : `${this.state.selectedGood} is selected`}
 
-          {this.state.selectedGood !== 'No goods' && (
+          {this.state.selectedGood !== '' && (
             /* eslint-disable-next-line jsx-a11y/control-has-associated-label */
             <button
               data-cy="ClearButton"
@@ -52,7 +52,7 @@ export class App extends Component {
         <table className="table">
           <tbody>
             {goods.map(good => (
-              this.state.selectedGood === `${good} is`
+              this.state.selectedGood === good
                 ? (
                   <tr
                     data-cy="Good"
