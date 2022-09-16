@@ -25,11 +25,11 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  clearButton = () => {
+  handleClear = () => {
     this.setState({ selectedGood: '' });
   };
 
-  addButton = (event: React.MouseEvent<HTMLButtonElement>) => (
+  handleClick = (event: React.MouseEvent<HTMLButtonElement>) => (
     this.state.selectedGood === event.currentTarget.id
       ? this.setState({ selectedGood: '' })
       : this.setState({ selectedGood: event.currentTarget.id })
@@ -50,7 +50,7 @@ export class App extends Component<{}, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={this.clearButton}
+                  onClick={this.handleClear}
                 />
               </h1>
             )
@@ -74,7 +74,7 @@ export class App extends Component<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={this.clearButton}
+                        onClick={this.handleClear}
                       >
                         -
                       </button>
@@ -84,7 +84,7 @@ export class App extends Component<{}, State> {
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={this.addButton}
+                        onClick={this.handleClick}
                         id={good}
                       >
                         +
