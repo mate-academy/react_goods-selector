@@ -25,18 +25,18 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  removeOrSelectGood = (selectedGood: string, good: string) => (
+    selectedGood === good
+      ? this.setState({ selectedGood: '' })
+      : this.setState({ selectedGood: good })
+  );
+
   render() {
     const { selectedGood } = this.state;
 
     const handleClick = () => {
       this.setState({ selectedGood: '' });
     };
-
-    const removeOrSelectGood = (good: string) => (
-      selectedGood === good
-        ? this.setState({ selectedGood: '' })
-        : this.setState({ selectedGood: good })
-    );
 
     return (
       <main className="section container">
@@ -62,7 +62,7 @@ export class App extends Component<{}, State> {
 
         <table className="table">
           {goods.map(good => {
-            const RightTarget = selectedGood === good;
+            const rightTarget = selectedGood === good;
 
             return (
 
@@ -72,13 +72,13 @@ export class App extends Component<{}, State> {
                   data-cy="Good"
                   className={classNames(
                     '',
-                    { 'has-background-success-light': RightTarget },
+                    { 'has-background-success-light': rightTarget },
                   )}
                 >
                   <td>
                     <button
                       data-cy={
-                        RightTarget
+                        rightTarget
                           ? 'RemoveButton'
                           : 'AddButton'
                       }
@@ -86,15 +86,15 @@ export class App extends Component<{}, State> {
                       className={
                         classNames(
                           'button',
-                          { 'is-info': RightTarget },
+                          { 'is-info': rightTarget },
                         )
                       }
                       onClick={() => {
-                        removeOrSelectGood(good);
+                        this.removeOrSelectGood(selectedGood, good);
                       }}
                     >
                       {
-                        RightTarget
+                        rightTarget
                           ? '-'
                           : '+'
                       }
