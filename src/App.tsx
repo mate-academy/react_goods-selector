@@ -31,12 +31,12 @@ export class App extends Component<{}, State> {
       : this.setState({ selectedGood: good })
   );
 
+  handleClick = () => {
+    this.setState({ selectedGood: '' });
+  };
+
   render() {
     const { selectedGood } = this.state;
-
-    const handleClick = () => {
-      this.setState({ selectedGood: '' });
-    };
 
     return (
       <main className="section container">
@@ -52,7 +52,7 @@ export class App extends Component<{}, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={handleClick}
+                  onClick={this.handleClick}
                 />
               </h1>
             )
