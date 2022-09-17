@@ -47,7 +47,7 @@ export class App extends Component<{}, State> {
 
     return (
       <main className="section container">
-        {selectedGood !== ''
+        {selectedGood
           ? (
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
@@ -56,7 +56,7 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => this.clearSelectedGood()}
+                onClick={this.clearSelectedGood}
               />
             </h1>
           )
@@ -76,7 +76,6 @@ export class App extends Component<{}, State> {
                   <button
                     data-cy="AddButton"
                     type="button"
-                    // className="button is-info"
                     className={classNames(
                       'button',
                       { 'is-info': good === selectedGood },
