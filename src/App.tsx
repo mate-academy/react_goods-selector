@@ -20,6 +20,8 @@ type State = {
   selectedGood: string;
 };
 
+//  comment
+
 export class App extends Component<{}, State> {
   state :Readonly<State> = {
     selectedGood: 'Jam',
