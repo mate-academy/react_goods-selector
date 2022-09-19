@@ -89,9 +89,9 @@ export class App extends Component<{}, State> {
                           { 'is-info': rightTarget },
                         )
                       }
-                      onClick={() => {
-                        this.removeOrSelectGood(selectedGood, good);
-                      }}
+                      onClick={
+                        this.removeOrSelectGood.bind(this, selectedGood, good)
+                      }
                     >
                       {
                         rightTarget
