@@ -25,6 +25,13 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  isSelectedGood(selectedGood: string, good: string) {
+    return (selectedGood === good
+      ? this.setState({ selectedGood: '' })
+      : this.setState({ selectedGood: good })
+    );
+  }
+
   render() {
     const { selectedGood } = this.state;
 
@@ -41,6 +48,9 @@ export class App extends React.Component<{}, State> {
             type="button"
             className="delete ml-3"
             onClick={() => this.setState({ selectedGood: '' })}
+            style={{
+              display: selectedGood ? 'block' : 'none',
+            }}
           />
         </h1>
 
@@ -65,10 +75,7 @@ export class App extends React.Component<{}, State> {
                       { 'is-info': selectedGood === good },
                     )}
                     onClick={() => {
-                      // eslint-disable-next-line
-                      (selectedGood === good)
-                        ? this.setState({ selectedGood: '' })
-                        : this.setState({ selectedGood: good });
+                      this.isSelectedGood(selectedGood, good);
                     }}
                   >
                     {selectedGood === good ? '-' : '+'}
