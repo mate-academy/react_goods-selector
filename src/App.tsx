@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -48,9 +49,7 @@ export class App extends React.Component<{}, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={() => {
-                    this.clickToUnselectGood();
-                  }}
+                  onClick={this.clickToUnselectGood}
                 />
               </h1>
             )
@@ -64,9 +63,9 @@ export class App extends React.Component<{}, State> {
                 <tr
                   key={good}
                   data-cy="Good"
-                  className={selectedGood === good
-                    ? 'has-background-success-light'
-                    : ''}
+                  className={classNames({
+                    'has-background-success-light': selectedGood === good,
+                  })}
                 >
                   <td>
                     {selectedGood === good
@@ -75,9 +74,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
-                          onClick={() => {
-                            this.clickToUnselectGood();
-                          }}
+                          onClick={this.clickToUnselectGood}
                         >
                           -
                         </button>
