@@ -1,6 +1,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import 'bulma/css/bulma.css';
+import classNames from 'classnames';
 import './App.scss';
 
 export const goods = [
@@ -24,6 +25,14 @@ export class App extends React.Component<{}, {}> {
   render() {
     const { selectedGood } = this.state;
 
+    const setRightState = (good: string) => {
+      this.setState({
+        selectedGood: selectedGood === good
+          ? ''
+          : good,
+      });
+    };
+
     return (
       <main className="section container">
         <h1 className="title is-flex is-align-items-center">
@@ -33,18 +42,17 @@ export class App extends React.Component<{}, {}> {
 
           {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
           {selectedGood
-            ? (
-              // eslint-disable-next-line jsx-a11y/control-has-associated-label
-              <button
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-                onClick={() => {
-                  this.setState({ selectedGood: '' });
-                }}
-              />
-            )
-            : ''}
+          && (
+            // eslint-disable-next-line jsx-a11y/control-has-associated-label
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={() => {
+                this.setState({ selectedGood: '' });
+              }}
+            />
+          )}
 
         </h1>
 
@@ -54,9 +62,9 @@ export class App extends React.Component<{}, {}> {
               <tr
                 key={good}
                 data-cy="Good"
-                className={selectedGood === good
-                  ? 'has-background-success-light'
-                  : ''}
+                className={classNames(
+                  { 'has-background-success-light': selectedGood === good },
+                )}
               >
                 <td>
                   <button
@@ -67,13 +75,7 @@ export class App extends React.Component<{}, {}> {
                       ? 'RemoveButton'
                       : 'AddButton'}
                     type="button"
-                    onClick={() => {
-                      this.setState({
-                        selectedGood: selectedGood === good
-                          ? ''
-                          : good,
-                      });
-                    }}
+                    onClick={() => setRightState(good)}
                   >
                     {selectedGood === good
                       ? '-'
