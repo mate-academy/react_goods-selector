@@ -1,9 +1,3 @@
-# React Goods selector
-- Replace `<your_account>` with your Github username in the [DEMO LINK](https://DariaVeretyak.github.io/react_goods-selector/)
-- Follow the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline)
-- Use [React TypeScript cheat sheet](https://mate-academy.github.io/fe-program/js/extra/react-typescript)
-
-## Task
 1. You are given an array of goods
 2. Display them as a list inside the `App` (**DON'T** create additional components)
 3. Add `h1` initially saying `No goods selected`
@@ -26,9 +20,3 @@
     - `No goods selected`
     - `Jam is selected`
     - `Carrot, Jam and Eggs are selected`
-4. Add some styles, you are frontend developer :) (use [Bulma](https://bulma.io) or another library)
- - [Center elements](https://bulma.io/documentation/layout/level/)
- - [Customize buttons](https://bulma.io/documentation/elements/button/)
- - [Customize background](https://bulma.io/documentation/overview/colors/)
- - [Add whatever you want](https://bulma.io/documentation/)
-
