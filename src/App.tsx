@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import 'bulma/css/bulma.css';
@@ -22,16 +23,16 @@ export class App extends React.Component<{}, {}> {
     selectedGood: 'Jam',
   };
 
+  setGood = (good: string) => {
+    this.setState(state => ({
+      selectedGood: state.selectedGood === good
+        ? ''
+        : good,
+    }));
+  };
+
   render() {
     const { selectedGood } = this.state;
-
-    const setRightState = (good: string) => {
-      this.setState({
-        selectedGood: selectedGood === good
-          ? ''
-          : good,
-      });
-    };
 
     return (
       <main className="section container">
@@ -39,11 +40,8 @@ export class App extends React.Component<{}, {}> {
           {selectedGood
             ? `${selectedGood} is selected`
             : 'No goods selected'}
-
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
           {selectedGood
           && (
-            // eslint-disable-next-line jsx-a11y/control-has-associated-label
             <button
               data-cy="ClearButton"
               type="button"
@@ -53,7 +51,6 @@ export class App extends React.Component<{}, {}> {
               }}
             />
           )}
-
         </h1>
 
         <table className="table">
@@ -68,14 +65,13 @@ export class App extends React.Component<{}, {}> {
               >
                 <td>
                   <button
-                    className={selectedGood === good
-                      ? 'button is-info'
-                      : 'button'}
+                    className={classNames('button',
+                      { 'is-info': selectedGood === good })}
                     data-cy={selectedGood === good
                       ? 'RemoveButton'
                       : 'AddButton'}
                     type="button"
-                    onClick={() => setRightState(good)}
+                    onClick={() => this.setGood(good)}
                   >
                     {selectedGood === good
                       ? '-'
