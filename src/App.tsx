@@ -41,7 +41,7 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        {!this.state.selectedGood
+        {!selectedGood
           ? <h1 className="title">No goods selected</h1>
           : (
             <h1 className="title is-flex is-align-items-center">
@@ -70,29 +70,17 @@ export class App extends React.Component<{}, State> {
                   : ''}
               >
                 <td>
-                  {good !== selectedGood ? (
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      className="button"
-                      onClick={() => {
-                        this.selectGood(good);
-                      }}
-                    >
-                      +
-                    </button>
-                  ) : (
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                      onClick={() => {
-                        this.selectGood(good);
-                      }}
-                    >
-                      -
-                    </button>
-                  )}
+                  <button
+                    data-cy={good !== selectedGood
+                      ? 'AddButton' : 'RemoveButton'}
+                    type="button"
+                    className={`button ${good === selectedGood && 'is-info'}`}
+                    onClick={() => {
+                      this.selectGood(good);
+                    }}
+                  >
+                    {good !== selectedGood ? '+' : '-'}
+                  </button>
                 </td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
