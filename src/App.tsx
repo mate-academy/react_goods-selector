@@ -25,7 +25,7 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  goodsClear = () => this.setState({ selectedGood: '' });
+  clearGoods = () => this.setState({ selectedGood: '' });
 
   goodAdd = (good: string) => this.setState({ selectedGood: good });
 
@@ -46,7 +46,7 @@ export class App extends React.Component<{}, State> {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={this.goodsClear}
+              onClick={this.clearGoods}
             />
           )}
         </h1>
@@ -58,7 +58,6 @@ export class App extends React.Component<{}, State> {
                 key={good}
                 data-cy="Good"
                 className={classNames(
-                  '',
                   {
                     'has-background-success-light': selectedGood === good,
                   },
@@ -71,7 +70,7 @@ export class App extends React.Component<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={this.goodsClear}
+                        onClick={this.clearGoods}
                       >
                         -
                       </button>
