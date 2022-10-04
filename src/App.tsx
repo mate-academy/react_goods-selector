@@ -24,15 +24,11 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  selectGood = (good: string) => {
-    const currentGood = this.state.selectedGood;
-
-    this.setState({
-      selectedGood: (good !== currentGood) ? good : '',
-    });
+  changeState = (good: string): void => {
+    this.setState({ selectedGood: good });
   };
 
-  deleteGood = () => {
+  clearState = () => {
     this.setState({ selectedGood: '' });
   };
 
@@ -53,7 +49,7 @@ export class App extends React.Component<{}, State> {
                 type="button"
                 className="delete ml-3"
                 onClick={() => {
-                  this.deleteGood();
+                  this.clearState();
                 }}
               />
             </h1>
@@ -76,7 +72,11 @@ export class App extends React.Component<{}, State> {
                     type="button"
                     className={`button ${good === selectedGood && 'is-info'}`}
                     onClick={() => {
-                      this.selectGood(good);
+                      if (good !== selectedGood) {
+                        this.changeState(good);
+                      } else {
+                        this.clearState();
+                      }
                     }}
                   >
                     {good !== selectedGood ? '+' : '-'}
