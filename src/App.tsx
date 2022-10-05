@@ -16,25 +16,18 @@ export const goods = [
 ];
 
 export const App: React.FC = () => {
-  const [state, setState] = useState<string | null>('Jam');
+  const [selectedGood, setSelectedGood] = useState<string | null>('Jam');
 
   const resetState = () => {
-    setState(null);
+    setSelectedGood(null);
   };
 
   return (
     <main className="section container">
-      {!state
-        && (
-          <h1 className="title">
-            No goods selected
-          </h1>
-        )}
-
-      {state
-        && (
+      {selectedGood
+        ? (
           <h1 className="title is-flex is-align-items-center">
-            {`${state} is selected`}
+            {`${selectedGood} is selected`}
 
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <button
@@ -44,6 +37,10 @@ export const App: React.FC = () => {
               onClick={resetState}
             />
           </h1>
+        ) : (
+          <h1 className="title">
+            No goods selected
+          </h1>
         )}
 
       <table className="table">
@@ -52,11 +49,11 @@ export const App: React.FC = () => {
             <tr
               data-cy="Good"
               key={good}
-              className={good === state
+              className={good === selectedGood
                 ? 'has-background-success-light'
                 : ''}
             >
-              {state !== good
+              {selectedGood !== good
                 ? (
                   <td>
                     <button
@@ -64,7 +61,7 @@ export const App: React.FC = () => {
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={() => setState(good)}
+                      onClick={() => setSelectedGood(good)}
                     >
                       +
                     </button>
