@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
@@ -20,13 +19,17 @@ export const App: React.FC = () => {
   const defaultGood = 'Jam';
   const defaultSelection = goods.indexOf(defaultGood);
   const [selectedGood, setSelectedGood] = useState(defaultGood);
-  const [selectedTr, setSelectedTr] = useState<string | null>(defaultSelection.toString());
+  const [selectedTr, setSelectedTr] = useState<string | null>(defaultSelection
+    .toString());
   const AddSelectHandler = (e: React.MouseEvent, good: string) => {
     const currTarget = e.currentTarget.closest('tr');
+
     if (currTarget) {
       const selectedItem = currTarget.dataset.selected || null;
+
       setSelectedTr(selectedItem);
     }
+
     setSelectedGood(good);
   };
 
@@ -41,11 +44,11 @@ export const App: React.FC = () => {
         {selectedGood ? (
           `${selectedGood} is selected`
         ) : (
-          `No goods selected`
+          'No goods selected'
         )}
 
-        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
         {selectedGood && (
+          // eslint-disable-next-line jsx-a11y/control-has-associated-label
           <button
             data-cy="ClearButton"
             type="button"
@@ -59,9 +62,11 @@ export const App: React.FC = () => {
         <tbody>
           {goods.map((good, index) => (
             <tr
-            data-cy="Good"
-            key={good} data-selected={index}
-              className={index.toString() === selectedTr ? 'has-background-success-light' : ''}
+              data-cy="Good"
+              key={good}
+              data-selected={index}
+              className={index.toString() === selectedTr
+                ? 'has-background-success-light' : ''}
             >
               {index.toString() === selectedTr ? (
                 <td>
@@ -81,12 +86,11 @@ export const App: React.FC = () => {
                     type="button"
                     className="button"
                     onClick={(e) => AddSelectHandler(e, good)}
-                      >
+                  >
                     +
                   </button>
-              </td>
+                </td>
               )}
-
 
               <td data-cy="GoodTitle" className="is-vcentered">
                 {good}
