@@ -19,22 +19,28 @@ export const App: React.FC = () => {
   const defaultGood = 'Jam';
   const defaultSelection = goods.indexOf(defaultGood);
   const [selectedGood, setSelectedGood] = useState(defaultGood);
-  const [selectedTr, setSelectedTr] = useState<string | null>(defaultSelection
-    .toString());
-  const AddSelectHandler = (e: React.MouseEvent, good: string) => {
-    const currTarget = e.currentTarget.closest('tr');
+  const [
+    selectedListItem,
+    setSelectedListItem,
+  ] = useState<string | null>(defaultSelection.toString());
+
+  const AddSelectHandler = (
+    event: React.MouseEvent,
+    good: string,
+  ) => {
+    const currTarget = event.currentTarget.closest('tr');
 
     if (currTarget) {
       const selectedItem = currTarget.dataset.selected || null;
 
-      setSelectedTr(selectedItem);
+      setSelectedListItem(selectedItem);
     }
 
     setSelectedGood(good);
   };
 
   const clearHandler = () => {
-    setSelectedTr(null);
+    setSelectedListItem(null);
     setSelectedGood('');
   };
 
@@ -65,10 +71,11 @@ export const App: React.FC = () => {
               data-cy="Good"
               key={good}
               data-selected={index}
-              className={index.toString() === selectedTr
+              className={index.toString() === selectedListItem
                 ? 'has-background-success-light' : ''}
             >
-              {index.toString() === selectedTr ? (
+              {index.toString() === selectedListItem
+              && (
                 <td>
                   <button
                     data-cy="RemoveButton"
@@ -79,7 +86,10 @@ export const App: React.FC = () => {
                     -
                   </button>
                 </td>
-              ) : (
+              )}
+
+              {index.toString() !== selectedListItem
+              && (
                 <td>
                   <button
                     data-cy="AddButton"
