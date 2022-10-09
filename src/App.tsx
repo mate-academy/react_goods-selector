@@ -1,7 +1,5 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { Component } from 'react';
-// import classNames from 'classnames';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -37,6 +35,7 @@ export class App extends Component<{}, State> {
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
 
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
                 type="button"
@@ -52,14 +51,17 @@ export class App extends Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(good => (
-              selectedGood === good
-                ? (
-                  <tr
-                    data-cy="Good"
-                    key={good}
-                    className="has-background-success-light"
-                  >
-                    <td>
+              <tr
+                data-cy="Good"
+                key={good}
+                className={classNames('',
+                  {
+                    'has-background-success-light': selectedGood === good,
+                  })}
+              >
+                <td>
+                  {selectedGood === good
+                    ? (
                       <button
                         data-cy="RemoveButton"
                         type="button"
@@ -72,20 +74,8 @@ export class App extends Component<{}, State> {
                       >
                         -
                       </button>
-                    </td>
-
-                    <td data-cy="GoodTitle" className="is-vcentered">
-                      {good}
-                    </td>
-                  </tr>
-                )
-                : (
-                  <tr
-                    data-cy="Good"
-                    key={good}
-                    className=""
-                  >
-                    <td>
+                    )
+                    : (
                       <button
                         data-cy="AddButton"
                         type="button"
@@ -98,13 +88,13 @@ export class App extends Component<{}, State> {
                       >
                         +
                       </button>
-                    </td>
+                    )}
+                </td>
 
-                    <td data-cy="GoodTitle" className="is-vcentered">
-                      {good}
-                    </td>
-                  </tr>
-                )
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
             ))}
 
           </tbody>
