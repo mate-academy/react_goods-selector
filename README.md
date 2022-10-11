@@ -3,6 +3,7 @@
 > [React + Typescript cheat sheet](https://mate-academy.github.io/fe-program/js/extra/react-typescript)
 
 You are given an array of goods. Render them in a table with the ability to select one or clear selection.
+Вам надається набір товарів. Відобразіть їх у вигляді таблиці з можливістю вибрати один або очистити виділення.
 
 > Here is [the working version](https://mate-academy.github.io/react_goods-selector)
 
@@ -17,6 +18,18 @@ You are given an array of goods. Render them in a table with the ability to sele
     - only 1 good can be selected at a time;
 1. Don't show `AddButton` when a good is selected.
 1. Show `RemoveButton` for the selected good to clear selection.
+
+1. Напишіть усе всередині `App` (**не** створюйте додаткові компоненти).
+1. Збережіть `selectedGood` у state (`Jam` є значенням за замовчуванням).
+1. Показати назву вибраного товару в `h1.title` (`Jam is selected`).
+1. Додайте клас `has-background-success-light` до `tr` вибраного товару.
+1. Показувати кнопку `ClearButton` у назві лише тоді, коли вибрано товар.
+1. `ClearButton` має очистити виділення, встановивши порожній рядок у `selectedGood`.
+1. Якщо товар не вибраний, у заголовку має бути `Товар не вибрано`.
+1. Кожен товар повинен мати кнопку `AddButton` для вибору товару.
+    - за один раз можна вибрати тільки 1 товар;
+1. Не показувати `AddButton`, коли вибрано товар.
+1. Показати `RemoveButton` для вибраного товару, щоб очистити вибір.
 
 ## Instructions
 

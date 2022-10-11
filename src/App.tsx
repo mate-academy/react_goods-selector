@@ -1,85 +1,82 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
+import goodsFromServer from './goods';
 
-export const goods = [
-  'Dumplings',
-  'Carrot',
-  'Eggs',
-  'Ice cream',
-  'Apple',
-  'Bread',
-  'Fish',
-  'Honey',
-  'Jam',
-  'Garlic',
-];
+type State = {
+  selectedGood: string,
+};
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+export class App extends React.Component<{}, State> {
+  state: Readonly<State> = {
+    selectedGood: 'Jam',
+  };
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+  render() {
+    const { selectedGood } = this.state;
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+    return (
+      <main className="App">
+        <header className="App__header">
+          <h1 className="App__title">
+            {selectedGood
+              ? `${selectedGood} is selected`
+              : 'No goods selected'}
+          </h1>
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
+          {this.state.selectedGood.length > 0 && (
             <button
-              data-cy="AddButton"
               type="button"
-              className="button"
+              className="App__clear"
+              onClick={() => {
+                this.setState({ selectedGood: '' });
+              }}
             >
-              +
+              Clear
             </button>
-          </td>
+          )}
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+        </header>
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
+        <ul>
+          {goodsFromServer.map(good => (
+            <li
+              className={classNames(
+                'Good',
+                { 'Good--active': good === selectedGood },
+              )}
+              key={good}
             >
-              -
-            </button>
-          </td>
+              {good}
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+              {good === selectedGood && (
+                <button
+                  type="button"
+                  className="Good__remove"
+                  onClick={() => {
+                    this.setState({ selectedGood: '' });
+                  }}
+                >
+                  Remove
+                </button>
+              )}
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+              {good !== selectedGood && (
+                <button
+                  type="button"
+                  className="Good__select"
+                  onClick={() => {
+                    this.setState({ selectedGood: good });
+                  }}
+                >
+                  Select
+                </button>
+              )}
+            </li>
+          ))}
+        </ul>
+      </main>
+    );
+  }
+}

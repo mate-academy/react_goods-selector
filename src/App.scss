@@ -1,3 +1,29 @@
-iframe {
-  display: none;
+.App {
+  margin: 0 auto;
+  padding: 20px;
+
+  width: 500px;
+  border: 1px solid #000;
+
+  &__header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+.Good {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  width: 200px;
+
+  &--active {
+    font-weight: bold;
+    background-color: darkorange;
+    border: 1px solid transparent;
+    line-height: 24px;
+  }
 }
