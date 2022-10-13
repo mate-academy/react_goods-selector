@@ -25,8 +25,25 @@ export class App extends React.Component<{}, State> {
     selectGood: 'Jam',
   };
 
+  addGood = (good: string) => {
+    this.setState({ selectGood: good });
+  };
+
+  removeGood = () => {
+    this.setState({ selectGood: '' });
+  };
+
+  classGood = (selectGood: string, good: string) => (
+    selectGood === good && 'has-background-success-light'
+  );
+
   render() {
     const { selectGood } = this.state;
+    const {
+      addGood,
+      removeGood,
+      classGood,
+    } = this;
 
     return (
       <main className="section container">
@@ -41,7 +58,7 @@ export class App extends React.Component<{}, State> {
                 type="button"
                 className="delete ml-3"
                 onClick={() => {
-                  this.setState({ selectGood: '' });
+                  this.setState(removeGood);
                 }}
               />
             </h1>
@@ -52,10 +69,9 @@ export class App extends React.Component<{}, State> {
           <tbody>
             {goods.map(good => (
               <tr
+                key={good}
                 data-cy="Good"
-                className={cn(
-                  selectGood === good && 'has-background-success-light',
-                )}
+                className={cn(classGood(selectGood, good))}
               >
                 <td>
                   {selectGood === good
@@ -64,9 +80,7 @@ export class App extends React.Component<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={() => {
-                          this.setState({ selectGood: '' });
-                        }}
+                        onClick={removeGood}
                       >
                         -
                       </button>
@@ -76,9 +90,7 @@ export class App extends React.Component<{}, State> {
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={() => {
-                          this.setState({ selectGood: good });
-                        }}
+                        onClick={() => addGood(good)}
                       >
                         +
                       </button>
