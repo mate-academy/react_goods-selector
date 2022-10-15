@@ -25,6 +25,22 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  clearGoods = (): void => {
+    this.setState({ selectedGood: '' });
+  };
+
+  toggleGood = (good: string): void => {
+    return (this.state.selectedGood === good)
+      ? this.clearGoods()
+      : this.setState({ selectedGood: good });
+  };
+
+  chooseOption = (good: string, optionTrue: string, optionFalse: string) => {
+    return (this.state.selectedGood === good)
+      ? optionTrue
+      : optionFalse;
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -36,14 +52,12 @@ export class App extends Component<{}, State> {
               {selectedGood}
               {' is selected'}
 
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
+                aria-label="clearList"
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  this.setState({ selectedGood: '' });
-                }}
+                onClick={this.clearGoods}
               />
             </h1>
           )
@@ -53,6 +67,7 @@ export class App extends Component<{}, State> {
           <tbody>
             {goods.map(good => (
               <tr
+                key={good}
                 data-cy="Good"
                 className={classNames({
                   'has-background-success-light': selectedGood === good,
@@ -60,9 +75,9 @@ export class App extends Component<{}, State> {
               >
                 <td>
                   <button
-                    data-cy={selectedGood === good
-                      ? 'RemoveButton'
-                      : 'AddButton'}
+                    data-cy={
+                      this.chooseOption(good, 'RemoveButton', 'AddButton')
+                    }
                     type="button"
                     className={classNames(
                       'button',
@@ -70,11 +85,9 @@ export class App extends Component<{}, State> {
                         'is-info': selectedGood === good,
                       },
                     )}
-                    onClick={() => {
-                      this.setState({ selectedGood: good });
-                    }}
+                    onClick={() => this.toggleGood(good)}
                   >
-                    {selectedGood === good ? '-' : '+'}
+                    {this.chooseOption(good, '-', '+')}
                   </button>
                 </td>
 
