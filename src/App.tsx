@@ -2,7 +2,19 @@ import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 import classNames from 'classnames';
-import goodsFromServer from './goods';
+
+export const goods = [
+  'Dumplings',
+  'Carrot',
+  'Eggs',
+  'Ice cream',
+  'Apple',
+  'Bread',
+  'Fish',
+  'Honey',
+  'Jam',
+  'Garlic',
+];
 
 type State = {
   selectedGood: string,
@@ -40,7 +52,7 @@ export class App extends React.Component<{}, State> {
         </header>
 
         <ul>
-          {goodsFromServer.map(good => (
+          {goods.map(good => (
             <li
               className={classNames(
                 'Good',
