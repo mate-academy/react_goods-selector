@@ -1,4 +1,5 @@
 import React from 'react';
+import className from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -16,57 +17,51 @@ export const goods = [
 ];
 
 type State = {
-  selected: boolean,
   selectedGood: string,
 };
 
 export class App extends React.Component<{}, State> {
   state = {
-    selected: true,
     selectedGood: 'Jam',
   };
 
   pickGood = (good: string) => {
     this.setState({
-      selected: true,
       selectedGood: good,
     });
   };
 
   removeGood = () => {
     this.setState({
-      selected: false,
       selectedGood: '',
     });
   };
 
-  classForGood = (selectedGood: string, good: string) => (
-    selectedGood === good
-      ? 'has-background-success-light'
-      : ''
-  );
-
   render() {
-    const { selected, selectedGood } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <main className="section container">
         {
-          selected
-            ? (
-              <h1 className="title is-flex is-align-items-center">
-                {`${selectedGood} is selected`}
+          <h1 className={className('title', {
+            'is-flex is-align-items-center': selectedGood,
+          })}
+          >
+            {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
 
-                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+            {
+              selectedGood
+              && (
+                /* eslint-disable-next-line jsx-a11y/control-has-associated-label */
                 <button
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
                   onClick={this.removeGood}
                 />
-              </h1>
-            )
-            : <h1 className="title">No goods selected</h1>
+              )
+            }
+          </h1>
         }
 
         <table className="table">
@@ -76,7 +71,9 @@ export class App extends React.Component<{}, State> {
                 <tr
                   data-cy="Good"
                   key={good}
-                  className={this.classForGood(selectedGood, good)}
+                  className={className({
+                    'has-background-success-light': selectedGood === good,
+                  })}
                 >
                   <td>
                     {selectedGood === good
