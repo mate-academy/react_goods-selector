@@ -34,17 +34,19 @@ export class App extends Component<{}, State> {
   };
 
   render() {
+    const { selectedGood } = this.state;
+
     return (
       <main className="section container">
         <h1 className={classNames(
           'title',
-          { 'is-flex is-align-items-center': this.state.selectedGood },
+          { 'is-flex is-align-items-center': selectedGood },
         )}
         >
-          {this.state.selectedGood
+          {selectedGood
             ? (
               <>
-                {`${this.state.selectedGood} is selected`}
+                {`${selectedGood} is selected`}
 
                 {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
                 <button
@@ -60,43 +62,47 @@ export class App extends Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map(good => (
-              <tr
-                data-cy="Good"
-                key={good}
-                className={good === this.state.selectedGood
-                  ? 'has-background-success-light'
-                  : ''}
-              >
-                <td>
-                  {good === this.state.selectedGood
-                    ? (
-                      <button
-                        data-cy="RemoveButton"
-                        type="button"
-                        className="button is-info"
-                        onClick={this.removeGood}
-                      >
-                        -
-                      </button>
-                    )
-                    : (
-                      <button
-                        data-cy="AddButton"
-                        type="button"
-                        className="button"
-                        onClick={() => this.selectGood(good)}
-                      >
-                        +
-                      </button>
-                    )}
-                </td>
+            {goods.map(good => {
+              const isSelected = good === selectedGood;
 
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            ))}
+              return (
+                <tr
+                  data-cy="Good"
+                  key={good}
+                  className={isSelected
+                    ? 'has-background-success-light'
+                    : ''}
+                >
+                  <td>
+                    {isSelected
+                      ? (
+                        <button
+                          data-cy="RemoveButton"
+                          type="button"
+                          className="button is-info"
+                          onClick={this.removeGood}
+                        >
+                          -
+                        </button>
+                      )
+                      : (
+                        <button
+                          data-cy="AddButton"
+                          type="button"
+                          className="button"
+                          onClick={() => this.selectGood(good)}
+                        >
+                          +
+                        </button>
+                      )}
+                  </td>
+
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </main>
