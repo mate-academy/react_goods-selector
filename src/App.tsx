@@ -49,8 +49,7 @@ export class App extends Component<{}, State> {
         {selectedGood
           ? (
             <h1 className="title is-flex is-align-items-center">
-              {selectedGood}
-              {' is selected'}
+              {`${selectedGood} is selected`}
 
               <button
                 aria-label="clearList"
