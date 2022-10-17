@@ -3,16 +3,16 @@ import 'bulma/css/bulma.css';
 import './App.scss';
 
 export const goods = [
-  { id: 1, name: 'Dumplings' },
-  { id: 2, name: 'Carrot' },
-  { id: 3, name: 'Eggs' },
-  { id: 4, name: 'Ice cream' },
-  { id: 5, name: 'Apple' },
-  { id: 6, name: 'Bread' },
-  { id: 7, name: 'Fish' },
-  { id: 8, name: 'Honey' },
-  { id: 9, name: 'Jam' },
-  { id: 10, name: 'Garlic' },
+  { name: 'Dumplings' },
+  { name: 'Carrot' },
+  { name: 'Eggs' },
+  { name: 'Ice cream' },
+  { name: 'Apple' },
+  { name: 'Bread' },
+  { name: 'Fish' },
+  { name: 'Honey' },
+  { name: 'Jam' },
+  { name: 'Garlic' },
 ];
 
 type State = {
@@ -48,7 +48,7 @@ export class App extends React.Component<Props, State> {
             {goods.map((item) => (
               <tr
                 data-cy="Good"
-                key={item.id}
+                key={item.name}
                 className={`${
                   item.name === this.state.selectedGood
                     ? 'has-background-success-light'
@@ -63,13 +63,11 @@ export class App extends React.Component<Props, State> {
                       item.name === this.state.selectedGood ? 'is-info' : ''
                     }`}
                     onClick={() => {
-                      // eslint-disable-next-line react/no-unused-state
-                      this.setState(
-                        // eslint-disable-next-line react/no-access-state-in-setstate
-                        this.state.selectedGood === item.name
-                          ? { selectedGood: '' }
-                          : { selectedGood: item.name },
-                      );
+                      if (this.state.selectedGood === item.name) {
+                        this.setState({ selectedGood: '' });
+                      } else {
+                        this.setState({ selectedGood: item.name });
+                      }
                     }}
                   >
                     {item.name === this.state.selectedGood ? '-' : '+'}
