@@ -1,6 +1,7 @@
-import React from 'react';
+import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -15,71 +16,131 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+type State = {
+  selectedGood: string;
+  isSelected: boolean;
+};
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+function switcher(
+  condition: boolean,
+  product = '',
+  selected = '',
+): boolean {
+  if (product !== selected) {
+    return true;
+  }
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+  if (condition) {
+    return false;
+  }
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
+  return true;
+}
+
+export class App extends Component<{}, State> {
+  state: Readonly<State> = {
+    selectedGood: 'Jam',
+    isSelected: true,
+  };
+
+  handleClickTitleButton = () => (
+    this.setState({
+      isSelected: false,
+    })
+  );
+
+  handleClickProductButton = (
+    product: string,
+    isSelected: boolean,
+    selectedGood: string,
+  ) => {
+    this.setState({
+      selectedGood: product,
+      isSelected: switcher(
+        isSelected,
+        product,
+        selectedGood,
+      ),
+    });
+  };
+
+  render() {
+    const { selectedGood, isSelected } = this.state;
+
+    return (
+      <main className="section container">
+        <h1
+          className={classNames(
+            'title',
+            {
+              'is-flex': isSelected,
+              'is-align-items-center': isSelected,
+            },
+          )}
+        >
+          {isSelected
+            ? `${selectedGood} is selected`
+            : 'No goods selected'}
+
+          {isSelected && (
+            // eslint-disable-next-line jsx-a11y/control-has-associated-label
             <button
-              data-cy="AddButton"
+              data-cy="ClearButton"
               type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+              className="delete ml-3"
+              onClick={this.handleClickTitleButton}
+            />
+          )}
+        </h1>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+        <table className="table">
+          <tbody>
+            {goods.map((product) => {
+              let isProductSelected = false;
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+              if (product === selectedGood && isSelected) {
+                isProductSelected = true;
+              }
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+              return (
+                <tr
+                  data-cy="Good"
+                  key={product}
+                  className={classNames(
+                    {
+                      'has-background-success-light': isProductSelected,
+                    },
+                  )}
+                >
+                  <td>
+                    <button
+                      data-cy={isProductSelected ? 'RemoveButton' : 'AddButton'}
+                      type="button"
+                      onClick={() => this.handleClickProductButton(
+                        product,
+                        isSelected,
+                        selectedGood,
+                      )}
+                      className={classNames(
+                        'button',
+                        {
+                          'is-info': isProductSelected,
+                        },
+                      )}
+                    >
+                      {isProductSelected ? '-' : '+'}
+                    </button>
+                  </td>
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    { product }
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </main>
+    );
+  }
+}
