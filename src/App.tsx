@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import cn from 'classnames';
+import { v4 as uuidv4 } from 'uuid';
+
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -16,13 +18,18 @@ export const goods = [
   'Garlic',
 ];
 
+interface Good {
+  id: string,
+  title: string,
+}
+
 type State = {
   selectedGood: string;
 };
 
-const preparedGoods = goods.map((good, index) => (
+const preparedGoods: Good[] = goods.map(good => (
   {
-    id: index + 1,
+    id: uuidv4(),
     title: good,
   }
 ));
