@@ -1,6 +1,6 @@
 # React Goods Selector
 
-> [React + Typescript cheat sheet](https://mate-academy.github.io/fe-program/js/extra/react-typescript)
+> [React + Typescript cheat sheet](https://mate-academy.github.io/fe-program/js/extra/react-typescript) 
 
 You are given an array of goods. Render them in a table with the ability to select one or clear selection.
 
