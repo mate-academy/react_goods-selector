@@ -18,21 +18,9 @@ export const goods = [
   'Garlic',
 ];
 
-interface Good {
-  id: string,
-  title: string,
-}
-
 type State = {
   selectedGood: string;
 };
-
-const preparedGoods: Good[] = goods.map(good => (
-  {
-    id: uuidv4(),
-    title: good,
-  }
-));
 
 export class App extends Component<{}, State> {
   state: Readonly<State> = {
@@ -88,13 +76,13 @@ export class App extends Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {preparedGoods.map(({ id, title }) => {
-              const isActive = title === selectedGood;
+            {goods.map((good) => {
+              const isActive = good === selectedGood;
 
               return (
                 <tr
                   data-cy="Good"
-                  key={id}
+                  key={uuidv4()}
                   className={cn(
                     {
                       'has-background-success-light': isActive,
@@ -114,7 +102,7 @@ export class App extends Component<{}, State> {
                         },
                       )}
                       onClick={() => {
-                        this.toggleSelected(title);
+                        this.toggleSelected(good);
                       }}
                     >
                       {isActive ? '-' : '+'}
@@ -122,7 +110,7 @@ export class App extends Component<{}, State> {
                   </td>
 
                   <td data-cy="GoodTitle" className="is-vcentered">
-                    {title}
+                    {good}
                   </td>
                 </tr>
               );
