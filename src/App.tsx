@@ -59,12 +59,12 @@ export class App extends Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map((good) => {
+            {goods.map((good, index) => {
               const goodSelected = selectedGood === good;
 
               return (
                 <tr
-                  key={good}
+                  key={good + index.toString()}
                   data-cy="Good"
                   className={classNames({
                     'has-background-success-light': goodSelected,
