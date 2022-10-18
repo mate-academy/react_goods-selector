@@ -63,36 +63,32 @@ export class App extends Component<{}, State> {
                 <tr
                   key={id}
                   data-cy="Good"
-                  className={
-                    classNames({
-                      'has-background-success-light': isSelected,
-                    })
-                  }
+                  className={classNames({
+                    'has-background-success-light': isSelected,
+                  })}
                 >
                   <td>
-                    {isSelected
-                      ? (
-                        <button
-                          data-cy="RemoveButton"
-                          type="button"
-                          className="button is-info"
-                          onClick={this.removeOnClick}
-                        >
-                          -
-                        </button>
-                      )
-                      : (
-                        <button
-                          data-cy="AddButton"
-                          type="button"
-                          className="button"
-                          onClick={(event) => {
-                            this.addOnClick(event, name);
-                          }}
-                        >
-                          +
-                        </button>
+                    <button
+                      data-cy={isSelected
+                        ? 'RemoveButton'
+                        : 'AddButton'}
+                      type="button"
+                      className={classNames(
+                        'button',
+                        {
+                          'is-info': isSelected,
+                        },
                       )}
+                      onClick={isSelected
+                        ? this.removeOnClick
+                        : (event) => {
+                          this.addOnClick(event, name);
+                        }}
+                    >
+                      {isSelected
+                        ? '-'
+                        : '+'}
+                    </button>
                   </td>
 
                   <td data-cy="GoodTitle" className="is-vcentered">
