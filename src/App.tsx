@@ -22,19 +22,19 @@ type State = {
 
 export class App extends React.Component<{}, State> {
   state = {
-    selectedProduct: 'No goods ',
+    selectedProduct: '',
   };
 
   addRemoveGood = (currentProduct: string) => {
     if (this.state.selectedProduct === currentProduct) {
-      this.setState({ selectedProduct: 'No goods ' });
+      this.setState({ selectedProduct: '' });
     } else {
       this.setState({ selectedProduct: currentProduct });
     }
   };
 
   clearSelector = () => {
-    this.setState({ selectedProduct: 'No goods ' });
+    this.setState({ selectedProduct: '' });
   };
 
   render() {
@@ -42,10 +42,10 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        {(selectedProduct === 'No goods ')
+        {!selectedProduct
           ? (
             <h1 className="title">
-              {`${selectedProduct} selected`}
+              No goods selected
             </h1>
           )
           : (
@@ -69,11 +69,9 @@ export class App extends React.Component<{}, State> {
                 <tr
                   key={item}
                   data-cy="Good"
-                  className={
-                    (item === selectedProduct)
-                      ? 'has-background-success-light'
-                      : ''
-                  }
+                  className={cn({
+                    'has-background-success-light': item === selectedProduct,
+                  })}
                 >
                   <td>
                     <button
