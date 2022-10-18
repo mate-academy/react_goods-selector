@@ -2,7 +2,6 @@ import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 import classNames from 'classnames';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { v4 as uuidv4 } from 'uuid';
 
 export const goods = [
