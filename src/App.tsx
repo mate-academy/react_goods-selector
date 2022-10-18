@@ -26,12 +26,8 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  addToSelected = (good: string) => {
-    this.setState({ selectedGood: good });
-  };
-
-  removeFromSelected = () => {
-    this.setState({ selectedGood: '' });
+  toggleSelected = (good:string | undefined) => {
+    this.setState({ selectedGood: good || '' });
   };
 
   render() {
@@ -53,7 +49,7 @@ export class App extends Component<{}, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={this.removeFromSelected}
+                  onClick={() => this.toggleSelected(undefined)}
                 />
               </>
             )
@@ -74,29 +70,22 @@ export class App extends Component<{}, State> {
                 )}
               >
                 <td>
-                  {
-                    selectedGood === good
-                      ? (
-                        <button
-                          data-cy="RemoveButton"
-                          type="button"
-                          className="button is-info"
-                          onClick={this.removeFromSelected}
-                        >
-                          -
-                        </button>
-                      )
-                      : (
-                        <button
-                          data-cy="AddButton"
-                          type="button"
-                          className="button"
-                          onClick={() => this.addToSelected(good)}
-                        >
-                          +
-                        </button>
-                      )
-                  }
+                  <button
+                    data-cy={selectedGood === good
+                      ? 'RemoveButton' : 'AddButton'}
+                    type="button"
+                    className={classNames(
+                      'button',
+                      { 'is-info': selectedGood === good },
+                    )}
+                    onClick={() => this.toggleSelected(
+                      selectedGood === good
+                        ? undefined
+                        : good,
+                    )}
+                  >
+                    {selectedGood === good ? '-' : '+'}
+                  </button>
                 </td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
