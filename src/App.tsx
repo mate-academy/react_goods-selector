@@ -20,7 +20,7 @@ type State = {
   selectedGood: string;
 };
 
-export class App extends Component {
+export class App extends Component<{}, State> {
   state: State = {
     selectedGood: 'Jam',
   };
