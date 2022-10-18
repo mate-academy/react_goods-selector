@@ -1,7 +1,10 @@
 import { Component } from 'react';
+
 import 'bulma/css/bulma.css';
 import './App.scss';
+
 import classNames from 'classnames';
+import { v4 as uuidv4 } from 'uuid';
 
 export const goods = [
   'Dumplings',
@@ -65,7 +68,7 @@ export class App extends Component<{}, State> {
                   className={classNames('', {
                     'has-background-success-light': isSelected,
                   })}
-                  key={good}
+                  key={uuidv4()}
                 >
                   <td>
                     {isSelected
