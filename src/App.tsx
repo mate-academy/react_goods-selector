@@ -2,6 +2,7 @@ import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 import classNames from 'classnames';
+import { v4 as uuidv4 } from 'uuid';
 
 export const goods = [
   'Dumplings',
@@ -31,32 +32,45 @@ export class App extends React.Component<{}, State> {
     });
   };
 
+  addSelected = (good: string) => {
+    this.setState({ selectedGood: good });
+  };
+
   render() {
     const { selectedGood } = this.state;
 
     return (
       <main className="section container">
-        {selectedGood === ''
-          ? <h1 className="title">No goods selected</h1>
-          : (
-            <h1 className="title is-flex is-align-items-center">
-              {`${ selectedGood } is selected`}
-
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-              <button
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-                onClick={this.cancelSelect}
-              />
-            </h1>
-          )}
+        <h1 className={classNames(
+          'title',
+          { 'is-flex': selectedGood },
+          { 'is-align-items-center': selectedGood },
+        )}
+        >
+          {!selectedGood
+            ? 'No goods selected'
+            : (
+              <>
+                {`${selectedGood} is selected`}
+                <button
+                  data-cy="ClearButton"
+                  type="button"
+                  aria-label="Clear"
+                  className="delete ml-3"
+                  onClick={() => {
+                    this.setState(this.cancelSelect);
+                  }}
+                />
+              </>
+            )}
+        </h1>
         <table className="table">
           <tbody>
             {goods.map((good) => {
               return (
                 <tr
                   data-cy="Good"
+                  key={uuidv4()}
                   className={classNames({
                     'has-background-success-light':
                       selectedGood === good,
@@ -69,11 +83,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="AddButton"
                           type="button"
                           className="button"
-                          onClick={() => {
-                            this.setState({
-                              selectedGood: good,
-                            });
-                          }}
+                          onClick={() => this.addSelected(good)}
                         >
                           +
                         </button>
@@ -85,7 +95,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
-                          onClick={this.cancelSelect}
+                          onClick={() => this.cancelSelect()}
                         >
                           -
                         </button>
