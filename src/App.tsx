@@ -18,54 +18,39 @@ export const goods = [
 
 type State = {
   selectedGood: string;
-  isSelected: boolean;
 };
-
-function switcher(
-  condition: boolean,
-  product = '',
-  selected = '',
-): boolean {
-  if (product !== selected) {
-    return true;
-  }
-
-  if (condition) {
-    return false;
-  }
-
-  return true;
-}
 
 export class App extends Component<{}, State> {
   state: Readonly<State> = {
     selectedGood: 'Jam',
-    isSelected: true,
   };
 
   handleClickTitleButton = () => (
     this.setState({
-      isSelected: false,
+      selectedGood: '',
     })
   );
 
-  handleClickProductButton = (
-    product: string,
-    isSelected: boolean,
-    selectedGood: string,
-  ) => {
-    this.setState({
-      selectedGood: product,
-      isSelected: switcher(
-        isSelected,
-        product,
-        selectedGood,
-      ),
-    });
+  handleClickProductButton = (product: string) => {
+    if (this.state.selectedGood === product) {
+      this.setState({
+        selectedGood: '',
+      });
+    } else {
+      this.setState({
+        selectedGood: product,
+      });
+    }
+  };
+
+  clearSelectedGood = () => {
+    if (this.state.selectedGood) {
+      this.setState({ selectedGood: '' });
+    }
   };
 
   render() {
-    const { selectedGood, isSelected } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <main className="section container">
@@ -73,16 +58,16 @@ export class App extends Component<{}, State> {
           className={classNames(
             'title',
             {
-              'is-flex': isSelected,
-              'is-align-items-center': isSelected,
+              'is-flex': selectedGood,
+              'is-align-items-center': selectedGood,
             },
           )}
         >
-          {isSelected
+          {selectedGood
             ? `${selectedGood} is selected`
             : 'No goods selected'}
 
-          {isSelected && (
+          {selectedGood && (
             // eslint-disable-next-line jsx-a11y/control-has-associated-label
             <button
               data-cy="ClearButton"
@@ -98,7 +83,7 @@ export class App extends Component<{}, State> {
             {goods.map((product) => {
               let isProductSelected = false;
 
-              if (product === selectedGood && isSelected) {
+              if (product === selectedGood) {
                 isProductSelected = true;
               }
 
@@ -116,11 +101,7 @@ export class App extends Component<{}, State> {
                     <button
                       data-cy={isProductSelected ? 'RemoveButton' : 'AddButton'}
                       type="button"
-                      onClick={() => this.handleClickProductButton(
-                        product,
-                        isSelected,
-                        selectedGood,
-                      )}
+                      onClick={() => this.handleClickProductButton(product)}
                       className={classNames(
                         'button',
                         {
