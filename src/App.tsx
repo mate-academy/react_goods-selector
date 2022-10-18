@@ -4,16 +4,16 @@ import 'bulma/css/bulma.css';
 import './App.scss';
 
 export const goods = [
-  'Dumplings',
-  'Carrot',
-  'Eggs',
-  'Ice cream',
-  'Apple',
-  'Bread',
-  'Fish',
-  'Honey',
-  'Jam',
-  'Garlic',
+  { good: 'Dumplings', id: 1 },
+  { good: 'Carrot', id: 2 },
+  { good: 'Eggs', id: 3 },
+  { good: 'Ice cream', id: 4 },
+  { good: 'Apple', id: 5 },
+  { good: 'Bread', id: 6 },
+  { good: 'Fish', id: 7 },
+  { good: 'Honey', id: 8 },
+  { good: 'Jam', id: 9 },
+  { good: 'Garlic', id: 10 },
 ];
 
 type State = {
@@ -54,13 +54,13 @@ export class App extends Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map(good => {
+            {goods.map(({ good, id }) => {
               const isSelected = good === selectedGood;
 
               return (
                 <tr
                   data-cy="Good"
-                  key={good}
+                  key={id}
                   className={
                     classNames({
                       'has-background-success-light': isSelected,
@@ -77,7 +77,7 @@ export class App extends Component<{}, State> {
                         })
                       }
                       onClick={() => {
-                        const value = !isSelected ? good : '';
+                        const value = isSelected ? '' : good;
 
                         this.setState({ selectedGood: value });
                       }}
