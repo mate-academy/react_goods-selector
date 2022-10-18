@@ -2,6 +2,7 @@ import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 import classNames from 'classnames';
+import { v4 as uuidv4 } from 'uuid';
 
 export const goods = [
   'Dumplings',
@@ -62,7 +63,7 @@ export class App extends Component<{}, State> {
 
               return (
                 <tr
-                  key={good}
+                  key={uuidv4()}
                   data-cy="Good"
                   className={classNames(bgForSelectedGood)}
                 >
