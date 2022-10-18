@@ -63,8 +63,8 @@ export class App extends Component<{}, State> {
     this.setState({ selectedGood: '' });
   };
 
-  classGood = (selectGood: string, good: string) => (
-    selectGood === good && 'has-background-success-light'
+  classGood = (selectedGood: string, good: string) => (
+    selectedGood === good && 'has-background-success-light'
   );
 
   render() {
