@@ -3,6 +3,7 @@ import 'bulma/css/bulma.css';
 import './App.scss';
 import classNames from 'classnames';
 import { v4 as uuidv4 } from 'uuid';
+import { is } from 'cypress/types/bluebird';
 
 export const goods = [
   'Dumplings',
@@ -26,7 +27,7 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  toggleSelected = (good:string | undefined) => {
+  toggleSelected = (good?:string) => {
     this.setState({ selectedGood: good || '' });
   };
 
@@ -49,7 +50,7 @@ export class App extends Component<{}, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={() => this.toggleSelected(undefined)}
+                  onClick={() => this.toggleSelected()}
                 />
               </>
             )
@@ -58,41 +59,45 @@ export class App extends Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map(good => (
-              <tr
-                data-cy="Good"
-                key={uuidv4()}
-                className={classNames(
-                  {
-                    'has-background-success-light':
-                    good === selectedGood,
-                  },
-                )}
-              >
-                <td>
-                  <button
-                    data-cy={selectedGood === good
-                      ? 'RemoveButton' : 'AddButton'}
-                    type="button"
-                    className={classNames(
-                      'button',
-                      { 'is-info': selectedGood === good },
-                    )}
-                    onClick={() => this.toggleSelected(
-                      selectedGood === good
-                        ? undefined
-                        : good,
-                    )}
-                  >
-                    {selectedGood === good ? '-' : '+'}
-                  </button>
-                </td>
+            {goods.map(good => {
+              const isSelectedGood = good === selectedGood;
 
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            ))}
+              return (
+                <tr
+                  data-cy="Good"
+                  key={uuidv4()}
+                  className={classNames(
+                    {
+                      'has-background-success-light':
+                      isSelectedGood,
+                    },
+                  )}
+                >
+                  <td>
+                    <button
+                      data-cy={isSelectedGood
+                        ? 'RemoveButton' : 'AddButton'}
+                      type="button"
+                      className={classNames(
+                        'button',
+                        { 'is-info': isSelectedGood },
+                      )}
+                      onClick={() => this.toggleSelected(
+                        isSelectedGood
+                          ? ''
+                          : good,
+                      )}
+                    >
+                      {isSelectedGood ? '-' : '+'}
+                    </button>
+                  </td>
+
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </main>
