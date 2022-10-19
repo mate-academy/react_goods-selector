@@ -1,5 +1,4 @@
-import React from 'react';
-import classNames from 'classnames';
+import React, { useState } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -16,108 +15,78 @@ export const goods = [
   'Garlic',
 ];
 
-type State = {
-  selectedGood: string,
-};
+export const App: React.FC = () => {
+  const [selectedGood, setSelectedGood] = useState<string | null>('Jam');
 
-// eslint-disable-next-line react/prefer-stateless-function
-export class App extends React.Component<{}, State> {
-  state: Readonly<State> = {
-    selectedGood: 'Jam',
+  const resetState = () => {
+    setSelectedGood(null);
   };
 
-  clearSelectedGood = () => {
-    this.setState({ selectedGood: '' });
-  };
+  return (
+    <main className="section container">
+      {selectedGood
+        ? (
+          <h1 className="title is-flex is-align-items-center">
+            {`${selectedGood} is selected`}
 
-  selectGood(good: string) {
-    const { selectedGood } = this.state;
+            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={resetState}
+            />
+          </h1>
+        ) : (
+          <h1 className="title">
+            No goods selected
+          </h1>
+        )}
 
-    if (!selectedGood.length) {
-      this.setState({ selectedGood: good });
-    } else if (selectedGood !== good) {
-      this.setState({ selectedGood: good });
-    } else {
-      this.setState({ selectedGood: '' });
-    }
-  }
-
-  render() {
-    const { selectedGood } = this.state;
-
-    return (
-      <main className="section container">
-        <h1
-          className={
-            classNames(
-              'title',
-              { 'is-flex is-align-items-center': selectedGood.length > 0 },
-            )
-          }
-        >
-          {
-            selectedGood.length > 0
-              ? `${selectedGood} is selected`
-              : 'No goods selected'
-          }
-
-          {selectedGood.length > 0
-            && (
-            /* eslint-disable-next-line jsx-a11y/control-has-associated-label */
-              <button
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-                onClick={this.clearSelectedGood}
-              />
-            )}
-        </h1>
-
-        <table className="table">
-          <tbody>
-            {goods.map((good) => (
-              <tr
-                data-cy="Good"
-                key={good}
-                className={classNames(
-                  '',
-                  {
-                    'has-background-success-light': selectedGood === good,
-                  },
+      <table className="table">
+        <tbody>
+          {goods.map(good => (
+            <tr
+              data-cy="Good"
+              key={good}
+              className={good === selectedGood
+                ? 'has-background-success-light'
+                : ''}
+            >
+              {selectedGood !== good
+                ? (
+                  <td>
+                    <button
+                      value={good}
+                      data-cy="AddButton"
+                      type="button"
+                      className="button"
+                      onClick={() => setSelectedGood(good)}
+                    >
+                      +
+                    </button>
+                  </td>
+                )
+                : (
+                  <td>
+                    <button
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
+                      onClick={resetState}
+                    >
+                      -
+                    </button>
+                  </td>
                 )}
-              >
-                <td>
-                  <button
-                    data-cy={
-                      selectedGood === good
-                        ? 'RemoveButton'
-                        : 'AddButton'
-                    }
-                    type="button"
-                    className={classNames(
-                      'button',
-                      { 'is-info': selectedGood === good },
-                    )}
-                    onClick={() => {
-                      this.selectGood(good);
-                    }}
-                  >
-                    {
-                      selectedGood === good
-                        ? '-'
-                        : '+'
-                    }
-                  </button>
-                </td>
 
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </main>
-    );
-  }
-}
+              <td data-cy="GoodTitle" className="is-vcentered">
+                {good}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </main>
+  );
+};
