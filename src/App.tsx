@@ -25,17 +25,17 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  selectGood = (newState: string) => (
+  selectGoodState = (newState: string) => (
     this.setState({ selectedGood: newState })
   );
 
-  removeGood = () => (
+  removeGoodState = () => (
     this.setState({ selectedGood: '' })
   );
 
   render() {
     const { selectedGood } = this.state;
-    const { selectGood, removeGood } = this;
+    const { selectGoodState, removeGoodState } = this;
 
     return (
       <main className="section container">
@@ -49,7 +49,7 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={removeGood}
+                onClick={removeGoodState}
               />
             </h1>
           )
@@ -77,7 +77,7 @@ export class App extends Component<{}, State> {
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
-                          onClick={removeGood}
+                          onClick={removeGoodState}
                         >
                           -
                         </button>
@@ -88,7 +88,7 @@ export class App extends Component<{}, State> {
                           type="button"
                           className="button"
                           onClick={() => (
-                            selectGood(good)
+                            selectGoodState(good)
                           )}
                         >
                           +
