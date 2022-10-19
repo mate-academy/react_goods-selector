@@ -59,46 +59,38 @@ export class App extends Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map((good) => {
-              const selectedItem = {
-                'has-background-success-light':
-                selectedGood === good,
-              };
+            {goods.map((good, i) => {
+              const isSelectedGood = selectedGood === good;
+              const slug = `${i}-${good}`;
 
               return (
                 <tr
+                  key={slug}
                   data-cy="Good"
-                  className={classNames(selectedItem)}
+                  className={classNames({
+                    'has-background-success-light': isSelectedGood,
+                  })}
                 >
-                  {selectedGood !== good
-                    ? (
-                      <td>
-                        <button
-                          data-cy="AddButton"
-                          type="button"
-                          className="button"
-                          onClick={() => {
-                            this.setState({
-                              selectedGood: good,
-                            });
-                          }}
-                        >
-                          +
-                        </button>
-                      </td>
-                    )
-                    : (
-                      <td>
-                        <button
-                          data-cy="RemoveButton"
-                          type="button"
-                          className="button is-info"
-                          onClick={this.cancelSelection}
-                        >
-                          -
-                        </button>
-                      </td>
-                    )}
+                  <td>
+                    <button
+                      data-cy={isSelectedGood
+                        ? 'RemoveButton'
+                        : 'AddButton'}
+                      type="button"
+                      className={classNames('button', {
+                        'is-info': isSelectedGood,
+                      })}
+                      onClick={isSelectedGood
+                        ? this.cancelSelection
+                        : () => {
+                          this.setState({
+                            selectedGood: good,
+                          });
+                        }}
+                    >
+                      {isSelectedGood ? '-' : '+'}
+                    </button>
+                  </td>
                   <td data-cy="GoodTitle" className="is-vcentered">
                     {good}
                   </td>
