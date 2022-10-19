@@ -26,12 +26,8 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  saveGood = (good: string) => {
+  selectGood = (good: string | '') => {
     this.setState({ selectedGood: good });
-  };
-
-  removeGood = () => {
-    this.setState({ selectedGood: '' });
   };
 
   render() {
@@ -54,7 +50,7 @@ export class App extends React.Component<{}, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={this.removeGood}
+                  onClick={() => this.selectGood('')}
                 />
               </>
             ) : 'No goods selected'}
@@ -62,38 +58,42 @@ export class App extends React.Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map(good => (
-              <tr
-                data-cy="Good"
-                key={uuidv4()}
-                className={classNames({
-                  'has-background-success-light': (good === selectedGood),
-                })}
-              >
-                <td>
-                  <button
-                    data-cy={good === selectedGood
-                      ? 'RemoveButton'
-                      : 'AddButton'}
-                    type="button"
-                    className={good === selectedGood
-                      ? 'button is-info'
-                      : 'button'}
-                    onClick={good === selectedGood
-                      ? this.removeGood
-                      : () => this.saveGood(good)}
-                  >
-                    {good === selectedGood
-                      ? '-'
-                      : '+'}
-                  </button>
-                </td>
+            {goods.map(good => {
+              const isSelected = good === selectedGood;
 
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            ))}
+              return (
+                <tr
+                  data-cy="Good"
+                  key={uuidv4()}
+                  className={classNames({
+                    'has-background-success-light': isSelected,
+                  })}
+                >
+                  <td>
+                    <button
+                      data-cy={isSelected
+                        ? 'RemoveButton'
+                        : 'AddButton'}
+                      type="button"
+                      className={isSelected
+                        ? 'button is-info'
+                        : 'button'}
+                      onClick={isSelected
+                        ? () => this.selectGood('')
+                        : () => this.selectGood(good)}
+                    >
+                      {isSelected
+                        ? '-'
+                        : '+'}
+                    </button>
+                  </td>
+
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </main>
