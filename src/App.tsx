@@ -27,9 +27,7 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handlerAddGood = (good: string) => this.setState({ selectedGood: good });
-
-  handlerClearGood = () => this.setState({ selectedGood: '' });
+  handleClearGood = () => this.setState({ selectedGood: '' });
 
   render() {
     const {
@@ -47,7 +45,7 @@ export class App extends Component<{}, State> {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={this.handlerClearGood}
+              onClick={this.handleClearGood}
             />
           )}
         </h1>
@@ -67,7 +65,7 @@ export class App extends Component<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className={(selectedGood === good) ? 'button is-info' : 'button'}
-                        onClick={this.handlerClearGood}
+                        onClick={this.handleClearGood}
                       >
                         -
                       </button>
@@ -79,7 +77,7 @@ export class App extends Component<{}, State> {
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={() => this.handlerAddGood(good)}
+                        onClick={() => this.setState({ selectedGood: good })}
                       >
                         +
                       </button>
