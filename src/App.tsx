@@ -3,7 +3,6 @@ import 'bulma/css/bulma.css';
 import './App.scss';
 import classNames from 'classnames';
 import { v4 as uuidv4 } from 'uuid';
-import { is } from 'cypress/types/bluebird';
 
 export const goods = [
   'Dumplings',
