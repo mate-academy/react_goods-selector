@@ -46,6 +46,11 @@ export const goods = [
   },
 ];
 
+interface Good {
+  name: string,
+  id: number,
+}
+
 type State = {
   selectedGood: string;
 
@@ -56,10 +61,26 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  clearSelectedGood = () => {
+    this.setState({ selectedGood: '' });
+  };
+
   render() {
     const {
       selectedGood,
     } = this.state;
+
+    function isGoodSelected(good: Good) {
+      return selectedGood === good.name;
+    }
+
+    const buttonHandler = (good: Good) => {
+      if (isGoodSelected(good)) {
+        this.setState({ selectedGood: '' });
+      } else {
+        this.setState({ selectedGood: good.name });
+      }
+    };
 
     return (
       <main className="section container">
@@ -77,11 +98,7 @@ export class App extends Component<{}, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={() => {
-                    this.setState({
-                      selectedGood: '',
-                    });
-                  }}
+                  onClick={this.clearSelectedGood}
                 />
               </>
             )}
@@ -96,7 +113,7 @@ export class App extends Component<{}, State> {
                   classNames(
                     {
                       'has-background-success-light':
-                    selectedGood === good.name,
+                      isGoodSelected(good),
                     },
                   )
                 }
@@ -104,23 +121,17 @@ export class App extends Component<{}, State> {
               >
                 <td>
                   <button
-                    data-cy={selectedGood === good.name
+                    data-cy={isGoodSelected(good)
                       ? 'RemoveButton'
                       : 'AddButton'}
                     type="button"
                     className={
                       classNames('button',
-                        { 'is-info': selectedGood === good.name })
+                        { 'is-info': isGoodSelected(good) })
                     }
-                    onClick={() => {
-                      if (selectedGood === good.name) {
-                        this.setState({ selectedGood: '' });
-                      } else {
-                        this.setState({ selectedGood: good.name });
-                      }
-                    }}
+                    onClick={() => buttonHandler(good)}
                   >
-                    {selectedGood === good.name
+                    {isGoodSelected(good)
                       ? '-'
                       : '+'}
                   </button>
