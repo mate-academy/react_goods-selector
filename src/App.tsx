@@ -57,9 +57,7 @@ export class App extends React.Component<{}, State> {
                   type="button"
                   aria-label="Clear"
                   className="delete ml-3"
-                  onClick={() => {
-                    this.setState(this.cancelSelect);
-                  }}
+                  onClick={this.cancelSelect}
                 />
               </>
             )}
@@ -67,6 +65,8 @@ export class App extends React.Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map((good) => {
+              const isSelected = good === selectedGood;
+
               return (
                 <tr
                   data-cy="Good"
@@ -76,31 +76,24 @@ export class App extends React.Component<{}, State> {
                       selectedGood === good,
                   })}
                 >
-                  {selectedGood !== good
-                    ? (
-                      <td>
-                        <button
-                          data-cy="AddButton"
-                          type="button"
-                          className="button"
-                          onClick={() => this.addSelected(good)}
-                        >
-                          +
-                        </button>
-                      </td>
-                    )
-                    : (
-                      <td>
-                        <button
-                          data-cy="RemoveButton"
-                          type="button"
-                          className="button is-info"
-                          onClick={() => this.cancelSelect()}
-                        >
-                          -
-                        </button>
-                      </td>
-                    )}
+                  <td>
+                    <button
+                      data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
+                      type="button"
+                      className={
+                        classNames('button', {
+                          'is-info': isSelected,
+                        })
+                      }
+                      onClick={isSelected
+                        ? () => this.cancelSelect()
+                        : () => this.addSelected(good)}
+                    >
+                      {isSelected
+                        ? '-'
+                        : '+'}
+                    </button>
+                  </td>
                   <td data-cy="GoodTitle" className="is-vcentered">
                     {good}
                   </td>
