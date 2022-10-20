@@ -18,19 +18,29 @@ export const goods = [
 
 export class App extends React.Component {
   state = {
-    selectedWord: 'Jam',
+    selectedGood: 'Jam',
   };
 
+  removeGoodState = () => (
+    this.setState({ selectedGood: '' })
+  );
+
+  isGood = (selectedGood: string, good: string) => (
+    selectedGood === good
+  );
+
   render(): React.ReactNode {
+    const { selectedGood } = this.state;
+
     return (
       <main className="section container">
         {
-          !this.state.selectedWord
+          !selectedGood
             ? (
               <h1 className="title">No goods selected</h1>)
             : (
               <h1 className="title is-flex is-align-items-center">
-                {`${this.state.selectedWord} `}
+                {`${selectedGood} `}
                 is selected
 
                 {/* eslint-disable-next-line jsx-a11y/control-has-associated-label  */}
@@ -38,9 +48,7 @@ export class App extends React.Component {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={() => (
-                    this.setState({ selectedWord: '' })
-                  )}
+                  onClick={this.removeGoodState}
                 />
               </h1>
             )
@@ -56,14 +64,14 @@ export class App extends React.Component {
                   className={classNames(
                     {
                       'has-background-success-light':
-                      this.state.selectedWord === good,
+                      this.isGood(selectedGood, good),
                     },
                   )}
                 >
                   <td>
                     <button
                       data-cy={
-                        this.state.selectedWord === good
+                        this.isGood(selectedGood, good)
                           ? 'RemoveButton'
                           : 'AddButton'
                       }
@@ -71,17 +79,17 @@ export class App extends React.Component {
                       className={classNames(
                         'button',
                         {
-                          'is-info': this.state.selectedWord === good,
+                          'is-info': this.isGood(selectedGood, good),
                         },
                       )}
                       onClick={() => (
-                        this.state.selectedWord === good
-                          ? this.setState({ selectedWord: '' })
-                          : this.setState({ selectedWord: good })
+                        this.isGood(selectedGood, good)
+                          ? this.removeGoodState()
+                          : this.setState({ selectedGood: good })
                       )}
                     >
                       {
-                        this.state.selectedWord === good
+                        this.isGood(selectedGood, good)
                           ? ('-')
                           : ('+')
                       }
