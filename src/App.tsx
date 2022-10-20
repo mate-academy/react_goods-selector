@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -40,8 +41,22 @@ export class App extends Component<{}, State> {
     });
   };
 
+  handleItem = (item: string) => {
+    const { selectedGood } = this.state;
+
+    if (selectedGood === item) {
+      this.removeItem();
+    } else {
+      this.addItem(item);
+    }
+  }
+
   render() {
     const { selectedGood, title } = this.state;
+
+    function isItemSelected(item: string) {
+      return selectedGood === item;
+    }
 
     return (
       <main className="section container">
@@ -66,32 +81,27 @@ export class App extends Component<{}, State> {
               <tr
                 data-cy="Good"
                 key={item + String(index)}
-                className={
-                  selectedGood === item
-                    ? 'has-background-success-light'
-                    : ''
-                }
+                className={classNames({
+                  'has-background-success-light': isItemSelected(item),
+                })}
               >
                 <td>
                   <button
                     data-cy={
-                      selectedGood === item
+                      isItemSelected(item)
                         ? 'RemoveButton'
                         : 'AddButton'
                     }
                     type="button"
-                    className={`button ${
-                      selectedGood === item
-                        ? 'is-info'
-                        : ''
-                    }`}
-                    onClick={() => {
-                      return selectedGood === item
-                        ? this.removeItem()
-                        : this.addItem(item);
-                    }}
+                    className={classNames(
+                      'button',
+                      {
+                        'is-info': isItemSelected(item),
+                      },
+                    )}
+                    onClick={() => this.handleItem(item)}
                   >
-                    {selectedGood === item
+                    {isItemSelected(item)
                       ? '-'
                       : '+'}
                   </button>
