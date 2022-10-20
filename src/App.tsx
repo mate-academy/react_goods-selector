@@ -20,13 +20,12 @@ type State = {
   selectedGood: string,
 };
 
-// eslint-disable-next-line react/prefer-stateless-function
 export class App extends Component<{}, State> {
   state: Readonly<State> = {
     selectedGood: 'Jam',
   };
 
-  equalElement = (good: string) => {
+  handleSelect = (good: string) => {
     if (this.state.selectedGood === good) {
       this.setState({ selectedGood: '' });
     } else {
@@ -76,7 +75,7 @@ export class App extends Component<{}, State> {
                           type="button"
                           className="button is-info"
                           onClick={() => {
-                            this.equalElement(good);
+                            this.handleSelect(good);
                           }}
                         >
                           -
@@ -88,7 +87,7 @@ export class App extends Component<{}, State> {
                           type="button"
                           className="button"
                           onClick={() => {
-                            this.equalElement(good);
+                            this.handleSelect(good);
                           }}
                         >
                           +
