@@ -31,6 +31,12 @@ export class App extends Component<{}, State> {
     });
   };
 
+  selectGood = (good: string) => {
+    this.setState({
+      selectedGood: good,
+    });
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -82,11 +88,7 @@ export class App extends Component<{}, State> {
                       })}
                       onClick={isSelectedGood
                         ? this.cancelSelection
-                        : () => {
-                          this.setState({
-                            selectedGood: good,
-                          });
-                        }}
+                        : () => this.selectGood(good)}
                     >
                       {isSelectedGood ? '-' : '+'}
                     </button>
