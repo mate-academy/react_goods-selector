@@ -1,3 +1,33 @@
 iframe {
   display: none;
 }
+
+.table {
+  max-width: 170px;
+}
+
+.button {
+  text-decoration: none;
+  display: inline-block;
+  width: 45px;
+  height: 40px;
+  border: 1px solid #000;
+  background-color: #fff;
+}
+
+.Good {
+  list-style: none;
+  margin-bottom: 0.5rem;
+}
+
+.is-vcentered {
+  margin-left: 12px;
+
+}
+
+.delete {
+  &--ml-3 {
+    display: none;
+    margin-left: 20px;
+  }
+}
