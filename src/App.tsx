@@ -52,45 +52,49 @@ export class App extends React.Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map(good => (
-              <tr
-                data-cy="Good"
-                key={good + goods.indexOf(good)}
-                className={
-                  classNames({
-                    'has-background-success-light': good === selectedGood,
-                  })
-                }
-              >
-                <td>
-                  {good === selectedGood
-                    ? (
-                      <button
-                        data-cy="RemoveButton"
-                        type="button"
-                        onClick={this.clearGood}
-                        className="button is-info"
-                      >
-                        -
-                      </button>
-                    )
-                    : (
-                      <button
-                        data-cy="AddButton"
-                        type="button"
-                        onClick={() => this.setState({ selectedGood: good })}
-                        className="button"
-                      >
-                        +
-                      </button>
-                    )}
-                </td>
+            {goods.map(good => {
+              const isGoodSelected = good === selectedGood;
 
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            ))}
+              return (
+                <tr
+                  data-cy="Good"
+                  key={good + goods.indexOf(good)}
+                  className={
+                    classNames({
+                      'has-background-success-light': isGoodSelected,
+                    })
+                  }
+                >
+                  <td>
+                    {isGoodSelected
+                      ? (
+                        <button
+                          data-cy="RemoveButton"
+                          type="button"
+                          onClick={this.clearGood}
+                          className="button is-info"
+                        >
+                          -
+                        </button>
+                      )
+                      : (
+                        <button
+                          data-cy="AddButton"
+                          type="button"
+                          onClick={() => this.setState({ selectedGood: good })}
+                          className="button"
+                        >
+                          +
+                        </button>
+                      )}
+                  </td>
+
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </main>
