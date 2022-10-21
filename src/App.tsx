@@ -38,6 +38,10 @@ export class App extends Component<{}, State> {
   render() {
     const { selectedGood } = this.state;
 
+    function isSelected(good: string) {
+      return selectedGood === good;
+    }
+
     return (
       <main className="section container">
         <h1 className={classNames(
@@ -69,24 +73,24 @@ export class App extends Component<{}, State> {
                 key={uuid()}
                 data-cy="Good"
                 className={classNames({
-                  'has-background-success-light': selectedGood === good,
+                  'has-background-success-light': isSelected(good),
                 })}
               >
                 <td>
                   <button
-                    data-cy={selectedGood === good
+                    data-cy={isSelected(good)
                       ? 'RemoveButton'
                       : 'AddButton'}
                     type="button"
                     className={classNames(
                       'button',
-                      { 'is-info': selectedGood === good },
+                      { 'is-info': isSelected(good) },
                     )}
-                    onClick={selectedGood === good
+                    onClick={isSelected(good)
                       ? this.removeGood
                       : () => this.addGood(good)}
                   >
-                    {selectedGood === good
+                    {isSelected(good)
                       ? '-'
                       : '+'}
                   </button>
