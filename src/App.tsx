@@ -5,7 +5,6 @@ import './App.scss';
 
 type State = {
   selectedGood: string;
-  title: string;
 };
 
 export const goods = [
@@ -24,20 +23,17 @@ export const goods = [
 export class App extends Component<{}, State> {
   state = {
     selectedGood: 'Jam',
-    title: '',
   };
 
   addItem = (item: string) => {
     this.setState({
       selectedGood: item,
-      title: '',
     });
   };
 
   removeItem = () => {
     this.setState({
       selectedGood: '',
-      title: 'No goods selected',
     });
   };
 
@@ -49,10 +45,10 @@ export class App extends Component<{}, State> {
     } else {
       this.addItem(item);
     }
-  }
+  };
 
   render() {
-    const { selectedGood, title } = this.state;
+    const { selectedGood } = this.state;
 
     function isItemSelected(item: string) {
       return selectedGood === item;
@@ -60,8 +56,8 @@ export class App extends Component<{}, State> {
 
     return (
       <main className="section container">
-        {title ? (
-          <h1 className="title">{title}</h1>
+        {!selectedGood ? (
+          <h1 className="title">No goods selected</h1>
         ) : (
           <h1 className="title is-flex is-align-items-center">
             {`${selectedGood} is selected`}
@@ -77,10 +73,10 @@ export class App extends Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map((item: string, index: number) => (
+            {goods.map((item: string) => (
               <tr
                 data-cy="Good"
-                key={item + String(index)}
+                key={item}
                 className={classNames({
                   'has-background-success-light': isItemSelected(item),
                 })}
