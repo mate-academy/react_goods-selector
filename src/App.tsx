@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -58,11 +59,9 @@ export class App extends React.Component<{}, State> {
                 <tr
                   data-cy="Good"
                   key={good}
-                  className={
-                    good === selectedGood
-                      ? 'has-background-success-light'
-                      : '-'
-                  }
+                  className={classNames({
+                    'has-background-success-light': good === selectedGood,
+                  })}
                 >
                   <td>
                     {
