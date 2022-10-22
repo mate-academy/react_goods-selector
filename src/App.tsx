@@ -21,9 +21,13 @@ export class App extends React.Component {
     selectedGood: 'Jam',
   };
 
-  clearGoods = () => this.setState(
+  removeButton = () => this.setState(
     { selectedGood: '' },
   );
+
+  addButton = (good: string) => this.setState({
+    selectedGood: good,
+  });
 
   render() {
     const { selectedGood } = this.state;
@@ -40,7 +44,7 @@ export class App extends React.Component {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.clearGoods}
+                onClick={this.removeButton}
               />
             </h1>
           )
@@ -53,13 +57,12 @@ export class App extends React.Component {
         <table className="table">
           <tbody>
             {goods.map(good => (
-              <>
+              <React.Fragment key={good}>
                 {
                   good === selectedGood
                     ? (
                       <tr
                         data-cy="Good"
-                        key={good}
                         className={`${
                           'has-background-success-light'
                         }`}
@@ -69,7 +72,7 @@ export class App extends React.Component {
                             data-cy="RemoveButton"
                             type="button"
                             className="button is-info"
-                            onClick={this.clearGoods}
+                            onClick={this.removeButton}
                           >
                             -
                           </button>
@@ -85,16 +88,13 @@ export class App extends React.Component {
                     : (
                       <tr
                         data-cy="Good"
-                        key={good}
                       >
                         <td>
                           <button
                             data-cy="AddButton"
                             type="button"
                             className="button"
-                            onClick={() => (
-                              this.setState({ selectedGood: good })
-                            )}
+                            onClick={() => this.addButton(good)}
                           >
                             +
                           </button>
@@ -108,7 +108,7 @@ export class App extends React.Component {
                       </tr>
                     )
                 }
-              </>
+              </React.Fragment>
             ))}
           </tbody>
         </table>
