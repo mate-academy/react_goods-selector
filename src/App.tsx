@@ -1,18 +1,19 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
-export const goods = [
-  { name: 'Dumplings' },
-  { name: 'Carrot' },
-  { name: 'Eggs' },
-  { name: 'Ice cream' },
-  { name: 'Apple' },
-  { name: 'Bread' },
-  { name: 'Fish' },
-  { name: 'Honey' },
-  { name: 'Jam' },
-  { name: 'Garlic' },
+export const goods: string[] = [
+  'Dumplings',
+  'Carrot',
+  'Eggs',
+  'Ice cream',
+  'Apple',
+  'Bread',
+  'Fish',
+  'Honey',
+  'Jam',
+  'Garlic',
 ];
 
 type State = {
@@ -23,16 +24,25 @@ type Props = {};
 
 export class App extends React.Component<Props, State> {
   state: Readonly<State> = {
-    // eslint-disable-next-line react/no-unused-state
     selectedGood: '',
   };
 
+  saveSelectedItem = (selectedGood: string) => {
+    this.setState({ selectedGood });
+  };
+
+  removeSelectedItem = () => {
+    this.setState({ selectedGood: '' });
+  };
+
   render(): React.ReactNode {
+    const { selectedGood } = this.state;
+
     return (
       <main className="section container">
         <h1 className="title is-flex is-align-items-center">
-          {this.state.selectedGood
-            ? `${this.state.selectedGood} is selected`
+          {selectedGood
+            ? `${selectedGood} is selected`
             : 'No goods selected'}
           {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
           <button
@@ -45,37 +55,43 @@ export class App extends React.Component<Props, State> {
 
         <table className="table">
           <tbody>
-            {goods.map((item) => (
+            {goods.map(item => (
               <tr
                 data-cy="Good"
-                key={item.name}
-                className={`${
-                  item.name === this.state.selectedGood
-                    ? 'has-background-success-light'
-                    : ''
-                }`}
+                className={classNames({
+                  'has-background-success-light':
+                  (item === selectedGood),
+                })}
+                key={item}
               >
                 <td>
-                  <button
-                    data-cy="AddButton"
-                    type="button"
-                    className={`button ${
-                      item.name === this.state.selectedGood ? 'is-info' : ''
-                    }`}
-                    onClick={() => {
-                      if (this.state.selectedGood === item.name) {
-                        this.setState({ selectedGood: '' });
-                      } else {
-                        this.setState({ selectedGood: item.name });
-                      }
-                    }}
-                  >
-                    {item.name === this.state.selectedGood ? '-' : '+'}
-                  </button>
+                  {(item === selectedGood)
+                    ? (
+                      <button
+                        data-cy="RemoveButton"
+                        type="button"
+                        className="button is-info"
+                        onClick={this.removeSelectedItem}
+                      >
+                        -
+                      </button>
+                    )
+                    : (
+                      <button
+                        data-cy="AddButton"
+                        type="button"
+                        className="button"
+                        onClick={() => {
+                          this.saveSelectedItem(item);
+                        }}
+                      >
+                        +
+                      </button>
+                    )}
                 </td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
-                  {item.name}
+                  {item}
                 </td>
               </tr>
             ))}
