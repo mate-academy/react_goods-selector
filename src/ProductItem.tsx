@@ -1,11 +1,13 @@
 import React from 'react';
 import className from 'classnames';
 
-export class ProductItem extends React.Component<{
+interface Props {
   product: string
   itemActive: (name: string) => void
   isActive: boolean
-}> {
+}
+
+export class ProductItem extends React.Component<Props> {
   state: Readonly<{
     product: string
   }> = {
@@ -26,12 +28,8 @@ export class ProductItem extends React.Component<{
             className={className('button', {
               'is-info': this.props.isActive,
             })}
-            onClick={() => {
-              // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-              this.props.isActive
-                ? this.props.itemActive('')
-                : this.props.itemActive(product);
-            }}
+            onClick={() => this.props
+              .itemActive(this.props.isActive ? '' : product)}
           >
             {this.props.isActive
               ? '-'

@@ -18,24 +18,13 @@ export const goods = [
 ];
 
 export class App extends React.Component {
-  constructor(props: string) {
-    super(props);
-
-    this.itemActive = this.itemActive.bind(this);
-  }
-
   state = {
     productTitle: '',
   };
 
-  componentDidUpdate() {
-    // console.log(this.state.product);
-    // console.log(this.state.productTitle);
-  }
-
-  itemActive(name: string) {
+  itemActive = (name: string) => {
     this.setState({ productTitle: name });
-  }
+  };
 
   render() {
     const { productTitle } = this.state;
@@ -64,8 +53,6 @@ export class App extends React.Component {
         <table className="table">
           <tbody>
             {goods.map((product) => {
-              // console.log(productTitle === product);
-
               return (
                 <tr
                   data-cy="Good"
