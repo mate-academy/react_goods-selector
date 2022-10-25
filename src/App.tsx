@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { Component } from 'react';
 import classNames from 'classnames';
@@ -58,7 +57,11 @@ export class App extends Component<{}, State> {
               <tr
                 data-cy="Good"
                 key={good}
-                className={classNames({ 'has-background-success-light': selectedGood === good })}
+                className={
+                  classNames('', {
+                    'has-background-success-light': selectedGood === good,
+                  })
+                }
               >
                 {selectedGood === good
                   ? (
@@ -66,7 +69,9 @@ export class App extends Component<{}, State> {
                       <button
                         data-cy="RemoveButton"
                         type="button"
-                        className={classNames('button', { 'is-info': selectedGood === good })}
+                        className={classNames('button', {
+                          'is-info': selectedGood === good,
+                        })}
                         onClick={this.handleClearGood}
                       >
                         -
