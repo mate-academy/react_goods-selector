@@ -65,9 +65,7 @@ export class App extends React.Component<{}, State> {
                     ? (
                       <tr
                         data-cy="Good"
-                        className={`${
-                          'has-background-success-light'
-                        }`}
+                        className="has-background-success-light"
                       >
                         <td>
                           <button
@@ -79,10 +77,7 @@ export class App extends React.Component<{}, State> {
                             -
                           </button>
                         </td>
-                        <td
-                          data-cy="GoodTitle"
-                          className="is-vcentered"
-                        >
+                        <td data-cy="GoodTitle" className="is-vcentered">
                           {good}
                         </td>
                       </tr>
@@ -99,10 +94,7 @@ export class App extends React.Component<{}, State> {
                             +
                           </button>
                         </td>
-                        <td
-                          data-cy="GoodTitle"
-                          className="is-vcentered"
-                        >
+                        <td data-cy="GoodTitle" className="is-vcentered">
                           {good}
                         </td>
                       </tr>
