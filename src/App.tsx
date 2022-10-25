@@ -18,11 +18,13 @@ export const goods = [
 
 interface State {
   selectedGood: string,
+  noMessage: string,
 }
 
 export class App extends Component<{}, State> {
   state = {
     selectedGood: 'Jam',
+    noMessage: 'No goods selected',
   };
 
   selectGood = (good: string) => {
@@ -34,7 +36,7 @@ export class App extends Component<{}, State> {
   };
 
   render() {
-    const { selectedGood } = this.state;
+    const { selectedGood, noMessage } = this.state;
 
     return (
       <main className="section container">
@@ -57,7 +59,7 @@ export class App extends Component<{}, State> {
                 />
               </>
             )
-            : 'No goods selected'}
+            : noMessage}
         </h1>
 
         <table className="table">
@@ -69,9 +71,9 @@ export class App extends Component<{}, State> {
                 <tr
                   data-cy="Good"
                   key={good}
-                  className={isSelected
-                    ? 'has-background-success-light'
-                    : ''}
+                  className={classNames(
+                    { 'has-background-success-light': isSelected },
+                  )}
                 >
                   <td>
                     {isSelected
