@@ -16,14 +16,18 @@ export const goods = [
   'Garlic',
 ];
 
-export class App extends React.Component {
+interface State {
+  selectedGood: string | null;
+}
+
+export class App extends React.Component<{}, State> {
   state = {
     selectedGood: 'Jam',
   };
 
-  removeButton = () => this.setState(
-    { selectedGood: '' },
-  );
+  removeButton = () => this.setState({
+    selectedGood: '',
+  });
 
   addButton = (good: string) => this.setState({
     selectedGood: good,
@@ -37,9 +41,7 @@ export class App extends React.Component {
         {selectedGood
           ? (
             <h1 className="title is-flex is-align-items-center">
-              {selectedGood}
-              {' '}
-              is selected
+              {`${selectedGood} is selected`}
               <button
                 data-cy="ClearButton"
                 type="button"
@@ -86,9 +88,7 @@ export class App extends React.Component {
                       </tr>
                     )
                     : (
-                      <tr
-                        data-cy="Good"
-                      >
+                      <tr data-cy="Good">
                         <td>
                           <button
                             data-cy="AddButton"
