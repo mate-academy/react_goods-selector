@@ -1,7 +1,7 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable max-len */
-/* eslint-disable react/prefer-stateless-function */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import { Component } from 'react';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -37,7 +37,9 @@ export class App extends Component<{}, State> {
     return (
       <main className="section container">
         <h1
-          className={selectedGood ? 'title is-flex is-align-items-center' : 'title'}
+          className={selectedGood
+            ? 'title is-flex is-align-items-center'
+            : 'title'}
         >
           {selectedGood ? `${selectedGood} is selected` : 'No goods selected' }
           {selectedGood && (
@@ -56,7 +58,7 @@ export class App extends Component<{}, State> {
               <tr
                 data-cy="Good"
                 key={good}
-                className={(selectedGood === good) ? 'has-background-success-light' : ''}
+                className={classNames({ 'has-background-success-light': selectedGood === good })}
               >
                 {selectedGood === good
                   ? (
@@ -64,7 +66,7 @@ export class App extends Component<{}, State> {
                       <button
                         data-cy="RemoveButton"
                         type="button"
-                        className={(selectedGood === good) ? 'button is-info' : 'button'}
+                        className={classNames('button', { 'is-info': selectedGood === good })}
                         onClick={this.handleClearGood}
                       >
                         -
