@@ -77,9 +77,10 @@ export class App extends Component<{}, State> {
                         )
                       }
                       onClick={() => {
-                        this.setState({ selectedGood: good });
                         if (active) {
                           this.setState({ selectedGood: '' });
+                        } else {
+                          this.setState({ selectedGood: good });
                         }
                       }}
                     >
