@@ -4,64 +4,38 @@ import './App.scss';
 import classNames from 'classnames';
 
 export const goods = [
-  {
-    name: 'Dumplings',
-    id: 1,
-  },
-  {
-    name: 'Carrot',
-    id: 2,
-  },
-  {
-    name: 'Eggs',
-    id: 3,
-  },
-  {
-    name: 'Ice cream',
-    id: 4,
-  },
-  {
-    name: 'Apple',
-    id: 5,
-  },
-  {
-    name: 'Bread',
-    id: 6,
-  },
-  {
-    name: 'Fish',
-    id: 7,
-  },
-  {
-    name: 'Honey',
-    id: 8,
-  },
-  {
-    name: 'Jam',
-    id: 9,
-  },
-  {
-    name: 'Garlic',
-    id: 10,
-  },
+  'Dumplings',
+  'Carrot',
+  'Eggs',
+  'Ice cream',
+  'Apple',
+  'Bread',
+  'Fish',
+  'Honey',
+  'Jam',
+  'Garlic',
 ];
 
-interface Good {
-  name: string,
-  id:number,
-}
+// interface Good {
+//   name: string,
+//   id:number,
+// }
 
 type State = {
-  selectedGood: Good | null;
+  selectedGood: string;
 };
 
 export class App extends React.Component<{}, State> {
   state: Readonly<State> = {
-    selectedGood: goods[8],
+    selectedGood: 'Jam',
   };
 
-  selectGood = (good:Good | null) => {
+  selectGood = (good:string) => {
     this.setState({ selectedGood: good });
+  };
+
+  removeSelectedGood = () => {
+    this.setState({ selectedGood: '' });
   };
 
   render() {
@@ -79,13 +53,13 @@ export class App extends React.Component<{}, State> {
             'No goods selected'
           ) : (
             <>
-              {`${selectedGood.name} is selected`}
+              {`${selectedGood} is selected`}
               <button
                 aria-label="Select good"
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => this.selectGood(null)}
+                onClick={this.removeSelectedGood}
               />
             </>
           )}
@@ -94,37 +68,42 @@ export class App extends React.Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map((good) => {
-              const goodIsSelected = good.id === selectedGood?.id;
+              const goodIsSelected = good === selectedGood;
+              const removeOrAdd = goodIsSelected ? 'RemoveButton' : 'AddButton';
 
               return (
-                <tr
-                  key={good.id}
-                  data-cy="Good"
-                  className={classNames({
-                    'has-background-success-light': goodIsSelected,
-                  })}
-                >
-                  <td>
-                    <button
-                      data-cy={goodIsSelected ? 'RemoveButton' : 'AddButton'}
-                      type="button"
-                      className={classNames('button', {
-                        'is-info': goodIsSelected,
-                      })}
-                      onClick={() => this.selectGood(goodIsSelected
-                        ? null
-                        : good)}
-                    >
-                      {goodIsSelected
-                        ? '-'
-                        : '+'}
-                    </button>
-                  </td>
+                <>
+                  <tr
+                    key={good}
+                    data-cy="Good"
+                    className={classNames({
+                      'has-background-success-light': goodIsSelected,
+                    })}
+                  >
+                    <td>
+                      <button
+                        data-cy={removeOrAdd}
+                        type="button"
+                        className={classNames('button', {
+                          'is-info': goodIsSelected,
+                        })}
+                        onClick={goodIsSelected
+                          ? this.removeSelectedGood
+                          : () => {
+                            this.selectGood(good);
+                          }}
+                      >
+                        {goodIsSelected
+                          ? '-'
+                          : '+'}
+                      </button>
+                    </td>
 
-                  <td data-cy="GoodTitle" className="is-vcentered">
-                    {good.name}
-                  </td>
-                </tr>
+                    <td data-cy="GoodTitle" className="is-vcentered">
+                      {good}
+                    </td>
+                  </tr>
+                </>
               );
             })}
           </tbody>
