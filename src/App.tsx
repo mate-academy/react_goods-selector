@@ -36,9 +36,9 @@ export class App extends Component<{}, State> {
     return (
       <main className="section container">
         <h1
-          className={selectedGood
-            ? 'title is-flex is-align-items-center'
-            : 'title'}
+          className={classNames('title', {
+            'is-flex is-align-items-center': selectedGood,
+          })}
         >
           {selectedGood ? `${selectedGood} is selected` : 'No goods selected' }
           {selectedGood && (
@@ -58,7 +58,7 @@ export class App extends Component<{}, State> {
                 data-cy="Good"
                 key={good}
                 className={
-                  classNames('', {
+                  classNames({
                     'has-background-success-light': selectedGood === good,
                   })
                 }
