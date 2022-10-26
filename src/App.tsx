@@ -18,25 +18,23 @@ export const goods = [
 
 interface State {
   selectedGood: string,
-  noMessage: string,
 }
 
 export class App extends Component<{}, State> {
   state = {
     selectedGood: 'Jam',
-    noMessage: 'No goods selected',
   };
 
   selectGood = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
-  removeGood = () => {
-    this.setState({ selectedGood: '' });
+  unselectGood = () => {
+    this.setState({ selectedGood: 'No goods selected' });
   };
 
   render() {
-    const { selectedGood, noMessage } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <main className="section container">
@@ -45,7 +43,7 @@ export class App extends Component<{}, State> {
           { 'is-flex is-align-items-center': selectedGood },
         )}
         >
-          {selectedGood
+          {selectedGood !== 'No goods selected'
             ? (
               <>
                 {`${selectedGood} is selected`}
@@ -55,11 +53,11 @@ export class App extends Component<{}, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={this.removeGood}
+                  onClick={this.unselectGood}
                 />
               </>
             )
-            : noMessage}
+            : selectedGood}
         </h1>
 
         <table className="table">
@@ -82,7 +80,7 @@ export class App extends Component<{}, State> {
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
-                          onClick={this.removeGood}
+                          onClick={this.unselectGood}
                         >
                           -
                         </button>
