@@ -17,37 +17,37 @@ export const goods: string[] = [
 ];
 
 type State = {
-  selectedItem: string;
+  selectedGood: string;
 };
 
 export class App extends React.Component<{}, State> {
   state: Readonly<State> = {
-    selectedItem: 'Jam',
+    selectedGood: 'Jam',
   };
 
-  saveSelectedItem = (selectedItem: string) => {
-    this.setState({ selectedItem });
+  setSelectedGood = (selectedGood: string) => {
+    this.setState({ selectedGood });
   };
 
-  removeSelectedItem = () => {
-    this.setState({ selectedItem: '' });
+  unselectGood = () => {
+    this.setState({ selectedGood: '' });
   };
 
   render() {
-    const { selectedItem } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <main className="section container">
-        {selectedItem
+        {selectedGood
           ? (
             <h1 className="title is-flex is-align-items-center">
-              {`${selectedItem} is selected`}
+              {`${selectedGood} is selected`}
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.removeSelectedItem}
+                onClick={this.unselectGood}
               />
             </h1>
           )
@@ -62,18 +62,18 @@ export class App extends React.Component<{}, State> {
               <tr
                 data-cy="Good"
                 className={classNames({
-                  'has-background-success-light': (item === selectedItem),
+                  'has-background-success-light': (item === selectedGood),
                 })}
                 key={item}
               >
                 <td>
-                  {(item === selectedItem)
+                  {(item === selectedGood)
                     ? (
                       <button
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={this.removeSelectedItem}
+                        onClick={this.unselectGood}
                       >
                         -
                       </button>
@@ -84,7 +84,7 @@ export class App extends React.Component<{}, State> {
                         type="button"
                         className="button"
                         onClick={() => {
-                          this.saveSelectedItem(item);
+                          this.setSelectedGood(item);
                         }}
                       >
                         +
