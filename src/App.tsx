@@ -25,13 +25,13 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleAddGood = (word: string) => {
+  selectGood = (word: string) => {
     this.setState({
       selectedGood: word,
     });
   };
 
-  handleRemoveGood = () => this.setState({ selectedGood: '' });
+  unselectGood = () => this.setState({ selectedGood: '' });
 
   render() {
     const { selectedGood } = this.state;
@@ -47,7 +47,7 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.handleRemoveGood}
+                onClick={this.unselectGood}
               />
             </h1>
           )
@@ -56,28 +56,28 @@ export class App extends Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map((good) => {
-              const checked = selectedGood === good;
+              const isGoodSelected = selectedGood === good;
 
               return (
                 <tr
                   data-cy="Good"
                   key={good}
                   className={classNames(
-                    { 'has-background-success-light': checked },
+                    { 'has-background-success-light': isGoodSelected },
                   )}
                 >
                   <td>
                     <button
-                      data-cy={checked ? 'RemoveButton' : 'AddButton'}
+                      data-cy={isGoodSelected ? 'RemoveButton' : 'AddButton'}
                       type="button"
-                      className={`button ${checked && 'is-info'}`}
+                      className={`button ${isGoodSelected && 'is-info'}`}
                       onClick={() => {
-                        return checked
-                          ? this.handleRemoveGood()
-                          : this.handleAddGood(good);
+                        return isGoodSelected
+                          ? this.unselectGood()
+                          : this.selectGood(good);
                       }}
                     >
-                      {checked
+                      {isGoodSelected
                         ? '-'
                         : '+'}
                     </button>
