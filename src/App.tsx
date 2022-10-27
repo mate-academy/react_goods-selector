@@ -53,10 +53,37 @@ export class App extends Component<{}, State> {
           )
           : <h1 className="title">No goods selected</h1>}
 
+        <h1
+          className={classNames('title',
+            { 'is-flex is-align-items-center': selectedGood })}
+        >
+          {selectedGood
+            ? (
+              <>
+                {`${selectedGood} is selected`}
+                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+                <button
+                  data-cy="ClearButton"
+                  type="button"
+                  className="delete ml-3"
+                  onClick={this.unselectGood}
+                />
+              </>
+            )
+            : 'No goods selected'}
+
+        </h1>
+
         <table className="table">
           <tbody>
             {goods.map((good) => {
               const isGoodSelected = selectedGood === good;
+
+              const handleSelection = () => {
+                return isGoodSelected
+                  ? this.unselectGood()
+                  : this.selectGood(good);
+              };
 
               return (
                 <tr
@@ -71,11 +98,7 @@ export class App extends Component<{}, State> {
                       data-cy={isGoodSelected ? 'RemoveButton' : 'AddButton'}
                       type="button"
                       className={`button ${isGoodSelected && 'is-info'}`}
-                      onClick={() => {
-                        return isGoodSelected
-                          ? this.unselectGood()
-                          : this.selectGood(good);
-                      }}
+                      onClick={handleSelection}
                     >
                       {isGoodSelected
                         ? '-'
