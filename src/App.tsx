@@ -1,7 +1,7 @@
-import React from 'react';
+import { Component } from 'react';
 import 'bulma/css/bulma.css';
-import './App.scss';
 import classNames from 'classnames';
+import './App.scss';
 
 export const goods = [
   'Dumplings',
@@ -20,74 +20,89 @@ type State = {
   selectedGood: string,
 };
 
-export class App extends React.Component<{}, State> {
+// eslint-disable-next-line react/prefer-stateless-function
+export class App extends Component<{}, State> {
   state: Readonly<State> = {
     selectedGood: 'Jam',
+  };
+
+  equalElement = (good: string) => {
+    if (this.state.selectedGood === good) {
+      this.setState({ selectedGood: '' });
+    } else {
+      this.setState({ selectedGood: good });
+    }
   };
 
   render() {
     const { selectedGood } = this.state;
 
     return (
-      <main className="App">
-        <header className="App__header">
-          <h1 className="App__title">
-            {selectedGood
-              ? `${selectedGood} is selected`
-              : 'No goods selected'}
-          </h1>
+      <main className="section container">
+        {selectedGood ? (
+          <h1 className="title is-flex is-align-items-center">
+            {`${selectedGood} is selected`}
 
-          {this.state.selectedGood.length > 0 && (
+            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <button
+              data-cy="ClearButton"
               type="button"
-              className="App__clear"
+              className="delete ml-3"
               onClick={() => {
                 this.setState({ selectedGood: '' });
               }}
-            >
-              Clear
-            </button>
-          )}
+            />
+          </h1>
+        ) : (<h1 className="title">No goods selected</h1>)}
 
-        </header>
-
-        <ul>
-          {goods.map(good => (
-            <li
-              className={classNames(
-                'Good',
-                { 'Good--active': good === selectedGood },
-              )}
-              key={good}
-            >
-              {good}
-
-              {good === selectedGood && (
-                <button
-                  type="button"
-                  className="Good__remove"
-                  onClick={() => {
-                    this.setState({ selectedGood: '' });
-                  }}
+        <table className="table">
+          <tbody>
+            {goods.map(good => {
+              return (
+                <tr
+                  data-cy="Good"
+                  key={good}
+                  className={
+                    classNames(
+                      { 'has-background-success-light': good === selectedGood },
+                    )
+                  }
                 >
-                  Remove
-                </button>
-              )}
-
-              {good !== selectedGood && (
-                <button
-                  type="button"
-                  className="Good__select"
-                  onClick={() => {
-                    this.setState({ selectedGood: good });
-                  }}
-                >
-                  Select
-                </button>
-              )}
-            </li>
-          ))}
-        </ul>
+                  <td>
+                    {selectedGood === good
+                      ? (
+                        <button
+                          data-cy="RemoveButton"
+                          type="button"
+                          className="button is-info"
+                          onClick={() => {
+                            this.equalElement(good);
+                          }}
+                        >
+                          -
+                        </button>
+                      )
+                      : (
+                        <button
+                          data-cy="AddButton"
+                          type="button"
+                          className="button"
+                          onClick={() => {
+                            this.equalElement(good);
+                          }}
+                        >
+                          +
+                        </button>
+                      )}
+                  </td>
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </main>
     );
   }
