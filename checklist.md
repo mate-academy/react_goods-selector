@@ -18,7 +18,7 @@ handleClick = () => {
 
 BAD EXAMPLE:
 ```jsx
-<button 
+<button
   type="button"
   onClick={() => {}}
 >
@@ -31,7 +31,7 @@ GOOD EXAMPLE:
 handleClick = () => {};
 
 return (
-  <button 
+  <button
     type="button"
     onClick={handleClick}
   >
@@ -48,7 +48,7 @@ BAD EXAMPLE:
 handleClick = () => console.log(333);
 
 return (
-  <button 
+  <button
     type="button"
     onClick={() => this.handleClick()}
   >
@@ -63,7 +63,7 @@ GOOD EXAMPLE:
 handleClick = () => console.log(333);
 
 return (
-  <button 
+  <button
     type="button"
     onClick={this.handleClick}
   >
@@ -77,7 +77,7 @@ BAD EXAMPLE:
 handleClick = (event) => console.log(event);
 
 return (
-  <button 
+  <button
     type="button"
     onClick={(event) => this.handleClick(event)}
   >
@@ -91,7 +91,7 @@ GOOD EXAMPLE:
 handleClick = (event) => console.log(event);
 
 return (
-  <button 
+  <button
     type="button"
     onClick={this.handleClick}
   >
