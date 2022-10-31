@@ -2,6 +2,8 @@ import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
+import classNames from 'classnames';
+
 export const goods = [
   'Dumplings',
   'Carrot',
@@ -16,7 +18,7 @@ export const goods = [
 ];
 
 type State = {
-  selectedGoods: string | null,
+  selectedGoods: string,
 };
 
 export class App extends React.Component<{}, State> {
@@ -32,10 +34,7 @@ export class App extends React.Component<{}, State> {
         {selectedGoods
           ? (
             <h1 className="title is-flex is-align-items-center">
-              {selectedGoods}
-              {' '}
-              is selected
-
+              {`${selectedGoods} is selected`}
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
@@ -56,9 +55,10 @@ export class App extends React.Component<{}, State> {
                 data-cy="Good"
                 key={item}
                 className={
-                  selectedGoods === item
-                    ? ('has-background-success-light')
-                    : ('')
+                  classNames(
+                    '',
+                    { 'has-background-success-light': selectedGoods === item },
+                  )
                 }
               >
                 <td>
@@ -70,9 +70,11 @@ export class App extends React.Component<{}, State> {
                     }
                     type="button"
                     className={
-                      selectedGoods === item
-                        ? ('button is-info')
-                        : ('button')
+
+                      classNames(
+                        'button',
+                        { 'is-info': selectedGoods === item },
+                      )
                     }
                     onClick={() => {
                       this.setState({ selectedGoods: item });
