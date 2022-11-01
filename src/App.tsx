@@ -18,31 +18,38 @@ export const goods = [
 ];
 
 type State = {
-  selectedGoods: string,
+  selectedGood: string,
 };
 
 export class App extends React.Component<{}, State> {
   state = {
-    selectedGoods: 'Jam',
+    selectedGood: 'Jam',
   };
 
+  clearElement = () => {
+    this.setState({ selectedGood: '' });
+  };
+
+  isSelected = (item: string) => (
+    this.state.selectedGood === item
+  );
+
   render() {
-    const { selectedGoods } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <main className="section container">
-        {selectedGoods
+        {selectedGood
           ? (
             <h1 className="title is-flex is-align-items-center">
-              {`${selectedGoods} is selected`}
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+              {`${selectedGood} is selected`}
+
               <button
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  this.setState({ selectedGoods: '' });
-                }}
+                aria-label="ClearButton"
+                onClick={this.clearElement}
               />
             </h1>
           )
@@ -57,14 +64,14 @@ export class App extends React.Component<{}, State> {
                 className={
                   classNames(
                     '',
-                    { 'has-background-success-light': selectedGoods === item },
+                    { 'has-background-success-light': this.isSelected(item) },
                   )
                 }
               >
                 <td>
                   <button
                     data-cy={
-                      selectedGoods === item
+                      this.isSelected(item)
                         ? ('RemoveButton')
                         : ('AddButton')
                     }
@@ -73,17 +80,17 @@ export class App extends React.Component<{}, State> {
 
                       classNames(
                         'button',
-                        { 'is-info': selectedGoods === item },
+                        { 'is-info': this.isSelected(item) },
                       )
                     }
                     onClick={() => {
-                      this.setState({ selectedGoods: item });
-                      if (selectedGoods === item) {
-                        this.setState({ selectedGoods: '' });
+                      this.setState({ selectedGood: item });
+                      if (this.isSelected(item)) {
+                        this.clearElement();
                       }
                     }}
                   >
-                    {selectedGoods === item
+                    {this.isSelected(item)
                       ? ('-')
                       : ('+')}
                   </button>
