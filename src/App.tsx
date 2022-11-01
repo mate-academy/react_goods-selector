@@ -24,7 +24,13 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  isSelectedGood = (good: string) => {
+  isSelectedGood = (button: HTMLButtonElement, good: string): void => {
+    if (button.classList.contains('is-info')) {
+      this.setState({ selectedGood: '' });
+
+      return;
+    }
+
     this.setState({ selectedGood: good });
   };
 
@@ -37,12 +43,10 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        { !selectedGood.length
-          ? (<h1 className="title">No goods selected</h1>)
-          : ''}
+        { !selectedGood && <h1 className="title">No goods selected</h1>}
 
-        {selectedGood.length
-          ? (
+        {selectedGood
+          && (
             <h1 className="title is-flex is-align-items-center">
               {selectedGood}
               {' '}
@@ -55,8 +59,7 @@ export class App extends React.Component<{}, State> {
                 onClick={() => this.clearList()}
               />
             </h1>
-          )
-          : ''}
+          )}
 
         <table className="table">
           <tbody>
@@ -70,15 +73,17 @@ export class App extends React.Component<{}, State> {
               >
                 <td>
                   <button
-                    data-cy="AddButton"
                     type="button"
-                    onClick={() => {
-                      this.isSelectedGood(good);
+                    onClick={(event) => {
+                      this.isSelectedGood(event.currentTarget, good);
                     }}
                     className={classNames(
                       'button',
                       { 'is-info': selectedGood === good },
                     )}
+                    data-cy={selectedGood === good
+                      ? 'RemoveButton'
+                      : 'AddButton'}
                   >
                     {selectedGood === good ? '-' : '+'}
                   </button>
