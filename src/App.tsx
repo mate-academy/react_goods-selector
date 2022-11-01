@@ -19,7 +19,7 @@ export const goods = [
 type State = {
   selectedGood: string,
 };
-
+//
 export class App extends React.Component<{}, State> {
   state: Readonly<State> = {
     selectedGood: 'Jam',
