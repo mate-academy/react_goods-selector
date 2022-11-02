@@ -1,85 +1,55 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
-export const goods = [
-  'Dumplings',
-  'Carrot',
-  'Eggs',
-  'Ice cream',
-  'Apple',
-  'Bread',
-  'Fish',
-  'Honey',
-  'Jam',
-  'Garlic',
-];
+interface Good {
+  id: number;
+  color: string;
+  name: string;
+}
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+const API_URL
+  = 'https://mate-academy.github.io/react_dynamic-list-of-goods/goods.json';
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+async function getData() {
+  // const data = fetch(API_URL)
+  //   .then((response) => {
+  //     return response.json();
+  //   });
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+  const response = await fetch(API_URL);
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+  return response.json();
+}
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+export const App: React.FC = () => {
+  const [goods, setGoods] = useState<Good[]>([]);
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+  async function loadData() {
+    const goodsFromServer = await getData();
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+    setGoods(goodsFromServer);
+  }
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+  useEffect(() => {
+    // getData()
+    //   .then((dataFromServer) => {
+    //     setGoods(dataFromServer);
+    //   });
+    loadData();
+  }, []);
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+  return (
+    <main className="section container">
+      {goods.length === 0 && (
+        <h1 className="title">No goods selected</h1>
+      )}
+
+      {goods.map(good => (
+        <p key={good.id}>
+          {good.name}
+        </p>
+      ))}
+    </main>
+  );
+};
