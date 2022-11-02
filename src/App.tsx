@@ -21,7 +21,7 @@ type State = {
 
 export class App extends React.Component<{}, State> {
   state = {
-    selectedGood: '',
+    selectedGood: 'Jam',
   };
 
   handleAdd = (good: string) => {
