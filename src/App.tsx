@@ -34,25 +34,31 @@ export class App extends React.Component<{}, State> {
     this.state.selectedGood === item
   );
 
+  removeSelectedElement = (item: string) => {
+    this.setState({ selectedGood: item });
+    if (this.isSelected(item)) {
+      this.clearElement();
+    }
+  };
+
   render() {
     const { selectedGood } = this.state;
 
     return (
       <main className="section container">
-        {selectedGood
-          ? (
-            <h1 className="title is-flex is-align-items-center">
-              {`${selectedGood} is selected`}
+        {selectedGood ? (
+          <h1 className="title is-flex is-align-items-center">
+            {`${selectedGood} is selected`}
 
-              <button
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-                aria-label="ClearButton"
-                onClick={this.clearElement}
-              />
-            </h1>
-          )
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              aria-label="ClearButton"
+              onClick={this.clearElement}
+            />
+          </h1>
+        )
           : (<h1 className="title">No goods selected</h1>)}
 
         <table className="table">
@@ -77,18 +83,12 @@ export class App extends React.Component<{}, State> {
                     }
                     type="button"
                     className={
-
                       classNames(
                         'button',
                         { 'is-info': this.isSelected(item) },
                       )
                     }
-                    onClick={() => {
-                      this.setState({ selectedGood: item });
-                      if (this.isSelected(item)) {
-                        this.clearElement();
-                      }
-                    }}
+                    onClick={() => this.removeSelectedElement(item)}
                   >
                     {this.isSelected(item)
                       ? ('-')
