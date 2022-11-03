@@ -49,36 +49,40 @@ export class App extends React.Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map((good) => (
-              <tr
-                key={good}
-                data-cy="Good"
-                className={classNames({
-                  'has-background-success-light': selectedGood === good,
-                })}
-              >
-                <td>
-                  <button
-                    type="button"
-                    onClick={() => (selectedGood === good
-                      ? this.setState({ selectedGood: '' })
-                      : this.setState({ selectedGood: good }))}
-                    className={classNames(
-                      'button',
-                      { 'is-info': selectedGood === good },
-                    )}
-                    data-cy={selectedGood === good
-                      ? 'RemoveButton'
-                      : 'AddButton'}
-                  >
-                    {selectedGood === good ? '-' : '+'}
-                  </button>
-                </td>
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            ))}
+            {goods.map((good) => {
+              const isSelected = selectedGood === good;
+
+              return (
+                <tr
+                  key={good}
+                  data-cy="Good"
+                  className={classNames({
+                    'has-background-success-light': isSelected,
+                  })}
+                >
+                  <td>
+                    <button
+                      type="button"
+                      onClick={() => (isSelected
+                        ? this.setState({ selectedGood: '' })
+                        : this.setState({ selectedGood: good }))}
+                      className={classNames(
+                        'button',
+                        { 'is-info': isSelected },
+                      )}
+                      data-cy={isSelected
+                        ? 'RemoveButton'
+                        : 'AddButton'}
+                    >
+                      {isSelected ? '-' : '+'}
+                    </button>
+                  </td>
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </main>
