@@ -24,20 +24,6 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  isSelectedGood = (button: HTMLButtonElement, good: string): void => {
-    if (button.classList.contains('is-info')) {
-      this.setState({ selectedGood: '' });
-
-      return;
-    }
-
-    this.setState({ selectedGood: good });
-  };
-
-  clearList = () => {
-    this.setState({ selectedGood: '' });
-  };
-
   render() {
     const { selectedGood } = this.state;
 
@@ -56,7 +42,7 @@ export class App extends React.Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => this.clearList()}
+                onClick={() => this.setState({ selectedGood: '' })}
               />
             </h1>
           )}
@@ -74,9 +60,9 @@ export class App extends React.Component<{}, State> {
                 <td>
                   <button
                     type="button"
-                    onClick={(event) => {
-                      this.isSelectedGood(event.currentTarget, good);
-                    }}
+                    onClick={() => (selectedGood === good
+                      ? this.setState({ selectedGood: '' })
+                      : this.setState({ selectedGood: good }))}
                     className={classNames(
                       'button',
                       { 'is-info': selectedGood === good },
