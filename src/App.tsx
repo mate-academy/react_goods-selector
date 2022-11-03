@@ -73,7 +73,7 @@ export class App extends React.Component {
                         type="button"
                         className="button is-info"
                         onClick={() => {
-                          this.setState({ selectedGood: '' });
+                          this.saveHandler('');
                         }}
                       >
                         -
