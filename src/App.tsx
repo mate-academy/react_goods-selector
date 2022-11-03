@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import classNames from 'classnames';
 import 'bulma/css/bulma.css';
+
 import './App.scss';
 
 export const goods = [
@@ -25,6 +26,10 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  onHandleSetSelectedGood(value: string) {
+    this.setState({ selectedGood: value });
+  }
+
   render() {
     const { selectedGood } = this.state;
 
@@ -40,9 +45,7 @@ export class App extends Component<{}, State> {
                 type="button"
                 className="delete ml-3"
                 aria-label="Remove goods"
-                onClick={() => {
-                  this.setState({ selectedGood: '' });
-                }}
+                onClick={() => this.onHandleSetSelectedGood('')}
               />
             </h1>
           )
@@ -71,9 +74,7 @@ export class App extends Component<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={() => {
-                          this.setState({ selectedGood: '' });
-                        }}
+                        onClick={() => this.onHandleSetSelectedGood('')}
                       >
                         -
                       </button>
@@ -83,9 +84,7 @@ export class App extends Component<{}, State> {
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={() => {
-                          this.setState({ selectedGood: good });
-                        }}
+                        onClick={() => this.onHandleSetSelectedGood(good)}
                       >
                         +
                       </button>
