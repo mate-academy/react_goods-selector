@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -20,14 +21,10 @@ export class App extends React.Component {
     selectedGood: 'Jam',
   };
 
-  setGood = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const goodName = event.currentTarget.closest('tr')
-      ?.querySelector('.is-vcentered')
-      ?.textContent;
+  setGood = (good: string): void => {
+    this.setState({ selectedGood: good });
 
-    this.setState({ selectedGood: goodName });
-
-    if (this.state.selectedGood === goodName) {
+    if (this.state.selectedGood === good) {
       this.setState({ selectedGood: '' });
     }
   };
@@ -41,16 +38,16 @@ export class App extends React.Component {
 
     const goodIsSelectedMessage = (
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood}
-        {' is selected'}
+        {`${selectedGood} is selected`}
 
-        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
         <button
           data-cy="ClearButton"
           type="button"
           className="delete ml-3"
           onClick={this.removeGood}
-        />
+        >
+          &#8291;
+        </button>
       </h1>
     );
 
@@ -71,18 +68,18 @@ export class App extends React.Component {
               <tr
                 data-cy="Good"
                 key={good}
-                className={selectedGood === good
-                  ? 'has-background-success-light'
-                  : ''}
+                className={classNames({
+                  'has-background-success-light': selectedGood === good,
+                })}
               >
                 <td>
                   <button
                     data-cy="AddButton"
                     type="button"
-                    className={selectedGood === good
-                      ? 'button is-info'
-                      : 'button'}
-                    onClick={this.setGood}
+                    className={classNames('button', {
+                      'is-info': selectedGood === good,
+                    })}
+                    onClick={() => this.setGood(good)}
                   >
                     {selectedGood === good ? '-' : '+'}
                   </button>
