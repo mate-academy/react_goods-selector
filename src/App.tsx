@@ -17,7 +17,7 @@ export const goods = [
 ];
 
 type State = {
-  selectedGood: string;
+  selectedGood: string | null;
 };
 
 export class App extends React.Component<{}, State> {
@@ -26,8 +26,12 @@ export class App extends React.Component<{}, State> {
   };
 
   removeSelection = () => (
-    this.setState({ selectedGood: '' })
+    this.setState({ selectedGood: null })
   );
+
+  addSelection = (good: string) => {
+    this.setState({ selectedGood: good });
+  };
 
   render() {
     const { selectedGood } = this.state;
@@ -68,9 +72,7 @@ export class App extends React.Component<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={() => {
-                          this.setState({ selectedGood: '' });
-                        }}
+                        onClick={this.removeSelection}
                       >
                         -
                       </button>
@@ -80,9 +82,7 @@ export class App extends React.Component<{}, State> {
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={() => {
-                          this.setState({ selectedGood: good });
-                        }}
+                        onClick={() => this.addSelection(good)}
                       >
                         +
                       </button>
