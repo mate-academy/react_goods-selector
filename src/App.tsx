@@ -31,11 +31,10 @@ export class App extends React.Component<{}, State> {
         {this.state.selectedGood ? (
           <h1 className="title is-flex is-align-items-center">
             {`${this.state.selectedGood} is selected`}
-
-            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <button
               data-cy="ClearButton"
               type="button"
+              aria-label="x"
               className="delete ml-3"
               onClick={() => {
                 this.setState({ selectedGood: '' });
@@ -45,6 +44,7 @@ export class App extends React.Component<{}, State> {
         ) : (
           <h1 className="title">No goods selected</h1>
         )}
+
         <table className="table">
           <tbody>
             {goods.map(item => {
@@ -83,6 +83,7 @@ export class App extends React.Component<{}, State> {
                       </button>
                     </td>
                   )}
+
                   <td
                     data-cy="GoodTitle"
                     className="is-vcentered"
