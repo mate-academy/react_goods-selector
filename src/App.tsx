@@ -24,6 +24,16 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  selectItem = (good: string) => {
+    if (good === this.state.selectedGood) {
+      this.setState({ selectedGood: '' });
+    }
+
+    if (good !== this.state.selectedGood) {
+      this.setState({ selectedGood: good });
+    }
+  };
+
   render() {
     const {
       selectedGood,
@@ -35,17 +45,13 @@ export class App extends React.Component<{}, State> {
           ? (
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
-
-              {selectedGood && (
-              /* eslint-disable-next-line jsx-a11y/control-has-associated-label */
-                <button
-                  data-cy="ClearButton"
-                  type="button"
-                  className="delete ml-3"
-                  onClick={() => this.setState({ selectedGood: '' })}
-                />
-              )}
-
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={() => this.setState({ selectedGood: '' })}
+              />
             </h1>
           )
           : (
@@ -83,7 +89,7 @@ export class App extends React.Component<{}, State> {
                       : (
                         'button'
                       )}
-                    onClick={() => this.setState({ selectedGood: good })}
+                    onClick={() => this.selectItem(good)}
                   >
                     {good === selectedGood ? ('-') : ('+')}
                   </button>
