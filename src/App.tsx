@@ -38,17 +38,12 @@ export class App extends React.Component<{}, State> {
 
   render() {
     const { selectedGood } = this.state;
-    let message = 'No goods selected';
-
-    if (selectedGood) {
-      message = `${selectedGood} is selected`;
-    }
 
     return (
       <main className="section container">
 
         <h1 className="title is-flex is-align-items-center">
-          {message}
+          {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
 
           {selectedGood && (
             <button
@@ -69,8 +64,7 @@ export class App extends React.Component<{}, State> {
                 key={good}
                 className={classNames('Good',
                   {
-                    'has-background-success-light': selectedGood
-                      .includes(good),
+                    'has-background-success-light': selectedGood === good,
                   })}
               >
                 <td>
