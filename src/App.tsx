@@ -73,9 +73,7 @@ export class App extends React.Component<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={() => {
-                          this.handleClose();
-                        }}
+                        onClick={() => this.handleClose()}
                       >
                         -
                       </button>
@@ -86,9 +84,7 @@ export class App extends React.Component<{}, State> {
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={() => {
-                          this.handleAdd(good);
-                        }}
+                        onClick={() => this.handleAdd(good)}
                       >
                         +
                       </button>
