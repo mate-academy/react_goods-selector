@@ -26,16 +26,16 @@ export class App extends React.Component<{}, State> {
   };
 
   render() {
+    const goodsSelectedMessage = `${this.state.selectedProduct} is selected`;
+
     return (
       <main className="section container">
         <h1 className="title is-flex is-align-items-center">
           {
             this.state.selectedProduct
-              ? `${this.state.selectedProduct} is selected`
+              ? goodsSelectedMessage
               : 'No goods selected'
           }
-
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
           {
             this.state.selectedProduct && (
               <button
@@ -66,34 +66,35 @@ export class App extends React.Component<{}, State> {
                   }
                 >
                   <td>
-                    {
-                      this.state.selectedProduct !== product
-                        ? (
-                          <button
-                            data-cy="AddButton"
-                            type="button"
-                            className="button"
-                            onClick={() => {
-                              this.setState({ selectedProduct: product });
-                            }}
-                          >
-                            +
-                          </button>
+                    <button
+                      data-cy={
+                        this.state.selectedProduct !== product
+                          ? 'AddButton'
+                          : 'RemoveButton'
+                      }
+                      type="button"
+                      className={
+                        classNames(
+                          'button',
+                          { 'is-info': this.state.selectedProduct === product },
                         )
-                        : (
-                          <button
-                            data-cy="RemoveButton"
-                            type="button"
-                            className="button is-info"
-                            onClick={() => {
-                              this.setState({ selectedProduct: '' });
-                            }}
-                          >
-                            -
-                          </button>
-                        )
-                    }
-
+                      }
+                      onClick={
+                        this.state.selectedProduct !== product
+                          ? () => {
+                            this.setState({ selectedProduct: product });
+                          }
+                          : () => {
+                            this.setState({ selectedProduct: '' });
+                          }
+                      }
+                    >
+                      {
+                        this.state.selectedProduct !== product
+                          ? '+'
+                          : '-'
+                      }
+                    </button>
                   </td>
 
                   <td data-cy="GoodTitle" className="is-vcentered">
@@ -102,7 +103,6 @@ export class App extends React.Component<{}, State> {
                 </tr>
               ))
             }
-
           </tbody>
         </table>
       </main>
