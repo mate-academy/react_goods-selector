@@ -30,9 +30,9 @@ export class App extends React.Component<{}, State> {
   };
 
   handleAddRemoveButton = (good: string) => {
-    const { selectedGood } = this.state;
-
-    this.setState({ selectedGood: (selectedGood === good) ? '' : good });
+    this.setState((state) => (
+      { selectedGood: (state.selectedGood === good) ? '' : good }
+    ));
   };
 
   render() {
