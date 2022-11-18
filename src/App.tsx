@@ -59,7 +59,11 @@ export class App extends React.Component {
             {goods.map(good => (
               selectedGood === good
                 ? (
-                  <tr data-cy="Good" className="has-background-success-light">
+                  <tr
+                    data-cy="Good"
+                    className="has-background-success-light"
+                    key={good}
+                  >
                     <td>
                       <button
                         data-cy="RemoveButton"
@@ -77,7 +81,7 @@ export class App extends React.Component {
                   </tr>
                 )
                 : (
-                  <tr data-cy="Good">
+                  <tr data-cy="Good" key={good}>
                     <td>
                       <button
                         data-cy="AddButton"
