@@ -34,19 +34,20 @@ export class App extends Component<{}, State> {
 
     return (
       <main className="section container">
-        {selectedGood === '' ? (
+        {!selectedGood ? (
           <h1 className="title">No goods selected</h1>
         ) : (
           <h1 className="title is-flex is-align-items-center">
             {selectedGood}
             {' is selected'}
-            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <button
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
               onClick={this.cleanButton}
-            />
+            >
+              x
+            </button>
           </h1>
         )}
         <table className="table">
@@ -55,9 +56,9 @@ export class App extends Component<{}, State> {
               <tr
                 data-cy="Good"
                 key={good}
-                className={selectedGood === good
-                  ? 'has-background-success-light'
-                  : ''}
+                className={className({
+                  'has-background-success-light': selectedGood === good,
+                })}
               >
                 <td>
                   <button
@@ -73,9 +74,15 @@ export class App extends Component<{}, State> {
                         'is-info': selectedGood === good,
                       },
                     )}
-                    onClick={() => {
-                      this.setState({ selectedGood: good });
-                    }}
+                    onClick={
+                      selectedGood === good
+                        ? () => {
+                          this.setState({ selectedGood: '' });
+                        }
+                        : () => {
+                          this.setState({ selectedGood: good });
+                        }
+                    }
                   >
                     {selectedGood === good ? '-' : '+'}
                   </button>
