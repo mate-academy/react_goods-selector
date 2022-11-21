@@ -40,14 +40,13 @@ export class App extends React.Component {
         {selectedGood
           ? (
             <h1 className="title is-flex is-align-items-center">
-              {selectedGood}
-              {' is selected'}
+              {`${selectedGood} is selected`}
 
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
+                aria-label="ClearButton"
                 onClick={this.removeSelection}
               />
             </h1>
