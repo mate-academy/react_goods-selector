@@ -39,19 +39,21 @@ export class App extends Component<{}, State> {
     return (
       <main className="section container">
 
-        <h1 className="title is-flex is-align-items-center">
-          {selectedGood
-            ? `${selectedGood} is selected`
-            : 'No goods selected'}
+        {selectedGood
+          ? (
+            <h1 className="title is-flex is-align-items-center">
+              {`${selectedGood} is selected`}
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.clearGoodOnClick}
 
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-          <button
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-            onClick={this.clearGoodOnClick}
-          />
-        </h1>
+              />
+            </h1>
+          )
+          : <h1 className="title">No goods selected</h1>}
 
         <table className="table">
           <tbody>
