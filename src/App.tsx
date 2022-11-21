@@ -15,24 +15,90 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+type State = {
+  selectedGood: string,
+};
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+export class App extends React.Component<{}, State> {
+  state: Readonly<State> = {
+    selectedGood: `${goods[8]} is selected`,
+  };
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+  render() {
+    const { selectedGood } = this.state;
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
+    return (
+      <main className="section container">
+        {selectedGood.length === 0
+          ? <h1 className="title">No goods selected</h1>
+          : (
+            <h1 className="title is-flex is-align-items-center">
+              {selectedGood}
+
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={() => {
+                  this.setState({ selectedGood: '' });
+                }}
+              />
+            </h1>
+          )}
+
+        <table className="table">
+          <tbody>
+            {goods.map(good => (
+              <tr
+                data-cy="Good"
+                key={good}
+                className={
+                  selectedGood === `${good} is selected`
+                    ? 'has-background-success-light'
+                    : ''
+                }
+              >
+                <td>
+                  {
+                    selectedGood !== `${good} is selected`
+                      ? (
+                        <button
+                          data-cy="AddButton"
+                          type="button"
+                          className="button"
+                          onClick={() => {
+                            this.setState({
+                              selectedGood: `${good} is selected`,
+                            });
+                          }}
+                        >
+                          +
+                        </button>
+                      )
+                      : (
+                        <button
+                          data-cy="RemoveButton"
+                          type="button"
+                          className="button is-info"
+                          onClick={() => {
+                            this.setState({
+                              selectedGood: '',
+                            });
+                          }}
+                        >
+                          -
+                        </button>
+                      )
+                  }
+                </td>
+
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            ))}
+            {/* <tr data-cy="Good">
           <td>
             <button
               data-cy="AddButton"
@@ -78,8 +144,10 @@ export const App: React.FC = () => (
           <td data-cy="GoodTitle" className="is-vcentered">
             Garlic
           </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+        </tr> */}
+          </tbody>
+        </table>
+      </main>
+    );
+  }
+}
