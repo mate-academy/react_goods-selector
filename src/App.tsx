@@ -22,18 +22,18 @@ type State = {
 
 export class App extends React.Component<{}, State> {
   state: Readonly<State> = {
-    selectedGood: `${goods[8]} is selected`,
+    selectedGood: 'Jam',
   };
 
-  handleClickClearButton = () => {
+  clearSelectOnClick = () => {
     this.setState({
       selectedGood: '',
     });
   };
 
-  handleAddButton = (currenGood: string) => {
+  selectOnClick = (currentGood: string) => {
     this.setState({
-      selectedGood: `${currenGood} is selected`,
+      selectedGood: currentGood,
     });
   };
 
@@ -46,13 +46,13 @@ export class App extends React.Component<{}, State> {
           ? <h1 className="title">No goods selected</h1>
           : (
             <h1 className="title is-flex is-align-items-center">
-              {selectedGood}
+              {`${selectedGood} is selected`}
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.handleClickClearButton}
+                onClick={this.clearSelectOnClick}
               />
             </h1>
           )}
@@ -65,20 +65,19 @@ export class App extends React.Component<{}, State> {
                 key={good}
                 className={classNames(
                   {
-                    'has-background-success-light':
-                      selectedGood === `${good} is selected`,
+                    'has-background-success-light': selectedGood === good,
                   },
                 )}
               >
                 <td>
                   {
-                    selectedGood !== `${good} is selected`
+                    selectedGood !== good
                       ? (
                         <button
                           data-cy="AddButton"
                           type="button"
                           className="button"
-                          onClick={() => this.handleAddButton(good)}
+                          onClick={() => this.selectOnClick(good)}
                         >
                           +
                         </button>
@@ -88,7 +87,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
-                          onClick={this.handleClickClearButton}
+                          onClick={this.clearSelectOnClick}
                         >
                           -
                         </button>
