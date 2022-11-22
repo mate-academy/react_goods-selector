@@ -69,10 +69,7 @@ export class App extends Component<{}, State> {
                       <button
                         data-cy="RemoveButton"
                         type="button"
-                        className={classNames(
-                          'button',
-                          { 'is-info': good === selectedGood },
-                        )}
+                        className="button is-info"
                         onClick={handleClick}
                       >
                         -
