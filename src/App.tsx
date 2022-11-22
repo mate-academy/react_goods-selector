@@ -90,10 +90,7 @@ export class App extends Component<{}, State> {
                     )}
                 </td>
 
-                <td
-                  data-cy="GoodTitle"
-                  className="is-vcentered"
-                >
+                <td data-cy="GoodTitle" className="is-vcentered">
                   {good}
                 </td>
               </tr>
