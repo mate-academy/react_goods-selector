@@ -34,20 +34,21 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        <h1 className="title is-flex is-align-items-center">
-          {selectedGood.length
-            ? (`${selectedGood} is selected`)
-            : ('No goods selected')}
-          {selectedGood && (
-            // eslint-disable-next-line jsx-a11y/control-has-associated-label
-            <button
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={this.resetClick}
-            />
-          )}
-        </h1>
+        {selectedGood
+          ? (
+            <h1 className="title is-flex is-align-items-center">
+              {`${selectedGood} is selected`}
+
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.resetClick}
+              />
+            </h1>
+          )
+          : <h1 className="title">No goods selected</h1>}
 
         <table className="table">
           <tbody>
