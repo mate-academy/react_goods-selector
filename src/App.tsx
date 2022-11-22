@@ -24,6 +24,18 @@ export class App extends React.Component<{}, State> {
     selectedGood: `${goods[8]} is selected`,
   };
 
+  handleClickClearButton = () => {
+    this.setState({
+      selectedGood: '',
+    });
+  };
+
+  handleAddButton = (currenGood: string) => {
+    this.setState({
+      selectedGood: `${currenGood} is selected`,
+    });
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -34,15 +46,12 @@ export class App extends React.Component<{}, State> {
           : (
             <h1 className="title is-flex is-align-items-center">
               {selectedGood}
-
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  this.setState({ selectedGood: '' });
-                }}
+                onClick={this.handleClickClearButton}
               />
             </h1>
           )}
@@ -67,11 +76,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="AddButton"
                           type="button"
                           className="button"
-                          onClick={() => {
-                            this.setState({
-                              selectedGood: `${good} is selected`,
-                            });
-                          }}
+                          onClick={() => this.handleAddButton(good)}
                         >
                           +
                         </button>
@@ -81,11 +86,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
-                          onClick={() => {
-                            this.setState({
-                              selectedGood: '',
-                            });
-                          }}
+                          onClick={this.handleClickClearButton}
                         >
                           -
                         </button>
@@ -98,53 +99,6 @@ export class App extends React.Component<{}, State> {
                 </td>
               </tr>
             ))}
-            {/* <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
-
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
-
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr> */}
           </tbody>
         </table>
       </main>
