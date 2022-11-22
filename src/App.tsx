@@ -83,7 +83,7 @@ export class App extends Component<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={() => this.clearByClick}
+                        onClick={this.clearByClick}
                       >
                         -
                       </button>
