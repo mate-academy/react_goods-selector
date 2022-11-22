@@ -65,7 +65,8 @@ export class App extends React.Component<{}, State> {
                 key={good}
                 className={classNames(
                   {
-                    'has-background-success-light': selectedGood === `${good} is selected`,
+                    'has-background-success-light':
+                      selectedGood === `${good} is selected`,
                   },
                 )}
               >
