@@ -81,9 +81,9 @@ export class App extends Component<{}, State> {
                     : (
                       <td>
                         <button
-                          data-cy="AddButton"
+                          data-cy="RemoveButton"
                           type="button"
-                          className="button"
+                          className="button is-info"
                           onClick={this.clearClick}
                         >
                           -
