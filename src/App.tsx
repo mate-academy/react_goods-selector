@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -15,9 +16,9 @@ export const goods = [
   'Garlic',
 ];
 
-interface State {
+type State = {
   selectedGood: string,
-}
+};
 
 export class App extends Component<{}, State> {
   state: Readonly<State> = {
@@ -26,6 +27,10 @@ export class App extends Component<{}, State> {
 
   handleGoodSelection = (good: string) => {
     this.setState({ selectedGood: good });
+  };
+
+  handleClearingSelection = () => {
+    this.setState({ selectedGood: '' });
   };
 
   isSelected = (good: string) => {
@@ -47,9 +52,7 @@ export class App extends Component<{}, State> {
                 aria-label="Clear"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  this.handleGoodSelection('');
-                }}
+                onClick={this.handleClearingSelection}
               />
             </h1>
           )
@@ -65,9 +68,11 @@ export class App extends Component<{}, State> {
               <tr
                 data-cy="Good"
                 key={good}
-                className={isSelected(good)
-                  ? 'has-background-success-light'
-                  : ''}
+                className={classNames(
+                  {
+                    'has-background-success-light': isSelected(good),
+                  },
+                )}
               >
                 <td>
                   {isSelected(good)
@@ -76,9 +81,7 @@ export class App extends Component<{}, State> {
                         data-cy="RemoveButton"
                         className="button is-info"
                         type="button"
-                        onClick={() => {
-                          this.handleGoodSelection('');
-                        }}
+                        onClick={this.handleClearingSelection}
                       >
                         -
                       </button>
