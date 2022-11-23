@@ -30,9 +30,7 @@ export class App extends React.Component<{}, State> {
   };
 
   handleSelectGood = (good: string) => (
-    this.state.selectedGood === good
-      ? this.setState({ selectedGood: '' })
-      : this.setState({ selectedGood: good })
+    this.setState({ selectedGood: good })
   );
 
   render() {
@@ -62,7 +60,7 @@ export class App extends React.Component<{}, State> {
           <tbody>
             {
               goods.map(good => {
-                const isSelected = selectedGood === good;
+                const isGoodSelected = selectedGood === good;
 
                 return (
                   <tr
@@ -71,20 +69,20 @@ export class App extends React.Component<{}, State> {
                     className={classNames(
                       {
                         'has-background-success-light':
-                          isSelected,
+                          isGoodSelected,
                       },
                     )}
                   >
                     <td>
                       {
-                        isSelected
+                        isGoodSelected
                           ? (
                             <button
                               data-cy="RemoveButton"
                               type="button"
                               className="button is-blue is-info"
                               onClick={() => {
-                                this.handleSelectGood(good);
+                                this.handleSelectGood('');
                               }}
                             >
                               -
