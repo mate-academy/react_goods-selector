@@ -25,11 +25,11 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  clearClick = () => {
+  clearSelectedGood = () => {
     this.setState({ selectedGood: '' });
   };
 
-  handleClick = (good: string) => {
+  selectGood = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
@@ -48,7 +48,7 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.clearClick}
+                onClick={this.clearSelectedGood}
               />
             </h1>
           )
@@ -56,46 +56,44 @@ export class App extends Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map(good => {
-              return (
-                <tr
-                  data-cy="Good"
-                  key={good}
-                  className={classNames({
-                    'has-background-success-light': selectedGood === good,
-                  })}
-                >
-                  {selectedGood !== good
-                    ? (
-                      <td>
-                        <button
-                          data-cy="AddButton"
-                          type="button"
-                          className="button"
-                          onClick={() => this.handleClick(good)}
-                        >
-                          +
-                        </button>
-                      </td>
-                    )
-                    : (
-                      <td>
-                        <button
-                          data-cy="RemoveButton"
-                          type="button"
-                          className="button is-info"
-                          onClick={this.clearClick}
-                        >
-                          -
-                        </button>
-                      </td>
-                    )}
-                  <td data-cy="GoodTitle" className="is-vcentered">
-                    {good}
-                  </td>
-                </tr>
-              );
-            })}
+            {goods.map(good => (
+              <tr
+                data-cy="Good"
+                key={good}
+                className={classNames({
+                  'has-background-success-light': selectedGood === good,
+                })}
+              >
+                {selectedGood !== good
+                  ? (
+                    <td>
+                      <button
+                        data-cy="AddButton"
+                        type="button"
+                        className="button"
+                        onClick={() => this.selectGood(good)}
+                      >
+                        +
+                      </button>
+                    </td>
+                  )
+                  : (
+                    <td>
+                      <button
+                        data-cy="RemoveButton"
+                        type="button"
+                        className="button is-info"
+                        onClick={this.clearSelectedGood}
+                      >
+                        -
+                      </button>
+                    </td>
+                  )}
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </main>
