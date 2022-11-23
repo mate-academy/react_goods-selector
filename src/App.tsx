@@ -18,7 +18,7 @@ export const goods = [
 ];
 
 type State = {
-  selectedProduct: string | null,
+  selectedProduct: string,
 };
 
 export class App extends React.Component<{}, State> {
@@ -26,12 +26,16 @@ export class App extends React.Component<{}, State> {
     selectedProduct: 'Jam',
   };
 
-  enableSelectionOnClick = (product: string) => {
+  handleProductSelection = (product: string) => {
     this.setState({ selectedProduct: product });
   };
 
-  disableSelectionOnClick = () => {
-    this.setState({ selectedProduct: null });
+  handleProductRemoving = () => {
+    this.setState({ selectedProduct: '' });
+  };
+
+  isSelected = (product: string) => {
+    return this.state.selectedProduct === product;
   };
 
   render() {
@@ -40,7 +44,7 @@ export class App extends React.Component<{}, State> {
     return (
       <main className="section container">
         {
-          selectedProduct === null
+          !selectedProduct
             ? (
               <h1 className="title">No goods selected</h1>
             )
@@ -53,7 +57,7 @@ export class App extends React.Component<{}, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={this.disableSelectionOnClick}
+                  onClick={this.handleProductRemoving}
                 />
               </h1>
             )
@@ -69,13 +73,13 @@ export class App extends React.Component<{}, State> {
                 })}
               >
                 <td>
-                  {selectedProduct === good
+                  {this.isSelected(good)
                     ? (
                       <button
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={this.disableSelectionOnClick}
+                        onClick={this.handleProductRemoving}
                       >
                         -
                       </button>
@@ -85,7 +89,7 @@ export class App extends React.Component<{}, State> {
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={() => this.enableSelectionOnClick(good)}
+                        onClick={() => this.handleProductSelection(good)}
                       >
                         +
                       </button>
