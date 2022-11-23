@@ -77,7 +77,7 @@ export class App extends Component<{}, State> {
                         className="button is-info"
                         type="button"
                         onClick={() => {
-                          this.handleGoodSelection(good);
+                          this.handleGoodSelection('');
                         }}
                       >
                         -
