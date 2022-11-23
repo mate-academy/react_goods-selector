@@ -29,7 +29,7 @@ export class App extends Component<{}, State> {
     this.setState({ selectedGood: '' });
   };
 
-  chooseSelectedGood = (good: string) => {
+  selectedGood = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
@@ -60,7 +60,9 @@ export class App extends Component<{}, State> {
               <tr
                 data-cy="Good"
                 className={classNames(
-                  { 'has-background-success-light': good === selectedGood },
+                  {
+                    'has-background-success-light': good === selectedGood
+                  },
                 )}
                 key={good}
               >
@@ -80,13 +82,15 @@ export class App extends Component<{}, State> {
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={() => this.chooseSelectedGood(good)}
+                        onClick={() => this.selectedGood(good)}
                       >
                         +
                       </button>
                     )}
                 </td>
-                <td data-cy="GoodTitle" className="is-vcentered">{good}</td>
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
               </tr>
             ))}
           </tbody>
