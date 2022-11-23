@@ -26,13 +26,17 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleClick = () => {
+  clearSelectedGood = () => {
     this.setState({ selectedGood: '' });
   };
 
-  render(): React.ReactNode {
+  selectGood = (good: string) => {
+    this.setState({ selectedGood: good });
+  };
+
+  render() {
     const { selectedGood } = this.state;
-    const { handleClick } = this;
+    const { clearSelectedGood, selectGood } = this;
 
     return (
       <main className="section container">
@@ -45,7 +49,7 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={handleClick}
+                onClick={clearSelectedGood}
               />
             </h1>
           )
@@ -58,9 +62,11 @@ export class App extends Component<{}, State> {
                 key={good}
                 data-cy="Good"
                 className={
-                  classNames({
-                    'has-background-success-light': good === selectedGood,
-                  })
+                  classNames(
+                    {
+                      'has-background-success-light': good === selectedGood,
+                    },
+                  )
                 }
               >
                 <td>
@@ -70,7 +76,7 @@ export class App extends Component<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={handleClick}
+                        onClick={clearSelectedGood}
                       >
                         -
                       </button>
@@ -83,7 +89,7 @@ export class App extends Component<{}, State> {
                           'button',
                           { 'is-info': good === selectedGood },
                         )}
-                        onClick={() => this.setState({ selectedGood: good })}
+                        onClick={() => selectGood(good)}
                       >
                         +
                       </button>
