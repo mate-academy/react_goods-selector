@@ -22,7 +22,7 @@ type State = {
 };
 
 export class App extends Component<{}, State> {
-  state: Readonly<State> = {
+  state = {
     selectedGood: 'Jam',
   };
 
