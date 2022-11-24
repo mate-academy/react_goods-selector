@@ -1,5 +1,5 @@
-import 'bulma/css/bulma.css';
 import './App.scss';
+import 'bulma/css/bulma.css';
 import { Component } from 'react';
 import classNames from 'classnames';
 
