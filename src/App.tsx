@@ -26,7 +26,7 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  isSelected = (good: string) => {
+  addGood = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
@@ -57,16 +57,19 @@ export class App extends Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map((good) => (
+            {goods.map(good => (
               <tr
                 key={good}
                 data-cy="Good"
-                className={classNames({
-                  'has-background-success-light': selectedGood === good,
-                })}
+                className={classNames(
+                  {
+                    'has-background-success-light': selectedGood === good,
+                  },
+                )}
               >
-                {selectedGood === good ? (
-                  <td>
+                <td>
+                  {selectedGood === good ? (
+
                     <button
                       data-cy="RemoveButton"
                       type="button"
@@ -75,20 +78,20 @@ export class App extends Component<{}, State> {
                     >
                       -
                     </button>
-                  </td>
-                ) : (
-                  <td>
+                  // </td>
+                  ) : (
+                  // <td>
                     <button
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={() => this.isSelected(good)}
+                      onClick={() => this.addGood(good)}
                     >
                       +
                     </button>
-                  </td>
-                )}
 
+                  )}
+                </td>
                 <td data-cy="GoodTitle" className="is-vcentered">
                   {good}
                 </td>
