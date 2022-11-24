@@ -25,11 +25,11 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  clearGoodOnClick = () => {
+  clearGood = () => {
     this.setState({ selectedGood: '' });
   };
 
-  addGoodOnClick = (good: string) => {
+  addGood = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
@@ -52,7 +52,7 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.clearGoodOnClick}
+                onClick={this.clearGood}
 
               />
             </h1>
@@ -76,7 +76,7 @@ export class App extends Component<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={this.clearGoodOnClick}
+                        onClick={this.clearGood}
                       >
                         -
                       </button>
@@ -86,7 +86,7 @@ export class App extends Component<{}, State> {
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={() => this.addGoodOnClick(good)}
+                        onClick={() => this.addGood(good)}
                       >
                         +
                       </button>
