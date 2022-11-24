@@ -34,7 +34,7 @@ export class App extends Component<{}, State> {
           'is-flex is-align-items-center': selectedGood,
         })}
         >
-          {selectedGood
+          {selectedGood.length > 0
             ? (
               <>
                 {`${selectedGood} is selected`}
@@ -66,22 +66,27 @@ export class App extends Component<{}, State> {
                   key={good}
                 >
                   <td>
-                    <button
-                      data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
-                      type="button"
-                      className={classNames('button', {
-                        'is-info': isSelected,
-                      })}
-                      onClick={() => {
-                        const value = isSelected ? '' : good;
-
-                        this.setState({ selectedGood: value });
-                      }}
-                    >
-                      {isSelected
-                        ? '-'
-                        : '+'}
-                    </button>
+                    {isSelected
+                      ? (
+                        <button
+                          data-cy="RemoveButton"
+                          type="button"
+                          className="button is-info"
+                          onClick={() => this.setState({ selectedGood: '' })}
+                        >
+                          -
+                        </button>
+                      )
+                      : (
+                        <button
+                          data-cy="AddButton"
+                          type="button"
+                          className="button"
+                          onClick={() => this.setState({ selectedGood: good })}
+                        >
+                          +
+                        </button>
+                      )}
                   </td>
 
                   <td data-cy="GoodTitle" className="is-vcentered">
