@@ -17,7 +17,7 @@ export const goods = [
 ];
 
 type State = {
-  selectedGood: string | null,
+  selectedGood: string,
 };
 
 export class App extends Component<{}, State> {
@@ -35,24 +35,32 @@ export class App extends Component<{}, State> {
 
   render() {
     const { selectedGood } = this.state;
+    const isGoodSelected = selectedGood.length === 0;
 
     return (
       <main className="section container">
-        {!selectedGood
-          ? <h1 className="title">No goods selected</h1>
-          : (
-            <h1 className="title is-flex is-align-items-center">
-              {`${selectedGood} is selected`}
+        <h1 className={classNames(
+          'title',
+          { 'is-flex is-align-items-center': !isGoodSelected },
+        )}
+        >
+          {isGoodSelected
+            ? 'No goods selected'
+            : (
+              <>
+                {selectedGood}
+                {' is selected'}
 
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-              <button
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-                onClick={this.clearGood}
-              />
-            </h1>
-          )}
+                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+                <button
+                  data-cy="ClearButton"
+                  type="button"
+                  className="delete ml-3"
+                  onClick={this.clearGood}
+                />
+              </>
+            )}
+        </h1>
 
         <table className="table">
           <tbody>
