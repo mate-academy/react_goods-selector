@@ -16,9 +16,9 @@ export const goods = [
   'Garlic',
 ];
 
-type State = {
+interface State {
   selectedGood: string,
-};
+}
 
 export class App extends React.Component<{}, State> {
   state = {
