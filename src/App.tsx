@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -21,7 +22,7 @@ type State = {
 
 export class App extends Component<{}, State> {
   state: Readonly<State> = {
-    selectedGood: '',
+    selectedGood: 'Jam',
   };
 
   isSelected = (good: string) => {
@@ -32,8 +33,8 @@ export class App extends Component<{}, State> {
     this.setState({ selectedGood: good });
   };
 
-  componentDidMount = () => {
-    this.setState({ selectedGood: 'Jam' });
+  handleClick = () => {
+    this.setState({ selectedGood: '' });
   };
 
   render() {
@@ -52,7 +53,7 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => this.setState({ selectedGood: '' })}
+                onClick={this.handleClick}
               />
             </h1>
           )}
@@ -62,9 +63,12 @@ export class App extends Component<{}, State> {
             {goods.map(good => (
               <tr
                 data-cy="Good"
-                className={this.isSelected(good)
-                  ? 'has-background-success-light'
-                  : ''}
+                className={classNames(
+                  {
+                    'has-background-success-light': good === selectedGood,
+                  },
+                )}
+                key={good}
               >
                 {this.isSelected(good)
                   ? (
@@ -73,7 +77,7 @@ export class App extends Component<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={() => this.setState({ selectedGood: '' })}
+                        onClick={this.handleClick}
                       >
                         -
                       </button>
