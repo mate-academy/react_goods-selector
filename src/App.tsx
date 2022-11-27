@@ -52,13 +52,14 @@ export class App extends Component<{}, State> {
               />
             </h1>
           )
-          : (<h1 className="title">No goods selected</h1>)}
+          : <h1 className="title">No goods selected</h1>}
 
         <table className="table">
           <tbody>
             {goods.map(good => (
               <tr
                 data-cy="Good"
+                key={good}
                 className={classNames(
                   { 'has-background-success-light': selectedGoods === good },
                 )}
