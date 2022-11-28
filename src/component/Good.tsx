@@ -2,7 +2,7 @@ import React from 'react';
 
 type Props = {
   good: string,
-  onClick: any,
+  onClick: (name: string) => void,
   className: string
 };
 
