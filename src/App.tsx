@@ -49,7 +49,7 @@ export class App extends React.Component<{}, State> {
                   type="button"
                   className="delete ml-3"
                   onClick={() => this.handler()}
-                />npm 
+                />
               </h1>
             </>
           )}
