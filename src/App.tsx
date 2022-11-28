@@ -58,18 +58,20 @@ export class App extends Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(good => {
+              const isSelected = good === selectedGood;
+
               return (
                 <tr
                   data-cy="Good"
                   key={good}
                   className={classNames(
                     {
-                      'has-background-success-light': good === selectedGood,
+                      'has-background-success-light': isSelected,
                     },
                   )}
                 >
                   <td>
-                    {good === selectedGood
+                    {isSelected
                       ? (
                         <button
                           data-cy="RemoveButton"
