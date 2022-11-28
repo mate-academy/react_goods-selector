@@ -40,7 +40,7 @@ export class App extends React.Component<{}, State> {
             <>
               <h1 className="title is-flex is-align-items-center">
                 {this.state.selectedGood}
-                is selected
+                {' is selected'}
               </h1>
 
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
