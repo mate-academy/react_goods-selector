@@ -48,7 +48,7 @@ export class App extends React.Component<{}, State> {
                 className="delete ml-3"
                 onClick={() => this.handler()}
               />
-            </h1>git 
+            </h1>
           </>
         )}
 
