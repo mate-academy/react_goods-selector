@@ -41,16 +41,16 @@ export class App extends React.Component<{}, State> {
               <h1 className="title is-flex is-align-items-center">
                 {this.state.selectedGood}
                 {' is selected'}
-              </h1>
 
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-              <button
-                id="button"
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-                onClick={() => this.handler()}
-              />
+                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+                <button
+                  id="button"
+                  data-cy="ClearButton"
+                  type="button"
+                  className="delete ml-3"
+                  onClick={() => this.handler()}
+                />npm 
+              </h1>
             </>
           )}
 
