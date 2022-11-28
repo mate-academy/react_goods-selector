@@ -32,27 +32,25 @@ export class App extends React.Component<{}, State> {
   render() {
     return (
       <main className="section container">
-        {(this.state.selectedGood.length === 0)
-          ? (
-            <h1 className="title">No goods selected</h1>
-          )
-          : (
-            <>
-              <h1 className="title is-flex is-align-items-center">
-                {this.state.selectedGood}
-                {' is selected'}
+        {(this.state.selectedGood.length === 0) ? (
+          <h1 className="title">No goods selected</h1>
+        ) : (
+          <>
+            <h1 className="title is-flex is-align-items-center">
+              {this.state.selectedGood}
+              {' is selected'}
 
-                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-                <button
-                  id="button"
-                  data-cy="ClearButton"
-                  type="button"
-                  className="delete ml-3"
-                  onClick={() => this.handler()}
-                />
-              </h1>
-            </>
-          )}
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+              <button
+                id="button"
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={() => this.handler()}
+              />
+            </h1>git 
+          </>
+        )}
 
         <table className="table">
           <tbody>
@@ -60,9 +58,9 @@ export class App extends React.Component<{}, State> {
               <Good
                 good={good}
                 onClick={(name: string) => this.handler(name)}
-                className={(good === this.state.selectedGood)
-                  ? 'has-background-success-light'
-                  : ''}
+                classNameGood={`${good === this.state.selectedGood && 'has-background-success-light'}`}
+                classNameButton={`${good === this.state.selectedGood && 'button is-info'}`}
+                buttonInfo={`${good === this.state.selectedGood && '-'}`}
               />
             ))}
           </tbody>
