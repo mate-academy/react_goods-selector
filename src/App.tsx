@@ -26,7 +26,7 @@ export class App extends React.Component<{}, State> {
   };
 
   clear = () => {
-    this.setState({ selectedGood: '' })
+    this.setState({ selectedGood: '' });
   };
 
   addGoods = (good: string) => {
