@@ -25,9 +25,7 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  isSelected = (good: string) => {
-    return good === this.state.selectedGood;
-  };
+  isSelected = (good: string) => good === this.state.selectedGood;
 
   handleGoodSelection = (good: string) => {
     this.setState({ selectedGood: good });
