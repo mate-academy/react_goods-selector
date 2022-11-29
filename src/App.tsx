@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
-import { Good } from './component/Good';
+// import { Good } from './component/Good';
 
 export const goods = [
   'Dumplings',
@@ -55,13 +55,25 @@ export class App extends React.Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(good => (
-              <Good
-                good={good}
-                onClick={(name: string) => this.handler(name)}
-                classNameGood={`${good === this.state.selectedGood && 'has-background-success-light'}`}
-                classNameButton={`${good === this.state.selectedGood && 'button is-info'}`}
-                buttonInfo={`${good === this.state.selectedGood && '-'}`}
-              />
+              <tr
+                className={`${good === this.state.selectedGood && 'has-background-success-light'}`}
+                data-cy="Good"
+              >
+                <td>
+                  <button
+                    onClick={() => this.handler(good)}
+                    data-cy="RemoveButton"
+                    type="button"
+                    className={`${good === this.state.selectedGood && 'button is-info'}`}
+                  >
+                    {(good === this.state.selectedGood) ? '-' : '+'}
+                  </button>
+                </td>
+
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
             ))}
           </tbody>
         </table>
