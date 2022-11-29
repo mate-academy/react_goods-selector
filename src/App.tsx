@@ -1,7 +1,6 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
-// import { Good } from './component/Good';
 
 export const goods = [
   'Dumplings',
@@ -21,12 +20,20 @@ type State = {
 };
 
 export class App extends React.Component<{}, State> {
-  state = {
+  state:Readonly<State> = {
     selectedGood: 'Jam',
   };
 
-  handler = (name = '') => {
-    this.setState({ selectedGood: name });
+  delete = () => {
+    this.setState({ selectedGood: '' });
+  };
+
+  handler = (name: string) => {
+    this.setState(
+      (prevState) => (
+        { selectedGood: name === prevState.selectedGood ? '' : name }
+      ),
+    );
   };
 
   render() {
@@ -46,7 +53,7 @@ export class App extends React.Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => this.handler()}
+                onClick={() => this.delete()}
               />
             </h1>
           </>
