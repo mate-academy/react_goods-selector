@@ -20,7 +20,7 @@ type State = {
 };
 
 export class App extends React.Component<{}, State> {
-  state:Readonly<State> = {
+  state: Readonly<State> = {
     selectedGood: 'Jam',
   };
 
@@ -53,7 +53,7 @@ export class App extends React.Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => this.delete()}
+                onClick={this.delete}
               />
             </h1>
           </>
@@ -63,7 +63,12 @@ export class App extends React.Component<{}, State> {
           <tbody>
             {goods.map(good => (
               <tr
-                className={`${good === this.state.selectedGood && 'has-background-success-light'}`}
+                key={good}
+                className={
+                  good === this.state.selectedGood
+                    ? 'has-background-success-light'
+                    : ''
+                }
                 data-cy="Good"
               >
                 <td>
@@ -71,7 +76,9 @@ export class App extends React.Component<{}, State> {
                     onClick={() => this.handler(good)}
                     data-cy="RemoveButton"
                     type="button"
-                    className={`${good === this.state.selectedGood && 'button is-info'}`}
+                    className={
+                      good === this.state.selectedGood ? 'button is-info' : ''
+                    }
                   >
                     {(good === this.state.selectedGood) ? '-' : '+'}
                   </button>
