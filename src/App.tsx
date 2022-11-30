@@ -71,18 +71,45 @@ export class App extends React.Component<{}, State> {
                 }
                 data-cy="Good"
               >
-                <td>
+                {
+                  good === this.state.selectedGood
+                    ? (
+                      <td>
+                        <button
+                          onClick={this.delete}
+                          data-cy="RemoveButton"
+                          type="button"
+                          className="button is-info"
+                        >
+                          -
+                        </button>
+                      </td>
+                    )
+                    : (
+                      <td>
+                        <button
+                          onClick={() => this.handler(good)}
+                          data-cy="AddButton"
+                          type="button"
+                          className="button"
+                        >
+                          +
+                        </button>
+                      </td>
+                    )
+                }
+                {/* <td>
                   <button
                     onClick={() => this.handler(good)}
                     data-cy="RemoveButton"
                     type="button"
                     className={
-                      good === this.state.selectedGood ? 'button is-info' : ''
+                      good === this.state.selectedGood ? 'button is-info' : 'button'
                     }
                   >
-                    {(good === this.state.selectedGood) ? '-' : '+'}
+                    {good === this.state.selectedGood ? '-' : '+'}
                   </button>
-                </td>
+                </td> */}
 
                 <td data-cy="GoodTitle" className="is-vcentered">
                   {good}
