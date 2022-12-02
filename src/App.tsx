@@ -18,32 +18,28 @@ export const goods = [
 
 type State = {
   selectedGood: string,
-  currentTitle: string,
 };
 
 export class App extends React.Component<{}, State> {
   state = {
     selectedGood: 'Jam',
-    currentTitle: 'Jam is selected',
   };
 
   render() {
-    const { selectedGood, currentTitle } = this.state;
+    const { selectedGood } = this.state;
 
     const alterTitle = () => {
       this.setState({
         selectedGood: '',
-        currentTitle: 'No goods selected',
       });
     };
 
     return (
       <main className="section container">
-
-        <h1 className="title is-flex is-align-items-center">
-          {currentTitle}
-          {selectedGood && (
-            /* eslint-disable-next-line jsx-a11y/control-has-associated-label */
+        {selectedGood ? (
+          <h1 className="title is-flex is-align-items-center">
+            {`${selectedGood} is selected`}
+            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <button
               data-cy="ClearButton"
               type="button"
@@ -52,8 +48,14 @@ export class App extends React.Component<{}, State> {
                 alterTitle();
               }}
             />
+
+          </h1>
+        )
+          : (
+            <h1 className="title is-flex is-align-items-center">
+              No goods selected
+            </h1>
           )}
-        </h1>
 
         <table className="table">
           <tbody>
@@ -74,7 +76,6 @@ export class App extends React.Component<{}, State> {
                       onClick={() => {
                         this.setState({
                           selectedGood: good,
-                          currentTitle: `${good} is selected`,
                         });
                       }}
                     >
