@@ -22,7 +22,7 @@ type State = {
 
 export class App extends Component<{}, State> {
   state = {
-    selectedGood: '',
+    selectedGood: 'Jam',
   };
 
   render() {
