@@ -70,7 +70,7 @@ export class App extends Component<{}, State> {
                     className={classNames(
                       'button',
                       {
-                        'button is-info': selectedGood === good,
+                        'is-info': selectedGood === good,
                       },
                     )}
                     onClick={selectedGood === good
