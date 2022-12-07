@@ -29,6 +29,14 @@ export class App extends Component<{}, State> {
     this.setState({ selectedGood: '' });
   };
 
+  handleSelect = (good: string) => {
+    if (this.state.selectedGood !== good) {
+      this.setState({ selectedGood: good });
+    } else {
+      this.removeSelected();
+    }
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -69,21 +77,13 @@ export class App extends Component<{}, State> {
                     type="button"
                     className={classNames(
                       'button',
-                      {
-                        'is-info': selectedGood === good,
-                      },
+                      { 'is-info': selectedGood === good },
                     )}
-                    onClick={selectedGood === good
-                      ? this.removeSelected
-                      : () => {
-                        return (
-                          this.setState({ selectedGood: good })
-                        );
-                      }}
+                    onClick={() => {
+                      this.handleSelect(good);
+                    }}
                   >
-                    {selectedGood === good
-                      ? '-'
-                      : '+'}
+                    {selectedGood === good ? '-' : '+'}
                   </button>
                 </td>
 
