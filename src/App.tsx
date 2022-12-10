@@ -62,9 +62,9 @@ export class App extends React.Component<{}, State> {
                   <td>
                     <button
                       type="button"
-                      onClick={() => (isSelected
-                        ? this.setState({ selectedGood: '' })
-                        : this.setState({ selectedGood: good }))}
+                      onClick={() => this.setState({
+                        selectedGood: isSelected ? '' : good,
+                      })}
                       className={classNames(
                         'button',
                         { 'is-info': isSelected },
