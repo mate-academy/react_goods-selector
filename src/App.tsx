@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import { classname as cn } from './scripts/classname';
 
 export const goods = [
   'Dumplings',
@@ -61,10 +62,9 @@ export class App extends React.Component<{}, State> {
               <tr
                 key={good}
                 data-cy="Good"
-                className={`${selectedGood === good
-                  ? 'has-background-success-light'
-                  : ''
-                }`}
+                className={cn(
+                  { 'has-background-success-light': selectedGood === good },
+                )}
               >
                 <td>
                   {selectedGood === good
