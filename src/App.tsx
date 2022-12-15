@@ -57,7 +57,7 @@ export class App extends React.Component<{}, State> {
                 className={classNames(
                   { 'has-background-success-light': (selectedGood === item) },
                 )}
-                key={goods.indexOf(item)}
+                key={item}
               >
                 <td>
                   {selectedGood !== item ? (
