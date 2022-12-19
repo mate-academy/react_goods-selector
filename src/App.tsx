@@ -1,6 +1,7 @@
-import React from 'react';
+import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -15,71 +16,83 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+type State = {
+  selectedGood: string,
+};
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+export class App extends Component<{}, State> {
+  state: Readonly<State> = {
+    selectedGood: 'Jam',
+  };
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+  selectItem = (item: string) => {
+    const condition = item === this.state.selectedGood;
+    const valueToSet = condition ? '' : item;
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+    this.setState({ selectedGood: valueToSet });
+  };
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+  render() {
+    const { selectedGood } = this.state;
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+    return (
+      <main className="section container">
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+        {
+          selectedGood
+            ? (
+              <h1 className="title is-flex is-align-items-center">
+                {`${selectedGood} is selected`}
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+                <button
+                  data-cy="ClearButton"
+                  type="button"
+                  className="delete ml-3"
+                  onClick={() => this.setState({ selectedGood: '' })}
+                />
+              </h1>
+            )
+            : <h1 className="title">No goods selected</h1>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+        }
+
+        <table className="table">
+          <tbody>
+            {
+              goods.map(item => {
+                const isSelected = item === selectedGood;
+                const classesForTr = classNames(
+                  { 'has-background-success-light': isSelected },
+                );
+                const classesForButton = classNames({
+                  button: true,
+                  'is-info': isSelected,
+                });
+
+                return (
+                  <tr key={item} data-cy="Good" className={classesForTr}>
+                    <td>
+                      <button
+                        data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
+                        type="button"
+                        className={classesForButton}
+                        onClick={() => this.selectItem(item)}
+                      >
+                        {isSelected ? '-' : '+'}
+                      </button>
+                    </td>
+
+                    <td data-cy="GoodTitle" className="is-vcentered">
+                      {item}
+                    </td>
+                  </tr>
+                );
+              })
+            }
+          </tbody>
+        </table>
+      </main>
+    );
+  }
+}
