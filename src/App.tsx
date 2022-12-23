@@ -15,71 +15,94 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+export class App extends React.Component {
+  state = {
+    selectedGood: 'Jam',
+    selectedStatus: true,
+  };
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+  handleSelect = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const goodTitle = (
+      event?.currentTarget.parentElement?.nextElementSibling?.textContent);
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+    this.setState({ selectedGood: goodTitle });
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+    if (document.querySelector('.is-info') === event?.currentTarget) {
+      this.setState({ selectedGood: '' });
+    }
+  };
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+  handleUnselect = () => {
+    if (document.querySelector('.is-info')) {
+      this.setState({ selectedGood: '' });
+    }
+  };
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+  render() {
+    const { selectedGood, selectedStatus } = this.state;
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+    return (
+      <main className="section container">
+        {this.state.selectedGood
+          ? (
+            <h1 className="title is-flex is-align-items-center">
+              { `${selectedGood} is selected`}
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.handleUnselect}
+              />
+            </h1>
+          )
+          : <h1 className="title">No goods selected</h1>}
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+        <table className="table">
+          <tbody>
+
+            {goods.map(
+              item => {
+                const checkIfSelected = () => (
+                  selectedStatus === true && item === selectedGood
+                );
+
+                return (
+                  <tr
+                    data-cy="Good"
+                    key={item}
+                    className={checkIfSelected()
+                      ? 'has-background-success-light'
+                      : ''}
+                  >
+                    <td>
+                      <button
+                        data-cy={checkIfSelected()
+                          ? 'RemoveButton'
+                          : 'AddButton'}
+                        type="button"
+                        className={checkIfSelected()
+                          ? 'button is-info'
+                          : 'button'}
+                        onClick={this.handleSelect}
+                      >
+                        {checkIfSelected()
+                          ? '-'
+                          : '+'}
+                      </button>
+                    </td>
+
+                    <td data-cy="GoodTitle" className="is-vcentered">
+                      {item}
+                    </td>
+                  </tr>
+                );
+              },
+            )}
+          </tbody>
+        </table>
+      </main>
+    );
+  }
+}
