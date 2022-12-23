@@ -18,32 +18,28 @@ export const goods = [
 export class App extends React.Component {
   state = {
     selectedGood: 'Jam',
-    selectedStatus: true,
   };
 
-  handleSelect = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const goodTitle = (
-      event?.currentTarget.parentElement?.nextElementSibling?.textContent);
+  handleSelect = (goodText: string) => {
+    const goodTitle = goodText;
 
-    this.setState({ selectedGood: goodTitle });
-
-    if (document.querySelector('.is-info') === event?.currentTarget) {
+    if (this.state.selectedGood === goodText) {
       this.setState({ selectedGood: '' });
+    } else {
+      this.setState({ selectedGood: goodTitle });
     }
   };
 
   handleUnselect = () => {
-    if (document.querySelector('.is-info')) {
-      this.setState({ selectedGood: '' });
-    }
+    this.setState({ selectedGood: '' });
   };
 
   render() {
-    const { selectedGood, selectedStatus } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <main className="section container">
-        {this.state.selectedGood
+        {selectedGood
           ? (
             <h1 className="title is-flex is-align-items-center">
               { `${selectedGood} is selected`}
@@ -64,9 +60,7 @@ export class App extends React.Component {
 
             {goods.map(
               item => {
-                const checkIfSelected = () => (
-                  selectedStatus === true && item === selectedGood
-                );
+                const checkIfSelected = () => selectedGood === item;
 
                 return (
                   <tr
@@ -85,7 +79,9 @@ export class App extends React.Component {
                         className={checkIfSelected()
                           ? 'button is-info'
                           : 'button'}
-                        onClick={this.handleSelect}
+                        onClick={() => {
+                          this.handleSelect(item);
+                        }}
                       >
                         {checkIfSelected()
                           ? '-'
