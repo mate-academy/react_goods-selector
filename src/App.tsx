@@ -78,6 +78,7 @@ export class App extends Component {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
+                        onClick={this.deleteSelectionHandler}
                       >
                         -
                       </button>
