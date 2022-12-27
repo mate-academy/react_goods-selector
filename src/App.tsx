@@ -25,17 +25,8 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  saveSelectedGood = (selectedGood: string) => {
-    this.setState({ selectedGood });
-  };
-
-  removeSelectedGood = () => {
-    this.setState({ selectedGood: '' });
-  };
-
   render() {
     const { selectedGood } = this.state;
-    const { saveSelectedGood, removeSelectedGood } = this;
 
     return (
       <main className="section container">
@@ -49,7 +40,9 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={removeSelectedGood}
+                onClick={() => {
+                  this.setState({ selectedGood: '' });
+                }}
               />
             </h1>
           )
@@ -74,7 +67,9 @@ export class App extends Component<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={removeSelectedGood}
+                        onClick={() => {
+                          this.setState({ selectedGood: '' });
+                        }}
                       >
                         -
                       </button>
@@ -85,7 +80,7 @@ export class App extends Component<{}, State> {
                         type="button"
                         className="button"
                         onClick={() => {
-                          saveSelectedGood(item);
+                          this.setState({ selectedGood: item });
                         }}
                       >
                         +
