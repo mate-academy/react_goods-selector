@@ -25,6 +25,10 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  selectedButton = (isSelected: boolean, good: string) => this.setState({
+    selectedGood: isSelected ? '' : good,
+  });
+
   render() {
     const { selectedGood } = this.state;
 
@@ -62,9 +66,7 @@ export class App extends React.Component<{}, State> {
                   <td>
                     <button
                       type="button"
-                      onClick={() => this.setState({
-                        selectedGood: isSelected ? '' : good,
-                      })}
+                      onClick={() => this.selectedButton(isSelected, good)}
                       className={classNames(
                         'button',
                         { 'is-info': isSelected },
