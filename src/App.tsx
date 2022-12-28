@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
@@ -27,28 +26,30 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  clearSelector = () => {
+    this.setState({ isSelected: false, selectedGood: '' });
+  };
+
   render(): React.ReactNode {
     const { isSelected, selectedGood } = this.state;
 
     return (
       <main className="section container">
-        {isSelected
-          ? (
-            <h1 className="title is-flex is-align-items-center">
-              {selectedGood}
-              {' '}
-              is selected
+        {isSelected ? (
+          <h1 className="title is-flex is-align-items-center">
+            {selectedGood}
+            {' '}
+            is selected
 
-              <button
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-                onClick={() => {
-                  this.setState({ isSelected: false, selectedGood: '' });
-                }}
-              />
-            </h1>
-          )
+            <button
+              aria-label="a"
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={this.clearSelector}
+            />
+          </h1>
+        )
           : <h1 className="title">No goods selected</h1>}
 
         <table className="table">
@@ -71,7 +72,11 @@ export class App extends React.Component<{}, State> {
                       ? 'button is-info'
                       : 'button'}
                     onClick={() => {
-                      this.setState({ selectedGood: good, isSelected: true });
+                      if (good === selectedGood) {
+                        this.clearSelector();
+                      } else {
+                        this.setState({ selectedGood: good, isSelected: true });
+                      }
                     }}
                   >
                     {good === selectedGood ? '-' : '+'}
