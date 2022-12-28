@@ -1,7 +1,6 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
-// import cn from 'classnames';
 import cn from 'classnames';
 
 export const goods = [
