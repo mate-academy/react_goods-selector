@@ -1,3 +1,29 @@
 iframe {
   display: none;
 }
+
+#root {
+  background-image: url("https://thumbs.dreamstime.com/z/greek-food-background-traditional-different-greek-dishes-set-greek-food-background-traditional-different-greek-dishes-set-top-view-178761927.jpg");
+}
+
+.section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 50%;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+}
+
+tr {
+  border: 1px solid gray;
+  box-shadow: 5px 1px 2px gray;
+  background-color: papayawhip;
+}
+
+.is-vcentered {
+  font-weight: bold;
+}
