@@ -23,17 +23,17 @@ type State = { selectedGood: string };
 type GoodProps = { good: string };
 type ButtonProps = {
   isSelected: boolean,
-  handleClick: () => void
+  setSelected: () => void
 };
 
 export class App extends Component<{}, State> {
-  state = { selectedGood: '' };
+  state = { selectedGood: 'Jam' };
 
   Good: FC<GoodProps> = ({ good }) => {
     const { selectedGood } = this.state;
     const isSelected = good === selectedGood;
 
-    const handleClick = () => (
+    const setSelected = () => (
       this.setState({
         selectedGood: isSelected
           ? ''
@@ -46,15 +46,16 @@ export class App extends Component<{}, State> {
         <td>
           <this.Button
             isSelected={isSelected}
-            handleClick={handleClick}
+            setSelected={setSelected}
           />
         </td>
 
         <td
           data-cy="GoodTitle"
           className={cn(
-            'is-vcentered',
-            { 'has-background-success-light': isSelected },
+            'is-vcentered', {
+              'has-background-success-light': isSelected,
+            },
           )}
         >
           {good}
@@ -63,7 +64,7 @@ export class App extends Component<{}, State> {
     );
   };
 
-  Button: FC<ButtonProps> = ({ isSelected, handleClick }) => (
+  Button: FC<ButtonProps> = ({ isSelected, setSelected }) => (
     <button
       type="button"
       data-cy={isSelected
@@ -73,7 +74,7 @@ export class App extends Component<{}, State> {
         'button',
         { 'is-info': isSelected },
       )}
-      onClick={handleClick}
+      onClick={setSelected}
     >
       {isSelected ? '-' : '+'}
     </button>
@@ -83,7 +84,10 @@ export class App extends Component<{}, State> {
     <table className="table">
       <tbody>
         {goods.map(good => (
-          <this.Good key={good} good={good} />
+          <this.Good
+            key={good}
+            good={good}
+          />
         ))}
       </tbody>
     </table>
