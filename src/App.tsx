@@ -1,8 +1,12 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/control-has-associated-label */
+
+import { Component, FC, ReactNode } from 'react';
+import cn from 'classnames';
+
 import 'bulma/css/bulma.css';
 import './App.scss';
 
-export const goods = [
+const goods = [
   'Dumplings',
   'Carrot',
   'Eggs',
@@ -15,71 +19,112 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+type State = { selectedGood: string };
+type GoodProps = { good: string };
+type ButtonProps = {
+  isSelected: boolean,
+  handleClick: () => void
+};
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+export class App extends Component<{}, State> {
+  state = { selectedGood: '' };
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+  Good: FC<GoodProps> = ({ good }) => {
+    const { selectedGood } = this.state;
+    const isSelected = good === selectedGood;
 
+    const handleClick = () => (
+      this.setState({
+        selectedGood: isSelected
+          ? ''
+          : good,
+      })
+    );
+
+    return (
+      <tr data-cy="Good">
+        <td>
+          <this.Button
+            isSelected={isSelected}
+            handleClick={handleClick}
+          />
+        </td>
+
+        <td
+          data-cy="GoodTitle"
+          className={cn(
+            'is-vcentered',
+            { 'has-background-success-light': isSelected },
+          )}
+        >
+          {good}
+        </td>
+      </tr>
+    );
+  };
+
+  Button: FC<ButtonProps> = ({ isSelected, handleClick }) => (
+    <button
+      type="button"
+      data-cy={isSelected
+        ? 'RemoveButton'
+        : 'AddButton'}
+      className={cn(
+        'button',
+        { 'is-info': isSelected },
+      )}
+      onClick={handleClick}
+    >
+      {isSelected ? '-' : '+'}
+    </button>
+  );
+
+  GoodList: FC<{}> = () => (
     <table className="table">
       <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
-
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
-
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
+        {goods.map(good => (
+          <this.Good key={good} good={good} />
+        ))}
       </tbody>
     </table>
-  </main>
-);
+  );
+
+  Title: FC<{}> = () => {
+    const { selectedGood } = this.state;
+    const clearSelected = () => (
+      this.setState({ selectedGood: '' })
+    );
+
+    return (
+      <h1
+        className={cn(
+          'title', {
+            'is-flex is-align-items-center': selectedGood,
+          },
+        )}
+      >
+        {selectedGood
+          ? (
+            <>
+              {`${selectedGood} is selected`}
+
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={clearSelected}
+              />
+            </>
+          )
+          : 'No goods selected'}
+      </h1>
+    );
+  };
+
+  render = (): ReactNode => (
+    <main className="section container">
+      <this.Title />
+      <this.GoodList />
+    </main>
+  );
+}
