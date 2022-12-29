@@ -75,7 +75,12 @@ export class App extends Component<{}, State> {
               const setSelected = () => this.setSelected(good);
 
               return (
-                <tr data-cy="Good">
+                <tr
+                  data-cy="Good"
+                  className={cn({
+                    'has-background-success-light': isSelected,
+                  })}
+                >
                   <td>
                     <button
                       type="button"
@@ -96,11 +101,7 @@ export class App extends Component<{}, State> {
 
                   <td
                     data-cy="GoodTitle"
-                    className={cn(
-                      'is-vcentered', {
-                        'has-background-success-light': isSelected,
-                      },
-                    )}
+                    className="is-vcentered"
                   >
                     {good}
                   </td>
