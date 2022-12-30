@@ -66,14 +66,13 @@ export class App extends Component<{}, State> {
                     : ''
                 }
               >
-                <td>
+                <td key={good}>
                   {good === selectedGood
                     ? (
                       <button
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        key={good}
                         onClick={this.handleClickRemove}
                       >
                         -
