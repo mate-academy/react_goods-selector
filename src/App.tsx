@@ -46,7 +46,7 @@ export class App extends React.Component<{}, State> {
             </h1>
           )}
         <table className="table">
-          <tbody>
+          <tbody className="table-body">
             {goods.map(good => (
               <tr
                 key={good}

@@ -1,3 +1,19 @@
 iframe {
   display: none;
 }
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url(https://media.istockphoto.com/id/515856750/photo/healthy-eating-background.jpg?s=612x612&w=0&k=20&c=yfOFP_fUFrUFdNM3nb1g0S5FNzbm28-0fSQrqaVar_M=);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.table {
+  width: 250px;
+}
