@@ -1,3 +1,18 @@
 iframe {
   display: none;
 }
+
+.container  {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+table {
+  width: 300px;
+}
+
+button {
+  background: linear-gradient(rosybrown,sandybrown);
+}
