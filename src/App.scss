@@ -1,3 +1,68 @@
 iframe {
   display: none;
 }
+
+#root {
+  height: 100vh;
+
+  background: linear-gradient(46deg, #8360c3, #2ebf91);
+  background-size: 400% 400%;
+
+  -webkit-animation: gradient-background 6s ease infinite;
+  -o-animation: gradient-background 6s ease infinite;
+  animation: gradient-background 6s ease infinite;
+}
+
+@-webkit-keyframes gradient-background {
+  0% {
+    background-position: 88% 0%;
+  }
+  50% {
+    background-position: 13% 100%;
+  }
+  100% {
+    background-position: 88% 0%;
+  }
+}
+@-o-keyframes gradient-background {
+  0% {
+    background-position: 88% 0%;
+  }
+  50% {
+    background-position: 13% 100%;
+  }
+  100% {
+    background-position: 88% 0%;
+  }
+}
+@keyframes gradient-background {
+  0% {
+    background-position: 88% 0%;
+  }
+  50% {
+    background-position: 13% 100%;
+  }
+  100% {
+    background-position: 88% 0%;
+  }
+}
+
+.title {
+  color: honeydew;
+}
+
+.section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 50%;
+}
+
+tr {
+  border: 1px solid #662e1c;
+  background-color: darkorange;
+}
+
+.table {
+  border-radius: 10px;
+}
