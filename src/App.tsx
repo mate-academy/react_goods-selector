@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import cn from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -21,7 +22,11 @@ export interface State {
 
 export class App extends React.Component<{}, State> {
   state = {
-    selectedGood: '',
+    selectedGood: 'Jam',
+  };
+
+  handleClick = () => {
+    this.setState({ selectedGood: '' });
   };
 
   render() {
@@ -29,18 +34,29 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        {selectedGood}
-        <h1 className="title">No goods selected</h1>
-
-        <h1 className="title is-flex is-align-items-center">
-          Jam is selected
-
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-          <button
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-          />
+        <h1 className={cn(
+          'title',
+          {
+            'is-flex is-align-items-center': selectedGood,
+          },
+        )}
+        >
+          {
+            selectedGood
+              ? (
+                <>
+                  {`${selectedGood} is selected`}
+                  {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+                  <button
+                    data-cy="ClearButton"
+                    type="button"
+                    className="delete ml-3"
+                    onClick={this.handleClick}
+                  />
+                </>
+              )
+              : ('No goods selected')
+          }
         </h1>
 
         <table className="table">
