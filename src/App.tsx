@@ -25,8 +25,12 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleClick = () => {
+  handleClickRemove = () => {
     this.setState({ selectedGood: '' });
+  };
+
+  handleClickAdd = (good: string) => {
+    this.setState({ selectedGood: good });
   };
 
   render() {
@@ -51,7 +55,7 @@ export class App extends React.Component<{}, State> {
                     data-cy="ClearButton"
                     type="button"
                     className="delete ml-3"
-                    onClick={this.handleClick}
+                    onClick={this.handleClickRemove}
                   />
                 </>
               )
@@ -61,53 +65,49 @@ export class App extends React.Component<{}, State> {
 
         <table className="table">
           <tbody>
-            <tr data-cy="Good">
-              <td>
-                <button
-                  data-cy="AddButton"
-                  type="button"
-                  className="button"
-                >
-                  +
-                </button>
-              </td>
+            {goods.map(good => (
+              <tr
+                key={good}
+                data-cy="Good"
+                className={cn(
+                  {
+                    'has-background-success-light': good === selectedGood,
+                  },
+                )}
+              >
+                <td>
+                  {
+                    good !== selectedGood
+                      ? (
+                        <button
+                          data-cy="AddButton"
+                          type="button"
+                          className="button"
+                          onClick={() => {
+                            this.handleClickAdd(good);
+                          }}
+                        >
+                          +
+                        </button>
+                      )
+                      : (
+                        <button
+                          data-cy="RemoveButton"
+                          type="button"
+                          className="button is-info"
+                          onClick={this.handleClickRemove}
+                        >
+                          -
+                        </button>
+                      )
+                  }
+                </td>
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                Dumplings
-              </td>
-            </tr>
-
-            <tr data-cy="Good" className="has-background-success-light">
-              <td>
-                <button
-                  data-cy="RemoveButton"
-                  type="button"
-                  className="button is-info"
-                >
-                  -
-                </button>
-              </td>
-
-              <td data-cy="GoodTitle" className="is-vcentered">
-                Jam
-              </td>
-            </tr>
-
-            <tr data-cy="Good">
-              <td>
-                <button
-                  data-cy="AddButton"
-                  type="button"
-                  className="button"
-                >
-                  +
-                </button>
-              </td>
-
-              <td data-cy="GoodTitle" className="is-vcentered">
-                Garlic
-              </td>
-            </tr>
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </main>
