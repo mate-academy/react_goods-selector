@@ -1,6 +1,10 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const goods = [
   'Dumplings',
@@ -15,71 +19,86 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+type State = {
+  selectedGood: string
+};
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+export class App extends React.Component<{}, State> {
+  state = {
+    selectedGood: 'Jam',
+  };
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
+  RemoveProduct = () => {
+    this.setState({ selectedGood: '' });
+  };
+
+  AddProductButton = (product:string) => {
+    this.setState({ selectedGood: product });
+  };
+
+  render() {
+    const { selectedGood } = this.state;
+    const removeProductButton = (
+      <Button
+        variant="contained"
+        data-cy="RemoveButton"
         type="button"
-        className="delete ml-3"
-      />
-    </h1>
+        className="button is-info"
+        onClick={this.RemoveProduct}
+      >
+        -
+      </Button>
+    );
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
-
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
-
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+    return (
+      <main className="Container">
+        {selectedGood
+          ? (
+            <h1 className="title is-flex is-align-items-center">
+              {`${selectedGood} is selected`}
+              <IconButton
+                aria-label="delete"
+                size="large"
+                data-cy="ClearButton"
+                onClick={this.RemoveProduct}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </h1>
+          )
+          : <h1 className="title">No goods selected</h1>}
+        <table className="table">
+          <tbody>
+            {goods.map(product => (
+              <tr
+                data-cy="Good"
+                className={product === selectedGood
+                  ? 'has-background-success-light'
+                  : ''}
+              >
+                <td>
+                  {product === selectedGood
+                    ? removeProductButton
+                    : (
+                      <Button
+                        variant="outlined"
+                        data-cy="AddButton"
+                        type="button"
+                        className="button"
+                        onClick={() => this.AddProductButton(product)}
+                      >
+                        +
+                      </Button>
+                    ) }
+                </td>
+                <td data-cy="GoodTitle" className="is-vcentered" key={product}>
+                  {product}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </main>
+    );
+  }
+}
