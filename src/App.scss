@@ -1,3 +1,30 @@
 iframe {
   display: none;
 }
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.table {
+  background-color: rgb(204, 227, 249);
+  width: 220px;
+}
+
+td {
+  color: red;
+  font-weight: 500;
+}
+
+
+.button {
+  color: rgb(109, 116, 255);
+  font-weight: 700;
+}
+
+.title {
+  color: green
+}
