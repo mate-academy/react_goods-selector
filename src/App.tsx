@@ -21,7 +21,7 @@ type State = {
 };
 
 export class App extends Component<{}, State> {
-  state = {
+  state: Readonly<State> = {
     selectedGood: 'Jam',
   };
 
@@ -68,30 +68,28 @@ export class App extends Component<{}, State> {
                   key={good}
                 >
                   <td>
-                    <button
-                      data-cy={
-                        selectedGood === good
-                          ? 'RemoveButton'
-                          : 'AddButton'
-                      }
-                      type="button"
-                      className={classNames(
-                        'button',
-                        {
-                          'is-info': selectedGood === good,
-                        },
-                      )}
-                      onClick={(selectedGood === good
-                        ? this.clearGood
-                        : (
-                          () => {
-                            this.changeGood(good);
-                          }
-                        )
-                      )}
-                    >
-                      {selectedGood === good ? '-' : '+'}
-                    </button>
+                    {(selectedGood === good
+                      ? (
+                        <button
+                          data-cy="RemoveButton"
+                          type="button"
+                          className="button is-info"
+                          onClick={this.clearGood}
+                        >
+                          -
+                        </button>
+                      )
+                      : (
+                        <button
+                          data-cy="AddButton"
+                          type="button"
+                          className="button"
+                          onClick={() => this.changeGood(good)}
+                        >
+                          +
+                        </button>
+                      )
+                    )}
                   </td>
 
                   <td data-cy="GoodTitle" className="is-vcentered">
