@@ -70,7 +70,6 @@ export class App extends Component<{}, State> {
                   className={cn(
                     { 'has-background-success-light': isSelectedGood },
                   )}
-                  // className='has-background-success-light'
                 >
                   <td>
                     {
