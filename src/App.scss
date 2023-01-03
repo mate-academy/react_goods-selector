@@ -1,3 +1,21 @@
 iframe {
   display: none;
 }
+
+.main {
+  background-image: url(backgroundGoods.jpg);
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  justify-content: center;
+}
+
+.table {
+  margin: 0 auto;
+  width: 400px;
+}
