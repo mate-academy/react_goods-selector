@@ -1,5 +1,5 @@
 $text-color: #591811;
-$delete-button: #EE3425;
+$delete-button: #ee3425;
 $delete-button-hover: #c0190a;
 
 body {
@@ -16,7 +16,7 @@ iframe {
 
 .container {
   border: 5px solid $text-color;
-  background-color: #FCF4A2;
+  background-color: #fcf4a2;
   margin: 0 auto;
   width: 500px;
   border-radius: 10px;
@@ -25,7 +25,7 @@ iframe {
 .table {
   color: $text-color;
   width: 100%;
-  background-color: #FFCF49;
+  background-color: #ffcf49;
   border-radius: 5px;
 }
 
@@ -35,7 +35,7 @@ iframe {
 }
 
 .button {
-  background-color: #73C5A5;
+  background-color: #73c5a5;
 
   &:hover {
     background-color: #3a886a;
