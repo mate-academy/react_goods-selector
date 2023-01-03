@@ -27,7 +27,7 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleClick = () => {
+  handleClicktoRemoveGood = () => {
     this.setState({ selectedGood: '' });
   };
 
@@ -44,7 +44,7 @@ export class App extends React.Component<{}, State> {
                 {`${selectedGood} is selected`}
                 {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
                 <button
-                  onClick={this.handleClick}
+                  onClick={this.handleClicktoRemoveGood}
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
@@ -69,10 +69,10 @@ export class App extends React.Component<{}, State> {
                       {selectedGood === product
                         ? (
                           <button
-                            onClick={this.handleClick}
+                            onClick={this.handleClicktoRemoveGood}
                             data-cy="RemoveButton"
                             type="button"
-                            className="button is-info"
+                            className="button button--active is-info"
                           >
                             -
                           </button>

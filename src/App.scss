@@ -1,3 +1,59 @@
+$text-color: #591811;
+$delete-button: #EE3425;
+$delete-button-hover: #c0190a;
+
+body {
+  padding: 0;
+  background-image: url(./food.webp);
+  background-size: 800px;
+  background-repeat: repeat;
+
+}
+
 iframe {
   display: none;
+}
+
+.container {
+  border: 5px solid $text-color;
+  background-color: #FCF4A2;
+  margin: 0 auto;
+  width: 500px;
+  border-radius: 10px;
+}
+
+.table {
+  color: $text-color;
+  width: 100%;
+  background-color: #FFCF49;
+  border-radius: 5px;
+}
+
+.title {
+  color: $text-color;
+  margin: 0 auto;
+}
+
+.button {
+  background-color: #73C5A5;
+
+  &:hover {
+    background-color: #3a886a;
+  }
+
+  &.is-info {
+    background-color: $delete-button;
+
+    &:hover {
+      background-color: $delete-button-hover;
+    }
+  }
+}
+
+.delete {
+  background-color: $delete-button;
+
+  &:hover {
+    background-color: $delete-button-hover;
+  }
 }
