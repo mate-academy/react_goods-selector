@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import 'bulma/css/bulma.css';
 import './App.scss';
@@ -25,12 +24,15 @@ export const App: React.FC = () => {
       {selectedGood ? (
         <h1 className="title is-flex is-align-items-center">
           {`${selectedGood} is selected`}
+          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
             onClick={() => setSelectedGoods('')}
-          />
+          >
+            {}
+          </button>
         </h1>
       ) : (
         <h1 className="title">No goods selected</h1>
