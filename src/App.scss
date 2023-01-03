@@ -2,17 +2,6 @@ iframe {
   display: none;
 }
 
-.title {
-  display: flex;
-  color: rgb(79, 93, 241);
-  justify-content: center;
-}
-
-.button {
-  color: black;
-  background-color: gray;
-}
-
 .section {
   display: flex;
   justify-content: center;
@@ -21,13 +10,7 @@ iframe {
 }
 
 .title {
+  display: flex;
+  color: rgb(79, 93, 241);
   justify-content: center;
 }
-
-// tr {
-//   border: 1px solid #662e1c;
-//   background-color: darkkhaki;
-//   border-radius: 50px;
-// }
-
-
