@@ -24,9 +24,9 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  removeButton = () => this.setState({ selectedGood: '' });
+  removeGood = () => this.setState({ selectedGood: '' });
 
-  selectButton = (name: string) => this.setState({ selectedGood: name });
+  selectGood = (name: string) => this.setState({ selectedGood: name });
 
   render() {
     const { selectedGood } = this.state;
@@ -45,7 +45,7 @@ export class App extends Component<{}, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={this.removeButton}
+                  onClick={this.removeGood}
                 />
               </h1>
             )
@@ -57,7 +57,7 @@ export class App extends Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(product => {
-              const isSelected = product === selectedGood;
+              const isGoodSelected = product === selectedGood;
 
               return (
                 (
@@ -65,18 +65,18 @@ export class App extends Component<{}, State> {
                     key={product}
                     data-cy="Good"
                     className={classNames(
-                      { 'has-background-success-light': isSelected },
+                      { 'has-background-success-light': isGoodSelected },
                     )}
                   >
                     <td>
                       {
-                        isSelected
+                        isGoodSelected
                           ? (
                             <button
                               data-cy="RemoveButton"
                               type="button"
                               className="button is-info"
-                              onClick={this.removeButton}
+                              onClick={this.removeGood}
                             >
                               -
                             </button>
@@ -86,7 +86,7 @@ export class App extends Component<{}, State> {
                               data-cy="AddButton"
                               type="button"
                               className="button"
-                              onClick={() => this.selectButton(product)}
+                              onClick={() => this.selectGood(product)}
                             >
                               +
                             </button>
