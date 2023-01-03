@@ -21,16 +21,16 @@ interface State {
 }
 
 export class App extends Component<{}, State> {
-  state = {
+  state: Readonly<State> = {
     selectedGood: 'Jam',
   };
 
-  removeBtn = () => {
+  removeButton = () => {
     this.setState({ selectedGood: '' });
   };
 
-  addBtn = (item: string) => {
-    this.setState({ selectedGood: item });
+  addBtn = (good: string) => {
+    this.setState({ selectedGood: good });
   };
 
   render() {
@@ -41,7 +41,7 @@ export class App extends Component<{}, State> {
         {
           selectedGood
             ? (
-              <h1 className="title is-flex is-align-items-center">
+              <h1 className="title is-flex is-align-goods-center">
                 {`${selectedGood} is selected`}
 
                 {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
@@ -49,7 +49,7 @@ export class App extends Component<{}, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={this.removeBtn}
+                  onClick={this.removeButton}
                 />
               </h1>
             )
@@ -60,27 +60,27 @@ export class App extends Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map((item) => {
-              const isSelected = item === selectedGood;
+            {goods.map((good) => {
+              const isSelectedGood = good === selectedGood;
 
               return (
                 <tr
                   data-cy="Good"
-                  key={item}
+                  key={good}
                   className={cn(
-                    { 'has-background-success-light': isSelected },
+                    { 'has-background-success-light': isSelectedGood },
                   )}
                   // className='has-background-success-light'
                 >
                   <td>
                     {
-                      isSelected
+                      isSelectedGood
                         ? (
                           <button
                             data-cy="RemoveButton"
                             type="button"
                             className="button is-info"
-                            onClick={this.removeBtn}
+                            onClick={this.removeButton}
                           >
                             -
                           </button>
@@ -90,7 +90,7 @@ export class App extends Component<{}, State> {
                             data-cy="AddButton"
                             type="button"
                             className="button"
-                            onClick={() => this.addBtn(item)}
+                            onClick={() => this.addBtn(good)}
                           >
                             +
                           </button>
@@ -99,7 +99,7 @@ export class App extends Component<{}, State> {
                   </td>
 
                   <td data-cy="GoodTitle" className="is-vcentered">
-                    {item}
+                    {good}
                   </td>
                 </tr>
               );
