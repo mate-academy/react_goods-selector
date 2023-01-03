@@ -25,7 +25,7 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  RemoveItem = () => {
+  removeItem = () => {
     this.setState({ selectedGood: '' });
   };
 
@@ -48,7 +48,7 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.RemoveItem}
+                onClick={this.removeItem}
               />
             </h1>
           ) : (
@@ -65,9 +65,9 @@ export class App extends Component<{}, State> {
                   { 'has-background-success-light': good === selectedGood },
                 )}
               >
-                {good !== selectedGood
-                  ? (
-                    <td>
+                <td>
+                  {good !== selectedGood
+                    ? (
                       <button
                         data-cy="AddButton"
                         type="button"
@@ -76,20 +76,18 @@ export class App extends Component<{}, State> {
                       >
                         +
                       </button>
-                    </td>
-                  )
-                  : (
-                    <td>
+                    )
+                    : (
                       <button
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={this.RemoveItem}
+                        onClick={this.removeItem}
                       >
                         -
                       </button>
-                    </td>
-                  )}
+                    )}
+                </td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
                   {good}
