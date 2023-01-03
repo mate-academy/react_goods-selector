@@ -77,7 +77,7 @@ export class App extends Component<{}, State> {
                       isSelectedGood
                         ? (
                           <button
-                            data-cy="removeGood"
+                            data-cy="RemoveButton"
                             type="button"
                             className="button is-info"
                             onClick={this.removeGood}
