@@ -1,3 +1,23 @@
 iframe {
   display: none;
 }
+
+body {
+  height: 100vh;
+  background-image: url("https://images.unsplash.com/photo-1582803824122-f25becf36ad8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.container {
+  padding-top: 90px;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.table {
+  width: 280px;
+  border-radius: 7px;
+  background-color: #e0f1c6;
+}
