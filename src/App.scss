@@ -1,3 +1,14 @@
 iframe {
   display: none;
 }
+
+.container {
+  display: grid;
+  justify-items: center;
+}
+
+.table {
+  width: 33.3%;
+  display: flex;
+  justify-content: center;
+}
