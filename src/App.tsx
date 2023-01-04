@@ -94,7 +94,7 @@ export class App extends React.Component<{}, State> {
                   data-cy="GoodTitle"
                   className="is-vcentered"
                 >
-                  {`${good}`}
+                  {good}
                 </td>
               </tr>
             ))}
