@@ -40,23 +40,34 @@ export class App extends React.Component<{}, State> {
   render() {
     const { selectedGood } = this.state;
 
+    const removeButton = (
+      <button
+        data-cy="RemoveButton"
+        type="button"
+        className="button is-info"
+        onClick={this.clearHandler}
+      >
+        -
+      </button>
+    );
+
     return (
       <main className="main section container">
-        {!selectedGood ? (
-          <h1 className="title">No goods selected</h1>
-        ) : (
-          <h1 className="title is-flex is-align-items-center">
-            {`${selectedGood} is selected`}
+        {!selectedGood
+          ? <h1 className="title">No goods selected</h1>
+          : (
+            <h1 className="title is-flex is-align-items-center">
+              {`${selectedGood} is selected`}
 
-            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-            <button
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={this.clearHandler}
-            />
-          </h1>
-        )}
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.clearHandler}
+              />
+            </h1>
+          )}
 
         <table className="table">
           <tbody>
@@ -70,27 +81,20 @@ export class App extends React.Component<{}, State> {
                 }
               >
                 <td>
-                  {good === selectedGood ? (
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                      onClick={this.clearHandler}
-                    >
-                      -
-                    </button>
-                  ) : (
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      className="button"
-                      onClick={() => {
-                        this.addHandler(good);
-                      }}
-                    >
-                      +
-                    </button>
-                  )}
+                  {good === selectedGood
+                    ? removeButton
+                    : (
+                      <button
+                        data-cy="AddButton"
+                        type="button"
+                        className="button"
+                        onClick={() => {
+                          this.addHandler(good);
+                        }}
+                      >
+                        +
+                      </button>
+                    )}
                 </td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
@@ -98,14 +102,6 @@ export class App extends React.Component<{}, State> {
                 </td>
               </tr>
             ))}
-
-            {/* <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button> */}
           </tbody>
         </table>
       </main>
