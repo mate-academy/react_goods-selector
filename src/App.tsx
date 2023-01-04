@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -42,7 +42,7 @@ export class App extends Component<{}, State> {
 
     return (
       <main className="section container">
-        {selectedGood.length ? (
+        {selectedGood ? (
           <h1 className="title is-flex is-align-items-center">
             {`${selectedGood} is selected`}
 
@@ -64,30 +64,31 @@ export class App extends Component<{}, State> {
               <tr
                 key={good}
                 data-cy="Good"
-                className={classNames(
+                className={cn(
                   { 'has-background-success-light': good === selectedGood },
                 )}
               >
                 <td>
-                  {good !== selectedGood ? (
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      className="button"
-                      onClick={() => this.handleAddButton(good)}
-                    >
-                      +
-                    </button>
-                  ) : (
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                      onClick={this.handleCLearButton}
-                    >
-                      -
-                    </button>
-                  )}
+                  {good !== selectedGood
+                    ? (
+                      <button
+                        data-cy="AddButton"
+                        type="button"
+                        className="button"
+                        onClick={() => this.handleAddButton(good)}
+                      >
+                        +
+                      </button>
+                    ) : (
+                      <button
+                        data-cy="RemoveButton"
+                        type="button"
+                        className="button is-info"
+                        onClick={this.handleCLearButton}
+                      >
+                        -
+                      </button>
+                    )}
 
                 </td>
 
