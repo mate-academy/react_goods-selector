@@ -1,3 +1,35 @@
 iframe {
   display: none;
 }
+
+#root {
+  background-image: url(../src/tropical-product-background_53876-89241.jpg.webp);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body {
+  font-family: Nanum Pen Script, sans-serif;
+  font-size: 30px;
+}
+
+.section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 30%;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+.table {
+  background-color: transparent;
+}
