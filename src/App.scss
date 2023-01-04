@@ -4,11 +4,17 @@ iframe {
 
 #root {
   background-image: url(../src/tropical-product-background_53876-89241.jpg.webp);
-  height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 body {
-  font-family: Nanum Pen Script;
+  font-family: Nanum Pen Script, sans-serif;
   font-size: 30px;
 }
 
