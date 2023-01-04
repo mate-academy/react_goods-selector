@@ -48,6 +48,7 @@ export class App extends React.Component<{}, State> {
               <button
                 data-cy="ClearButton"
                 type="button"
+                aria-label="clear"
                 className="delete ml-3"
                 onClick={this.rmvSelectedGood}
               />
