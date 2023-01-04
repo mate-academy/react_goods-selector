@@ -1,3 +1,17 @@
 iframe {
   display: none;
 }
+
+.section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 50%;
+  background-color: pink;
+}
+
+.title {
+  display: flex;
+  color: rgb(79, 93, 241);
+  justify-content: center;
+}
