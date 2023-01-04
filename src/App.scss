@@ -1,3 +1,28 @@
 iframe {
   display: none;
 }
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background: linear-gradient(65deg, rgb(181, 41, 231), rgb(216, 43, 43));
+}
+
+.container {
+  display: grid;
+  justify-items: center;
+}
+
+.table {
+  width: 300px;
+  border-radius: 10px;
+  padding: 30px;
+}
+
+.title {
+  color: white;
+}
+
+.button {
+  background: linear-gradient(65deg, rgb(181, 41, 231), rgb(216, 43, 43));
+
+}
