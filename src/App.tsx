@@ -28,11 +28,11 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  RemoveProduct = () => {
+  removeProduct = () => {
     this.setState({ selectedGood: '' });
   };
 
-  AddProductButton = (product:string) => {
+  addProductButton = (product:string) => {
     this.setState({ selectedGood: product });
   };
 
@@ -44,7 +44,7 @@ export class App extends React.Component<{}, State> {
         data-cy="RemoveButton"
         type="button"
         className="button is-info"
-        onClick={this.RemoveProduct}
+        onClick={this.removeProduct}
       >
         -
       </Button>
@@ -60,7 +60,7 @@ export class App extends React.Component<{}, State> {
                 aria-label="delete"
                 size="large"
                 data-cy="ClearButton"
-                onClick={this.RemoveProduct}
+                onClick={this.removeProduct}
               >
                 <DeleteIcon />
               </IconButton>
@@ -71,6 +71,7 @@ export class App extends React.Component<{}, State> {
           <tbody>
             {goods.map(product => (
               <tr
+                key={product}
                 data-cy="Good"
                 className={product === selectedGood
                   ? 'has-background-success-light'
@@ -85,13 +86,13 @@ export class App extends React.Component<{}, State> {
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={() => this.AddProductButton(product)}
+                        onClick={() => this.addProductButton(product)}
                       >
                         +
                       </Button>
                     ) }
                 </td>
-                <td data-cy="GoodTitle" className="is-vcentered" key={product}>
+                <td data-cy="GoodTitle" className="is-vcentered">
                   {product}
                 </td>
               </tr>
