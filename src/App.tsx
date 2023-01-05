@@ -1,4 +1,5 @@
-import React from 'react';
+import { Component } from 'react';
+import cn from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -19,104 +20,101 @@ type State = {
   activeGood: string;
 };
 
-export class App extends React.Component<{}, State> {
+export class App extends Component<{}, State> {
   state = {
-    activeGood: 'Eggs',
+    activeGood: 'Jam',
   };
+
+  isActive = (good: string) => (
+    good === this.state.activeGood
+  );
+
+  clearBtnHandler = () => (
+    this.setState({ activeGood: '' })
+  );
+
+  activeBtnToggler = (good: string) => (
+    this.setState({
+      activeGood: this.isActive(good)
+        ? ''
+        : good,
+    })
+  );
 
   render() {
     const { activeGood } = this.state;
+    const hasNoneActive = !activeGood;
 
     return (
       <main className="section container">
-        <h1 className="title">No goods selected</h1>
-
-        <h1 className="title is-flex is-align-items-center">
-          {`${activeGood} is selected`}
-
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-          <button
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-          />
+        <h1 className={
+          cn(
+            'title',
+            { 'is-flex is-align-items-center': !hasNoneActive },
+          )
+        }
+        >
+          {
+            hasNoneActive
+              ? 'No goods selected'
+              : (`${activeGood} is selected`)
+          }
+          { !hasNoneActive && (
+            <>
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.clearBtnHandler}
+              />
+            </>
+          ) }
         </h1>
 
         <table className="table">
           <tbody>
-            {goods.map(good => (
-              <tr
-                data-cy="Good"
-                key={good}
-              >
-                <td>
-                  <button
-                    data-cy="AddButton"
-                    type="button"
-                    className="button"
-                  >
-                    +
-                  </button>
-                </td>
+            {goods.map(good => {
+              const isActive = this.isActive(good);
 
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-        <h1>Demo (delete after):</h1>
-        <table className="table">
-          <tbody>
-            <tr data-cy="Good">
-              <td>
-                <button
-                  data-cy="AddButton"
-                  type="button"
-                  className="button"
+              return (
+                <tr
+                  data-cy="Good"
+                  key={good}
+                  className={
+                    cn(
+                      { 'has-background-success-light': isActive },
+                    )
+                  }
                 >
-                  +
-                </button>
-              </td>
+                  <td>
+                    <button
+                      data-cy={
+                        isActive
+                          ? 'removeButton'
+                          : 'addButton'
+                      }
+                      type="button"
+                      className={cn(
+                        'button',
+                        { 'is-info': isActive },
+                      )}
+                      onClick={() => this.activeBtnToggler(good)}
+                    >
+                      {
+                        isActive
+                          ? '-'
+                          : '+'
+                      }
+                    </button>
+                  </td>
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                Dumplings
-              </td>
-            </tr>
-
-            <tr data-cy="Good" className="has-background-success-light">
-              <td>
-                <button
-                  data-cy="RemoveButton"
-                  type="button"
-                  className="button is-info"
-                >
-                  -
-                </button>
-              </td>
-
-              <td data-cy="GoodTitle" className="is-vcentered">
-                Jam
-              </td>
-            </tr>
-
-            <tr data-cy="Good">
-              <td>
-                <button
-                  data-cy="AddButton"
-                  type="button"
-                  className="button"
-                >
-                  +
-                </button>
-              </td>
-
-              <td data-cy="GoodTitle" className="is-vcentered">
-                Garlic
-              </td>
-            </tr>
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </main>
