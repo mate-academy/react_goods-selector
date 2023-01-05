@@ -40,7 +40,7 @@ export class App extends Component<{}, State> {
       <main className="section container">
         {selectedGood ? (
           <h1 className="title is-flex is-align-items-center">
-            {`${selectedGood}  is selected` }
+            {`${selectedGood} is selected` }
 
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <button
@@ -61,7 +61,7 @@ export class App extends Component<{}, State> {
                 data-cy="Good"
                 key={good}
                 className={cn(
-                  { 'has-background-sucess-light': selectedGood === good },
+                  { 'has-background-success-light': selectedGood === good },
                 )}
               >
                 <td>
@@ -71,6 +71,7 @@ export class App extends Component<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
+                        onClick={this.handleClearButton}
                       >
                         -
                       </button>
