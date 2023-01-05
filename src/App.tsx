@@ -25,15 +25,12 @@ export const App: React.FC = () => {
         <h1 className="title is-flex is-align-items-center">
           {`${selectGoods} is selected`}
 
-          <button
+             <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
             onClick={() => setSelectGoods('')}
-            title="Clear the selected goods"
-          >
-            Clear
-          </button>
+          ></button>
 
         </h1>
       ) : (
