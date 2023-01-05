@@ -25,7 +25,7 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  rmvSelectedGood = () => {
+  removeSelectedGood = () => {
     this.setState({ selectedGood: '' });
   };
 
@@ -50,7 +50,7 @@ export class App extends React.Component<{}, State> {
                 type="button"
                 aria-label="clear"
                 className="delete ml-3"
-                onClick={this.rmvSelectedGood}
+                onClick={this.removeSelectedGood}
               />
             </h1>
           )}
@@ -77,7 +77,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
-                          onClick={this.rmvSelectedGood}
+                          onClick={this.removeSelectedGood}
                         >
                           -
                         </button>
