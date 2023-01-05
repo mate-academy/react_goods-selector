@@ -32,6 +32,31 @@ export const App: React.FC = () => (
 
     <table className="table">
       <tbody>
+        {goods.map(good => (
+          <tr
+            data-cy="Good"
+          >
+            <td>
+              <button
+                data-cy="AddButton"
+                type="button"
+                className="button"
+              >
+                +
+              </button>
+            </td>
+
+            <td data-cy="GoodTitle" className="is-vcentered">
+              {good}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <h1>Demo (delete after):</h1>
+    <table className="table">
+      <tbody>
         <tr data-cy="Good">
           <td>
             <button
