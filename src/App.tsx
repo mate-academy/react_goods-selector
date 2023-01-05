@@ -43,23 +43,23 @@ export class App extends Component<{}, State> {
 
   render() {
     const { activeGood } = this.state;
-    const hasNoneActive = !activeGood;
+    const hasActive = Boolean(activeGood);
 
     return (
       <main className="section container">
         <h1 className={
           cn(
             'title',
-            { 'is-flex is-align-items-center': !hasNoneActive },
+            { 'is-flex is-align-items-center': hasActive },
           )
         }
         >
           {
-            hasNoneActive
-              ? 'No goods selected'
-              : (`${activeGood} is selected`)
+            hasActive
+              ? (`${activeGood} is selected`)
+              : 'No goods selected'
           }
-          { !hasNoneActive && (
+          { hasActive && (
             <>
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
@@ -91,8 +91,8 @@ export class App extends Component<{}, State> {
                     <button
                       data-cy={
                         isActive
-                          ? 'removeButton'
-                          : 'addButton'
+                          ? 'RemoveButton'
+                          : 'AddButton'
                       }
                       type="button"
                       className={cn(
