@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
@@ -17,12 +18,20 @@ export const goods = [
 ];
 
 type State = {
-  selectedGood: string
+  selectedGood: string;
 };
 
 export class App extends React.Component<{}, State> {
   state = {
     selectedGood: 'Jam',
+  };
+
+  handleClearButton = () => {
+    this.setState({ selectedGood: '' });
+  };
+
+  handleAddButton = (good: string) => {
+    this.setState({ selectedGood: good });
   };
 
   render() {
@@ -31,49 +40,39 @@ export class App extends React.Component<{}, State> {
     return (
       <main className="section container">
 
-        {selectedGood
-          ? (
-            <h1 className="title is-flex is-align-items-center">
-              {`${selectedGood} is selected`}
+        {selectedGood ? (
+          <h1 className="title is-flex is-align-items-center">
+            {`${selectedGood} is selected`}
 
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-              <button
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-                onClick={() => {
-                  // event.currentTarget.textContent:'No goods selected'
-                  this.setState({
-                    selectedGood: '',
-                  });
-                }}
-              />
-            </h1>
-          )
-          : (<h1 className="title">No goods selected</h1>
-          )}
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={this.handleClearButton}
+            />
+          </h1>
+        ) : (
+          <h1 className="title">No goods selected</h1>
+        )}
 
         <table className="table">
           <tbody>
             {goods.map(good => (
               <tr
+                key={good}
                 data-cy="Good"
-                className={
-                  cn({ 'has-background-success-light': good === selectedGood })
-                }
+                className={cn(
+                  { 'has-background-success-light': selectedGood === good },
+                )}
               >
                 <td>
                   {selectedGood === good
                     ? (
                       <button
-                        data-cy="AddButton"
+                        data-cy="RemoveButton"
                         type="button"
-                        className="button"
-                        onClick={() => {
-                          this.setState({
-                            selectedGood: '',
-                          });
-                        }}
+                        className="button is-info"
+                        onClick={this.handleClearButton}
                       >
                         -
                       </button>
@@ -82,16 +81,13 @@ export class App extends React.Component<{}, State> {
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={() => {
-                          this.setState({
-                            selectedGood: good,
-                          });
-                        }}
+                        onClick={() => this.handleAddButton(good)}
                       >
                         +
                       </button>
                     )}
                 </td>
+
                 <td data-cy="GoodTitle" className="is-vcentered">
                   {good}
                 </td>
