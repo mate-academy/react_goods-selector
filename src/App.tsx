@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -30,12 +31,6 @@ export class App extends Component<{}, State> {
     });
   };
 
-  removeGood = () => {
-    this.setState({
-      selectedGood: '',
-    });
-  };
-
   clearGood = () => {
     this.setState({
       selectedGood: '',
@@ -43,15 +38,17 @@ export class App extends Component<{}, State> {
   };
 
   render() {
+    const { selectedGood } = this.state;
+
     return (
       <main className="section container">
 
         {
-          !this.state.selectedGood ? (
+          !selectedGood ? (
             <h1 className="title">No goods selected</h1>
           ) : (
             <h1 className="title is-flex is-align-items-center">
-              {`${this.state.selectedGood} is selected`}
+              {`${selectedGood} is selected`}
 
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
@@ -74,7 +71,9 @@ export class App extends Component<{}, State> {
                   <tr
                     data-cy="Good"
                     className={
-                      isGoodSelected && 'has-background-success-light'
+                      classNames(
+                        { 'has-background-success-light': isGoodSelected },
+                      )
                     }
                     key={good}
                   >
@@ -86,7 +85,7 @@ export class App extends Component<{}, State> {
                               data-cy="RemoveButton"
                               type="button"
                               className="button is-info"
-                              onClick={this.removeGood}
+                              onClick={this.clearGood}
                             >
                               -
                             </button>
