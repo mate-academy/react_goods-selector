@@ -83,7 +83,7 @@ export class App extends React.Component<{}, State> {
                       }
                       onClick={() => {
                         return isSelected
-                          ? this.setState({ selectedGood: '' })
+                          ? this.handleResetClick()
                           : this.handleSelectClick(good);
                       }}
                     >
