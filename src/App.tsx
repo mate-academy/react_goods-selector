@@ -44,13 +44,14 @@ export class App extends Component<{}, State> {
               is-flex
               is-align-items-center"
             >
-              {/* eslint-disable-next-line */}
-              {selectedGood} is selected
+              {selectedGood}
+              {' '}
+              is selected
 
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
                 type="button"
+                aria-label="clear"
                 className="delete ml-3"
                 onClick={this.removeGood}
               />
