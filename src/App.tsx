@@ -24,11 +24,11 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  ClearButton = () => {
+  clearButton = () => {
     this.setState({ selectedGood: '' });
   };
 
-  AddButton = (good: string) => {
+  addButton = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
@@ -36,67 +36,66 @@ export class App extends Component<{}, State> {
     const { selectedGood } = this.state;
 
     return (
-      <>
-        <main className="section container" >
+      <main className="section container">
 
-          {selectedGood === ''
-            ? <h1 className="title">No goods selected</h1>
-            : (
-              <h1 className="title is-flex is-align-items-center">
-                {`${selectedGood} is selected`}
-                <button
-                  data-cy="ClearButton"
-                  type="button"
-                  className="delete ml-3"
-                  onClick={this.ClearButton}
-                />
-              </h1>
-            )}
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+        {selectedGood === ''
+          ? <h1 className="title">No goods selected</h1>
+          : (
+            <h1 className="title is-flex is-align-items-center">
+              {`${selectedGood} is selected`}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.clearButton}
+              >
+                {undefined}
+              </button>
+            </h1>
+          )}
 
-          <table className="table">
-            <tbody>
-              {goods.map(good => (
-                <tr
-                  data-cy="Good"
-                  className={good === selectedGood
-                    ? 'has-background-success-light'
-                    : ''}
-                >
-                  <td>
-                    {good === selectedGood
-                      ? (
-                        <button
-                          data-cy="RemoveButton"
-                          type="button"
-                          className="button is-info"
-                          onClick={this.ClearButton}
-                        >
-                          -
-                        </button>
-                      )
-                      : (
-                        <button
-                          data-cy="AddButton"
-                          type="button"
-                          className="button"
-                          onClick={() => this.AddButton(good)}
-                        >
-                          +
-                        </button>
-                      )
-                    }
-                  </td>
+        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+        <table className="table">
+          <tbody>
+            {goods.map(good => (
+              <tr
+                data-cy="Good"
+                className={good === selectedGood
+                  ? 'has-background-success-light'
+                  : ''}
+              >
+                <td>
+                  {good === selectedGood
+                    ? (
+                      <button
+                        data-cy="RemoveButton"
+                        type="button"
+                        className="button is-info"
+                        onClick={this.clearButton}
+                      >
+                        -
+                      </button>
+                    )
+                    : (
+                      <button
+                        data-cy="AddButton"
+                        type="button"
+                        className="button"
+                        onClick={() => this.addButton(good)}
+                      >
+                        +
+                      </button>
+                    )}
+                </td>
 
-                  <td data-cy="GoodTitle" className="is-vcentered">
-                    {good}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </main>
-      </>
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </main>
     );
   }
 }
