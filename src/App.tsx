@@ -92,7 +92,7 @@ export class App extends React.Component<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={() => this.handleClickRemoved()}
+                        onClick={this.handleClickRemoved}
                       >
                         -
                       </button>
