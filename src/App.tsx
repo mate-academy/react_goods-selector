@@ -53,7 +53,7 @@ export class App extends React.Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => this.handleClickRemoved()}
+                onClick={this.handleClickRemoved}
               />
             </h1>
           )
