@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import cn from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -28,14 +29,6 @@ export class App extends Component<{}, State> {
     this.setState({ selectedGood: '' });
   };
 
-  handleAddButton = (event: React.MouseEvent<HTMLElement>) => {
-    const target = event.currentTarget.closest('tr');
-
-    if (target) {
-      this.setState({ selectedGood: target.lastChild?.textContent || '' });
-    }
-  };
-
   render() {
     const { selectedGood } = this.state;
 
@@ -59,13 +52,16 @@ export class App extends Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(good => (
-              good === selectedGood ? (
-                <tr
-                  className="has-background-success-light"
-                  data-cy="Good"
-                  key={good}
-                >
-                  <td>
+              <tr
+                className={cn({
+                  'has-background-success-light': selectedGood === good,
+                })}
+                data-cy="Good"
+                key={good}
+              >
+
+                <td>
+                  {good === selectedGood ? (
                     <button
                       data-cy="RemoveButton"
                       type="button"
@@ -74,35 +70,26 @@ export class App extends Component<{}, State> {
                     >
                       -
                     </button>
-                  </td>
-
-                  <td data-cy="GoodTitle" className="is-vcentered">
-                    {good}
-                  </td>
-                </tr>
-              ) : (
-                <tr
-                  className=""
-                  data-cy="Good"
-                  key={good}
-                >
-                  <td>
+                  ) : (
                     <button
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={this.handleAddButton}
+                      onClick={() => {
+                        this.setState({ selectedGood: good });
+                      }}
                     >
                       +
                     </button>
-                  </td>
+                  )}
+                </td>
 
-                  <td data-cy="GoodTitle" className="is-vcentered">
-                    {good}
-                  </td>
-                </tr>
-              )
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
             ))}
+
           </tbody>
         </table>
       </main>
