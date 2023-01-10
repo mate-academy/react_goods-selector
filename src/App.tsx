@@ -22,32 +22,36 @@ type State = {
 
 export class App extends React.Component<{}, State> {
   state = {
-    selectedGood: 'Jam is selected',
+    selectedGood: 'Jam',
   };
 
-  handleClickAdd = (item: string) => (
-    this.state.selectedGood === `${item} is selected`
-      ? this.setState({ selectedGood: 'No goods selected' })
-      : this.setState({ selectedGood: `${item} is selected` })
+  handleClick = (item: string) => (
+    this.state.selectedGood === `${item}`
+      ? this.setState({ selectedGood: '' })
+      : this.setState({ selectedGood: `${item}` })
   );
 
   render() {
     const { selectedGood } = this.state;
-    const checkItemIsSelected = (selectedGood !== 'No goods selected');
+    const isSelected = (selectedGood.length > 0);
 
     return (
       <main className="section container">
 
         <h1 className="title is-flex is-align-items-center">
-          {`${selectedGood}`}
+          {
+            isSelected
+              ? `${selectedGood} is selected`
+              : 'No goods selected'
+          }
 
-          { (checkItemIsSelected) && (
+          { (isSelected) && (
             // eslint-disable-next-line jsx-a11y/control-has-associated-label
             <button
               data-cy="ClearButton"
               type="button"
               onClick={() => (
-                this.setState({ selectedGood: 'No goods selected' })
+                this.setState({ selectedGood: '' })
               )}
               className="delete ml-3"
             />
@@ -57,7 +61,7 @@ export class App extends React.Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(item => {
-              const itemcheck = selectedGood === `${item} is selected`;
+              const itemcheck = selectedGood === `${item}`;
 
               return (
                 <tr
@@ -80,7 +84,7 @@ export class App extends React.Component<{}, State> {
                         { 'is-info': itemcheck },
                       )}
                       onClick={() => {
-                        this.handleClickAdd(`${item}`);
+                        this.handleClick(`${item}`);
                       }}
                     >
                       {itemcheck
