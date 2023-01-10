@@ -26,9 +26,9 @@ export class App extends React.Component<{}, State> {
   };
 
   handleClick = (item: string) => (
-    this.state.selectedGood === `${item}`
+    this.state.selectedGood === item
       ? this.setState({ selectedGood: '' })
-      : this.setState({ selectedGood: `${item}` })
+      : this.setState({ selectedGood: item })
   );
 
   render() {
@@ -39,11 +39,9 @@ export class App extends React.Component<{}, State> {
       <main className="section container">
 
         <h1 className="title is-flex is-align-items-center">
-          {
-            isSelected
-              ? `${selectedGood} is selected`
-              : 'No goods selected'
-          }
+          {isSelected
+            ? `${selectedGood} is selected`
+            : 'No goods selected'}
 
           { (isSelected) && (
             // eslint-disable-next-line jsx-a11y/control-has-associated-label
@@ -61,7 +59,7 @@ export class App extends React.Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(item => {
-              const itemcheck = selectedGood === `${item}`;
+              const itemcheck = selectedGood === item;
 
               return (
                 <tr
@@ -84,7 +82,7 @@ export class App extends React.Component<{}, State> {
                         { 'is-info': itemcheck },
                       )}
                       onClick={() => {
-                        this.handleClick(`${item}`);
+                        this.handleClick(item);
                       }}
                     >
                       {itemcheck
