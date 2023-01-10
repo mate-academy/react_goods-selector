@@ -25,13 +25,13 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  pickGood = (good: string) => {
+  selectGood = (good: string) => {
     this.setState({
       selectedGood: good,
     });
   };
 
-  removeGood = () => {
+  unselectGood = () => {
     this.setState({
       selectedGood: '',
     });
@@ -42,69 +42,67 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        {
-          <h1 className={className('title', {
-            'is-flex is-align-items-center': selectedGood,
-          })}
-          >
-            {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
+        <h1 className={className('title', {
+          'is-flex is-align-items-center': selectedGood,
+        })}
+        >
+          {selectedGood
+            ? `${selectedGood} is selected`
+            : 'No goods selected'}
 
-            {
-              selectedGood
+          {
+            selectedGood
               && (
                 /* eslint-disable-next-line jsx-a11y/control-has-associated-label */
                 <button
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={this.removeGood}
+                  onClick={this.unselectGood}
                 />
               )
-            }
-          </h1>
-        }
+          }
+        </h1>
 
         <table className="table">
           <tbody>
-            {
-              goods.map(good => (
-                <tr
-                  data-cy="Good"
-                  key={good}
-                  className={className({
-                    'has-background-success-light': selectedGood === good,
-                  })}
-                >
-                  <td>
-                    {selectedGood === good
-                      ? (
-                        <button
-                          data-cy="RemoveButton"
-                          type="button"
-                          className="button is-info"
-                          onClick={this.removeGood}
-                        >
-                          -
-                        </button>
-                      )
-                      : (
-                        <button
-                          data-cy="AddButton"
-                          type="button"
-                          className="button"
-                          onClick={() => this.pickGood(good)}
-                        >
-                          +
-                        </button>
-                      )}
-                  </td>
+            {goods.map(good => (
+              <tr
+                data-cy="Good"
+                key={good}
+                className={className({
+                  'has-background-success-light': selectedGood === good,
+                })}
+              >
+                <td>
+                  {selectedGood === good
+                    ? (
+                      <button
+                        data-cy="RemoveButton"
+                        type="button"
+                        className="button is-info"
+                        onClick={this.unselectGood}
+                      >
+                        -
+                      </button>
+                    )
+                    : (
+                      <button
+                        data-cy="AddButton"
+                        type="button"
+                        className="button"
+                        onClick={() => this.selectGood(good)}
+                      >
+                        +
+                      </button>
+                    )}
+                </td>
 
-                  <td data-cy="GoodTitle" className="is-vcentered">
-                    {good}
-                  </td>
-                </tr>
-              ))
-            }
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            ))}
 
           </tbody>
         </table>
