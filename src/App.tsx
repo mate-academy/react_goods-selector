@@ -25,18 +25,12 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  removeSelectedGood = () => this.setState({ selectedGood: '' });
-
   handleGood = (good: string) => {
-    const { selectedGood } = this.state;
-
-    if (selectedGood === good) {
-      this.removeSelectedGood();
-
-      return;
-    }
-
-    this.setState({ selectedGood: good });
+    this.setState((prevState) => {
+      return {
+        selectedGood: prevState.selectedGood === good ? '' : good,
+      };
+    });
   };
 
   render() {
@@ -56,7 +50,7 @@ export class App extends Component<{}, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={this.removeSelectedGood}
+                  onClick={() => this.handleGood(selectedGood)}
                 />
               </>
             )
