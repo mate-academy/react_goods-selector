@@ -26,11 +26,9 @@ export class App extends Component<{}, State> {
   };
 
   handleGood = (good: string) => {
-    this.setState((prevState) => {
-      return {
-        selectedGood: prevState.selectedGood === good ? '' : good,
-      };
-    });
+    this.setState((prevState) => ({
+      selectedGood: prevState.selectedGood === good ? '' : good,
+    }));
   };
 
   render() {
