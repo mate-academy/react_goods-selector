@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import cn from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -24,11 +25,11 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  clearButton = () => {
+  handleRemoveGood = () => {
     this.setState({ selectedGood: '' });
   };
 
-  addButton = (good: string) => {
+  handleAddGood = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
@@ -43,14 +44,13 @@ export class App extends Component<{}, State> {
           : (
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.clearButton}
-              >
-                {undefined}
-              </button>
+                onClick={this.handleRemoveGood}
+              />
             </h1>
           )}
 
@@ -60,9 +60,9 @@ export class App extends Component<{}, State> {
             {goods.map(good => (
               <tr
                 data-cy="Good"
-                className={good === selectedGood
-                  ? 'has-background-success-light'
-                  : ''}
+                className={cn(
+                  { 'has-background-success-light': good === selectedGood },
+                )}
               >
                 <td>
                   {good === selectedGood
@@ -71,7 +71,7 @@ export class App extends Component<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={this.clearButton}
+                        onClick={this.handleRemoveGood}
                       >
                         -
                       </button>
@@ -81,7 +81,7 @@ export class App extends Component<{}, State> {
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={() => this.addButton(good)}
+                        onClick={() => this.handleAddGood(good)}
                       >
                         +
                       </button>
