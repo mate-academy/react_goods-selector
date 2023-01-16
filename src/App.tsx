@@ -63,6 +63,7 @@ export class App extends Component<{}, State> {
                 className={cn(
                   { 'has-background-success-light': good === selectedGood },
                 )}
+                key={goods.indexOf(good) + 1}
               >
                 <td>
                   {good === selectedGood
