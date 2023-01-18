@@ -21,12 +21,10 @@ export class App extends React.Component {
   };
 
   handleSelect = (goodText: string) => {
-    const goodTitle = goodText;
-
     if (this.state.selectedGood === goodText) {
       this.setState({ selectedGood: '' });
     } else {
-      this.setState({ selectedGood: goodTitle });
+      this.setState({ selectedGood: goodText });
     }
   };
 
