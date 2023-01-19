@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -21,11 +22,7 @@ export class App extends React.Component {
   };
 
   handleSelect = (goodText: string) => {
-    if (this.state.selectedGood === goodText) {
-      this.setState({ selectedGood: '' });
-    } else {
-      this.setState({ selectedGood: goodText });
-    }
+    this.setState({ selectedGood: goodText });
   };
 
   handleUnselect = () => {
@@ -53,44 +50,45 @@ export class App extends React.Component {
           : <h1 className="title">No goods selected</h1>}
         <table className="table">
           <tbody>
-            {goods.map(
-              item => {
-                const checkIfSelected = () => selectedGood === item;
-
-                return (
-                  <tr
-                    data-cy="Good"
-                    key={item}
-                    className={checkIfSelected()
-                      ? 'has-background-success-light'
-                      : ''}
-                  >
-                    <td>
+            {goods.map(item => (
+              <tr
+                data-cy="Good"
+                key={item}
+                className={classNames(
+                  { 'has-background-success-light': selectedGood === item },
+                )}
+              >
+                <td>
+                  { selectedGood !== item
+                    ? (
                       <button
-                        data-cy={checkIfSelected()
-                          ? 'RemoveButton'
-                          : 'AddButton'}
+                        data-cy="AddButton"
                         type="button"
-                        className={checkIfSelected()
-                          ? 'button is-info'
-                          : 'button'}
+                        className="button"
                         onClick={() => {
                           this.handleSelect(item);
                         }}
                       >
-                        {checkIfSelected()
-                          ? '-'
-                          : '+'}
+                        +
                       </button>
-                    </td>
+                    )
+                    : (
+                      <button
+                        data-cy="RemoveButton"
+                        type="button"
+                        className="button is-info"
+                        onClick={this.handleUnselect}
+                      >
+                        -
+                      </button>
+                    )}
+                </td>
 
-                    <td data-cy="GoodTitle" className="is-vcentered">
-                      {item}
-                    </td>
-                  </tr>
-                );
-              },
-            )}
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {item}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </main>
