@@ -51,23 +51,26 @@ export class App extends Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map(god => (
+            {goods.map(good => (
               <tr
                 data-cy="Good"
-                key={god}
+                key={good}
                 className={
-                  selectedGood === god
+                  selectedGood === good
                     ? ('has-background-success-light')
                     : ''
                 }
               >
                 <td>
-                  {selectedGood === god
+                  {selectedGood === good
                     ? (
                       <button
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
+                        onClick={() => {
+                          this.setState({ selectedGood: '' });
+                        }}
                       >
                         -
                       </button>
@@ -78,16 +81,15 @@ export class App extends Component<{}, State> {
                         type="button"
                         className="button"
                         onClick={() => {
-                          this.setState({ selectedGood: god });
+                          this.setState({ selectedGood: good });
                         }}
                       >
                         +
                       </button>
                     )}
                 </td>
-
                 <td data-cy="GoodTitle" className="is-vcentered">
-                  {god}
+                  {good}
                 </td>
               </tr>
             ))}
