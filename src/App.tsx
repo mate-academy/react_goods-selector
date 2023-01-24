@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -23,9 +24,7 @@ export const App: React.FC = () => {
       data-cy="Good"
       key={good}
       className={
-        (selectedGood === good)
-          ? ('has-background-success-light')
-          : ''
+        classNames({ 'has-background-success-light': selectedGood === good })
       }
     >
       <td>
@@ -64,24 +63,20 @@ export const App: React.FC = () => {
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {
-          (!selectedGood
-            ? 'No goods selected'
-            : `${selectedGood} is selected`
-          )
-        }
+        {(selectedGood
+          ? `${selectedGood} is selected`
+          : 'No goods selected'
+        )}
 
-        {
-          selectedGood && (
-            <button
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              aria-label="clear button"
-              onClick={() => setSelectedGood('')}
-            />
-          )
-        }
+        {selectedGood && (
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            aria-label="clear button"
+            onClick={() => setSelectedGood('')}
+          />
+        )}
       </h1>
 
       <table className="table">
