@@ -28,29 +28,27 @@ export const App: React.FC = () => {
       }
     >
       <td>
-        {
-          (selectedGood !== good)
-            ? (
-              <button
-                data-cy="AddButton"
-                type="button"
-                className="button"
-                onClick={() => setSelectedGood(good)}
-              >
-                +
-              </button>
-            )
-            : (
-              <button
-                data-cy="RemoveButton"
-                type="button"
-                className="button is-info"
-                onClick={() => setSelectedGood('')}
-              >
-                -
-              </button>
-            )
-        }
+        {(selectedGood === good)
+          ? (
+            <button
+              data-cy="RemoveButton"
+              type="button"
+              className="button is-info"
+              onClick={() => setSelectedGood('')}
+            >
+              -
+            </button>
+          )
+          : (
+            <button
+              data-cy="AddButton"
+              type="button"
+              className="button"
+              onClick={() => setSelectedGood(good)}
+            >
+              +
+            </button>
+          )}
 
       </td>
 
