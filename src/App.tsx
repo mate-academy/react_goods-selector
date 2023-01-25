@@ -28,7 +28,7 @@ export const App: React.FC = () => {
       }
     >
       <td>
-        {(selectedGood === good)
+        {selectedGood === good
           ? (
             <button
               data-cy="RemoveButton"
