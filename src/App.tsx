@@ -65,12 +65,11 @@ export class App extends React.Component {
                 key={good + Math.random()}
                 data-cy="Good"
                 className={classNames({
-                  'has-background-success-light':
-                    selectedGood.localeCompare(good),
+                  'has-background-success-light': selectedGood === good,
                 })}
               >
                 <td>
-                  {selectedGood.localeCompare(good)
+                  {selectedGood === good
                     ? (
                       <button
                         data-cy="RemoveButton"
