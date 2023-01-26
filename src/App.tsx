@@ -53,19 +53,17 @@ export class App extends React.Component<{}, State> {
     return (
       <main className="section container">
         {selectedGood ? (
-          <>
-            <h1 className="title is-flex is-align-items-center">
-              {`${selectedGood} is selected`}
+          <h1 className="title is-flex is-align-items-center">
+            {`${selectedGood} is selected`}
 
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-              <button
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-                onClick={this.clearButton}
-              />
-            </h1>
-          </>
+            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={this.clearButton}
+            />
+          </h1>
         )
           : <h1 className="title">No goods selected</h1>}
 
