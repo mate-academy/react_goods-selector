@@ -25,25 +25,7 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  addButton = (event: React.MouseEvent<HTMLButtonElement>, good:string) => {
-    const target = event.currentTarget;
-
-    target.parentElement?.parentElement?.classList
-      .toggle('has-background-success-light');
-
-    this.setState({ selectedGood: good });
-  };
-
-  removeButton = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const target = event.currentTarget;
-
-    target.parentElement?.parentElement?.classList
-      .toggle('has-background-success-light');
-
-    this.setState({ selectedGood: '' });
-  };
-
-  clearButton = () => {
+  reset = () => {
     this.setState({ selectedGood: '' });
   };
 
@@ -61,7 +43,7 @@ export class App extends React.Component<{}, State> {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={this.clearButton}
+              onClick={this.reset}
             />
           </h1>
         )
@@ -84,9 +66,7 @@ export class App extends React.Component<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={(event) => {
-                          this.removeButton(event);
-                        }}
+                        onClick={this.reset}
                       >
                         -
                       </button>
@@ -96,9 +76,9 @@ export class App extends React.Component<{}, State> {
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={(event) => {
-                          this.addButton(event, good);
-                        }}
+                        onClick={() => (
+                          this.setState({ selectedGood: good })
+                        )}
                       >
                         +
                       </button>
