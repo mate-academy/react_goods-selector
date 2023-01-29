@@ -34,20 +34,22 @@ export class App extends React.Component <{}, State> {
 
     return (
       <main className="section container">
-        {(selectedGood.length === 0)
-          ? <h1 className="title">No goods selected</h1>
-          : (
-            <h1 className="title is-flex is-align-items-center">
-              {`${selectedGood} is selected`}
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-              <button
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-                onClick={this.clearSelectedGood}
-              />
-            </h1>
-          )}
+        {
+          selectedGood.length === 0
+            ? <h1 className="title">No goods selected</h1>
+            : (
+              <h1 className="title is-flex is-align-items-center">
+                {`${selectedGood} is selected`}
+                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+                <button
+                  data-cy="ClearButton"
+                  type="button"
+                  className="delete ml-3"
+                  onClick={this.clearSelectedGood}
+                />
+              </h1>
+            )
+        }
 
         <table className="table">
           <tbody>
@@ -62,30 +64,32 @@ export class App extends React.Component <{}, State> {
                 key={good}
               >
                 <td>
-                  { (selectedGood === good)
-                    ? (
-                      <button
-                        data-cy="RemoveButton"
-                        type="button"
-                        className="button is-info"
-                        onClick={this.clearSelectedGood}
-                      >
-                        -
-                      </button>
-                    )
-                    : (
-                      <button
-                        data-cy="AddButton"
-                        type="button"
-                        className="button"
-                        onClick={() => {
-                          this.setState({ selectedGood: good });
-                          // eslint-disable-next-line max-len
-                        }}
-                      >
-                        +
-                      </button>
-                    )}
+                  {
+                    selectedGood === good
+                      ? (
+                        <button
+                          data-cy="RemoveButton"
+                          type="button"
+                          className="button is-info"
+                          onClick={this.clearSelectedGood}
+                        >
+                          -
+                        </button>
+                      )
+                      : (
+                        <button
+                          data-cy="AddButton"
+                          type="button"
+                          className="button"
+                          onClick={() => {
+                            this.setState({ selectedGood: good });
+                            // eslint-disable-next-line max-len
+                          }}
+                        >
+                          +
+                        </button>
+                      )
+                  }
                 </td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
