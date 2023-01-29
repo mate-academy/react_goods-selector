@@ -48,7 +48,7 @@ export class App extends React.Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => this.deleteSelectedGood()}
+                onClick={this.deleteSelectedGood}
               />
             </h1>
           )
@@ -73,7 +73,7 @@ export class App extends React.Component<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={() => this.deleteSelectedGood()}
+                        onClick={this.deleteSelectedGood}
                       >
                         -
                       </button>
