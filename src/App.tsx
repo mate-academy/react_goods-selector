@@ -65,7 +65,7 @@ export class App extends React.Component<{}, State> {
                   {this.isSelected(good)
                     ? (
                       <button
-                        data-cy="ClearButton"
+                        data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
                         onClick={this.clearSelected}
