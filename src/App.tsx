@@ -38,38 +38,37 @@ export class App extends Component<{}, State> {
 
     return (
       <main className="section container">
-        {selectedGood
-          ? (
-            <h1 className="title is-flex is-align-items-center">
-              {selectedGood}
+        {selectedGood ? (
+          <h1 className="title is-flex is-align-items-center">
+            {`${selectedGood} is selected`}
 
-              {' '}
-
-              is selected
-
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-              <button
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-                onClick={this.deleteSelect}
-              />
-            </h1>
-          )
-          : (<h1 className="title">No goods selected</h1>)}
+            <button
+              data-cy="ClearButton"
+              aria-label="Clear"
+              type="button"
+              className="delete ml-3"
+              onClick={this.deleteSelect}
+            />
+          </h1>
+        ) : (
+          <h1 className="title">No goods selected</h1>
+        )}
 
         <table className="table">
           <tbody>
-            {goods.map(good => (
-              <tr
-                data-cy="Good"
-                key={good}
-                className={classNames('',
-                  { 'has-background-success-light': good === selectedGood })}
-              >
-                <td>
-                  {selectedGood === good
-                    ? (
+            {goods.map((good) => {
+              const isGoodSelected = selectedGood === good;
+
+              return (
+                <tr
+                  data-cy="Good"
+                  key={good}
+                  className={classNames({
+                    'has-background-success-light': isGoodSelected,
+                  })}
+                >
+                  <td>
+                    {isGoodSelected ? (
                       <button
                         data-cy="RemoveButton"
                         type="button"
@@ -78,8 +77,7 @@ export class App extends Component<{}, State> {
                       >
                         -
                       </button>
-                    )
-                    : (
+                    ) : (
                       <button
                         data-cy="AddButton"
                         type="button"
@@ -89,13 +87,14 @@ export class App extends Component<{}, State> {
                         +
                       </button>
                     )}
-                </td>
+                  </td>
 
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            ))}
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </main>
