@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
-
+import classNames from 'classnames';
 export const goods = [
   'Dumplings',
   'Carrot',
@@ -55,13 +55,18 @@ export class App extends React.Component<{}, State> {
               const isGoodSelected = selectedGood === good;
 
               return (
-                <>
+                <tr
+                  key={good}
+                  data-cy="Good"
+                  className={classNames(
+                    {
+                      'has-background-success-light': isGoodSelected,
+                    },
+                  )}
+                >
                   { isGoodSelected
                     ? (
-                      <tr
-                        data-cy="Good"
-                        className="has-background-success-light"
-                      >
+                      <>
                         <td>
                           <button
                             data-cy="RemoveButton"
@@ -80,32 +85,31 @@ export class App extends React.Component<{}, State> {
                         <td data-cy="GoodTitle" className="is-vcentered">
                           {good}
                         </td>
-                      </tr>
+                      </>
                     )
                     : (
-                      <tr data-cy="Good">
-                    <td>
-                      <button
-                        data-cy="AddButton"
-                        type="button"
-                        className="button"
-                        onClick={() => {
-                          this.setState({
-                            selectedGood: good,
-                          });
-                        }}
-                      >
-                        +
-                      </button>
-                    </td>
+                      <>
+                        <td>
+                          <button
+                            data-cy="AddButton"
+                            type="button"
+                            className="button"
+                            onClick={() => {
+                              this.setState({
+                                selectedGood: good,
+                              });
+                            }}
+                          >
+                            +
+                          </button>
+                        </td>
 
-                    <td data-cy="GoodTitle" className="is-vcentered">
-                      {good}
-                    </td>
-                      </tr>
-
+                        <td data-cy="GoodTitle" className="is-vcentered">
+                          {good}
+                        </td>
+                      </>
                     )}
-                </>
+                </tr>
               );
             })}
           </tbody>
