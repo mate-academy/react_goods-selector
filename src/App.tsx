@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -16,25 +17,27 @@ export const goods = [
 ];
 
 type State = {
-  selected: string,
+  selectedGood: string,
 };
 
 export class App extends Component<{}, State> {
   state: Readonly<State> = {
-    selected: 'Jam',
+    selectedGood: 'Jam',
   };
 
-  clearSelected = () => this.setState({ selected: '' });
+  clearSelected = () => this.setState({ selectedGood: '' });
+
+  setSelected = (good: string) => this.setState({ selectedGood: good });
 
   render() {
-    const { selected } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <main className="section container">
-        {selected
+        {selectedGood
           ? (
             <h1 className="title is-flex is-align-items-center">
-              {`${selected} is selected`}
+              {`${selectedGood} is selected`}
 
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
@@ -51,12 +54,14 @@ export class App extends Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(good => {
-              const isSelected = good === selected;
+              const isSelected = good === selectedGood;
 
               return (
                 <tr
                   data-cy="Good"
-                  className={isSelected ? 'has-background-success-light' : ''}
+                  className={classNames({
+                    'has-background-success-light': isSelected,
+                  })}
                 >
                   <td>
                     {isSelected
@@ -74,7 +79,7 @@ export class App extends Component<{}, State> {
                           data-cy="AddButton"
                           type="button"
                           className="button"
-                          onClick={() => this.setState({ selected: good })}
+                          onClick={() => this.setSelected(good)}
                         >
                           +
                         </button>
