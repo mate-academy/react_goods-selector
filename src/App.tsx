@@ -25,21 +25,9 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleGoodButtonClick = (condition: boolean, nameToSet: string) => {
-    if (condition) {
-      this.setState({
-        selectedGood: '',
-      });
-    } else {
-      this.setState({
-        selectedGood: nameToSet,
-      });
-    }
-  };
-
-  handleClearButtonClick = () => {
+  handleButtonClick = (nameToSet: string) => {
     this.setState({
-      selectedGood: '',
+      selectedGood: nameToSet,
     });
   };
 
@@ -63,7 +51,9 @@ export class App extends React.Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.handleClearButtonClick}
+                onClick={() => {
+                  this.handleButtonClick('');
+                }}
               />
             </h1>
           )}
@@ -84,25 +74,31 @@ export class App extends React.Component<{}, State> {
                   )}
                 >
                   <td>
-                    <button
-                      data-cy={isGoodSelected
-                        ? 'RemoveButton'
-                        : 'AddButton'}
-                      type="button"
-                      className={classNames(
-                        'button',
-                        {
-                          'is-info': isGoodSelected,
-                        },
+                    {isGoodSelected
+                      ? (
+                        <button
+                          data-cy="RemoveButton"
+                          type="button"
+                          className="button is-info"
+                          onClick={() => {
+                            this.handleButtonClick('');
+                          }}
+                        >
+                          -
+                        </button>
+                      )
+                      : (
+                        <button
+                          data-cy="AddButton"
+                          type="button"
+                          className="button"
+                          onClick={() => {
+                            this.handleButtonClick(good);
+                          }}
+                        >
+                          +
+                        </button>
                       )}
-                      onClick={() => {
-                        this.handleGoodButtonClick(isGoodSelected, good);
-                      }}
-                    >
-                      {isGoodSelected
-                        ? '-'
-                        : '+'}
-                    </button>
                   </td>
 
                   <td data-cy="GoodTitle" className="is-vcentered">
