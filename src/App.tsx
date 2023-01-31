@@ -2,7 +2,9 @@ import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
-export const goods = [
+import classNames from 'classnames';
+
+export const goods: string[] = [
   'Dumplings',
   'Carrot',
   'Eggs',
@@ -30,6 +32,12 @@ export class App extends Component<{}, State> {
     });
   };
 
+  addGood = (value: string) => {
+    this.setState({
+      selectedGood: value,
+    });
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -54,47 +62,49 @@ export class App extends Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map(good => (
-              <tr
-                data-cy="Good"
-                key={good}
-                className={selectedGood === good
-                  ? 'has-background-success-light'
-                  : ''}
-              >
-                <td>
-                  {good !== selectedGood
-                    ? (
-                      <button
-                        data-cy="AddButton"
-                        type="button"
-                        className="button"
-                        onClick={() => {
-                          this.setState({
-                            selectedGood: good,
-                          });
-                        }}
-                      >
-                        +
-                      </button>
-                    ) : (
-                      <button
-                        data-cy="RemoveButton"
-                        type="button"
-                        className="button is-info"
-                        onClick={this.clearGood}
-                      >
-                        -
-                      </button>
-                    )}
+            {goods.map(good => {
+              const isSelectedGood = selectedGood === good;
 
-                </td>
+              return (
+                <tr
+                  data-cy="Good"
+                  key={good}
+                  className={classNames({
+                    'has-background-success-light': isSelectedGood,
+                  })}
+                >
+                  <td>
+                    {!isSelectedGood
+                      ? (
+                        <button
+                          data-cy="AddButton"
+                          type="button"
+                          className="button"
+                          onClick={() => {
+                            this.addGood(good);
+                          }}
+                        >
+                          +
+                        </button>
+                      ) : (
+                        <button
+                          data-cy="RemoveButton"
+                          type="button"
+                          className="button is-info"
+                          onClick={this.clearGood}
+                        >
+                          -
+                        </button>
+                      )}
 
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            ))}
+                  </td>
+
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </main>
