@@ -25,11 +25,9 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  buttonClick = (nameToGood: string) => {
-    this.setState({
-      selectedGood: nameToGood,
-    });
-  };
+  clearSelected = () => this.setState({ selectedGood: '' });
+
+  setSelected = (good: string) => this.setState({ selectedGood: good });
 
   render() {
     const { selectedGood } = this.state;
@@ -46,7 +44,7 @@ export class App extends Component<{}, State> {
                 type="button"
                 className="delete ml-3"
                 onClick={() => {
-                  this.buttonClick('');
+                  this.clearSelected();
                 }}
               />
             </h1>
@@ -76,7 +74,7 @@ export class App extends Component<{}, State> {
                           type="button"
                           className="button is-info"
                           onClick={() => {
-                            this.buttonClick('');
+                            this.clearSelected();
                           }}
                         >
                           -
@@ -88,7 +86,7 @@ export class App extends Component<{}, State> {
                           type="button"
                           className="button"
                           onClick={() => {
-                            this.buttonClick(good);
+                            this.setSelected(good);
                           }}
                         >
                           +
