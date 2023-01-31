@@ -33,12 +33,16 @@ export class App extends React.Component<{}, State> {
     this.setState({ selectedGood: '' });
   };
 
+  isGoodSelected = (good: string) => {
+    return good === this.state.selectedGood;
+  };
+
   render() {
     const { selectedGood } = this.state;
 
     return (
       <main className="section container">
-        {selectedGood !== ''
+        {selectedGood.length
           ? (
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
@@ -60,11 +64,11 @@ export class App extends React.Component<{}, State> {
                 data-cy="Good"
                 key={good}
                 className={classNames(
-                  { 'has-background-success-light': good === selectedGood },
+                  { 'has-background-success-light': this.isGoodSelected(good) },
                 )}
               >
                 <td>
-                  {good !== selectedGood
+                  {!this.isGoodSelected(good)
                     ? (
                       <button
                         data-cy="AddButton"
