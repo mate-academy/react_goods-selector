@@ -16,9 +16,17 @@ export const goods = [
   'Garlic',
 ];
 
-export class App extends React.Component {
+type State = {
+  selectedGood: string,
+};
+
+export class App extends React.Component<{}, State> {
   state = {
     selectedGood: 'Jam',
+  };
+
+  addGood = (good: string) => {
+    this.setState({ selectedGood: good });
   };
 
   removeGood = () => {
@@ -30,27 +38,20 @@ export class App extends React.Component {
 
     return (
       <main className="section container">
-        <h1 className={classNames(
-          'title',
-          { 'is-flex is-align-items-center': selectedGood },
-        )}
-        >
-          {selectedGood
-            ? (
-              <>
-                {`${selectedGood} is selected`}
-
-                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-                <button
-                  data-cy="ClearButton"
-                  type="button"
-                  className="delete ml-3"
-                  onClick={this.removeGood}
-                />
-              </>
-            )
-            : 'No goods selected'}
-        </h1>
+        {selectedGood !== ''
+          ? (
+            <h1 className="title is-flex is-align-items-center">
+              {`${selectedGood} is selected`}
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.removeGood}
+              />
+            </h1>
+          )
+          : <h1 className="title">No goods selected</h1>}
 
         <table className="table">
           <tbody>
