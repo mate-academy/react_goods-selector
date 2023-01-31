@@ -43,9 +43,7 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  this.clearSelected();
-                }}
+                onClick={this.clearSelected}
               />
             </h1>
           )
@@ -73,9 +71,7 @@ export class App extends Component<{}, State> {
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
-                          onClick={() => {
-                            this.clearSelected();
-                          }}
+                          onClick={this.clearSelected}
                         >
                           -
                         </button>
