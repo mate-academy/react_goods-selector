@@ -25,7 +25,7 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleGood = (item: string) => {
+  handleSelectGood = (item: string) => {
     this.setState({ selectedGood: item });
   };
 
@@ -45,7 +45,7 @@ export class App extends React.Component<{}, State> {
                 type="button"
                 className="delete ml-3"
                 onClick={() => {
-                  this.handleGood('');
+                  this.handleSelectGood('');
                 }}
               />
             </h1>
@@ -71,7 +71,7 @@ export class App extends React.Component<{}, State> {
                           type="button"
                           className="button is-info"
                           onClick={() => {
-                            this.handleGood('');
+                            this.handleSelectGood('');
                           }}
                         >
                           -
@@ -83,7 +83,7 @@ export class App extends React.Component<{}, State> {
                           type="button"
                           className="button"
                           onClick={() => {
-                            this.handleGood(good);
+                            this.handleSelectGood(good);
                           }}
                         >
                           +
