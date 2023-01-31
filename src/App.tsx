@@ -2,7 +2,8 @@ import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 import classNames from 'classnames';
-export const goods = [
+
+export const goods: string[] = [
   'Dumplings',
   'Carrot',
   'Eggs',
@@ -21,6 +22,16 @@ interface State {
 export class App extends React.Component<{}, State> {
   state = {
     selectedGood: 'Jam',
+  };
+
+  handleGood = (good: string) => {
+    const { selectedGood } = this.state;
+
+    const isGoodSelected = good === selectedGood;
+
+    this.setState({
+      selectedGood: isGoodSelected ? '' : good,
+    });
   };
 
   render() {
@@ -73,9 +84,7 @@ export class App extends React.Component<{}, State> {
                             type="button"
                             className="button is-info"
                             onClick={() => {
-                              this.setState({
-                                selectedGood: good,
-                              });
+                              this.handleGood(good);
                             }}
                           >
                             -
@@ -95,9 +104,7 @@ export class App extends React.Component<{}, State> {
                             type="button"
                             className="button"
                             onClick={() => {
-                              this.setState({
-                                selectedGood: good,
-                              });
+                              this.handleGood(good);
                             }}
                           >
                             +
