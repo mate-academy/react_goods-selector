@@ -84,7 +84,6 @@ export class App extends React.Component <{}, State> {
                             className="button"
                             onClick={() => {
                               this.setState({ selectedGood: good });
-                              // eslint-disable-next-line max-len
                             }}
                           >
                             +
