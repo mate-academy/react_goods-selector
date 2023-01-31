@@ -34,7 +34,7 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        {this.state.selectedGood.length > 0
+        {selectedGood.length > 0
           ? (
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
@@ -63,7 +63,7 @@ export class App extends React.Component<{}, State> {
                 })}
               >
                 <td>
-                  {this.state.selectedGood === good
+                  {selectedGood === good
                     ? (
                       <button
                         data-cy="RemoveButton"
