@@ -1,7 +1,7 @@
 import { Component } from 'react';
+import cd from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
-//
 
 export const goods = [
   'Dumplings',
@@ -15,13 +15,6 @@ export const goods = [
   'Jam',
   'Garlic',
 ];
-
-const preparedGoods = goods.map((good, index) => (
-  {
-    name: good,
-    id: index,
-  }
-));
 
 interface States {
   selectedGood: string;
@@ -48,7 +41,7 @@ export class App extends Component<{}, States> {
 
   render() {
     const { selectedGood } = this.state;
-    let title = (<h1 className="title">No goods selected</h1>);
+    let title = <h1 className="title">No goods selected</h1>;
 
     if (selectedGood) {
       title = (
@@ -75,51 +68,47 @@ export class App extends Component<{}, States> {
 
         <table className="table">
           <tbody>
-            {preparedGoods.map(good => {
-              if (good.name === selectedGood) {
-                return (
-                  <tr
-                    data-cy="Good"
-                    className="has-background-success-light"
-                    key={good.id}
-                  >
-                    <td>
-                      <button
-                        onClick={() => {
-                          this.select(good.name);
-                        }}
-                        data-cy="RemoveButton"
-                        type="button"
-                        className="button is-info"
-                      >
-                        -
-                      </button>
-                    </td>
-
-                    <td data-cy="GoodTitle" className="is-vcentered">
-                      {good.name}
-                    </td>
-                  </tr>
-                );
-              }
-
+            {goods.map(good => {
               return (
-                <tr data-cy="Good" key={good.id}>
+                <tr
+                  data-cy="Good"
+                  className={cd('', {
+                    'has-background-success-light': good === selectedGood,
+                  })}
+                  key={good}
+                >
                   <td>
-                    <button
-                      onClick={() => {
-                        this.select(good.name);
-                      }}
-                      data-cy="AddButton"
-                      type="button"
-                      className="button"
-                    >
-                      +
-                    </button>
+
+                    {good !== selectedGood
+                      ? (
+                        <button
+                          data-cy="AddButton"
+                          type="button"
+                          className="button"
+                          onClick={() => {
+                            this.select(good);
+                          }}
+                        >
+                          +
+                        </button>
+                      )
+                      : (
+                        <button
+                          data-cy="RemoveButton"
+                          type="button"
+                          className="button is-info"
+                          onClick={() => {
+                            this.select(good);
+                          }}
+                        >
+                          -
+                        </button>
+                      )}
+
                   </td>
 
                   <td data-cy="GoodTitle" className="is-vcentered">
-                    {good.name}
+                    {good}
                   </td>
                 </tr>
               );
