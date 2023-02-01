@@ -30,6 +30,8 @@ export class App extends React.Component<{}, State> {
     this.setState({ selectedGood: goodToSave });
   };
 
+  resetSelectedGoods = () => this.saveSelectedGood('');
+
   render() {
     const { selectedGood } = this.state;
 
@@ -37,20 +39,17 @@ export class App extends React.Component<{}, State> {
       <main className="section container">
         {selectedGood
           ? (
-            <>
-              <h1 className="title is-flex is-align-items-center">
-                {`${selectedGood} is selected`}
-                <button
-                  data-cy="ClearButton"
-                  type="button"
-                  className="delete ml-3"
-                  onClick={() => {
-                    this.saveSelectedGood('');
-                  }}
-                />
-              </h1>
 
-            </>
+            <h1 className="title is-flex is-align-items-center">
+              {`${selectedGood} is selected`}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.resetSelectedGoods}
+              />
+            </h1>
+
           )
           : (
             <h1 className="title">No goods selected</h1>
@@ -74,7 +73,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
-                          onClick={() => this.saveSelectedGood('')}
+                          onClick={this.resetSelectedGoods}
                         >
                           -
                         </button>
@@ -98,7 +97,6 @@ export class App extends React.Component<{}, State> {
                 </tr>
               );
             })}
-
           </tbody>
         </table>
       </main>
