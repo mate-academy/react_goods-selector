@@ -35,19 +35,19 @@ export class App extends Component<{}, State> {
 
   render() {
     const { selectedGood } = this.state;
+    const unselected = 'No goods selected';
 
     return (
       <main className="section container">
         <h1
-          className={`title ${
-            selectedGood
-              ? 'is-flex is-align-items-center'
-              : ''
-          }`}
+          className={classnames(
+            'title',
+            { 'is-flex is-align-items-center': selectedGood },
+          )}
         >
           {selectedGood
             ? `${selectedGood} is selected`
-            : 'No goods selected'}
+            : unselected}
           {selectedGood && (
             // eslint-disable-next-line jsx-a11y/control-has-associated-label
             <button
@@ -82,8 +82,7 @@ export class App extends Component<{}, State> {
                         >
                           -
                         </button>
-                      )
-                      : (
+                      ) : (
                         <button
                           data-cy="AddButton"
                           type="button"
