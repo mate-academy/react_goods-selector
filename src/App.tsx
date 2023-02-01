@@ -29,6 +29,10 @@ export class App extends React.Component<{}, State> {
     this.setState({ selectedGood: '' });
   };
 
+  addingGood = (good:string) => {
+    this.setState({ selectedGood: good });
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -51,31 +55,29 @@ export class App extends React.Component<{}, State> {
           )}
 
         <table className="table">
-          {goods.map((good) => {
-            const isGoodSelected = selectedGood === good;
+          <tbody>
+            {goods.map((good) => {
+              const isGoodSelected = selectedGood === good;
 
-            return (
-              <tbody key={good}>
+              return (
                 <tr
                   data-cy="Good"
+                  key={good}
                   className={classNames(
                     {
                       'has-background-success-light': isGoodSelected,
                     },
                   )}
                 >
-
                   <td>
-                    {!(isGoodSelected)
+                    {(!isGoodSelected)
                       ? (
                         <button
                           data-cy="AddButton"
                           type="button"
                           className="button"
                           onClick={() => {
-                            this.setState({
-                              selectedGood: good,
-                            });
+                            this.addingGood(good);
                           }}
                         >
                           +
@@ -93,14 +95,13 @@ export class App extends React.Component<{}, State> {
                         </button>
                       )}
                   </td>
-
                   <td data-cy="GoodTitle" className="is-vcentered">
                     {good}
                   </td>
                 </tr>
-              </tbody>
-            );
-          })}
+              );
+            })}
+          </tbody>
         </table>
       </main>
     );
