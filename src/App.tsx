@@ -35,7 +35,9 @@ export class App extends Component<{}, State> {
 
   render() {
     const { selectedGood } = this.state;
-    const unselected = 'No goods selected';
+    const selectionMessage = selectedGood
+      ? `${selectedGood} is selected`
+      : 'No goods selected';
 
     return (
       <main className="section container">
@@ -45,9 +47,7 @@ export class App extends Component<{}, State> {
             { 'is-flex is-align-items-center': selectedGood },
           )}
         >
-          {selectedGood
-            ? `${selectedGood} is selected`
-            : unselected}
+          {selectionMessage}
           {selectedGood && (
             // eslint-disable-next-line jsx-a11y/control-has-associated-label
             <button
@@ -93,9 +93,7 @@ export class App extends Component<{}, State> {
                         </button>
                       )}
                   </td>
-                  <td data-cy="GoodTitle" className="is-vcentered">
-                    {good}
-                  </td>
+                  <td data-cy="GoodTitle" className="is-vcentered">{good}</td>
                 </tr>
               );
             })}
