@@ -59,12 +59,9 @@ export class App extends React.Component<{}, State> {
               <tr
                 data-cy="Good"
                 key={good}
-                className={classNames(
-                  '',
-                  {
-                    'has-background-success-light': good === selectedGoods,
-                  },
-                )}
+                className={classNames({
+                  'has-background-success-light': good === selectedGoods,
+                })}
               >
                 <td>
                   <button
@@ -82,9 +79,11 @@ export class App extends React.Component<{}, State> {
                         .getAttribute('data-cy');
 
                       // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-                      atribute === 'RemoveButton'
-                        ? this.setState({ selectedGoods: null })
-                        : this.setState({ selectedGoods: good });
+                      this.setState({
+                        selectedGoods: atribute === 'RemoveButton'
+                          ? null
+                          : good,
+                      });
                     }}
                   >
                     {good === selectedGoods ? '-' : '+'}
