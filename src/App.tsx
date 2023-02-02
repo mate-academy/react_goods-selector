@@ -30,25 +30,22 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        <h1 className="title is-flex is-align-items-center">
-          {selectedGud ? `${selectedGud} is selected` : 'No goods selected'}
-          {(selectedGud === '')
-            ? null
-            : (
-              // eslint-disable-next-line jsx-a11y/control-has-associated-label
+        {selectedGud
+          ? (
+            <h1 className="title is-flex is-align-items-center">
+              {`${selectedGud} is selected`}
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
                 onClick={() => {
-                  this.setState({
-                    selectedGud: '',
-                  });
+                  this.setState({ selectedGud: '' });
                 }}
               />
-            )}
-        </h1>
-
+            </h1>
+          )
+          : <h1 className="title">No goods selected</h1>}
         <table className="table">
           <tbody>
             {goods.map(good => (
