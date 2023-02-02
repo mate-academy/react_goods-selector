@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -55,7 +56,9 @@ export class App extends Component<{}, State> {
               />
             </h1>
           ) : (
-            <h1 className="title"> No goods selected </h1>
+            <h1 className="title">
+              No goods selected
+            </h1>
           )}
 
         <table className="table">
@@ -64,9 +67,9 @@ export class App extends Component<{}, State> {
               <tr
                 data-cy="Good"
                 key={good}
-                className={selectedGood === good
-                  ? 'has-background-success-light'
-                  : ''}
+                className={classNames({
+                  'has-background-success-light': selectedGood === good,
+                })}
               >
                 <td>
                   {selectedGood === good
