@@ -25,8 +25,12 @@ export class App extends Component<{}, States> {
     selectedGood: 'Jam',
   };
 
+  isCurrGoodSelected = (good: string) => {
+    return good === this.state.selectedGood;
+  };
+
   select = (good: string) => {
-    if (good === this.state.selectedGood) {
+    if (this.isCurrGoodSelected(good)) {
       this.setState({
         selectedGood: '',
       });
@@ -73,26 +77,15 @@ export class App extends Component<{}, States> {
                 <tr
                   data-cy="Good"
                   className={cd('', {
-                    'has-background-success-light': good === selectedGood,
+                    'has-background-success-light':
+                    this.isCurrGoodSelected(good),
                   })}
                   key={good}
                 >
                   <td>
 
-                    {good !== selectedGood
+                    {this.isCurrGoodSelected(good)
                       ? (
-                        <button
-                          data-cy="AddButton"
-                          type="button"
-                          className="button"
-                          onClick={() => {
-                            this.select(good);
-                          }}
-                        >
-                          +
-                        </button>
-                      )
-                      : (
                         <button
                           data-cy="RemoveButton"
                           type="button"
@@ -102,6 +95,18 @@ export class App extends Component<{}, States> {
                           }}
                         >
                           -
+                        </button>
+                      )
+                      : (
+                        <button
+                          data-cy="AddButton"
+                          type="button"
+                          className="button"
+                          onClick={() => {
+                            this.select(good);
+                          }}
+                        >
+                          +
                         </button>
                       )}
 
