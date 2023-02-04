@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -43,7 +44,9 @@ export class App extends React.Component<{}, State> {
       <main className="section container">
         {!selectedGood
           ? (
-            <h1 className="title">No goods selected</h1>
+            <h1 className="title">
+              No goods selected
+            </h1>
           ) : (
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
@@ -63,13 +66,22 @@ export class App extends React.Component<{}, State> {
             {goods.map(good => (
               <tr
                 data-cy="Good"
-                className={good === selectedGood
-                  ? 'has-background-success-light'
-                  : ''}
+                className={classNames({
+                  'has-background-success-light': selectedGood === good,
+                })}
               >
                 <td>
-                  {good !== selectedGood
+                  {selectedGood === good
                     ? (
+                      <button
+                        data-cy="RemoveButton"
+                        type="button"
+                        className="button is-info"
+                        onClick={this.clearSelectedGood}
+                      >
+                        -
+                      </button>
+                    ) : (
                       <button
                         data-cy="AddButton"
                         type="button"
@@ -79,15 +91,6 @@ export class App extends React.Component<{}, State> {
                         }}
                       >
                         +
-                      </button>
-                    ) : (
-                      <button
-                        data-cy="RemoveButton"
-                        type="button"
-                        className="button is-info"
-                        onClick={this.clearSelectedGood}
-                      >
-                        -
                       </button>
                     )}
                 </td>
