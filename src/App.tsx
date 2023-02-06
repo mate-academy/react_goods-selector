@@ -23,7 +23,7 @@ type State = {
 };
 
 export class App extends React.Component<{}, State> {
-  state = { selectedGood: '' };
+  state = { selectedGood: 'Jam' };
 
   render() {
     const { selectedGood } = this.state;
