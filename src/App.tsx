@@ -62,9 +62,6 @@ export class App extends React.Component<{}, State> {
                       { 'has-background-success-light': booleanFood },
                     )
                   }
-                  onClick={() => {
-                    this.setState({ selectedGood: food });
-                  }}
                 >
                   <td>
                     <button
@@ -73,8 +70,11 @@ export class App extends React.Component<{}, State> {
                       className={
                         classNames('button', { 'is-info': booleanFood })
                       }
+                      onClick={() => {
+                        this.setState({ selectedGood: food });
+                      }}
                     >
-                      {booleanFood ? '-' : '+' }
+                      { booleanFood ? '-' : '+' }
                     </button>
                   </td>
                   <td data-cy="GoodTitle" className="is-vcentered">
