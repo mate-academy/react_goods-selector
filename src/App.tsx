@@ -36,7 +36,7 @@ export class App extends React.Component<{}, State> {
             ? `${selectedGood} is selected`
             : 'No goods selected'}
 
-          {(!selectedGood.length)
+          {!selectedGood.length
             || (
               <button
                 data-cy="ClearButton"
