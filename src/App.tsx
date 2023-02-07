@@ -2,7 +2,6 @@ import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 import classNames from 'classnames';
-// import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
