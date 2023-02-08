@@ -16,6 +16,11 @@ export const goods = [
   'Garlic',
 ];
 
+enum Buttons {
+  remove = 'RemoveButton',
+  add = 'AddButton',
+}
+
 type State = {
   selectedGood: string,
 };
@@ -25,7 +30,7 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  pushButton = (itemName: string) => {
+  handleClick = (itemName: string) => {
     this.setState({ selectedGood: itemName });
   };
 
@@ -50,7 +55,7 @@ export class App extends Component<{}, State> {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => this.pushButton('')}
+              onClick={() => this.handleClick('')}
             />
           )}
         </h1>
@@ -58,17 +63,17 @@ export class App extends Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(item => {
-              const match = selectedGood === item;
+              const isSelectedItem = selectedGood === item;
 
-              const buttonType = match
-                ? 'RemoveButton'
-                : 'AddButton';
+              const buttonType = isSelectedItem
+                ? Buttons.remove
+                : Buttons.add;
 
-              const newValue = buttonType === 'AddButton'
+              const newValue = buttonType === Buttons.add
                 ? item
                 : '';
 
-              const buttonSign = buttonType === 'AddButton'
+              const buttonSign = buttonType === Buttons.add
                 ? '+'
                 : '-';
 
@@ -76,7 +81,7 @@ export class App extends Component<{}, State> {
                 <tr
                   data-cy="Good"
                   className={classNames(
-                    { 'has-background-success-light': match },
+                    { 'has-background-success-light': isSelectedItem },
                   )}
                 >
                   <td>
@@ -85,9 +90,9 @@ export class App extends Component<{}, State> {
                       type="button"
                       className={classNames(
                         'button',
-                        { 'is-info': match },
+                        { 'is-info': isSelectedItem },
                       )}
-                      onClick={() => this.pushButton(newValue)}
+                      onClick={() => this.handleClick(newValue)}
                     >
                       {buttonSign}
                     </button>
