@@ -64,18 +64,33 @@ export class App extends React.Component<{}, State> {
                   }
                 >
                   <td>
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      className={
-                        classNames('button', { 'is-info': booleanFood })
-                      }
-                      onClick={() => {
-                        this.setState({ selectedGood: food });
-                      }}
-                    >
-                      { booleanFood ? '-' : '+' }
-                    </button>
+                    {!booleanFood ? (
+                      <button
+                        data-cy="AddButton"
+                        type="button"
+                        className={
+                          classNames('button', { 'is-info': booleanFood })
+                        }
+                        onClick={() => {
+                          this.setState({ selectedGood: food });
+                        }}
+                      >
+                        +
+                      </button>
+                    ) : (
+                      <button
+                        data-cy="AddButton"
+                        type="button"
+                        className={
+                          classNames('button', { 'is-info': booleanFood })
+                        }
+                        onClick={() => {
+                          this.setState({ selectedGood: '' });
+                        }}
+                      >
+                        -
+                      </button>
+                    )}
                   </td>
                   <td data-cy="GoodTitle" className="is-vcentered">
                     {food}
