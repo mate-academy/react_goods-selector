@@ -60,7 +60,7 @@ export class App extends Component<{}, State> {
             {goods.map(
               good => (
                 <tr
-                  key={Math.random()}
+                  key={good}
                   data-cy="Good"
                   className={Classname(
                     {
