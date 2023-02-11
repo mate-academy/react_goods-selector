@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -15,71 +15,78 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+type Props = {
+  select: string,
+  name: string,
+  switchSelect: (name: string) => void
+};
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+const Element: React.FC<Props> = ({ select, name, switchSelect }) => {
+  const [check, setCheck] = useState<boolean>(select === name);
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+  useEffect(() => {
+    setCheck(select === name);
+  }, [select]);
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+  return (
+    <tr
+      data-cy="Good"
+      className={check ? 'has-background-success-light' : ''}
+    >
+      <td>
+        <button
+          data-cy={check ? 'RemoveButton' : 'AddButton'}
+          type="button"
+          className={check ? 'button is-info' : 'button'}
+          onClick={() => {
+            switchSelect(!check ? name : '');
+          }}
+        >
+          {check ? '-' : '+' }
+        </button>
+      </td>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+      <td data-cy="GoodTitle" className="is-vcentered">
+        {name}
+      </td>
+    </tr>
+  );
+};
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+export const App: React.FC = () => {
+  const [select, setSelect] = useState<string>('Jam');
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+  return (
+    <main className="section container">
+      {!select && <h1 className="title">No goods selected</h1>}
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+      {select && (
+        <h1 className="title is-flex is-align-items-center">
+          {`${select} is selected`}
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={() => setSelect('')}
+          />
+        </h1>
+      )}
+
+      <table className="table">
+        <tbody>
+          {goods
+            .map((el: string) => (
+              <Element
+                select={select}
+                name={el}
+                switchSelect={setSelect}
+                key={el}
+              />
+            ))}
+        </tbody>
+      </table>
+    </main>
+  );
+};
