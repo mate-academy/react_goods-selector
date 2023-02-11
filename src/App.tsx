@@ -56,10 +56,8 @@ export const App: React.FC = () => {
       <table className="table">
         <tbody>
           {goods.map((good) => {
-            let tableRow;
-
-            if ((selectedGood && selectedGood !== good) || !selectedGood) {
-              tableRow = (
+            if (!selectedGood || selectedGood !== good) {
+              return (
                 <tr data-cy="Good" key={good}>
                   <td>
                     <button
@@ -81,34 +79,30 @@ export const App: React.FC = () => {
               );
             }
 
-            if (selectedGood === good) {
-              tableRow = (
-                <tr
-                  className="has-background-success-light"
-                  data-cy="Good"
-                  key={good}
-                >
-                  <td>
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                      onClick={(e) => {
-                        buttonClickHandler(e, good);
-                      }}
-                    >
-                      -
-                    </button>
-                  </td>
+            return (
+              <tr
+                className="has-background-success-light"
+                data-cy="Good"
+                key={good}
+              >
+                <td>
+                  <button
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="button is-info"
+                    onClick={(e) => {
+                      buttonClickHandler(e, good);
+                    }}
+                  >
+                    -
+                  </button>
+                </td>
 
-                  <td data-cy="GoodTitle" className="is-vcentered">
-                    {good}
-                  </td>
-                </tr>
-              );
-            }
-
-            return tableRow;
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            );
           })}
         </tbody>
       </table>
