@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -22,11 +22,7 @@ type Props = {
 };
 
 const Element: React.FC<Props> = ({ select, name, switchSelect }) => {
-  const [check, setCheck] = useState<boolean>(select === name);
-
-  useEffect(() => {
-    setCheck(select === name);
-  }, [select]);
+  const check:boolean = select === name;
 
   return (
     <tr
