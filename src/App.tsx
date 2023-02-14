@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -15,71 +16,108 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+type State = {
+  name: string;
+  selectedItem: boolean;
+};
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+export class App extends React.Component<{}, State> {
+  state: Readonly<State> = {
+    name: 'Jam',
+    selectedItem: true,
+  };
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+  controlEvent = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const retouch = event.currentTarget.innerText === '+';
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+    this.clearAll();
+    if (retouch) {
+      const tdActive = event.currentTarget.parentElement;
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+      event.currentTarget.classList.add('is-info');
+      event.currentTarget.setAttribute('data-cy', 'RemoveButton');
+      tdActive?.parentElement?.classList.add('has-background-success-light');
+      // eslint-disable-next-line no-param-reassign
+      event.currentTarget.innerText = '-';
+      this.setState({ name: tdActive?.nextSibling?.textContent || '' });
+      this.setState({ selectedItem: true });
+    }
+  };
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+  clearAll = () => {
+    const button = document.querySelectorAll('.button');
+    const tr = document.querySelectorAll('tr');
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+    button.forEach((elem) => {
+      elem.classList.remove('is-info');
+      // eslint-disable-next-line no-param-reassign
+      elem.textContent = '+';
+      elem.setAttribute('data-cy', 'AddButton');
+    });
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+    tr.forEach((elem) => elem.classList
+      .remove('has-background-success-light'));
+    this.setState({ selectedItem: false });
+  };
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+  createMassiveElements = () => {
+    return (
+      goods.map((elem) => {
+        return (
+          <tr
+            data-cy="Good"
+            key={elem}
+            className={
+              classNames({ 'has-background-success-light': elem === 'Jam' })
+            }
+          >
+            <td>
+              <button
+                data-cy={elem === 'Jam' ? 'RemoveButton' : 'AddButton'}
+                type="button"
+                className={classNames('button', { 'is-info': elem === 'Jam' })}
+                onClick={this.controlEvent}
+              >
+                {elem === 'Jam' ? '-' : '+'}
+              </button>
+            </td>
+
+            <td data-cy="GoodTitle" className="is-vcentered">
+              {elem}
+            </td>
+          </tr>
+        );
+      })
+    );
+  };
+
+  render() {
+    return (
+      <main className="section container">
+        {this.state.selectedItem
+          ? (
+            <h1 className="title is-flex is-align-items-center">
+              {`${this.state.name} is selected`}
+
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={() => {
+                  this.setState({ selectedItem: false });
+                  this.clearAll();
+                }}
+              />
+            </h1>
+          )
+          : <h1 className="title">No goods selected</h1>}
+        <table className="table">
+          <tbody>
+            {this.createMassiveElements()}
+          </tbody>
+        </table>
+      </main>
+    );
+  }
+}
