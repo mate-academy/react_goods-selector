@@ -17,73 +17,54 @@ export const goods = [
 ];
 
 type State = {
-  name: string;
-  selectedItem: boolean;
+  selectedGood: string;
 };
 
 export class App extends React.Component<{}, State> {
   state: Readonly<State> = {
-    name: 'Jam',
-    selectedItem: true,
+    selectedGood: 'Jam',
   };
 
-  controlEvent = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const retouch = event.currentTarget.innerText === '+';
+  handleGoodClick = (goodName: string) => {
+    const isRepeatButton = this.state.selectedGood === goodName;
 
-    this.clearAll();
-    if (retouch) {
-      const tdActive = event.currentTarget.parentElement;
-
-      event.currentTarget.classList.add('is-info');
-      event.currentTarget.setAttribute('data-cy', 'RemoveButton');
-      tdActive?.parentElement?.classList.add('has-background-success-light');
-      // eslint-disable-next-line no-param-reassign
-      event.currentTarget.innerText = '-';
-      this.setState({ name: tdActive?.nextSibling?.textContent || '' });
-      this.setState({ selectedItem: true });
+    if (isRepeatButton) {
+      this.setState({ selectedGood: '' });
+    } else {
+      this.setState({ selectedGood: goodName });
     }
   };
 
-  clearAll = () => {
-    const button = document.querySelectorAll('.button');
-    const tr = document.querySelectorAll('tr');
-
-    button.forEach((elem) => {
-      elem.classList.remove('is-info');
-      // eslint-disable-next-line no-param-reassign
-      elem.textContent = '+';
-      elem.setAttribute('data-cy', 'AddButton');
-    });
-
-    tr.forEach((elem) => elem.classList
-      .remove('has-background-success-light'));
-    this.setState({ selectedItem: false });
+  handleClearButtonClick = () => {
+    this.setState({ selectedGood: '' });
   };
 
-  createMassiveElements = () => {
+  createMassivegoodItements = () => {
     return (
-      goods.map((elem) => {
+      goods.map((goodItem) => {
+        const isGoodSelected = this.state.selectedGood === goodItem;
+
         return (
           <tr
             data-cy="Good"
-            key={elem}
+            key={goodItem}
             className={
-              classNames({ 'has-background-success-light': elem === 'Jam' })
+              classNames({ 'has-background-success-light': isGoodSelected })
             }
           >
             <td>
               <button
-                data-cy={elem === 'Jam' ? 'RemoveButton' : 'AddButton'}
+                data-cy={isGoodSelected ? 'RemoveButton' : 'AddButton'}
                 type="button"
-                className={classNames('button', { 'is-info': elem === 'Jam' })}
-                onClick={this.controlEvent}
+                className={classNames('button', { 'is-info': isGoodSelected })}
+                onClick={() => this.handleGoodClick(goodItem)}
               >
-                {elem === 'Jam' ? '-' : '+'}
+                {isGoodSelected ? '-' : '+'}
               </button>
             </td>
 
             <td data-cy="GoodTitle" className="is-vcentered">
-              {elem}
+              {goodItem}
             </td>
           </tr>
         );
@@ -94,27 +75,24 @@ export class App extends React.Component<{}, State> {
   render() {
     return (
       <main className="section container">
-        {this.state.selectedItem
+        {this.state.selectedGood.length
           ? (
             <h1 className="title is-flex is-align-items-center">
-              {`${this.state.name} is selected`}
+              {`${this.state.selectedGood} is selected`}
 
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  this.setState({ selectedItem: false });
-                  this.clearAll();
-                }}
+                onClick={this.handleClearButtonClick}
               />
             </h1>
           )
           : <h1 className="title">No goods selected</h1>}
         <table className="table">
           <tbody>
-            {this.createMassiveElements()}
+            {this.createMassivegoodItements()}
           </tbody>
         </table>
       </main>
