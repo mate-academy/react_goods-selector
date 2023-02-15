@@ -26,11 +26,7 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  HandlerSelectedGoods = () => {
-    this.setState({ selectedGood: '' });
-  };
-
-  HandlerRemoveGood = () => {
+  handleSelectedGood = () => {
     this.setState({ selectedGood: '' });
   };
 
@@ -40,9 +36,9 @@ export class App extends React.Component<{}, State> {
     return (
       <main className="section container">
         <h1 className="title is-flex is-align-items-center">
-          {!selectedGood
-            ? 'No goods selected'
-            : `${selectedGood} is selected`}
+          {selectedGood
+            ? `${selectedGood} is selected`
+            : 'No goods selected'}
 
           {selectedGood && (
             <>
@@ -51,7 +47,7 @@ export class App extends React.Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.HandlerSelectedGoods}
+                onClick={this.handleSelectedGood}
               />
             </>
           )}
@@ -88,7 +84,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
-                          onClick={this.HandlerRemoveGood}
+                          onClick={this.handleSelectedGood}
                         >
                           -
                         </button>
