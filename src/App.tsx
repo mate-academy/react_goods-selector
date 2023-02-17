@@ -17,30 +17,34 @@ export const goods = [
 ];
 
 type State = {
-  selectedGud: string,
+  selectedGood: string,
 };
 
 export class App extends React.Component<{}, State> {
   state = {
-    selectedGud: 'Jam',
+    selectedGood: 'Jam',
   };
 
   render() {
-    const { selectedGud } = this.state;
+    const { selectedGood } = this.state;
+
+    function currentGood(goodItem: string): boolean {
+      return goodItem === selectedGood;
+    }
 
     return (
       <main className="section container">
-        {selectedGud
+        {selectedGood
           ? (
             <h1 className="title is-flex is-align-items-center">
-              {`${selectedGud} is selected`}
+              {`${selectedGood} is selected`}
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
                 onClick={() => {
-                  this.setState({ selectedGud: '' });
+                  this.setState({ selectedGood: '' });
                 }}
               />
             </h1>
@@ -50,22 +54,21 @@ export class App extends React.Component<{}, State> {
           <tbody>
             {goods.map(good => (
               <tr
+                key={good}
                 data-cy="Good"
                 className={classNames({
-                  'has-background-success-light': selectedGud === good,
+                  'has-background-success-light': currentGood(good),
                 })}
               >
                 <td>
-                  {selectedGud === good
+                  {currentGood(good)
                     ? (
                       <button
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
                         onClick={() => {
-                          this.setState({
-                            selectedGud: '',
-                          });
+                          this.setState({ selectedGood: '' });
                         }}
                       >
                         -
@@ -77,9 +80,7 @@ export class App extends React.Component<{}, State> {
                         type="button"
                         className="button"
                         onClick={() => {
-                          this.setState({
-                            selectedGud: good,
-                          });
+                          this.setState({ selectedGood: good });
                         }}
                       >
                         +
