@@ -16,17 +16,25 @@ const goods = [
   'Garlic',
 ];
 
+type StateType = {
+  selectedGood: string | null,
+};
+
 export class App extends React.Component {
-  state = {
+  state: StateType = {
     selectedGood: 'Jam',
   };
 
   clearCartHandler = () => {
-    this.setState({ selectedGood: '' });
+    this.setState({ selectedGood: null });
   };
 
   selectGoodHandler(name: string) {
-    this.setState({ selectedGood: name });
+    this.setState((prevState: StateType) => ({
+      selectedGood: prevState.selectedGood !== name
+        ? name
+        : null,
+    }));
   }
 
   render() {
@@ -52,6 +60,7 @@ export class App extends React.Component {
           <tbody>
             {goods.map((good) => (
               <tr
+                key={good}
                 data-cy="Good"
                 className={
                   this.state.selectedGood === good
@@ -61,7 +70,9 @@ export class App extends React.Component {
               >
                 <td>
                   <button
-                    data-cy="AddButton"
+                    data-cy={this.state.selectedGood === good
+                      ? 'RemoveButton'
+                      : 'AddButton'}
                     type="button"
                     className={`button ${
                       this.state.selectedGood === good && 'is-info'
