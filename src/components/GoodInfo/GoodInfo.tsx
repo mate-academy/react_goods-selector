@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Good } from './Good';
-import { getGoodById } from './api';
+import { Good } from '../../types/Good';
+import { getGoodById } from '../../api/api';
 
 type Props = {
   goodId: number;

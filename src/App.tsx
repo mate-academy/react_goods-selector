@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
-import { Good } from './Good';
-import { getGoods2 } from './api';
-import { GoodInfo } from './GoodInfo';
+import { getGoods } from './api/api';
+import { GoodInfo } from './components/GoodInfo';
+import { Good } from './types/Good';
 
 export const App: React.FC = () => {
   const [goods, setGoods] = useState<Good[]>([]);
@@ -11,7 +11,7 @@ export const App: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const goodsFromServer = await getGoods2();
+      const goodsFromServer = await getGoods();
 
       setGoods(goodsFromServer);
     };
@@ -24,17 +24,6 @@ export const App: React.FC = () => {
       <h1 className="title">No goods selected</h1>
 
       <GoodInfo goodId={selectedGoodId} />
-
-      <h1 className="title is-flex is-align-items-center">
-        Jam is selected
-
-        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-        <button
-          data-cy="ClearButton"
-          type="button"
-          className="delete ml-3"
-        />
-      </h1>
 
       <table className="table">
         <tbody>

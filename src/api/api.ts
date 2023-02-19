@@ -1,15 +1,8 @@
-import { Good } from './Good';
+import { Good } from '../types/Good';
 
 const API_URL = 'https://mate.academy/students-api/goods';
 
-export function getGoods(): Promise<Good[]> {
-  const result = fetch(API_URL)
-    .then(response => response.json());
-
-  return result; // Promise<Good[]>
-}
-
-export async function getGoods2() {
+export async function getGoods() {
   const response = await fetch(API_URL);
 
   return response.json();
