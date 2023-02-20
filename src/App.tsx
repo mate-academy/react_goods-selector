@@ -1,23 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
-import { getGoods } from './api/api';
+import { addGood, getGoods, removeGood } from './api/api';
 import { GoodInfo } from './components/GoodInfo';
 import { Good } from './types/Good';
+import { AddGoodForm } from './components/AddGoodForm';
+import { getColorById } from './utils/getColorById';
+import colors from './api/colors';
+import { GoodsList } from './components/GoodsList';
 
 export const App: React.FC = () => {
   const [goods, setGoods] = useState<Good[]>([]);
   const [selectedGoodId, setSelectedGoodId] = useState(0);
 
+  const fetchAllGoods = async () => {
+    const goodsFromServer = await getGoods();
+
+    setGoods(goodsFromServer);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      const goodsFromServer = await getGoods();
-
-      setGoods(goodsFromServer);
-    };
-
-    fetchData();
+    fetchAllGoods();
   }, []);
+
+  const addNewGood = async (name: string, colorId: number) => {
+    const color = getColorById(colorId, colors);
+
+    await addGood(name, color?.name || 'white');
+    await fetchAllGoods();
+  };
+
+  const deleteGood = async (goodId: number) => {
+    await removeGood(goodId);
+    await fetchAllGoods();
+  };
+
+  const selectGood = (goodId: number) => {
+    setSelectedGoodId(goodId);
+  };
 
   return (
     <main className="section container">
@@ -25,30 +45,13 @@ export const App: React.FC = () => {
 
       <GoodInfo goodId={selectedGoodId} />
 
-      <table className="table">
-        <tbody>
-          {goods.map(good => (
-            <tr data-cy="Good" key={good.id}>
-              <td>
-                <button
-                  data-cy="AddButton"
-                  type="button"
-                  className="button"
-                  onClick={() => {
-                    setSelectedGoodId(good.id);
-                  }}
-                >
-                  +
-                </button>
-              </td>
+      <GoodsList
+        goods={goods}
+        selectGood={selectGood}
+        deleteGood={deleteGood}
+      />
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good.name}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <AddGoodForm addNewGood={addNewGood} />
     </main>
   );
 };

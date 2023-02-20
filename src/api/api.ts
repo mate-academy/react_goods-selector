@@ -13,3 +13,27 @@ export async function getGoodById(goodId: number): Promise<Good> {
 
   return response.json();
 }
+
+export async function addGood(name: string, color: string | null) {
+  try {
+    await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+      body: JSON.stringify({ name, color }),
+    });
+  } catch (error) {
+    throw Error('Cant add new good to the server');
+  }
+}
+
+export async function removeGood(goodId: number) {
+  try {
+    await fetch(`${API_URL}/${goodId}`, {
+      method: 'DELETE',
+    });
+  } catch (error) {
+    throw Error('Cant remove good from the server');
+  }
+}
