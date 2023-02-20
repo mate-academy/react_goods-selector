@@ -17,7 +17,7 @@ export const goods = [
 ];
 
 type State = {
-  selectedGood: string;
+  selectedGood: string | null;
 };
 
 export class App extends React.Component<{}, State> {
@@ -25,8 +25,8 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  hiddenGoods = () => {
-    this.setState({ selectedGood: '' });
+  hiddenGoods = (good: string) => {
+    this.setState({ selectedGood: good });
   };
 
   render() {
@@ -43,7 +43,7 @@ export class App extends React.Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.hiddenGoods}
+                onClick={() => this.hiddenGoods('')}
               />
             </h1>
           )
@@ -73,9 +73,11 @@ export class App extends React.Component<{}, State> {
                           { 'is-info': selectedGood === item },
                         )
                       }
-                      onClick={() => {
-                        this.setState({ selectedGood: item });
-                      }}
+                      onClick={() => this.hiddenGoods(
+                        selectedGood === item
+                          ? ''
+                          : item,
+                      )}
                     >
                       {selectedGood === item ? '-' : '+'}
                     </button>
