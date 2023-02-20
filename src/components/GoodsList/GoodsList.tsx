@@ -5,12 +5,14 @@ interface Props {
   goods: Good[];
   selectGood: (goodId: number) => void;
   deleteGood: (goodId: number) => void;
+  setEditGood: (goodId: number) => void;
 }
 
 export const GoodsList: React.FC<Props> = ({
   goods,
   selectGood,
   deleteGood,
+  setEditGood,
 }) => (
   <table className="table">
     <tbody>
@@ -47,6 +49,19 @@ export const GoodsList: React.FC<Props> = ({
               }}
             >
               X
+            </button>
+          </td>
+
+          <td>
+            <button
+              data-cy="AddButton"
+              type="button"
+              className="button"
+              onClick={() => {
+                setEditGood(good.id);
+              }}
+            >
+              Edit
             </button>
           </td>
         </tr>

@@ -37,3 +37,17 @@ export async function removeGood(goodId: number) {
     throw Error('Cant remove good from the server');
   }
 }
+
+export async function editGood(goodId: number, color: string) {
+  try {
+    await fetch(`${API_URL}/${goodId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+      body: JSON.stringify({ color }),
+    });
+  } catch (error) {
+    throw Error('Cant add new good to the server');
+  }
+}
