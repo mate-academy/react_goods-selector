@@ -30,6 +30,14 @@ export class App extends Component<{}, State> {
     this.setState({ selectedGood: '' });
   };
 
+  changeGood = (selectedGood: string, good: string) => {
+    if (selectedGood === good) {
+      this.emptyState();
+    } else {
+      this.setState({ selectedGood: good });
+    }
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -41,14 +49,12 @@ export class App extends Component<{}, State> {
               <h1 className="title is-flex is-align-items-center">
                 {`${selectedGood} is selected`}
 
-                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
                 <button
+                  aria-label=" "
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={
-                    this.emptyState
-                  }
+                  onClick={this.emptyState}
                 />
               </h1>
             )
@@ -71,9 +77,7 @@ export class App extends Component<{}, State> {
                   <td>
                     <button
                       data-cy={
-                        selectedGood === good
-                          ? 'RemoveButton'
-                          : 'AddButton'
+                        selectedGood === good ? 'RemoveButton' : 'AddButton'
                       }
                       type="button"
                       className={classNames(
@@ -81,11 +85,7 @@ export class App extends Component<{}, State> {
                         { 'is-info': selectedGood === good },
                       )}
                       onClick={() => {
-                        if (selectedGood === good) {
-                          this.emptyState();
-                        } else {
-                          this.setState({ selectedGood: good });
-                        }
+                        this.changeGood(selectedGood, good);
                       }}
                     >
                       {
