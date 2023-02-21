@@ -28,7 +28,7 @@ export class App extends Component<{}, State> {
     return (
       <main className="section container">
         <h1 className="title is-flex is-align-items-center">
-          {this.state.selectedGood !== ''
+          {this.state.selectedGood
             ? `${this.state.selectedGood} is selected`
             : 'No goods selected'}
 
