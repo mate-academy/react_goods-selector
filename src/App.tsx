@@ -21,7 +21,7 @@ type State = {
 
 export class App extends Component<{}, State> {
   state = {
-    selectedGood: 'Jam',
+    selectedGood: goods[goods.indexOf('Jam')] || '',
   };
 
   render() {
@@ -33,7 +33,7 @@ export class App extends Component<{}, State> {
             : 'No goods selected'}
 
           {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-          {this.state.selectedGood !== '' && (
+          {this.state.selectedGood && (
             <button
               data-cy="ClearButton"
               aria-label="Clear"
@@ -47,11 +47,14 @@ export class App extends Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(good => {
+              const sameGoods: boolean = good === this.state.selectedGood;
+
               return (
                 <tr
                   data-cy="Good"
+                  key={good}
                   className={
-                    good === this.state.selectedGood
+                    sameGoods
                       ? 'has-background-success-light'
                       : ''
                   }
@@ -59,23 +62,23 @@ export class App extends Component<{}, State> {
                   <td>
                     <button
                       data-cy={
-                        good === this.state.selectedGood
+                        sameGoods
                           ? 'RemoveButton'
                           : 'AddButton'
                       }
                       type="button"
                       className={
-                        good === this.state.selectedGood
+                        sameGoods
                           ? 'button is-info'
                           : 'button'
                       }
                       onClick={() => (
-                        this.state.selectedGood === good
+                        sameGoods
                           ? this.setState({ selectedGood: '' })
                           : this.setState({ selectedGood: good })
                       )}
                     >
-                      {this.state.selectedGood === good
+                      {sameGoods
                         ? '-'
                         : '+'}
                     </button>
