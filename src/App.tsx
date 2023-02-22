@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import 'bulma/css/bulma.css';
+import classNames from 'classnames';
 import React from 'react';
 import './App.scss';
 
@@ -38,9 +39,11 @@ export class App extends React.Component {
   }
 
   render() {
+    const { selectedGood } = this.state;
+
     return (
       <main className="section container">
-        {this.state.selectedGood ? (
+        {selectedGood ? (
           <h1 className="title is-flex is-align-items-center">
             {this.state.selectedGood}
             {' '}
@@ -63,23 +66,23 @@ export class App extends React.Component {
                 key={good}
                 data-cy="Good"
                 className={
-                  this.state.selectedGood === good
+                  selectedGood === good
                     ? 'has-background-success-light'
                     : ''
                 }
               >
                 <td>
                   <button
-                    data-cy={this.state.selectedGood === good
+                    data-cy={selectedGood === good
                       ? 'RemoveButton'
                       : 'AddButton'}
                     type="button"
-                    className={`button ${
-                      this.state.selectedGood === good && 'is-info'
-                    }`}
+                    className={classNames(
+                      'button', { 'is-info': selectedGood === good },
+                    )}
                     onClick={() => this.selectGoodHandler(good)}
                   >
-                    {this.state.selectedGood === good ? '-' : '+'}
+                    {selectedGood === good ? '-' : '+'}
                   </button>
                 </td>
                 <td data-cy="GoodTitle" className="is-vcentered">
