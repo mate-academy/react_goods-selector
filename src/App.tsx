@@ -34,7 +34,7 @@ export class App extends Component<{}, State> {
 
     return (
       <main className="section container">
-        {selectedGood.length > 0
+        {selectedGood.length
           ? (
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
