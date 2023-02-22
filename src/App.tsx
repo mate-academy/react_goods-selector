@@ -38,10 +38,6 @@ export class App extends Component<{}, State> {
     }
   };
 
-  checked = (selectedGood: string, good: string) => {
-    return selectedGood === good;
-  };
-
   render() {
     const { selectedGood } = this.state;
 
@@ -71,32 +67,33 @@ export class App extends Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(good => {
+              const isChecked = selectedGood === good;
+
               return (
                 <tr
                   data-cy="Good"
                   className={classNames({
-                    'has-background-success-light':
-                      this.checked(selectedGood, good),
+                    'has-background-success-light': isChecked,
                   })}
                 >
                   <td>
                     <button
                       data-cy={
-                        this.checked(selectedGood, good)
+                        isChecked
                           ? 'RemoveButton'
                           : 'AddButton'
                       }
                       type="button"
                       className={classNames(
                         'button',
-                        { 'is-info': this.checked(selectedGood, good) },
+                        { 'is-info': isChecked },
                       )}
                       onClick={() => {
                         this.changeGood(selectedGood, good);
                       }}
                     >
                       {
-                        this.checked(selectedGood, good) ? '-' : '+'
+                        isChecked ? '-' : '+'
                       }
                     </button>
                   </td>
