@@ -31,6 +31,14 @@ export class App extends React.Component<{}, State> {
     });
   };
 
+  handlerSwitch = (item: string, itemValue: string) => {
+    if (item.includes('is-info')) {
+      this.setSelect();
+    } else {
+      this.setSelect(itemValue);
+    }
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -74,11 +82,9 @@ export class App extends React.Component<{}, State> {
                   <td>
                     <button
                       data-cy={
-                        `${
-                          selected
-                            ? 'RemoveButton'
-                            : 'AddButton'
-                        }`
+                        selected
+                          ? 'RemoveButton'
+                          : 'AddButton'
                       }
                       type="button"
                       className={
@@ -88,13 +94,7 @@ export class App extends React.Component<{}, State> {
                         )
                       }
                       onClick={(event) => {
-                        const btnClass = event.currentTarget.className;
-
-                        if (btnClass.includes('is-info')) {
-                          this.setSelect();
-                        } else {
-                          this.setSelect(good);
-                        }
+                        this.handlerSwitch(event.currentTarget.className, good);
                       }}
                     >
                       {selected ? '-' : '+'}
