@@ -31,7 +31,7 @@ export class App extends React.Component<{}, State> {
     });
   };
 
-  handlerSwitch = (item: string, itemValue: string) => {
+  handleSwitch = (item: string, itemValue: string) => {
     if (item.includes('is-info')) {
       this.setSelect();
     } else {
@@ -94,7 +94,7 @@ export class App extends React.Component<{}, State> {
                         )
                       }
                       onClick={(event) => {
-                        this.handlerSwitch(event.currentTarget.className, good);
+                        this.handleSwitch(event.currentTarget.className, good);
                       }}
                     >
                       {selected ? '-' : '+'}
