@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -19,55 +20,25 @@ type State = {
   selectedGoods: string,
 };
 
-function removeClass(
-  collection: NodeListOf<HTMLButtonElement | HTMLTableRowElement>,
-  className: string,
-) {
-  collection.forEach(element => {
-    element.classList.remove(className);
-  });
-}
-
 export class App extends Component<{}, State> {
   state: Readonly<State> = {
     selectedGoods: 'Jam',
   };
 
-  unsetCells = () => {
-    const cells = document.querySelectorAll('tr');
-    const buttons = document.querySelectorAll('button');
-
-    buttons.forEach((b: HTMLButtonElement) => {
-      // eslint-disable-next-line no-param-reassign
-      b.innerText = '+';
-    });
-
-    removeClass(buttons, 'is-info');
-    removeClass(cells, 'has-background-success-light');
+  clear = () => {
+    this.setState({ selectedGoods: '' });
   };
 
-  setCell = (event: React.SyntheticEvent) => {
-    const button = event.currentTarget as HTMLElement;
-    const cell = button.parentElement?.parentElement;
+  toggle = (element: React.SyntheticEvent) => {
+    const item
+    = element.currentTarget.parentElement?.nextElementSibling?.innerHTML;
 
-    cell?.classList.add('has-background-success-light');
-    button.classList.add('is-info');
-    button.innerText = '-';
-  };
-
-  toggleCell(event: React.SyntheticEvent) {
-    const currentGood
-      = event.currentTarget.parentElement?.nextSibling as HTMLElement;
-
-    if (this.state.selectedGoods === currentGood.innerText) {
-      this.unsetCells();
-      this.setState({ selectedGoods: '' });
+    if (this.state.selectedGoods === item) {
+      this.clear();
     } else {
-      this.unsetCells();
-      this.setState({ selectedGoods: currentGood?.innerText || '' });
-      this.setCell(event);
+      this.setState({ selectedGoods: item || '' });
     }
-  }
+  };
 
   render() {
     const { selectedGoods } = this.state;
@@ -84,10 +55,7 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  this.unsetCells();
-                  this.setState({ selectedGoods: '' });
-                }}
+                onClick={this.clear}
               />
             </h1>
           )
@@ -96,17 +64,24 @@ export class App extends Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(good => (
-              <tr key={good} data-cy="Good">
+              <tr
+                key={good}
+                data-cy="Good"
+                className={classNames({
+                  'has-background-success-light': selectedGoods === good,
+                })}
+              >
                 <td>
                   <button
                     data-cy="AddButton"
                     type="button"
-                    className="button"
-                    onClick={(event) => {
-                      this.toggleCell(event);
-                    }}
+                    className={classNames('button',
+                      { 'is-info': selectedGoods === good })}
+                    onClick={this.toggle}
                   >
-                    +
+                    {selectedGoods === good
+                      ? '-'
+                      : '+'}
                   </button>
                 </td>
 
