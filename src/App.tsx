@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -15,71 +16,83 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+type State = {
+  selectedGoods: string,
+};
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+export class App extends Component<{}, State> {
+  state: Readonly<State> = {
+    selectedGoods: 'Jam',
+  };
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+  clear = () => {
+    this.setState({ selectedGoods: '' });
+  };
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+  toggle = (element: React.SyntheticEvent) => {
+    const item
+    = element.currentTarget.parentElement?.nextElementSibling?.innerHTML;
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+    if (this.state.selectedGoods === item) {
+      this.clear();
+    } else {
+      this.setState({ selectedGoods: item || '' });
+    }
+  };
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+  render() {
+    const { selectedGoods } = this.state;
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+    return (
+      <main className="section container">
+        {selectedGoods
+          ? (
+            <h1 className="title is-flex is-align-items-center">
+              {`${selectedGoods} is selected`}
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.clear}
+              />
+            </h1>
+          )
+          : (<h1 className="title">No goods selected</h1>)}
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+        <table className="table">
+          <tbody>
+            {goods.map(good => (
+              <tr
+                key={good}
+                data-cy="Good"
+                className={classNames({
+                  'has-background-success-light': selectedGoods === good,
+                })}
+              >
+                <td>
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    className={classNames('button',
+                      { 'is-info': selectedGoods === good })}
+                    onClick={this.toggle}
+                  >
+                    {selectedGoods === good
+                      ? '-'
+                      : '+'}
+                  </button>
+                </td>
+
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </main>
+    );
+  }
+}
