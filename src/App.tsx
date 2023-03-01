@@ -38,9 +38,7 @@ export class App extends React.Component<{}, State> {
           ? <h1 className="title">No goods selected</h1>
           : (
             <h1 className="title is-flex is-align-items-center">
-              {selectedGood}
-              {' '}
-              is selected
+              {`${selectedGood} is selected`}
 
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
@@ -55,16 +53,16 @@ export class App extends React.Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map((good: string) => {
-              const selected = good === selectedGood;
+              const isSelected = good === selectedGood;
 
               return (
                 <tr
                   data-cy="Good"
                   key={good}
-                  className={selected ? 'has-background-success-light' : ''}
+                  className={isSelected ? 'has-background-success-light' : ''}
                 >
                   <td>
-                    {selected
+                    {isSelected
                       ? (
                         <button
                           data-cy="RemoveButton"
