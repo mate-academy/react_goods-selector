@@ -21,16 +21,16 @@ type State = {
 
 export class App extends React.Component<{}, State> {
   state = {
-    selectedGood: 'Jam',
+    selectedGood: goods[goods.indexOf('Jam')] || '',
   };
 
-  selected = (good1: string) => {
-    return this.state.selectedGood !== good1
-      ? this.setState({ selectedGood: good1 })
+  selectGood = (goodName: string) => {
+    return this.state.selectedGood !== goodName
+      ? this.setState({ selectedGood: goodName })
       : this.setState({ selectedGood: '' });
   };
 
-  deleteH1 = () => {
+  clearSelected = () => {
     this.setState({ selectedGood: '' });
   };
 
@@ -41,19 +41,16 @@ export class App extends React.Component<{}, State> {
       <main className="section container">
 
         {selectedGood === ''
-          ? (<h1 className="title">No goods selected</h1>)
+          ? <h1 className="title">No goods selected</h1>
           : (
             <h1 className="title is-flex is-align-items-center">
-              {selectedGood}
-              {' '}
-              is selected
-
+              {`${selectedGood} is selected`}
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.deleteH1}
+                onClick={this.clearSelected}
               />
             </h1>
           )}
@@ -79,7 +76,7 @@ export class App extends React.Component<{}, State> {
                       ? 'button is-info'
                       : 'button'}
                     onClick={() => {
-                      this.selected(good);
+                      this.selectGood(good);
                     }}
                   >
                     {selectedGood === good
@@ -99,21 +96,3 @@ export class App extends React.Component<{}, State> {
     );
   }
 }
-
-// {selectedGood === ''
-// ? (<h1 className="title">No goods selected</h1>)
-// : (
-//   <h1 className="title is-flex is-align-items-center">
-//     {selectedGood}
-//     {' '}
-//     is selected
-
-//     {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-//     <button
-//       data-cy="ClearButton"
-//       type="button"
-//       className="delete ml-3"
-//       onClick={this.deleteH1}
-//     />
-//   </h1>
-// )}
