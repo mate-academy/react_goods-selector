@@ -60,7 +60,7 @@ export class App extends Component<{}, AppState> {
                 key={good}
                 data-cy="Good"
                 className={classNames({
-                  'has-background-success-light': selectedGood,
+                  'has-background-success-light': selectedGood === good,
                 })}
               >
                 {!selectedGood || good !== selectedGood ? (
