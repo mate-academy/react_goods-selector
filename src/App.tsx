@@ -53,7 +53,6 @@ export class App extends Component<{}, State> {
               "
             >
               {`${selectedGood} is selected`}
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
                 type="button"
@@ -62,7 +61,9 @@ export class App extends Component<{}, State> {
                   ml-3
                 "
                 onClick={this.removeGood}
-              />
+              >
+                <img src="" alt="" />
+              </button>
             </h1>
           )
           : (
