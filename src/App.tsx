@@ -35,22 +35,20 @@ export class App extends Component<{}, AppState> {
 
   render() {
     const { selectedGood } = this.state;
-    const title = selectedGood ? `${selectedGood} is selected` : 'No goods selected';
-    const buttonClear = selectedGood && (
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-        onClick={this.handleClearSelection}
-        aria-label="Clear selection"
-      />
-    );
 
     return (
       <main className="section container">
         <h1 className="title">
-          {title}
-          {buttonClear}
+          {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
+          {selectedGood && (
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={this.handleClearSelection}
+              aria-label="Clear selection"
+            />
+          )}
         </h1>
 
         <table className="table">
