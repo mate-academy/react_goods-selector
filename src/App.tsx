@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -21,7 +22,7 @@ type State = {
 
 export class App extends React.Component<{}, State> {
   state: Readonly<State> = {
-    selectedGood: 'Jam',
+    selectedGood: goods[goods.indexOf('Jam')] || goods[0],
   };
 
   handleAddClick = (event: React.MouseEvent, good: string) => {
@@ -38,7 +39,7 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        {(!selectedGood)
+        {!selectedGood
           ? (
             <h1 className="title">
               No goods selected
@@ -46,9 +47,7 @@ export class App extends React.Component<{}, State> {
           )
           : (
             <h1 className="title is-flex is-align-items-center">
-              {selectedGood}
-              {' '}
-              is selected
+              {`${selectedGood} is selected`}
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
@@ -64,15 +63,15 @@ export class App extends React.Component<{}, State> {
             {goods.map((good: string) => (
               <tr
                 data-cy="Good"
-                className={selectedGood === good
-                  ? 'has-background-success-light' : ''}
+                className={classNames('',
+                  { 'has-background-success-light': good === selectedGood })}
               >
                 <td>
                   <button
                     data-cy="AddButton"
                     type="button"
-                    className={good === selectedGood
-                      ? 'button is-info' : 'button'}
+                    className={classNames('button',
+                      { 'is-info': good === selectedGood })}
                     onClick={(event) => (selectedGood === good
                       ? this.clearSelectionHandler()
                       : this.handleAddClick(event, good))}
