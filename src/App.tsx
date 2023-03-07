@@ -73,7 +73,9 @@ export class App extends React.Component<{}, State> {
                     type="button"
                     className={good === selectedGood
                       ? 'button is-info' : 'button'}
-                    onClick={(event) => this.handleAddClick(event, good)}
+                    onClick={(event) => (selectedGood === good
+                      ? this.clearSelectionHandler()
+                      : this.handleAddClick(event, good))}
                   >
                     {selectedGood === good ? '-' : '+'}
                   </button>
