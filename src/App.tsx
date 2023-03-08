@@ -21,8 +21,16 @@ type State = {
 };
 
 export class App extends Component<{}, State> {
-  state = {
+  state: Readonly<State> = {
     selectedGood: 'Jam',
+  };
+
+  changeGood = (good: string) => {
+    this.setState({ selectedGood: good });
+  };
+
+  clearGood = () => {
+    this.setState({ selectedGood: '' });
   };
 
   render() {
@@ -39,9 +47,7 @@ export class App extends Component<{}, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={() => {
-                    this.setState({ selectedGood: '' });
-                  }}
+                  onClick={() => this.clearGood()}
                 />
               </h1>
             )
@@ -70,9 +76,7 @@ export class App extends Component<{}, State> {
                             data-cy="AddButton"
                             type="button"
                             className="button"
-                            onClick={() => {
-                              this.setState({ selectedGood: good });
-                            }}
+                            onClick={() => this.changeGood(good)}
                           >
                             +
                           </button>
@@ -82,9 +86,7 @@ export class App extends Component<{}, State> {
                             data-cy="RemoveButton"
                             type="button"
                             className="button is-info"
-                            onClick={() => {
-                              this.setState({ selectedGood: '' });
-                            }}
+                            onClick={() => this.clearGood()}
                           >
                             -
                           </button>
