@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -21,7 +22,7 @@ type State = {
 
 export class App extends Component<{}, State> {
   state: Readonly<State> = {
-    selectedGood: 'Jam',
+    selectedGood: goods[goods.indexOf('Jam')] || goods[0],
   };
 
   render() {
@@ -29,7 +30,7 @@ export class App extends Component<{}, State> {
 
     return (
       <main className="section container">
-        {selectedGood === ''
+        {!selectedGood
           ? <h1 className="title">No goods selected</h1>
           : (
             <h1 className="title is-flex is-align-items-center">
@@ -53,9 +54,9 @@ export class App extends Component<{}, State> {
             {goods.map(good => (
               <tr
                 data-cy="Good"
-                className={good === selectedGood
-                  ? 'has-background-success-light'
-                  : ''}
+                className={classNames({
+                  'has-background-success-light': good === selectedGood
+                })}
               >
                 <td>
                   <button
