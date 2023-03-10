@@ -1,39 +1,44 @@
-import { Component } from "react";
-import "bulma/css/bulma.css";
-import "./App.scss";
+import React from 'react';
+import 'bulma/css/bulma.css';
+import './App.scss';
 
 export const goods = [
-  "Dumplings",
-  "Carrot",
-  "Eggs",
-  "Ice cream",
-  "Apple",
-  "Bread",
-  "Fish",
-  "Honey",
-  "Jam",
-  "Garlic",
+  'Dumplings',
+  'Carrot',
+  'Eggs',
+  'Ice cream',
+  'Apple',
+  'Bread',
+  'Fish',
+  'Honey',
+  'Jam',
+  'Garlic',
 ];
 
 type State = {
-  selectedGood: string;
+  selectedGood: string,
 };
 
-export class App extends Component<{}, State> {
-  state = {
-    selectedGood: "Jam",
+export class App extends React.Component<{}, State> {
+  state: State = {
+    selectedGood: 'Jam',
+  };
+
+  addGood = (good: string) => {
+    this.setState({ selectedGood: good });
   };
 
   removeGood = () => {
     this.setState({ selectedGood: '' });
   };
 
-  addGood = (good: string) => {
-    this.setState({selectedGood: good})
+  isGoodSelected = (good: string) => {
+    return this.state.selectedGood === good;
   };
 
   render() {
     const { selectedGood } = this.state;
+    const { isGoodSelected } = this;
 
     return (
       <main className="section container">
@@ -43,6 +48,7 @@ export class App extends Component<{}, State> {
             <button
               data-cy="ClearButton"
               type="button"
+              aria-label="Mute volume"
               className="delete ml-3"
               onClick={this.removeGood}
             />
@@ -55,16 +61,19 @@ export class App extends Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map(elem => (
-              <tr 
-                data-cy="Good" 
-                key={elem}
-                className={this.state.selectedGood === elem 
-                  ? 'has-background-success-light'
-                  : '' }
+
+            {goods.map(good => (
+              <tr
+                key={good}
+                data-cy="Good"
+                className={
+                  isGoodSelected(good)
+                    ? 'has-background-success-light'
+                    : ''
+                }
               >
-              <td>
-                  {this.state.selectedGood === elem ? (
+                <td>
+                  {isGoodSelected(good) ? (
                     <button
                       data-cy="RemoveButton"
                       type="button"
@@ -78,18 +87,17 @@ export class App extends Component<{}, State> {
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={() => this.addGood(elem)}
+                      onClick={() => this.addGood(good)}
                     >
                       +
                     </button>
                   )}
                 </td>
 
-
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {elem}
-              </td>
-            </tr>
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
             ))}
           </tbody>
         </table>
