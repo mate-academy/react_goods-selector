@@ -25,11 +25,11 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  deleteHandler = () => {
+  handleDelete = () => {
     this.setState({ selectedGood: '' });
   };
 
-  addHandler = (good: string) => {
+  handleAdd = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
@@ -50,7 +50,7 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.deleteHandler}
+                onClick={this.handleDelete}
               />
             </h1>
           )}
@@ -72,7 +72,7 @@ export class App extends Component<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={this.deleteHandler}
+                        onClick={this.handleDelete}
                       >
                         -
                       </button>
@@ -84,7 +84,7 @@ export class App extends Component<{}, State> {
                         type="button"
                         className="button"
                         onClick={() => {
-                          this.addHandler(good);
+                          this.handleAdd(good);
                         }}
                       >
                         +
