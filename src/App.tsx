@@ -25,17 +25,17 @@ export class App extends React.Component {
     selectedGood: 'Jam',
   };
 
-  changeGoodHandler = (good: string) => {
+  handleChangeGood = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
-  removeGoodHandler = () => {
+  handleRemoveGood = () => {
     this.setState({ selectedGood: '' });
   };
 
   render() {
     const { selectedGood } = this.state;
-    const { changeGoodHandler, removeGoodHandler } = this;
+    const { handleChangeGood, handleRemoveGood } = this;
 
     return (
       <main className="section container">
@@ -49,7 +49,7 @@ export class App extends React.Component {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={removeGoodHandler}
+                onClick={handleRemoveGood}
               />
             </h1>
           )
@@ -75,7 +75,7 @@ export class App extends React.Component {
                     {isEqual
                       ? (
                         <button
-                          onClick={removeGoodHandler}
+                          onClick={handleRemoveGood}
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
@@ -85,7 +85,7 @@ export class App extends React.Component {
                       )
                       : (
                         <button
-                          onClick={() => changeGoodHandler(good)}
+                          onClick={() => handleChangeGood(good)}
                           data-cy="AddButton"
                           type="button"
                           className="button"
