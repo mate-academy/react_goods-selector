@@ -33,20 +33,22 @@ export class App extends React.Component<{}, State> {
     return (
       <main className="section container">
         <h1 className={`title ${selectedGood ? 'is-flex is-align-items-center' : ''}`}>
-          {selectedGood ? (
-            <>
-              {`${selectedGood} is selected`}
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-              <button
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-                onClick={this.clearGoodsSelection}
-              />
-            </>
-          ) : (
-            <>No goods selected</>
-          )}
+          <div>
+            {selectedGood ? (
+              <div>
+                {`${selectedGood} is selected`}
+                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+                <button
+                  data-cy="ClearButton"
+                  type="button"
+                  className="delete ml-3"
+                  onClick={this.clearGoodsSelection}
+                />
+              </div>
+            ) : (
+              <div>No goods selected</div>
+            )}
+          </div>
         </h1>
         <table className="table">
           <tbody>
