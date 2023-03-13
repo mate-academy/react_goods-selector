@@ -57,46 +57,50 @@ export class App extends Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map(good => (
-              <tr
-                key={good}
-                data-cy="Good"
-                className={cn({
-                  'has-background-success-light': selectedGood === good,
-                })}
-              >
-                {selectedGood === good
-                  ? (
-                    <td>
-                      <button
-                        data-cy="RemoveButton"
-                        type="button"
-                        className="button is-info"
-                        onClick={this.handleDelete}
-                      >
-                        -
-                      </button>
-                    </td>
-                  ) : (
-                    <td>
-                      <button
-                        data-cy="AddButton"
-                        type="button"
-                        className="button"
-                        onClick={() => {
-                          this.handleAdd(good);
-                        }}
-                      >
-                        +
-                      </button>
-                    </td>
-                  )}
+            {goods.map(good => {
+              const checkGood = selectedGood === good;
 
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            ))}
+              return (
+                <tr
+                  key={good}
+                  data-cy="Good"
+                  className={cn({
+                    'has-background-success-light': checkGood,
+                  })}
+                >
+                  {checkGood
+                    ? (
+                      <td>
+                        <button
+                          data-cy="RemoveButton"
+                          type="button"
+                          className="button is-info"
+                          onClick={this.handleDelete}
+                        >
+                          -
+                        </button>
+                      </td>
+                    ) : (
+                      <td>
+                        <button
+                          data-cy="AddButton"
+                          type="button"
+                          className="button"
+                          onClick={() => {
+                            this.handleAdd(good);
+                          }}
+                        >
+                          +
+                        </button>
+                      </td>
+                    )}
+
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </main>
