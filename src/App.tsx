@@ -84,7 +84,7 @@ export class App extends Component<{}, State> {
                   dataCy="ClearButton"
                   content=""
                   classes={['delete', 'ml-3']}
-                  handler={() => this.handleRemove()}
+                  handler={this.handleRemove}
                 />
               </h1>
             )
@@ -111,7 +111,7 @@ export class App extends Component<{}, State> {
                           dataCy="RemoveButton"
                           content="-"
                           classes={['button', 'is-info']}
-                          handler={() => this.handleRemove()}
+                          handler={this.handleRemove}
                         />
                       )
                       : (
