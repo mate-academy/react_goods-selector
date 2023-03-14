@@ -22,7 +22,7 @@ interface AppState {
 
 export class App extends Component<{}, AppState> {
   state: AppState = {
-    selectedGood: 'Jam',
+    selectedGood: goods[goods.indexOf('Jam')] || goods[0],
   };
 
   handleSelectGood = (good: string) => {
