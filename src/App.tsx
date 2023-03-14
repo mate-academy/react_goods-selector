@@ -34,43 +34,43 @@ export class App extends Component<{}, State> {
   };
 
   render() {
+    const { selectedGood } = this.state;
+
     return (
       <main className="section container">
         {
-          this.state.selectedGood
-            ? (
-              <h1 className="title is-flex is-align-items-center">
-                {`${this.state.selectedGood} is selected`}
+          selectedGood ? (
+            <h1 className="title is-flex is-align-items-center">
+              {`${selectedGood} is selected`}
 
-                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-                <button
-                  data-cy="ClearButton"
-                  type="button"
-                  className="delete ml-3"
-                  onClick={this.removeGood}
-                />
-              </h1>
-            )
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.removeGood}
+              />
+            </h1>
+          )
             : <h1 className="title">No goods selected</h1>
         }
 
         <table className="table">
           <tbody>
             {goods.map((good) => {
+              const isSelected = good === selectedGood;
+
               return (
                 <tr
                   data-cy="Good"
                   key={good}
                   className={classNames(
-                    {
-                      'has-background-success-light':
-                        good === this.state.selectedGood,
-                    },
+                    { 'has-background-success-light': isSelected },
                   )}
                 >
                   <td>
                     {
-                      this.state.selectedGood !== good
+                      !isSelected
                         ? (
                           <button
                             data-cy="AddButton"
