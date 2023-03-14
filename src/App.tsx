@@ -32,39 +32,37 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        <h1 className={`title ${selectedGood ? 'is-flex is-align-items-center' : ''}`}>
-          <div>
-            {selectedGood ? (
-              <div>
-                {`${selectedGood} is selected`}
-                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-                <button
-                  data-cy="ClearButton"
-                  type="button"
-                  className="delete ml-3"
-                  onClick={this.clearGoodsSelection}
-                />
-              </div>
-            ) : (
-              <div>No goods selected</div>
-            )}
-          </div>
-        </h1>
+        {selectedGood ? (
+          <h1 className={`title ${selectedGood ? 'is-flex is-align-items-center' : ''}`}>
+            {`${selectedGood} is selected`}
+            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={this.clearGoodsSelection}
+            />
+          </h1>
+        ) : (
+          <h1 className={`title ${selectedGood ? 'is-flex is-align-items-center' : ''}`}>
+            No goods selected
+          </h1>
+        )}
         <table className="table">
           <tbody>
             {goods.map(good => {
-              const goodIsSelected = good === selectedGood;
+              const isGoodSelected = good === selectedGood;
 
               return (
                 <tr
                   key={good}
                   data-cy="Good"
                   className={classNames(
-                    { 'has-background-success-light': goodIsSelected },
+                    { 'has-background-success-light': isGoodSelected },
                   )}
                 >
                   <td>
-                    {goodIsSelected ? (
+                    {isGoodSelected ? (
                       <button
                         data-cy="RemoveButton"
                         type="button"
