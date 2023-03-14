@@ -34,20 +34,23 @@ export class App extends Component<{}, State> {
   };
 
   render() {
+    const { selectedGood } = this.state;
+    const { clearGood, changeGood } = this;
+
     return (
       <main className="section container">
         {
-          this.state.selectedGood
+          selectedGood
             ? (
               <h1 className="title is-flex is-align-items-center">
-                {`${this.state.selectedGood} is selected`}
+                {`${selectedGood} is selected`}
 
                 {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
                 <button
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={() => this.clearGood()}
+                  onClick={clearGood}
                 />
               </h1>
             )
@@ -57,6 +60,8 @@ export class App extends Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(good => {
+              const isGoodSelected = good === selectedGood;
+
               return (
                 <tr
                   data-cy="Good"
@@ -64,19 +69,19 @@ export class App extends Component<{}, State> {
                   className={classNames(
                     {
                       'has-background-success-light':
-                        good === this.state.selectedGood,
+                        isGoodSelected,
                     },
                   )}
                 >
                   <td>
                     {
-                      this.state.selectedGood !== good
+                      !isGoodSelected
                         ? (
                           <button
                             data-cy="AddButton"
                             type="button"
                             className="button"
-                            onClick={() => this.changeGood(good)}
+                            onClick={() => changeGood(good)}
                           >
                             +
                           </button>
@@ -86,7 +91,7 @@ export class App extends Component<{}, State> {
                             data-cy="RemoveButton"
                             type="button"
                             className="button is-info"
-                            onClick={() => this.clearGood()}
+                            onClick={clearGood}
                           >
                             -
                           </button>
