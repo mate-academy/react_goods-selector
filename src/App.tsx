@@ -13,6 +13,14 @@ export class App extends React.Component<{}, State> {
     status: 'Jam',
   };
 
+  addGood = (good: string) => {
+    this.setState({ status: good });
+  };
+
+  removeGood = () => {
+    this.setState({ status: '' });
+  };
+
   render() {
     const { status } = this.state;
 
@@ -53,9 +61,7 @@ export class App extends React.Component<{}, State> {
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => (
-                        this.setState({ status: '' })
-                      )}
+                      onClick={() => this.removeGood()}
                     >
                       -
                     </button>
@@ -64,9 +70,7 @@ export class App extends React.Component<{}, State> {
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={() => (
-                        this.setState({ status: good })
-                      )}
+                      onClick={() => this.addGood(good)}
                     >
                       +
                     </button>
