@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -54,11 +55,19 @@ export class App extends Component<{}, State> {
             {goods.map(good => {
               const isSelected = good === selectedGood;
 
+              const selectGoods = () => {
+                this.setState({ selectedGood: good });
+              };
+
+              const classes = classNames({
+                'has-background-success-light': isSelected,
+              });
+
               return (
                 <tr
                   key={good}
                   data-cy="Good"
-                  className={isSelected ? 'has-background-success-light' : ''}
+                  className={classes}
                 >
                   <td>
                     {isSelected
@@ -78,7 +87,7 @@ export class App extends Component<{}, State> {
                           type="button"
                           className="button"
                           onClick={() => {
-                            this.setState({ selectedGood: good });
+                            selectGoods();
                           }}
                         >
                           +
