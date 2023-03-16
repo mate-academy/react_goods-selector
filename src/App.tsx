@@ -26,17 +26,6 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  keyCount: number;
-
-  constructor(props: {}) {
-    super(props);
-
-    this.keyCount = 0;
-  }
-
-  // eslint-disable-next-line no-plusplus
-  setKey = () => this.keyCount++;
-
   removeGood = () => {
     this.setState({ selectedGood: '' });
   };
@@ -74,7 +63,7 @@ export class App extends React.Component<{}, State> {
                 className={cn('', {
                   'has-background-success-light': good === selectedGood,
                 })}
-                key={this.setKey()}
+                key={good}
               >
                 <td>
                   {
