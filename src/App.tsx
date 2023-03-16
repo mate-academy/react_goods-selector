@@ -53,13 +53,17 @@ export class App extends React.Component<{}, State> {
               : 'No goods selected'
           }
 
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-          <button
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-            onClick={this.removeGood}
-          />
+          {
+            selectedGood && (
+              // eslint-disable-next-line jsx-a11y/control-has-associated-label
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.removeGood}
+              />
+            )
+          }
         </h1>
 
         <table className="table">
