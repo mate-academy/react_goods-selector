@@ -28,14 +28,14 @@ const GoodsButton: React.FC<BtnProps> = (
     dataCy,
     content,
     handler,
-    classes = [],
+    classes = ['button'],
   },
 ) => (
   <button
     data-cy={dataCy}
     type="button"
     className={classNames(...classes)}
-    onClick={() => handler()}
+    onClick={handler}
   >
     {content}
   </button>
@@ -55,19 +55,15 @@ export class App extends Component<{}, State> {
   };
 
   handleAdd = (good: string) => {
-    this.setState(
-      {
-        selectedGood: good,
-      },
-    );
+    this.setState({
+      selectedGood: good,
+    });
   };
 
   handleRemove = () => {
-    this.setState(
-      {
-        selectedGood: '',
-      },
-    );
+    this.setState({
+      selectedGood: '',
+    });
   };
 
   render() {
@@ -93,42 +89,48 @@ export class App extends Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map(good => (
-              <tr
-                key={good}
-                data-cy="Good"
-                className={classNames(
-                  {
-                    'has-background-success-light': good === selectedGood,
-                  },
-                )}
-              >
-                <td>
-                  {
-                    good === selectedGood
-                      ? (
-                        <GoodsButton
-                          dataCy="RemoveButton"
-                          content="-"
-                          classes={['button', 'is-info']}
-                          handler={this.handleRemove}
-                        />
-                      )
-                      : (
-                        <GoodsButton
-                          dataCy="AddButton"
-                          content="+"
-                          handler={() => this.handleAdd(good)}
-                        />
-                      )
-                  }
-                </td>
+            {goods.map(good => {
+              const isSelected = good === selectedGood;
 
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            ))}
+              return (
+                (
+                  <tr
+                    key={good}
+                    data-cy="Good"
+                    className={classNames(
+                      {
+                        'has-background-success-light': isSelected,
+                      },
+                    )}
+                  >
+                    <td>
+                      {
+                        isSelected
+                          ? (
+                            <GoodsButton
+                              dataCy="RemoveButton"
+                              content="-"
+                              classes={['button', 'is-info']}
+                              handler={this.handleRemove}
+                            />
+                          )
+                          : (
+                            <GoodsButton
+                              dataCy="AddButton"
+                              content="+"
+                              handler={() => this.handleAdd(good)}
+                            />
+                          )
+                      }
+                    </td>
+
+                    <td data-cy="GoodTitle" className="is-vcentered">
+                      {good}
+                    </td>
+                  </tr>
+                )
+              );
+            })}
           </tbody>
         </table>
       </main>
