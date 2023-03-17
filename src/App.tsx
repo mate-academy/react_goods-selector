@@ -71,18 +71,20 @@ export class App extends React.Component<{}, State> {
         <table className="table">
           <tbody>
             {things.map(thing => {
+              const isSelectedItem = thing === selectedItem;
+
               return (
                 <tr
                   data-cy="Good"
                   className={
-                    thing === selectedItem
+                    isSelectedItem
                       ? 'has-background-success-light'
                       : ''
                   }
                 >
                   <td>
                     {
-                      selectedItem === thing
+                      isSelectedItem
                         ? (
                           <button
                             data-cy="RemoveButton"
