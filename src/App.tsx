@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -24,6 +25,12 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  clearSelectedGood = () => {
+    this.setState({
+      selectedGood: '',
+    });
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -34,19 +41,15 @@ export class App extends React.Component<{}, State> {
 
           {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
           {
-            selectedGood ? (
+            selectedGood && (
               <button
                 aria-label="Mute volume"
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  this.setState({
-                    selectedGood: '',
-                  });
-                }}
+                onClick={this.clearSelectedGood}
               />
-            ) : null
+            )
           }
         </h1>
 
@@ -55,9 +58,10 @@ export class App extends React.Component<{}, State> {
             {goods.map(good => (
               <tr
                 data-cy="Good"
-                className={
-                  selectedGood === good ? 'has-background-success-light' : ''
-                }
+                key={good}
+                className={classNames(
+                  { 'has-background-success-light': selectedGood === good },
+                )}
               >
                 <td>
                   {
@@ -103,21 +107,3 @@ export class App extends React.Component<{}, State> {
     );
   }
 }
-
-// {
-//   selectedGood
-//     ? (
-//       <button
-//         data-cy="ClearButton"
-//         type="button"
-//         className="delete ml-3"
-//         onClick={() => {
-//           this.setState({
-//             selectedGood: '',
-//           });
-//         }}
-//       >
-//         {null}
-//       </button>
-//     ) : (null)
-// }
