@@ -62,6 +62,7 @@ export class App extends React.Component<{}, State> {
               return (
                 <tr
                   data-cy="Good"
+                  key={good}
                   className={classNames(
                     { 'has-background-success-light': this.isSelected(good) },
                   )}
