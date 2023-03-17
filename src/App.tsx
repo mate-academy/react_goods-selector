@@ -53,7 +53,11 @@ export class App extends React.Component {
               />
             </h1>
           )
-          : <h1 className="title">No goods selected</h1>}
+          : (
+            <h1 className="title">
+              No goods selected
+            </h1>
+          )}
 
         <table className="table">
           <tbody>
@@ -66,8 +70,7 @@ export class App extends React.Component {
                   data-cy="Good"
                   className={classNames(
                     {
-                      'has-background-success-light':
-                      isEqual,
+                      'has-background-success-light': isEqual,
                     },
                   )}
                 >
