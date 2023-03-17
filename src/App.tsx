@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import classNames from 'classnames';
 import './App.scss';
@@ -16,8 +16,12 @@ export const goods = [
   'Garlic',
 ];
 
-export class App extends React.Component {
-  state = {
+type State = {
+  selectedGood: string;
+};
+
+export class App extends Component<{}, State> {
+  state: State = {
     selectedGood: 'Jam',
   };
 
