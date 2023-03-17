@@ -21,7 +21,7 @@ type State = {
 };
 
 export class App extends Component<{}, State> {
-  state = {
+  state: Readonly<State> = {
     selectedGood: 'Jam',
   };
 
