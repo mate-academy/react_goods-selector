@@ -47,7 +47,7 @@ export class App extends React.Component<{}, State> {
           selectedGood
             ? (
               <h1 className="title is-flex is-align-items-center">
-                Jam is selected
+                {`${selectedGood} is selected`}
 
                 {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
                 <button
