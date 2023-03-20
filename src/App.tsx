@@ -1,27 +1,28 @@
-import React from 'react';
-import 'bulma/css/bulma.css';
-import './App.scss';
+import React from "react";
+import "bulma/css/bulma.css";
+import "./App.scss";
+import classNames from "classnames";
 
 export const goods = [
-  'Dumplings',
-  'Carrot',
-  'Eggs',
-  'Ice cream',
-  'Apple',
-  'Bread',
-  'Fish',
-  'Honey',
-  'Jam',
-  'Garlic',
+  "Dumplings",
+  "Carrot",
+  "Eggs",
+  "Ice cream",
+  "Apple",
+  "Bread",
+  "Fish",
+  "Honey",
+  "Jam",
+  "Garlic",
 ];
 
 export class App extends React.Component {
   state = {
-    selectedGood: 'Jam',
+    selectedGood: "Jam",
   };
 
   handleRemove = () => {
-    this.setState({ selectedGood: '' });
+    this.setState({ selectedGood: "" });
   };
 
   render() {
@@ -30,18 +31,16 @@ export class App extends React.Component {
     return (
       <main className="section container">
         <h1 className="title is-flex is-align-items-center">
-          {selectedGood ? (`${selectedGood} is selected`) : 'No goods selected'}
-          {
-            selectedGood && (
-              <button
-                aria-label="Mute volume"
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-                onClick={this.handleRemove}
-              />
-            )
-          }
+          {selectedGood ? `${selectedGood} is selected` : "No goods selected"}
+          {selectedGood && (
+            <button
+              aria-label="Mute volume"
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={this.handleRemove}
+            />
+          )}
         </h1>
 
         <table className="table">
@@ -49,23 +48,27 @@ export class App extends React.Component {
             {goods.map((good) => (
               <tr
                 data-cy="Good"
-                className={
-                  selectedGood === good ? 'has-background-success-light' : ''
-                }
+                key={good}
+                className={classNames({
+                  "has-background-success-light": selectedGood === good,
+                })}
               >
                 <td>
                   <button
                     data-cy={
-                      selectedGood === good ? 'RemoveButton' : 'AddButton'
+                      selectedGood === good ? "RemoveButton" : "AddButton"
                     }
-                    // data-cy="AddButton"
                     type="button"
                     className={
-                      selectedGood === good ? 'button is-info' : 'button'
+                      selectedGood === good ? "button is-info" : "button"
                     }
-                    onClick={() => this.setState({ selectedGood: good })}
+                    onClick={
+                      selectedGood === good
+                        ? this.handleRemove
+                        : () => this.setState({ selectedGood: good })
+                    }
                   >
-                    {selectedGood === good ? '-' : '+'}
+                    {selectedGood === good ? "-" : "+"}
                   </button>
                 </td>
 
