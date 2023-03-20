@@ -25,12 +25,12 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleChangeGood = (good: string) => {
-    this.setState({ selectedGood: good });
-  };
-
   removeGood = () => {
     this.setState({ selectedGood: '' });
+  };
+
+  handleChangeGood = (good: string) => {
+    this.setState({ selectedGood: good });
   };
 
   render() {
