@@ -20,7 +20,7 @@ type State = {
 };
 
 export class App extends React.Component<{}, State> {
-  state = {
+  state: Readonly<State> = {
     selectedGood: 'Jam',
   };
 
@@ -33,13 +33,15 @@ export class App extends React.Component<{}, State> {
   };
 
   render() {
+    const { selectedGood } = this.state;
+
     return (
       <main className="section container">
         {
-          this.state.selectedGood
+          selectedGood
             ? (
               <h1 className="title is-flex is-align-items-center">
-                {`${this.state.selectedGood} is selected`}
+                {`${selectedGood} is selected`}
                 {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
                 <button
                   data-cy="ClearButton"
@@ -55,7 +57,7 @@ export class App extends React.Component<{}, State> {
           <tbody>
             {goods.map(good => {
               return (
-                this.state.selectedGood === good
+                selectedGood === good
                   ? (
                     <tr
                       data-cy="Good"
