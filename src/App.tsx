@@ -23,7 +23,7 @@ type State = {
 
 export class App extends Component<{}, State> {
   state: Readonly<State> = {
-    selectedGood: 'Jam',
+    selectedGood: goods[goods.indexOf('Jam')] || goods[0],
   };
 
   clickHandle = () => {
@@ -57,14 +57,14 @@ export class App extends Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(good => {
-              const selectedG = good === selectedGood;
+              const isSelected = good === selectedGood;
 
               const selectedGoods = () => {
                 this.setState({ selectedGood: good });
               };
 
               const classAdd = classNames({
-                'has-background-success-light': selectedG,
+                'has-background-success-light': isSelected,
               });
 
               return (
@@ -75,7 +75,7 @@ export class App extends Component<{}, State> {
                 >
                   <td>
                     {
-                      selectedG
+                      isSelected
                         ? (
                           <button
                             data-cy="RemoveButton"
