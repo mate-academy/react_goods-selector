@@ -18,6 +18,7 @@ You are given an array of goods. Render them in a table with the ability to sele
 1. Don't show `AddButton` when a good is selected.
 1. Show `RemoveButton` for the selected good to clear selection.
 
+
 ## Instructions
 
 - Implement a solution following the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline).
