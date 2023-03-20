@@ -25,8 +25,17 @@ export class App extends React.PureComponent<{}, State> {
     selectedGood: 'Jam',
   };
 
+  setGood = (product: string) => {
+    this.setState({ selectedGood: product });
+  };
+
+  clearGood = () => {
+    this.setState({ selectedGood: '' });
+  };
+
   render() {
     const { selectedGood } = this.state;
+    const { setGood, clearGood } = this;
 
     return (
       <main className="section container">
@@ -40,9 +49,7 @@ export class App extends React.PureComponent<{}, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={() => {
-                    this.setState({ selectedGood: '' });
-                  }}
+                  onClick={clearGood}
                 />
               </h1>
             )
@@ -70,9 +77,7 @@ export class App extends React.PureComponent<{}, State> {
                             data-cy="AddButton"
                             type="button"
                             className="button"
-                            onClick={() => {
-                              this.setState({ selectedGood: product });
-                            }}
+                            onClick={() => setGood(product)}
                           >
                             +
                           </button>
@@ -82,9 +87,7 @@ export class App extends React.PureComponent<{}, State> {
                             data-cy="RemoveButton"
                             type="button"
                             className="button is-info"
-                            onClick={() => {
-                              this.setState({ selectedGood: '' });
-                            }}
+                            onClick={clearGood}
                           >
                             -
                           </button>
