@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods: string[] = [
   'Dumplings',
@@ -16,52 +17,48 @@ export const goods: string[] = [
 ];
 
 type State = {
-  things: string[];
-  selectedItem: string;
+  selectedGood: string;
 };
 
 export class App extends React.Component<{}, State> {
   state: Readonly<State> = {
-    things: goods,
-    selectedItem: 'Jam',
+    selectedGood: 'Jam',
   };
 
   selectGood = (good: string) => {
-    this.setState({ selectedItem: good });
+    this.setState({ selectedGood: good });
   };
 
   clearSelection = () => {
     this.setState({
-      selectedItem: '',
+      selectedGood: '',
     });
   };
 
   render() {
-    const {
-      things,
-      selectedItem,
-    } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <main className="section container">
         <h1
           className={
-            selectedItem
-              ? 'title is-flex is-align-items-center'
-              : 'title'
+            classNames(
+              'title',
+              { 'is-flex is-align-items-center': selectedGood },
+            )
           }
         >
-          {selectedItem
+          {selectedGood
             ? (
               <>
-                {`${selectedItem} is selected`}
+                {`${selectedGood} is selected`}
 
-                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
                 <button
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
                   onClick={this.clearSelection}
+                  aria-label="clear"
                 />
               </>
             )
@@ -70,21 +67,22 @@ export class App extends React.Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {things.map(thing => {
-              const isSelectedItem = thing === selectedItem;
+            {goods.map(good => {
+              const isSelectedGood = good === selectedGood;
 
               return (
                 <tr
+                  key={good}
                   data-cy="Good"
                   className={
-                    isSelectedItem
+                    isSelectedGood
                       ? 'has-background-success-light'
                       : ''
                   }
                 >
                   <td>
                     {
-                      isSelectedItem
+                      isSelectedGood
                         ? (
                           <button
                             data-cy="RemoveButton"
@@ -100,7 +98,7 @@ export class App extends React.Component<{}, State> {
                             data-cy="AddButton"
                             type="button"
                             className="button"
-                            onClick={() => this.selectGood(thing)}
+                            onClick={() => this.selectGood(good)}
                           >
                             +
                           </button>
@@ -109,7 +107,7 @@ export class App extends React.Component<{}, State> {
                   </td>
 
                   <td data-cy="GoodTitle" className="is-vcentered">
-                    {thing}
+                    {good}
                   </td>
                 </tr>
               );
