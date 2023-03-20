@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 type State = {
   selectedGood: string,
@@ -42,19 +43,23 @@ export class App extends Component<{}, State> {
     return (
       <main className="section container">
 
-        <h1 className={`title${selectedGood && ' is-flex is-align-items-center'}`}>
+        <h1 className={classNames(
+          'title',
+          { 'is-flex is-align-items-center': selectedGood },
+        )}
+        >
           {selectedGood
             ? `${selectedGood} is selected`
             : 'No goods selected'}
 
           {selectedGood
             && (
-              // eslint-disable-next-line jsx-a11y/control-has-associated-label
               <button
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
                 onClick={this.handleRemoveButton}
+                aria-label="clear"
               />
             )}
         </h1>
@@ -63,15 +68,16 @@ export class App extends Component<{}, State> {
           <tbody>
 
             {goods.map(good => {
+              const selected = selectedGood === good;
+
               return (
                 <tr
+                  key={good}
                   data-cy="Good"
-                  className={`Good ${
-                    selectedGood === good
-                      ? 'has-background-success-light'
-                      : ''
-                  }`}
-                  key={Math.random()}
+                  className={classNames(
+                    'Good',
+                    { 'has-background-success-light': selected },
+                  )}
                 >
                   <td>
                     {selectedGood === good
