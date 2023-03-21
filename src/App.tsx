@@ -2,6 +2,8 @@ import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import classNames from 'classnames';
 
+import { Button } from './components/Button';
+
 import './App.scss';
 
 export const goods = [
@@ -31,7 +33,7 @@ export class App extends Component<{}, State> {
   };
 
   deleteGood = () => {
-    this.setState({ selectedGood: '' });
+    this.selectGood('');
   };
 
   render() {
@@ -45,9 +47,8 @@ export class App extends Component<{}, State> {
               {`${selectedGood} is selected`}
 
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-              <button
-                data-cy="ClearButton"
-                type="button"
+              <Button
+                type="ClearButton"
                 className="delete ml-3"
                 onClick={this.deleteGood}
               />
@@ -72,25 +73,21 @@ export class App extends Component<{}, State> {
                   {
                     isSelected ? (
                       <td>
-                        <button
-                          data-cy="RemoveButton"
-                          type="button"
+                        <Button
+                          type="RemoveButton"
                           className="button is-info"
                           onClick={this.deleteGood}
-                        >
-                          -
-                        </button>
+                          name="-"
+                        />
                       </td>
                     ) : (
                       <td>
-                        <button
-                          data-cy="AddButton"
-                          type="button"
+                        <Button
+                          type="AddButton"
                           className="button"
                           onClick={() => this.selectGood(good)}
-                        >
-                          +
-                        </button>
+                          name="+"
+                        />
                       </td>
                     )
                   }
