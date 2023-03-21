@@ -36,23 +36,33 @@ export class App extends Component<{}, State> {
   render() {
     const { selectedGood } = this.state;
 
+    const titleClasses = classNames(
+      'title',
+      {
+        'is-flex': !!selectedGood,
+        'is-align-items-center': !!selectedGood,
+      },
+    );
+
     return (
       <main className="section container">
-        {!selectedGood
-          ? <h1 className="title">No goods selected</h1>
-          : (
-            <h1 className="title is-flex is-align-items-center">
-              {`${selectedGood} is selected`}
-
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-              <button
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-                onClick={this.clearSelection}
-              />
-            </h1>
-          )}
+        <h1 className={titleClasses}>
+          {selectedGood
+            ? (
+              <>
+                {`${selectedGood} is selected`}
+                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+                <button
+                  data-cy="ClearButton"
+                  type="button"
+                  className="delete ml-3"
+                  onClick={this.clearSelection}
+                />
+              </>
+            ) : (
+              'No goods selected'
+            )}
+        </h1>
 
         <table className="table">
           <tbody>
