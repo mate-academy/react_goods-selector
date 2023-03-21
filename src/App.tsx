@@ -42,11 +42,12 @@ export class App extends Component<{}, State> {
           ? (
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
+
               <button
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                aria-label="ClearButton"
+                aria-label="Clear Selection"
                 onClick={this.handleClearButtonClick}
               />
             </h1>
