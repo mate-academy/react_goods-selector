@@ -21,15 +21,15 @@ type State = {
 };
 
 export class App extends Component<{}, State> {
-  state: State = {
+  state: Readonly<State> = {
     selectedGood: 'Jam',
   };
 
-  clear = () => {
+  clearGood = () => {
     this.setState({ selectedGood: '' });
   };
 
-  handleAddButtonClick = (newGood: string) => {
+  handleAddGood = (newGood: string) => {
     this.setState({ selectedGood: newGood });
   };
 
@@ -38,27 +38,24 @@ export class App extends Component<{}, State> {
 
     return (
       <main className="section container">
-        {
-          selectedGood
-            ? (
-              <h1 className="title is-flex is-align-items-center">
-                {`${selectedGood} is selected`}
-
-                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-                <button
-                  data-cy="ClearButton"
-                  type="button"
-                  className="delete ml-3"
-                  onClick={this.clear}
-                />
-              </h1>
-            )
-            : (
-              <h1 className="title">
-                No goods selected
-              </h1>
-            )
-        }
+        {selectedGood
+          ? (
+            <h1 className="title is-flex is-align-items-center">
+              {`${selectedGood} is selected`}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.clearGood}
+                aria-label="clear"
+              />
+            </h1>
+          )
+          : (
+            <h1 className="title">
+              No goods selected
+            </h1>
+          )}
         <table className="table">
           <tbody>
             {goods.map(good => {
@@ -69,35 +66,33 @@ export class App extends Component<{}, State> {
                   key={good}
                   data-cy="Good"
                   className={classNames(
-                    { 'has-background-success-light': (isSelected) },
+                    { 'has-background-success-light': isSelected },
                   )}
                 >
                   <td>
-                    {
-                      isSelected
-                        ? (
-                          <button
-                            data-cy="RemoveButton"
-                            type="button"
-                            className="button is-info"
-                            onClick={this.clear}
-                          >
-                            -
-                          </button>
-                        )
-                        : (
-                          <button
-                            data-cy="AddButton"
-                            type="button"
-                            className="button"
-                            onClick={() => (
-                              this.handleAddButtonClick(good)
-                            )}
-                          >
-                            +
-                          </button>
-                        )
-                    }
+                    {isSelected
+                      ? (
+                        <button
+                          data-cy="RemoveButton"
+                          type="button"
+                          className="button is-info"
+                          onClick={this.clearGood}
+                        >
+                          -
+                        </button>
+                      )
+                      : (
+                        <button
+                          data-cy="AddButton"
+                          type="button"
+                          className="button"
+                          onClick={() => (
+                            this.handleAddGood(good)
+                          )}
+                        >
+                          +
+                        </button>
+                      )}
                   </td>
 
                   <td data-cy="GoodTitle" className="is-vcentered">
