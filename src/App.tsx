@@ -39,6 +39,7 @@ export class App extends Component<{}, State> {
 
               <button
                 data-cy="ClearButton"
+                aria-label="Clear"
                 type="button"
                 className="delete ml-3"
                 onClick={() => this.setState({ selectedGood: '' })}
