@@ -24,10 +24,6 @@ export class App extends Component<{}, State> {
     selectedGod: 'Jam',
   };
 
-  // addClass = (event: React.MouseEvent<HTMLTableRowElement>) => {
-  //   this.setState()
-  // }
-
   render() {
     const { selectedGod } = this.state;
 
