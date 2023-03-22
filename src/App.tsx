@@ -21,15 +21,15 @@ interface State {
 }
 
 export class App extends React.Component<{}, State> {
-  state: State = {
+  state: Readonly<State> = {
     selectedProduct: 'Jam',
   };
 
-  clear = () => {
+  clearSelectedProduct = () => {
     this.setState({ selectedProduct: '' });
   };
 
-  handleButtonClick = (newProduct: string) => {
+  handleProductSelection = (newProduct: string) => {
     this.setState({ selectedProduct: newProduct });
   };
 
@@ -43,12 +43,12 @@ export class App extends React.Component<{}, State> {
             ? (
               <h1 className="title is-flex is-align-items-center">
                 {`${selectedProduct} is selected`}
-                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
                 <button
                   data-cy="ClearButton"
                   type="button"
+                  aria-label="clear button"
                   className="delete ml-3"
-                  onClick={this.clear}
+                  onClick={this.clearSelectedProduct}
                 />
               </h1>
             )
@@ -68,7 +68,7 @@ export class App extends React.Component<{}, State> {
                   key={product}
                   data-cy="Good"
                   className={classNames(
-                    { 'has-background-success-light': (isSelected) },
+                    { 'has-background-success-light': isSelected },
                   )}
                 >
                   <td>
@@ -79,7 +79,7 @@ export class App extends React.Component<{}, State> {
                             data-cy="RemoveButton"
                             type="button"
                             className="button is-info"
-                            onClick={this.clear}
+                            onClick={this.clearSelectedProduct}
                           >
                             -
                           </button>
@@ -90,7 +90,7 @@ export class App extends React.Component<{}, State> {
                             type="button"
                             className="button"
                             onClick={() => (
-                              this.handleButtonClick(product)
+                              this.handleProductSelection(product)
                             )}
                           >
                             +
