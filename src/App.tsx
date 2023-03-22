@@ -9,7 +9,7 @@ type State = {
 };
 
 export class App extends React.Component<{}, State> {
-  state = {
+  state: Readonly<State> = {
     selectedGood: 'Jam',
   };
 
@@ -26,43 +26,45 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        {
-          selectedGood ? (
+        {selectedGood
+          ? (
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
 
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
+                aria-label="clear"
                 onClick={this.removeGood}
               />
             </h1>
           )
-            : (<h1 className="title">No goods selected</h1>)}
+          : (
+            <h1 className="title">No goods selected</h1>
+          )}
 
         <table className="table">
           <tbody>
             {goods.map((good) => {
               const isSelected = selectedGood === good;
               const addOrRemoveGood = isSelected
-                ? (this.removeGood)
-                : (() => this.addGood(good));
+                ? this.removeGood
+                : () => this.addGood(good);
 
               return (
                 <tr
                   data-cy="Good"
                   key={good}
                   className={classNames({
-                    'has-background-success-light': selectedGood === good,
+                    'has-background-success-light': isSelected,
                   })}
                 >
                   <td>
                     <button
                       data-cy={isSelected
-                        ? ('RemoveButton')
-                        : ('AddButton')}
+                        ? 'RemoveButton'
+                        : 'AddButton'}
                       type="button"
                       className={classNames(
                         'button',
@@ -73,8 +75,8 @@ export class App extends React.Component<{}, State> {
                       onClick={addOrRemoveGood}
                     >
                       {isSelected
-                        ? ('-')
-                        : ('+')}
+                        ? '-'
+                        : '+'}
                     </button>
                   </td>
 
