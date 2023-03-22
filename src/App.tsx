@@ -26,27 +26,29 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        {selectedGood !== '' || <h1 className="title">No goods selected</h1> }
+        {
+          selectedGood ? (
+            <h1 className="title is-flex is-align-items-center">
+              {`${selectedGood} is selected`}
 
-        {selectedGood ? (
-          <h1 className="title is-flex is-align-items-center">
-            {`${selectedGood} is selected`}
-
-            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-            <button
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={this.removeGood}
-            />
-          </h1>
-        )
-          : ('')}
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.removeGood}
+              />
+            </h1>
+          )
+            : (<h1 className="title">No goods selected</h1>)}
 
         <table className="table">
           <tbody>
             {goods.map((good) => {
               const isSelected = selectedGood === good;
+              const addOrRemoveGood = isSelected
+                ? (this.removeGood)
+                : (() => this.addGood(good));
 
               return (
                 <tr
@@ -58,7 +60,9 @@ export class App extends React.Component<{}, State> {
                 >
                   <td>
                     <button
-                      data-cy={isSelected ? ('RemoveButton') : ('AddButton')}
+                      data-cy={isSelected
+                        ? ('RemoveButton')
+                        : ('AddButton')}
                       type="button"
                       className={classNames(
                         'button',
@@ -66,11 +70,11 @@ export class App extends React.Component<{}, State> {
                           'is-info': isSelected,
                         },
                       )}
-                      onClick={isSelected
-                        ? (this.removeGood)
-                        : (() => this.addGood(good))}
+                      onClick={addOrRemoveGood}
                     >
-                      {isSelected ? ('-') : ('+')}
+                      {isSelected
+                        ? ('-')
+                        : ('+')}
                     </button>
                   </td>
 
