@@ -21,15 +21,15 @@ type State = {
 };
 
 export class App extends React.PureComponent<{}, State> {
-  state = {
+  state: Readonly<State> = {
     selectedGood: 'Jam',
   };
 
-  addGood = (good: string) => {
+  selectGood = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
-  deleteSelected = () => {
+  clear = () => {
     this.setState({ selectedGood: '' });
   };
 
@@ -39,19 +39,17 @@ export class App extends React.PureComponent<{}, State> {
     return (
       <main className="section container">
         {selectedGood ? (
-          <>
-            <h1 className="title is-flex is-align-items-center">
-              {`${selectedGood} is selected`}
+          <h1 className="title is-flex is-align-items-center">
+            {`${selectedGood} is selected`}
 
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-              <button
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-                onClick={() => this.deleteSelected()}
-              />
-            </h1>
-          </>
+            <button
+              aria-label="Clear selected good"
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={this.clear}
+            />
+          </h1>
         ) : (
           <h1 className="title is-flex is-align-items-center">
             No goods selected
@@ -61,12 +59,14 @@ export class App extends React.PureComponent<{}, State> {
         <table className="table">
           <tbody>
             {goods.map((good) => {
+              const isSelected = selectedGood === good;
+
               return (
                 <tr
                   data-cy="Good"
                   key={good}
                   className={classNames({
-                    'has-background-success-light': selectedGood === good,
+                    'has-background-success-light': isSelected,
                   })}
                 >
                   <td>
@@ -75,7 +75,7 @@ export class App extends React.PureComponent<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={() => this.deleteSelected()}
+                        onClick={this.clear}
                       >
                         -
                       </button>
@@ -84,7 +84,7 @@ export class App extends React.PureComponent<{}, State> {
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={() => this.addGood(good)}
+                        onClick={() => this.selectGood(good)}
                       >
                         +
                       </button>
