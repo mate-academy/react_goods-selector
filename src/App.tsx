@@ -25,11 +25,11 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleDelete = () => {
+  handleClearSelectedGood = () => {
     this.setState({ selectedGood: '' });
   };
 
-  handleAdd = (good: string) => {
+  handleSelectGood = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
@@ -44,13 +44,12 @@ export class App extends Component<{}, State> {
           ) : (
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
-
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.handleDelete}
+                onClick={this.handleClearSelectedGood}
+                aria-label="ClearButton"
               />
             </h1>
           )}
@@ -58,24 +57,24 @@ export class App extends Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(good => {
-              const checkGood = selectedGood === good;
+              const isCheckedGood = selectedGood === good;
 
               return (
                 <tr
                   key={good}
                   data-cy="Good"
                   className={cn({
-                    'has-background-success-light': checkGood,
+                    'has-background-success-light': isCheckedGood,
                   })}
                 >
-                  {checkGood
+                  {isCheckedGood
                     ? (
                       <td>
                         <button
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
-                          onClick={this.handleDelete}
+                          onClick={this.handleClearSelectedGood}
                         >
                           -
                         </button>
@@ -87,7 +86,7 @@ export class App extends Component<{}, State> {
                           type="button"
                           className="button"
                           onClick={() => {
-                            this.handleAdd(good);
+                            this.handleSelectGood(good);
                           }}
                         >
                           +
