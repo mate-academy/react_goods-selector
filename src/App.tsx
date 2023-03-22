@@ -25,6 +25,10 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  handleClearButton = () => this.setState({ selectedGood: '' });
+
+  handleAddButton = (item: string) => this.setState({ selectedGood: item });
+
   render() {
     const { selectedGood } = this.state;
     const successBg = 'has-background-success-light';
@@ -42,7 +46,7 @@ export class App extends Component<{}, State> {
                 aria-label="Clear"
                 type="button"
                 className="delete ml-3"
-                onClick={() => this.setState({ selectedGood: '' })}
+                onClick={this.handleClearButton}
               />
             </h1>
           )}
@@ -50,10 +54,12 @@ export class App extends Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(good => {
+              const isActiveGood = selectedGood === good;
+
               return (
                 <tr
                   data-cy="Good"
-                  className={classNames({ [successBg]: selectedGood === good })}
+                  className={classNames({ [successBg]: isActiveGood })}
                   key={good}
                 >
                   <td>
@@ -63,7 +69,7 @@ export class App extends Component<{}, State> {
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
-                          onClick={() => this.setState({ selectedGood: '' })}
+                          onClick={this.handleClearButton}
                         >
                           -
                         </button>
@@ -72,7 +78,11 @@ export class App extends Component<{}, State> {
                           data-cy="AddButton"
                           type="button"
                           className="button"
-                          onClick={() => this.setState({ selectedGood: good })}
+                          onClick={
+                            () => {
+                              this.handleAddButton(good);
+                            }
+                          }
                         >
                           +
                         </button>
