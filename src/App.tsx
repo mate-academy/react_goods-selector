@@ -21,22 +21,22 @@ type State = {
 };
 
 export class App extends Component<{}, State> {
-  state: State = {
+  state: Readonly<State> = {
     selectedGood: 'Jam',
   };
 
-  anotherGood = (good: string) => {
+  changeGood = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
-  deleteGood = () => {
+  removeGood = () => {
     this.setState({ selectedGood: '' });
   };
 
   render() {
     const {
-      anotherGood,
-      deleteGood,
+      changeGood,
+      removeGood,
     } = this;
 
     const {
@@ -45,27 +45,26 @@ export class App extends Component<{}, State> {
 
     return (
       <main className="section container">
-        {
-          !selectedGood
-            ? (
-              <h1 className="title">
-                No goods selected
-              </h1>
-            )
-            : (
-              <h1 className="title is-flex is-align-items-center">
-                {`${selectedGood} is selected`}
+        {!selectedGood
+          ? (
+            <h1 className="title">
+              No goods selected
+            </h1>
+          )
+          : (
+            <h1 className="title is-flex is-align-items-center">
+              {`${selectedGood} is selected`}
 
-                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-                <button
-                  data-cy="ClearButton"
-                  type="button"
-                  className="delete ml-3"
-                  onClick={deleteGood}
-                />
-              </h1>
-            )
-        }
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={removeGood}
+                aria-label="Clear"
+              />
+            </h1>
+          )}
+
         <table className="table">
           <tbody>
             {goods.map(good => {
@@ -76,35 +75,33 @@ export class App extends Component<{}, State> {
                   key={good}
                   data-cy="Good"
                   className={classNames(
-                    { 'has-background-success-light': (chosenGood) },
+                    { 'has-background-success-light': chosenGood },
                   )}
                 >
                   <td>
-                    {
-                      chosenGood
-                        ? (
-                          <button
-                            data-cy="RemoveButton"
-                            type="button"
-                            className="button is-info"
-                            onClick={deleteGood}
-                          >
-                            -
-                          </button>
-                        )
-                        : (
-                          <button
-                            data-cy="AddButton"
-                            type="button"
-                            className="button"
-                            onClick={() => (
-                              anotherGood(good)
-                            )}
-                          >
-                            +
-                          </button>
-                        )
-                    }
+                    {chosenGood
+                      ? (
+                        <button
+                          data-cy="RemoveButton"
+                          type="button"
+                          className="button is-info"
+                          onClick={removeGood}
+                        >
+                          -
+                        </button>
+                      )
+                      : (
+                        <button
+                          data-cy="AddButton"
+                          type="button"
+                          className="button"
+                          onClick={() => (
+                            changeGood(good)
+                          )}
+                        >
+                          +
+                        </button>
+                      )}
                   </td>
 
                   <td
