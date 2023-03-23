@@ -25,11 +25,11 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  clearTitle = () => {
+  clearSelectedGood = () => {
     this.setState({ selectedGood: '' });
   };
 
-  handleClickGood = () => {
+  handleSelectGood = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
@@ -50,7 +50,7 @@ export class App extends React.Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.clearTitle}
+                onClick={this.clearSelectedGood}
                 aria-label="clear"
               />
             </h1>
@@ -59,7 +59,7 @@ export class App extends React.Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(good => {
-              const selected = selectedGood === good;
+              const isGoodSelected = selectedGood === good;
 
               return (
                 <tr
@@ -67,7 +67,7 @@ export class App extends React.Component<{}, State> {
                   key={good}
                   className={
                     classNames(
-                      { 'has-background-success-light': selected },
+                      { 'has-background-success-light': isGoodSelected },
                     )
                   }
                 >
@@ -78,7 +78,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
-                          onClick={this.clearTitle}
+                          onClick={this.clearSelectedGood}
                         >
                           -
                         </button>
@@ -90,7 +90,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="AddButton"
                           type="button"
                           className="button"
-                          onClick={this.handleClickGood}
+                          onClick={() => this.handleSelectGood(good)}
                         >
                           +
                         </button>
