@@ -21,8 +21,16 @@ type State = {
 };
 
 export class App extends React.Component<{}, State> {
-  state = {
+  state: Readonly<State> = {
     selectedGood: 'Jam',
+  };
+
+  clearTitle = () => {
+    this.setState({ selectedGood: '' });
+  };
+
+  handleClickGood = () => {
+    this.setState({ selectedGood: good });
   };
 
   render() {
@@ -38,14 +46,12 @@ export class App extends React.Component<{}, State> {
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
 
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  this.setState({ selectedGood: '' });
-                }}
+                onClick={this.clearTitle}
+                aria-label="clear"
               />
             </h1>
           )}
@@ -53,13 +59,15 @@ export class App extends React.Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(good => {
+              const selected = selectedGood === good;
+
               return (
                 <tr
                   data-cy="Good"
                   key={good}
                   className={
                     classNames(
-                      { 'has-background-success-light': selectedGood === good },
+                      { 'has-background-success-light': selected },
                     )
                   }
                 >
@@ -70,9 +78,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
-                          onClick={() => {
-                            this.setState({ selectedGood: '' });
-                          }}
+                          onClick={this.clearTitle}
                         >
                           -
                         </button>
@@ -84,9 +90,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="AddButton"
                           type="button"
                           className="button"
-                          onClick={() => {
-                            this.setState({ selectedGood: good });
-                          }}
+                          onClick={this.handleClickGood}
                         >
                           +
                         </button>
