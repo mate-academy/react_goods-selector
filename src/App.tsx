@@ -17,15 +17,13 @@ export const goods = [
 ];
 
 type State = {
-  goodsFromArray: string[]
-  selectedGood: string;
+  selectedGood: Good;
 };
 
 type Good = string;
 
 export class App extends React.Component<{}, State> {
   state: Readonly<State> = {
-    goodsFromArray: goods,
     selectedGood: 'Jam',
   };
 
@@ -42,13 +40,10 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        {(selectedGood)
+        {selectedGood
           ? (
             <h1 className="title is-flex is-align-items-center">
-              {selectedGood}
-              {' '}
-              is selected
-
+              {`${selectedGood} is selected`}
               {selectedGood && (
                 <button
                   data-cy="ClearButton"
@@ -60,23 +55,27 @@ export class App extends React.Component<{}, State> {
               )}
             </h1>
           )
-          : (<h1 className="title">No goods selected</h1>)}
+          : (
+            <h1 className="title">No goods selected</h1>
+          )}
 
         <table className="table">
           <tbody>
-            {this.state.goodsFromArray.map((good) => {
+            {goods.map((good) => {
+              const rightGood = good === selectedGood;
+
               return (
                 <tr
                   data-cy="Good"
                   key={good}
                   className={classNames(
                     {
-                      'has-background-success-light': (good === selectedGood),
+                      'has-background-success-light': rightGood,
                     },
                   )}
                 >
                   <td>
-                    {(good !== selectedGood)
+                    {!rightGood
                       ? (
                         <button
                           data-cy="AddButton"
