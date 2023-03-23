@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -31,15 +32,12 @@ export class App extends React.Component<{}, State> {
       <main className="section container">
         {selectedGood ? (
           <h1 className="title is-flex is-align-items-center">
-            {selectedGood}
-            {' '}
-            is selected
-
-            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+            {`${selectedGood} is selected`}
             <button
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
+              aria-label="clear"
               onClick={() => {
                 this.setState({ selectedGood: '' });
               }}
@@ -54,10 +52,11 @@ export class App extends React.Component<{}, State> {
             {goods.map(good => (
               <tr
                 data-cy="Good"
-                className={selectedGood === good ? (
-                  'has-background-success-light'
-                ) : (
-                  ''
+                className={classNames(
+                  '',
+                  {
+                    'has-background-success-light': selectedGood === good,
+                  },
                 )}
               >
                 <td>
