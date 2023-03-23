@@ -44,13 +44,12 @@ export class App extends React.PureComponent<{}, State> {
           ? (
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
-
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
                 onClick={clearGood}
+                aria-label="Clear button"
               />
             </h1>
           )
@@ -59,24 +58,25 @@ export class App extends React.PureComponent<{}, State> {
         <table className="table">
           <tbody>
             {goods.map((good) => {
-              const goodSelected = good === selectedGood;
+              const isGoodSelected = good === selectedGood;
 
               return (
                 <tr
                   data-cy="Good"
                   key={good}
                   className={classNames({
-                    'has-background-success-light': goodSelected,
+                    'has-background-success-light': isGoodSelected,
                   })}
                 >
                   <td>
-                    {!goodSelected
+                    {!isGoodSelected
                       ? (
                         <button
                           data-cy="AddButton"
                           type="button"
                           className="button"
                           onClick={() => changeGood(good)}
+                          aria-label="Add good button"
                         >
                           +
                         </button>
@@ -87,6 +87,7 @@ export class App extends React.PureComponent<{}, State> {
                           type="button"
                           className="button is-info"
                           onClick={clearGood}
+                          aria-label="Remove good button"
                         >
                           -
                         </button>
