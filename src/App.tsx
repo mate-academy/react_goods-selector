@@ -21,17 +21,17 @@ type State = {
 };
 
 export class App extends React.Component<{}, State> {
-  state = {
+  state: Readonly<State> = {
     selectedGood: 'Jam',
   };
 
-  changeName = (selectedGood: string) => {
+  changeGood = (selectedGood: string) => {
     this.setState({
       selectedGood,
     });
   };
 
-  removeName = () => {
+  removeGood = () => {
     this.setState({
       selectedGood: '',
     });
@@ -51,7 +51,7 @@ export class App extends React.Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.removeName}
+                onClick={this.removeGood}
               />
             </h1>
           ) : (
@@ -78,7 +78,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="AddButton"
                           type="button"
                           className="button"
-                          onClick={() => this.changeName(good)}
+                          onClick={() => this.changeGood(good)}
                         >
                           +
                         </button>
@@ -89,7 +89,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
-                          onClick={this.removeName}
+                          onClick={this.removeGood}
                         >
                           -
                         </button>
