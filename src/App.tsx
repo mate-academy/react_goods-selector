@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
@@ -26,7 +25,7 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  deleteGoods = () => {
+  deleteGood = () => {
     this.setState({ selectedGood: '' });
   };
 
@@ -44,11 +43,13 @@ export class App extends Component<{}, State> {
             ? (
               <h1 className="title is-flex is-align-items-center">
                 {`${selectedGood} is selected`}
+
                 <button
-                  data-cy="ClearButton"
+                  data-cy="RemoveButton"
+                  aria-label="Delete goods"
                   type="button"
                   className="delete ml-3"
-                  onClick={this.deleteGoods}
+                  onClick={this.deleteGood}
                 />
               </h1>
             )
@@ -58,25 +59,25 @@ export class App extends Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(good => {
-              const isGood = good === selectedGood;
+              const isSelectedGood = good === selectedGood;
 
               return (
                 <tr
                   data-cy="Good"
                   key={good}
                   className={classNames(
-                    { 'has-background-success-light': isGood },
+                    { 'has-background-success-light': isSelectedGood },
                   )}
                 >
 
-                  {isGood
+                  {isSelectedGood
                     ? (
                       <td>
                         <button
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
-                          onClick={this.deleteGoods}
+                          onClick={this.deleteGood}
                         >
                           -
                         </button>
