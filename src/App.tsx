@@ -29,6 +29,10 @@ export class App extends React.Component<{}, State> {
     this.setState({ selectedGood: '' });
   };
 
+  handleSet = (goodName: string) => {
+    this.setState({ selectedGood: goodName });
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -59,7 +63,7 @@ export class App extends React.Component<{}, State> {
                     'has-background-success-light': selectedGood === good,
                   },
                 )}
-                key={crypto.randomUUID()}
+                key={good}
               >
                 <td>
                   {selectedGood === good ? (
@@ -77,9 +81,7 @@ export class App extends React.Component<{}, State> {
                       type="button"
                       className="button"
                       onClick={() => {
-                        this.setState({
-                          selectedGood: good,
-                        });
+                        this.handleSet(good);
                       }}
                     >
                       +
