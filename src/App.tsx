@@ -25,6 +25,10 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  handleReset = () => {
+    this.setState({ selectedGood: '' });
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -38,9 +42,7 @@ export class App extends React.Component<{}, State> {
               type="button"
               className="delete ml-3"
               aria-label="clear"
-              onClick={() => {
-                this.setState({ selectedGood: '' });
-              }}
+              onClick={this.handleReset}
             />
           </h1>
         ) : (
@@ -53,7 +55,6 @@ export class App extends React.Component<{}, State> {
               <tr
                 data-cy="Good"
                 className={classNames(
-                  '',
                   {
                     'has-background-success-light': selectedGood === good,
                   },
@@ -65,11 +66,7 @@ export class App extends React.Component<{}, State> {
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => {
-                        this.setState({
-                          selectedGood: '',
-                        });
-                      }}
+                      onClick={this.handleReset}
                     >
                       -
                     </button>
