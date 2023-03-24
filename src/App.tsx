@@ -59,6 +59,7 @@ export class App extends React.Component<{}, State> {
                     'has-background-success-light': selectedGood === good,
                   },
                 )}
+                key={crypto.randomUUID()}
               >
                 <td>
                   {selectedGood === good ? (
