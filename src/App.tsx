@@ -17,47 +17,48 @@ export const goods = [
 ];
 
 type State = {
-  status: string;
+  readonly selectedGood: string;
 };
 
 export class App extends React.Component<{}, State> {
   state = {
-    status: 'Jam',
+    selectedGood: 'Jam',
   };
 
-  setStatus = (good: string) => {
-    this.setState({ status: good });
+  changeGood = (good: string) => {
+    this.setState({ selectedGood: good });
   };
 
-  removeStatus = () => {
-    this.setState({ status: '' });
+  removeGood = () => {
+    this.setState({ selectedGood: '' });
   };
 
   render() {
-    const { status } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <main className="section container">
-        {!status
-          ? <h1 className="title">No goods selected</h1>
-          : ''}
-        {status
-          ? (
-            <h1 className="title is-flex is-align-items-center">
-              {`${status} is selected`}
+        <h1 className={classNames(
+          'title',
+          { 'is-flex is-align-items-center': selectedGood },
+        )}
+        >
+          {selectedGood
+            ? (
+              <>
+                {`${selectedGood} is selected`}
 
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-              <button
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-                onClick={() => (
-                  this.setState({ status: '' })
-                )}
-              />
-            </h1>
-          )
-          : ('')}
+                <button
+                  aria-label="RemoveGood"
+                  data-cy="ClearButton"
+                  type="button"
+                  className="delete ml-3"
+                  onClick={this.removeGood}
+                />
+              </>
+            )
+            : 'No goods selected'}
+        </h1>
 
         <table className="table">
           <tbody>
@@ -66,16 +67,16 @@ export class App extends React.Component<{}, State> {
                 data-cy="Good"
                 key={good}
                 className={classNames({
-                  'has-background-success-light': status === good,
+                  'has-background-success-light': selectedGood === good,
                 })}
               >
                 <td>
-                  {status === good ? (
+                  {selectedGood === good ? (
                     <button
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => this.removeStatus()}
+                      onClick={() => this.removeGood()}
                     >
                       -
                     </button>
@@ -84,7 +85,7 @@ export class App extends React.Component<{}, State> {
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={() => this.setStatus(good)}
+                      onClick={() => this.changeGood(good)}
                     >
                       +
                     </button>
