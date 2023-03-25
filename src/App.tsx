@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
-import classNames from 'classnames';
+import { GoodsList } from './components/GoodsList';
 
 export const goods = [
   'Dumplings',
@@ -24,6 +24,14 @@ export class App extends React.Component<{}, State> {
     selectedGood: '',
   };
 
+  addItem = (item: string) => {
+    this.setState({ selectedGood: item });
+  };
+
+  removeItem = () => {
+    this.setState({ selectedGood: '' });
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -37,10 +45,10 @@ export class App extends React.Component<{}, State> {
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
 
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
                 type="button"
+                aria-label="clear btn"
                 className="delete ml-3"
                 onClick={() => {
                   this.setState({ selectedGood: '' });
@@ -50,47 +58,12 @@ export class App extends React.Component<{}, State> {
           )}
 
         <table className="table">
-          <tbody>
-            {goods.map(item => (
-              <tr
-                data-cy="Good"
-                key={item}
-                className={classNames({
-                  'has-background-success-light': item === selectedGood,
-                })}
-              >
-                <td>
-                  {item === selectedGood
-                    ? (
-                      <button
-                        data-cy="RemoveButton"
-                        type="button"
-                        className="button is-info"
-                        onClick={() => {
-                          this.setState({ selectedGood: '' });
-                        }}
-                      >
-                        -
-                      </button>
-                    ) : (
-                      <button
-                        data-cy="AddButton"
-                        type="button"
-                        className="button"
-                        onClick={() => {
-                          this.setState({ selectedGood: item });
-                        }}
-                      >
-                        +
-                      </button>
-                    )}
-                </td>
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {item}
-                </td>
-              </tr>
-            ))}
-          </tbody>
+          <GoodsList
+            goods={goods}
+            addGood={this.addItem}
+            removeItem={this.removeItem}
+            selectedGood={this.state.selectedGood}
+          />
         </table>
       </main>
     );
