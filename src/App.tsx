@@ -21,11 +21,11 @@ type State = {
 };
 
 export class App extends React.PureComponent<{}, State> {
-  state = {
+  state: Readonly<State> = {
     selectedGood: 'Jam',
   };
 
-  setGood = (product: string) => {
+  changeGood = (product: string) => {
     this.setState({ selectedGood: product });
   };
 
@@ -35,26 +35,24 @@ export class App extends React.PureComponent<{}, State> {
 
   render() {
     const { selectedGood } = this.state;
-    const { setGood, clearGood } = this;
+    const { changeGood: setGood, clearGood } = this;
 
     return (
       <main className="section container">
-        {
-          selectedGood
-            ? (
-              <h1 className="title is-flex is-align-items-center">
-                {`${selectedGood} is selected`}
-                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-                <button
-                  data-cy="ClearButton"
-                  type="button"
-                  className="delete ml-3"
-                  onClick={clearGood}
-                />
-              </h1>
-            )
-            : <h1 className="title">No goods selected</h1>
-        }
+        {selectedGood
+          ? (
+            <h1 className="title is-flex is-align-items-center">
+              {`${selectedGood} is selected`}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={clearGood}
+                aria-label="clear"
+              />
+            </h1>
+          )
+          : <h1 className="title">No goods selected</h1>}
 
         <table className="table">
           <tbody>
@@ -70,29 +68,27 @@ export class App extends React.PureComponent<{}, State> {
                   })}
                 >
                   <td>
-                    {
-                      !isSelected
-                        ? (
-                          <button
-                            data-cy="AddButton"
-                            type="button"
-                            className="button"
-                            onClick={() => setGood(product)}
-                          >
-                            +
-                          </button>
-                        )
-                        : (
-                          <button
-                            data-cy="RemoveButton"
-                            type="button"
-                            className="button is-info"
-                            onClick={clearGood}
-                          >
-                            -
-                          </button>
-                        )
-                    }
+                    {!isSelected
+                      ? (
+                        <button
+                          data-cy="AddButton"
+                          type="button"
+                          className="button"
+                          onClick={() => setGood(product)}
+                        >
+                          +
+                        </button>
+                      )
+                      : (
+                        <button
+                          data-cy="RemoveButton"
+                          type="button"
+                          className="button is-info"
+                          onClick={clearGood}
+                        >
+                          -
+                        </button>
+                      )}
                   </td>
 
                   <td data-cy="GoodTitle" className="is-vcentered">
