@@ -18,9 +18,8 @@ export const goods = [
 ];
 
 type State = {
-  selectedGood: string | '';
+  selectedGood: string;
 };
-// eslint-disable-next-line react/prefer-stateless-function
 export class App extends Component<{}, State> {
   state: Readonly<State> = {
     selectedGood: 'Jam',
@@ -42,13 +41,12 @@ export class App extends Component<{}, State> {
         {selectedGood ? (
           <h1 className="title is-flex is-align-items-center">
             {`${selectedGood} is selected`}
-
-            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <button
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
               onClick={this.clearGood}
+              aria-label="Clear good"
             />
           </h1>
         ) : (
