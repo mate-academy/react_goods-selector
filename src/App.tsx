@@ -6,8 +6,7 @@ type Props = {};
 
 type State = {
   goods: string[],
-  chosenElem: string,
-  clearBtn: boolean,
+  chosenElement: string,
 };
 
 export class App extends React.Component<Props, State> {
@@ -24,18 +23,15 @@ export class App extends React.Component<Props, State> {
       'Jam',
       'Garlic',
     ],
-    chosenElem: 'Jam',
-    clearBtn: true,
+    chosenElement: 'Jam',
   };
 
   chosenGood = (good: string) => {
-    this.setState({ chosenElem: good });
-    this.setState({ clearBtn: true });
+    this.setState({ chosenElement: good });
   };
 
   clear = () => {
-    this.setState({ chosenElem: 'No' });
-    this.setState({ clearBtn: false });
+    this.setState({ chosenElement: '' });
   };
 
   render(): React.ReactNode {
@@ -45,23 +41,21 @@ export class App extends React.Component<Props, State> {
       <main className="section container">
 
         <h1 className="title is-flex is-align-items-center">
-          { this.state.chosenElem === 'No'
+          { this.state.chosenElement === ''
             ? 'No goods selected'
-            : `${this.state.chosenElem} is selected` }
-          {this.state.clearBtn
+            : `${this.state.chosenElement} is selected` }
+          {this.state.chosenElement
             ? (
-              <div>
-                <button
-                  data-cy="ClearButton"
-                  type="button"
-                  className="delete ml-3"
-                  onClick={() => {
-                    this.clear();
-                  }}
-                >
-                  {null}
-                </button>
-              </div>
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={() => {
+                  this.clear();
+                }}
+              >
+                {null}
+              </button>
             )
             : null}
         </h1>
@@ -69,7 +63,7 @@ export class App extends React.Component<Props, State> {
         <table className="table">
           <tbody>
             {goods.map((good) => {
-              if (good === this.state.chosenElem) {
+              if (good === this.state.chosenElement) {
                 return (
                   <tr
                     data-cy="Good"
@@ -82,14 +76,14 @@ export class App extends React.Component<Props, State> {
                         type="button"
                         className="button is-info"
                       >
-                        +
+                        -
                       </button>
                     </td>
                     <td
                       data-cy="GoodTitle"
                       className="is-vcentered"
                     >
-                      {this.state.chosenElem}
+                      {this.state.chosenElement}
                     </td>
                   </tr>
                 );
