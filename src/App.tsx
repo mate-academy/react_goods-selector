@@ -21,7 +21,7 @@ type State = {
 };
 export class App extends React.Component<{}, State> {
   state = {
-    selectedGood: '',
+    selectedGood: 'Jam',
   };
 
   addItem = (item: string) => {
@@ -50,9 +50,7 @@ export class App extends React.Component<{}, State> {
                 type="button"
                 aria-label="clear btn"
                 className="delete ml-3"
-                onClick={() => {
-                  this.removeItem();
-                }}
+                onClick={this.removeItem}
               />
             </h1>
           )}
