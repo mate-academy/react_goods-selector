@@ -51,7 +51,7 @@ export class App extends React.Component<{}, State> {
                 aria-label="clear btn"
                 className="delete ml-3"
                 onClick={() => {
-                  this.setState({ selectedGood: '' });
+                  this.removeItem();
                 }}
               />
             </h1>

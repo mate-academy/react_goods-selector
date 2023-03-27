@@ -26,7 +26,7 @@ export class GoodItem extends React.Component<Props, {}> {
               data-cy="RemoveButton"
               type="button"
               className="button is-info"
-              onClick={() => removeItem}
+              onClick={removeItem}
             >
               -
             </button>
