@@ -2,6 +2,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -25,6 +26,18 @@ export class App extends React.Component<{}, State> {
     selectedWord: 'Jam',
   };
 
+  buttonResetHandler = () => {
+    this.setState({ selectedWord: '' });
+  };
+
+  buttonSelectHandler = (good: string) => {
+    return (
+      this.setState({
+        selectedWord: good,
+      })
+    );
+  };
+
   render() {
     const { selectedWord } = this.state;
 
@@ -32,7 +45,7 @@ export class App extends React.Component<{}, State> {
       <main className="section container">
         <h1 className="title is-flex is-align-items-center">
           {
-            selectedWord === '' ? 'No items'
+            selectedWord === '' ? 'No goods selected'
               : `${selectedWord} is selected`
           }
           {selectedWord && (
@@ -40,11 +53,7 @@ export class App extends React.Component<{}, State> {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={(event) => {
-                if (event.currentTarget) {
-                  this.setState({ selectedWord: '' });
-                }
-              }}
+              onClick={this.buttonResetHandler}
             />
           )}
         </h1>
@@ -55,20 +64,33 @@ export class App extends React.Component<{}, State> {
 
             {goods.map(item => (
               <tr
+                key={item}
                 data-cy="Good"
-                className={selectedWord === item
-                  ? 'has-background-success-light' : ''}
+                className={classNames('', {
+                  'has-background-success-light': selectedWord === item,
+                })}
               >
                 <td>
-                  <button
-                    type="button"
-                    className="button"
-                    onClick={() => this.setState({
-                      selectedWord: item,
-                    })}
-                  >
-                    {selectedWord === item ? '-' : '+'}
-                  </button>
+                  {selectedWord !== item
+                    ? (
+                      <button
+                        type="button"
+                        className="button"
+                        id="#1"
+                        onClick={() => this.buttonSelectHandler(item)}
+                      >
+                        +
+                      </button>
+                    )
+                    : (
+                      <button
+                        type="button"
+                        className="button is-info"
+                        onClick={() => this.buttonSelectHandler('')}
+                      >
+                        -
+                      </button>
+                    )}
                 </td>
                 <td
                   data-cy="GoodTitle"
