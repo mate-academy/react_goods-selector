@@ -54,7 +54,7 @@ export class App extends Component<{}, State> {
           <h1 className="title">No goods selected</h1>
         )}
 
-        <table>
+        <table className="table">
           <tbody>
             {goods.map((good) => {
               const isSelectedGood = selectedGood === good;
