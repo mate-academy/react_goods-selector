@@ -25,17 +25,17 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  clearButton = () => {
+  clearGoods = () => {
     this.setState({ selectedGood: '' });
   };
 
-  addButton = (newSelectedGood: string) => {
+  handleSelectGood = (newSelectedGood: string) => {
     this.setState({ selectedGood: newSelectedGood });
   };
 
   render() {
     const { selectedGood } = this.state;
-    const notGood = 'No goods selected';
+    const emptyState = 'No goods selected';
 
     return (
       <main className="section container">
@@ -48,17 +48,17 @@ export class App extends Component<{}, State> {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={this.clearButton}
+              onClick={this.clearGoods}
             />
           </h1>
         ) : (
-          <h1 className="title">{notGood}</h1>
+          <h1 className="title">{emptyState}</h1>
         )}
 
         <table className="table">
           <tbody>
             {goods.map(good => {
-              const isGood = good === selectedGood;
+              const isSelected = good === selectedGood;
 
               return (
                 <>
@@ -66,16 +66,16 @@ export class App extends Component<{}, State> {
                     data-cy="Good"
                     key={good}
                     className={classNames(
-                      { 'has-background-success-light': (isGood) },
+                      { 'has-background-success-light': (isSelected) },
                     )}
                   >
                     <td>
-                      {isGood ? (
+                      {isSelected ? (
                         <button
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
-                          onClick={this.clearButton}
+                          onClick={this.clearGoods}
                         >
                           -
                         </button>
@@ -85,7 +85,7 @@ export class App extends Component<{}, State> {
                           type="button"
                           className="button"
                           onClick={() => (
-                            this.addButton(good)
+                            this.handleSelectGood(good)
                           )}
                         >
                           +
