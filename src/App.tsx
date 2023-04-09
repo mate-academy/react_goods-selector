@@ -15,71 +15,71 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+interface GoodProps {
+  name: string;
+  selectedGood: string;
+  setSelectedGood: (value: string) => void;
+}
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
-
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
+const Good: React.FC<GoodProps> = ({ selectedGood, setSelectedGood, name }) => (
+  <tr data-cy="Good" className={selectedGood === name ? 'has-background-success-light' : ''}>
+    <td>
+      {selectedGood === name ? <button
+        data-cy="RemoveButton"
         type="button"
-        className="delete ml-3"
-      />
-    </h1>
+        className="button is-info"
+        onClick={() => setSelectedGood('')}
+      >
+        -
+      </button>
+        :
+        <button
+          data-cy="AddButton"
+          type="button"
+          className="button"
+          onClick={() => setSelectedGood(name)}
+        >
+          +
+        </button>
+      }
+    </td>
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+    <td data-cy="GoodTitle" className="is-vcentered">
+      {name}
+    </td>
+  </tr>
+)
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+export const App: React.FC = () => {
+  const [selectedGood, setSelectedGood] = React.useState('Jam');
+  return (
+    <main className="section container">
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+      <h1 className="title is-flex is-align-items-center has-background-success-light">
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+        {selectedGood.length > 0 ? `${selectedGood} is selected` : 'No goods selected'}
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+        {selectedGood && <button
+          data-cy="ClearButton"
+          type="button"
+          className="delete ml-3"
+          onClick={() => setSelectedGood('')}
+        />}
+      </h1>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+      <table className="table">
+        <tbody>
+          {goods.map(item => <Good
+            key={item}
+            name={item}
+            selectedGood={selectedGood}
+            setSelectedGood={setSelectedGood}
+          />
+          )}
+        </tbody>
+      </table>
+    </main>
+  );
+}
+
