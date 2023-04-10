@@ -16,7 +16,6 @@ export const goods = [
   'Garlic',
 ];
 
-
 export const App: React.FC = () => {
   const [selectedGood, setSelectedGood] = React.useState('Jam');
 
