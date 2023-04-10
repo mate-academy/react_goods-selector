@@ -21,7 +21,7 @@ type State = {
 
 export class App extends Component<{}, State> {
   state: Readonly<State> = {
-    selectedGood: 'Jam',
+    selectedGood: goods[goods.indexOf('Jam')] || goods[0],
   };
 
   handleGoodSelect = (name: string) => {
@@ -59,6 +59,7 @@ export class App extends Component<{}, State> {
             {goods.map(good => (
               <tr
                 data-cy="Good"
+                key={good}
                 className={
                   this.state.selectedGood === good
                     ? 'has-background-success-light'
