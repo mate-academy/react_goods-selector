@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import 'bulma/css/bulma.css';
 
 import './App.scss';
@@ -41,7 +42,7 @@ export const App: React.FC = () => {
         <tbody>
           {goods.map(productName => (
             <tr
-              key={productName}
+              key={uuidv4()}
               data-cy="Good"
               className={productName === product
                 ? 'has-background-success-light'
