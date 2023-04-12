@@ -67,35 +67,39 @@ export class App extends React.Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map(good => (
-              <tr
-                data-cy="Good"
-                className={`${good === selectedGood && 'has-background-success-light'}`}
-                key={good}
-              >
-                <td>
-                  <button
-                    data-cy={`${good === selectedGood
-                      ? 'RemoveButton'
-                      : 'AddButton'
-                    }`}
-                    type="button"
-                    className={`button ${good === selectedGood && 'is-info'}`}
-                    onClick={(event) => {
-                      this.handleState(event, good);
-                    }}
-                  >
-                    {`${good === selectedGood
-                      ? '-'
-                      : '+'}`}
-                  </button>
-                </td>
+            {goods.map(good => {
+              const isActive = good === selectedGood;
 
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            ))}
+              return (
+                <tr
+                  data-cy="Good"
+                  className={`${isActive && 'has-background-success-light'}`}
+                  key={good}
+                >
+                  <td>
+                    <button
+                      data-cy={`${isActive
+                        ? 'RemoveButton'
+                        : 'AddButton'
+                      }`}
+                      type="button"
+                      className={`button ${isActive && 'is-info'}`}
+                      onClick={(event) => {
+                        this.handleState(event, good);
+                      }}
+                    >
+                      {`${isActive
+                        ? '-'
+                        : '+'}`}
+                    </button>
+                  </td>
+
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </main>
