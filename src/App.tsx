@@ -28,7 +28,7 @@ export class App extends React.Component {
         { selectedGood
           ? (
             <h1 className="title is-flex is-align-items-center">
-              { selectedGood }
+              {selectedGood}
               {' '}
               is selected
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
@@ -49,7 +49,14 @@ export class App extends React.Component {
         <table className="table">
           <tbody>
             {goods.map(good => (
-              <tr data-cy="Good">
+              <tr
+                data-cy="Good"
+                className={
+                  this.state.selectedGood === good
+                    ? 'has-background-success-light'
+                    : ''
+                }
+              >
                 <td>
                   { selectedGood !== good
                     ? (
