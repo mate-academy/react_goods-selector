@@ -21,15 +21,21 @@ export class App extends Component {
     selectedGood: 'Jam',
   };
 
+  selectGood = (good: string) => {
+    return this.state.selectedGood === good
+      ? this.setState({ selectedGood: '' })
+      : this.setState({ selectedGood: good });
+  };
+
   render() {
     const { selectedGood } = this.state;
 
     return (
       <main className="section container">
-        {this.state.selectedGood.length
+        {selectedGood.length
           ? (
             <h1 className="title is-flex is-align-items-center">
-              {`${this.state.selectedGood} is selected`}
+              {`${selectedGood} is selected`}
 
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
@@ -65,11 +71,7 @@ export class App extends Component {
                       { 'is-info': good === selectedGood },
                     )}
                     onClick={() => {
-                      if (selectedGood === good) {
-                        this.setState({ selectedGood: '' });
-                      } else {
-                        this.setState({ selectedGood: good });
-                      }
+                      this.selectGood(good);
                     }}
                   >
                     {good === selectedGood ? '-' : '+'}
