@@ -7,6 +7,7 @@ interface GoodProps {
 export const Good: React.FC<GoodProps>
   = ({ selectedGood, setSelectedGood, name }) => {
     const handleButtonClick = (value = '') => setSelectedGood(value);
+
     return (
       <tr
         data-cy="Good"
@@ -44,4 +45,4 @@ export const Good: React.FC<GoodProps>
         </td>
       </tr>
     );
-  }
+  };
