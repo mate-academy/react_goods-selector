@@ -1,8 +1,7 @@
 import React from 'react';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
-// import { flowRight } from 'cypress/types/lodash';
-// import { log } from 'console';
 
 export const goods = [
   'Dumplings',
@@ -28,41 +27,10 @@ export class App extends React.Component<{}, State> {
 
   clearValue = () => {
     this.setState({ selectedValue: '' });
-
-    document.querySelectorAll('tr').forEach(el => {
-      el.classList.remove('has-background-success-light');
-
-      const button = el.querySelector('button');
-
-      if (button) {
-        button.innerText = '+';
-        button.classList.remove('is-info');
-        button.dataset.cy = 'AddButton';
-      }
-    });
   };
 
-  selectValue = (currentTarget: HTMLButtonElement, value: string) => {
-    if (currentTarget.dataset.cy === 'AddButton') {
-      this.clearValue();
-
-      const target = currentTarget;
-      const row = target.closest('tr');
-
-      target.innerHTML = '-';
-      target.classList.add('is-info');
-
-      if (row) {
-        row.classList.toggle(
-          'has-background-success-light',
-        );
-      }
-
-      target.dataset.cy = 'RemoveButton';
-      this.setState({ selectedValue: value });
-    } else {
-      this.clearValue();
-    }
+  selectValue = (value: string) => {
+    this.setState({ selectedValue: value });
   };
 
   render() {
@@ -88,18 +56,37 @@ export class App extends React.Component<{}, State> {
           <tbody>
             {goods.map(item => (
               <tr
+                key={item}
                 data-cy="Good"
+                className={classNames(
+                  {
+                    'has-background-success-light':
+                    item === this.state.selectedValue,
+                  },
+                )}
               >
                 <td>
                   <button
-                    data-cy="AddButton"
+                    data-cy={
+                      item === this.state.selectedValue
+                        ? 'RemoveButton'
+                        : 'AddButton'
+                    }
                     type="button"
-                    className="button"
+                    className={classNames('button', {
+                      'is-info': item === this.state.selectedValue,
+                    })}
                     onClick={(event) => {
-                      this.selectValue(event.currentTarget, item);
+                      if (event.currentTarget.dataset.cy === 'AddButton') {
+                        this.selectValue(item);
+                      } else {
+                        this.clearValue();
+                      }
                     }}
                   >
-                    +
+                    {item === this.state.selectedValue
+                      ? '+'
+                      : '-'}
                   </button>
                 </td>
 
@@ -108,7 +95,6 @@ export class App extends React.Component<{}, State> {
                 </td>
               </tr>
             ))}
-
           </tbody>
         </table>
       </main>
