@@ -77,7 +77,7 @@ export class App extends React.Component<{}, State> {
                       'is-info': item === this.state.selectedValue,
                     })}
                     onClick={(event) => {
-                      if (event.currentTarget.dataset.cy === 'AddButton') {
+                      if (!this.state.selectedValue) {
                         this.selectValue(item);
                       } else {
                         this.clearValue();
