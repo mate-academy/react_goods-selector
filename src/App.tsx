@@ -29,7 +29,7 @@ export class App extends Component {
     this.setState({ selectedGood: good });
   };
 
-  handleRemoveButtonClick = () => {
+  handleRemoveGood = () => {
     this.setState({ selectedGood: '' });
   };
 
@@ -42,15 +42,16 @@ export class App extends Component {
           ? <h1 className="title">No goods selected</h1>
           : (
             <h1 className="title is-flex is-align-items-center">
-              {`${selectedGood} is selected`}
+              { selectedGood }
+              {' '}
+              is selected
 
               <button
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  this.setState({ selectedGood: '' });
-                }}
+                onClick={this.handleRemoveGood}
+                aria-label="Clear Button"
               />
             </h1>
           )}
@@ -90,7 +91,7 @@ export class App extends Component {
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
-                          onClick={this.handleRemoveButtonClick}
+                          onClick={this.handleRemoveGood}
                         >
                           -
                         </button>
