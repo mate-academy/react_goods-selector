@@ -2,6 +2,17 @@ import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
+/* <h1 className="title is-flex is-align-items-center">
+Jam is selected
+
+eslint-disable-next-line jsx-a11y/control-has-associated-label
+<button
+  data-cy="ClearButton"
+  type="button"
+  className="delete ml-3"
+/>
+</h1> */
+
 export const goods = [
   'Dumplings',
   'Carrot',
@@ -15,71 +26,98 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+export class App extends React.Component {
+  state = {
+    selectedGood: 'Jam',
+    selectedClass: 'has-background-success-light',
+    noOneSelected: 'No goods selected',
+    addButtonText: '+',
+    removeButtonText: '-',
+  };
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+  handleAddFunction = (event: React.MouseEvent<HTMLElement>): void => {
+    const { target } = event;
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+    if ((target as HTMLButtonElement).type === 'button') {
+      if (event.currentTarget.lastChild !== null) {
+        this.setState({
+          selectedGood: (event.currentTarget.lastChild as HTMLTableCellElement)
+            .innerText,
+        });
+      }
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+      event.currentTarget.classList.add(this.state.selectedClass);
+      (target as HTMLButtonElement).innerText = this.state.removeButtonText;
+    }
+  };
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+  handleRemoveFunction = (event: React.MouseEvent<HTMLElement>): void => {
+    const { target } = event;
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+    if (this.state.selectedGood
+      && (target as HTMLButtonElement).type === 'button') {
+      this.setState({
+        selectedGood: '',
+      });
+      event.currentTarget.classList.remove(this.state.selectedClass);
+      (target as HTMLButtonElement).innerText = this.state.addButtonText;
+    }
+  };
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+  render() {
+    return (
+      <main className="section container">
+        {this.state.selectedGood
+          ? (
+            <h1 className="title is-flex is-align-items-center">
+              {`${this.state.selectedGood} is selected`}
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.handleRemoveFunction}
+              />
+            </h1>
+          ) : (
+            <h1 className="title">
+              {this.state.noOneSelected}
+            </h1>
+          )}
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+        <table className="table">
+          <tbody>
+            {goods.map(good => (
+              <tr
+                key={goods.indexOf(good)}
+                data-cy="Good"
+                onClick={good === this.state.selectedGood
+                  ? this.handleRemoveFunction
+                  : this.handleAddFunction}
+                className={good === this.state.selectedGood
+                  ? this.state.selectedClass
+                  : ''}
+              >
+                <td>
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                  >
+                    {good === this.state.selectedGood
+                      ? this.state.removeButtonText
+                      : this.state.addButtonText}
+                  </button>
+                </td>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </main>
+    );
+  }
+}
