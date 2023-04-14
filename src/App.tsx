@@ -22,7 +22,7 @@ interface State {
 
 export class App extends Component {
   state: Readonly<State> = {
-    selectedGood: '',
+    selectedGood: 'Jam',
   };
 
   handleAddButtonClick = (good: string) => {
