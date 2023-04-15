@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -29,10 +30,6 @@ export const goods = [
 export class App extends React.Component {
   state = {
     selectedGood: 'Jam',
-    selectedClass: 'has-background-success-light',
-    noOneSelected: 'No goods selected',
-    addButtonText: '+',
-    removeButtonText: '-',
   };
 
   handleAddFunction = (event: React.MouseEvent<HTMLElement>): void => {
@@ -45,9 +42,6 @@ export class App extends React.Component {
             .innerText,
         });
       }
-
-      event.currentTarget.classList.add(this.state.selectedClass);
-      (target as HTMLButtonElement).innerText = this.state.removeButtonText;
     }
   };
 
@@ -59,8 +53,6 @@ export class App extends React.Component {
       this.setState({
         selectedGood: '',
       });
-      event.currentTarget.classList.remove(this.state.selectedClass);
-      (target as HTMLButtonElement).innerText = this.state.addButtonText;
     }
   };
 
@@ -81,7 +73,7 @@ export class App extends React.Component {
             </h1>
           ) : (
             <h1 className="title">
-              {this.state.noOneSelected}
+              No goods selected
             </h1>
           )}
 
@@ -94,19 +86,27 @@ export class App extends React.Component {
                 onClick={good === this.state.selectedGood
                   ? this.handleRemoveFunction
                   : this.handleAddFunction}
-                className={good === this.state.selectedGood
-                  ? this.state.selectedClass
-                  : ''}
+                className={classNames({
+                  'has-background-success-light':
+                    (good === this.state.selectedGood),
+                })}
               >
                 <td>
                   <button
-                    data-cy="AddButton"
+                    data-cy={
+                      this.state.selectedGood === good
+                        ? 'RemoveButton'
+                        : 'AddButton'
+                    }
                     type="button"
-                    className="button"
+                    className={classNames('button', {
+                      'is-info':
+                        (good === this.state.selectedGood),
+                    })}
                   >
                     {good === this.state.selectedGood
-                      ? this.state.removeButtonText
-                      : this.state.addButtonText}
+                      ? '-'
+                      : '+'}
                   </button>
                 </td>
 
