@@ -21,7 +21,7 @@ type State = {
 
 export class App extends Component<{}, State> {
   state: Readonly<State> = {
-    selectedGood: 'Jam',
+    selectedGood: goods[goods.indexOf('Jam')] || goods[0],
   };
 
   buttonHandler = (good: string) => (
