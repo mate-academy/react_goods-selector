@@ -25,30 +25,31 @@ export class App extends React.Component<{}, State> {
   };
 
   handleClick(item: string) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    item === this.state.selectedGood
-      ? this.setState({
-        selectedGood: '',
-      })
-      : this.setState({
-        selectedGood: item,
-      });
+    this.setState(prevState => ({
+      selectedGood: item === prevState.selectedGood ? '' : item,
+    }));
+  }
+
+  handleCrossButton(): void {
+    this.setState({
+      selectedGood: '',
+    });
   }
 
   render() {
+    const { selectedGood } = this.state;
+
     return (
       <main className="section container">
-        {this.state.selectedGood ? (
+        {selectedGood ? (
           <h1 className="title is-flex is-align-items-center">
-            {`${this.state.selectedGood} is selected`}
+            {`${selectedGood} is selected`}
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <button
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => this.setState({
-                selectedGood: '',
-              })}
+              onClick={() => this.handleCrossButton()}
             />
           </h1>
         ) : (
@@ -61,28 +62,22 @@ export class App extends React.Component<{}, State> {
               <tr
                 data-cy="Good"
                 className={
-                  item === this.state.selectedGood
-                    ? 'has-background-success-light'
-                    : ''
+                  item === selectedGood ? 'has-background-success-light' : ''
                 }
                 key={item}
               >
                 <td>
                   <button
                     data-cy={
-                      item === this.state.selectedGood
-                        ? 'RemoveButton'
-                        : 'AddButton'
+                      item === selectedGood ? 'RemoveButton' : 'AddButton'
                     }
                     type="button"
                     className={
-                      item === this.state.selectedGood
-                        ? 'button is-info'
-                        : 'button'
+                      item === selectedGood ? 'button is-info' : 'button'
                     }
                     onClick={() => this.handleClick(item)}
                   >
-                    {item === this.state.selectedGood ? '-' : '+'}
+                    {item === selectedGood ? '-' : '+'}
                   </button>
                 </td>
                 <td data-cy="GoodTitle" className="is-vcentered">
