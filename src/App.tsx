@@ -25,6 +25,18 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  indicateGood = (good: string) => {
+    this.setState({
+      selectedGood: good,
+    });
+  };
+
+  clearGood = () => {
+    this.setState({
+      selectedGood: '',
+    });
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -35,19 +47,15 @@ export class App extends React.Component<{}, State> {
         ) : (
           <h1 className="title is-flex is-align-items-center">
             {`${selectedGood} is selected`}
-            <>
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-              <button
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-                onClick={() => {
-                  this.setState({
-                    selectedGood: '',
-                  });
-                }}
-              />
-            </>
+            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={() => {
+                this.clearGood();
+              }}
+            />
           </h1>
         )}
 
@@ -70,9 +78,7 @@ export class App extends React.Component<{}, State> {
                       type="button"
                       className="button"
                       onClick={() => {
-                        this.setState({
-                          selectedGood: good,
-                        });
+                        this.indicateGood(good);
                       }}
                     >
                       +
@@ -83,9 +89,7 @@ export class App extends React.Component<{}, State> {
                       type="button"
                       className="button is-info"
                       onClick={() => {
-                        this.setState({
-                          selectedGood: '',
-                        });
+                        this.clearGood();
                       }}
                     >
                       -
