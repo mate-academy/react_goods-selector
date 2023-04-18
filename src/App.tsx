@@ -1,6 +1,7 @@
-import React from 'react';
+import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import cn from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -15,71 +16,86 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+export class App extends Component {
+  state = {
+    selectedGood: 'Jam',
+  };
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+  handleGood = (good: string) => {
+    const isGoodSelected = this.state.selectedGood === good;
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+    if (isGoodSelected) {
+      this.setState({ selectedGood: '' });
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+      return;
+    }
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+    this.setState({ selectedGood: good });
+  };
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+  handleClear = () => {
+    this.setState({ selectedGood: '' });
+  };
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+  render() {
+    const { selectedGood } = this.state;
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+    return (
+      <main className="section container">
+        {selectedGood.length
+          ? (
+            <h1 className="title is-flex is-align-items-center">
+              {`${selectedGood} is selected`}
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.handleClear}
+              />
+            </h1>
+          )
+          : <h1 className="title">No goods selected</h1>}
+
+        <table className="table">
+          <tbody>
+            {goods.map(good => {
+              const isGoodSelected = selectedGood === good;
+
+              return (
+                <tr
+                  data-cy="Good"
+                  key={good}
+                  className={cn({
+                    'has-background-success-light': isGoodSelected,
+                  })}
+                >
+                  <td>
+                    <button
+                      data-cy={isGoodSelected ? 'RemoveButton' : 'AddButton'}
+                      type="button"
+                      className={cn(
+                        'button',
+                        { 'is-info': isGoodSelected },
+                      )}
+                      onClick={() => {
+                        this.handleGood(good);
+                      }}
+                    >
+                      {isGoodSelected ? '-' : '+'}
+                    </button>
+                  </td>
+
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </main>
+    );
+  }
+}
