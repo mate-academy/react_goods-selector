@@ -34,7 +34,6 @@ export class App extends Component<{}, State> {
           ? (
             <h1 className="title is-flex is-align-items-center">
               {`${selected} is selected`}
-
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
