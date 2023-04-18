@@ -24,6 +24,8 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  handleClear = () => this.setState({ selectedGood: '' });
+
   render() {
     const { selectedGood } = this.state;
 
@@ -38,9 +40,7 @@ export class App extends React.Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  this.setState({ selectedGood: null });
-                }}
+                onClick={this.handleClear}
               />
             </h1>
           )
@@ -52,16 +52,19 @@ export class App extends React.Component<{}, State> {
               <tr
                 data-cy="Good"
                 className={selectedGood === good
-                  ? 'has-background-success-light' : ''}
+                  ? 'has-background-success-light'
+                  : ''}
                 key={good}
               >
                 <td>
                   <button
                     data-cy={selectedGood === good
-                      ? 'RemoveButton' : 'AddButton'}
+                      ? 'RemoveButton'
+                      : 'AddButton'}
                     type="button"
                     className={selectedGood === good
-                      ? 'button is-info' : 'button'}
+                      ? 'button is-info'
+                      : 'button'}
                     onClick={() => {
                       this.setState({ selectedGood: good });
                       if (selectedGood === good) {
@@ -83,4 +86,3 @@ export class App extends React.Component<{}, State> {
     );
   }
 }
-// work
