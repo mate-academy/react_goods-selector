@@ -65,7 +65,7 @@ export class App extends React.Component<{}, State> {
                 <td>
                   {good === selectedGood ? (
                     <button
-                      data-cy="AddButton"
+                      data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
                       onClick={this.removeButton}
@@ -74,7 +74,7 @@ export class App extends React.Component<{}, State> {
                     </button>
                   ) : (
                     <button
-                      data-cy="RemoveButton"
+                      data-cy="AddButton"
                       type="button"
                       className="button"
                       onClick={(() => this.addButton(good))}
