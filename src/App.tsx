@@ -1,4 +1,5 @@
-import React from 'react';
+import { Component } from 'react';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -15,71 +16,88 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+interface State {
+  product: string | null
+}
+export class App extends Component<{}, State> {
+  state: Readonly<State> = {
+    product: 'Jam',
+  };
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+  handleClear = () => {
+    this.setState({ product: null });
+  };
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+  handleSelectedProduct = (selectedProduct:boolean, productName:string) => {
+    this.setState({
+      product: selectedProduct
+        ? null
+        : productName,
+    });
+  };
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+  render() {
+    const { product } = this.state;
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+    return (
+      <main className="section container">
+        {product
+          ? (
+            <h1 className="title is-flex is-align-items-center">
+              {`${product} is selected`}
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+              {(
+                // eslint-disable-next-line jsx-a11y/control-has-associated-label
+                <button
+                  data-cy="ClearButton"
+                  type="button"
+                  className="delete ml-3"
+                  onClick={this.handleClear}
+                />
+              )}
+            </h1>
+          )
+          : <h1 className="title">No goods selected</h1>}
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+        <table className="table">
+          <tbody>
+            {goods.map(productName => {
+              const selectedProduct = productName === product;
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+              return (
+                <tr
+                  key={productName}
+                  data-cy="Good"
+                  className={classNames({
+                    'has-background-success-light': selectedProduct,
+                  })}
+                >
+                  <td>
+                    <button
+                      data-cy={selectedProduct
+                        ? 'RemoveButton'
+                        : 'AddButton'}
+                      type="button"
+                      className={classNames('button', {
+                        'button is-info': selectedProduct,
+                      })}
+                      onClick={() => (
+                        this.handleSelectedProduct(selectedProduct, productName)
+                      )}
+                    >
+                      {selectedProduct ? '-' : '+'}
+                    </button>
+                  </td>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {productName}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </main>
+    );
+  }
+}
