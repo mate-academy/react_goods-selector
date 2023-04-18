@@ -21,6 +21,22 @@ export class App extends React.Component {
     selectedGood: 'Jam',
   };
 
+  handleClearButton = () => {
+    this.setState({ selectedGood: '' });
+  };
+
+  handleAddButton = (e: React.MouseEvent) => {
+    const target = e.currentTarget;
+    const newGood
+    = target.parentElement?.nextElementSibling?.textContent;
+
+    if (target.className === 'button') {
+      this.setState({ selectedGood: newGood });
+    } else {
+      this.setState({ selectedGood: '' });
+    }
+  };
+
   render() {
     const { selectedGood } = this.state;
     const goodLength = selectedGood.length;
@@ -28,7 +44,7 @@ export class App extends React.Component {
     return (
       <main className="section container">
         <h1 className="title is-flex is-align-items-center">
-          { (goodLength > 0)
+          { (goodLength)
             ? (
               `${selectedGood} is selected`
             )
@@ -39,22 +55,24 @@ export class App extends React.Component {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={(e) => {
-              this.setState({ selectedGood: '' });
-              e.currentTarget.remove();
+            style={{
+              display: (!goodLength)
+                ? 'none'
+                : 'flex',
             }}
+            onClick={this.handleClearButton}
           />
         </h1>
 
         <table className="table">
           <tbody>
-            { goods.map(el => {
-              const isSelected = selectedGood === el;
+            { goods.map(good => {
+              const isSelected = selectedGood === good;
 
               return (
                 <tr
                   data-cy="Good"
-                  key={el}
+                  key={good}
                   className={isSelected
                     ? 'has-background-success-light'
                     : ''}
@@ -65,36 +83,15 @@ export class App extends React.Component {
                       type="button"
                       className={isSelected ? 'button is-info' : 'button'}
                       style={{ display: 'flex' }}
-                      onClick={() => {
-                        this.setState({
-                          selectedGood: (isSelected) ? '' : el,
-                        });
-
-                        const clearButton
-                        = document.querySelector('.ml-3');
-                        const title = document.querySelector('.title');
-
-                        if (isSelected && clearButton) {
-                          clearButton.remove();
-                        }
-
-                        if (!isSelected && !clearButton) {
-                          const newClearButton
-                          = document.createElement('button');
-
-                          newClearButton.className = 'delete ml-3';
-                          newClearButton.style.display = 'flex';
-                          title?.append(newClearButton);
-                        }
-                      }}
+                      onClick={(e) => this.handleAddButton(e)}
                     >
                       {isSelected
                         ? '-'
                         : '+'}
                     </button>
                   </td>
-                  <td data-cy="GoodTitle" className="is-vcentered" id={el}>
-                    {el}
+                  <td data-cy="GoodTitle" className="is-vcentered" id={good}>
+                    {good}
                   </td>
                 </tr>
               );
