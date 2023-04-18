@@ -1,7 +1,6 @@
 import { Component } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
-
 import './App.scss';
 
 export const goods = [
@@ -25,24 +24,40 @@ export class App extends Component<{}, State> {
     product: 'Jam',
   };
 
+  handleClear = () => {
+    this.setState({ product: null });
+  };
+
+  handleSelectedProduct = (selectedProduct:boolean, productName:string) => {
+    this.setState({
+      product: selectedProduct
+        ? null
+        : productName,
+    });
+  };
+
   render() {
     const { product } = this.state;
 
     return (
       <main className="section container">
-        <h1 className="title is-flex is-align-items-center">
-          {product ? `${product} is selected` : 'No goods selected'}
+        {product
+          ? (
+            <h1 className="title is-flex is-align-items-center">
+              {`${product} is selected`}
 
-          {product && (
-            // eslint-disable-next-line jsx-a11y/control-has-associated-label
-            <button
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={() => this.setState({ product: null })}
-            />
-          )}
-        </h1>
+              {(
+                // eslint-disable-next-line jsx-a11y/control-has-associated-label
+                <button
+                  data-cy="ClearButton"
+                  type="button"
+                  className="delete ml-3"
+                  onClick={this.handleClear}
+                />
+              )}
+            </h1>
+          )
+          : <h1 className="title">No goods selected</h1>}
 
         <table className="table">
           <tbody>
@@ -51,11 +66,11 @@ export class App extends Component<{}, State> {
 
               return (
                 <tr
-                  key={uuidv4()}
+                  key={productName}
                   data-cy="Good"
-                  className={selectedProduct
-                    ? 'has-background-success-light'
-                    : ''}
+                  className={classNames({
+                    'has-background-success-light': selectedProduct,
+                  })}
                 >
                   <td>
                     <button
@@ -63,16 +78,12 @@ export class App extends Component<{}, State> {
                         ? 'RemoveButton'
                         : 'AddButton'}
                       type="button"
-                      className={selectedProduct
-                        ? 'button is-info'
-                        : 'button'}
-                      onClick={() => {
-                        this.setState({
-                          product: selectedProduct
-                            ? null
-                            : productName,
-                        });
-                      }}
+                      className={classNames('button', {
+                        'button is-info': selectedProduct,
+                      })}
+                      onClick={() => (
+                        this.handleSelectedProduct(selectedProduct, productName)
+                      )}
                     >
                       {selectedProduct ? '-' : '+'}
                     </button>
