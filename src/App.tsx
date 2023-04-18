@@ -21,10 +21,20 @@ export class App extends Component {
     selectedGood: 'Jam',
   };
 
-  selectGood = (good: string) => {
-    return this.state.selectedGood === good
-      ? this.setState({ selectedGood: '' })
-      : this.setState({ selectedGood: good });
+  handleGood = (good: string) => {
+    const isGoodSelected = this.state.selectedGood === good;
+
+    if (isGoodSelected) {
+      this.setState({ selectedGood: '' });
+
+      return;
+    }
+
+    this.setState({ selectedGood: good });
+  };
+
+  handleClear = () => {
+    this.setState({ selectedGood: '' });
   };
 
   render() {
@@ -42,9 +52,7 @@ export class App extends Component {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  this.setState({ selectedGood: '' });
-                }}
+                onClick={this.handleClear}
               />
             </h1>
           )
@@ -52,37 +60,39 @@ export class App extends Component {
 
         <table className="table">
           <tbody>
-            {goods.map(good => (
-              <tr
-                data-cy="Good"
-                className={cn({
-                  'has-background-success-light': good === selectedGood,
-                })}
-              >
-                <td>
-                  <button
-                    data-cy={cn(
-                      { AddButton: good !== selectedGood },
-                      { RemoveButton: good === selectedGood },
-                    )}
-                    type="button"
-                    className={cn(
-                      'button',
-                      { 'is-info': good === selectedGood },
-                    )}
-                    onClick={() => {
-                      this.selectGood(good);
-                    }}
-                  >
-                    {good === selectedGood ? '-' : '+'}
-                  </button>
-                </td>
+            {goods.map(good => {
+              const isGoodSelected = selectedGood === good;
 
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            ))}
+              return (
+                <tr
+                  data-cy="Good"
+                  key={good}
+                  className={cn({
+                    'has-background-success-light': isGoodSelected,
+                  })}
+                >
+                  <td>
+                    <button
+                      data-cy={isGoodSelected ? 'RemoveButton' : 'AddButton'}
+                      type="button"
+                      className={cn(
+                        'button',
+                        { 'is-info': isGoodSelected },
+                      )}
+                      onClick={() => {
+                        this.handleGood(good);
+                      }}
+                    >
+                      {isGoodSelected ? '-' : '+'}
+                    </button>
+                  </td>
+
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </main>
