@@ -75,7 +75,7 @@ export class App extends React.Component<{}, State> {
                   className={classNames(
                     { 'has-background-success-light': isSelected },
                   )}
-                  key={Math.random()}
+                  key={good}
                 >
                   <td>
                     <button
