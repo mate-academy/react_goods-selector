@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bulma/css/bulma.css';
+
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -15,71 +17,83 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+type Product = string | null;
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+export const App: React.FC = () => {
+  const [product, setProduct] = useState<Product>('Jam');
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+  const handleClear = () => {
+    setProduct(null);
+  };
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+  const handleSelectedProduct = (
+    productName: string,
+    selectedProduct: boolean,
+  ) => {
+    setProduct(selectedProduct
+      ? null
+      : productName);
+  };
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+  return (
+    <main className="section container">
+      {product
+        ? (
+          <h1 className="title is-flex is-align-items-center">
+            {`${product} is selected`}
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+            {(
+              // eslint-disable-next-line jsx-a11y/control-has-associated-label
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={handleClear}
+              />
+            )}
+          </h1>
+        )
+        : <h1 className="title">No goods selected</h1> }
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+      <table className="table">
+        <tbody>
+          {goods.map(productName => {
+            const selectedProduct = productName === product;
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+            return (
+              <tr
+                key={productName}
+                data-cy="Good"
+                className={classNames({
+                  'has-background-success-light': selectedProduct,
+                })}
+              >
+                <td>
+                  <button
+                    data-cy={selectedProduct
+                      ? 'RemoveButton'
+                      : 'AddButton'}
+                    type="button"
+                    className={classNames('button', {
+                      'button is-info': selectedProduct,
+                    })}
+                    onClick={() => handleSelectedProduct(
+                      productName,
+                      selectedProduct,
+                    )}
+                  >
+                    {selectedProduct ? '-' : '+'}
+                  </button>
+                </td>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {productName}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </main>
+  );
+};
