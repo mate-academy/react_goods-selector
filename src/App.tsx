@@ -25,13 +25,13 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  clearAction = () => {
+  handleClear = () => {
     this.setState({
       selectedGood: '',
     });
   };
 
-  addGood = (good: string) => (
+  handleSelect = (good: string) => (
     this.setState({
       selectedGood: good,
     })
@@ -53,9 +53,7 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  this.clearAction();
-                }}
+                onClick={this.handleClear}
               />
             </h1>
           )}
@@ -63,26 +61,24 @@ export class App extends Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(good => {
-              const selectedGoodCheck = (selectedGood === good);
+              const isSelectedGood = (selectedGood === good);
 
               return (
                 <tr
                   data-cy="Good"
                   key={good}
                   className={classNames({
-                    'has-background-success-light': selectedGoodCheck,
+                    'has-background-success-light': isSelectedGood,
                   })}
                 >
                   <td>
-                    {selectedGoodCheck
+                    {isSelectedGood
                       ? (
                         <button
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
-                          onClick={() => (
-                            this.clearAction()
-                          )}
+                          onClick={this.handleClear}
                         >
                           -
                         </button>
@@ -93,7 +89,7 @@ export class App extends Component<{}, State> {
                           type="button"
                           className="button"
                           onClick={() => (
-                            this.addGood(good)
+                            this.handleSelect(good)
                           )}
                         >
                           +
