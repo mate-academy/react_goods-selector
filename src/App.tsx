@@ -24,17 +24,17 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleRemove = () => {
+  handleClearSelection = () => {
     this.setState({ selectedGood: null });
   };
 
-  getGood = (good: string) => {
+  selectGood = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
-  handleSelect = (good: string) => {
+  handleGoodSelection = (good: string) => {
     return () => {
-      this.getGood(good);
+      this.selectGood(good);
     };
   };
 
@@ -52,7 +52,7 @@ export class App extends React.Component<{}, State> {
             <button
               data-cy="ClearButton"
               type="button"
-              onClick={this.handleRemove}
+              onClick={this.handleClearSelection}
               className="delete ml-3"
             />
           </h1>
@@ -77,7 +77,7 @@ export class App extends React.Component<{}, State> {
                     <button
                       data-cy="RemoveButton"
                       type="button"
-                      onClick={this.handleRemove}
+                      onClick={this.handleClearSelection}
                       className="button is-info"
                     >
                       -
@@ -86,7 +86,7 @@ export class App extends React.Component<{}, State> {
                     <button
                       data-cy="AddButton"
                       type="button"
-                      onClick={this.handleSelect(good)}
+                      onClick={this.handleGoodSelection(good)}
                       className="button"
                     >
                       +
