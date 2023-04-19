@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -45,7 +46,7 @@ export class App extends React.Component<{}, State> {
         </h1>
       )
       : (
-        <h1 className="title is-flex is-align-items-center">
+        <h1 className="title">
           No goods selected
         </h1>
       );
@@ -56,7 +57,11 @@ export class App extends React.Component<{}, State> {
       <button
         data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
         type="button"
-        className={isSelected ? 'button is-info' : 'button'}
+        className={
+          classNames('button', {
+            'is-info': isSelected,
+          })
+        }
         onClick={
           isSelected
             ? () => this.handleButtonClick()
@@ -83,7 +88,11 @@ export class App extends React.Component<{}, State> {
               return (
                 <tr
                   data-cy="Good"
-                  className={isSelected ? 'has-background-success-light' : ''}
+                  className={
+                    classNames('', {
+                      'has-background-success-light': isSelected,
+                    })
+                  }
                   key={(new Date().getTime()) * Math.random()}
                 >
                   <td>
