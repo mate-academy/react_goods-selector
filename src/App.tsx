@@ -31,8 +31,16 @@ export class App extends React.Component<{}, State> {
     });
   };
 
+  handleClear = () => {
+    this.setState({
+      selectedGood: '',
+    });
+  };
+
   render() {
     const { selectedGood } = this.state;
+
+    const { handleClear, handleClick } = this;
 
     return (
       <main className="section container">
@@ -45,9 +53,7 @@ export class App extends React.Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  this.handleClick('');
-                }}
+                onClick={handleClear}
               />
             </h1>
           )
@@ -56,51 +62,54 @@ export class App extends React.Component<{}, State> {
               No goods selected
             </h1>
           )}
+
         <table className="table">
           <tbody>
-            {goods.map(good => (
-              <tr
-                data-cy="Good"
-                key={good}
-                className={classNames({
-                  'has-background-success-light': selectedGood === good,
-                })}
-              >
-                <td>
-                  {
-                    selectedGood === good
-                      ? (
-                        <button
-                          data-cy="RemoveButton"
-                          type="button"
-                          className="button is-info"
-                          onClick={() => {
-                            this.handleClick('');
-                          }}
-                        >
-                          -
-                        </button>
-                      )
-                      : (
-                        <button
-                          data-cy="AddButton"
-                          type="button"
-                          className="button"
-                          onClick={() => {
-                            this.handleClick(good);
-                          }}
-                        >
-                          +
-                        </button>
-                      )
-                  }
-                </td>
+            {goods.map(good => {
+              const isSelected = selectedGood === good;
 
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            ))}
+              return (
+                <tr
+                  data-cy="Good"
+                  key={good}
+                  className={classNames({
+                    'has-background-success-light': isSelected,
+                  })}
+                >
+                  <td>
+                    {
+                      isSelected
+                        ? (
+                          <button
+                            data-cy="RemoveButton"
+                            type="button"
+                            className="button is-info"
+                            onClick={handleClear}
+                          >
+                            -
+                          </button>
+                        )
+                        : (
+                          <button
+                            data-cy="AddButton"
+                            type="button"
+                            className="button"
+                            onClick={() => {
+                              handleClick(good);
+                            }}
+                          >
+                            +
+                          </button>
+                        )
+                    }
+                  </td>
+
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </main>
