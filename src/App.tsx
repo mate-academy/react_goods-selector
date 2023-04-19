@@ -25,21 +25,23 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  handleReset = () => (this.setState({ selectedGood: '' }));
+
   render() {
     const { selectedGood } = this.state;
 
     return (
       <main className="section container">
-        { this.state.selectedGood
+        { selectedGood
           ? (
             <h1 className="title is-flex is-align-items-center">
-              {`${this.state.selectedGood} is selected`}
+              {`${selectedGood} is selected`}
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => this.setState({ selectedGood: '' })}
+                onClick={this.handleReset}
               />
             </h1>
           )
@@ -52,52 +54,42 @@ export class App extends Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(good => {
-              const isChosen = selectedGood === good;
+              const isSelected = selectedGood === good;
 
               return (
-                <>
-                  <tr
-                    data-cy="Good"
-                    className={classNames(
-                      {
-                        'has-background-success-light': isChosen,
-                      },
-                    )}
-                  >
-                    <td>
-                      <button
-                        data-cy={classNames(
-                          {
-                            AddButton: !isChosen,
-                            RemoveButton: isChosen,
-                          },
-                        )}
-                        type="button"
-                        className={classNames('button',
-                          {
-                            'is-info': isChosen,
-                          })}
-                        onClick={() => {
-                          if (isChosen) {
-                            this.setState({ selectedGood: '' });
-                          } else {
-                            this.setState({ selectedGood: good });
-                          }
-                        }}
-                      >
-                        {isChosen ? '-' : '+'}
-                      </button>
-                    </td>
-
-                    <td
-                      data-cy="GoodTitle"
-                      className="is-vcentered"
-                      key={good}
+                <tr
+                  data-cy="Good"
+                  className={classNames({
+                    'has-background-success-light': isSelected,
+                  })}
+                >
+                  <td>
+                    <button
+                      data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
+                      type="button"
+                      className={classNames('button', {
+                        'is-info': isSelected,
+                      })}
+                      onClick={() => {
+                        if (isSelected) {
+                          this.setState({ selectedGood: '' });
+                        } else {
+                          this.setState({ selectedGood: good });
+                        }
+                      }}
                     >
-                      {good}
-                    </td>
-                  </tr>
-                </>
+                      {isSelected ? '-' : '+'}
+                    </button>
+                  </td>
+
+                  <td
+                    data-cy="GoodTitle"
+                    className="is-vcentered"
+                    key={good}
+                  >
+                    {good}
+                  </td>
+                </tr>
               );
             })}
           </tbody>
