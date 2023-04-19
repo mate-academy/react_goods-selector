@@ -16,7 +16,7 @@ export const goods: string[] = [
 ];
 
 interface State {
-  selectedGood: string | null;
+  selectedGood: string;
 }
 
 export class App extends React.Component<{}, State> {
@@ -24,11 +24,11 @@ export class App extends React.Component<{}, State> {
     selectedGood: goods[8],
   };
 
-  removeButton = () => {
-    this.setState({ selectedGood: null });
+  handleClear = () => {
+    this.setState({ selectedGood: '' });
   };
 
-  addButton = (good: string) => {
+  handleSelect = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
@@ -47,7 +47,7 @@ export class App extends React.Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.removeButton}
+                onClick={this.handleClear}
               />
             </h1>
           )
@@ -68,7 +68,7 @@ export class App extends React.Component<{}, State> {
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={this.removeButton}
+                      onClick={this.handleClear}
                     >
                       -
                     </button>
@@ -77,7 +77,7 @@ export class App extends React.Component<{}, State> {
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={(() => this.addButton(good))}
+                      onClick={(() => this.handleSelect(good))}
                     >
                       +
                     </button>
