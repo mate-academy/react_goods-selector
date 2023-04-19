@@ -18,17 +18,23 @@ export const goods = [
 
 type State = {
   selected: string;
-  isPressed: boolean;
 };
 
 export class App extends React.Component<{}, State> {
   state: Readonly<State> = {
     selected: 'Jam',
-    isPressed: true,
+  };
+
+  hendlerIsPressed = (good: string) => {
+    if (this.state.selected === good) {
+      this.setState({ selected: 'No goods selected' });
+    } else {
+      this.setState({ selected: good });
+    }
   };
 
   render() {
-    const { selected, isPressed } = this.state;
+    const { selected } = this.state;
 
     return (
       <main className="section container">
@@ -42,10 +48,7 @@ export class App extends React.Component<{}, State> {
                 type="button"
                 className="delete ml-3"
                 onClick={() => {
-                  this.setState({
-                    selected: 'No goods selected',
-                    isPressed: false,
-                  });
+                  this.setState({ selected: 'No goods selected' });
                 }}
               />
             </>
@@ -55,7 +58,11 @@ export class App extends React.Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(good => (
-              <tr data-cy="Good" key={good} className={`${(selected === good) && 'has-background-success-light'}`}>
+              <tr
+                data-cy="Good"
+                key={good}
+                className={`${(selected === good) && 'has-background-success-light'}`}
+              >
                 <td>
                   <button
                     data-cy={selected === good
@@ -66,16 +73,7 @@ export class App extends React.Component<{}, State> {
                       'button',
                       { 'is-info': selected === good },
                     )}
-                    onClick={() => {
-                      if (isPressed && selected === good) {
-                        this.setState({
-                          selected: 'No goods selected',
-                          isPressed: false,
-                        });
-                      } else {
-                        this.setState({ selected: good, isPressed: true });
-                      }
-                    }}
+                    onClick={() => this.hendlerIsPressed(good)}
                   >
                     {selected === good ? ('-') : ('+')}
                   </button>
