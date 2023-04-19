@@ -16,8 +16,12 @@ export const goods = [
   'Garlic',
 ];
 
-export class App extends Component {
-  state = {
+interface State {
+  selectedGood: string;
+}
+
+export class App extends Component<{}, State> {
+  state: Readonly<State> = {
     selectedGood: 'Jam',
   };
 
@@ -25,10 +29,8 @@ export class App extends Component {
     this.setState({ selectedGood: '' });
   };
 
-  handleClick = (good: string) => {
-    return this.state.selectedGood === good
-      ? this.setState({ selectedGood: '' })
-      : this.setState({ selectedGood: good });
+  handleSelect = (good: string) => {
+    this.setState({ selectedGood: good });
   };
 
   render() {
@@ -62,6 +64,7 @@ export class App extends Component {
                   className={classNames(
                     { 'has-background-success-light': isGoodSelected },
                   )}
+                  key={good}
                 >
                   <td>
                     <button
@@ -74,9 +77,11 @@ export class App extends Component {
                         'button',
                         { 'is-info': isGoodSelected },
                       )}
-                      onClick={() => {
-                        this.handleClick(good);
-                      }}
+                      onClick={() => (
+                        isGoodSelected
+                          ? this.handleClear()
+                          : this.handleSelect(good)
+                      )}
                     >
                       {isGoodSelected ? '-' : '+'}
                     </button>
