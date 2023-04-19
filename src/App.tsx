@@ -26,9 +26,21 @@ export class App extends Component<{}, State> {
   };
 
   handleClick = (good: string) => {
-    return this.state.selectedGood === good
-      ? this.setState({ selectedGood: '' })
-      : this.setState({ selectedGood: good });
+    const isGoodSelected = this.state.selectedGood === good;
+
+    if (isGoodSelected) {
+      this.setState({ selectedGood: '' });
+
+      return;
+    }
+
+    this.setState({ selectedGood: good });
+  };
+
+  handleResetClick = () => {
+    this.setState({
+      selectedGood: '',
+    });
   };
 
   render() {
@@ -36,7 +48,7 @@ export class App extends Component<{}, State> {
 
     return (
       <main className="section container">
-        {selectedGood.length
+        {selectedGood
           ? (
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
@@ -46,11 +58,7 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  this.setState({
-                    selectedGood: '',
-                  });
-                }}
+                onClick={() => this.handleResetClick()}
               />
             </h1>
           )
@@ -72,17 +80,11 @@ export class App extends Component<{}, State> {
                   <td>
 
                     <button
-                      data-cy={classNames(
-                        {
-                          AddButton: !isSelected,
-                          RemoveButton: isSelected,
-                        },
-                      )}
+                      data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
                       type="button"
-                      className={classNames('button',
-                        {
-                          'is-info': isSelected,
-                        })}
+                      className={classNames('button', {
+                        'is-info': isSelected,
+                      })}
                       onClick={() => this.handleClick(good)}
                     >
                       {isSelected ? '-' : '+'}
