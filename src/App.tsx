@@ -25,6 +25,14 @@ export class App extends React.Component<Props, State> {
     selectedGood: 'Jam',
   };
 
+  addGood = (good: string) => {
+    this.setState({ selectedGood: good });
+  };
+
+  removeGood = () => {
+    this.setState({ selectedGood: null });
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -55,7 +63,7 @@ export class App extends React.Component<Props, State> {
                 data-cy="Good"
                 className={selectedGood === good
                   ? 'has-background-success-light' : ''}
-                key={Math.random()}
+                key={good}
               >
                 <td>
                   <button
@@ -65,9 +73,9 @@ export class App extends React.Component<Props, State> {
                     className={selectedGood === good
                       ? 'button is-info' : 'button'}
                     onClick={() => {
-                      this.setState({ selectedGood: good });
+                      this.addGood(good);
                       if (selectedGood === good) {
-                        this.setState({ selectedGood: null });
+                        this.removeGood();
                       }
                     }}
                   >
