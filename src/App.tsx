@@ -26,6 +26,10 @@ export class App extends React.Component<{}, State> {
 
   handleClear = () => this.setState({ selectedGood: null });
 
+  handleSelect = (good: string) => {
+    this.setState({ selectedGood: good });
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -52,31 +56,32 @@ export class App extends React.Component<{}, State> {
               <tr
                 data-cy="Good"
                 className={selectedGood === good
-                  ? 'has-background-success-light'
-                  : ''}
+                  ? 'has-background-success-light' : ''}
                 key={good}
               >
                 <td>
-                  <button
-                    data-cy={selectedGood === good
-                      ? 'RemoveButton'
-                      : 'AddButton'}
-                    type="button"
-                    className={selectedGood === good
-                      ? 'button is-info'
-                      : 'button'}
-                    onClick={() => {
-                      this.setState({ selectedGood: good });
-                      if (selectedGood === good) {
-                        this.handleClear();
-                      }
-                    }}
-                  >
-                    {selectedGood === good ? '-' : '+'}
-                  </button>
+                  {good === selectedGood ? (
+                    <button
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
+                      onClick={this.handleClear}
+                    >
+                      -
+                    </button>
+                  ) : (
+                    <button
+                      data-cy="AddButton"
+                      type="button"
+                      className="button"
+                      onClick={(() => this.handleSelect(good))}
+                    >
+                      +
+                    </button>
+                  )}
                 </td>
                 <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
+                  { good }
                 </td>
               </tr>
             ))}
