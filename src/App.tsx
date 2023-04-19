@@ -1,8 +1,15 @@
-import React from 'react';
+import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
-export const goods = [
+type Good = string;
+
+interface State {
+  selected: string;
+}
+
+export const goods: Good[] = [
   'Dumplings',
   'Carrot',
   'Eggs',
@@ -15,71 +22,81 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+// eslint-disable-next-line react/prefer-stateless-function
+export class App extends Component {
+  state: State = {
+    selected: '',
+  };
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+  handleButton = (item: string) => () => {
+    this.setState({ selected: item });
+  };
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+  render() {
+    return (
+      <main className="section container">
+        <h1 className="title is-flex is-align-items-center">
+          {this.state.selected
+            ? `${this.state.selected} is selected`
+            : 'No goods selected'}
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
+          {this.state.selected && (
+            // eslint-disable-next-line jsx-a11y/control-has-associated-label
             <button
-              data-cy="AddButton"
+              data-cy="ClearButton"
               type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+              className="delete ml-3"
+              onClick={this.handleButton('')}
+            />
+          )}
+        </h1>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+        <table className="table">
+          <tbody>
+            {goods.map((item: string) => {
+              const isSelected = this.state.selected === item;
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+              return (
+                <tr
+                  key={item}
+                  data-cy="Good"
+                  className={classNames({
+                    'has-background-success-light': isSelected,
+                  })}
+                >
+                  <td>
+                    {isSelected ? (
+                      <button
+                        data-cy="RemoveButton"
+                        type="button"
+                        className="button is-info"
+                        onClick={this.handleButton('')}
+                      >
+                        -
+                      </button>
+                    ) : (
+                      <button
+                        data-cy="AddButton"
+                        type="button"
+                        className="button"
+                        onClick={this.handleButton(item)}
+                      >
+                        +
+                      </button>
+                    )}
+                  </td>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {item}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </main>
+    );
+  }
+}
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+export default App;
