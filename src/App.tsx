@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import 'bulma/css/bulma.css';
 
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -22,54 +22,76 @@ type Product = string | null;
 export const App: React.FC = () => {
   const [product, setProduct] = useState<Product>('Jam');
 
+  const handleClear = () => {
+    setProduct(null);
+  };
+
+  const handleSelectedProduct = (
+    productName: string,
+    selectedProduct: boolean,
+  ) => {
+    setProduct(selectedProduct
+      ? null
+      : productName);
+  };
+
   return (
     <main className="section container">
-      <h1 className="title is-flex is-align-items-center">
-        {product ? `${product} is selected` : 'No goods selected'}
+      {product
+        ? (
+          <h1 className="title is-flex is-align-items-center">
+            {`${product} is selected`}
 
-        {product && (
-          // eslint-disable-next-line jsx-a11y/control-has-associated-label
-          <button
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-            onClick={() => setProduct(null)}
-          />
-        )}
-      </h1>
+            {(
+              // eslint-disable-next-line jsx-a11y/control-has-associated-label
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={handleClear}
+              />
+            )}
+          </h1>
+        )
+        : <h1 className="title">No goods selected</h1> }
 
       <table className="table">
         <tbody>
-          {goods.map(productName => (
-            <tr
-              key={uuidv4()}
-              data-cy="Good"
-              className={productName === product
-                ? 'has-background-success-light'
-                : ''}
-            >
-              <td>
-                <button
-                  data-cy={productName === product
-                    ? 'RemoveButton'
-                    : 'AddButton'}
-                  type="button"
-                  className={productName === product
-                    ? 'button is-info'
-                    : 'button'}
-                  onClick={() => setProduct(productName === product
-                    ? null
-                    : productName)}
-                >
-                  {productName === product ? '-' : '+'}
-                </button>
-              </td>
+          {goods.map(productName => {
+            const selectedProduct = productName === product;
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {productName}
-              </td>
-            </tr>
-          ))}
+            return (
+              <tr
+                key={productName}
+                data-cy="Good"
+                className={classNames({
+                  'has-background-success-light': selectedProduct,
+                })}
+              >
+                <td>
+                  <button
+                    data-cy={selectedProduct
+                      ? 'RemoveButton'
+                      : 'AddButton'}
+                    type="button"
+                    className={classNames('button', {
+                      'button is-info': selectedProduct,
+                    })}
+                    onClick={() => handleSelectedProduct(
+                      productName,
+                      selectedProduct,
+                    )}
+                  >
+                    {selectedProduct ? '-' : '+'}
+                  </button>
+                </td>
+
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {productName}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </main>
