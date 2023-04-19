@@ -24,7 +24,7 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleClear = () => this.setState({ selectedGood: '' });
+  handleClear = () => this.setState({ selectedGood: null });
 
   render() {
     const { selectedGood } = this.state;
@@ -68,7 +68,7 @@ export class App extends React.Component<{}, State> {
                     onClick={() => {
                       this.setState({ selectedGood: good });
                       if (selectedGood === good) {
-                        this.setState({ selectedGood: null });
+                        this.handleClear();
                       }
                     }}
                   >
