@@ -27,6 +27,8 @@ export class App extends Component<{}, State> {
 
   handleReset = () => (this.setState({ selectedGood: '' }));
 
+  handleSelect = (good = '') => (this.setState({ selectedGood: good }));
+
   render() {
     const { selectedGood } = this.state;
 
@@ -72,9 +74,9 @@ export class App extends Component<{}, State> {
                       })}
                       onClick={() => {
                         if (isSelected) {
-                          this.setState({ selectedGood: '' });
+                          this.handleSelect();
                         } else {
-                          this.setState({ selectedGood: good });
+                          this.handleSelect(good);
                         }
                       }}
                     >
