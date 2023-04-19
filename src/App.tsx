@@ -1,6 +1,11 @@
-import React from 'react';
+import { Component } from 'react';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
+
+interface State {
+  selectedGood: string;
+}
 
 export const goods = [
   'Dumplings',
@@ -15,71 +20,83 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+export class App extends Component<{}, State> {
+  state = {
+    selectedGood: 'Jam',
+  };
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+  handleReset = () => (this.setState({ selectedGood: '' }));
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+  handleSelect = (good = '') => (this.setState({ selectedGood: good }));
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+  render() {
+    const { selectedGood } = this.state;
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+    return (
+      <main className="section container">
+        { selectedGood
+          ? (
+            <h1 className="title is-flex is-align-items-center">
+              {`${selectedGood} is selected`}
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.handleReset}
+              />
+            </h1>
+          )
+          : (
+            <h1 className="title">
+              No goods selected
+            </h1>
+          )}
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+        <table className="table">
+          <tbody>
+            {goods.map(good => {
+              const isSelected = selectedGood === good;
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+              return (
+                <tr
+                  data-cy="Good"
+                  className={classNames({
+                    'has-background-success-light': isSelected,
+                  })}
+                >
+                  <td>
+                    <button
+                      data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
+                      type="button"
+                      className={classNames('button', {
+                        'is-info': isSelected,
+                      })}
+                      onClick={() => {
+                        if (isSelected) {
+                          this.handleSelect();
+                        } else {
+                          this.handleSelect(good);
+                        }
+                      }}
+                    >
+                      {isSelected ? '-' : '+'}
+                    </button>
+                  </td>
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+                  <td
+                    data-cy="GoodTitle"
+                    className="is-vcentered"
+                    key={good}
+                  >
+                    {good}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </main>
+    );
+  }
+}
