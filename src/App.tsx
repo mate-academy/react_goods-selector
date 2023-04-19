@@ -25,7 +25,7 @@ export const goods: Good[] = [
 // eslint-disable-next-line react/prefer-stateless-function
 export class App extends Component {
   state: State = {
-    selected: '',
+    selected: 'Jam',
   };
 
   handleButton = (item: string) => () => {
