@@ -16,7 +16,7 @@ export const goods = [
 ];
 
 interface State {
-  selectedGood: string | null;
+  selectedGood: string;
 }
 
 export class App extends React.Component<{}, State> {
@@ -24,11 +24,11 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  hadleGoodSelect = (good: string) => {
+  handleGoodSelect = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
-  hadleClearSelection = () => {
+  handleClearSelection = () => {
     this.setState({ selectedGood: '' });
   };
 
@@ -49,7 +49,7 @@ export class App extends React.Component<{}, State> {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={this.hadleClearSelection}
+              onClick={this.handleClearSelection}
             />
           )}
         </h1>
@@ -70,7 +70,7 @@ export class App extends React.Component<{}, State> {
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={() => this.hadleGoodSelect(good)}
+                      onClick={() => this.handleGoodSelect(good)}
                     >
                       +
                     </button>
@@ -81,7 +81,7 @@ export class App extends React.Component<{}, State> {
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={this.hadleClearSelection}
+                      onClick={this.handleClearSelection}
                     >
                       -
                     </button>
