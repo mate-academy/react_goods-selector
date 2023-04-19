@@ -17,7 +17,7 @@ export const goods = [
 ];
 
 type State = {
-  selectedGood: string | null;
+  selectedGood: string;
 };
 
 export class App extends Component<{}, State> {
@@ -25,13 +25,15 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  isSelected = true;
-
-  handleClick = (good: string | null) => {
-    const { selectedGood } = this.state;
-
+  handleClick = (good: string) => {
     this.setState({
-      selectedGood: good === selectedGood ? null : good,
+      selectedGood: good,
+    });
+  };
+
+  handleReset = () => {
+    this.setState({
+      selectedGood: '',
     });
   };
 
@@ -49,9 +51,7 @@ export class App extends Component<{}, State> {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => {
-                this.handleClick(null);
-              }}
+              onClick={this.handleReset}
             />
           </h1>
         ) : (
@@ -61,29 +61,40 @@ export class App extends Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(good => {
-              this.isSelected = good === selectedGood;
+              const isGoodSelected = good === selectedGood;
 
               return (
                 <tr
                   key={good}
                   data-cy="Good"
-                  className={classNames('', {
-                    'has-background-success-light': this.isSelected,
+                  className={classNames({
+                    'has-background-success-light': isGoodSelected,
                   })}
                 >
                   <td>
-                    <button
-                      data-cy={this.isSelected ? 'RemoveButton' : 'AddButton'}
-                      type="button"
-                      className={classNames('button', {
-                        'button is-info': this.isSelected,
-                      })}
-                      onClick={() => {
-                        this.handleClick(good);
-                      }}
-                    >
-                      {this.isSelected ? '-' : '+'}
-                    </button>
+                    {isGoodSelected
+                      ? (
+                        <button
+                          data-cy="RemoveButton"
+                          type="button"
+                          className="button is-info"
+                          onClick={this.handleReset}
+                        >
+                          -
+                        </button>
+                      )
+                      : (
+                        <button
+                          data-cy="AddButton"
+                          type="button"
+                          className="button"
+                          onClick={() => (
+                            this.handleClick(good)
+                          )}
+                        >
+                          +
+                        </button>
+                      )}
                   </td>
 
                   <td data-cy="GoodTitle" className="is-vcentered">
