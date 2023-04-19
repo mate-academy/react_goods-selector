@@ -26,6 +26,10 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  handleClear = () => this.setState({ selectedGood: '' });
+
+  handleAdd = (good: string) => this.setState({ selectedGood: good });
+
   render() {
     const { selectedGood } = this.state;
 
@@ -40,28 +44,26 @@ export class App extends React.Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  this.setState({ selectedGood: '' });
-                }}
+                onClick={this.handleClear}
               />
             </h1>
           )
-          : (<h1 className="title">No goods selected</h1>)}
+          : <h1 className="title">No goods selected</h1>}
 
         <table className="table">
           <tbody>
             {goods.map((good) => {
-              const isSelected = selectedGood === good;
+              const isGoodSelected = selectedGood === good;
 
               return (
                 <tr
                   data-cy="Good"
                   className={classNames({
-                    'has-background-success-light': isSelected,
+                    'has-background-success-light': isGoodSelected,
                   })}
                 >
                   <td>
-                    {isSelected
+                    {isGoodSelected
                       ? (
                         <button
                           className="button is-info"
@@ -77,7 +79,7 @@ export class App extends React.Component<{}, State> {
                           className="button"
                           type="button"
                           onClick={() => (
-                            this.setState({ selectedGood: good })
+                            this.handleAdd(good)
                           )}
                           data-cy="AddButton"
                         >
