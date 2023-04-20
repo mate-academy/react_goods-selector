@@ -58,7 +58,7 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => this.handleResetClick()}
+                onClick={this.handleResetClick}
               />
             </h1>
           )
@@ -78,7 +78,6 @@ export class App extends Component<{}, State> {
                   })}
                 >
                   <td>
-
                     <button
                       data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
                       type="button"
