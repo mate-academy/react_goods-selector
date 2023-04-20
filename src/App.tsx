@@ -2,6 +2,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -21,20 +22,16 @@ export class App extends React.Component {
     selectedGood: 'Jam',
   };
 
-  handleClearButton = () => {
-    this.setState({ selectedGood: '' });
+  handleAddButton = (condition: boolean, newGood: string) => {
+    this.setState({
+      selectedGood: (!condition)
+        ? newGood
+        : '',
+    });
   };
 
-  handleAddButton = (e: React.MouseEvent) => {
-    const target = e.currentTarget;
-    const newGood
-    = target.parentElement?.nextElementSibling?.textContent;
-
-    if (target.className === 'button') {
-      this.setState({ selectedGood: newGood });
-    } else {
-      this.setState({ selectedGood: '' });
-    }
+  handleClearButton = () => {
+    this.setState({ selectedGood: '' });
   };
 
   render() {
@@ -56,9 +53,9 @@ export class App extends React.Component {
             type="button"
             className="delete ml-3"
             style={{
-              display: (!goodLength)
-                ? 'none'
-                : 'flex',
+              display: goodLength
+                ? 'flex'
+                : 'none',
             }}
             onClick={this.handleClearButton}
           />
@@ -73,17 +70,20 @@ export class App extends React.Component {
                 <tr
                   data-cy="Good"
                   key={good}
-                  className={isSelected
-                    ? 'has-background-success-light'
-                    : ''}
+                  className={classNames(
+                    'unselected',
+                    { 'has-background-success-light': isSelected },
+                  )}
                 >
                   <td>
                     <button
                       data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
                       type="button"
-                      className={isSelected ? 'button is-info' : 'button'}
+                      className={classNames(
+                        'button', { 'button is-info': isSelected },
+                      )}
                       style={{ display: 'flex' }}
-                      onClick={(e) => this.handleAddButton(e)}
+                      onClick={() => this.handleAddButton(isSelected, good)}
                     >
                       {isSelected
                         ? '-'
