@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -18,12 +19,15 @@ export const goods = [
 export const App: React.FC = () => {
   const [selectedGood, setSelectedGood] = useState<string>('Jam');
 
+  const onToggleGood = (item: string) => {
+    setSelectedGood(prev => (prev === item ? '' : item));
+  };
+
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
         {selectedGood ? `${selectedGood} is selected` : 'No goods selected' }
 
-        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
         {selectedGood && (
           <button
             onClick={() => setSelectedGood('')}
@@ -42,17 +46,18 @@ export const App: React.FC = () => {
             <tr
               key={item}
               data-cy="Good"
-              className={item === selectedGood
-                ? 'has-background-success-light'
-                : ''}
+              className={classNames(
+                { 'has-background-success-light': item === selectedGood },
+              )}
             >
               <td>
                 <button
-                  onClick={() => setSelectedGood(prev => (
-                    prev === item ? '' : item))}
+                  onClick={() => onToggleGood(item)}
                   data-cy="AddButton"
                   type="button"
-                  className={`button ${selectedGood === item && 'is-info'}`}
+                  className={classNames(
+                    'button', { 'is-info': selectedGood === item },
+                  )}
                 >
                   {selectedGood === item ? '-' : '+'}
                 </button>
