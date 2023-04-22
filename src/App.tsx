@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -23,12 +24,19 @@ export class App extends Component<{}, State> {
     selected: 'Jam',
   };
 
+  handleSelect = (good: string) => {
+    this.setState({ selected: good });
+  };
+
+  handleClear = () => {
+    this.setState({ selected: '' });
+  };
+
   render() {
     const { selected } = this.state;
 
     return (
       <main className="section container">
-        {/* <h1 className="title">No goods selected</h1> */}
 
         {selected
           ? (
@@ -49,39 +57,44 @@ export class App extends Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map(selectedGood => (
-              <tr
-                data-cy="Good"
-                className={selected === selectedGood
-                  ? 'has-background-success-light' : ''}
-                key={selectedGood}
-              >
-                <td>
-                  <button
-                    data-cy={selected === selectedGood
-                      ? 'RemoveButton'
-                      : 'AddButton'}
-                    type="button"
-                    className={selected === selectedGood
-                      ? 'button is-info'
-                      : 'button'}
-                    onClick={() => {
-                      this.setState({
-                        selected: selected === selectedGood
-                          ? null
-                          : selectedGood,
-                      });
-                    }}
-                  >
-                    {selected === selectedGood ? '-' : '+'}
-                  </button>
-                </td>
+            {goods.map(selectedGood => {
+              const isGoodSelected = selected === selectedGood;
 
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {selectedGood}
-                </td>
-              </tr>
-            ))}
+              return (
+                <tr
+                  data-cy="Good"
+                  className={classNames(
+                    { 'has-background-success-light': isGoodSelected },
+                  )}
+                  key={selectedGood}
+                >
+                  <td>
+                    <button
+                      data-cy={classNames(
+                        { AddButton: !isGoodSelected },
+                        { RemoveButton: isGoodSelected },
+                      )}
+                      type="button"
+                      className={classNames(
+                        'button',
+                        { 'is-info': isGoodSelected },
+                      )}
+                      onClick={() => (
+                        isGoodSelected
+                          ? this.handleClear()
+                          : this.handleSelect(selectedGood)
+                      )}
+                    >
+                      {isGoodSelected ? '-' : '+'}
+                    </button>
+                  </td>
+
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {selectedGood}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </main>
