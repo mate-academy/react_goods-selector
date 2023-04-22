@@ -25,31 +25,16 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleButtonClick = (good?: string) => {
+  handleGoodSelection = (good: string) => {
     this.setState({
-      selectedGood: good || '',
+      selectedGood: good,
     });
   };
 
-  createGoodsHeader = (selectedGood: string) => {
-    return selectedGood
-      ? (
-        <h1 className="title is-flex is-align-items-center">
-          {`${selectedGood} is selected`}
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-          <button
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-            onClick={() => this.handleButtonClick()}
-          />
-        </h1>
-      )
-      : (
-        <h1 className="title">
-          No goods selected
-        </h1>
-      );
+  removeSelectedGood = () => {
+    this.setState({
+      selectedGood: '',
+    });
   };
 
   createGoodButton = (isSelected: boolean, good: string) => {
@@ -64,8 +49,8 @@ export class App extends React.Component<{}, State> {
         }
         onClick={
           isSelected
-            ? () => this.handleButtonClick()
-            : () => this.handleButtonClick(good)
+            ? this.removeSelectedGood
+            : () => this.handleGoodSelection(good)
         }
       >
         {isSelected ? '-' : '+'}
@@ -78,8 +63,24 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        {this.createGoodsHeader(selectedGood)}
-
+        {selectedGood
+          ? (
+            <h1 className="title is-flex is-align-items-center">
+              {`${selectedGood} is selected`}
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.removeSelectedGood}
+              />
+            </h1>
+          )
+          : (
+            <h1 className="title">
+              No goods selected
+            </h1>
+          )}
         <table className="table">
           <tbody>
             {goods.map(good => {
