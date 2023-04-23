@@ -22,7 +22,6 @@ export const goods: Good[] = [
   'Garlic',
 ];
 
-// eslint-disable-next-line react/prefer-stateless-function
 export class App extends Component {
   state: State = {
     selected: 'Jam',
@@ -30,6 +29,10 @@ export class App extends Component {
 
   handleButton = (item: string) => () => {
     this.setState({ selected: item });
+  };
+
+  handleRemoveButton = () => () => {
+    this.setState({ selected: '' });
   };
 
   render() {
@@ -46,7 +49,7 @@ export class App extends Component {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={this.handleButton('')}
+              onClick={this.handleRemoveButton()}
             />
           )}
         </h1>
@@ -70,7 +73,7 @@ export class App extends Component {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={this.handleButton('')}
+                        onClick={this.handleRemoveButton()}
                       >
                         -
                       </button>
