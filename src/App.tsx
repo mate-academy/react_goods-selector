@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -19,22 +20,20 @@ interface S {
   selectedGood: string;
 }
 
-// export const App: React.FC = () => (
 export class App extends React.Component<{}, S> {
   state = {
     selectedGood: 'Jam',
   };
-  // React.MouseEvent<HTMLButtonElement>
 
-  handleGoodButton = (event: React.MouseEvent<HTMLButtonElement>,
-    good: string) => {
+  handleGoodButton = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    good: string,
+  ) => {
     const button = event.currentTarget;
 
     if (button.dataset.cy === 'AddButton') {
-      button.dataset.cy = 'RemoveButton';
       this.setState({ selectedGood: good });
     } else {
-      button.dataset.cy = 'AddButton';
       this.setState({ selectedGood: '' });
     }
   };
@@ -51,7 +50,7 @@ export class App extends React.Component<{}, S> {
         <h1 className="title is-flex is-align-items-center">
           {`${selectedGood ? `${selectedGood} is` : 'No goods'} selected` }
           {selectedGood
-            ? (
+            && (
               <>
                 {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
                 <button
@@ -61,10 +60,8 @@ export class App extends React.Component<{}, S> {
                   onClick={this.handleClearButton}
                 />
               </>
-            )
-            : null}
+            )}
         </h1>
-
         <table className="table">
           <tbody>
             {
@@ -75,15 +72,18 @@ export class App extends React.Component<{}, S> {
                   <tr
                     data-cy="Good"
                     key={good}
-                    className={isSelected
-                      ? 'has-background-success-light'
-                      : ''}
+                    className={classNames({
+                      'has-background-success-light': isSelected,
+                    })}
                   >
                     <td>
                       <button
-                        data-cy="AddButton"
+                        data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
                         type="button"
-                        className={isSelected ? 'button is-info' : 'button'}
+                        className={classNames('button',
+                          {
+                            'is-info': isSelected,
+                          })}
                         onClick={(event) => {
                           this.handleGoodButton(event, good);
                         }}
