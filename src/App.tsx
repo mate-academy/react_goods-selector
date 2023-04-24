@@ -34,6 +34,7 @@ export class App extends Component<{}, State> {
 
   render() {
     const { selected } = this.state;
+    const { handleSelect, handleClear } = this;
 
     return (
       <main className="section container">
@@ -47,9 +48,7 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  this.setState({ selected: null });
-                }}
+                onClick={handleClear}
               />
             </h1>
           )
@@ -63,26 +62,22 @@ export class App extends Component<{}, State> {
               return (
                 <tr
                   data-cy="Good"
-                  className={classNames(
-                    { 'has-background-success-light': isGoodSelected },
-                  )}
+                  className={classNames({
+                    'has-background-success-light': isGoodSelected,
+                  })}
                   key={selectedGood}
                 >
                   <td>
                     <button
-                      data-cy={classNames(
-                        { AddButton: !isGoodSelected },
-                        { RemoveButton: isGoodSelected },
-                      )}
+                      data-cy={isGoodSelected ? 'RemoveButton' : 'AddButton'}
                       type="button"
-                      className={classNames(
-                        'button',
-                        { 'is-info': isGoodSelected },
-                      )}
+                      className={classNames('button', {
+                        'is-info': isGoodSelected,
+                      })}
                       onClick={() => (
                         isGoodSelected
-                          ? this.handleClear()
-                          : this.handleSelect(selectedGood)
+                          ? handleClear()
+                          : handleSelect(selectedGood)
                       )}
                     >
                       {isGoodSelected ? '-' : '+'}
