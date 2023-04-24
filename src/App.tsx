@@ -16,22 +16,19 @@ export const goods = [
   'Garlic',
 ];
 
-interface S {
+interface State {
   selectedGood: string;
 }
 
-export class App extends React.Component<{}, S> {
+export class App extends React.Component<{}, State> {
   state = {
     selectedGood: 'Jam',
   };
 
   handleGoodButton = (
-    event: React.MouseEvent<HTMLButtonElement>,
     good: string,
   ) => {
-    const button = event.currentTarget;
-
-    if (button.dataset.cy === 'AddButton') {
+    if (!this.state.selectedGood || this.state.selectedGood !== good) {
       this.setState({ selectedGood: good });
     } else {
       this.setState({ selectedGood: '' });
@@ -49,6 +46,7 @@ export class App extends React.Component<{}, S> {
       <main className="section container">
         <h1 className="title is-flex is-align-items-center">
           {`${selectedGood ? `${selectedGood} is` : 'No goods'} selected` }
+
           {selectedGood
             && (
               <>
@@ -62,6 +60,7 @@ export class App extends React.Component<{}, S> {
               </>
             )}
         </h1>
+
         <table className="table">
           <tbody>
             {
@@ -80,12 +79,11 @@ export class App extends React.Component<{}, S> {
                       <button
                         data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
                         type="button"
-                        className={classNames('button',
-                          {
-                            'is-info': isSelected,
-                          })}
-                        onClick={(event) => {
-                          this.handleGoodButton(event, good);
+                        className={classNames('button', {
+                          'is-info': isSelected,
+                        })}
+                        onClick={() => {
+                          this.handleGoodButton(good);
                         }}
                       >
                         {isSelected ? '-' : '+'}
