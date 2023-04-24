@@ -37,27 +37,6 @@ export class App extends React.Component<{}, State> {
     });
   };
 
-  createGoodButton = (isSelected: boolean, good: string) => {
-    return (
-      <button
-        data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
-        type="button"
-        className={
-          classNames('button', {
-            'is-info': isSelected,
-          })
-        }
-        onClick={
-          isSelected
-            ? this.removeSelectedGood
-            : () => this.handleGoodSelection(good)
-        }
-      >
-        {isSelected ? '-' : '+'}
-      </button>
-    );
-  };
-
   render() {
     const { selectedGood } = this.state;
 
@@ -90,14 +69,29 @@ export class App extends React.Component<{}, State> {
                 <tr
                   data-cy="Good"
                   className={
-                    classNames('', {
+                    classNames({
                       'has-background-success-light': isSelected,
                     })
                   }
-                  key={(new Date().getTime()) * Math.random()}
+                  key={good}
                 >
                   <td>
-                    {this.createGoodButton(isSelected, good)}
+                    <button
+                      data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
+                      type="button"
+                      className={
+                        classNames('button', {
+                          'is-info': isSelected,
+                        })
+                      }
+                      onClick={
+                        isSelected
+                          ? this.removeSelectedGood
+                          : () => this.handleGoodSelection(good)
+                      }
+                    >
+                      {isSelected ? '-' : '+'}
+                    </button>
                   </td>
 
                   <td data-cy="GoodTitle" className="is-vcentered">
