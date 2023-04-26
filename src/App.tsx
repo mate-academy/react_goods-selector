@@ -1,4 +1,6 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -15,71 +17,109 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+type State = {
+  selectedGoods: string;
+};
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+export class App extends React.Component<{}, State> {
+  state = {
+    selectedGoods: 'Jam',
+  };
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+  get oneGood(): string {
+    return this.state.selectedGoods;
+  }
+
+  isSelected = (item: string) => this.oneGood === item;
+
+  select = (item: string) => {
+    return this.isSelected(item)
+      ? this.setState({ selectedGoods: '' })
+      : this.setState({ selectedGoods: item });
+  };
+
+  addClearButton = () => {
+    return (
       <button
+        aria-label="ClearButton"
         data-cy="ClearButton"
         type="button"
         className="delete ml-3"
+        onClick={() => {
+          this.setState({ selectedGoods: '' });
+        }}
       />
-    </h1>
+    );
+  };
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+  addButtonAdd = (item:string) => {
+    return (
+      <button
+        data-cy="AddButton"
+        type="button"
+        className="button"
+        onClick={() => this.select(item)}
+      >
+        +
+      </button>
+    );
+  };
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+  addButtonRemove = (item:string) => {
+    return (
+      <button
+        data-cy="RemoveButton"
+        type="button"
+        className="button is-info"
+        onClick={() => this.select(item)}
+      >
+        -
+      </button>
+    );
+  };
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+  render() {
+    return (
+      <main className="section container">
+        <h1
+          className="
+            title is-flex
+            is-align-items-center
+          "
+        >
+          {this.oneGood
+            ? `${this.oneGood} is selected`
+            : 'No goods selected'}
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+          {this.oneGood && this.addClearButton()}
+        </h1>
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+        <table className="table">
+          <tbody>
+            {goods.map(item => (
+              <tr
+                data-cy="Good"
+                className={classNames('', {
+                  'has-background-success-light': (this.isSelected(item)),
+                })}
+              >
+                <td>
+                  {this.isSelected(item)
+                    ? this.addButtonRemove(item)
+                    : this.addButtonAdd(item)}
+                </td>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+                <td
+                  data-cy="GoodTitle"
+                  className="is-vcentered"
+                >
+                  {item}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </main>
+    );
+  }
+}
