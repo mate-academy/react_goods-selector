@@ -25,9 +25,9 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleClearGood = () => this.setState({ selectedGood: '' });
-
-  handleSelectGood = (good: string) => this.setState({ selectedGood: good });
+  handleButtonClick = (good: string, isGoodSelected: boolean) => {
+    this.setState({ selectedGood: isGoodSelected ? '' : good });
+  };
 
   render() {
     const { selectedGood } = this.state;
@@ -37,16 +37,15 @@ export class App extends Component<{}, State> {
         {selectedGood
           ? (
             <h1 className="title is-flex is-align-items-center">
-              {selectedGood}
-              {' '}
-              is selected
-
+              {`${selectedGood} is selected`}
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.handleClearGood}
+                onClick={() => {
+                  this.handleButtonClick(selectedGood, true);
+                }}
               />
             </h1>
           )
@@ -69,12 +68,13 @@ export class App extends Component<{}, State> {
                     <button
                       data-cy={!isGoodSelected ? 'AddButton' : 'RemoveButton'}
                       type="button"
-                      className={isGoodSelected ? 'button is-info' : 'button'}
-                      onClick={() => (
-                        isGoodSelected
-                          ? this.handleClearGood()
-                          : this.handleSelectGood(good)
+                      className={classNames(
+                        'button',
+                        { 'is-info': isGoodSelected },
                       )}
+                      onClick={() => {
+                        this.handleButtonClick(good, isGoodSelected);
+                      }}
                     >
                       {isGoodSelected ? '-' : '+'}
                     </button>
@@ -84,7 +84,6 @@ export class App extends Component<{}, State> {
                     {good}
                   </td>
                 </tr>
-
               );
             })}
           </tbody>
