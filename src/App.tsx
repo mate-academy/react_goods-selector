@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 import classNames from 'classnames';
 import 'bulma/css/bulma.css';
@@ -18,67 +17,30 @@ export const goods = [
 ];
 
 type State = {
-  selectedGoods: string;
+  selectedGood: string;
 };
 
 export class App extends React.Component<{}, State> {
   state = {
-    selectedGoods: 'Jam',
+    selectedGood: 'Jam',
   };
 
-  get oneGood(): string {
-    return this.state.selectedGoods;
-  }
-
-  isSelected = (item: string) => this.oneGood === item;
-
-  select = (item: string) => {
-    return this.isSelected(item)
-      ? this.setState({ selectedGoods: '' })
-      : this.setState({ selectedGoods: item });
-  };
-
-  addClearButton = () => {
-    return (
-      <button
-        aria-label="ClearButton"
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-        onClick={() => {
-          this.setState({ selectedGoods: '' });
-        }}
-      />
-    );
-  };
-
-  addButtonAdd = (item:string) => {
-    return (
-      <button
-        data-cy="AddButton"
-        type="button"
-        className="button"
-        onClick={() => this.select(item)}
-      >
-        +
-      </button>
-    );
-  };
-
-  addButtonRemove = (item:string) => {
-    return (
-      <button
-        data-cy="RemoveButton"
-        type="button"
-        className="button is-info"
-        onClick={() => this.select(item)}
-      >
-        -
-      </button>
-    );
-  };
+  addGoodsButton = (name: string, item = '') => (
+    <button
+      data-cy={name}
+      type="button"
+      className={name === 'AddButton' ? 'button' : 'button is-info'}
+      onClick={() => this.setState(
+        { selectedGood: item },
+      )}
+    >
+      {name === 'RemoveButton' ? '-' : '+'}
+    </button>
+  );
 
   render() {
+    const { selectedGood } = this.state;
+
     return (
       <main className="section container">
         <h1
@@ -87,26 +49,37 @@ export class App extends React.Component<{}, State> {
             is-align-items-center
           "
         >
-          {this.oneGood
-            ? `${this.oneGood} is selected`
+          {selectedGood
+            ? `${selectedGood} is selected`
             : 'No goods selected'}
 
-          {this.oneGood && this.addClearButton()}
+          {selectedGood && (
+            <button
+              aria-label="ClearButton"
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={() => this.setState(
+                { selectedGood: '' },
+              )}
+            />
+          )}
         </h1>
 
         <table className="table">
           <tbody>
             {goods.map(item => (
               <tr
+                key={item}
                 data-cy="Good"
                 className={classNames('', {
-                  'has-background-success-light': (this.isSelected(item)),
+                  'has-background-success-light': (selectedGood === item),
                 })}
               >
                 <td>
-                  {this.isSelected(item)
-                    ? this.addButtonRemove(item)
-                    : this.addButtonAdd(item)}
+                  {selectedGood === item
+                    ? this.addGoodsButton('RemoveButton')
+                    : this.addGoodsButton('AddButton', item)}
                 </td>
 
                 <td
