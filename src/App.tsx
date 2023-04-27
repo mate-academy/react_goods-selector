@@ -48,6 +48,7 @@ export class App extends Component<{}, State> {
             </h1>
           )
           : <h1 className="title">No goods selected</h1>}
+
         <table className="table">
           <tbody>
             {goods.map((good) => {
@@ -56,6 +57,7 @@ export class App extends Component<{}, State> {
               return (
                 <tr
                   data-cy="Good"
+                  key={good}
                   className={cn({
                     'has-background-success-light': isGoodSelected,
                   })}
@@ -66,7 +68,7 @@ export class App extends Component<{}, State> {
                         <button
                           className="button is-info"
                           type="button"
-                          onClick={() => this.setState({ selectedGood: '' })}
+                          onClick={this.handleClear}
                           data-cy="RemoveButton"
                         >
                           -
@@ -98,4 +100,3 @@ export class App extends Component<{}, State> {
     );
   }
 }
-
