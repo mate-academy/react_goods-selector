@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useState } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import React from 'react';
 
 export const goods = [
   'Dumplings',
@@ -16,78 +16,82 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => {
-  const [selectedGood, setSelectedGood] = useState('Jam');
-  const [isGoodSelected, setIsGoodSelected] = useState(true);
-
-  const handleSelect = (item: React.SetStateAction<string>) => {
-    setSelectedGood(item);
-    setIsGoodSelected(true);
+export class App extends React.Component {
+  state = {
+    selectedGood: 'Jam',
+    isGoodSelected: true,
   };
 
-  const handleClearClick = () => {
-    setSelectedGood('');
-    setIsGoodSelected(false);
+  handleSelect = (item: React.SetStateAction<string>) => {
+    this.setState({ selectedGood: item, isGoodSelected: true });
   };
 
-  const goodsElements = goods.map(good => (
-    <tr
-      data-cy="Good"
-      className={selectedGood === good ? 'has-background-success-light' : ''}
-    >
-      <td>
-        {selectedGood !== good
-          ? (
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-              onClick={() => handleSelect(good)}
-            >
-              +
-            </button>
-          )
-          : (
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-              onClick={handleClearClick}
-            >
-              -
-            </button>
-          )}
-      </td>
+  handleClearClick = () => {
+    this.setState({ selectedGood: '', isGoodSelected: false });
+  };
 
-      <td data-cy="GoodTitle" className="is-vcentered">
-        {good}
-      </td>
-    </tr>
-  ));
+  render() {
+    const { selectedGood, isGoodSelected } = this.state;
 
-  return (
-    <main className="section container">
-      <h1 className="title is-flex is-align-items-center">
-        {isGoodSelected ? `${selectedGood} is selected` : 'No goods selected'}
+    const goodsElements = goods.map(good => (
+      <tr
+        data-cy="Good"
+        className={selectedGood === good ? 'has-background-success-light' : ''}
+      >
+        <td>
+          {selectedGood !== good
+            ? (
+              <button
+                data-cy="AddButton"
+                type="button"
+                className="button"
+                onClick={() => this.handleSelect(good)}
+              >
+                +
+              </button>
+            )
+            : (
+              <button
+                data-cy="RemoveButton"
+                type="button"
+                className="button is-info"
+                onClick={this.handleClearClick}
+              >
+                -
+              </button>
+            )}
+        </td>
 
-        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-        {isGoodSelected
-          && (
-            <button
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={handleClearClick}
-            />
-          )}
+        <td data-cy="GoodTitle" className="is-vcentered">
+          {good}
+        </td>
+      </tr>
+    ));
 
-      </h1>
+    return (
+      <main className="section container">
+        <h1 className="title is-flex is-align-items-center">
+          {this.state.isGoodSelected ? `${selectedGood} is selected` : 'No goods selected'}
 
-      <table className="table">
-        <tbody>
-          {goodsElements}
-        </tbody>
-      </table>
-    </main>
-  );
-};
+          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+          {isGoodSelected
+            && (
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.handleClearClick}
+              />
+            )}
+
+        </h1>
+
+        <table className="table">
+          <tbody>
+            {goodsElements}
+          </tbody>
+        </table>
+      </main>
+    );
+  }
+}
