@@ -47,7 +47,9 @@ export class App extends Component<{}, State> {
                 onClick={() => this.setState({ selectedGood: '' })}
               />
             </h1>
-          ) : (<h1 className="title">No goods selected</h1>)}
+          ) : (
+            <h1 className="title">No goods selected</h1>
+          )}
 
         <table className="table">
           <tbody>
