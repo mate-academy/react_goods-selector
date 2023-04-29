@@ -16,18 +16,18 @@ export const goods = [
   'Garlic',
 ];
 
-type S = {
+type State = {
   selectedGood: string
 };
 
-export class App extends Component<{}, S> {
+export class App extends Component<{}, State> {
   state = {
     selectedGood: 'Jam',
   };
 
   editSelectedGood = (good: string) => {
-    this.setState((prev: Readonly<S>) => ({
-      selectedGood: (prev.selectedGood !== good ? good : ''),
+    this.setState((state: Readonly<State>) => ({
+      selectedGood: (state.selectedGood !== good ? good : ''),
     }));
   };
 
@@ -51,34 +51,32 @@ export class App extends Component<{}, S> {
 
         <table className="table">
           <tbody>
-            {goods.map(good => (
-              <tr
-                data-cy="Good"
-                key={good}
-                className={selectedGood === good
-                  ? 'has-background-success-light'
-                  : ''}
-              >
-                <td>
-                  <button
-                    data-cy={selectedGood === good
-                      ? 'RemoveButton'
-                      : 'AddButton'}
-                    type="button"
-                    className={selectedGood === good
-                      ? 'button is-info'
-                      : 'button'}
-                    onClick={() => this.editSelectedGood(good)}
-                  >
-                    {selectedGood === good ? '-' : '+'}
-                  </button>
-                </td>
+            {goods.map(good => {
+              const currentItem = selectedGood === good;
 
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            ))}
+              return (
+                <tr
+                  data-cy="Good"
+                  key={good}
+                  className={currentItem ? 'has-background-success-light' : ''}
+                >
+                  <td>
+                    <button
+                      data-cy={currentItem ? 'RemoveButton' : 'AddButton'}
+                      type="button"
+                      className={currentItem ? 'button is-info' : 'button'}
+                      onClick={() => this.editSelectedGood(good)}
+                    >
+                      {currentItem ? '-' : '+'}
+                    </button>
+                  </td>
+
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </main>
