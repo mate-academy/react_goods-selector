@@ -16,17 +16,19 @@ export const goods = [
   'Garlic',
 ];
 
-export class App extends Component {
+type S = {
+  selectedGood: string
+};
+
+export class App extends Component<{}, S> {
   state = {
     selectedGood: 'Jam',
   };
 
   editSelectedGood = (good: string) => {
-    if (good !== this.state.selectedGood) {
-      this.setState({ selectedGood: good });
-    } else {
-      this.setState({ selectedGood: '' });
-    }
+    this.setState((prev: Readonly<S>) => ({
+      selectedGood: (prev.selectedGood !== good ? good : ''),
+    }));
   };
 
   render() {
@@ -53,16 +55,19 @@ export class App extends Component {
               <tr
                 data-cy="Good"
                 key={good}
-                className={selectedGood
-                  === good ? 'has-background-success-light' : ''}
+                className={selectedGood === good
+                  ? 'has-background-success-light'
+                  : ''}
               >
                 <td>
                   <button
                     data-cy={selectedGood === good
-                      ? 'RemoveButton' : 'AddButton'}
+                      ? 'RemoveButton'
+                      : 'AddButton'}
                     type="button"
-                    className={selectedGood
-                      === good ? 'button is-info' : 'button'}
+                    className={selectedGood === good
+                      ? 'button is-info'
+                      : 'button'}
                     onClick={() => this.editSelectedGood(good)}
                   >
                     {selectedGood === good ? '-' : '+'}
