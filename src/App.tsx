@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import 'bulma/css/bulma.css';
+import cn from 'classnames';
 import './App.scss';
 
 export const goods = [
@@ -24,30 +25,30 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  clearGoods = () => this.setState({ selectedGood: '' });
+  handleClear = () => this.setState({ selectedGood: '' });
 
   handleSelectedGood = (good: string) => this.setState({ selectedGood: good });
 
   render() {
     const { selectedGood } = this.state;
-    const selectedClass = 'has-background-success-light';
 
     return (
       <main className="section container">
 
         <h1 className="title is-flex is-align-items-center">
-          {selectedGood.length ? `${selectedGood} is selected` : 'No goods selected'}
+          {selectedGood.length
+            ? `${selectedGood} is selected`
+            : 'No goods selected'}
 
           {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
           {
-            selectedGood
-            && (
+            selectedGood && (
               <button
                 aria-label="button"
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.clearGoods}
+                onClick={this.handleClear}
               />
             )
 
@@ -63,17 +64,21 @@ export class App extends Component<{}, State> {
                 <tr
                   key={good}
                   data-cy="Good"
-                  className={(isSelectedGood && selectedClass) || ''}
+                  className={cn('', {
+                    'has-background-success-light': isSelectedGood,
+                  })}
                 >
                   <td>
                     <button
                       data-cy={isSelectedGood ? 'RemoveButton' : 'AddButton'}
                       type="button"
-                      className={isSelectedGood ? 'button is-info' : 'button'}
+                      className={cn('button', {
+                        'is-info': isSelectedGood,
+                      })}
                       onClick={() => {
                         // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                         isSelectedGood
-                          ? this.clearGoods()
+                          ? this.handleClear()
                           : this.handleSelectedGood(good);
                       }}
                     >
