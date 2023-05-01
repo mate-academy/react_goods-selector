@@ -24,11 +24,9 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleSelectedGood = (isSelectedGood: boolean, good: string) => (
-    isSelectedGood
-      ? this.setState({ selectedGood: '' })
-      : this.setState({ selectedGood: good })
-  );
+  clearGoods = () => this.setState({ selectedGood: '' });
+
+  handleSelectedGood = (good: string) => this.setState({ selectedGood: good });
 
   render() {
     const { selectedGood } = this.state;
@@ -49,7 +47,7 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => this.setState({ selectedGood: '' })}
+                onClick={this.clearGoods}
               />
             )
 
@@ -73,7 +71,10 @@ export class App extends Component<{}, State> {
                       type="button"
                       className={isSelectedGood ? 'button is-info' : 'button'}
                       onClick={() => {
-                        this.handleSelectedGood(isSelectedGood, good);
+                        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+                        isSelectedGood
+                          ? this.clearGoods()
+                          : this.handleSelectedGood(good);
                       }}
                     >
                       {isSelectedGood ? '-' : '+'}
