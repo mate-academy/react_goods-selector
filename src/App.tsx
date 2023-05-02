@@ -1,5 +1,4 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
-import React from 'react';
+import { useState } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -16,81 +15,60 @@ export const goods = [
   'Garlic',
 ];
 
-type State = {
-  selectedGood: string;
-};
+export const App: React.FC = () => {
+  const [selectedGood, setSelectedGood] = useState(goods[8]);
 
-export class App extends React.Component<{}, State> {
-  state = {
-    selectedGood: 'Jam',
+  const clearHandler = () => {
+    setSelectedGood('');
   };
 
-  handleState = (event: React.MouseEvent<HTMLButtonElement>, word: string) => {
-    const data = (event.target as HTMLButtonElement).dataset.cy;
-
-    this.setState({
-      selectedGood: word,
-    });
-
-    if (data === 'RemoveButton') {
-      this.setState({
-        selectedGood: '',
-      });
+  const buttonClickHandler = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    good: string,
+  ) => {
+    if (e.currentTarget.textContent === '-') {
+      setSelectedGood('');
+    } else {
+      setSelectedGood(good);
     }
   };
 
-  handleClearButton = () => {
-    this.setState({
-      selectedGood: '',
-    });
-  };
+  return (
+    <main className="section container">
+      {!selectedGood && <h1 className="title">No goods selected</h1>}
 
-  render() {
-    const { selectedGood } = this.state;
-
-    return (
-      <main className="section container">
-        <h1 className={`title ${selectedGood && 'is-flex is-align-items-center'}`}>
-          {selectedGood
-            ? `${selectedGood} is selected`
-            : 'No goods selected'}
-
+      {selectedGood && (
+        <h1 className="title is-flex is-align-items-center">
+          {`${selectedGood} is selected`}
+          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
           {selectedGood && (
             <button
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => this.handleClearButton()}
+              onClick={clearHandler}
+              aria-label="Clear selection"
             />
           )}
         </h1>
+      )}
 
-        <table className="table">
-          <tbody>
-            {goods.map(good => {
-              const isActive = good === selectedGood;
-
+      <table className="table">
+        <tbody>
+          {goods.map((good) => {
+            if (!selectedGood || selectedGood !== good) {
               return (
-                <tr
-                  data-cy="Good"
-                  className={`${isActive && 'has-background-success-light'}`}
-                  key={good}
-                >
+                <tr data-cy="Good" key={good}>
                   <td>
                     <button
-                      data-cy={`${isActive
-                        ? 'RemoveButton'
-                        : 'AddButton'
-                      }`}
+                      data-cy="AddButton"
                       type="button"
-                      className={`button ${isActive && 'is-info'}`}
-                      onClick={(event) => {
-                        this.handleState(event, good);
+                      className="button"
+                      onClick={(e) => {
+                        buttonClickHandler(e, good);
                       }}
                     >
-                      {`${isActive
-                        ? '-'
-                        : '+'}`}
+                      +
                     </button>
                   </td>
 
@@ -99,10 +77,35 @@ export class App extends React.Component<{}, State> {
                   </td>
                 </tr>
               );
-            })}
-          </tbody>
-        </table>
-      </main>
-    );
-  }
-}
+            }
+
+            return (
+              <tr
+                className="has-background-success-light"
+                data-cy="Good"
+                key={good}
+              >
+                <td>
+                  <button
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="button is-info"
+                    onClick={(e) => {
+                      buttonClickHandler(e, good);
+                    }}
+                  >
+                    -
+                  </button>
+                </td>
+
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </main>
+  );
+};
