@@ -19,7 +19,9 @@ type State = {
   selectedGood: string,
 };
 
-export class App extends Component<{}, State> {
+type Props = {};
+
+export class App extends Component<Props, State> {
   state: Readonly<State> = {
     selectedGood: 'Jam',
   };
