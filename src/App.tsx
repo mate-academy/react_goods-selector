@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -26,13 +27,13 @@ export class App extends Component<Props, State> {
     selectedGood: 'Jam',
   };
 
-  save = (good: string) => {
+  selectGood = (good: string) => {
     this.setState({
       selectedGood: good,
     });
   };
 
-  delete = () => {
+  deselectGood = () => {
     this.setState({
       selectedGood: '',
     });
@@ -52,7 +53,7 @@ export class App extends Component<Props, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.delete}
+                onClick={this.deselectGood}
               >
                 -
               </button>
@@ -78,13 +79,14 @@ export class App extends Component<Props, State> {
                         : 'AddButton'
                     }
                     type="button"
-                    className={
-                      selectedGood === good
-                        ? 'button is-info'
-                        : 'button'
-                    }
+                    className={classNames(
+                      'button',
+                      {
+                        'is-info': selectedGood === good,
+                      },
+                    )}
                     onClick={() => (
-                      this.save(good)
+                      this.selectGood(good)
                     )}
                   >
                     {selectedGood === good ? '-' : '+'}
