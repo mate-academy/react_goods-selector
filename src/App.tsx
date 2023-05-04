@@ -24,7 +24,7 @@ type Props = {};
 
 export class App extends Component<Props, State> {
   state: Readonly<State> = {
-    selectedGood: 'Jam',
+    selectedGood: goods[goods.indexOf('Jam')] || goods[0],
   };
 
   selectGood = (good: string) => {
