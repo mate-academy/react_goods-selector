@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
-import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -72,25 +71,32 @@ export class App extends Component<Props, State> {
                   : ''}
               >
                 <td>
-                  <button
-                    data-cy={
-                      selectedGood === good
-                        ? 'RemoveButton'
-                        : 'AddButton'
-                    }
-                    type="button"
-                    className={classNames(
-                      'button',
-                      {
-                        'is-info': selectedGood === good,
-                      },
+                  {selectedGood === good
+                    ? (
+                      <button
+                        data-cy="RemoveButton"
+                        type="button"
+                        className="button is-info"
+                        onClick={() => (
+                          this.deselectGood()
+                        )}
+                      >
+                        -
+                      </button>
+                    )
+                    : (
+                      <button
+                        data-cy="AddButton"
+                        type="button"
+                        className="button"
+                        onClick={() => (
+                          this.selectGood(good)
+                        )}
+                      >
+                        +
+                      </button>
+
                     )}
-                    onClick={() => (
-                      this.selectGood(good)
-                    )}
-                  >
-                    {selectedGood === good ? '-' : '+'}
-                  </button>
                 </td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
