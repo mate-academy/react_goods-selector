@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
+import ClassNames from 'classnames';
 import './App.scss';
 
 export const goods = [
@@ -34,7 +35,10 @@ export class App extends React.Component <{}, State> {
   };
 
   clearButton = () => (
-    this.setState({ isChecked: false }));
+    this.setState({
+      isChecked: false,
+      selectedGood: '',
+    }));
 
   render() {
     const { isChecked, selectedGood } = this.state;
@@ -61,21 +65,25 @@ export class App extends React.Component <{}, State> {
           <tbody>
 
             {goods.map((item: string) => {
+              const isItemSelected = item === selectedGood;
+
               return (
                 <tr
                   key={item}
                   data-cy="Good"
-                  className={selectedGood === item
+                  className={isItemSelected
                     ? 'has-background-success-light' : ''}
                 >
                   <td>
                     <button
                       data-cy="RemoveButton"
                       type="button"
-                      className="button is-info"
+                      className={ClassNames(
+                        'button', { 'is-info': isItemSelected },
+                      )}
                       onClick={this.handleClick}
                     >
-                      {selectedGood === item ? '-' : '+'}
+                      {isItemSelected ? '-' : '+'}
                     </button>
                   </td>
 
