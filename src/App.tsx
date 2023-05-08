@@ -28,7 +28,7 @@ export class App extends React.Component<{}, State> {
     this.setState({ selectedGood: good });
   };
 
-  handleClickClear = () => {
+  handleClear = () => {
     this.setState({ selectedGood: null });
   };
 
@@ -44,7 +44,7 @@ export class App extends React.Component<{}, State> {
               {`${selectedGood} is selected`}
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
-                onClick={this.handleClickClear}
+                onClick={this.handleClear}
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
@@ -70,7 +70,7 @@ export class App extends React.Component<{}, State> {
                     {selectedGood === good
                       ? (
                         <button
-                          onClick={this.handleClickClear}
+                          onClick={this.handleClear}
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
