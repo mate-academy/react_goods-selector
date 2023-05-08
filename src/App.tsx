@@ -17,35 +17,31 @@ export const goods = [
 
 interface State {
   selectedGood: string | null;
-  isSelected: boolean;
 }
 
 export class App extends React.Component<{}, State> {
   state = {
     selectedGood: 'Jam',
-    isSelected: true,
   };
 
   handleClick = (good: string) => {
-    this.setState({ selectedGood: good, isSelected: true });
+    this.setState({ selectedGood: good });
   };
 
   handleClickClear = () => {
-    this.setState({ isSelected: false, selectedGood: null });
+    this.setState({ selectedGood: null });
   };
 
   render() {
-    const { selectedGood, isSelected } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <main className="section container">
 
-        {isSelected
+        {selectedGood
           ? (
             <h1 className="title is-flex is-align-items-center">
-              {selectedGood}
-              {' '}
-              is selected
+              {`${selectedGood} is selected`}
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 onClick={this.handleClickClear}
