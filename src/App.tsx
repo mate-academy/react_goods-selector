@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import 'bulma/css/bulma.css';
 import './App.scss';
-import React from 'react';
+import React, { Component } from 'react';
 
 export const goods = [
   'Dumplings',
@@ -16,22 +16,25 @@ export const goods = [
   'Garlic',
 ];
 
-export class App extends React.Component {
+interface State {
+  selectedGood: React.SetStateAction<string>,
+}
+
+export class App extends Component<{}, State> {
   state = {
     selectedGood: 'Jam',
-    isGoodSelected: true,
   };
 
   handleSelect = (item: React.SetStateAction<string>) => {
-    this.setState({ selectedGood: item, isGoodSelected: true });
+    this.setState({ selectedGood: item });
   };
 
   handleClearClick = () => {
-    this.setState({ selectedGood: '', isGoodSelected: false });
+    this.setState({ selectedGood: '' });
   };
 
   render() {
-    const { selectedGood, isGoodSelected } = this.state;
+    const { selectedGood } = this.state;
 
     const goodsElements = goods.map(good => (
       <tr
@@ -71,10 +74,10 @@ export class App extends React.Component {
     return (
       <main className="section container">
         <h1 className="title is-flex is-align-items-center">
-          {this.state.isGoodSelected ? `${selectedGood} is selected` : 'No goods selected'}
+          {this.state.selectedGood.length ? `${selectedGood} is selected` : 'No goods selected'}
 
           {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-          {isGoodSelected
+          {selectedGood.length > 0
             && (
               <button
                 data-cy="ClearButton"
