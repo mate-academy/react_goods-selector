@@ -24,11 +24,11 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleSelectClick = (element: string) => {
+  handleSelect = (element: string) => {
     this.setState({ selectedGood: element });
   };
 
-  handleClearClick = () => {
+  handleUnselect = () => {
     this.setState({ selectedGood: '' });
   };
 
@@ -40,16 +40,15 @@ export class App extends React.Component<{}, State> {
         <h1 className="title is-flex is-align-items-center">
           {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
 
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-          {selectedGood
-            && (
+          {selectedGood && (
             <button
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={this.handleClearClick}
+              aria-label="Save"
+              onClick={this.handleUnselect}
             />
-            )}
+          )}
         </h1>
 
         <table className="table">
@@ -70,7 +69,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
-                          onClick={this.handleClearClick}
+                          onClick={this.handleUnselect}
                         >
                           -
                         </button>
@@ -80,7 +79,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="AddButton"
                           type="button"
                           className="button"
-                          onClick={() => this.handleSelectClick(good)}
+                          onClick={() => this.handleSelect(good)}
                         >
                           +
                         </button>
