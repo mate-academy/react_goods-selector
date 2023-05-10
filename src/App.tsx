@@ -37,14 +37,16 @@ export class App extends React.Component<{}, State> {
   };
 
   render() {
+    const { selectedGood } = this.state;
+
     return (
       <main className="section container">
         {
-          !this.state.selectedGood
+          !selectedGood
             ? <h1 className="title">No goods selected</h1>
             : (
               <h1 className="title is-flex is-align-items-center">
-                {`${this.state.selectedGood} ${this.managePluralForm(this.state.selectedGood)} selected` }
+                {`${selectedGood} ${this.managePluralForm(selectedGood)} selected` }
 
                 {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
                 <button
@@ -62,12 +64,12 @@ export class App extends React.Component<{}, State> {
               <tr
                 data-cy="Good"
                 key={good}
-                className={this.state.selectedGood === good
+                className={selectedGood === good
                   ? 'has-background-success-light'
                   : ''}
               >
                 <td>
-                  {this.state.selectedGood === good
+                  {selectedGood === good
                     ? (
                       <button
                         data-cy="RemoveButton"
