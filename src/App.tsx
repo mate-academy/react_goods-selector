@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import 'bulma/css/bulma.css';
 import './App.scss';
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 export const goods = [
   'Dumplings',
@@ -17,7 +17,7 @@ export const goods = [
 ];
 
 interface State {
-  selectedGood: React.SetStateAction<string>,
+  selectedGood: string,
 }
 
 export class App extends Component<{}, State> {
@@ -25,11 +25,11 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleSelect = (item: React.SetStateAction<string>) => {
+  handleSelect = (item: string) => {
     this.setState({ selectedGood: item });
   };
 
-  handleClearClick = () => {
+  handleClear = () => {
     this.setState({ selectedGood: '' });
   };
 
@@ -58,7 +58,7 @@ export class App extends Component<{}, State> {
                 data-cy="RemoveButton"
                 type="button"
                 className="button is-info"
-                onClick={this.handleClearClick}
+                onClick={this.handleClear}
               >
                 -
               </button>
@@ -83,7 +83,7 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.handleClearClick}
+                onClick={this.handleClear}
               />
             )}
 
