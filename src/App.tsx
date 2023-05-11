@@ -50,7 +50,7 @@ export class App extends React.Component<{}, AppState> {
               type="button"
               className="delete ml-3"
               title="button"
-              onClick={() => this.handleClear()}
+              onClick={this.handleClear}
             />
           )}
         </h1>
@@ -81,7 +81,7 @@ export class App extends React.Component<{}, AppState> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={() => this.handleClear()}
+                        onClick={this.handleClear}
                       >
                         -
                       </button>
