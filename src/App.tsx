@@ -15,9 +15,9 @@ export const goods = [
   'Garlic',
 ];
 
-type State = {
+interface State {
   selectedGood: string,
-};
+}
 
 export class App extends React.Component<{}, State> {
   state = {
@@ -32,10 +32,6 @@ export class App extends React.Component<{}, State> {
     this.setState({ selectedGood: good });
   };
 
-  managePluralForm = (form: string) => {
-    return form[form.length - 1] === 's' ? 'are' : 'is';
-  };
-
   render() {
     const { selectedGood } = this.state;
 
@@ -46,7 +42,7 @@ export class App extends React.Component<{}, State> {
             ? <h1 className="title">No goods selected</h1>
             : (
               <h1 className="title is-flex is-align-items-center">
-                {`${selectedGood} ${this.managePluralForm(selectedGood)} selected` }
+                {`${selectedGood} is selected` }
 
                 {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
                 <button
