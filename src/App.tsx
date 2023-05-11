@@ -38,7 +38,7 @@ export class App extends React.Component<{}, State> {
     return (
       <main className="section container">
         <h1 className="title is-flex is-align-items-center">
-          {selectedGood.length > 0 ? `${selectedGood} is selected` : 'No goods selected'}
+          {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
           <button
             data-cy="ClearButton"
             type="button"
