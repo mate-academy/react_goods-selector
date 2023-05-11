@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
@@ -36,6 +37,13 @@ export class App extends React.Component<{}, State> {
     });
   }
 
+  deleteStateForButton(): void {
+    this.setState({
+      selectedGood: 'No goods',
+      hiddenCross: false,
+    });
+  }
+
   render() {
     // eslint-disable-next-line @typescript-eslint/no-shadow
     const {
@@ -59,10 +67,7 @@ export class App extends React.Component<{}, State> {
               type="button"
               className="delete ml-3"
               onClick={() => {
-                this.setState({
-                  selectedGood: 'No goods',
-                  hiddenCross: false,
-                });
+                this.deleteStateForButton();
               }}
             />
           )}
@@ -88,7 +93,7 @@ export class App extends React.Component<{}, State> {
                         type="button"
                         className="button is-info"
                         onClick={() => {
-                          this.saveStateForButton(good);
+                          this.deleteStateForButton();
                         }}
                       >
                         -
