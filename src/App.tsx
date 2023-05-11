@@ -38,7 +38,7 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        {selectedGood.length === 0
+        {!selectedGood
           ? <h1 className="title">No goods selected</h1>
           : (
             <h1 className="title is-flex is-align-items-center">
