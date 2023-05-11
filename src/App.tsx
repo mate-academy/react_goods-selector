@@ -20,39 +20,37 @@ type Props = {};
 
 interface State {
   selectedGood: string | null,
-  isSelected: boolean,
 }
 
 export class App extends React.Component<Props, State> {
   state: Readonly<State> = {
     selectedGood: 'Jam',
-    isSelected: true,
   };
 
   selectGood = (good: string) => {
-    this.setState({ selectedGood: good, isSelected: true });
+    this.setState({ selectedGood: good });
   };
 
   unselectGood = () => {
-    this.setState({ selectedGood: '', isSelected: false });
+    this.setState({ selectedGood: null });
   };
 
   render() {
-    const { selectedGood, isSelected } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <main className="section container">
         <h1 className={
-          !isSelected
+          selectedGood === null
             ? 'title'
             : 'title is-flex is-align-items-center'
         }
         >
-          {!isSelected
+          {selectedGood === null
             ? 'No goods selected'
             : `${selectedGood} is selected`}
 
-          {isSelected && (
+          {selectedGood && (
             // eslint-disable-next-line jsx-a11y/control-has-associated-label
             <button
               data-cy="ClearButton"
