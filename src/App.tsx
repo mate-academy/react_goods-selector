@@ -16,7 +16,7 @@ export const goods = [
 ];
 
 interface State {
-  selectedGood: string | '';
+  selectedGood: string,
 }
 
 export class App extends React.Component<{}, State> {
@@ -24,7 +24,7 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  addItems = (good: string) => {
+  addItem = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
@@ -39,13 +39,15 @@ export class App extends React.Component<{}, State> {
       <main className="section container">
         <h1 className="title is-flex is-align-items-center">
           {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
-          <button
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-            onClick={this.clearItems}
-            aria-label="Clear Selection"
-          />
+          {selectedGood && (
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={this.clearItems}
+              aria-label="Clear Selection"
+            />
+          )}
         </h1>
 
         <table className="table">
@@ -67,6 +69,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
+                          onClick={this.clearItems}
                         >
                           -
                         </button>
@@ -75,7 +78,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="AddButton"
                           type="button"
                           className="button"
-                          onClick={() => this.addItems(good)}
+                          onClick={() => this.addItem(good)}
                         >
                           +
                         </button>
