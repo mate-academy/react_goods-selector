@@ -15,7 +15,11 @@ export const goods = [
   'Garlic',
 ];
 
-export class App extends React.Component {
+interface AppState {
+  selectedGood: string;
+}
+
+export class App extends React.Component <{}, AppState> {
   state = {
     selectedGood: 'Jam',
   };
@@ -24,22 +28,21 @@ export class App extends React.Component {
     this.setState({ selectedGood: '' });
   };
 
-  addButton(
-    _event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    name:string,
-  ) {
+  addButton(name:string) {
     this.setState({ selectedGood: name });
   }
 
   render(): React.ReactNode {
+    const { selectedGood } = this.state;
+
     return (
       <main className="section container">
         <h1 className="title is-flex is-align-items-center">
-          {this.state.selectedGood
-            ? `${this.state.selectedGood} is selected`
+          {selectedGood
+            ? `${selectedGood} is selected`
             : 'No goods selected'}
 
-          {this.state.selectedGood && (
+          {selectedGood && (
             // eslint-disable-next-line jsx-a11y/control-has-associated-label
             <button
               data-cy="ClearButton"
@@ -53,7 +56,7 @@ export class App extends React.Component {
         <table className="table">
           <tbody>
             {goods.map(good => {
-              const isSelected = good === this.state.selectedGood;
+              const isSelected = good === selectedGood;
 
               return (
                 <tr
@@ -76,10 +79,7 @@ export class App extends React.Component {
                       onClick={
                         isSelected
                           ? this.clearButton
-                          : (event) => this.addButton(
-                            event,
-                            good,
-                          )
+                          : () => this.addButton(good)
                       }
                     >
                       {`${isSelected ? '-' : '+'}`}
