@@ -41,12 +41,12 @@ export class App extends React.Component<Props, State> {
     return (
       <main className="section container">
         <h1 className={
-          selectedGood === null
+          !selectedGood
             ? 'title'
             : 'title is-flex is-align-items-center'
         }
         >
-          {selectedGood === null
+          {!selectedGood
             ? 'No goods selected'
             : `${selectedGood} is selected`}
 
