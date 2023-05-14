@@ -22,7 +22,7 @@ type State = {
 
 export class App extends Component<{}, State> {
   state = {
-    selectedGood: 'Jam',
+    selectedGood: goods[goods.indexOf('Jam')] || goods[0],
   };
 
   removeGoodHandler = () => {
