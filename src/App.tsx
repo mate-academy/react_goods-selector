@@ -31,7 +31,6 @@ export class App extends React.Component<{}, State> {
     return (
       <main className="section container">
         <h1 className="title is-flex is-align-items-center">
-          {' '}
           {selectedGood
             ? ` ${selectedGood} is selected`
             : 'No goods selected'}
@@ -52,6 +51,7 @@ export class App extends React.Component<{}, State> {
           <tbody>
             {goods.map(good => (
               <tr
+                key={good}
                 data-cy="Good"
                 className={selectedGood === good
                   ? 'has-background-success-light' : ''}
