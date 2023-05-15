@@ -25,12 +25,12 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  RemoveButton = () => {
+  handleRemoveButtonClick = () => {
     this.setState({ selectedGood: '' });
   };
 
   // eslint-disable-next-line @typescript-eslint/no-shadow
-  AddButton = (goods: string) => {
+  handleAddButtonClick = (goods: string) => {
     this.setState({ selectedGood: goods });
   };
 
@@ -55,7 +55,7 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={(this.RemoveButton)}
+                onClick={(this.handleRemoveButtonClick)}
               />
             </h1>
           )
@@ -66,9 +66,8 @@ export class App extends Component<{}, State> {
             {goods.map((good) => {
               return (
                 <tr
-                  ata-cy="Good"
+                  data-cy="Good"
                   className={classNames(
-                    '',
                     { 'has-background-success-light': good === selectedGood },
                   )}
                 >
@@ -78,7 +77,7 @@ export class App extends Component<{}, State> {
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={() => this.AddButton(good)}
+                        onClick={() => this.handleAddButtonClick(good)}
                       >
                         +
                       </button>
@@ -89,7 +88,7 @@ export class App extends Component<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={this.RemoveButton}
+                        onClick={this.handleRemoveButtonClick}
                       >
                         -
                       </button>
