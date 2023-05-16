@@ -1,6 +1,6 @@
 import 'bulma/css/bulma.css';
 import classNames from 'classnames';
-import { Component } from 'react';
+import { useState } from 'react';
 import './App.scss';
 
 export const goods = [
@@ -16,93 +16,83 @@ export const goods = [
   'Garlic',
 ];
 
-type State = {
-  selectedGood: string,
-};
-
-export class App extends Component<{}, State> {
-  state = {
-    selectedGood: 'Jam',
-  };
-
-  handleRemoveButtonClick = () => {
-    this.setState({ selectedGood: '' });
-  };
+export const App: React.FC = () => {
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   // eslint-disable-next-line @typescript-eslint/no-shadow
-  handleAddButtonClick = (goods: string) => {
-    this.setState({ selectedGood: goods });
+  const handleAddButtonClick = (goods: string) => {
+    setSelectedGood(goods);
   };
 
-  render() {
-    const { selectedGood } = this.state;
+  const handleRemoveButtonClick = () => {
+    setSelectedGood('');
+  };
 
-    return (
+  return (
+    <main className="section container">
+      {
+        selectedGood === '' ? (
+          <h1 className="title">
+            No goods selected
+          </h1>
+        ) : (
+          <h1 className="title is-flex is-align-items-center">
+            {selectedGood}
+            {' '}
+            is selected
+            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={(handleRemoveButtonClick)}
+            />
+          </h1>
+        )
+      }
 
-      <main className="section container">
-        {
-          selectedGood === '' ? (
-            <h1 className="title">
-              No goods selected
-            </h1>
-          ) : (
-            <h1 className="title is-flex is-align-items-center">
-              {selectedGood}
-              {' '}
-              is selected
-              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-              <button
-                data-cy="ClearButton"
-                type="button"
-                className="delete ml-3"
-                onClick={(this.handleRemoveButtonClick)}
-              />
-            </h1>
-          )
-        }
-
-        <table className="table">
-          <tbody>
-            {goods.map((good) => {
-              return (
-                <tr
-                  data-cy="Good"
-                  className={classNames(
-                    { 'has-background-success-light': good === selectedGood },
-                  )}
-                >
-                  {!selectedGood || good !== selectedGood ? (
-                    <td>
-                      <button
-                        data-cy="AddButton"
-                        type="button"
-                        className="button"
-                        onClick={() => this.handleAddButtonClick(good)}
-                      >
-                        +
-                      </button>
-                    </td>
-                  ) : (
-                    <td>
-                      <button
-                        data-cy="RemoveButton"
-                        type="button"
-                        className="button is-info"
-                        onClick={this.handleRemoveButtonClick}
-                      >
-                        -
-                      </button>
-                    </td>
-                  )}
-                  <td data-cy="GoodTitle" className="is-vcentered">
-                    {good}
+      <table className="table">
+        <tbody>
+          {goods.map((good) => {
+            return (
+              <tr
+                key={good}
+                data-cy="Good"
+                className={classNames(
+                  { 'has-background-success-light': good === selectedGood },
+                )}
+              >
+                {!selectedGood || good !== selectedGood ? (
+                  <td>
+                    <button
+                      data-cy="AddButton"
+                      type="button"
+                      className="button"
+                      onClick={() => handleAddButtonClick(good)}
+                    >
+                      +
+                    </button>
                   </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </main>
-    );
-  }
-}
+                ) : (
+                  <td>
+                    <button
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
+                      onClick={handleRemoveButtonClick}
+                    >
+                      -
+                    </button>
+                  </td>
+                )}
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </main>
+  );
+};
