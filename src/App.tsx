@@ -3,7 +3,7 @@ import 'bulma/css/bulma.css';
 import './App.scss';
 
 interface State {
-  selectedGood: string | null,
+  selectedGood: string,
 }
 
 export const goods = [
@@ -24,7 +24,7 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleButton(relatedGood: string | null) {
+  handleButton(relatedGood: string) {
     return this.setState({ selectedGood: relatedGood });
   }
 
@@ -33,21 +33,21 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        {!selectedGood
+        {selectedGood
           ? (
-            <h1 className="title">No goods selected</h1>
-          ) : (
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
 
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
-                onClick={() => this.handleButton(null)}
+                onClick={() => this.handleButton('')}
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
               />
             </h1>
+          ) : (
+            <h1 className="title">No goods selected</h1>
           )}
         <table className="table">
           <tbody>
@@ -59,8 +59,17 @@ export class App extends React.Component<{}, State> {
                   : 'has-background-success-light'}
               >
                 <td>
-                  {good !== selectedGood
+                  {good === selectedGood
                     ? (
+                      <button
+                        onClick={() => this.handleButton('')}
+                        data-cy="RemoveButton"
+                        type="button"
+                        className="button is-info"
+                      >
+                        -
+                      </button>
+                    ) : (
                       <button
                         onClick={() => this.handleButton(good)}
                         data-cy="AddButton"
@@ -68,15 +77,6 @@ export class App extends React.Component<{}, State> {
                         className="button"
                       >
                         +
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => this.handleButton(null)}
-                        data-cy="RemoveButton"
-                        type="button"
-                        className="button is-info"
-                      >
-                        -
                       </button>
                     )}
                 </td>
