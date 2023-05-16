@@ -28,7 +28,7 @@ export class App extends React.Component<{}, State> {
     this.setState({ selectedGood: element });
   };
 
-  handleUnclick = () => {
+  handleClear = () => {
     this.setState({ selectedGood: '' });
   };
 
@@ -46,7 +46,7 @@ export class App extends React.Component<{}, State> {
               type="button"
               className="delete ml-3"
               aria-label="Save"
-              onClick={this.handleUnclick}
+              onClick={this.handleClear}
             />
           )}
         </h1>
@@ -69,7 +69,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
-                          onClick={this.handleUnclick}
+                          onClick={this.handleClear}
                         >
                           -
                         </button>
