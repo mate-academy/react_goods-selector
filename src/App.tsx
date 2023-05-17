@@ -41,7 +41,7 @@ export class App extends Component<{}, Selected> {
 
     return (
       <main className="section container">
-        {selectedGood === ''
+        {!selectedGood
           ? (
             <h1 className="title">No goods selected</h1>
           )
