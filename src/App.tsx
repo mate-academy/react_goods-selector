@@ -46,10 +46,10 @@ export class App extends React.Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.removeGoods}
+                onClick={() => this.removeGoods()}
               />
             </h1>
-            )
+          )
           : (
             <h1 className="title">
               No goods selected
