@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -15,71 +15,89 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+export const App: React.FC = () => {
+  const [name, setName] = useState('Nothing');
+  const [clicked, setClicked] = useState(false);
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+  function clear() {
+    setClicked(false);
+    const tbody: any = document.querySelectorAll('tbody');
+    const tbodyArray = [...tbody[0].childNodes];
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+    for (let i = 0; i < tbodyArray.length; i += 1) {
+      const buttonClass = tbodyArray[i].childNodes[0].childNodes[0].className;
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
+      if (buttonClass === 'button is-info') {
+        tbodyArray[i].childNodes[0].childNodes[0].className = 'button';
+        tbodyArray[i].childNodes[0].childNodes[0].childNodes[0].data = '+';
+      }
+    }
+
+    setName('Nothing');
+  }
+
+  function goodChoice(event: React.MouseEvent<HTMLButtonElement>) {
+    const copyEvent = event.currentTarget;
+
+    if (clicked === true) {
+      clear();
+      setClicked(false);
+    } else {
+      clear();
+      setName(event.currentTarget.parentNode?.nextSibling?.textContent || '');
+      copyEvent.textContent = '-';
+      copyEvent.className = 'button is-info';
+      setClicked(true);
+    }
+  }
+
+  return (
+
+    <main className="section container">
+      <h1 className="title">No goods selected</h1>
+
+      <h1 className="title is-flex is-align-items-center">
+        {name}
+        is selected
+
+        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+        {clicked === true
+          ? (
             <button
-              data-cy="AddButton"
+              aria-label="hide and clear"
+              data-cy="ClearButton"
               type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+              className="delete ml-3"
+              onClick={clear}
+            />
+          ) : null}
+      </h1>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
-
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
-
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+      <table className="table">
+        <tbody>
+          {goods.map((good: string) => (
+            <tr data-cy="Good" key={good}>
+              <td>
+                <button
+                  data-cy="AddButton"
+                  type="button"
+                  className="button"
+                  onClick={(event) => {
+                    goodChoice(event);
+                }}>
+                +
+                </button>
+              </td>
+              <td
+                data-cy="GoodTitle"
+                className="is-vcentered"
+              >
+                {good}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </main>
+  );
+};
