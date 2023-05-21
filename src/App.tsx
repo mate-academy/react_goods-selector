@@ -15,71 +15,92 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+type State = {
+  selectedGood: string | null,
+};
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+export class App extends React.Component<{}, State> {
+  state: Readonly<State> = {
+    selectedGood: 'Jam',
+  };
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+  selectGood = (product: string) => {
+    if (this.state.selectedGood !== product) {
+      this.setState({
+        selectedGood: product,
+      });
+    } else {
+      this.setState({
+        selectedGood: null,
+      });
+    }
+  };
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+  render() {
+    const { selectedGood } = this.state;
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+    return (
+      <main className="section container">
+        {selectedGood
+          ? (
+            <h1 className="title is-flex is-align-items-center">
+              {`${selectedGood} is selected`}
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={() => {
+                  this.setState({ selectedGood: null });
+                }}
+              />
+            </h1>
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+          )
+          : (
+            <h1 className="title">No goods selected</h1>
+          )}
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+        <table className="table">
+          <tbody>
+            {goods.map((good) => {
+              const isSelect = selectedGood === good;
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+              return (
+                <tr
+                  data-cy="Good"
+                  className={isSelect
+                    ? 'has-background-success-light'
+                    : ''}
+                >
+                  <td>
+                    <button
+                      data-cy={isSelect
+                        ? 'RemoveButton'
+                        : 'AddButton'}
+                      type="button"
+                      className={isSelect
+                        ? 'button is-info'
+                        : 'button'}
+                      onClick={() => {
+                        this.selectGood(good);
+                      }}
+                    >
+                      {isSelect
+                        ? '-'
+                        : '+'}
+                    </button>
+                  </td>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </main>
+    );
+  }
+}
