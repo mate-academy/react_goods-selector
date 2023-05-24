@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -15,89 +15,101 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => {
-  const [name, setName] = useState('Nothing');
-  const [clicked, setClicked] = useState(false);
-
-  function clear() {
-    setClicked(false);
-    const tbody: any = document.querySelectorAll('tbody');
-    const tbodyArray = [...tbody[0].childNodes];
-
-    for (let i = 0; i < tbodyArray.length; i += 1) {
-      const buttonClass = tbodyArray[i].childNodes[0].childNodes[0].className;
-
-      if (buttonClass === 'button is-info') {
-        tbodyArray[i].childNodes[0].childNodes[0].className = 'button';
-        tbodyArray[i].childNodes[0].childNodes[0].childNodes[0].data = '+';
-      }
-    }
-
-    setName('Nothing');
-  }
-
-  function goodChoice(event: React.MouseEvent<HTMLButtonElement>) {
-    const copyEvent = event.currentTarget;
-
-    if (clicked === true) {
-      clear();
-      setClicked(false);
-    } else {
-      clear();
-      setName(event.currentTarget.parentNode?.nextSibling?.textContent || '');
-      copyEvent.textContent = '-';
-      copyEvent.className = 'button is-info';
-      setClicked(true);
-    }
-  }
-
-  return (
-
-    <main className="section container">
-      <h1 className="title">No goods selected</h1>
-
-      <h1 className="title is-flex is-align-items-center">
-        {name}
-        is selected
-
-        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-        {clicked === true
-          ? (
-            <button
-              aria-label="hide and clear"
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={clear}
-            />
-          ) : null}
-      </h1>
-
-      <table className="table">
-        <tbody>
-          {goods.map((good: string) => (
-            <tr data-cy="Good" key={good}>
-              <td>
-                <button
-                  data-cy="AddButton"
-                  type="button"
-                  className="button"
-                  onClick={(event) => {
-                    goodChoice(event);
-                }}>
-                +
-                </button>
-              </td>
-              <td
-                data-cy="GoodTitle"
-                className="is-vcentered"
-              >
-                {good}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </main>
-  );
+type State = {
+  name: string,
+  clicked: boolean,
 };
+
+export class App extends React.Component<{}, State> {
+  state = {
+    name: '',
+    clicked: false,
+  };
+
+  clear = () => {
+    this.setState({
+      name: '',
+      clicked: false,
+    });
+  };
+
+  save = (
+    good: string,
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    if (event.currentTarget.className === 'button') {
+      this.setState({
+        name: good,
+        clicked: true,
+      });
+    } else {
+      this.setState({
+        name: '',
+        clicked: false,
+      });
+    }
+  };
+
+  render() {
+    const { name, clicked } = this.state;
+
+    return (
+      <main className="section container">
+        <h1 className="title">
+          {clicked === false ? 'No goods selected' : null}
+        </h1>
+
+        <h1 className="title is-flex is-align-items-center">
+
+          {clicked === true ? `${name}
+          is selected` : null}
+
+          {clicked === true
+            ? (
+              <button
+                aria-label="hide and clear"
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.clear}
+              />
+            ) : null}
+
+          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+
+        </h1>
+
+        <table className="table">
+          <tbody>
+            {goods.map((good: string) => (
+              <tr
+                data-cy="Good"
+                key={good}
+                className={good === name ? 'has-background-success-light ' : ''}
+              >
+                <td>
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    className={good === name ? 'button is-info' : 'button'}
+                    onClick={(event) => this.save(good, event)}
+                  >
+                    {good === name ? '-' : '+' }
+
+                  </button>
+                </td>
+                <td
+                  data-cy="GoodTitle"
+                  className="is-vcentered"
+                >
+                  {good}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </main>
+
+    );
+  }
+}
