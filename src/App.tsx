@@ -28,7 +28,7 @@ export class App extends React.Component<{}, State> {
 
   clear = () => {
     this.setState({
-      name: '',
+      name: 'No goods ',
       clicked: false,
     });
   };
@@ -44,7 +44,7 @@ export class App extends React.Component<{}, State> {
       });
     } else {
       this.setState({
-        name: '',
+        name: 'No goods ',
         clicked: false,
       });
     }
@@ -55,15 +55,9 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        <h1 className="title">
-          {clicked === false ? 'No goods selected' : null}
-        </h1>
-
         <h1 className="title is-flex is-align-items-center">
 
-          {clicked === true ? `${name}
-          is selected` : null}
-
+          {`${name} is selected`}
           {clicked === true
             ? (
               <button
