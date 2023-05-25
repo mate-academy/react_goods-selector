@@ -22,7 +22,7 @@ type State = {
 
 export class App extends React.Component<{}, State> {
   state = {
-    name: '',
+    name: goods[goods.indexOf('Jam')] || goods[0],
     clicked: false,
   };
 
