@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
@@ -15,71 +16,110 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+type State = {
+  selectedGood: string,
+};
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+export class App extends React.Component<{}, State> {
+  state: Readonly<State> = {
+    selectedGood: 'Jam',
+  };
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+  handler = (good: string) => {
+    this.setState({
+      selectedGood: good,
+    });
+  };
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
+  handlerClear = () => {
+    this.setState({
+      selectedGood: '',
+    });
+  };
+
+  handlerClearButton = () => {
+    this.setState({
+      selectedGood: '',
+    });
+  };
+
+  render() {
+    const { selectedGood } = this.state;
+
+    return (
+      <main className="section container">
+        {selectedGood === ''
+          ? (<h1 className="title">No goods selected</h1>)
+          : (
+            <h1 className="title is-flex is-align-items-center">
+              {selectedGood}
+              {' '}
+              is selected
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.handlerClearButton}
+              />
+            </h1>
+          )}
+
+        <ul>
+          {goods.map(good => (
+            <li
+              key={good}
             >
-              +
-            </button>
-          </td>
+              <table className="table">
+                <tbody>
+                  {selectedGood === good
+                    ? (
+                      <tr
+                        data-cy="Good"
+                        className="has-background-success-light"
+                      >
+                        <td>
+                          <button
+                            data-cy="RemoveButton"
+                            type="button"
+                            className="button is-info"
+                            onClick={() => {
+                              this.handlerClear();
+                            }}
+                          >
+                            -
+                          </button>
+                        </td>
+                        <td data-cy="GoodTitle" className="is-vcentered">
+                          {good}
+                        </td>
+                      </tr>
+                    )
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
-
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
-
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+                    : (
+                      <tr data-cy="Good">
+                        <td>
+                          <button
+                            data-cy="AddButton"
+                            type="button"
+                            className="button"
+                            onClick={() => {
+                              this.handler(good);
+                            }}
+                          >
+                            +
+                          </button>
+                        </td>
+                        <td data-cy="GoodTitle" className="is-vcentered">
+                          {good}
+                        </td>
+                      </tr>
+                    )}
+                </tbody>
+              </table>
+            </li>
+          ))}
+        </ul>
+      </main>
+    );
+  }
+}
