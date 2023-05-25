@@ -15,13 +15,11 @@ export const goods = [
   'Garlic',
 ];
 
-type Props = {};
-
 type State = {
   selectedGood: string | null;
 };
 
-export class App extends Component<Props, State> {
+export class App extends Component<{}, State> {
   state = {
     selectedGood: 'Jam',
   };
@@ -34,7 +32,7 @@ export class App extends Component<Props, State> {
     this.setState({ selectedGood: good });
   };
 
-  readonly() {
+  render() {
     const { selectedGood } = this.state;
 
     return (
@@ -58,15 +56,13 @@ export class App extends Component<Props, State> {
 
         <table className="table">
           <tbody>
-            {goods.map((good) => (
+            {goods.map(good => (
               <tr
                 data-cy="Good"
-                key={good}
                 className={selectedGood === good
                   ? 'has-background-success-light'
                   : ''}
               >
-                <td>{good}</td>
                 <td>
                   {selectedGood === good
                     ? (
