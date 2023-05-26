@@ -15,31 +15,6 @@ export const goods = [
   'Garlic',
 ];
 
-function removeButtonCreate(button: HTMLButtonElement) {
-  button.parentNode?.parentElement?.classList
-    .add('has-background-success-light');
-  button.setAttribute('data-cy', 'RemoveButton');
-  button.classList.add('is-info');
-  // eslint-disable-next-line no-param-reassign
-  button.innerText = '-';
-}
-
-function addButtonCreate(button: HTMLButtonElement) {
-  button.parentNode?.parentElement?.classList
-    .remove('has-background-success-light');
-  button.setAttribute('data-cy', 'AddButton');
-  button.classList.remove('is-info');
-  // eslint-disable-next-line no-param-reassign
-  button.innerText = '+';
-}
-
-function changeAllButtonsToAddButtons() {
-  Array.from(document
-    .getElementsByTagName('button'))
-    .map(arrayButton => arrayButton.dataset.cy !== 'ClearButton'
-      && addButtonCreate(arrayButton));
-}
-
 export class App extends Component<{}, {}> {
   state = {
     SelectedGood: '',
@@ -48,6 +23,31 @@ export class App extends Component<{}, {}> {
   componentDidMount() {
     document.getElementsByTagName('button')[8].click();
   }
+
+  removeButtonCreate = (button: HTMLButtonElement) => {
+    button.parentNode?.parentElement?.classList
+      .add('has-background-success-light');
+    button.setAttribute('data-cy', 'RemoveButton');
+    button.classList.add('is-info');
+    // eslint-disable-next-line no-param-reassign
+    button.innerText = '-';
+  };
+
+  addButtonCreate = (button: HTMLButtonElement) => {
+    button.parentNode?.parentElement?.classList
+      .remove('has-background-success-light');
+    button.setAttribute('data-cy', 'AddButton');
+    button.classList.remove('is-info');
+    // eslint-disable-next-line no-param-reassign
+    button.innerText = '+';
+  };
+
+  changeAllButtonsToAddButtons = () => {
+    Array.from(document
+      .getElementsByTagName('button'))
+      .map(arrayButton => arrayButton.dataset.cy !== 'ClearButton'
+        && this.addButtonCreate(arrayButton));
+  };
 
   render() {
     const { SelectedGood } = this.state;
@@ -68,7 +68,7 @@ export class App extends Component<{}, {}> {
                   onClick={() => {
                     this.setState({ SelectedGood: '' });
 
-                    changeAllButtonsToAddButtons();
+                    this.changeAllButtonsToAddButtons();
                   }}
                 />
               </>
@@ -90,8 +90,8 @@ export class App extends Component<{}, {}> {
                         const button = e.currentTarget;
 
                         if (button.dataset.cy === 'AddButton') {
-                          changeAllButtonsToAddButtons();
-                          removeButtonCreate(button);
+                          this.changeAllButtonsToAddButtons();
+                          this.removeButtonCreate(button);
                           this.setState(
                             {
                               SelectedGood: button
@@ -102,7 +102,7 @@ export class App extends Component<{}, {}> {
                           return;
                         }
 
-                        addButtonCreate(button);
+                        this.addButtonCreate(button);
                         this.setState(
                           {
                             SelectedGood: '',
