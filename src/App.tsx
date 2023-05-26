@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -15,71 +15,114 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+function removeButtonCreate(button: HTMLButtonElement) {
+  button.parentNode?.parentElement?.classList
+    .add('has-background-success-light');
+  button.setAttribute('data-cy', 'RemoveButton');
+  button.classList.add('is-info');
+  // eslint-disable-next-line no-param-reassign
+  button.innerText = '-';
+}
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+function addButtonCreate(button: HTMLButtonElement) {
+  button.parentNode?.parentElement?.classList
+    .remove('has-background-success-light');
+  button.setAttribute('data-cy', 'AddButton');
+  button.classList.remove('is-info');
+  // eslint-disable-next-line no-param-reassign
+  button.innerText = '+';
+}
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+function changeAllButtonsToAddButtons() {
+  Array.from(document
+    .getElementsByTagName('button'))
+    .map(arrayButton => arrayButton.dataset.cy !== 'ClearButton'
+      && addButtonCreate(arrayButton));
+}
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+export class App extends Component<{}, {}> {
+  state = {
+    SelectedGood: '',
+  };
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+  componentDidMount() {
+    document.getElementsByTagName('button')[8].click();
+  }
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+  render() {
+    const { SelectedGood } = this.state;
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+    return (
+      <main className="section container">
+        <h1 className="title is-flex is-align-items-center">
+          {SelectedGood
+            ? (
+              <>
+                {`${SelectedGood} is selected`}
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+                <button
+                  data-cy="ClearButton"
+                  type="button"
+                  className="delete ml-3"
+                  onClick={() => {
+                    this.setState({ SelectedGood: '' });
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+                    changeAllButtonsToAddButtons();
+                  }}
+                />
+              </>
+            )
+            : 'No goods selected'}
+        </h1>
+
+        <table className="table">
+          <tbody>
+            {goods.map(good => {
+              return (
+                <tr data-cy="Good" data-good={good} key={good}>
+                  <td>
+                    <button
+                      data-cy="AddButton"
+                      type="button"
+                      className="button"
+                      onClick={(e) => {
+                        const button = e.currentTarget;
+
+                        if (button.dataset.cy === 'AddButton') {
+                          changeAllButtonsToAddButtons();
+                          removeButtonCreate(button);
+                          this.setState(
+                            {
+                              SelectedGood: button
+                                .parentNode?.parentElement?.dataset.good,
+                            },
+                          );
+
+                          return;
+                        }
+
+                        addButtonCreate(button);
+                        this.setState(
+                          {
+                            SelectedGood: '',
+                          },
+                        );
+                      }}
+                    >
+                      +
+                    </button>
+                  </td>
+
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </main>
+    );
+  }
+}
