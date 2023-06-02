@@ -17,36 +17,7 @@ export const goods = [
 
 export class App extends Component<{}, {}> {
   state = {
-    SelectedGood: '',
-  };
-
-  componentDidMount() {
-    document.getElementsByTagName('button')[8].click();
-  }
-
-  removeButtonCreate = (button: HTMLButtonElement) => {
-    button.parentNode?.parentElement?.classList
-      .add('has-background-success-light');
-    button.setAttribute('data-cy', 'RemoveButton');
-    button.classList.add('is-info');
-    // eslint-disable-next-line no-param-reassign
-    button.innerText = '-';
-  };
-
-  addButtonCreate = (button: HTMLButtonElement) => {
-    button.parentNode?.parentElement?.classList
-      .remove('has-background-success-light');
-    button.setAttribute('data-cy', 'AddButton');
-    button.classList.remove('is-info');
-    // eslint-disable-next-line no-param-reassign
-    button.innerText = '+';
-  };
-
-  changeAllButtonsToAddButtons = () => {
-    Array.from(document
-      .getElementsByTagName('button'))
-      .map(arrayButton => arrayButton.dataset.cy !== 'ClearButton'
-        && this.addButtonCreate(arrayButton));
+    SelectedGood: 'Jam',
   };
 
   render() {
@@ -67,8 +38,6 @@ export class App extends Component<{}, {}> {
                   className="delete ml-3"
                   onClick={() => {
                     this.setState({ SelectedGood: '' });
-
-                    this.changeAllButtonsToAddButtons();
                   }}
                 />
               </>
@@ -80,44 +49,56 @@ export class App extends Component<{}, {}> {
           <tbody>
             {goods.map(good => {
               return (
-                <tr data-cy="Good" data-good={good} key={good}>
-                  <td>
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      className="button"
-                      onClick={(e) => {
-                        const button = e.currentTarget;
-
-                        if (button.dataset.cy === 'AddButton') {
-                          this.changeAllButtonsToAddButtons();
-                          this.removeButtonCreate(button);
-                          this.setState(
-                            {
-                              SelectedGood: button
-                                .parentNode?.parentElement?.dataset.good,
-                            },
-                          );
-
-                          return;
-                        }
-
-                        this.addButtonCreate(button);
-                        this.setState(
-                          {
-                            SelectedGood: '',
-                          },
-                        );
-                      }}
+                SelectedGood === good
+                  ? (
+                    <tr
+                      data-cy="Good"
+                      data-good={good}
+                      key={good}
+                      className="has-background-success-light"
                     >
-                      +
-                    </button>
-                  </td>
+                      <td>
+                        <button
+                          data-cy="RemoveButton"
+                          type="button"
+                          className="button is-info"
+                          onClick={() => {
+                            this.setState({ SelectedGood: '' });
+                          }}
+                        >
+                          -
+                        </button>
+                      </td>
 
-                  <td data-cy="GoodTitle" className="is-vcentered">
-                    {good}
-                  </td>
-                </tr>
+                      <td data-cy="GoodTitle" className="is-vcentered">
+                        {good}
+                      </td>
+                    </tr>
+                  )
+                  : (
+                    <tr
+                      data-cy="Good"
+                      data-good={good}
+                      key={good}
+                    >
+                      <td>
+                        <button
+                          data-cy="AddButton"
+                          type="button"
+                          className="button"
+                          onClick={() => {
+                            this.setState({ SelectedGood: good });
+                          }}
+                        >
+                          +
+                        </button>
+                      </td>
+
+                      <td data-cy="GoodTitle" className="is-vcentered">
+                        {good}
+                      </td>
+                    </tr>
+                  )
               );
             })}
           </tbody>
