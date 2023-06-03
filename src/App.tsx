@@ -48,8 +48,7 @@ export class App extends Component<{}, {}> {
 
         <table className="table">
           <tbody>
-            {goods.map(good => {
-              return (
+            {goods.map(good => (
                 <tr
                   data-cy="Good"
                   data-good={good}
