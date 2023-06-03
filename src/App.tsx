@@ -49,48 +49,47 @@ export class App extends Component<{}, {}> {
         <table className="table">
           <tbody>
             {goods.map(good => (
-                <tr
-                  data-cy="Good"
-                  data-good={good}
-                  key={good}
-                  className={classNames({
-                    'has-background-success-light': selectedGood === good,
-                  })}
-                >
-                  <td>
-                    {selectedGood === good
-                      ? (
-                        <button
-                          data-cy="RemoveButton"
-                          type="button"
-                          className="button is-info"
-                          onClick={() => {
-                            this.setState({ selectedGood: '' });
-                          }}
-                        >
-                          -
-                        </button>
-                      )
-                      : (
-                        <button
-                          data-cy="AddButton"
-                          type="button"
-                          className="button"
-                          onClick={() => {
-                            this.setState({ selectedGood: good });
-                          }}
-                        >
-                          +
-                        </button>
-                      )}
-                  </td>
+              <tr
+                data-cy="Good"
+                data-good={good}
+                key={good}
+                className={classNames({
+                  'has-background-success-light': selectedGood === good,
+                })}
+              >
+                <td>
+                  {selectedGood === good
+                    ? (
+                      <button
+                        data-cy="RemoveButton"
+                        type="button"
+                        className="button is-info"
+                        onClick={() => {
+                          this.setState({ selectedGood: '' });
+                        }}
+                      >
+                        -
+                      </button>
+                    )
+                    : (
+                      <button
+                        data-cy="AddButton"
+                        type="button"
+                        className="button"
+                        onClick={() => {
+                          this.setState({ selectedGood: good });
+                        }}
+                      >
+                        +
+                      </button>
+                    )}
+                </td>
 
-                  <td data-cy="GoodTitle" className="is-vcentered">
-                    {good}
-                  </td>
-                </tr>
-              );
-            })}
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </main>
