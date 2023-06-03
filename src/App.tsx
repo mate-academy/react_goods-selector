@@ -18,19 +18,19 @@ export const goods = [
 
 export class App extends Component<{}, {}> {
   state = {
-    SelectedGood: 'Jam',
+    selectedGood: 'Jam',
   };
 
   render() {
-    const { SelectedGood } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <main className="section container">
         <h1 className="title is-flex is-align-items-center">
-          {SelectedGood
+          {selectedGood
             ? (
               <>
-                {`${SelectedGood} is selected`}
+                {`${selectedGood} is selected`}
 
                 {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
                 <button
@@ -38,7 +38,7 @@ export class App extends Component<{}, {}> {
                   type="button"
                   className="delete ml-3"
                   onClick={() => {
-                    this.setState({ SelectedGood: '' });
+                    this.setState({ selectedGood: '' });
                   }}
                 />
               </>
@@ -55,18 +55,18 @@ export class App extends Component<{}, {}> {
                   data-good={good}
                   key={good}
                   className={classNames({
-                    'has-background-success-light': SelectedGood === good,
+                    'has-background-success-light': selectedGood === good,
                   })}
                 >
                   <td>
-                    {SelectedGood === good
+                    {selectedGood === good
                       ? (
                         <button
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
                           onClick={() => {
-                            this.setState({ SelectedGood: '' });
+                            this.setState({ selectedGood: '' });
                           }}
                         >
                           -
@@ -78,7 +78,7 @@ export class App extends Component<{}, {}> {
                           type="button"
                           className="button"
                           onClick={() => {
-                            this.setState({ SelectedGood: good });
+                            this.setState({ selectedGood: good });
                           }}
                         >
                           +
