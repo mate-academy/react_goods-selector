@@ -25,11 +25,11 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleButtonRemoval = () => {
+  handleRemove = () => {
     this.setState({ selectedGood: '' });
   };
 
-  handleButtonAddition = (addedGood: string) => {
+  handleAdd = (addedGood: string) => {
     this.setState({ selectedGood: addedGood });
   };
 
@@ -48,7 +48,7 @@ export class App extends React.Component<{}, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={this.handleButtonRemoval}
+                  onClick={this.handleRemove}
                 />
               </h1>
             )
@@ -81,7 +81,7 @@ export class App extends React.Component<{}, State> {
                             data-cy="RemoveButton"
                             type="button"
                             className="button is-info"
-                            onClick={this.handleButtonRemoval}
+                            onClick={this.handleRemove}
                           >
                             -
                           </button>
@@ -91,7 +91,7 @@ export class App extends React.Component<{}, State> {
                             data-cy="AddButton"
                             type="button"
                             className="button"
-                            onClick={() => (this.handleButtonAddition(good)
+                            onClick={() => (this.handleAdd(good)
                             )}
                           >
                             +
