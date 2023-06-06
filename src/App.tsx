@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -17,17 +18,15 @@ export const goods = [
 
 export class App extends React.Component {
   state = {
-    cellCheck: false,
     selectedGood: 'Jam',
   };
 
   render() {
     const { selectedGood } = this.state;
-    const { cellCheck } = this.state;
 
     return (
       <main className="section container">
-        {cellCheck ? (
+        {selectedGood === '' ? (
           <h1 className="title">No goods selected</h1>
         ) : (
           <h1 className="title is-flex is-align-items-center">
@@ -38,7 +37,7 @@ export class App extends React.Component {
               type="button"
               className="delete ml-3"
               onClick={
-                () => this.setState({ selectedGood: '', cellCheck: true })
+                () => this.setState({ selectedGood: '' })
               }
             />
           </h1>
@@ -51,13 +50,15 @@ export class App extends React.Component {
                   data-cy="Good"
                   key={item}
                   className={
-                    selectedGood === item ? 'has-background-success-light' : ''
+                    classNames(
+                      { 'has-background-success-light': selectedGood === item },
+                    )
                   }
                   onClick={() => {
                     if (selectedGood === item) {
-                      this.setState({ selectedGood: '', cellCheck: true });
+                      this.setState({ selectedGood: '' });
                     } else {
-                      this.setState({ selectedGood: item, cellCheck: false });
+                      this.setState({ selectedGood: item });
                     }
                   }}
                 >
