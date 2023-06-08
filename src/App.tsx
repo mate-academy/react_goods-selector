@@ -26,7 +26,7 @@ export class App extends React.Component {
     selectedGood: 'Jam',
   };
 
-  setSelectedGood = (name:string) => {
+  setSelectedGood = (name: string) => {
     this.setState({ selectedGood: name });
   };
 
@@ -37,11 +37,10 @@ export class App extends React.Component {
 
       <main className="section container">
         {selectedGood === ''
-          ? (<h1 className="title">No goods selected</h1>)
+          ? <h1 className="title">No goods selected</h1>
           : (
             <h1 className="title is-flex is-align-items-center">
-              {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-              { selectedGood } is selected
+              {`${selectedGood} is selected`}
 
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
@@ -62,38 +61,40 @@ export class App extends React.Component {
                 className={
                   classNames(
                     {
-                      // eslint-disable-next-line max-len
-                      'has-background-success-light': selectedGood.includes(good),
+                      'has-background-success-light':
+                       selectedGood.includes(good),
                     },
                   )
                 }
               >
                 <td>
-                  {!selectedGood.includes(good)
-                    ? (
-                      <button
-                        data-cy="AddButton"
-                        type="button"
-                        className="button"
-                        onClick={
-                          () => this.setSelectedGood(good)
-                        }
-                      >
-                        +
-                      </button>
-                    )
-                    : (
-                      <button
-                        data-cy="RemoveButton"
-                        type="button"
-                        className="button is-info"
-                        onClick={
-                          () => this.setSelectedGood('')
-                        }
-                      >
-                        -
-                      </button>
-                    )}
+                  <button
+                    data-cy={
+                      selectedGood.includes(good)
+                        ? 'RemoveButton'
+                        : 'AddButton'
+                    }
+                    type="button"
+                    className={
+                      classNames(
+                        'button',
+                        { 'is-info': selectedGood.includes(good) },
+                      )
+                    }
+                    onClick={
+                      () => this.setSelectedGood(
+                        selectedGood.includes(good)
+                          ? ''
+                          : `${good}`,
+                      )
+                    }
+                  >
+                    {
+                      selectedGood.includes(good)
+                        ? '-'
+                        : '+'
+                    }
+                  </button>
                 </td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
