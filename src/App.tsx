@@ -43,7 +43,7 @@ export class App extends React.Component<{}, State> {
             type="button"
             className={classNames(
               'delete ml-3',
-              { 'is-hidden': selectedGood === '' },
+              { 'is-hidden': !selectedGood },
             )}
             onClick={() => {
               this.setState({
@@ -59,9 +59,9 @@ export class App extends React.Component<{}, State> {
               <tr
                 key={good}
                 data-cy="Good"
-                className={selectedGood === good
-                  ? 'has-background-success-light'
-                  : ''}
+                className={classNames({
+                  'has-background-success-light': selectedGood === good,
+                })}
               >
                 <td>
                   <button
