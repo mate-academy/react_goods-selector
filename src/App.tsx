@@ -24,15 +24,13 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  handleButtonClick = (clickedGood: string) => {
     const { selectedGood } = this.state;
-    const clickedGood = event.currentTarget.dataset.good;
 
-    if (selectedGood === clickedGood) {
-      this.setState({ selectedGood: undefined });
-    } else {
-      this.setState({ selectedGood: clickedGood });
-    }
+    this.setState({
+      selectedGood: selectedGood !== clickedGood
+        ? clickedGood : undefined,
+    });
   };
 
   render() {
@@ -68,11 +66,10 @@ export class App extends React.Component<{}, State> {
               >
                 <td>
                   <button
-                    data-good={good}
                     data-cy="AddButton"
                     type="button"
                     className="button"
-                    onClick={this.handleButtonClick}
+                    onClick={() => this.handleButtonClick(good)}
                   >
                     {selectedGood === good ? '-' : '+'}
                   </button>
