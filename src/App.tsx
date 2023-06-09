@@ -21,7 +21,7 @@ type State = {
 
 export class App extends React.Component<{}, State> {
   state: Readonly<State> = {
-    selectedGood: 'Jam',
+    selectedGood: goods[goods.indexOf('Jam')] || goods[0],
   };
 
   handleButtonClick = (clickedGood: string) => {
@@ -55,27 +55,30 @@ export class App extends React.Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map((good) => (
-              <tr key={good} data-cy="Good">
-                <td>
-                  <button
-                    data-cy="AddButton"
-                    type="button"
-                    className={`button ${
-                      selectedGood === good
-                        ? 'has-background-success-light' : ''
-                    }`}
-                    onClick={() => this.handleButtonClick(good)}
-                  >
-                    {selectedGood === good ? '-' : '+'}
-                  </button>
-                </td>
+            {goods.map((good) => {
+              const isSelected = selectedGood === good;
+              const buttonClassName = `button ${isSelected ? 'has-background-success-light' : ''}`;
 
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            ))}
+              return (
+                <tr key={good} data-cy="Good">
+                  <td>
+                    <button
+                      data-cy="AddButton"
+                      type="button"
+                      className={buttonClassName}
+                      onClick={() => this.handleButtonClick(good)}
+                      style={isSelected ? { backgroundColor: 'lightblue' } : {}}
+                    >
+                      {isSelected ? '-' : '+'}
+                    </button>
+                  </td>
+
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </main>
