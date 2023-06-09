@@ -28,8 +28,7 @@ export class App extends React.Component<{}, State> {
     const { selectedGood } = this.state;
 
     this.setState({
-      selectedGood: selectedGood !== clickedGood
-        ? clickedGood : undefined,
+      selectedGood: selectedGood !== clickedGood ? clickedGood : undefined,
     });
   };
 
@@ -41,7 +40,6 @@ export class App extends React.Component<{}, State> {
         {selectedGood ? (
           <h1 className="title is-flex is-align-items-center">
             {`${selectedGood} is selected`}
-
             <button
               data-cy="ClearButton"
               type="button"
@@ -57,18 +55,16 @@ export class App extends React.Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map(good => (
-              <tr
-                key={good}
-                data-cy="Good"
-                className={selectedGood === good
-                  ? 'has-background-success-light' : ''}
-              >
+            {goods.map((good) => (
+              <tr key={good} data-cy="Good">
                 <td>
                   <button
                     data-cy="AddButton"
                     type="button"
-                    className="button"
+                    className={`button ${
+                      selectedGood === good
+                        ? 'has-background-success-light' : ''
+                    }`}
                     onClick={() => this.handleButtonClick(good)}
                   >
                     {selectedGood === good ? '-' : '+'}
@@ -80,22 +76,6 @@ export class App extends React.Component<{}, State> {
                 </td>
               </tr>
             ))}
-
-            <tr data-cy="Good">
-              <td>
-                <button
-                  data-cy="AddButton"
-                  type="button"
-                  className="button"
-                >
-                  +
-                </button>
-              </td>
-
-              <td data-cy="GoodTitle" className="is-vcentered">
-                Garlic
-              </td>
-            </tr>
           </tbody>
         </table>
       </main>
