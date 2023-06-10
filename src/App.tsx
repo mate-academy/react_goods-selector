@@ -17,7 +17,7 @@ export const goods = [
 
 export class App extends Component {
   state = {
-    selectedGood: 'Jam',
+    selectedGood: goods[goods.indexOf('Jam')] || goods[0],
   };
 
   removeSelection = () => {
