@@ -24,6 +24,13 @@ export class App extends Component <{}, State> {
     selectedGood: goods[goods.indexOf('Jam')] || goods[0],
   };
 
+  handler = (good:string) => {
+    this.setState((prevState) => ({
+      selectedGood:
+      prevState.selectedGood === good ? '' : good,
+    }));
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -62,12 +69,7 @@ export class App extends Component <{}, State> {
                 <td>
                   <button
                     type="button"
-                    onClick={() => {
-                      this.setState((prevState) => ({
-                        selectedGood:
-                        prevState.selectedGood === good ? '' : good,
-                      }));
-                    }}
+                    onClick={() => this.handler(good)}
                     className={(selectedGood === good)
                       ? 'button is-info'
                       : 'button'}
