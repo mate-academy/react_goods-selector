@@ -24,8 +24,12 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handler = (good = '') => (
+  handleSelection = (good = '') => (
     () => this.setState({ selectedGood: good })
+  );
+
+  removeSelection = () => (
+    () => this.setState({ selectedGood: null })
   );
 
   render() {
@@ -44,7 +48,7 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.handler()}
+                onClick={this.handleSelection()}
               />
             </h1>
           ) : (
@@ -58,8 +62,7 @@ export class App extends Component<{}, State> {
                 data-cy="Good"
                 key={good}
                 className={
-                  this.state.selectedGood
-                  === good
+                  selectedGood === good
                     ? 'has-background-success-light'
                     : ''
                 }
@@ -67,21 +70,19 @@ export class App extends Component<{}, State> {
                 <td>
                   <button
                     data-cy={
-                      this.state.selectedGood === good
+                      selectedGood === good
                         ? 'RemoveButton'
                         : 'AddButton'
                     }
                     type="button"
-                    className={`button ${this.state.selectedGood === good ? 'is-info' : ''}`}
-                    onClick={() => {
-                      if (this.state.selectedGood === good) {
-                        this.setState({ selectedGood: null });
-                      } else {
-                        this.setState({ selectedGood: good });
-                      }
-                    }}
+                    className={`button ${selectedGood === good ? 'is-info' : ''}`}
+                    onClick={
+                      selectedGood === good
+                        ? this.removeSelection()
+                        : this.handleSelection(good)
+                    }
                   >
-                    {this.state.selectedGood === good ? '-' : '+'}
+                    {selectedGood === good ? '-' : '+'}
                   </button>
                 </td>
 
