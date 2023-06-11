@@ -31,15 +31,17 @@ export class App extends React.Component<{}, State> {
     return (
       <main className="section container">
         <h1 className="title is-flex is-align-items-center">
-          {selectedGood !== ''
+          {selectedGood
             ? (
               `${selectedGood} is selected`
             )
-            : ('No goods selected')}
+            : (
+              'No goods selected'
+            )}
 
           {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
           <button
-            data-cy="ClearButton"
+            data-cy={selectedGood ? 'ClearButton' : ''}
             type="button"
             className={classNames(
               'delete ml-3',
