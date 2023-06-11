@@ -62,6 +62,7 @@ export class App extends Component <{}, State> {
             { goods.map(good => (
               <tr
                 data-cy="Good"
+                key={good}
                 className={(selectedGood === good)
                   ? 'has-background-success-light'
                   : ''}
