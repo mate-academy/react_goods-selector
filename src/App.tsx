@@ -57,22 +57,20 @@ export class App extends React.Component<{}, State> {
           <tbody>
             {goods.map((good) => {
               const isSelected = selectedGood === good;
-              const buttonClassName = `button ${
-                isSelected ? 'has-background-success-light' : ''
-              }`;
-              const minusStyle = isSelected ? { color: 'white' } : {};
+              const trClassName = isSelected
+                ? 'has-background-success-light' : '';
+              const buttonClassName = `button ${isSelected ? 'is-info' : ''}`;
 
               return (
-                <tr key={good} data-cy="Good">
+                <tr key={good} data-cy="Good" className={trClassName}>
                   <td>
                     <button
                       data-cy="AddButton"
                       type="button"
-                      className={`${buttonClassName}`}
+                      className={buttonClassName}
                       onClick={() => this.handleButtonClick(good)}
-                      style={minusStyle}
                     >
-                      {isSelected ? <span style={minusStyle}>-</span> : '+'}
+                      {isSelected ? '-' : '+'}
                     </button>
                   </td>
 
