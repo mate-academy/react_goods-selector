@@ -25,6 +25,24 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  handleResetSelected = () => {
+    this.setState({ selectedGood: '' });
+  };
+
+  handleGoodsButton = (listItem: string) => {
+    const { selectedGood } = this.state;
+    const resetList = this.handleResetSelected;
+    const isSelected = listItem === selectedGood;
+
+    if (isSelected) {
+      resetList();
+
+      return;
+    }
+
+    this.setState({ selectedGood: listItem });
+  };
+
   render(): ReactNode {
     const { selectedGood } = this.state;
     const goodsList = [...goods];
@@ -40,6 +58,7 @@ export class App extends Component<{}, State> {
             <button
               data-cy="ClearButton"
               type="button"
+              onClick={this.handleResetSelected}
               className="delete ml-3"
             />
           )}
@@ -52,6 +71,7 @@ export class App extends Component<{}, State> {
 
               return (
                 <tr
+                  key={item}
                   data-cy="Good"
                   className={isSelected
                     ? 'has-background-success-light'
@@ -61,6 +81,7 @@ export class App extends Component<{}, State> {
                     <button
                       data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
                       type="button"
+                      onClick={() => this.handleGoodsButton(item)}
                       className={`button ${isSelected && 'is-info'}`}
                     >
                       {isSelected ? '-' : '+'}
