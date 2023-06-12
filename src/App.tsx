@@ -47,7 +47,7 @@ export class App extends Component<{}, Selected> {
           )
           : (
             <h1 className="title is-flex is-align-items-center">
-              {selectedGood}
+              {`${selectedGood} is selected`}
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
@@ -63,7 +63,10 @@ export class App extends Component<{}, Selected> {
               const isSelected = (selectedGood === good);
 
               return (
-                <tr data-cy="Good">
+                <tr
+                  data-cy="Good"
+                  className={isSelected ? 'has-background-success-light' : ''}
+                >
                   <td>
                     {isSelected
                       ? (
