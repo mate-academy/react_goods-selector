@@ -1,3 +1,29 @@
 iframe {
   display: none;
 }
+
+:root {
+  background-color: #f6f1f1;
+}
+
+.b-color {
+  &-main {
+    background-color: #f6f1f1;
+  }
+
+  &-light {
+    background-color: #afd3e2;
+  }
+
+  &-dark {
+    background-color: #19a7ce;
+  }
+
+  &-accent {
+    background-color: #146c94;
+  }
+}
+
+.radius {
+  border-radius: 0.5em;
+}
