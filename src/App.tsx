@@ -32,34 +32,6 @@ export class App extends React.Component<{}, State> {
     this.setState({ selectedGood: '' });
   };
 
-  // Below is alternative Goods Button implementation
-
-  // button = (isSelected: boolean, good: string) => {
-  //   if (isSelected) {
-  //     return (
-  //       <button
-  //         data-cy="RemoveButton"
-  //         type="button"
-  //         className="button is-info"
-  //         onClick={this.handleClickOnClearButton}
-  //       >
-  //         -
-  //       </button>
-  //     );
-  //   }
-
-  //   return (
-  //     <button
-  //       data-cy="AddButton"
-  //       type="button"
-  //       className="button"
-  //       onClick={() => this.handleClickOnGood(good)}
-  //     >
-  //       +
-  //     </button>
-  //   );
-  // };
-
   render() {
     const { selectedGood } = this.state;
 
@@ -96,11 +68,9 @@ export class App extends React.Component<{}, State> {
                       ? 'has-background-success-light'
                       : ''
                   }
+                  key={good}
                 >
                   <td>
-                    {/* Below is alternative Goods Button implementation */}
-
-                    {/* {this.button(isSelected, good)} */}
                     <button
                       data-cy={
                         isSelected
