@@ -44,69 +44,63 @@ export class App extends React.Component<{}, State> {
         is-flex-direction-column
         is-align-items-center"
       >
-        {
-          selectedGood
-            ? (
-              <h1 className="title is-flex is-align-items-center">
-                {`${selectedGood} is selected`}
-                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-                <button
-                  data-cy="ClearButton"
-                  type="button"
-                  className="delete ml-3"
-                  onClick={this.handleDeselect}
-                />
-              </h1>
-            )
-            : <h1 className="title">No goods selected</h1>
-        }
+        {selectedGood
+          ? (
+            <h1 className="title is-flex is-align-items-center">
+              {`${selectedGood} is selected`}
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.handleDeselect}
+              />
+            </h1>
+          )
+          : <h1 className="title">No goods selected</h1>}
 
         <table className="table radius b-color-light">
           <tbody>
-            {
-              goods.map(product => {
-                const isSelected = product === selectedGood;
+            {goods.map(product => {
+              const isSelected = product === selectedGood;
 
-                return (
-                  <tr
-                    data-cy="Good"
-                    className={
-                      classNames(
-                        { 'has-background-success-light': isSelected },
-                      )
-                    }
-                  >
-                    <td>
-                      <button
-                        data-cy={
-                          isSelected
-                            ? 'RemoveButton'
-                            : 'AddButton'
-                        }
-                        type="button"
-                        className={
-                          classNames(
-                            'button',
-                            { 'is-info': isSelected },
-                          )
-                        }
-                        onClick={() => (
-                          isSelected
-                            ? this.handleDeselect()
-                            : this.handleSelect(product)
-                        )}
-                      >
-                        {isSelected ? '-' : '+'}
-                      </button>
-                    </td>
+              return (
+                <tr
+                  data-cy="Good"
+                  className={classNames({
+                    'has-background-success-light': isSelected,
+                  })}
+                >
+                  <td>
+                    <button
+                      data-cy={
+                        isSelected
+                          ? 'RemoveButton'
+                          : 'AddButton'
+                      }
+                      type="button"
+                      className={
+                        classNames(
+                          'button',
+                          { 'is-info': isSelected },
+                        )
+                      }
+                      onClick={() => (
+                        isSelected
+                          ? this.handleDeselect()
+                          : this.handleSelect(product)
+                      )}
+                    >
+                      {isSelected ? '-' : '+'}
+                    </button>
+                  </td>
 
-                    <td data-cy="GoodTitle" className="is-vcentered">
-                      {product}
-                    </td>
-                  </tr>
-                );
-              })
-            }
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {product}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </main>
