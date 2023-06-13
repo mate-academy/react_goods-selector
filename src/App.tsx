@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -28,23 +29,26 @@ export class App extends React.Component<{}, State> {
     this.setState({ selectedGood: '' })
   );
 
-  addGood = (good: string) => (
+  selectGood = (good: string) => (
     this.setState({ selectedGood: good })
   );
 
   render() {
+    const { selectedGood } = this.state;
+
     return (
       <main className="section container">
 
-        <h1 className={this.state.selectedGood
-          ? 'title'
-          : 'title is-flex is-align-items-center'}
+        <h1 className={cn(
+          'title',
+          { 'is-flex': selectedGood, 'is-align-items-center': selectedGood },
+        )}
         >
-          {this.state.selectedGood
-            ? `${this.state.selectedGood} is selected`
+          {selectedGood
+            ? `${selectedGood} is selected`
             : 'No goods selected' }
 
-          {(this.state.selectedGood) && (
+          {(selectedGood) && (
             <>
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
@@ -62,13 +66,13 @@ export class App extends React.Component<{}, State> {
           <tbody>
             {goods.map((good) => (
               <tr
-                className={this.state.selectedGood === good
-                  ? 'has-background-success-light'
-                  : ''}
+                className={cn({
+                  'has-background-success-light': selectedGood === good,
+                })}
                 key={good}
                 data-cy="Good"
               >
-                {this.state.selectedGood === good
+                {selectedGood === good
                   ? (
                     <td>
                       <button
@@ -80,15 +84,13 @@ export class App extends React.Component<{}, State> {
                         -
                       </button>
                     </td>
-                  )
-
-                  : (
+                  ) : (
                     <td>
                       <button
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={() => this.addGood(good)}
+                        onClick={() => this.selectGood(good)}
                       >
                         +
                       </button>
