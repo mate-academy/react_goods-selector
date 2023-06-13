@@ -18,7 +18,6 @@ export const goods = [
 
 type State = {
   selectedGood: string,
-  isSelected?: boolean,
 };
 
 export class App extends React.Component <{}, State> {
@@ -32,7 +31,7 @@ export class App extends React.Component <{}, State> {
     });
   };
 
-  removeSelection = () => {
+  clear = () => {
     this.setState({
       selectedGood: '',
     });
@@ -52,7 +51,7 @@ export class App extends React.Component <{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.removeSelection}
+                onClick={this.clear}
               />
             </h1>
           )
@@ -75,7 +74,7 @@ export class App extends React.Component <{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={this.removeSelection}
+                        onClick={this.clear}
                       >
                         -
                       </button>
