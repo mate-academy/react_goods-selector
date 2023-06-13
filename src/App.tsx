@@ -18,50 +18,45 @@ export const goods = [
 
 type State = {
   selectedGood: string,
-  isSelected: boolean,
+  isSelected?: boolean,
 };
 
 export class App extends React.Component <{}, State> {
   state = {
     selectedGood: 'Jam',
-    isSelected: true,
   };
 
-  activeHandler = (good: string) => {
+  selectGood = (good: string) => {
     this.setState({
       selectedGood: good,
-      isSelected: true,
     });
   };
 
-  removeHandler = () => {
+  removeSelection = () => {
     this.setState({
       selectedGood: '',
-      isSelected: false,
     });
   };
 
   render() {
-    const { selectedGood, isSelected } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <main className="section container">
-        {
-          isSelected
-            ? (
-              <h1 className="title is-flex is-align-items-center">
-                {`${selectedGood} is selected`}
-                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-                <button
-                  data-cy="ClearButton"
-                  type="button"
-                  className="delete ml-3"
-                  onClick={this.removeHandler}
-                />
-              </h1>
-            )
-            : (<h1 className="title">No goods selected</h1>)
-        }
+        {selectedGood
+          ? (
+            <h1 className="title is-flex is-align-items-center">
+              {`${selectedGood} is selected`}
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={this.removeSelection}
+              />
+            </h1>
+          )
+          : (<h1 className="title">No goods selected</h1>)}
 
         <table className="table">
           <tbody>
@@ -80,7 +75,7 @@ export class App extends React.Component <{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={this.removeHandler}
+                        onClick={this.removeSelection}
                       >
                         -
                       </button>
@@ -93,7 +88,7 @@ export class App extends React.Component <{}, State> {
                         type="button"
                         className="button"
                         onClick={() => {
-                          this.activeHandler(good);
+                          this.selectGood(good);
                         }}
                       >
                         +
