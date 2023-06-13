@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import { Component, ReactNode } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
@@ -26,13 +25,13 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleResetSelected = () => {
+  clearSelection = () => {
     this.setState({ selectedGood: '' });
   };
 
   handleGoodsButton = (listItem: string) => {
     const { selectedGood } = this.state;
-    const resetList = this.handleResetSelected;
+    const resetList = this.clearSelection;
     const isSelected = listItem === selectedGood;
 
     if (isSelected) {
@@ -56,10 +55,11 @@ export class App extends Component<{}, State> {
             : 'No goods selected'}
 
           {selectedGood && (
+            // eslint-disable-next-line jsx-a11y/control-has-associated-label
             <button
               data-cy="ClearButton"
               type="button"
-              onClick={this.handleResetSelected}
+              onClick={this.clearSelection}
               className="delete ml-3"
             />
           )}
@@ -69,29 +69,36 @@ export class App extends Component<{}, State> {
           <tbody>
             {goodsList.map(item => {
               const isSelected = item === selectedGood;
-              const trSelectedLight = classNames({
-                'has-background-success-light': isSelected,
-              });
-              const buttonSelectedBackground = classNames({
-                button: true,
-                'is-info': isSelected,
-              });
 
               return (
                 <tr
                   key={item}
                   data-cy="Good"
-                  className={trSelectedLight}
+                  className={classNames({
+                    'has-background-success-light': isSelected,
+                  })}
                 >
                   <td>
-                    <button
-                      data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
-                      type="button"
-                      onClick={() => this.handleGoodsButton(item)}
-                      className={buttonSelectedBackground}
-                    >
-                      {isSelected ? '-' : '+'}
-                    </button>
+                    {isSelected
+                      ? (
+                        <button
+                          data-cy="RemoveButton"
+                          type="button"
+                          onClick={() => this.handleGoodsButton(item)}
+                          className="button is-info"
+                        >
+                          -
+                        </button>
+                      ) : (
+                        <button
+                          data-cy="AddButton"
+                          type="button"
+                          onClick={() => this.handleGoodsButton(item)}
+                          className="button"
+                        >
+                          +
+                        </button>
+                      )}
                   </td>
 
                   <td data-cy="GoodTitle" className="is-vcentered">
