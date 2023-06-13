@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -24,11 +25,11 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleClearSelection = () => {
+  clearSelection = () => {
     this.setState({ selectedGood: '' });
   };
 
-  handleAddSelection = (good: string) => {
+  addSelection = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
@@ -37,25 +38,24 @@ export class App extends Component<{}, State> {
 
     return (
       <main className="section container">
-        {
-          selectedGood
-            ? (
-              <>
-                <h1 className="title is-flex is-align-items-center">
-                  {`${selectedGood} is selected`}
+        {selectedGood
+          ? (
+            <>
+              <h1 className="title is-flex is-align-items-center">
+                {`${selectedGood} is selected`}
 
-                  {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-                  <button
-                    data-cy="ClearButton"
-                    type="button"
-                    className="delete ml-3"
-                    onClick={this.handleClearSelection}
-                  />
-                </h1>
-              </>
-            )
-            : <h1 className="title">No goods selected</h1>
-        }
+                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+                <button
+                  data-cy="ClearButton"
+                  type="button"
+                  className="delete ml-3"
+                  onClick={this.clearSelection}
+                />
+              </h1>
+            </>
+          )
+          : <h1 className="title">No goods selected</h1>}
+
         <table className="table">
           <tbody>
             {goods.map(good => {
@@ -65,13 +65,9 @@ export class App extends Component<{}, State> {
                 <tr
                   key={`${good}`}
                   data-cy="Good"
-                  className={
-                    `${
-                      goodIsSelected
-                        ? 'has-background-success-light'
-                        : ''
-                    }`
-                  }
+                  className={classNames({
+                    'has-background-success-light': goodIsSelected,
+                  })}
                 >
                   <td>
                     {
@@ -81,7 +77,7 @@ export class App extends Component<{}, State> {
                             data-cy="RemoveButton"
                             type="button"
                             className="button is-info"
-                            onClick={this.handleClearSelection}
+                            onClick={this.clearSelection}
                           >
                             -
                           </button>
@@ -91,7 +87,7 @@ export class App extends Component<{}, State> {
                             data-cy="AddButton"
                             type="button"
                             className="button"
-                            onClick={() => this.handleAddSelection(good)}
+                            onClick={() => this.addSelection(good)}
                           >
                             +
                           </button>
