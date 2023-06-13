@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import 'bulma/css/bulma.css';
+import cn from 'classnames';
 import './App.scss';
 
 export const goods = [
@@ -24,7 +25,7 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleButtonClick = (good = '') => (
+  handleGoodSelector = (good = '') => (
     () => this.setState({ selectedGood: good })
   );
 
@@ -44,12 +45,10 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.handleButtonClick()}
+                onClick={this.handleGoodSelector()}
               />
             </h1>
-          ) : (
-            <h1 className="title">No goods selected</h1>
-          )}
+          ) : <h1 className="title">No goods selected</h1>}
 
         <table className="table">
           <tbody>
@@ -57,9 +56,9 @@ export class App extends Component<{}, State> {
               <tr
                 key={good}
                 data-cy="Good"
-                className={selectedGood === good
-                  ? 'has-background-success-light'
-                  : ''}
+                className={cn({
+                  'has-background-success-light': selectedGood === good,
+                })}
               >
                 <td>
                   {selectedGood === good
@@ -68,7 +67,7 @@ export class App extends Component<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={this.handleButtonClick()}
+                        onClick={this.handleGoodSelector()}
                       >
                         -
                       </button>
@@ -77,7 +76,7 @@ export class App extends Component<{}, State> {
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={this.handleButtonClick(good)}
+                        onClick={this.handleGoodSelector(good)}
                       >
                         +
                       </button>
