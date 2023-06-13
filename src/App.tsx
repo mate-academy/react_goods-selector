@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 interface State {
   selectedGood: string;
@@ -24,16 +25,12 @@ export class App extends React.Component <{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleClickClearButton = () => {
+  clearSelection = () => {
     this.setState({ selectedGood: '' });
   };
 
-  handleClickSelectedButton = (good:string) => {
-    if (this.state.selectedGood === good) {
-      this.setState({ selectedGood: '' });
-    } else {
-      this.setState({ selectedGood: good });
-    }
+  setSelection = (good:string) => {
+    this.setState({ selectedGood: good });
   };
 
   render() {
@@ -51,13 +48,11 @@ export class App extends React.Component <{}, State> {
                   data-cy="ClearButton"
                   type="button"
                   className="delete ml-3"
-                  onClick={this.handleClickClearButton}
+                  onClick={this.clearSelection}
                 />
               </>
             )
-            : (
-              <>No goods selected</>
-            )}
+            : 'No goods selected'}
         </h1>
 
         <table className="table">
@@ -66,9 +61,9 @@ export class App extends React.Component <{}, State> {
               <tr
                 key={good}
                 data-cy="Good"
-                className={selectedGood === good
-                  ? 'has-background-success-light'
-                  : ''}
+                className={classNames({
+                  'has-background-success-light': selectedGood === good,
+                })}
               >
                 <td>
                   {selectedGood === good
@@ -77,7 +72,7 @@ export class App extends React.Component <{}, State> {
                         type="button"
                         className="button is-info"
                         onClick={(
-                          () => this.handleClickSelectedButton(good))}
+                          () => this.clearSelection())}
                         data-cy="RemoveButton"
                       >
                         -
@@ -89,7 +84,7 @@ export class App extends React.Component <{}, State> {
                         type="button"
                         className="button"
                         onClick={(
-                          () => this.handleClickSelectedButton(good))}
+                          () => this.setSelection(good))}
                       >
                         +
                       </button>
