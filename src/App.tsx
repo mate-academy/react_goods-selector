@@ -25,13 +25,13 @@ export class App extends React.Component<{}, State> {
     selectedProduct: 'Jam',
   };
 
-  handleSelectProduct = (product: string) => {
+  selectProduct = (product: string) => {
     this.setState({
       selectedProduct: product,
     });
   };
 
-  handleRemoveProduct = () => {
+  removeSelection = () => {
     this.setState({
       selectedProduct: '',
     });
@@ -53,7 +53,7 @@ export class App extends React.Component<{}, State> {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={this.handleRemoveProduct}
+              onClick={this.removeSelection}
             />
           )}
         </h1>
@@ -67,11 +67,9 @@ export class App extends React.Component<{}, State> {
                 <tr
                   data-cy="Good"
                   key={product}
-                  className={classNames(
-                    {
-                      'has-background-success-light': isSelected,
-                    },
-                  )}
+                  className={classNames({
+                    'has-background-success-light': isSelected,
+                  })}
                 >
                   <td>
                     {isSelected
@@ -79,7 +77,7 @@ export class App extends React.Component<{}, State> {
                         <button
                           data-cy="RemoveButton"
                           type="button"
-                          onClick={this.handleRemoveProduct}
+                          onClick={this.removeSelection}
                           className="button is-info"
                         >
                           -
@@ -89,7 +87,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="AddButton"
                           type="button"
                           className="button"
-                          onClick={() => this.handleSelectProduct(product)}
+                          onClick={() => this.selectProduct(product)}
                         >
                           +
                         </button>
