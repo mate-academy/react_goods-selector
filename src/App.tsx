@@ -25,6 +25,14 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
+  addSelectedGood = (good: string): void => {
+    this.setState({ selectedGood: good });
+  };
+
+  removeSelectedGood = (): void => {
+    this.setState({ selectedGood: '' });
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -37,16 +45,14 @@ export class App extends React.Component<{}, State> {
 
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
-                onClick={() => this.setState({ selectedGood: '' })}
+                onClick={this.removeSelectedGood}
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
               />
             </h1>
           ) : (
-            <h1 className="title">
-              No goods selected
-            </h1>
+            <h1 className="title">No goods selected</h1>
           )}
 
         <table className="table">
@@ -55,17 +61,15 @@ export class App extends React.Component<{}, State> {
               <tr
                 key={good}
                 data-cy="Good"
-                className={cn(
-                  {
-                    'has-background-success-light': good === selectedGood,
-                  },
-                )}
+                className={cn({
+                  'has-background-success-light': good === selectedGood,
+                })}
               >
                 <td>
                   {good === selectedGood
                     ? (
                       <button
-                        onClick={() => this.setState({ selectedGood: '' })}
+                        onClick={this.removeSelectedGood}
                         data-cy="RemoveButton"
                         type="button"
                         className="button"
@@ -74,7 +78,7 @@ export class App extends React.Component<{}, State> {
                       </button>
                     ) : (
                       <button
-                        onClick={() => this.setState({ selectedGood: good })}
+                        onClick={() => this.addSelectedGood(good)}
                         data-cy="AddButton"
                         type="button"
                         className="button"
