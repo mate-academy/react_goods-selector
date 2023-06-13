@@ -74,12 +74,32 @@ export class App extends React.Component<Props, State> {
                   className={classNames({
                     'has-background-success-light': isSelected,
                   })}
-                  // className={isSelected
-                  //   ? 'has-background-success-light'
-                  //   : ''}
                 >
                   <td>
-                    <button
+                    {isSelected
+                      ? (
+                        <button
+                          data-cy="RemoveButton"
+                          type="button"
+                          className="button is-info"
+                          onClick={this.dismissSelectedGood}
+                        >
+                          -
+                        </button>
+                      )
+                      : (
+                        <button
+                          data-cy="AddButton"
+                          type="button"
+                          className="button"
+                          onClick={() => {
+                            this.chooseSelectedGood(good);
+                          }}
+                        >
+                          +
+                        </button>
+                      )}
+                    {/* <button
                       data-cy={isSelected
                         ? 'RemoveButton'
                         : 'AddButton'}
@@ -94,7 +114,7 @@ export class App extends React.Component<Props, State> {
                         }}
                     >
                       {isSelected ? '-' : '+'}
-                    </button>
+                    </button> */}
                   </td>
 
                   <td data-cy="GoodTitle" className="is-vcentered">
