@@ -1,4 +1,6 @@
-import React from 'react';
+import { Component } from 'react';
+import cn from 'classnames';
+
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -15,71 +17,91 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+type State = {
+  selectedGood: string | null;
+};
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+// eslint-disable-next-line react/prefer-stateless-function
+export class App extends Component<{}, State> {
+  state = {
+    selectedGood: 'Jam',
+  };
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+  handleClick = (product: string) => (
+    () => this.setState({ selectedGood: product })
+  );
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
+  handleClear = () => (
+    () => this.setState({ selectedGood: null })
+  );
+
+  render() {
+    const { selectedGood } = this.state;
+
+    return (
+      <main className="section container">
+        <h1 className="title is-flex is-align-products-center">
+          {selectedGood
+            ? `${selectedGood} is selected`
+            : 'No goods selected'}
+
+          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+          {selectedGood && (
+            // eslint-disable-next-line jsx-a11y/control-has-associated-label
             <button
-              data-cy="AddButton"
+              data-cy="ClearButton"
               type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+              className="delete"
+              onClick={this.handleClear()}
+            />
+          )}
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+        </h1>
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+        <table className="table">
+          <tbody className="tbody">
+            {goods.map((product) => {
+              const isSelected = selectedGood === product;
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+              return (
+                <tr
+                  key={product}
+                  data-cy="Good"
+                  className={cn({
+                    'has-background-success-light': isSelected,
+                  })}
+                >
+                  <td>
+                    {isSelected ? (
+                      <button
+                        data-cy="RemoveButton"
+                        type="button"
+                        className="button active-btn"
+                        onClick={this.handleClear()}
+                      >
+                        -
+                      </button>
+                    ) : (
+                      <button
+                        data-cy="AddButton"
+                        type="button"
+                        className="button"
+                        onClick={this.handleClick(product)}
+                      >
+                        +
+                      </button>
+                    )}
+                  </td>
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {product}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </main>
+    );
+  }
+}
