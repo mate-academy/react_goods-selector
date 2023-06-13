@@ -19,14 +19,7 @@ interface State {
   selectedGood: string,
 }
 
-interface Props {
-  // eslint-disable-next-line react/no-unused-prop-types
-  goods: string[],
-}
-
-export class App extends React.Component<Props, State> {
-  props = { goods };
-
+export class App extends React.Component<{}, State> {
   state: State = {
     selectedGood: 'Jam',
   };
@@ -99,22 +92,6 @@ export class App extends React.Component<Props, State> {
                           +
                         </button>
                       )}
-                    {/* <button
-                      data-cy={isSelected
-                        ? 'RemoveButton'
-                        : 'AddButton'}
-                      type="button"
-                      className={classNames('button', {
-                        'is-info': isSelected,
-                      })}
-                      onClick={isSelected
-                        ? this.dismissSelectedGood
-                        : () => {
-                          this.chooseSelectedGood(good);
-                        }}
-                    >
-                      {isSelected ? '-' : '+'}
-                    </button> */}
                   </td>
 
                   <td data-cy="GoodTitle" className="is-vcentered">
