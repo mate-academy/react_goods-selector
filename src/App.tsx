@@ -38,12 +38,8 @@ export class App extends Component<{}, State> {
 
     return (
       <main className="section container">
-        {selectedGood === ''
+        {selectedGood
           ? (
-            <h1 className="title is-flex is-align-items-center">
-              No goods selected
-            </h1>
-          ) : (
             <h1 className="title">
               {`${selectedGood} is selected`}
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
@@ -53,6 +49,10 @@ export class App extends Component<{}, State> {
                 className="delete ml-3"
                 onClick={this.clearSelection}
               />
+            </h1>
+          ) : (
+            <h1 className="title is-flex is-align-items-center">
+              No goods selected
             </h1>
           )}
 
