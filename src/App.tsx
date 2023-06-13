@@ -31,11 +31,11 @@ export class App extends React.Component<Props, State> {
     selectedGood: 'Jam',
   };
 
-  dismissSelectedGoods = () => {
+  dismissSelectedGood = () => {
     this.setState({ selectedGood: '' });
   };
 
-  chooseSelectedGoods = (newGood: string) => {
+  chooseSelectedGood = (newGood: string) => {
     this.setState({ selectedGood: newGood });
   };
 
@@ -54,7 +54,7 @@ export class App extends React.Component<Props, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.dismissSelectedGoods}
+                onClick={this.dismissSelectedGood}
               />
             </h1>
           )
@@ -71,9 +71,12 @@ export class App extends React.Component<Props, State> {
               return (
                 <tr
                   data-cy="Good"
-                  className={isSelected
-                    ? 'has-background-success-light'
-                    : ''}
+                  className={classNames({
+                    'has-background-success-light': isSelected,
+                  })}
+                  // className={isSelected
+                  //   ? 'has-background-success-light'
+                  //   : ''}
                 >
                   <td>
                     <button
@@ -85,9 +88,9 @@ export class App extends React.Component<Props, State> {
                         'is-info': isSelected,
                       })}
                       onClick={isSelected
-                        ? this.dismissSelectedGoods
+                        ? this.dismissSelectedGood
                         : () => {
-                          this.chooseSelectedGoods(good);
+                          this.chooseSelectedGood(good);
                         }}
                     >
                       {isSelected ? '-' : '+'}
