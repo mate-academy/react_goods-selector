@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -50,32 +51,22 @@ export class App extends React.Component<{}, State> {
                 onClick={this.removeGood}
               />
             </h1>
-          ) : (
-            <h1 className="title">No goods selected</h1>
-          )}
+          )
+          : <h1 className="title">No goods selected</h1>}
 
         <table className="table">
           <tbody>
             {goods.map(good => (
               <tr
                 data-cy="Good"
-                className={selectedGood === good
-                  ? 'has-background-success-light'
-                  : ''}
+                className={classNames({
+                  'has-background-success-light': selectedGood === good
+                })}
               >
 
                 <td>
-                  {selectedGood !== good
+                  {selectedGood === good
                     ? (
-                      <button
-                        data-cy="AddButton"
-                        type="button"
-                        className="button"
-                        onClick={() => this.selectGood(good)}
-                      >
-                        +
-                      </button>
-                    ) : (
                       <button
                         data-cy="RemoveButton"
                         type="button"
@@ -83,6 +74,15 @@ export class App extends React.Component<{}, State> {
                         onClick={this.removeGood}
                       >
                         -
+                      </button>
+                    ) : (
+                      <button
+                        data-cy="AddButton"
+                        type="button"
+                        className="button"
+                        onClick={() => this.selectGood(good)}
+                      >
+                        +
                       </button>
                     )}
                 </td>
