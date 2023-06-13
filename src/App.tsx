@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import cn from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -24,11 +25,11 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleClearButtonClick = () => {
+  clear = () => {
     this.setState({ selectedGood: '' });
   };
 
-  handleAddButtonClick = (value: string) => {
+  selectGood = (value: string) => {
     this.setState({ selectedGood: value });
   };
 
@@ -47,13 +48,11 @@ export class App extends React.Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.handleClearButtonClick}
+                onClick={this.clear}
               />
             </h1>
           )
-          : (
-            <h1 className="title">No goods selected</h1>
-          )}
+          : <h1 className="title">No goods selected</h1>}
 
         <table className="table">
           <tbody>
@@ -61,34 +60,32 @@ export class App extends React.Component<{}, State> {
               <tr
                 key={good}
                 data-cy="Good"
-                className={selectedGood === good
-                  ? 'has-background-success-light'
-                  : ''}
+                className={cn({
+                  'has-background-success-light': selectedGood === good,
+                })}
               >
                 <td>
-                  {!(selectedGood === good)
+                  {selectedGood === good
                     ? (
+                      <button
+                        data-cy="RemoveButton"
+                        type="button"
+                        className="button is-info"
+                        onClick={this.clear}
+                      >
+                        -
+                      </button>
+                    )
+                    : (
                       <button
                         data-cy="AddButton"
                         type="button"
                         className="button"
                         onClick={() => {
-                          this.handleAddButtonClick(good);
+                          this.selectGood(good);
                         }}
                       >
                         +
-                      </button>
-                    )
-                    : (
-                      <button
-                        data-cy="RemoveButton"
-                        type="button"
-                        className="button is-info"
-                        onClick={() => {
-                          this.handleClearButtonClick();
-                        }}
-                      >
-                        -
                       </button>
                     )}
                 </td>
