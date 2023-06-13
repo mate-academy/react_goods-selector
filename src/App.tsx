@@ -1,5 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
+import cn from 'classnames';
+
 import './App.scss';
 
 export const goods = [
@@ -24,15 +26,9 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  addButtonHandler = (item: string) => {
+  handleSelect = (item: string) => {
     this.setState({
       selectedGood: item,
-    });
-  };
-
-  removeButtonHandler = () => {
-    this.setState({
-      selectedGood: '',
     });
   };
 
@@ -51,11 +47,7 @@ export class App extends React.Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  this.setState({
-                    selectedGood: '',
-                  });
-                }}
+                onClick={() => this.handleSelect('')}
               />
             </h1>
           )
@@ -68,9 +60,9 @@ export class App extends React.Component<{}, State> {
               <tr
                 key={item}
                 data-cy="Good"
-                className={selectedGood === item
-                  ? 'has-background-success-light'
-                  : ''}
+                className={cn({
+                  'has-background-success-light': selectedGood === item,
+                })}
               >
                 <td>
                   <button
@@ -78,10 +70,12 @@ export class App extends React.Component<{}, State> {
                       ? 'RemoveButton'
                       : 'AddButton'}
                     type="button"
-                    className={`button ${selectedGood === item ? 'is-info' : ''}`}
+                    className={cn('button', {
+                      'is-info': selectedGood === item,
+                    })}
                     onClick={selectedGood === item
-                      ? this.removeButtonHandler
-                      : () => this.addButtonHandler(item)}
+                      ? () => this.handleSelect('')
+                      : () => this.handleSelect(item)}
                   >
                     {selectedGood === item
                       ? '-'
