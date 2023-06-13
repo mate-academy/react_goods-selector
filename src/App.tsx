@@ -29,6 +29,10 @@ export class App extends React.Component<{}, State> {
     this.setState({ selectedGood: '' });
   };
 
+  addGood = (good: string) => {
+    this.setState({ selectedGood: good })
+  }
+
   render() {
     const { selectedGood } = this.state;
 
@@ -44,9 +48,7 @@ export class App extends React.Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => {
-                  this.resetGood();
-                }}
+                onClick={ this.resetGood }
               />
             </h1>
           )
@@ -58,36 +60,31 @@ export class App extends React.Component<{}, State> {
             {goods.map(good => (
               <tr
                 data-cy="Good"
-                className={classNames(
-                  {
-                    'has-background-success-light': good === selectedGood,
-                  },
-                )}
+                className={classNames({
+                  'has-background-success-light': good === selectedGood,
+                })}
               >
                 <td>
-                  { good === selectedGood ? (
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                      onClick={() => {
-                        this.resetGood();
-                      }}
-                    >
-                      -
-                    </button>
-                  ) : (
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      className="button"
-                      onClick={() => {
-                        this.setState({ selectedGood: good });
-                      }}
-                    >
-                      +
-                    </button>
-                  )}
+                  { good === selectedGood
+                    ? (
+                      <button
+                        data-cy="RemoveButton"
+                        type="button"
+                        className="button is-info"
+                        onClick={this.resetGood}
+                      >
+                        -
+                      </button> )
+                    : (
+                      <button
+                        data-cy="AddButton"
+                        type="button"
+                        className="button"
+                        onClick={() => this.addGood(good)}
+                      >
+                        +
+                      </button> )
+                  }
 
                 </td>
 
