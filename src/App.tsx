@@ -93,7 +93,6 @@ export class App extends Component<{}, State> {
                         </button>
                       )}
                   </td>
-
                   <td data-cy="GoodTitle" className="is-vcentered">
                     {good}
                   </td>
