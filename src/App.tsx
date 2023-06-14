@@ -47,9 +47,7 @@ export class App extends React.Component<{}, State> {
                 onClick={this.handleClickOnButton()}
               />
             </h1>
-          ) : (
-            <h1 className="title">No goods selected</h1>
-          )}
+          ) : <h1 className="title">No goods selected</h1>}
 
         <table className="table">
           <tbody>
