@@ -58,6 +58,7 @@ export class App extends Component<{}, State> {
 
               return (
                 <tr
+                  key={good}
                   data-cy="Good"
                   className={
                     isSelectedGood
