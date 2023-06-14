@@ -66,22 +66,25 @@ export class App extends Component<{}, State> {
                   }
                 >
                   <td>
-                    <button
-                      data-cy={isSelectedGood
-                        ? 'RemoveButton'
-                        : 'AddButton'}
-                      type="button"
-                      className={isSelectedGood
-                        ? 'button is-info'
-                        : 'button'}
-                      onClick={
-                        isSelectedGood
-                          ? this.removeSelectedGood
-                          : () => this.addSelectedGood(good)
-                      }
-                    >
-                      {isSelectedGood ? '+' : '-'}
-                    </button>
+                    {isSelectedGood ? (
+                      <button
+                        data-cy="RemoveButton"
+                        type="button"
+                        className="button is-info"
+                        onClick={this.removeSelectedGood}
+                      >
+                        +
+                      </button>
+                    ) : (
+                      <button
+                        data-cy="AddButton"
+                        type="button"
+                        className="button"
+                        onClick={() => this.addSelectedGood(good)}
+                      >
+                        -
+                      </button>
+                    )}
                   </td>
 
                   <td data-cy="GoodTitle" className="is-vcentered">
