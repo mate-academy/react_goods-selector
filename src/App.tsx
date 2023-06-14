@@ -25,11 +25,11 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleClickAddButton = (item: string) => (
+  selectGood = (item: string) => (
     this.setState({ selectedGood: item })
   );
 
-  handleClickRemoveButton = () => {
+  clear = () => {
     this.setState({ selectedGood: '' });
   };
 
@@ -49,13 +49,11 @@ export class App extends React.Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => this.handleClickRemoveButton()}
+                onClick={() => this.clear()}
               />
             </h1>
           )
-          : (
-            <h1 className="title">No goods selected</h1>
-          )}
+          : <h1 className="title">No goods selected</h1>}
 
         <table className="table">
           <tbody>
@@ -71,17 +69,27 @@ export class App extends React.Component<{}, State> {
                   )}
                 >
                   <td>
-                    <button
-                      data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
-                      type="button"
-                      className={cn('button',
-                        ((isSelected && 'is-info')))}
-                      onClick={(isSelected)
-                        ? (() => this.handleClickRemoveButton())
-                        : (() => this.handleClickAddButton(item))}
-                    >
-                      {isSelected ? '-' : '+'}
-                    </button>
+                    {isSelected
+                      ? (
+                        <button
+                          data-cy="RemoveButton"
+                          type="button"
+                          className="button is-info"
+                          onClick={this.clear}
+                        >
+                          -
+                        </button>
+                      )
+                      : (
+                        <button
+                          data-cy="AddButton"
+                          type="button"
+                          className="button"
+                          onClick={() => this.selectGood(item)}
+                        >
+                          +
+                        </button>
+                      )}
                   </td>
 
                   <td data-cy="GoodTitle" className="is-vcentered">
