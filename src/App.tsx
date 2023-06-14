@@ -25,7 +25,7 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleClickOnButton = (good = '') => (
+  selectGood = (good = '') => (
     () => this.setState({ selectedGood: good })
   );
 
