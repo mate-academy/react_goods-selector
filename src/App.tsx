@@ -63,7 +63,7 @@ export class App extends React.Component<{}, State> {
                   key={good}
                   data-cy="Good"
                   className={cn({
-                    'has-background-success-light': good === selectedGood,
+                    'has-background-success-light': isSelected,
                   })}
                 >
                   <td>
