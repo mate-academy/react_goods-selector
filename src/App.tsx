@@ -29,7 +29,7 @@ export class App extends React.Component <{}, State> {
     this.setState({ selectedGood: '' });
   };
 
-  setSelection = (good:string) => {
+  setSelectedGood = (good:string) => {
     this.setState({ selectedGood: good });
   };
 
@@ -84,7 +84,7 @@ export class App extends React.Component <{}, State> {
                         type="button"
                         className="button"
                         onClick={(
-                          () => this.setSelection(good))}
+                          () => this.setSelectedGood(good))}
                       >
                         +
                       </button>
