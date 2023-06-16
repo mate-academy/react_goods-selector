@@ -17,25 +17,19 @@ export const goods = [
 
 type State = {
   selectedGood: string,
-  selected: boolean,
-  symbols: { [key: string]: string };
 };
 
 export class App extends Component<{}, State> {
   state: Readonly<State> = {
     selectedGood: 'Jam',
-    selected: true,
-    symbols: {
-      Jam: '-',
-    },
   };
 
   render() {
-    const { selectedGood, selected, symbols } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <main className="section container">
-        {selected
+        {(selectedGood !== '')
           ? (
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
@@ -46,13 +40,8 @@ export class App extends Component<{}, State> {
                 type="button"
                 className="delete ml-3"
                 onClick={() => {
-                  Object.keys(symbols).forEach(key => {
-                    symbols[key] = '+';
-                  });
-
                   this.setState({
-                    selected: false,
-                    symbols,
+                    selectedGood: '',
                   });
                 }}
               />
@@ -68,40 +57,28 @@ export class App extends Component<{}, State> {
                 data-cy="Good"
                 key={name}
                 className={
-                  (selectedGood === name && symbols[name] === '-')
+                  (selectedGood === name)
                     ? 'has-background-success-light' : ''
                 }
               >
                 <td>
                   <button
                     data-cy={
-                      (selectedGood === name && symbols[name] === '-')
+                      (selectedGood === name)
                         ? 'RemoveButton' : 'AddButton'
                     }
                     type="button"
                     className={`button ${
-                      (selectedGood === name && symbols[name] === '-')
+                      (selectedGood === name)
                         ? 'is-info' : ''
                     }`}
                     onClick={() => {
-                      const updatedSymbols = { ...symbols };
-
-                      if (selectedGood === name) {
-                        updatedSymbols[name] = symbols[name] === '-'
-                          ? '+' : '-';
-                      } else {
-                        updatedSymbols[name] = '-';
-                        updatedSymbols[selectedGood] = '+';
-                      }
-
                       this.setState({
-                        selectedGood: name,
-                        selected: updatedSymbols[name] === '-',
-                        symbols: updatedSymbols,
+                        selectedGood: (selectedGood === name) ? '' : name,
                       });
                     }}
                   >
-                    {selectedGood === name ? symbols[name] : '+'}
+                    {selectedGood === name ? '-' : '+'}
                   </button>
                 </td>
 
