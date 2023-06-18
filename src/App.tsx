@@ -29,7 +29,7 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleGoodSelection = (_event: React.MouseEvent, good: string) => {
+  handleGoodSelection = (good: string) => {
     this.setState({
       selectedGood: good,
     });
@@ -45,7 +45,6 @@ export class App extends React.Component<{}, State> {
     const { selectedGood } = this.state;
 
     return (
-
       <main className="section container">
 
         {selectedGood
@@ -60,27 +59,19 @@ export class App extends React.Component<{}, State> {
                 onClick={this.handleGoodRemoval}
               />
             </h1>
-
-          )
-          : <h1 className="title">No goods selected</h1>}
+          ) : <h1 className="title">No goods selected</h1>}
 
         <table className="table">
           <tbody>
             {goods.map(good => {
-              let isSelected = false;
-
-              if (good === selectedGood) {
-                isSelected = true;
-              }
-
               const className = cn({
-                'has-background-success-light': isSelected,
+                'has-background-success-light': good === selectedGood,
               });
 
               return (
                 <tr key={good} data-cy="Good" className={className}>
                   <td>
-                    {isSelected
+                    {good === selectedGood
                       ? (
                         <button
                           data-cy="RemoveButton"
@@ -97,7 +88,7 @@ export class App extends React.Component<{}, State> {
                           type="button"
                           className="button"
                           onClick={
-                            (event) => this.handleGoodSelection(event, good)
+                            () => this.handleGoodSelection(good)
                           }
                         >
                           +
