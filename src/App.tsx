@@ -23,7 +23,13 @@ type State = {
 
 export class App extends Component<{}, State> {
   state: Readonly<State> = {
-    selectedGood: 'Jam',
+    selectedGood: goods[goods.indexOf('Jam')] || goods[0],
+  };
+
+  selectHandler = (good: string) => {
+    const checkState = this.state.selectedGood === good;
+
+    this.setState({ selectedGood: checkState ? null : good });
   };
 
   render() {
@@ -71,9 +77,7 @@ export class App extends Component<{}, State> {
                       data-cy={checkGood ? 'RemoveButton' : 'AddButton'}
                       type="button"
                       className={buttonClass}
-                      onClick={() => {
-                        this.setState({ selectedGood: good });
-                      }}
+                      onClick={() => this.selectHandler(good)}
                     >
                       {checkGood ? '-' : '+'}
                     </button>
