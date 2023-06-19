@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import './App.scss';
 import classNames from 'classnames';
 
@@ -19,7 +19,7 @@ type State = {
   selectedGood: string,
 };
 
-export class App extends React.Component<{}, State> {
+export class App extends Component<{}, State> {
   state = {
     selectedGood: 'Jam',
   };
@@ -45,9 +45,7 @@ export class App extends React.Component<{}, State> {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => {
-                this.handleClearButton();
-              }}
+              onClick={() => this.handleClearButton()}
             >
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             </button>
@@ -69,7 +67,7 @@ export class App extends React.Component<{}, State> {
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => this.handleClearButton}
+                      onClick={() => this.handleClearButton()}
                     >
                       -
                     </button>
@@ -78,7 +76,7 @@ export class App extends React.Component<{}, State> {
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={() => this.handleAddButton}
+                      onClick={() => this.handleAddButton(good)}
                     >
                       +
                     </button>
