@@ -25,8 +25,12 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  clearButton = () => {
+  cleanList = () => {
     this.setState({ selectedGood: '' });
+  };
+
+  addToList = (product: string) => {
+    this.setState({ selectedGood: product });
   };
 
   toggleSelectProduct(product: string) {
@@ -46,9 +50,8 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        { !selectedGood
-          ? <h1 className="title">No goods selected</h1>
-          : (
+        { selectedGood
+          ? (
             <h1 className="title is-flex is-align-items-center">
               {`${selectedGood} is selected`}
 
@@ -57,10 +60,11 @@ export class App extends React.Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.clearButton}
+                onClick={this.cleanList}
               />
             </h1>
-          )}
+          )
+          : <h1 className="title">No goods selected</h1>}
 
         <table className="table">
           <tbody>
@@ -68,12 +72,9 @@ export class App extends React.Component<{}, State> {
               <tr
                 data-cy="Good"
                 key={product}
-                className={classNames(
-                  {
-                    'has-background-success-light':
-                selectedGood === product,
-                  },
-                )}
+                className={classNames({
+                  'has-background-success-light': selectedGood === product,
+                })}
               >
                 <td>
                   {selectedGood === product
@@ -93,7 +94,7 @@ export class App extends React.Component<{}, State> {
                         type="button"
                         className="button"
                         onClick={() => {
-                          this.setState({ selectedGood: product });
+                          this.addToList(product);
                         }}
                       >
                         +
