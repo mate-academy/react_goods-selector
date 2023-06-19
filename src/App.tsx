@@ -56,17 +56,18 @@ export class App extends React.Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map(good => (
-              <tr
-                data-cy="Good"
-                className={classNames({
-                  'has-background-success-light': selectedGood === good
-                })}
-              >
+            {goods.map(good => {
+              const isSelected = selectedGood === good;
 
-                <td>
-                  {selectedGood === good
-                    ? (
+              return (
+                <tr
+                  data-cy="Good"
+                  className={classNames({
+                    'has-background-success-light': isSelected,
+                  })}
+                >
+                  <td>
+                    {isSelected ? (
                       <button
                         data-cy="RemoveButton"
                         type="button"
@@ -85,13 +86,13 @@ export class App extends React.Component<{}, State> {
                         +
                       </button>
                     )}
-                </td>
-
-                <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
-                </td>
-              </tr>
-            ))}
+                  </td>
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </main>
