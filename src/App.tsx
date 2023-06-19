@@ -19,31 +19,31 @@ export const goods = [
 ];
 
 type AppState = {
-  isSelected: string
+  selectedGood: string
 };
 
 export class App extends React.Component<{}, AppState> {
   state: Readonly<AppState> = {
-    isSelected: 'Jam',
+    selectedGood: 'Jam',
   };
 
   handleClick = (name: string): void => {
-    if (this.state.isSelected === name) {
-      this.setState({ isSelected: '' });
+    if (this.state.selectedGood === name) {
+      this.setState({ selectedGood: '' });
     } else {
-      this.setState({ isSelected: name });
+      this.setState({ selectedGood: name });
     }
   };
 
   render() {
-    const { isSelected } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <main className="section container">
-        {isSelected
+        {selectedGood
           ? (
             <h1 className="title is-flex is-align-items-center">
-              {`${isSelected} is selected`}
+              {`${selectedGood} is selected`}
               <button
                 data-cy="ClearButton"
                 type="button"
@@ -57,25 +57,24 @@ export class App extends React.Component<{}, AppState> {
         <table className="table">
           <tbody>
             {goods.map(good => {
-              const btnClassName = cn({
-                button: true,
-                'is-info': good === isSelected,
+              const btnClassName = cn('button', {
+                'is-info': good === selectedGood,
               });
 
               const trClassName = cn({
-                'has-background-success-light': good === isSelected,
+                'has-background-success-light': good === selectedGood,
               });
 
               return (
                 <tr data-cy="Good" key={good} className={trClassName}>
                   <td>
                     <button
-                      data-cy={good === isSelected ? 'RemoveButton' : 'AddButton'}
+                      data-cy={good === selectedGood ? 'RemoveButton' : 'AddButton'}
                       type="button"
                       className={btnClassName}
                       onClick={() => this.handleClick(good)}
                     >
-                      {good === isSelected ? '-' : '+'}
+                      {good === selectedGood ? '-' : '+'}
                     </button>
                   </td>
                   <td data-cy="GoodTitle" className="is-vcentered">
