@@ -24,11 +24,11 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleClear = () => {
+  clearSelection = () => {
     this.setState({ selectedGood: null });
   };
 
-  handleSelect = (good: string) => {
+  selectGood = (good: string) => {
     this.setState({ selectedGood: good });
   };
 
@@ -46,7 +46,7 @@ export class App extends Component<{}, State> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={this.handleClear}
+                onClick={this.clearSelection}
               />
             </h1>
           ) : (
@@ -60,6 +60,7 @@ export class App extends Component<{}, State> {
                 className={selectedGood === good
                   ? 'has-background-success-light'
                   : ''}
+
               >
                 <td>
                   {selectedGood === good
@@ -68,7 +69,7 @@ export class App extends Component<{}, State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={this.handleClear}
+                        onClick={this.clearSelection}
                       >
                         -
                       </button>
@@ -77,7 +78,7 @@ export class App extends Component<{}, State> {
                         data-cy="AddButton"
                         type="button"
                         className="button"
-                        onClick={() => this.handleSelect(good)}
+                        onClick={() => this.selectGood(good)}
                       >
                         +
                       </button>
