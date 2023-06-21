@@ -1,4 +1,3 @@
-import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -15,7 +14,7 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
+export const App = () => (
   <main className="section container">
     <h1 className="title">No goods selected</h1>
 

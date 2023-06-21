@@ -1,10 +1,10 @@
 # React Goods Selector
 
-> [React + Typescript cheat sheet](https://mate-academy.github.io/fe-program/js/extra/react-typescript)
-
 You are given an array of goods. Render them in a table with the ability to select one or clear selection.
 
 > Here is [the working version](https://mate-academy.github.io/react_goods-selector)
+
+In this we will use [Bulma CSS framework](https://bulma.io/). It is already installed and imported, so you may use its classes.
 
 1. Write everything inside the `App` (**don't** create additional components).
 1. Save a `selectedGood` in the state (`Jam` is the default value).
@@ -21,6 +21,5 @@ You are given an array of goods. Render them in a table with the ability to sele
 ## Instructions
 
 - Implement a solution following the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline).
-- Use the [React TypeScript cheat sheet](https://mate-academy.github.io/fe-program/js/extra/react-typescript).
 - Open one more terminal and run tests with `npm test` to ensure your solution is correct.
 - Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_goods-selector/) and add it to the PR description.
