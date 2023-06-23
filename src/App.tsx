@@ -31,7 +31,10 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        <h1 className="title is-flex is-align-items-center">
+        <h1 className={selectedGood !== ''
+          ? 'title is-flex is-align-items-center'
+          : 'title'}
+        >
           {selectedGood === ''
             ? 'No goods selected'
             : `${selectedGood} is selected`}
