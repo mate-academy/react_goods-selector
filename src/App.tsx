@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -22,6 +23,14 @@ type State = {
 export class App extends React.Component<{}, State> {
   state: Readonly<State> = {
     selectedGood: 'Jam',
+  };
+
+  selectGood = (good: string) => {
+    this.setState({ selectedGood: good });
+  };
+
+  unselectGood = () => {
+    this.setState({ selectedGood: '' });
   };
 
   render() {
@@ -53,20 +62,34 @@ export class App extends React.Component<{}, State> {
           <tbody>
 
             {goods.map((good) => {
+              const isSelected = good === selectedGood;
+
               return (
                 <tr
+                  key={good}
                   data-cy="Good"
+                  className={classNames({
+                    'has-background-success-light': isSelected,
+                  })}
                 >
                   <td>
                     <button
-                      data-cy="AddButton"
+                      data-cy={classNames({
+                        AddButton: !isSelected,
+                        RemoveButton: isSelected,
+                      })}
                       type="button"
-                      className="button"
-                      onClick={() => {
-                        this.setState({ selectedGood: good });
-                      }}
+                      className={classNames(
+                        'button',
+                        { 'is-info': isSelected },
+                      )}
+                      onClick={
+                        isSelected
+                          ? () => this.unselectGood()
+                          : () => this.selectGood(good)
+                      }
                     >
-                      +
+                      {isSelected ? '-' : '+'}
                     </button>
                   </td>
 
@@ -79,57 +102,9 @@ export class App extends React.Component<{}, State> {
                 </tr>
               );
             })}
-
-            <tr data-cy="Good">
-              <td>
-                <button
-                  data-cy="AddButton"
-                  type="button"
-                  className="button"
-                >
-                  +
-                </button>
-              </td>
-
-              <td data-cy="GoodTitle" className="is-vcentered">
-                Dumplings
-              </td>
-            </tr>
-
-            <tr data-cy="Good" className="has-background-success-light">
-              <td>
-                <button
-                  data-cy="RemoveButton"
-                  type="button"
-                  className="button is-info"
-                >
-                  -
-                </button>
-              </td>
-
-              <td data-cy="GoodTitle" className="is-vcentered">
-                Jam
-              </td>
-            </tr>
-
-            <tr data-cy="Good">
-              <td>
-                <button
-                  data-cy="AddButton"
-                  type="button"
-                  className="button"
-                >
-                  +
-                </button>
-              </td>
-
-              <td data-cy="GoodTitle" className="is-vcentered">
-                Garlic
-              </td>
-            </tr>
           </tbody>
         </table>
       </main>
     );
   }
-};
+}
