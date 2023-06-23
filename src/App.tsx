@@ -59,42 +59,41 @@ export class App extends Component<{}, State> {
 
         <table className="table">
           <tbody>
-            {goods.map((good) => {
-              return (
-                <tr
-                  data-cy="Good"
-                  className={classNames({
-                    'has-background-success-light': selectedGood === good,
-                  })}
-                >
-                  <td>
-                    {good === selectedGood ? (
-                      <button
-                        data-cy="RemoveButton"
-                        type="button"
-                        className="button is-info"
-                        onClick={() => this.clearHandler()}
-                      >
-                        -
-                      </button>
-                    ) : (
-                      <button
-                        data-cy="AddButton"
-                        type="button"
-                        className="button"
-                        onClick={() => this.addHandler(good)}
-                      >
-                        +
-                      </button>
-                    )}
-                  </td>
+            {goods.map((good) => (
+              <tr
+                key={good}
+                data-cy="Good"
+                className={classNames({
+                  'has-background-success-light': selectedGood === good,
+                })}
+              >
+                <td>
+                  {good === selectedGood ? (
+                    <button
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
+                      onClick={() => this.clearHandler()}
+                    >
+                      -
+                    </button>
+                  ) : (
+                    <button
+                      data-cy="AddButton"
+                      type="button"
+                      className="button"
+                      onClick={() => this.addHandler(good)}
+                    >
+                      +
+                    </button>
+                  )}
+                </td>
 
-                  <td data-cy="GoodTitle" className="is-vcentered">
-                    {good}
-                  </td>
-                </tr>
-              );
-            })}
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </main>
