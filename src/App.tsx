@@ -27,7 +27,9 @@ export class App extends React.Component<{}, State> {
   };
 
   handlerChangeState = (value: string) => {
-    this.setState({ selectedGood: value });
+    const { selectedGood } = this.state;
+
+    this.setState({ selectedGood: value !== selectedGood ? value : '' });
   };
 
   render() {
