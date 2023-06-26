@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
@@ -20,6 +21,7 @@ export const App: React.FC = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
   const messege = selectedGood.length > 0 ? `${selectedGood} is selected`
     : 'No goods selected';
+  // const buttonDel = document.getElementsByClassName('delete ml-3');
 
   return (
     <main className="section container">
@@ -28,16 +30,17 @@ export const App: React.FC = () => {
       })}
       >
         {messege}
-        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-        <button
-          data-cy="ClearButton"
-          type="button"
-          className="delete ml-3"
-          style={{ display: selectedGood.length > 0 ? 'block' : 'none' }}
-          onClick={() => {
-            setSelectedGood('');
-          }}
-        />
+
+        {selectedGood.length > 0 && (
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={() => {
+              setSelectedGood('');
+            }}
+          />
+        )}
       </h1>
 
       <table className="table">
@@ -56,9 +59,11 @@ export const App: React.FC = () => {
                   className={cn('button', {
                     ' is-info': selectedGood === good,
                   })}
-                  onClick={() => {
-                    setSelectedGood(good);
-                  }}
+                  onClick={
+                    selectedGood === good
+                      ? () => setSelectedGood('')
+                      : () => setSelectedGood(good)
+                  }
                 >
                   {selectedGood === good ? '-' : '+'}
                 </button>
