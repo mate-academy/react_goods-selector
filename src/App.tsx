@@ -24,7 +24,7 @@ type State = {
 
 export class App extends Component<{}, State> {
   state = {
-    selectedGood: '',
+    selectedGood: 'Jam',
   };
 
   add = (good: string) => {
@@ -43,9 +43,7 @@ export class App extends Component<{}, State> {
         {selectedGood
           ? (
             <h1 className="title is-flex is-align-items-center">
-              {selectedGood}
-              {' '}
-              is selected
+              {`${selectedGood} is selected`}
               {
                 (
                   // eslint-disable-next-line jsx-a11y/control-has-associated-label
@@ -53,9 +51,7 @@ export class App extends Component<{}, State> {
                     data-cy="ClearButton"
                     type="button"
                     className="delete ml-3"
-                    onClick={() => {
-                      this.remove();
-                    }}
+                    onClick={() => this.remove()}
                   />
                 )
               }
