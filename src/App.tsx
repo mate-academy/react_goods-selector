@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classnames from 'classnames';
 
 const goods = [
   'Dumplings',
@@ -16,19 +17,19 @@ const goods = [
 ];
 
 type State = {
-  selectedGood: string | undefined;
+  selectedGood: string;
 };
 
 export class App extends React.Component<{}, State> {
-  state: Readonly<State> = {
-    selectedGood: goods[goods.indexOf('Jam')] || goods[0],
+  state = {
+    selectedGood: 'Jam',
   };
 
   handleButtonClick = (clickedGood: string) => {
     const { selectedGood } = this.state;
 
     this.setState({
-      selectedGood: selectedGood !== clickedGood ? clickedGood : undefined,
+      selectedGood: selectedGood !== clickedGood ? clickedGood : '',
     });
   };
 
@@ -44,7 +45,7 @@ export class App extends React.Component<{}, State> {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => this.setState({ selectedGood: undefined })}
+              onClick={() => this.setState({ selectedGood: '' })}
             >
               <span className="visually-hidden">Clear selected good</span>
             </button>
@@ -57,9 +58,12 @@ export class App extends React.Component<{}, State> {
           <tbody>
             {goods.map((good) => {
               const isSelected = selectedGood === good;
-              const trClassName = isSelected
-                ? 'has-background-success-light' : '';
-              const buttonClassName = `button ${isSelected ? 'is-info' : ''}`;
+              const trClassName = classnames({
+                'has-background-success-light': isSelected,
+              });
+              const buttonClassName = classnames('button', {
+                'is-info': isSelected,
+              });
 
               return (
                 <tr key={good} data-cy="Good" className={trClassName}>
