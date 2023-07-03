@@ -56,18 +56,12 @@ export const App = () => {
                   <button
                     data-cy="AddButton"
                     type="button"
-                    className={isSelected
-                      ? 'button is-info'
-                      : 'button'
-                    }
+                    className={isSelected ? 'button is-info' : 'button'}
                     onClick={() => {
                       setSelectGoods(item);
                     }}
                   >
-                    {isSelected
-                      ? '-'
-                      : '+'
-                    }
+                    {isSelected ? '-' : '+'}
                   </button>
                 </td>
 
