@@ -16,30 +16,31 @@ export const goods = [
 ];
 
 export const App: React.FC = () => {
-  const [state, setState] = useState('Jam');
+  const [good, setGoods] = useState('Jam');
 
-  const butn = (
-    <button
-      data-cy="ClearButton"
-      type="button"
-      className="delete ml-3"
-      aria-label="Save"
-      onClick={() => setState('No goods')}
-    />
-  );
+  const Btn = () => {
+    if (good !== '') {
+      return (
+        <button
+          data-cy="ClearButton"
+          type="button"
+          className="delete ml-3"
+          aria-label="Save"
+          onClick={() => setGoods('')}
+        />
+      );
+    }
+
+    return null;
+  };
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {state}
-
-        {' is selected'}
-
-        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-        {
-          state !== 'No goods' ? butn : undefined
-        }
+        { good !== '' ? `${good} is selected!` : 'No goods selected.'}
+        <Btn />
       </h1>
+
       <table className="table">
         <tbody>
           {
@@ -47,19 +48,19 @@ export const App: React.FC = () => {
               <tr
                 data-cy="Good"
                 key={item}
-                className={item === state
+                className={item === good
                   ? 'has-background-success-light' : undefined}
               >
                 <td>
                   <button
                     data-cy="AddButton"
                     type="button"
-                    className={item === state ? 'button is-info' : 'button'}
+                    className={item === good ? 'button is-info' : 'button'}
                     onClick={() => {
-                      setState(item);
+                      setGoods(item);
                     }}
                   >
-                    {item === state ? '-' : '+'}
+                    {item === good ? '-' : '+'}
                   </button>
                 </td>
 
