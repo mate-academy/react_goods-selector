@@ -22,7 +22,7 @@ type AppState = {
 
 export class App extends React.Component<{}, AppState> {
   state = {
-    selectedGood: 'Jam',
+    selectedGood: goods[goods.indexOf('Jam')] || goods[0],
   };
 
   render() {
@@ -33,10 +33,7 @@ export class App extends React.Component<{}, AppState> {
         <main className="section container">
           {selectedGood ? (
             <h1 className="title is-flex is-align-items-center">
-              {selectedGood}
-              {' '}
-              is selected
-
+              {`${selectedGood} is selected`}
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 data-cy="ClearButton"
