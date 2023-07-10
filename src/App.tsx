@@ -40,6 +40,7 @@ export const App: React.FC = () => {
         <tbody>
           {goods.map((good) => {
             const goodIsSelected = good === selectedGood;
+            const setGood = () => setSelectedGood(goodIsSelected ? '' : good);
 
             return (
               <tr
@@ -51,7 +52,7 @@ export const App: React.FC = () => {
               >
                 <td>
                   <button
-                    onClick={() => setSelectedGood(goodIsSelected ? '' : good)}
+                    onClick={() => setGood()}
                     data-cy={goodIsSelected ? 'RemoveButton' : 'AddButton'}
                     type="button"
                     className={cn('button', { 'is-info': goodIsSelected })}
