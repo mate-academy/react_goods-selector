@@ -60,8 +60,8 @@ export class App extends React.Component<{}, State> {
                 className={
                   selectedGood === good
                     ? 'has-background-success-light'
-                    : ''
-                }
+                    : '' }
+                    key={good}
               >
                 {selectedGood === good ? (
                   <td>
