@@ -25,15 +25,9 @@ export class App extends Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  toggleSelectUser(good: string) {
-    const { selectedGood } = this.state;
-
-    const goodToSelect = selectedGood === good
-      ? null
-      : good;
-
+  toggleSelectedGood(good: string | null) {
     this.setState({
-      selectedGood: goodToSelect,
+      selectedGood: good,
     });
   }
 
@@ -47,13 +41,13 @@ export class App extends Component<{}, State> {
             ? `${selectedGood} is selected`
             : 'No goods selected'}
           {selectedGood && (
-            // eslint-disable-next-line jsx-a11y/control-has-associated-label
             <button
+              aria-label="Clear selected good"
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
               onClick={() => {
-                this.toggleSelectUser('');
+                this.toggleSelectedGood('');
               }}
             />
           )}
@@ -65,38 +59,44 @@ export class App extends Component<{}, State> {
               const isSelected = selectedGood === good;
 
               return (
-                <>
-                  <tr
-                    data-cy="Good"
-                    key={good}
-                    className={classNames({
-                      'has-background-success-light': isSelected,
-                    })}
-                  >
-                    <td>
-                      <button
-                        data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
-                        type="button"
-                        className={classNames('button', {
-                          'is-info': isSelected,
-                        })}
-                        onClick={() => {
-                          this.setState({
-                            selectedGood: good,
-                          });
+                <tr
+                  data-cy="Good"
+                  key={good}
+                  className={classNames({
+                    'has-background-success-light': isSelected,
+                  })}
+                >
+                  <td>
+                    {isSelected
+                      ? (
+                        <button
+                          data-cy="RemoveButton"
+                          type="button"
+                          className="button is-info"
+                          onClick={() => {
+                            this.toggleSelectedGood(null);
+                          }}
+                        >
+                          <span>-</span>
+                        </button>
+                      ) : (
+                        <button
+                          data-cy="AddButton"
+                          type="button"
+                          className="button"
+                          onClick={() => {
+                            this.toggleSelectedGood(good);
+                          }}
+                        >
+                          <span>+</span>
+                        </button>
+                      )}
+                  </td>
 
-                          this.toggleSelectUser(good);
-                        }}
-                      >
-                        {isSelected ? '-' : '+'}
-                      </button>
-                    </td>
-
-                    <td data-cy="GoodTitle" className="is-vcentered">
-                      {good}
-                    </td>
-                  </tr>
-                </>
+                  <td data-cy="GoodTitle" className="is-vcentered">
+                    {good}
+                  </td>
+                </tr>
               );
             })}
           </tbody>
