@@ -21,11 +21,15 @@ interface State {
 
 export class App extends React.Component<{}, State> {
   state: State = {
-    selectedGood: '',
+    selectedGood: 'Jam',
   };
 
   handleGoodSelection = (selectedGood: string) => {
-    this.setState({ selectedGood });
+    this.setState((prevState) => ({
+      selectedGood: prevState.selectedGood === selectedGood
+        ? ''
+        : selectedGood,
+    }));
   };
 
   render() {
@@ -34,7 +38,7 @@ export class App extends React.Component<{}, State> {
     return (
       <main className="section container">
         <h1 className="title">
-          {selectedGood || 'No goods selected'}
+          {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
 
           {selectedGood !== '' && (
             <button
@@ -61,7 +65,9 @@ export class App extends React.Component<{}, State> {
               >
                 <td>
                   <button
-                    data-cy="AddButton"
+                    data-cy={
+                      selectedGood === good ? 'RemoveButton' : 'AddButton'
+                    }
                     type="button"
                     className={`button ${selectedGood === good ? 'is-info' : ''}`}
                     onClick={() => this.handleGoodSelection(good)}
