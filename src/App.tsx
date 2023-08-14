@@ -1,11 +1,8 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable @typescript-eslint/no-shadow */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable no-return-assign */
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -25,63 +22,12 @@ export class App extends React.Component {
     selectedGood: 'Jam',
   };
 
-  reset = () => {
-    goods.forEach(good => {
-      const element:HTMLElement | null = document.getElementById(`${good}`);
-
-      if (element) {
-        element.classList.remove('has-background-success-light');
-        const button:HTMLElement | null = element.querySelector('.button');
-
-        if (button && button.classList.contains('is-info')) {
-          button.classList.remove('is-info');
-          button.setAttribute('data-cy', 'AddButton');
-          button.textContent = '+';
-        }
-      }
-    });
-
-    this.setState({ selectedGood: null });
+  clear = () => {
+    this.setState({ selectedGood: '' });
   };
 
-  handleClick = (good: string) => {
-    const element:HTMLElement | null = document.getElementById(`${good}`);
-
-    if (element) {
-      if (element.classList.contains('has-background-success-light')) {
-        this.reset();
-      } else {
-        this.reset();
-
-        if (element) {
-          element.classList.add('has-background-success-light');
-          const button:HTMLElement | null = element.querySelector('.button');
-
-          if (button) {
-            goods.forEach(good => {
-              const overButton:HTMLElement | null = document.getElementById(`${good}`);
-
-              if (overButton) {
-                const otherButton:HTMLElement | null
-                = overButton.querySelector('.button');
-
-                if (otherButton) {
-                  otherButton.classList.remove('is-info');
-                  otherButton.setAttribute('data-cy', 'AddButton');
-                  otherButton.textContent = '+';
-                }
-              }
-            });
-
-            button.setAttribute('data-cy', 'RemoveButton');
-            button.classList.add('is-info');
-            button.textContent = '-';
-          }
-        }
-
-        this.setState({ selectedGood: good });
-      }
-    }
+  selectedItem = (good: string) => {
+    this.setState({ selectedGood: good });
   };
 
   render() {
@@ -89,24 +35,27 @@ export class App extends React.Component {
 
     return (
       <main className="section container">
-        {selectedGood ? (
-          <h1 className="title is-flex is-align-items-center">
-            {selectedGood}
-            {' '}
-            is selected
+        <h1
+          className={classNames(
+            'title',
+            {
+              'is-flex is-align-items-center': selectedGood,
+            },
+          )}
+        >
+          {selectedGood
+            ? `${selectedGood} is selected`
+            : 'No goods selected'}
 
+          {selectedGood && (
             <button
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={this.reset}
+              onClick={this.clear}
             />
-          </h1>
-        ) : (
-          <h1 className="title">
-            No goods selected
-          </h1>
-        )}
+          )}
+        </h1>
 
         <table className="table">
           <tbody>
@@ -115,18 +64,25 @@ export class App extends React.Component {
                 data-cy="Good"
                 id={good}
                 key={good}
-                className={good === 'Jam'
-                  ? 'has-background-success-light'
-                  : ''}
+                className={classNames(
+                  { 'has-background-success-light': good === selectedGood },
+                )}
               >
                 <td>
                   <button
-                    data-cy={good === 'Jam' ? 'RemoveButton' : 'AddButton'}
+                    data-cy={good === selectedGood
+                      ? 'RemoveButton'
+                      : 'AddButton'}
                     type="button"
-                    className={good === 'Jam' ? 'button is-info' : 'button'}
-                    onClick={() => this.handleClick(good)}
+                    className={classNames(
+                      'button',
+                      { 'is-info': good === selectedGood },
+                    )}
+                    onClick={() => this.selectedItem(
+                      selectedGood === good ? '' : good,
+                    )}
                   >
-                    {good === 'Jam' ? '-' : '+'}
+                    {good === selectedGood ? '-' : '+'}
                   </button>
                 </td>
 
