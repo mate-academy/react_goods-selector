@@ -15,14 +15,18 @@ export const goods = [
   'Garlic',
 ];
 
+interface State {
+  selectedGood: (typeof goods) [number] | null
+}
+
 export class App extends React.Component {
-  state = {
+  state: Readonly<State> = {
     selectedGood: goods[8],
   };
 
   deleteGood = () => {
     this.setState({
-      selectedGood: '',
+      selectedGood: null,
     });
   };
 
@@ -32,77 +36,62 @@ export class App extends React.Component {
     });
   };
 
-  generateHeader() {
-    const { selectedGood } = this.state;
-
-    if (selectedGood === '') {
-      return <h1 className="title">No goods selected</h1>;
-    }
-
-    return (
-      <h1 className="title is-flex is-align-items-center">
-        {`${selectedGood} is selected`}
-
-        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-        <button
-          data-cy="ClearButton"
-          type="button"
-          className="delete ml-3"
-          onClick={this.deleteGood}
-        />
-      </h1>
-    );
-  }
-
   render() {
-    let goodKey = 0;
+    const { selectedGood } = this.state;
 
     return (
       <main className="section container">
-        {this.generateHeader()}
+        {selectedGood === null ? (
+          <h1 className="title">No goods selected</h1>
+        ) : (
+          <h1 className="title is-flex is-align-items-center">
+            {`${selectedGood} is selected`}
+
+            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={this.deleteGood}
+            />
+          </h1>
+        )}
 
         <table className="table">
           <tbody>
             {goods.map(good => {
-              goodKey += 1;
-              if (good === this.state.selectedGood) {
-                return (
-                  <tr
-                    data-cy="Good"
-                    className="has-background-success-light"
-                    key={goodKey}
-                  >
-                    <td>
-                      <button
-                        data-cy="RemoveButton"
-                        type="button"
-                        className="button is-info"
-                        onClick={this.deleteGood}
-                      >
-                        -
-                      </button>
-                    </td>
-
-                    <td data-cy="GoodTitle" className="is-vcentered">
-                      {good}
-                    </td>
-                  </tr>
-                );
-              }
+              const isSelectedGood = good === selectedGood;
 
               return (
-                <tr data-cy="Good" key={goodKey}>
+                <tr
+                  data-cy="Good"
+                  className={
+                    isSelectedGood
+                      ? 'has-background-success-light'
+                      : ''
+                  }
+                  key={good}
+                >
                   <td>
                     <button
-                      data-cy="AddButton"
+                      data-cy={
+                        isSelectedGood
+                          ? 'RemoveButton'
+                          : 'AddButton'
+                      }
                       type="button"
-                      className="button"
-                      onClick={() => this.addGood(good)}
+                      className={`button ${
+                        isSelectedGood ? 'is-info' : ''
+                      }`}
+                      onClick={
+                        isSelectedGood
+                          ? this.deleteGood
+                          : () => this.addGood(good)
+                      }
                     >
-                      +
+                      {isSelectedGood ? '-' : '+'}
                     </button>
                   </td>
-
                   <td data-cy="GoodTitle" className="is-vcentered">
                     {good}
                   </td>
