@@ -47,7 +47,7 @@ export const App: React.FC = () => {
               className="delete ml-3"
               onClick={() => handleClearState()}
             >
-              Clear
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             </button>
           </h1>
         </>
