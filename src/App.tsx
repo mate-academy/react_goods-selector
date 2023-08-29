@@ -66,7 +66,16 @@ export class App extends React.Component<{}, State> {
                   : ''}
               >
                 <td>
-                  {!selectedGood && (
+                  {good === selectedGood ? (
+                    <button
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
+                      onClick={() => this.handleGoodSelect(good)}
+                    >
+                      -
+                    </button>
+                  ) : (
                     <button
                       data-cy="AddButton"
                       type="button"
@@ -74,16 +83,6 @@ export class App extends React.Component<{}, State> {
                       onClick={() => this.handleGoodSelect(good)}
                     >
                       +
-                    </button>
-                  )}
-                  {selectedGood === good && (
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                      onClick={this.handleClearSelection}
-                    >
-                      -
                     </button>
                   )}
                 </td>
