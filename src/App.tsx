@@ -16,7 +16,7 @@ export const goods = [
 ];
 
 type State = {
-  selectedGood: null | string;
+  selectedGood: string;
 };
 
 export class App extends React.Component<{}, State> {
@@ -48,6 +48,7 @@ export class App extends React.Component<{}, State> {
               type="button"
               className="delete ml-3"
               onClick={this.handleClearSelection}
+              aria-label="Clear Selection"
             />
           )}
         </h1>
