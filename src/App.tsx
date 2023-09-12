@@ -24,22 +24,22 @@ export const App: React.FC = () => {
 
   return (
     <main className="section container">
-      {selectedGood ? (
-        <h1 className="title is-flex is-align-items-center">
-          {`${selectedGood} is selected`}
-
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-          <button
-            onClick={clearSelection}
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-          />
-        </h1>
-      ) : (
-
-        <h1 className="title">No goods selected</h1>
-      )}
+      <h1 className="title">
+        {selectedGood ? (
+          <span className="is-flex is-align-items-center">
+            {`${selectedGood} is selected`}
+            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+            <button
+              onClick={clearSelection}
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+            />
+          </span>
+        ) : (
+          'No goods selected'
+        )}
+      </h1>
 
       <table className="table">
         <tbody>
@@ -50,9 +50,7 @@ export const App: React.FC = () => {
               <tr
                 data-cy="Good"
                 key={good}
-                className={isSelected
-                  ? 'has-background-success-light'
-                  : ''}
+                className={isSelected ? 'has-background-success-light' : ''}
               >
                 <td>
                   <button
@@ -63,11 +61,8 @@ export const App: React.FC = () => {
                     }
                     data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
                     type="button"
-                    className={isSelected
-                      ? 'button is-info'
-                      : 'button'}
+                    className={isSelected ? 'button is-info' : 'button'}
                   >
-
                     {isSelected ? '-' : '+'}
                   </button>
                 </td>
