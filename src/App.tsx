@@ -36,8 +36,8 @@ export class App extends React.Component<{}, AppState> {
         {selectedGood ? (
           <h1 className="title is-flex is-align-items-center">
             {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-            `${selectedGood} is selected`
-
+            `${selectedGood}
+            is selected`
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <button
               data-cy="ClearButton"
