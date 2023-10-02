@@ -54,11 +54,9 @@ export const App: React.FC = () => {
               >
                 <td>
                   <button
-                    onClick={
-                      isSelected
-                        ? () => setSelectedGood('')
-                        : () => setSelectedGood(good)
-                    }
+                   onClick={
+                    () => setSelectedGood(isSelected ? '' : good)
+               }
                     data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
                     type="button"
                     className={isSelected ? 'button is-info' : 'button'}
