@@ -45,6 +45,7 @@ export class App extends React.Component<Props, State> {
 
   render() {
     const { selectedGoods } = this.state;
+    const isSelected = (item: string) => item === selectedGoods;
 
     return (
       <main className="section container">
@@ -74,11 +75,11 @@ export class App extends React.Component<Props, State> {
               <tr
                 key={item}
                 data-cy="Good"
-                className={item === selectedGoods
+                className={isSelected(item)
                   ? 'has-background-success-light' : ''}
               >
                 <td>
-                  {item === selectedGoods ? (
+                  {isSelected(item) ? (
                     <button
                       data-cy="RemoveButton"
                       type="button"
