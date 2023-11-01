@@ -18,6 +18,9 @@ export const goods = [
 
 export const App: React.FC = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
+  const resetGood = () => {
+    setSelectedGood('');
+  };
 
   return (
     <main className="section container">
@@ -29,7 +32,7 @@ export const App: React.FC = () => {
             title="clearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setSelectedGood('')}
+            onClick={resetGood}
           />
         )}
       </h1>
@@ -61,7 +64,7 @@ export const App: React.FC = () => {
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => setSelectedGood('')}
+                    onClick={resetGood}
                   >
                     -
                   </button>
