@@ -1,85 +1,57 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import { addGood, getGoods, removeGood } from './api/api';
+import { GoodInfo } from './components/GoodInfo';
+import { Good } from './types/Good';
+import { AddGoodForm } from './components/AddGoodForm';
+import { getColorById } from './utils/getColorById';
+import colors from './api/colors';
+import { GoodsList } from './components/GoodsList';
 
-export const goods = [
-  'Dumplings',
-  'Carrot',
-  'Eggs',
-  'Ice cream',
-  'Apple',
-  'Bread',
-  'Fish',
-  'Honey',
-  'Jam',
-  'Garlic',
-];
+export const App: React.FC = () => {
+  const [goods, setGoods] = useState<Good[]>([]);
+  const [selectedGoodId, setSelectedGoodId] = useState(0);
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+  const fetchAllGoods = async () => {
+    const goodsFromServer = await getGoods();
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+    setGoods(goodsFromServer);
+  };
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
+  useEffect(() => {
+    fetchAllGoods();
+  }, []);
+
+  const addNewGood = async (name: string, colorId: number) => {
+    const color = getColorById(colorId, colors);
+
+    await addGood(name, color?.name || 'white');
+    await fetchAllGoods();
+  };
+
+  const deleteGood = async (goodId: number) => {
+    await removeGood(goodId);
+    await fetchAllGoods();
+  };
+
+  const selectGood = (goodId: number) => {
+    setSelectedGoodId(goodId);
+  };
+
+  return (
+    <main className="section container">
+      <h1 className="title">No goods selected</h1>
+
+      <GoodInfo goodId={selectedGoodId} />
+
+      <GoodsList
+        goods={goods}
+        selectGood={selectGood}
+        deleteGood={deleteGood}
       />
-    </h1>
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
-
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
-
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+      <AddGoodForm addNewGood={addNewGood} />
+    </main>
+  );
+};
