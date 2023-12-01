@@ -73,7 +73,6 @@ export const App: React.FC = () => {
                     </button>
                   </td>
                 )}
-
               <td data-cy="GoodTitle" className="is-vcentered">
                 {good}
               </td>
