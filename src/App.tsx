@@ -24,6 +24,14 @@ type AppState = {
 export class App extends Component<{}, AppState> {
   state = { selectedGood: 'Jam' }
 
+  handleClearClick = () => {
+    this.setState({ selectedGood: '' });
+  }
+
+  handleListClick = (good: string) => {
+    this.setState({ selectedGood: good });
+  }
+
   render() {
     const { selectedGood } = this.state;
 
@@ -39,7 +47,7 @@ export class App extends Component<{}, AppState> {
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => this.setState({ selectedGood: '' })}
+                onClick={this.handleClearClick}
               />
             </h1>
           )}
@@ -51,6 +59,7 @@ export class App extends Component<{}, AppState> {
               const trClass = cn({
                 'has-background-success-light': isSelected,
               });
+              const forClick = isSelected ? '' : good;
 
               return (
                 <tr data-cy="Good" className={trClass} key={good}>
@@ -59,9 +68,7 @@ export class App extends Component<{}, AppState> {
                       data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
                       type="button"
                       className={buttonClass}
-                      onClick={() => this.setState({
-                        selectedGood: isSelected ? '' : good,
-                      })}
+                      onClick={() => this.handleListClick(forClick)}
                     >
                       {isSelected ? '-' : '+'}
                     </button>
