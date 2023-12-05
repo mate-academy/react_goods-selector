@@ -53,8 +53,12 @@ export class App extends React.Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(good => (
-              // eslint-disable-next-line max-len
-              <tr key={good} data-cy="Good" className={selectedGood === good ? 'has-background-success-light' : ''}>
+              <tr
+                key={good}
+                data-cy="Good"
+                className={selectedGood === good
+                  ? 'has-background-success-light' : ''}
+              >
                 <td>
                   {selectedGood !== good && (
                     <button
