@@ -21,7 +21,7 @@ type AppState = {
 
 export class App extends React.Component<{}, AppState> {
   state = {
-    selectedItem: goods[goods.indexOf('Jam')],
+    selectedItem: 'Jam',
   };
 
   clearItem = () => {
