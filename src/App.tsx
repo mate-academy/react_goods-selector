@@ -20,13 +20,13 @@ export class App extends Component {
     selected: 'Jam',
   };
 
-  clearItem = () => {
-    this.setState({ selected: '' });
-  }
-
-  selectItem = (itemName: string) => {
-    return () => this.setState({ selected: itemName });
-  }
+  handleItemClick = (itemName: string) => {
+    if (itemName === this.state.selected) {
+      this.setState({ selected: '' });
+    } else {
+      this.setState({ selected: itemName });
+    }
+  };
 
   render() {
     const { selected } = this.state;
@@ -36,11 +36,12 @@ export class App extends Component {
         {selected ? (
           <h1 className="title is-flex is-align-items-center">
             {`${selected} is selected`}
+            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <button
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={this.clearItem}
+              onClick={() => this.handleItemClick('')}
             />
           </h1>
         ) : (
@@ -62,11 +63,7 @@ export class App extends Component {
                     data-cy={item === selected ? 'RemoveButton' : 'AddButton'}
                     type="button"
                     className={`button ${item === selected ? 'is-info' : ''}`}
-                    onClick={
-                      item === selected
-                        ? this.clearItem
-                        : this.selectItem(item)
-                    }
+                    onClick={() => this.handleItemClick(item)}
                   >
                     {item === selected ? '-' : '+'}
                   </button>
