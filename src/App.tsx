@@ -24,6 +24,14 @@ export class App extends React.Component<{}, State> {
     selectedGoods: 'Jam',
   };
 
+  clearSelected = () => {
+    this.setState({ selectedGoods: '' });
+  }
+
+  selectItem = (itemName: string) => {
+    return () => this.setState({ selectedGoods: itemName });
+  }
+
   render() {
     const { selectedGoods } = this.state;
 
@@ -37,8 +45,8 @@ export class App extends React.Component<{}, State> {
               <button
                 data-cy="ClearButton"
                 type="button"
-                className="delete m1-3"
-                onClick={() => this.setState({ selectedGoods: '' })}
+                className="delete ml-3"
+                onClick={this.clearSelected}
               />
             </h1>
           )
@@ -61,7 +69,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="AddButton"
                           type="button"
                           className="button"
-                          onClick={() => this.setState({ selectedGoods: good })}
+                          onClick={this.selectItem(good)}
                         >
                           +
                         </button>
@@ -71,7 +79,7 @@ export class App extends React.Component<{}, State> {
                           data-cy="RemoveButton"
                           type="button"
                           className="button is-info"
-                          onClick={() => this.setState({ selectedGoods: '' })}
+                          onClick={this.clearSelected}
                         >
                           -
                         </button>
