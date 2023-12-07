@@ -1,7 +1,6 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
-import { throws } from 'assert';
 
 export const goods = [
   'Dumplings',
