@@ -80,6 +80,7 @@ export class App extends React.Component<{}, State> {
                           type="button"
                           className="button is-info"
                           onClick={this.clearSelected}
+
                         >
                           -
                         </button>
