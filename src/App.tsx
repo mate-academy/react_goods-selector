@@ -23,10 +23,12 @@ export class App extends Component {
   handleItemClick = (itemName: string) => {
     if (itemName === this.state.selected) {
       this.setState({ selected: '' });
-    } else {
-      this.setState({ selected: itemName });
+
+      return;
     }
-  };
+
+    this.setState({ selected: itemName });
+  }
 
   render() {
     const { selected } = this.state;
