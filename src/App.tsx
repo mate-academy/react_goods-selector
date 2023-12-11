@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
@@ -24,7 +25,7 @@ export class App extends React.Component<{}, State> {
     selectedGood: 'Jam',
   };
 
-  handleButton = (good: string) => {
+  handleSelectGoods = (good: string) => {
     if (this.state.selectedGood === good) {
       this.setState({ selectedGood: '' });
     } else {
@@ -32,7 +33,7 @@ export class App extends React.Component<{}, State> {
     }
   };
 
-  clearButton = () => {
+  handleClearGoods = () => {
     this.setState({ selectedGood: '' });
   };
 
@@ -41,10 +42,8 @@ export class App extends React.Component<{}, State> {
 
     return (
       <main className="section container">
-        {/* <h1 className="title">No goods selected</h1> */}
-
         <h1 className="title is-flex is-align-items-center">
-          {selectedGood.length === 0
+          {!selectedGood
             ? 'No goods selected'
             : `${selectedGood} is selected`}
 
@@ -55,7 +54,7 @@ export class App extends React.Component<{}, State> {
               type="button"
               className="delete ml-3"
               aria-label="Clear selection"
-              onClick={this.clearButton}
+              onClick={this.handleClearGoods}
             />
           )}
         </h1>
@@ -66,9 +65,11 @@ export class App extends React.Component<{}, State> {
               <tr
                 data-cy="Good"
                 key={good}
-                className={good === selectedGood
-                  ? 'has-background-success-light'
-                  : ''}
+                className={cn(
+                  {
+                    'has-background-success-light': good === selectedGood,
+                  },
+                )}
               >
                 <td>
                   <button
@@ -76,10 +77,13 @@ export class App extends React.Component<{}, State> {
                       ? 'RemoveButton'
                       : 'AddButton'}
                     type="button"
-                    className={good === selectedGood
-                      ? 'button is-info'
-                      : 'button'}
-                    onClick={() => this.handleButton(good)}
+                    className={cn(
+                      'button',
+                      {
+                        'is-info': good === selectedGood,
+                      },
+                    )}
+                    onClick={() => this.handleSelectGoods(good)}
                   >
                     {good === selectedGood
                       ? '-'
