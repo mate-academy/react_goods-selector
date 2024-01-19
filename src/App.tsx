@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -26,18 +26,13 @@ export const App: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-  }, [selectedGood]);
-
   return (
     <main className="section container">
       {selectedGood ? (
         <h1 className="title is-flex is-align-items-center">
-          {selectedGood}
-          {' '}
-          is selected
+          {`${selectedGood} is selected`}
           <button
-            data-cy="ClearButtonInline"
+            data-cy="ClearButton"
             type="button"
             className="delete ml-3"
             onClick={() => setSelectedGood('')}
@@ -53,20 +48,35 @@ export const App: React.FC = () => {
           {goods.map((good) => (
             <tr
               key={good}
-              data-cy="Good"
+              data-cy={selectedGood === good
+                ? 'RemoveButton'
+                : 'ToggleButton'}
               className={selectedGood === good
-                ? 'has-background-success-light' : ''}
+                ? 'has-background-success-light'
+                : ''}
             >
               <td>
-                <button
-                  data-cy="ToggleButton"
-                  type="button"
-                  className="button"
-                  onClick={() => handleButtonClick(good)}
-                  aria-label={`Toggle selection of ${good}`}
-                >
-                  {selectedGood === good ? '-' : '+'}
-                </button>
+                {selectedGood === good ? (
+                  <button
+                    data-cy="RemoveButton"
+                    type="button"
+                    className="button is-info"
+                    onClick={() => handleButtonClick(good)}
+                    aria-label={`Toggle selection of ${good}`}
+                  >
+                    -
+                  </button>
+                ) : (
+                  <button
+                    data-cy="AddButton"
+                    type="button"
+                    className="button"
+                    onClick={() => handleButtonClick(good)}
+                    aria-label={`Toggle selection of ${good}`}
+                  >
+                    +
+                  </button>
+                )}
               </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
