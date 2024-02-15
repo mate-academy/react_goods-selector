@@ -38,7 +38,7 @@ export class App extends React.Component {
         {this.state.selectedGood
           ? (
             <h1 className="title is-flex is-align-items-center">
-              {`${this.state.selectedGood} is selected`}
+              {`${selectedGood} is selected`}
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
               <button
                 onClick={this.handleClear}
@@ -60,31 +60,18 @@ export class App extends React.Component {
                     ? 'has-background-success-light'
                     : undefined}
                 >
-                  {good === this.state.selectedGood
-                    ? (
-                      <td>
-                        <button
-                          onClick={this.handleClear}
-                          data-cy="RemoveButton"
-                          type="button"
-                          className="button is-info"
-                        >
-                          -
-                        </button>
-                      </td>
-                    )
-                    : (
-                      <td>
-                        <button
-                          onClick={this.handleClick(good)}
-                          data-cy="AddButton"
-                          type="button"
-                          className="button"
-                        >
-                          +
-                        </button>
-                      </td>
-                    )}
+                  <td>
+                    <button
+                      onClick={good === selectedGood
+                        ? this.handleClear : this.handleClick(good)}
+                      data-cy={good === selectedGood
+                        ? 'RemoveButton' : 'AddButton'}
+                      type="button"
+                      className={`button ${good === selectedGood ? ' is-info' : ''}`}
+                    >
+                      {good === selectedGood ? '-' : '+'}
+                    </button>
+                  </td>
                   <td data-cy="GoodTitle" className="is-vcentered">
                     {good}
                   </td>
