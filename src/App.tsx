@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import cn from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -21,9 +22,7 @@ export class App extends React.Component {
   };
 
   handlerSelect = (good: string) => {
-    return () => {
-      this.setState({ selectedGood: good });
-    };
+    this.setState({ selectedGood: good });
   };
 
   handlerClear = () => {
@@ -32,12 +31,20 @@ export class App extends React.Component {
     });
   };
 
+  helperSelector = (good: string): (() => void) | undefined => {
+    if (this.state.selectedGood === good) {
+      return this.handlerClear;
+    }
+
+    return () => this.handlerSelect(good);
+  }
+
   render() {
     const { selectedGood } = this.state;
 
     return (
       <main className="section container">
-        {selectedGood === '' ? (
+        {!selectedGood ? (
           <h1 className="title">No goods selected</h1>
         ) : (
           <h1 className="title is-flex is-align-items-center">
@@ -57,24 +64,21 @@ export class App extends React.Component {
             {goods.map((good: string) => (
               <tr
                 data-cy="Good"
-                className={
-                  selectedGood === good
-                    ? 'has-background-success-light'
-                    : undefined
-                }
+                className={cn({
+                  'has-background-success-light': selectedGood === good,
+                })}
               >
                 <td>
                   <button
-                    onClick={selectedGood === good
-                      ? this.handlerClear
-                      : this.handlerSelect(good)}
+                    onClick={this.helperSelector(good)}
                     data-cy={selectedGood === good
                       ? 'RemoveButton'
                       : 'AddButton'}
                     type="button"
-                    className={selectedGood === good
-                      ? 'button is-info'
-                      : 'button'}
+                    className={cn({
+                      button: true,
+                      'button is-info': selectedGood === good,
+                    })}
                   >
                     {selectedGood === good
                       ? '-'
