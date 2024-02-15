@@ -41,7 +41,7 @@ export class App extends React.Component {
           <h1 className="title">No goods selected</h1>
         ) : (
           <h1 className="title is-flex is-align-items-center">
-            {`${this.state.selectedGood} is selected`}
+            {`${selectedGood} is selected`}
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <button
               onClick={this.handlerClear}
