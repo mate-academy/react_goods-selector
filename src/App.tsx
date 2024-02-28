@@ -36,70 +36,76 @@ export class App extends React.Component<{}, State> {
     });
   };
 
+  mapGoods = (selected: string) => {
+    const { selectedGood } = this.state;
+
+    const addButton = (
+      <button
+        data-cy="AddButton"
+        type="button"
+        className="button"
+        onClick={() => {
+          this.addSelectedGood(selected);
+        }}
+      >
+        +
+      </button>
+    );
+
+    const removeButton = (
+      <button
+        data-cy="RemoveButton"
+        type="button"
+        className="button is-info"
+        onClick={this.clearSelectedGood}
+      >
+        -
+      </button>
+    );
+
+    return (
+      <tr
+        data-cy="Good"
+        className={
+          selectedGood === selected ? 'has-background-success-light' : ''
+        }
+        key={selected}
+      >
+        <td>{selectedGood !== selected ? addButton : removeButton}</td>
+
+        <td data-cy="GoodTitle" className="is-vcentered">
+          {selected}
+        </td>
+      </tr>
+    );
+  };
+
   render() {
     const { selectedGood } = this.state;
 
+    const titleNotSelectedGood = <h1 className="title">No goods selected</h1>;
+
+    const titleSelectedGood = (
+      <h1 className="title is-flex is-align-items-center">
+        {selectedGood} is selected
+        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+        <button
+          data-cy="ClearButton"
+          type="button"
+          className="delete ml-3"
+          onClick={this.clearSelectedGood}
+        />
+      </h1>
+    );
+
     return (
       <main className="section container">
-        {selectedGood === '' ? (
-          <h1 className="title">No goods selected</h1>
-        ) : (
-          <h1 className="title is-flex is-align-items-center">
-            {selectedGood} is selected
-            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-            <button
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={this.clearSelectedGood}
-            />
-          </h1>
-        )}
+        {selectedGood === '' ? titleNotSelectedGood : titleSelectedGood}
 
         <table className="table">
           <tbody>
             {goods.map(selected => {
-              return (
-                <tr
-                  data-cy="Good"
-                  className={
-                    selectedGood === selected
-                      ? 'has-background-success-light'
-                      : ''
-                  }
-                  key={selected}
-                >
-                  {selectedGood !== selected ? (
-                    <td>
-                      <button
-                        data-cy="AddButton"
-                        type="button"
-                        className="button"
-                        onClick={() => {
-                          this.addSelectedGood(selected);
-                        }}
-                      >
-                        +
-                      </button>
-                    </td>
-                  ) : (
-                    <td>
-                      <button
-                        data-cy="RemoveButton"
-                        type="button"
-                        className="button is-info"
-                        onClick={this.clearSelectedGood}
-                      >
-                        -
-                      </button>
-                    </td>
-                  )}
-
-                  <td data-cy="GoodTitle" className="is-vcentered">
-                    {selected}
-                  </td>
-                </tr>
-              );
+              return this.mapGoods(selected);
             })}
           </tbody>
         </table>
