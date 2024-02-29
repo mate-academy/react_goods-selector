@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
@@ -36,30 +37,23 @@ export class App extends React.Component<{}, State> {
     });
   };
 
-  mapGoods = (selected: string) => {
+  renderGoods = (product: string) => {
     const { selectedGood } = this.state;
 
-    const addButton = (
+    const button = (
       <button
-        data-cy="AddButton"
+        data-cy={selectedGood === product ? 'RemoveButton' : 'AddButton'}
         type="button"
-        className="button"
+        className={`button ${selectedGood === product ? 'is-info' : ''}`}
         onClick={() => {
-          this.addSelectedGood(selected);
-        }}
+          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+          selectedGood === product
+            ? this.clearSelectedGood()
+            : this.addSelectedGood(product);
+        }
+        }
       >
-        +
-      </button>
-    );
-
-    const removeButton = (
-      <button
-        data-cy="RemoveButton"
-        type="button"
-        className="button is-info"
-        onClick={this.clearSelectedGood}
-      >
-        -
+        {selectedGood === product ? '-' : '+'}
       </button>
     );
 
@@ -67,45 +61,46 @@ export class App extends React.Component<{}, State> {
       <tr
         data-cy="Good"
         className={
-          selectedGood === selected ? 'has-background-success-light' : ''
+          selectedGood === product ? 'has-background-success-light' : ''
         }
-        key={selected}
+        key={product}
       >
-        <td>{selectedGood !== selected ? addButton : removeButton}</td>
+        <td>{button}</td>
 
         <td data-cy="GoodTitle" className="is-vcentered">
-          {selected}
+          {product}
         </td>
       </tr>
     );
   };
 
-  render() {
+  renderTitle = () => {
     const { selectedGood } = this.state;
 
-    const titleNotSelectedGood = <h1 className="title">No goods selected</h1>;
+    return (selectedGood === ''
+      ? <h1 className="title">No goods selected</h1> : (
+        <h1 className="title is-flex is-align-items-center">
+          {selectedGood} is selected
+          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={this.clearSelectedGood}
+          />
+        </h1>
+      ));
+  }
 
-    const titleSelectedGood = (
-      <h1 className="title is-flex is-align-items-center">
-        {selectedGood} is selected
-        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-        <button
-          data-cy="ClearButton"
-          type="button"
-          className="delete ml-3"
-          onClick={this.clearSelectedGood}
-        />
-      </h1>
-    );
-
+  render() {
     return (
       <main className="section container">
-        {selectedGood === '' ? titleNotSelectedGood : titleSelectedGood}
+        {this.renderTitle()}
 
         <table className="table">
           <tbody>
-            {goods.map(selected => {
-              return this.mapGoods(selected);
+            {goods.map(product => {
+              return this.renderGoods(product);
             })}
           </tbody>
         </table>
