@@ -48,31 +48,20 @@ export class App extends React.Component {
                   selectedGood === good ? 'has-background-success-light' : ''
                 }
               >
-                {selectedGood !== good && (
-                  <td>
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      className="button"
-                      onClick={() => this.setState({ selectedGood: good })}
-                    >
-                      +
-                    </button>
-                  </td>
-                )}
-
-                {selectedGood === good && (
-                  <td>
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                      onClick={() => this.setState({ selectedGood: null })}
-                    >
-                      -
-                    </button>
-                  </td>
-                )}
+                <td>
+                  <button
+                    data-cy={`${selectedGood === good ? 'RemoveButton' : 'AddButton'}`}
+                    type="button"
+                    className={`button ${selectedGood === good ? 'is-info' : ''}`}
+                    onClick={() =>
+                      this.setState({
+                        selectedGood: selectedGood === good ? null : good,
+                      })
+                    }
+                  >
+                    {selectedGood === good ? '-' : '+'}
+                  </button>
+                </td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
                   {good}
