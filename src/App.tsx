@@ -43,7 +43,7 @@ export class App extends React.Component {
             {goods.map(good => {
               return (
                 <tr
-                  data-cy={good}
+                  data-cy="Good"
                   className={
                     selectedGood === good ? 'has-background-success-light' : ''
                   }
