@@ -47,7 +47,6 @@ export class App extends React.Component {
         ) : (
           <h1 className="title">No goods selected</h1>
         )}
-        ;
         <table className="table">
           <tbody>
             {goods.map(good => {
@@ -64,7 +63,7 @@ export class App extends React.Component {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={() => this.handleCancelSelection(good)}
+                        onClick={() => this.handleCancelSelection()}
                       >
                         -
                       </button>
