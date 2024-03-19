@@ -13,60 +13,76 @@ export const goods = [
   'Honey',
   'Jam',
   'Garlic',
-];
+] as const;
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+type Good = typeof goods[number];
+interface State {
+  selectedGood: Good | null;
+}
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button data-cy="ClearButton" type="button" className="delete ml-3" />
-    </h1>
+export class App extends React.Component<{}, State>  {
+  state = {
+    selectedGood: 'Jam' as const,
+  }
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
+  private clearSelectedHandler = () => {
+    this.setState({selectedGood: null});
+  }
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+  private createAddSelectedGoodHandler = (good: Good) => {
+    return () => {
+      this.setState({selectedGood: good});
+    }
+  }
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+  render(): React.ReactNode {
+    const { selectedGood } = this.state;
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+    const title = selectedGood
+      ? `${selectedGood} is selected`
+      : 'No goods selected';
 
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
+    const buttonAdd = (good: Good) =>  (
+      <button data-cy="AddButton" type="button" className="button" onClick={this.createAddSelectedGoodHandler(good)}>
+      +
+      </button>
+    );
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+    const buttonRemove = (
+      <button
+        data-cy="RemoveButton"
+        type="button"
+        className="button is-info"
+        onClick={this.clearSelectedHandler}
+      >
+        -
+      </button>
+    );
+
+    const selectedCssClass = 'has-background-success-light';
+
+    return (
+    <main className="section container">
+      <h1 className="title">
+        {title}
+        {selectedGood && <button data-cy="ClearButton" type="button" className="delete ml-3"  onClick={this.clearSelectedHandler}/>}
+      </h1>
+
+      <table className="table">
+        <tbody>
+          {goods.map(good => (
+            <tr key={good} className={selectedGood === good ? selectedCssClass : ''} data-cy="Good">
+              <td>
+                {selectedGood === good ? buttonRemove : buttonAdd(good)}
+              </td>
+              <td data-cy="GoodTitle" className="is-vcentered">
+                {good}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </main>
+    );
+  }
+}
