@@ -16,6 +16,47 @@ export const goods = [
   'Garlic',
 ];
 
+type GoodProps = {
+  isSelected: boolean;
+  name: string;
+  setSelectedGood: (good: string | null) => void;
+};
+
+const Good: React.FC<GoodProps> = ({ setSelectedGood, isSelected, name }) => {
+  return (
+    <tr
+      data-cy="Good"
+      className={isSelected ? 'has-background-success-light' : ''}
+    >
+      <td>
+        {isSelected ? (
+          <button
+            data-cy="RemoveButton"
+            type="button"
+            className="button is-info"
+            onClick={() => setSelectedGood(null)}
+          >
+            -
+          </button>
+        ) : (
+          <button
+            data-cy="AddButton"
+            type="button"
+            className="button"
+            onClick={() => setSelectedGood(name)}
+          >
+            +
+          </button>
+        )}
+      </td>
+
+      <td data-cy="GoodTitle" className="is-vcentered">
+        {name}
+      </td>
+    </tr>
+  );
+};
+
 export const App: React.FC = () => {
   const [selectedGood, setSelectedGood] = useState<string | null>('Jam');
 
@@ -58,46 +99,5 @@ export const App: React.FC = () => {
         </tbody>
       </table>
     </main>
-  );
-};
-
-type GoodProps = {
-  isSelected: boolean;
-  name: string;
-  setSelectedGood: (good: string | null) => void;
-};
-
-const Good: React.FC<GoodProps> = ({ setSelectedGood, isSelected, name }) => {
-  return (
-    <tr
-      data-cy="Good"
-      className={isSelected ? 'has-background-success-light' : ''}
-    >
-      <td>
-        {isSelected ? (
-          <button
-            data-cy="RemoveButton"
-            type="button"
-            className="button is-info"
-            onClick={() => setSelectedGood(null)}
-          >
-            -
-          </button>
-        ) : (
-          <button
-            data-cy="AddButton"
-            type="button"
-            className="button"
-            onClick={() => setSelectedGood(name)}
-          >
-            +
-          </button>
-        )}
-      </td>
-
-      <td data-cy="GoodTitle" className="is-vcentered">
-        {name}
-      </td>
-    </tr>
   );
 };
