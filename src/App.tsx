@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -15,66 +15,64 @@ export const goods = [
   'Garlic',
 ] as const;
 
-type Good = typeof goods[number];
-interface State {
-  selectedGood: Good | null;
-}
+type Good = (typeof goods)[number];
 
-export class App extends React.Component<{}, State>  {
-  state = {
-    selectedGood: 'Jam' as const,
-  }
+export const App: React.FC = () => {
+  const [selectedGood, setSelectedGood] = useState<Good | null>('Jam');
+  const setSelectedGoodHandler = (good: Good | null) => () =>
+    setSelectedGood(good);
 
-  private clearSelectedHandler = () => {
-    this.setState({selectedGood: null});
-  }
+  const title = selectedGood
+    ? `${selectedGood} is selected`
+    : 'No goods selected';
 
-  private createAddSelectedGoodHandler = (good: Good) => {
-    return () => {
-      this.setState({selectedGood: good});
-    }
-  }
-
-  render(): React.ReactNode {
-    const { selectedGood } = this.state;
-
-    const title = selectedGood
-      ? `${selectedGood} is selected`
-      : 'No goods selected';
-
-    const buttonAdd = (good: Good) =>  (
-      <button data-cy="AddButton" type="button" className="button" onClick={this.createAddSelectedGoodHandler(good)}>
+  const buttonAdd = (good: Good) => (
+    <button
+      data-cy="AddButton"
+      type="button"
+      className="button"
+      onClick={setSelectedGoodHandler(good)}
+    >
       +
-      </button>
-    );
+    </button>
+  );
 
-    const buttonRemove = (
-      <button
-        data-cy="RemoveButton"
-        type="button"
-        className="button is-info"
-        onClick={this.clearSelectedHandler}
-      >
-        -
-      </button>
-    );
+  const buttonRemove = (
+    <button
+      data-cy="RemoveButton"
+      type="button"
+      className="button is-info"
+      onClick={setSelectedGoodHandler(null)}
+    >
+      -
+    </button>
+  );
 
-    const selectedCssClass = 'has-background-success-light';
+  const selectedCssClass = 'has-background-success-light';
 
-    return (
+  return (
     <main className="section container">
-      <h1 className="title">
+      <h1 className="title is-flex is-align-items-center">
         {title}
-        {selectedGood && <button data-cy="ClearButton" type="button" className="delete ml-3"  onClick={this.clearSelectedHandler}/>}
+        {selectedGood && (
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={setSelectedGoodHandler(null)}
+          />
+        )}
       </h1>
 
       <table className="table">
         <tbody>
           {goods.map(good => (
-            <tr key={good} className={selectedGood === good ? selectedCssClass : ''} data-cy="Good">
-              <td>
-                {selectedGood === good ? buttonRemove : buttonAdd(good)}
-              </td>
+            <tr
+              key={good}
+              className={selectedGood === good ? selectedCssClass : ''}
+              data-cy="Good"
+            >
+              <td>{selectedGood === good ? buttonRemove : buttonAdd(good)}</td>
               <td data-cy="GoodTitle" className="is-vcentered">
                 {good}
               </td>
@@ -83,6 +81,5 @@ export class App extends React.Component<{}, State>  {
         </tbody>
       </table>
     </main>
-    );
-  }
-}
+  );
+};
