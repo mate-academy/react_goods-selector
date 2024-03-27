@@ -1,0 +1,46 @@
+{
+    "sourceFile": "src/App.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1711525181619,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1711525187100,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n   'Jam',\n   'Garlic',\n ];\n \n-export class App: React.FC = () => (\n+export class App: React.FC extends = () => (\n   <main className=\"section container\">\n     <h1 className=\"title\">No goods selected</h1>\n \n     <h1 className=\"title is-flex is-align-items-center\">\n"
+                },
+                {
+                    "date": 1711525197939,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n   'Jam',\n   'Garlic',\n ];\n \n-export class App: React.FC extends = () => (\n+export class App extends React.Component = () => (\n   <main className=\"section container\">\n     <h1 className=\"title\">No goods selected</h1>\n \n     <h1 className=\"title is-flex is-align-items-center\">\n"
+                },
+                {
+                    "date": 1711525206588,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import React from 'react';\n+import React  from 'react';\n import 'bulma/css/bulma.css';\n import './App.scss';\n \n export const goods = [\n"
+                },
+                {
+                    "date": 1711525213210,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import React  from 'react';\n+import React, { Component } from 'react';\n import 'bulma/css/bulma.css';\n import './App.scss';\n \n export const goods = [\n"
+                },
+                {
+                    "date": 1711525248937,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,9 @@\n   'Garlic',\n ];\n \n export class App extends React.Component = () => (\n+  \n   <main className=\"section container\">\n     <h1 className=\"title\">No goods selected</h1>\n \n     <h1 className=\"title is-flex is-align-items-center\">\n"
+                },
+                {
+                    "date": 1711525254204,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,11 @@\n   'Jam',\n   'Garlic',\n ];\n \n-export class App extends React.Component = () => \n+export class App extends React.Component = () => {\n+  return \n+}\n   <main className=\"section container\">\n     <h1 className=\"title\">No goods selected</h1>\n \n     <h1 className=\"title is-flex is-align-items-center\">\n"
+                },
+                {
+                    "date": 1711525271188,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,74 @@\n+import React, { Component } from 'react';\n+import 'bulma/css/bulma.css';\n+import './App.scss';\n+\n+export const goods = [\n+  'Dumplings',\n+  'Carrot',\n+  'Eggs',\n+  'Ice cream',\n+  'Apple',\n+  'Bread',\n+  'Fish',\n+  'Honey',\n+  'Jam',\n+  'Garlic',\n+];\n+\n+export class App extends React.Component = () => {\n+  return(\n+  <main className=\"section container\">\n+    <h1 className=\"title\">No goods selected</h1>\n+\n+    <h1 className=\"title is-flex is-align-items-center\">\n+      Jam is selected\n+      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}\n+      <button data-cy=\"ClearButton\" type=\"button\" className=\"delete ml-3\" />\n+    </h1>\n+\n+    <table className=\"table\">\n+      <tbody>\n+        <tr data-cy=\"Good\">\n+          <td>\n+            <button data-cy=\"AddButton\" type=\"button\" className=\"button\">\n+              +\n+            </button>\n+          </td>\n+\n+          <td data-cy=\"GoodTitle\" className=\"is-vcentered\">\n+            Dumplings\n+          </td>\n+        </tr>\n+\n+        <tr data-cy=\"Good\" className=\"has-background-success-light\">\n+          <td>\n+            <button\n+              data-cy=\"RemoveButton\"\n+              type=\"button\"\n+              className=\"button is-info\"\n+            >\n+              -\n+            </button>\n+          </td>\n+\n+          <td data-cy=\"GoodTitle\" className=\"is-vcentered\">\n+            Jam\n+          </td>\n+        </tr>\n+\n+        <tr data-cy=\"Good\">\n+          <td>\n+            <button data-cy=\"AddButton\" type=\"button\" className=\"button\">\n+              +\n+            </button>\n+          </td>\n+\n+          <td data-cy=\"GoodTitle\" className=\"is-vcentered\">\n+            Garlic\n+          </td>\n+        </tr>\n+      </tbody>\n+    </table>\n+  </main>\n+  )\n+}\n"
+                }
+            ],
+            "date": 1711525181619,
+            "name": "Commit-0",
+            "content": "import React from 'react';\nimport 'bulma/css/bulma.css';\nimport './App.scss';\n\nexport const goods = [\n  'Dumplings',\n  'Carrot',\n  'Eggs',\n  'Ice cream',\n  'Apple',\n  'Bread',\n  'Fish',\n  'Honey',\n  'Jam',\n  'Garlic',\n];\n\nexport class App: React.FC = () => (\n  <main className=\"section container\">\n    <h1 className=\"title\">No goods selected</h1>\n\n    <h1 className=\"title is-flex is-align-items-center\">\n      Jam is selected\n      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}\n      <button data-cy=\"ClearButton\" type=\"button\" className=\"delete ml-3\" />\n    </h1>\n\n    <table className=\"table\">\n      <tbody>\n        <tr data-cy=\"Good\">\n          <td>\n            <button data-cy=\"AddButton\" type=\"button\" className=\"button\">\n              +\n            </button>\n          </td>\n\n          <td data-cy=\"GoodTitle\" className=\"is-vcentered\">\n            Dumplings\n          </td>\n        </tr>\n\n        <tr data-cy=\"Good\" className=\"has-background-success-light\">\n          <td>\n            <button\n              data-cy=\"RemoveButton\"\n              type=\"button\"\n              className=\"button is-info\"\n            >\n              -\n            </button>\n          </td>\n\n          <td data-cy=\"GoodTitle\" className=\"is-vcentered\">\n            Jam\n          </td>\n        </tr>\n\n        <tr data-cy=\"Good\">\n          <td>\n            <button data-cy=\"AddButton\" type=\"button\" className=\"button\">\n              +\n            </button>\n          </td>\n\n          <td data-cy=\"GoodTitle\" className=\"is-vcentered\">\n            Garlic\n          </td>\n        </tr>\n      </tbody>\n    </table>\n  </main>\n);\n"
+        }
+    ]
+}
