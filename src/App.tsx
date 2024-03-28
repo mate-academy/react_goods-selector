@@ -43,9 +43,9 @@ export class App extends React.Component {
 
   removeButton = (
     <button
-      data-cy="ClearButton"
+      data-cy="RemoveButton"
       type="button"
-      className="delete ml-3"
+      className="button is-info"
       onClick={() => this.handleClearSelection()}
     >
       -
@@ -59,7 +59,14 @@ export class App extends React.Component {
       <main className="section container">
         <h1 className="title is-flex is-align-items-center">
           {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
-          {selectedGood && this.removeButton}
+          {selectedGood && (
+            <button
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+              onClick={() => this.handleClearSelection}
+            />
+          )}
         </h1>
 
         <table className="table">
