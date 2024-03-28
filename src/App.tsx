@@ -17,7 +17,19 @@ export const goods = [
 ];
 
 export const App: React.FC = () => {
-  const [good, SetGood] = useState('Jam');
+  const [good, setGood] = useState('Jam');
+
+  const handleClearGood = () => {
+    setGood('');
+  };
+
+  const handleToggleGood = (initialGood: string) => {
+    if (good === initialGood) {
+      setGood('');
+    } else {
+      setGood(initialGood);
+    }
+  };
 
   return (
     <main className="section container">
@@ -30,9 +42,7 @@ export const App: React.FC = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => {
-              SetGood('');
-            }}
+            onClick={handleClearGood}
             aria-label="clear"
           />
         </h1>
@@ -58,13 +68,7 @@ export const App: React.FC = () => {
                     className={
                       good === initialGood ? 'button is-info' : 'button'
                     }
-                    onClick={() => {
-                      if (good === initialGood) {
-                        SetGood('');
-                      } else {
-                        SetGood(initialGood);
-                      }
-                    }}
+                    onClick={() => handleToggleGood(initialGood)}
                   >
                     {good === initialGood ? '-' : '+'}
                   </button>
