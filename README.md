@@ -14,13 +14,14 @@ You are given an array of goods. Render them in a table with the ability to sele
 1. `ClearButton` should clear selection by setting an empty string to `selectedGood`.
 1. When there is no selected good, the title should show `No goods selected`.
 1. Each good should have an `AddButton` to select the good.
-    - only 1 good can be selected at a time;
+   - only 1 good can be selected at a time;
 1. Don't show `AddButton` when a good is selected.
 1. Show `RemoveButton` for the selected good to clear selection.
 
 ## Instructions
+
 - Install Prettier Extention and use this [VSCode settings](https://mate-academy.github.io/fe-program/tools/vscode/settings.json) to enable format on save.
 - Implement a solution following the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline).
 - Use the [React TypeScript cheat sheet](https://mate-academy.github.io/fe-program/js/extra/react-typescript).
 - Open one more terminal and run tests with `npm test` to ensure your solution is correct.
-- Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_goods-selector/) and add it to the PR description.
+- Replace `<your_account>` with your Github username in the [DEMO LINK](https://Arkadiuszx.github.io/react_goods-selector/) and add it to the PR description.
