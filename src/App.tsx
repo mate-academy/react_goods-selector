@@ -64,7 +64,7 @@ export class App extends React.Component {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => this.handleClearSelection()}
+              onClick={this.handleClearSelection}
             />
           )}
         </h1>
