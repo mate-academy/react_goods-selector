@@ -16,18 +16,15 @@ export const goods = [
 ];
 
 type Good = (typeof goods)[number];
-
 export const App: React.FC = () => {
   const [selectedGood, setSelectedGood] = useState<Good | null>('Jam');
-
-  const setSelectedGoodHandler = function (good: Good | null) {
+  const setSelectedGoodHandler = (good: Good | null) => {
     setSelectedGood(good);
-  }.bind(this);
+  };
 
   const title = selectedGood
     ? `${selectedGood} is selected`
     : 'No goods selected';
-
   const buttonAdd = (good: Good) => (
     <button
       data-cy="AddButton"
@@ -38,7 +35,6 @@ export const App: React.FC = () => {
       +
     </button>
   );
-
   const buttonRemove = (
     <button
       data-cy="RemoveButton"
@@ -49,8 +45,10 @@ export const App: React.FC = () => {
       -
     </button>
   );
-
   const selectedCssClass = 'has-background-success-light';
+  const handleClearButtonClick = () => {
+    setSelectedGoodHandler(null);
+  };
 
   return (
     <main className="section container">
@@ -61,7 +59,7 @@ export const App: React.FC = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setSelectedGoodHandler(null)}
+            onClick={handleClearButtonClick}
           />
         )}
       </h1>
