@@ -38,7 +38,7 @@ export const App: React.FC = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={clearSelection}
+            onClick={() => clearSelection}
           ></button>
         )}
       </h1>
@@ -70,7 +70,7 @@ export const App: React.FC = () => {
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={clearSelection}
+                      onClick={() => clearSelection}
                     >
                       -
                     </button>
