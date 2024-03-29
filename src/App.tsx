@@ -70,7 +70,7 @@ export const App: React.FC = () => {
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => clearSelection}
+                      onClick={clearSelection}
                     >
                       -
                     </button>
