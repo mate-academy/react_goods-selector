@@ -13,7 +13,7 @@ You are given an array of goods. Render them in a table with the ability to sele
 <!-- 1. Show the `ClearButton` button in the title only when a good is selected. -->
 <!-- 1. `ClearButton` should clear selection by setting an empty string to `selectedGood`.
 1. When there is no selected good, the title should show `No goods selected`. -->
-<!-- 1. Each good should have an `AddButton` to select the good. -->
+1. Each good should have an `AddButton` to select the good.
 <!-- - only 1 good can be selected at a time; -->
 1. Don't show `AddButton` when a good is selected.
 1. Show `RemoveButton` for the selected good to clear selection.
