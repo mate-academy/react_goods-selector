@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
@@ -32,16 +33,22 @@ export class App extends React.Component<{}, State> {
     this.setState({ selectedGood: good });
   };
 
+  handleClick = (good: string, isGoodSelected: string) => {
+    if (isGoodSelected) {
+      this.setSelectedEmpty();
+    } else {
+      this.addGood(good);
+    }
+  };
+
   render() {
     const { selectedGood } = this.state;
 
     return (
       <main className="section container">
         <h1 className="title is-flex is-align-items-center">
-          {selectedGood === ''
-            ? 'No goods selected'
-            : `${selectedGood} is selected`}
-          {selectedGood !== '' && (
+          {!selectedGood ? 'No goods selected' : `${selectedGood} is selected`}
+          {!!selectedGood && (
             <button
               data-cy="ClearButton"
               type="button"
@@ -54,32 +61,28 @@ export class App extends React.Component<{}, State> {
         <table className="table">
           <tbody>
             {goods.map(good => {
+              const isGoodSelected = good === selectedGood;
+
               return (
                 <tr
                   data-cy="Good"
                   key={good}
-                  className={
-                    good === selectedGood ? 'has-background-success-light' : ''
-                  }
+                  className={cn({
+                    'has-background-success-light': isGoodSelected,
+                  })}
                 >
                   <td>
                     <button
-                      data-cy={
-                        good === selectedGood ? 'RemoveButton' : 'AddButton'
-                      }
+                      data-cy={isGoodSelected ? 'RemoveButton' : 'AddButton'}
                       type="button"
-                      className={
-                        good === selectedGood ? 'button is-info' : 'button'
-                      }
+                      className={cn('button', {
+                        'is-info': isGoodSelected,
+                      })}
                       onClick={() => {
-                        if (good === selectedGood) {
-                          this.setSelectedEmpty();
-                        } else {
-                          this.addGood(good);
-                        }
+                        this.handleClick(good, selectedGood);
                       }}
                     >
-                      {good === selectedGood ? '-' : '+'}
+                      {isGoodSelected ? '-' : '+'}
                     </button>
                   </td>
 
