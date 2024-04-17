@@ -63,23 +63,15 @@ export class App extends React.Component {
                 }
               >
                 <td>
-                  {selectedGood !== good ? (
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      className="button"
-                    >
-                      +
-                    </button>
-                  ) : (
-                    <button
-                      data-cy="RemoveButton"
-                      type="button"
-                      className="button is-info"
-                    >
-                      -
-                    </button>
-                  )}
+                  <button
+                    data-cy={
+                      selectedGood === good ? 'RemoveButton' : 'AddButton'
+                    }
+                    type="button"
+                    className={`button ${selectedGood === good ? 'is-info' : ''}`}
+                  >
+                    {selectedGood === good ? '-' : '+'}
+                  </button>
                 </td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
