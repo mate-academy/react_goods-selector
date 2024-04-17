@@ -1,85 +1,78 @@
-import React from 'react';
-import 'bulma/css/bulma.css';
-import './App.scss';
+import React, { useState } from 'react';
+  import 'bulma/css/bulma.css';
+  import './App.scss';
 
-export const goods = [
-  'Dumplings',
-  'Carrot',
-  'Eggs',
-  'Ice cream',
-  'Apple',
-  'Bread',
-  'Fish',
-  'Honey',
-  'Jam',
-  'Garlic',
-];
+  export const goods = [
+    'Dumplings',
+    'Carrot',
+    'Eggs',
+    'Ice cream',
+    'Apple',
+    'Bread',
+    'Fish',
+    'Honey',
+    'Jam',
+    'Garlic',
+  ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
+  export const App: React.FC = () => {
 
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button
-        data-cy="ClearButton"
-        type="button"
-        className="delete ml-3"
-      />
-    </h1>
+    const [selectedGood, setSelectedGood] = useState('Jam');
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+    const handleChange = (good: string) => {
+      good === selectedGood ? setSelectedGood('') : setSelectedGood(good);
+    }
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+    return (
+      <>
+          <main className="section container">
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+      <h1 className="title is-flex is-align-items-center">
+        {`${selectedGood !== '' ? `${selectedGood} is selected` : 'No goods selected'}`}
+            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+            {selectedGood !== '' && (
+                <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={() => setSelectedGood('')}
+              />
+            )
+            }
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+      </h1>
 
-        <tr data-cy="Good">
-          <td>
-            <button
-              data-cy="AddButton"
-              type="button"
-              className="button"
-            >
-              +
-            </button>
-          </td>
+      <table className="table">
+            <tbody>
+                {goods.map((good, index) => (
+                  <tr
+                    data-cy="Good"
+                    className={`${good === selectedGood && ('has-background-success-light')}`}
+                  >
+                          <td>
+                      <button
+                        key={index}
+                        value={good}
+                        onClick={() => handleChange(good)}
+                        data-cy={`${good === selectedGood ? 'RemoveButton' : 'AddButton'}`}
+                        type="button"
+                        className={`${good === selectedGood && ('is-info')} button`}>
+                              {good === selectedGood ? '-' : '+'}
+                            </button>
+                          </td>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+                          <td data-cy="GoodTitle" className="is-vcentered">
+                            {good}
+                          </td>
+                        </tr>
+                ))}
+
+        </tbody>
+      </table>
+    </main>
+      </>
+
+    )
+
+    };
