@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
+import classNames from 'classnames';
 
 export const goods = [
   'Dumplings',
@@ -33,8 +34,9 @@ export class App extends React.Component<{}, State> {
   };
 
   render() {
+    const selectGood = this.state.selectedGood;
     const title =
-      this.state.selectedGood === '' ? (
+    selectGood === '' ? (
         <h1 className="title">No goods selected</h1>
       ) : (
         <h1 className="title is-flex is-align-items-center">
@@ -59,18 +61,18 @@ export class App extends React.Component<{}, State> {
                 data-cy="Good"
                 key={good}
                 className={
-                  this.state.selectedGood === good
-                    ? 'has-background-success-light'
-                    : ''
+                  classNames({
+                    'has-background-success-light': selectGood === good
+                  })
                 }
               >
                 <td>
-                  {this.state.selectedGood === good ? (
+                  {selectGood === good ? (
                     <button
                       data-cy="RemoveButton"
                       type="button"
                       className="button is-info"
-                      onClick={() => this.deleteGood()}
+                      onClick={this.deleteGood}
                     >
                       -
                     </button>
@@ -97,35 +99,3 @@ export class App extends React.Component<{}, State> {
     );
   }
 }
-
-/*
-
-
-
-<tr data-cy="Good" className="has-background-success-light">
-          <td>
-            <button
-              data-cy="RemoveButton"
-              type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
-
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>*/
