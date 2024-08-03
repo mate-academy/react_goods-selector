@@ -36,7 +36,7 @@ export class App extends React.Component<{}, State> {
   render() {
     const selectGood = this.state.selectedGood;
     const title =
-    selectGood === '' ? (
+      selectGood === '' ? (
         <h1 className="title">No goods selected</h1>
       ) : (
         <h1 className="title is-flex is-align-items-center">
@@ -60,11 +60,9 @@ export class App extends React.Component<{}, State> {
               <tr
                 data-cy="Good"
                 key={good}
-                className={
-                  classNames({
-                    'has-background-success-light': selectGood === good
-                  })
-                }
+                className={classNames({
+                  'has-background-success-light': selectGood === good,
+                })}
               >
                 <td>
                   {selectGood === good ? (
