@@ -20,6 +20,14 @@ export class App extends React.Component {
     selectedGood: 'Jam',
   };
 
+  handleSelectGood = (good: string) => {
+    this.setState({ selectedGood: good });
+  };
+
+  handleRemoveGood = () => {
+    this.setState({ selectedGood: '' });
+  };
+
   render() {
     const { selectedGood } = this.state;
 
@@ -54,13 +62,25 @@ export class App extends React.Component {
                   }
                 >
                   <td>
-                    <button
-                      data-cy="AddButton"
-                      type="button"
-                      className="button"
-                    >
-                      +
-                    </button>
+                    {selectedGood === good ? (
+                      <button
+                        data-cy="RemoveButton"
+                        type="button"
+                        className="button is-info"
+                        onClick={this.handleRemoveGood}
+                      >
+                        -
+                      </button>
+                    ) : (
+                      <button
+                        data-cy="AddButton"
+                        type="button"
+                        className="button"
+                        onClick={() => this.handleSelectGood(good)}
+                      >
+                        +
+                      </button>
+                    )}
                   </td>
 
                   <td data-cy="GoodTitle" className="is-vcentered">
@@ -69,44 +89,6 @@ export class App extends React.Component {
                 </tr>
               );
             })}
-
-            <tr data-cy="Good">
-              <td>
-                <button data-cy="AddButton" type="button" className="button">
-                  +
-                </button>
-              </td>
-
-              <td data-cy="GoodTitle" className="is-vcentered">
-                Dumplings
-              </td>
-            </tr>
-            <tr data-cy="Good" className="has-background-success-light">
-              <td>
-                <button
-                  data-cy="RemoveButton"
-                  type="button"
-                  className="button is-info"
-                >
-                  -
-                </button>
-              </td>
-
-              <td data-cy="GoodTitle" className="is-vcentered">
-                Jam
-              </td>
-            </tr>
-            <tr data-cy="Good">
-              <td>
-                <button data-cy="AddButton" type="button" className="button">
-                  +
-                </button>
-              </td>
-
-              <td data-cy="GoodTitle" className="is-vcentered">
-                Garlic
-              </td>
-            </tr>
           </tbody>
         </table>
       </main>
