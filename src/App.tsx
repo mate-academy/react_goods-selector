@@ -25,20 +25,22 @@ export class App extends React.Component {
 
     return (
       <main className="section container">
-        <h1 className="title">No goods selected</h1>
-
-        <h1 className="title is-flex is-align-items-center">
-          {selectedGood} is selected
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-          {selectedGood !== '' && (
-            <button
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-              onClick={() => this.setState({ selectedGood: '' })}
-            />
-          )}
-        </h1>
+        {selectedGood === '' ? (
+          <h1 className="title">No goods selected</h1>
+        ) : (
+          <h1 className="title is-flex is-align-items-center">
+            {selectedGood} is selected
+            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+            {selectedGood !== '' && (
+              <button
+                data-cy="ClearButton"
+                type="button"
+                className="delete ml-3"
+                onClick={() => this.setState({ selectedGood: '' })}
+              />
+            )}
+          </h1>
+        )}
 
         <table className="table">
           <tbody>
