@@ -24,8 +24,10 @@ export class App extends React.Component {
     this.setState({ selectedGood: good });
   };
 
-  handleRemoveGood = () => {
-    this.setState({ selectedGood: '' });
+  handleRemoveGood = (good: string) => {
+    if (this.state.selectedGood === good) {
+      this.setState({ selectedGood: '' });
+    }
   };
 
   render() {
@@ -33,18 +35,19 @@ export class App extends React.Component {
 
     return (
       <main className="section container">
-        {selectedGood === '' ? (
+        {!selectedGood ? (
           <h1 className="title">No goods selected</h1>
         ) : (
           <h1 className="title is-flex is-align-items-center">
             {selectedGood} is selected
-            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             {selectedGood !== '' && (
               <button
                 data-cy="ClearButton"
                 type="button"
                 className="delete ml-3"
-                onClick={() => this.setState({ selectedGood: '' })}
+                onClick={() => {
+                  this.handleRemoveGood(selectedGood);
+                }}
               />
             )}
           </h1>
@@ -67,7 +70,9 @@ export class App extends React.Component {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={this.handleRemoveGood}
+                        onClick={() => {
+                          this.handleRemoveGood(good);
+                        }}
                       >
                         -
                       </button>
