@@ -15,58 +15,86 @@ export const goods = [
   'Garlic',
 ];
 
-export const App: React.FC = () => (
-  <main className="section container">
-    <h1 className="title">No goods selected</h1>
+type State = {
+  selectedGood: string;
+};
 
-    <h1 className="title is-flex is-align-items-center">
-      Jam is selected
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button data-cy="ClearButton" type="button" className="delete ml-3" />
-    </h1>
+export class App extends React.Component<{}, State> {
+  state: State = {
+    selectedGood: 'Jam',
+  };
 
-    <table className="table">
-      <tbody>
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
+  handleGoodSelect = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const good = event.currentTarget.dataset.good;
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Dumplings
-          </td>
-        </tr>
+    if (good) {
+      this.setState({ selectedGood: good });
+    }
+  };
 
-        <tr data-cy="Good" className="has-background-success-light">
-          <td>
+  handleClearSelection = () => {
+    this.setState({ selectedGood: '' });
+  };
+
+  render() {
+    const { selectedGood } = this.state;
+
+    return (
+      <main className="section container">
+        <h1 className="title is-flex is-align-items-center">
+          {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
+          {selectedGood && (
+            // eslint-disable-next-line jsx-a11y/control-has-associated-label
             <button
-              data-cy="RemoveButton"
+              data-cy="ClearButton"
               type="button"
-              className="button is-info"
-            >
-              -
-            </button>
-          </td>
+              className="delete ml-3"
+              onClick={this.handleClearSelection}
+            />
+          )}
+        </h1>
 
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Jam
-          </td>
-        </tr>
+        <table className="table">
+          <tbody>
+            {goods.map(good => (
+              <tr
+                key={good}
+                data-cy="Good"
+                className={
+                  good === selectedGood ? 'has-background-success-light' : ''
+                }
+              >
+                <td>
+                  {good === selectedGood ? (
+                    <button
+                      data-cy="RemoveButton"
+                      type="button"
+                      className="button is-info"
+                      onClick={this.handleClearSelection}
+                    >
+                      -
+                    </button>
+                  ) : (
+                    <button
+                      data-cy="AddButton"
+                      type="button"
+                      className="button"
+                      data-good={good}
+                      onClick={this.handleGoodSelect}
+                    >
+                      +
+                    </button>
+                  )}
+                </td>
 
-        <tr data-cy="Good">
-          <td>
-            <button data-cy="AddButton" type="button" className="button">
-              +
-            </button>
-          </td>
-
-          <td data-cy="GoodTitle" className="is-vcentered">
-            Garlic
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-);
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </main>
+    );
+  }
+}
