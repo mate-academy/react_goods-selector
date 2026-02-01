@@ -16,30 +16,34 @@ export const goods = [
 ];
 
 type State = {
-  selectedGoods: string;
+  selectedGood: string;
 };
 
 export class App extends React.Component<{}, State> {
   state: State = {
-    selectedGoods: 'Jam',
+    selectedGood: 'Jam',
   };
 
-  handleGoodSelect = (good: string) => {
-    this.setState({ selectedGoods: good });
+  handleGoodSelect = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const good = event.currentTarget.dataset.good;
+
+    if (good) {
+      this.setState({ selectedGood: good });
+    }
   };
 
   handleClearSelection = () => {
-    this.setState({ selectedGoods: '' });
+    this.setState({ selectedGood: '' });
   };
 
   render() {
-    const { selectedGoods } = this.state;
+    const { selectedGood } = this.state;
 
     return (
       <main className="section container">
         <h1 className="title is-flex is-align-items-center">
-          {selectedGoods ? `${selectedGoods} is selected` : 'No goods selected'}
-          {selectedGoods && (
+          {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
+          {selectedGood && (
             // eslint-disable-next-line jsx-a11y/control-has-associated-label
             <button
               data-cy="ClearButton"
@@ -57,11 +61,11 @@ export class App extends React.Component<{}, State> {
                 key={good}
                 data-cy="Good"
                 className={
-                  good === selectedGoods ? 'has-background-success-light' : ''
+                  good === selectedGood ? 'has-background-success-light' : ''
                 }
               >
                 <td>
-                  {good === selectedGoods ? (
+                  {good === selectedGood ? (
                     <button
                       data-cy="RemoveButton"
                       type="button"
@@ -75,7 +79,8 @@ export class App extends React.Component<{}, State> {
                       data-cy="AddButton"
                       type="button"
                       className="button"
-                      onClick={() => this.handleGoodSelect(good)}
+                      data-good={good}
+                      onClick={this.handleGoodSelect}
                     >
                       +
                     </button>
