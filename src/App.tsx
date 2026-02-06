@@ -19,7 +19,7 @@ type State = {
   selectedGood: string;
 };
 
-export class App extends React.Component<State> {
+export class App extends React.Component<{}, State> {
   state = {
     selectedGood: 'Jam',
   };
@@ -57,17 +57,17 @@ export class App extends React.Component<State> {
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => this.clearSelectedGood()}
+              onClick={this.clearSelectedGood}
             />
           </h1>
         )}
 
         <table className="table">
           <tbody>
-            {goods.map((good, index) => {
+            {goods.map((good) => {
               return (
                 <tr
-                  key={index}
+                  key={good}
                   data-cy="Good"
                   className={
                     good === selectedGood ? 'has-background-success-light' : ''
@@ -79,7 +79,7 @@ export class App extends React.Component<State> {
                         data-cy="RemoveButton"
                         type="button"
                         className="button is-info"
-                        onClick={() => this.deleteGood()}
+                        onClick={this.deleteGood}
                       >
                         -
                       </button>
