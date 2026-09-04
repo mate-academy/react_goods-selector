@@ -18,6 +18,18 @@ export const goods = [
 export const App: React.FC = () => {
   const [selectedGood, setSelectedGood] = useState('Jam');
 
+  const handleAddGood = (good: string) => {
+    setSelectedGood(good);
+  };
+
+  const handleRemoveGood = () => {
+    setSelectedGood('');
+  };
+
+  const handleClearSelection = () => {
+    setSelectedGood('');
+  };
+
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
@@ -29,7 +41,7 @@ export const App: React.FC = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setSelectedGood('')}
+            onClick={handleClearSelection}
             aria-label="Clear selection"
           />
         )}
@@ -51,7 +63,7 @@ export const App: React.FC = () => {
                     data-cy="RemoveButton"
                     type="button"
                     className="button is-info"
-                    onClick={() => setSelectedGood('')}
+                    onClick={handleRemoveGood}
                   >
                     -
                   </button>
@@ -60,7 +72,7 @@ export const App: React.FC = () => {
                     data-cy="AddButton"
                     type="button"
                     className="button"
-                    onClick={() => setSelectedGood(good)}
+                    onClick={() => handleAddGood(good)}
                   >
                     +
                   </button>
