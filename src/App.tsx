@@ -71,7 +71,7 @@ export class App extends React.Component<Props, State> {
                         <button
                           data-cy="RemoveButton"
                           type="button"
-                          className="button is-danger"
+                          className="button is-danger button is-info"
                           onClick={() => {
                             this.setState({
                               selectedGood: '',
