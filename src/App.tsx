@@ -34,7 +34,15 @@ export class App extends React.Component<Props, State> {
     });
   };
 
-  clearSelection = () => this.setState({ selectedGood: '' });
+  handleAddGood = (good: string) => () => {
+    this.handleClick(good);
+  };
+
+  clearSelection = () => {
+    this.setState({
+      selectedGood: '',
+    });
+  };
 
   render() {
     return (
@@ -44,30 +52,32 @@ export class App extends React.Component<Props, State> {
             {this.state.selectedGood
               ? `${this.state.selectedGood} is selected`
               : 'No goods selected'}
+
             {this.state.selectedGood && (
               <button
                 data-cy="ClearButton"
                 type="button"
-                className="delete"
+                className="button delete"
                 onClick={this.clearSelection}
               ></button>
             )}
           </h1>
+
           <table className="table">
             <tbody>
               {goods.map(good => {
+                const isSelected = this.state.selectedGood === good;
+
                 return (
                   <tr
                     key={good}
                     data-cy="Good"
                     className={
-                      this.state.selectedGood === good
-                        ? 'has-background-success-light'
-                        : ''
+                      isSelected ? 'has-background-success-light' : ''
                     }
                   >
                     <td>
-                      {this.state.selectedGood === good ? (
+                      {isSelected ? (
                         <button
                           data-cy="RemoveButton"
                           type="button"
@@ -80,8 +90,8 @@ export class App extends React.Component<Props, State> {
                         <button
                           data-cy="AddButton"
                           type="button"
-                          className="button "
-                          onClick={() => this.handleClick(good)}
+                          className="button"
+                          onClick={this.handleAddGood(good)}
                         >
                           +
                         </button>
