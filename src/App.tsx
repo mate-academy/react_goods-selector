@@ -71,7 +71,7 @@ export class App extends React.Component<Props, State> {
                         <button
                           data-cy="RemoveButton"
                           type="button"
-                          className="button is-danger button is-info"
+                          className="button is-info"
                           onClick={this.clearSelection}
                         >
                           -
@@ -80,7 +80,7 @@ export class App extends React.Component<Props, State> {
                         <button
                           data-cy="AddButton"
                           type="button"
-                          className="button is-info"
+                          className="button "
                           onClick={() => this.handleClick(good)}
                         >
                           +
